@@ -1,191 +1,112 @@
 /* ═══════════════════════════════════════════════════════════════
-   PSARA · Section Atmospheres
-   Context-driven themes for each section type:
-   Ink (dark dossier) · Warm (coffee room) · Gold (seal chamber)
-   · Parchment (reading room) · Terracotta (earth)
+   PSARA · Abstract Futuristic Section Themes
+   Deep Black Canvas × Electric Blue Glow × Metallic Gold Accent
    ═══════════════════════════════════════════════════════════════ */
 
-/* ═══ Dark Dossier Themes (Authority background) ═══ */
-
-.theme-ink {
-  color: var(--cream);
+/* ── Primary Dark Theme (default) ────────────────────────────── */
+.theme-dark,
+.theme-paper-jasmine,
+.theme-obsidian-dark,
+.theme-ink,
+.theme-warm-dark,
+.theme-warm-cream {
+  color: var(--white);
   background-color: var(--obsidian);
 }
 
-.theme-ink h1,
-.theme-ink h2,
-.theme-ink h3 {
-  color: var(--cream);
+.theme-dark h1,
+.theme-dark h2,
+.theme-dark h3,
+.theme-paper-jasmine h1,
+.theme-paper-jasmine h2,
+.theme-paper-jasmine h3,
+.theme-obsidian-dark h1,
+.theme-obsidian-dark h2,
+.theme-obsidian-dark h3 {
+  color: var(--white);
 }
 
-.theme-ink .body-copy,
-.theme-ink p:not(.text-white):not(.text-cream) {
-  color: var(--text-muted);
+.theme-dark p:not(.text-white):not(.text-blue):not(.text-gold),
+.theme-paper-jasmine p:not(.text-white):not(.text-blue),
+.theme-obsidian-dark p:not(.text-white) {
+  color: var(--white-70);
 }
 
-.theme-navy {
-  color: var(--cream);
-  background-color: var(--navy-deep);
+/* ── Light Section Variant (rare, for contrast) ───────────────── */
+.theme-light {
+  color: var(--obsidian);
+  background-color: #F8FAFC;
 }
 
-/* ═══ Warm Dark Themes (Jasmine-inspired warmth) ═══ */
-
-.theme-warm-dark {
-  color: var(--cream);
-  background-color: var(--warm-dark);
+.theme-light h1,
+.theme-light h2,
+.theme-light h3 {
+  color: var(--obsidian);
 }
 
-.theme-warm-dark h1,
-.theme-warm-dark h2,
-.theme-warm-dark h3 {
-  color: var(--cream);
+/* ── Electric Blue accent theme (hero CTAs, feature sections) ── */
+.theme-electric {
+  color: var(--white);
+  background: linear-gradient(135deg, var(--obsidian) 0%, #0A0F2A 100%);
 }
 
-.theme-warm-dark .body-copy,
-.theme-warm-dark p:not(.text-white):not(.text-cream) {
-  color: color-mix(in srgb, var(--cream) 80%, transparent);
+/* ── Grid / Mesh Background ──────────────────────────────────── */
+.bg-mesh {
+  background-color: var(--obsidian);
+  background-image: var(--grad-mesh);
 }
 
-.theme-warm-dark-2 {
-  color: var(--cream);
-  background-color: var(--warm-dark-2);
+/* ── Hairline Divider ────────────────────────────────────────── */
+.i-line {
+  height: 1px;
+  width: 100%;
+  background: var(--line);
+  margin: 1.5rem 0;
 }
 
-.theme-warm-dark-2 h1,
-.theme-warm-dark-2 h2,
-.theme-warm-dark-2 h3 {
-  color: var(--cream);
+.i-line-gold {
+  height: 1px;
+  width: 100%;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  margin: 1.5rem 0;
 }
 
-.theme-warm-dark-3 {
-  color: var(--cream);
-  background-color: var(--warm-dark-3);
+/* ── Blue Glow Pulse animation ──────────────────────────────── */
+@keyframes blue-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 var(--blue-glow); }
+  50%       { box-shadow: 0 0 20px 6px var(--blue-glow-soft); }
 }
 
-.theme-espresso {
-  color: var(--cream);
-  background-color: var(--espresso);
+/* ── Gold Shimmer Animation ──────────────────────────────────── */
+@keyframes gold-shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position: 200% center; }
 }
 
-/* ═══ Gold & Amber Themes (Seal chamber) ═══ */
-
-.theme-gold {
-  color: var(--warm-dark);
-  background-color: var(--gold-bg);
+.gold-shimmer-text {
+  background: var(--gold-shimmer);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gold-shimmer 3s linear infinite;
 }
 
-.theme-gold h1,
-.theme-gold h2,
-.theme-gold h3 {
-  color: var(--warm-dark);
+/* ── Glassmorphism card ──────────────────────────────────────── */
+.glass-card {
+  background: var(--grad-card);
+  border: 1px solid var(--line);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }
 
-.theme-gold .body-copy,
-.theme-gold p:not(.text-white):not(.text-cream) {
-  color: color-mix(in srgb, var(--warm-dark) 80%, transparent);
+.glass-card:hover {
+  background: var(--grad-card-hover);
+  border-color: var(--blue-border);
 }
 
-.theme-gold-soft {
-  color: var(--warm-dark);
-  background-color: var(--gold-bg-soft);
-}
-
-.theme-amber {
-  color: var(--cream);
-  background-color: var(--amber-deep);
-}
-
-/* ═══ Terracotta Bold Theme (Earth accent) ═══ */
-
-.theme-terracotta {
-  color: var(--cream);
-  background-color: var(--terracotta);
-}
-
-/* ═══ Warm Light Themes (Reading room) ═══ */
-
-.theme-warm-cream {
-  color: var(--ink-warm);
-  background-color: var(--warm-cream);
-}
-
-.theme-warm-cream h1,
-.theme-warm-cream h2,
-.theme-warm-cream h3 {
-  color: var(--ink-warm);
-  font-weight: 700;
-}
-
-.theme-warm-cream .body-copy,
-.theme-warm-cream p:not(.text-white):not(.text-cream) {
-  color: color-mix(in srgb, var(--ink-warm) 75%, transparent);
-}
-
-.theme-warm-parchment {
-  color: var(--ink-warm);
-  background-color: var(--warm-parchment);
-}
-
-/* ═══ Paper Themes (clean light) ═══ */
-
-.theme-paper {
-  color: var(--ink);
-  background-color: var(--cream);
-}
-
-.theme-paper h1,
-.theme-paper h2,
-.theme-paper h3 {
-  color: var(--ink);
-  font-weight: 700;
-}
-
-.theme-paper .body-copy,
-.theme-paper p:not(.text-white):not(.text-cream) {
-  color: var(--ink-muted);
-}
-
-/* ═══ Binding Rail (spectrum vertical edge) ═══ */
-
-.binding-rail {
-  position: relative;
-}
-
-.binding-rail::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  width: 3px;
-  background: var(--grad-spectrum-v);
-  opacity: 0.85;
-  border-radius: 2px;
-}
-
-/* ═══ Noise Texture Overlay (Luke's film grain) ═══ */
-
-.noise-overlay {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 9990;
-  opacity: 0.035;
-  mix-blend-mode: overlay;
-}
-
-.noise-overlay::before {
-  content: "";
-  position: absolute;
-  inset: -50%;
-  width: 200%;
-  height: 200%;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  background-size: 180px 180px;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .noise-overlay {
-    opacity: 0.025;
-  }
+/* ── Blue glow border ────────────────────────────────────────── */
+.blue-border {
+  border: 1px solid var(--blue-border);
+  box-shadow: 0 0 0 1px var(--blue-glow-soft) inset;
 }

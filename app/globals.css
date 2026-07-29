@@ -20,8 +20,8 @@
     font-family: var(--font-body);
     font-optical-sizing: auto;
     text-rendering: optimizeLegibility;
-    background-color: var(--obsidian);
-    color: var(--cream);
+    background-color: var(--canvas);
+    color: var(--text-primary);
     min-height: 100%;
     overflow-x: hidden;
     font-size: var(--text-base);
@@ -38,8 +38,8 @@
   }
 
   ::selection {
-    background-color: var(--gold);
-    color: var(--warm-dark);
+    background-color: var(--gold-400);
+    color: var(--off-black);
   }
 
   a {
@@ -55,23 +55,29 @@
   h1, h2, h3 {
     text-wrap: balance;
     font-family: var(--font-display);
+    color: var(--text-primary);
   }
 
-  /* Luke Baffait-inspired mix-blend-mode: difference */
-  .mix-difference {
-    mix-blend-mode: difference;
+  p {
+    color: var(--text-secondary);
   }
 
-  /* Split line animation wrapper */
-  .split-line {
+  /* Utility: clip reveal animation wrapper */
+  .clip-reveal {
     display: inline-block;
     overflow: hidden;
     vertical-align: top;
   }
 
-  .split-line > span {
+  .clip-reveal > span {
     display: inline-block;
     will-change: transform;
+  }
+
+  /* Content visibility for perf */
+  .content-vis-auto {
+    content-visibility: auto;
+    contain-intrinsic-size: 500px;
   }
 }
 

@@ -467,6 +467,110 @@ export const SERVICES: Service[] = [
       },
     ],
   },
+  {
+    slug: "website-design",
+    title: "Website Design & Development",
+    short: "Professional website design for security agencies and startups.",
+    description:
+      "Custom website design and development tailored for security agencies, PSARA consultants, and business startups — from brochure sites to full-featured business portals with enquiry forms, service pages, and compliance documentation.",
+    bullets: [
+      "Responsive website design (mobile-first)",
+      "Business portal with enquiry & WhatsApp integration",
+      "Service, state, and city landing pages",
+      "SEO-optimised structure for local search",
+      "Content management and updates support",
+    ],
+    keywords: ["website design for security agency", "security company website", "PSARA consultant website"],
+    sections: [
+      {
+        h: "Purpose-built for security agencies",
+        p: "A generic website template does not communicate the statutory seriousness of a PSARA-licensed agency. We design purpose-built digital presences that convey compliance, trust, and operational reach — from the homepage hero to the GDPR-aware contact flow.",
+      },
+      {
+        h: "What we deliver",
+        p: "A mobile-optimised, fast-loading website with clear service structuring, local SEO signals for state and city search, WhatsApp-enabled enquiry capture, and a backend that you or your team can update without technical dependencies.",
+      },
+      {
+        h: "Beyond templates",
+        p: "We do not drop you into a generic CMS theme. Each site is structured around your business model — multi-state presence, service catalogue, office network, and client onboarding flow — so the website works as a lead generation asset, not an online brochure.",
+      },
+    ],
+    process: [
+      "Discovery call — business model, services, target cities",
+      "Sitemap and wireframe creation",
+      "Design mockup and brand alignment",
+      "Development and content population",
+      "Testing, launch, and handover",
+    ],
+    whoFor: [
+      "New security agencies launching their digital presence",
+      "Existing agencies upgrading from basic or outdated websites",
+      "PSARA consultants needing multi-state service portals",
+      "Startups requiring professional investor-facing websites",
+    ],
+    faqs: [
+      {
+        q: "Do you build on WordPress or custom code?",
+        a: "We recommend the right platform based on your scale and budget — from high-performance custom Next.js sites (like ours) to well-structured WordPress solutions for easier content management.",
+      },
+      {
+        q: "How long does a website take?",
+        a: "A standard multi-page website typically takes 2–4 weeks from discovery to launch, depending on content readiness and complexity.",
+      },
+    ],
+  },
+  {
+    slug: "branding",
+    title: "Branding & Digital Identity",
+    short: "Logo design, brand identity, and digital presence for agencies.",
+    description:
+      "Complete branding and identity solutions for security agencies and business startups — logo design, brand guidelines, stationery, social media assets, and digital presence strategy that communicates trust and professionalism.",
+    bullets: [
+      "Custom logo and brand mark design",
+      "Brand colour palette and typography system",
+      "Business stationery (letterhead, business card, invoice)",
+      "Social media profile and cover assets",
+      "Brand guideline document for consistent use",
+    ],
+    keywords: ["security agency branding", "PSARA brand identity", "security logo design"],
+    sections: [
+      {
+        h: "First impressions matter",
+        p: "When a principal employer or government client evaluates your agency, your brand identity signals operational seriousness before a single word of your dossier is read. We build identities that communicate statutory discipline and professional service.",
+      },
+      {
+        h: "What we deliver",
+        p: "A complete brand identity system — logo (primary, secondary, icon variants), colour system, typography selection, stationery templates, social media kit, and a brand usage guide so every touchpoint remains consistent.",
+      },
+      {
+        h: "Brand strategy first, design second",
+        p: "We start with positioning — your market, your differentiator, your client profile — before a single pixel is designed. The visual identity flows from strategy, ensuring your brand stands out in a competitive security services market.",
+      },
+    ],
+    process: [
+      "Brand discovery — market, audience, positioning",
+      "Moodboard and concept exploration",
+      "Logo and identity system design",
+      "Stationery and asset production",
+      "Brand guideline handover",
+    ],
+    whoFor: [
+      "New security agencies launching their brand",
+      "Existing agencies rebranding or modernising",
+      "Startups seeking investor-ready brand identity",
+      "PSARA consultants building multi-location brand systems",
+    ],
+    faqs: [
+      {
+        q: "Can I get just a logo without the full brand package?",
+        a: "Yes. We offer modular packages — logo-only, basic identity, or full brand system. We recommend what fits your stage and budget.",
+      },
+      {
+        q: "How long does the branding process take?",
+        a: "A full brand identity project typically takes 2–3 weeks from discovery to final asset delivery. Logo-only projects can be completed in 5–7 working days.",
+      },
+    ],
+  },
 ];
 
 export function getService(slug: string) {

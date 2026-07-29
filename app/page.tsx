@@ -45,13 +45,13 @@ export default function Home() {
           ════════════════════════════════════════════ */}
 
       {/* 1. Cinematic Hero */}
-      <div data-section-transition data-transition="clip-left">
+      <div data-section-transition data-transition="clip-left" className="theme-paper-jasmine">
         <HeroDossier onOpenQuiz={() => setQuizOpen(true)} />
       </div>
 
       {/* 2. Stats */}
-      <SectionDivider label="01 — The Seal" />
-      <div data-section-transition data-transition="clip-up">
+      <SectionDivider label="01 — STATUTORY METRICS" />
+      <div data-section-transition data-transition="clip-up" className="theme-obsidian-dark">
         <StatsBar />
       </div>
 
@@ -59,24 +59,24 @@ export default function Home() {
           ACT 2: THE METHOD — How We Work
           ════════════════════════════════════════════ */}
 
-      <SectionDivider label="02 — The Method" />
+      <SectionDivider label="02 — PHILOSOPHY & PROCESS" />
 
       {/* 3. Philosophy */}
-      <div data-section-transition data-transition="clip-left">
+      <div data-section-transition data-transition="clip-left" className="theme-paper-jasmine">
         <Philosophy />
       </div>
 
       <SectionDivider />
 
       {/* 4. Ticker */}
-      <div data-section-transition data-transition="fade">
+      <div data-section-transition data-transition="fade" className="theme-obsidian-dark">
         <TickerMarquee />
       </div>
 
       <SectionDivider />
 
       {/* 5. Process */}
-      <div data-section-transition data-transition="clip-right">
+      <div data-section-transition data-transition="clip-right" className="theme-obsidian-dark">
         <ApprovalRoadmap />
       </div>
 
@@ -84,17 +84,17 @@ export default function Home() {
           ACT 3: THE REACH — Where We Work
           ════════════════════════════════════════════ */}
 
-      <SectionDivider label="03 — The Reach" />
+      <SectionDivider label="03 — STATUTORY JURISDICTION" />
 
       {/* 6. Presence */}
-      <div data-section-transition data-transition="blur">
+      <div data-section-transition data-transition="blur" className="theme-obsidian-dark">
         <Presence />
       </div>
 
       <SectionDivider />
 
       {/* 7. State Grid */}
-      <div data-section-transition data-transition="clip-up">
+      <div data-section-transition data-transition="clip-up" className="theme-paper-jasmine">
         <StateGridHome />
       </div>
 
@@ -102,17 +102,17 @@ export default function Home() {
           ACT 4: THE PROOF — Social Proof & Trust
           ════════════════════════════════════════════ */}
 
-      <SectionDivider label="04 — The Proof" />
+      <SectionDivider label="04 — VERIFIED REVIEWS" />
 
       {/* 8. Trust Proof */}
-      <div data-section-transition data-transition="clip-left">
+      <div data-section-transition data-transition="clip-left" className="theme-obsidian-dark">
         <TrustProof onOpenQuiz={() => setQuizOpen(true)} />
       </div>
 
       <SectionDivider />
 
       {/* 9. Reviews */}
-      <div data-section-transition data-transition="blur">
+      <div data-section-transition data-transition="blur" className="theme-paper-jasmine">
         <GoogleReviews variant="compact" />
       </div>
 
@@ -120,17 +120,17 @@ export default function Home() {
           ACT 5: THE CONVERSATION — Call to Action
           ════════════════════════════════════════════ */}
 
-      <SectionDivider label="05 — The Conversation" />
+      <SectionDivider label="05 — DIRECT CONSULTATION" />
 
       {/* 10. FAQ */}
-      <div data-section-transition data-transition="clip-up">
+      <div data-section-transition data-transition="clip-up" className="theme-paper-jasmine">
         <HomeFaq />
       </div>
 
       <SectionDivider />
 
       {/* 11. Contact */}
-      <div data-section-transition data-transition="blur">
+      <div data-section-transition data-transition="blur" className="theme-obsidian-dark">
         <HomeContact />
       </div>
 
@@ -142,7 +142,7 @@ export default function Home() {
       </div>
 
       {/* 12. Footer */}
-      <div data-section-transition data-transition="clip-left">
+      <div data-section-transition data-transition="clip-left" className="theme-obsidian-dark">
         <SiteFooter />
       </div>
 

@@ -1,152 +1,146 @@
 "use client";
 
-import { useEffect, useRef } from "react";
-import Image from "next/image";
 import Link from "next/link";
-import Chapter from "../layout/Chapter";
-import { OFFICES } from "../../../lib/config";
-import { lineByLineReveal, ensureGsap, storyEnter } from "../../lib/gsap";
-import CornerOrnament from "../ui/CornerOrnament";
-
-const highlightStates = [
-  { name: "Rajasthan", slug: "rajasthan", note: "HQ · Rules 2022 · Group-9 Home Dept" },
-  { name: "Delhi", slug: "delhi", note: "Police portal · fast digital path" },
-  { name: "Haryana", slug: "haryana", note: "Commercial office · Form-V culture" },
-  { name: "Uttar Pradesh", slug: "uttar-pradesh", note: "Extended verification corridors" },
-  { name: "Gujarat", slug: "gujarat", note: "Industrial west · training proof" },
-  { name: "Maharashtra", slug: "maharashtra", note: "Inspection-heavy · Rules 2022" },
-  { name: "Madhya Pradesh", slug: "madhya-pradesh", note: "Often 1-year validity — plan renewals" },
-  { name: "Karnataka", slug: "karnataka", note: "ISD Bengaluru · digital filings" },
-];
+import { MapPin, Phone, MessageSquare } from "lucide-react";
+import { OFFICES, CONTACT } from "../../../lib/config";
+import { DEFAULT_WA, TEL_HREF } from "../../../lib/whatsapp";
 
 export default function Presence() {
-  const root = useRef<HTMLDivElement | null>(null);
-  const headingRef = useRef<HTMLHeadingElement | null>(null);
-
-  useEffect(() => {
-    if (!root.current) return;
-    if (headingRef.current) {
-      lineByLineReveal(headingRef.current);
-    }
-    const { gsap } = ensureGsap();
-    const ctx = gsap.context(() => {
-      storyEnter(root.current!);
-    }, root);
-    return () => ctx.revert();
-  }, []);
-
-  const desks = OFFICES.slice(0, 8);
-
   return (
-    <Chapter id="presence" tone="warm-dark">
-      <div ref={root} className="binding-rail pl-0 md:pl-6">
-        <div className="mb-12 grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-12">
-          <div className="lg:col-span-5" data-story>
-            <h2 ref={headingRef} className="display-xl text-[var(--cream)]">
-              Pan-India <span className="text-[var(--gold)]">Coverage</span>
-            </h2>
-            <p className="body-copy mt-4 text-[var(--cream-warm)]">
-              Real desks with full addresses — not a franchise icon map. Pan-India filings are
-              coordinated from Jaipur headquarters with field presence across Delhi NCR, Gujarat,
-              Madhya Pradesh, Uttar Pradesh, Punjab, and Rajasthan corridors.
-            </p>
-            <p className="mt-4 text-sm font-semibold text-[var(--cream-warm)]">
-              There is <strong className="text-[var(--gold)]">no all-India PSARA licence</strong>.
-              Each State Controlling Authority issues its own grant. We sequence multi-state growth
-              after home-State stability.
-            </p>
-            <Link
-              href="/states"
-              className="mt-6 inline-block text-sm font-bold text-[var(--gold)] underline"
-            >
-              Browse all State PSARA guides →
-            </Link>
-          </div>
-
-          <div className="relative lg:col-span-7" data-story>
-            <div className="relative aspect-[16/10] overflow-hidden rounded-[var(--radius)] border border-[var(--line-gold)] p-6 md:p-10"
-                 style={{ backgroundColor: "var(--warm-dark-2, #241e16)" }}>
-              {/* Jasmine-style corner ornaments */}
-              <CornerOrnament position="tl" size="lg" opacity={0.3} />
-              <CornerOrnament position="tr" size="lg" opacity={0.3} />
-              <CornerOrnament position="bl" size="lg" opacity={0.3} />
-              <CornerOrnament position="br" size="lg" opacity={0.3} />
-
-              <div className="absolute inset-0 opacity-20 brightness-200 invert filter">
-                <Image
-                  src="/assets/images/india-map.svg"
-                  alt="India coverage map for PSARA licensing"
-                  fill
-                  className="object-contain p-6"
-                />
-              </div>
-              <div className="relative z-10 flex h-full flex-col justify-between">
-                <div className="flex items-center justify-between">
-                  <span className="text-xs font-bold uppercase tracking-widest text-[var(--gold)]">
-                    Pan-India filings
-                  </span>
-                  <span className="tag-chip">
-                    28+ States & UTs
-                  </span>
-                </div>
-                <div className="my-auto pt-6">
-                  <p className="font-[family-name:var(--font-display)] text-5xl font-extrabold tracking-tight text-[var(--cream)] md:text-6xl">
-                    200+
-                  </p>
-                  <p className="text-xs font-bold uppercase tracking-wider text-[var(--gold)] mt-2">
-                    City pages · State-wise Controlling Authority paths
-                  </p>
-                </div>
-              </div>
+    <section
+      id="presence"
+      className="py-24 md:py-36 px-[var(--gutter)]"
+      style={{
+        backgroundColor: "var(--obsidian)",
+        borderBottom: "1px solid var(--line)",
+      }}
+    >
+      <div className="max-w-[var(--page-max)] mx-auto">
+        {/* Header */}
+        <div
+          className="flex flex-col md:flex-row md:items-end justify-between pb-10 mb-14 gap-6"
+          style={{ borderBottom: "1px solid var(--line)" }}
+        >
+          <div>
+            <div className="flex items-center gap-3 mb-3">
+              <span className="w-5 h-px" style={{ backgroundColor: "var(--blue)" }} />
+              <span className="text-[0.58rem] font-bold uppercase tracking-[0.22em]" style={{ color: "var(--blue-bright)" }}>
+                PHYSICAL PRESENCE
+              </span>
             </div>
+            <h2
+              className="font-extrabold tracking-tighter uppercase leading-[0.90]"
+              style={{ fontSize: "clamp(2.5rem, 6vw, 6rem)", fontFamily: "var(--font-display)", color: "var(--white)" }}
+            >
+              OFFICE NETWORK
+            </h2>
+          </div>
+          <div className="flex gap-4 text-[0.58rem] font-bold uppercase tracking-widest" style={{ color: "var(--white-30)" }}>
+            <span>JAIPUR HQ</span><span>·</span><span>GURUGRAM</span><span>·</span><span>NEW DELHI</span>
           </div>
         </div>
 
-        <div className="mb-12" data-story>
-          <p className="text-xs font-bold uppercase tracking-widest text-[var(--gold)] mb-4">
-            Priority State corridors
-          </p>
-          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
-            {highlightStates.map((s) => (
-              <Link
-                key={s.slug}
-                href={`/states/${s.slug}`}
-                data-cursor={s.name}
-                className="border border-[var(--line-gold)] rounded-[var(--radius)] p-4 hover:border-[var(--gold)] transition-colors"
-                style={{ backgroundColor: "var(--warm-dark-2, #241e16)" }}
-              >
-                <p className="font-[family-name:var(--font-display)] text-lg font-bold text-[var(--cream)]">
-                  {s.name}
+        {/* Office Grid */}
+        <div className="grid md:grid-cols-3 gap-4">
+          {OFFICES.slice(0, 6).map((off, i) => (
+            <div
+              key={off.city}
+              className="group p-7 rounded-2xl flex flex-col justify-between transition-all duration-400"
+              style={{
+                backgroundColor: "var(--obsidian-card)",
+                border: "1px solid var(--line)",
+              }}
+              onMouseEnter={(e) => {
+                const el = e.currentTarget as HTMLElement;
+                el.style.borderColor = "var(--blue-border)";
+                el.style.boxShadow = "0 0 28px var(--blue-glow-soft)";
+              }}
+              onMouseLeave={(e) => {
+                const el = e.currentTarget as HTMLElement;
+                el.style.borderColor = "var(--line)";
+                el.style.boxShadow = "none";
+              }}
+            >
+              <div>
+                <div className="flex items-center justify-between mb-5">
+                  <span
+                    className="text-[0.52rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded-md border"
+                    style={{
+                      color: i === 0 ? "var(--gold)" : "var(--blue-bright)",
+                      borderColor: i === 0 ? "var(--gold-glow)" : "var(--blue-border)",
+                      backgroundColor: i === 0 ? "rgba(212,175,55,0.08)" : "var(--blue-surface)",
+                    }}
+                  >
+                    {off.badge}
+                  </span>
+                  <MapPin className="w-4 h-4" style={{ color: "var(--white-20)" }} />
+                </div>
+
+                <h3
+                  className="font-bold mb-2"
+                  style={{ fontSize: "1.35rem", fontFamily: "var(--font-display)", color: "var(--white)" }}
+                >
+                  {off.city}
+                </h3>
+                <p className="text-xs font-medium leading-relaxed" style={{ color: "var(--white-50)" }}>
+                  {off.address}
                 </p>
-                <p className="mt-1 text-xs font-medium text-[var(--text-dim)]">{s.note}</p>
-              </Link>
-            ))}
-          </div>
-        </div>
+              </div>
 
-        <div data-story>
-          <p className="text-xs font-bold uppercase tracking-widest text-[var(--gold)] mb-4">
-            Operational desks
-          </p>
-          {desks.map((o) => (
-            <div key={o.city} className="office-line">
-              <span className="font-[family-name:var(--font-display)] text-lg font-bold text-[var(--cream)]">
-                {o.city}
-              </span>
-              <span className="text-xs font-bold uppercase tracking-wider text-[var(--gold)]">{o.badge}</span>
-              <span className="text-sm font-medium text-[var(--cream-warm)]">
-                {o.address}, {o.pin}
-              </span>
+              <div
+                className="flex items-center justify-between pt-5 mt-5 text-[0.55rem] font-bold uppercase tracking-widest"
+                style={{ borderTop: "1px solid var(--line)", color: "var(--white-25)" }}
+              >
+                <span>PIN: {off.pin}</span>
+                <span>{off.lat}°N {off.lng}°E</span>
+              </div>
             </div>
           ))}
-          <Link
-            href="/contact"
-            className="mt-6 inline-block text-sm font-bold text-[var(--gold)] underline"
-          >
-            Full office list & maps →
-          </Link>
+        </div>
+
+        {/* Central helpdesk bar */}
+        <div
+          className="mt-6 p-8 rounded-2xl flex flex-col md:flex-row items-center justify-between gap-6"
+          style={{
+            backgroundColor: "var(--obsidian-lift)",
+            border: "1px solid var(--blue-border)",
+            boxShadow: "0 0 40px var(--blue-glow-soft)",
+          }}
+        >
+          <div>
+            <span className="text-[0.58rem] font-bold uppercase tracking-widest block mb-2" style={{ color: "var(--blue-bright)" }}>
+              CENTRAL HELPDESK
+            </span>
+            <p className="font-bold text-lg" style={{ color: "var(--white)", fontFamily: "var(--font-display)" }}>
+              Need on-ground support in any State or City?
+            </p>
+          </div>
+          <div className="flex items-center gap-3">
+            <a
+              href={TEL_HREF}
+              className="px-6 py-3 rounded-xl font-bold text-xs uppercase tracking-widest flex items-center gap-2 transition-all duration-300"
+              style={{ backgroundColor: "var(--blue)", color: "var(--white)", boxShadow: "0 0 20px var(--blue-glow)" }}
+              onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.boxShadow = "0 0 32px var(--blue-glow)"; }}
+              onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.boxShadow = "0 0 20px var(--blue-glow)"; }}
+            >
+              <Phone className="w-3.5 h-3.5" />
+              Call {CONTACT.phoneDisplay}
+            </a>
+            <a
+              href={DEFAULT_WA}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-6 py-3 rounded-xl font-bold text-xs uppercase tracking-widest flex items-center gap-2 transition-all duration-300"
+              style={{ backgroundColor: "rgba(212,175,55,0.10)", color: "var(--gold)", border: "1px solid var(--gold-glow)" }}
+              onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.backgroundColor = "rgba(212,175,55,0.18)"; }}
+              onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.backgroundColor = "rgba(212,175,55,0.10)"; }}
+            >
+              <MessageSquare className="w-3.5 h-3.5" />
+              WhatsApp Desk
+            </a>
+          </div>
         </div>
       </div>
-    </Chapter>
+    </section>
   );
 }

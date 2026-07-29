@@ -11,7 +11,7 @@ import JsonLd from "../../components/JsonLd";
 /** Reserved top-level routes that must not be captured as guides */
 const RESERVED = new Set([
   "about", "contact", "services", "faq", "states", "cities", "city",
-  "google", "privacy-policy", "terms", "disclaimer", "api", "_next",
+  "google", "privacy-policy", "terms", "disclaimer", "franchise", "api", "_next",
 ]);
 
 export function generateStaticParams() {

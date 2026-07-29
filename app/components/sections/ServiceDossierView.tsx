@@ -30,19 +30,13 @@ export default function ServiceDossierView({ service }: ServiceDossierViewProps)
       {/* ════════════════════════════════════════════
           1. SERVICE DOSSIER HERO SUMMARY
           ════════════════════════════════════════════ */}
-      <div className="relative border border-[var(--line-gold)] bg-[color-mix(in_srgb,var(--warm-dark-2)_70%,transparent)] p-6 md:p-10 backdrop-blur-md overflow-hidden ambient-glow-bg shimmer-border">
-        {/* Corner ticks */}
-        <div className="absolute top-3 left-3 w-4 h-4 border-t-2 border-l-2 border-[var(--gold)] opacity-50" aria-hidden />
-        <div className="absolute top-3 right-3 w-4 h-4 border-t-2 border-r-2 border-[var(--gold)] opacity-50" aria-hidden />
-        <div className="absolute bottom-3 left-3 w-4 h-4 border-b-2 border-l-2 border-[var(--gold)] opacity-50" aria-hidden />
-        <div className="absolute bottom-3 right-3 w-4 h-4 border-b-2 border-r-2 border-[var(--gold)] opacity-50" aria-hidden />
-
-        <div className="flex flex-wrap items-center justify-between gap-4 pb-6 border-b border-[var(--line)]">
-          <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-[var(--gold-faint)] border border-[var(--gold)] text-[var(--gold)] text-xs font-bold uppercase tracking-wider">
-            <ShieldCheck className="h-3.5 w-3.5" />
+      <div className="relative border border-[var(--line-light)] bg-white p-6 md:p-10 rounded-lg shadow-sm overflow-hidden text-[var(--text-dark)]">
+        <div className="flex flex-wrap items-center justify-between gap-4 pb-6 border-b border-[var(--line-light)]">
+          <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-[var(--obsidian-bg)] text-white text-xs font-bold uppercase tracking-wider rounded">
+            <ShieldCheck className="h-3.5 w-3.5 text-[var(--amber)]" />
             Specialized Practice
           </span>
-          <span className="text-xs font-bold tracking-widest uppercase text-[var(--cream-dim)]">
+          <span className="text-xs font-bold tracking-widest uppercase text-[var(--text-dark-muted)]">
             Service Dossier: {service.slug.toUpperCase()}
           </span>
         </div>
@@ -50,15 +44,19 @@ export default function ServiceDossierView({ service }: ServiceDossierViewProps)
         <FormattedText
           text={service.description}
           as="p"
-          className="mt-6 text-base md:text-lg leading-relaxed text-[var(--cream-soft)] font-medium block"
+          className="mt-6 text-base md:text-lg leading-relaxed text-[var(--text-dark-muted)] font-medium block"
         />
 
         {/* Dynamic Section Blocks */}
-        <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6 pt-6 border-t border-[var(--line)]">
+        <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6 pt-6 border-t border-[var(--line-light)]">
           {service.sections.map((sec, idx) => (
-            <div key={idx} className="p-5 border border-[var(--line)] bg-[var(--obsidian-soft)] space-y-2">
-              <h3 className="text-sm font-bold text-[var(--gold)] uppercase tracking-wider">{sec.h}</h3>
-              <FormattedText text={sec.p} as="p" className="text-xs font-medium leading-relaxed text-[var(--text-dim)] block" />
+            <div key={idx} className="p-5 border border-[var(--line-light)] bg-[var(--cream-bg)] rounded space-y-2">
+              <h3 className="text-sm font-bold text-[var(--amber)] uppercase tracking-wider">{sec.h}</h3>
+              <FormattedText
+                text={sec.p}
+                as="p"
+                className="text-xs text-[var(--text-dark-muted)] leading-relaxed block"
+              />
             </div>
           ))}
         </div>

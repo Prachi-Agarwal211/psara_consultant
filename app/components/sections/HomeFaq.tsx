@@ -1,91 +1,89 @@
 "use client";
 
-import { useEffect, useRef } from "react";
-import Link from "next/link";
-import { ChevronRight, HelpCircle } from "lucide-react";
-import Chapter from "../layout/Chapter";
-import { FAQS } from "../../../data/faq";
-import { lineByLineReveal, ensureGsap, storyEnter } from "../../lib/gsap";
+import { useState } from "react";
+import { ChevronDown } from "lucide-react";
 
-const HOME_FAQ_SLUGS = [
-  "What is a PSARA License?",
-  "Can one PSARA License cover multiple States?",
-  "How long does PSARA approval take?",
-  "Is training MOU mandatory?",
-  "Do directors need police verification?",
-  "What documents are required for PSARA?",
+const faqs = [
+  {
+    q: "What is a PSARA License and why is it mandatory?",
+    a: "A PSARA License is the statutory registration issued by the State Controlling Authority under the Private Security Agencies (Regulation) Act, 2005. Operating a security agency without a valid licence is a punishable offence in India.",
+  },
+  {
+    q: "Is a training MOU required before filing PSARA application?",
+    a: "Yes. Almost all State Controlling Authorities mandate a live MOU with a State-recognised security training institute covering prescribed unarmed and armed guard curricula.",
+  },
+  {
+    q: "How long does end-to-end PSARA licensing process take?",
+    a: "Indicative processing timeline ranges between 45 to 70 days depending on State portal queues, promoter police antecedent verification, and inspection scheduling.",
+  },
+  {
+    q: "Can I apply for multi-district or whole-State coverage?",
+    a: "Yes. Coverage slabs are structured into single district, up to five districts, or whole State. Government fees vary based on the coverage slab chosen.",
+  },
+  {
+    q: "What is the validity period of a PSARA License?",
+    a: "Typically 5 years from the date of grant under the Act, subject to State Rules. Renewal applications must be submitted before expiry to maintain continuous compliance.",
+  },
 ];
 
 export default function HomeFaq() {
-  const root = useRef<HTMLDivElement | null>(null);
-  const headingRef = useRef<HTMLHeadingElement | null>(null);
-  const items = HOME_FAQ_SLUGS.map((q) => FAQS.find((f) => f.q === q)).filter(
-    Boolean
-  ) as typeof FAQS;
+  const [openIndex, setOpenIndex] = useState<number | null>(0);
 
-  useEffect(() => {
-    if (!root.current) return;
-    if (headingRef.current) {
-      lineByLineReveal(headingRef.current);
-    }
-    const { gsap } = ensureGsap();
-    const ctx = gsap.context(() => {
-      storyEnter(root.current!);
-    }, root);
-    return () => ctx.revert();
-  }, []);
+  const toggle = (idx: number) => {
+    setOpenIndex(openIndex === idx ? null : idx);
+  };
 
   return (
-    <Chapter id="faq" tone="warm-parchment">
-      <div ref={root}>
-        <div className="mb-10 max-w-2xl" data-story>
-          <div className="flex items-center gap-2 mb-3">
-            <HelpCircle className="h-4 w-4 text-[var(--gold)]" />
-            <span className="text-xs font-bold uppercase tracking-wider text-[var(--ink)]">
-              Founder FAQ Briefing
-            </span>
+    <section
+      id="faq"
+      className="py-20 md:py-32 px-[var(--gutter)] theme-paper-jasmine border-b border-[var(--line-light)]"
+    >
+      <div className="max-w-[var(--page-max)] mx-auto">
+        {/* Header */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between border-b border-[var(--line-light)] pb-8 mb-12 gap-6">
+          <div>
+            <div className="flex items-center gap-3 text-[0.6rem] font-bold uppercase tracking-[0.2em] text-[var(--amber)] mb-2">
+              <span>STATUTORY CLARITY</span>
+            </div>
+            <h2 className="font-[family-name:var(--font-display)] text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tighter text-[var(--text-dark)] uppercase">
+              FREQUENT QUESTIONS
+            </h2>
           </div>
-          <h2 ref={headingRef} className="display-xl text-[var(--ink)] font-bold">
-            Questions Agency Owners <span className="text-[var(--gold)]">Ask First</span>
-          </h2>
-          <p className="mt-3 text-sm text-[var(--ink-muted)] leading-relaxed font-medium">
-            Straight answers based on the PSARA Act 2005 and State Home Department controlling authority rules.
-          </p>
+
+          <div className="flex items-center gap-3 text-[0.6rem] font-bold uppercase tracking-widest text-[var(--text-dark-muted)]">
+            <span>PSARA ACT 2005</span>
+            <span>·</span>
+            <span>DIRECT ANSWERS</span>
+          </div>
         </div>
 
-        <div className="divide-y divide-[var(--ink)]/15 border-t border-b border-[var(--ink)]/15" data-story>
-          {items.map((f, idx) => (
-            <details key={f.q} className="group py-5 transition-colors relative">
-              <summary className="cursor-pointer list-none font-[family-name:var(--font-display)] text-lg font-bold text-[var(--ink)] hover:text-[var(--gold)] flex items-center justify-between">
-                <span className="flex items-center gap-3">
-                  <span className="num-marker num-marker-sm text-xs text-[var(--gold)] font-bold">
-                    {String(idx + 1).padStart(2, '0')}
-                  </span>
-                  <span>
-                    <span className="text-[var(--gold)] font-bold mr-2">Q.</span>
-                    {f.q}
-                  </span>
-                </span>
-                <span className="ml-4 flex h-6 w-6 shrink-0 items-center justify-center rounded border border-[var(--ink)]/30 text-[var(--ink)] transition-transform duration-300 group-open:rotate-180">
-                  ↓
-                </span>
-              </summary>
-              <p className="mt-4 max-w-3xl text-sm leading-relaxed text-[var(--ink-muted)] pl-12 font-medium">
-                {f.a}
-              </p>
-            </details>
-          ))}
-        </div>
+        {/* FAQ Accordion */}
+        <div className="max-w-3xl mx-auto divide-y divide-[var(--line-light)] border-t border-b border-[var(--line-light)]">
+          {faqs.map((item, idx) => {
+            const isOpen = openIndex === idx;
 
-        <div className="mt-8 flex items-center justify-between" data-story>
-          <Link
-            href="/faq"
-            className="btn-ghost text-[var(--ink)] border-[var(--ink)]/30 hover:border-[var(--ink)] hover:text-[var(--ink)]"
-          >
-            Browse All 104 PSARA FAQs <ChevronRight className="h-4 w-4" />
-          </Link>
+            return (
+              <div key={idx} className="py-6">
+                <button
+                  type="button"
+                  onClick={() => toggle(idx)}
+                  data-cursor="Toggle FAQ"
+                  className="w-full flex items-center justify-between gap-4 text-left font-[family-name:var(--font-display)] text-xl font-bold text-[var(--text-dark)] hover:text-[var(--amber)] transition-colors"
+                >
+                  <span>{item.q}</span>
+                  <ChevronDown className={`w-5 h-5 text-[var(--amber)] shrink-0 transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`} />
+                </button>
+
+                {isOpen && (
+                  <p className="mt-4 text-sm font-medium text-[var(--text-dark-muted)] leading-relaxed animate-fadeIn">
+                    {item.a}
+                  </p>
+                )}
+              </div>
+            );
+          })}
         </div>
       </div>
-    </Chapter>
+    </section>
   );
 }

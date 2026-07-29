@@ -1,292 +1,445 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import Image from "next/image";
-import { ChevronRight, MessageSquare, ArrowUpRight } from "lucide-react";
-import BrandMark from "../ui/BrandMark";
+import Link from "next/link";
+import { ArrowDownRight, MessageSquare, Phone } from "lucide-react";
 import MagneticButton from "../ui/MagneticButton";
-import CornerOrnament from "../ui/CornerOrnament";
-import { SITE } from "../../../lib/config";
-import { DEFAULT_WA } from "../../../lib/whatsapp";
-import { ensureGsap, ease, prefersReducedMotion } from "../../lib/gsap";
+import BrandMark from "../ui/BrandMark";
+import { CONTACT } from "../../../lib/config";
+import { DEFAULT_WA, TEL_HREF } from "../../../lib/whatsapp";
+import { ensureGsap, prefersReducedMotion } from "../../lib/gsap";
 
-const navLinks = [
-  { label: "About", href: "#about" },
-  { label: "Coverage", href: "#coverage" },
-  { label: "Process", href: "#process" },
-  { label: "Services", href: "#services" },
-  { label: "Reviews", href: "#reviews" },
-  { label: "Contact", href: "#contact" },
+const NAV_ITEMS = [
+  { label: "About", href: "/about" },
+  { label: "Services", href: "/services" },
+  { label: "States", href: "/states" },
+  { label: "Contact", href: "/contact" },
 ];
 
-function ChrHoverNav({ href, label }: { href: string; label: string }) {
-  return (
-    <a
-      href={href}
-      className="chr-hover text-[0.6rem] font-bold uppercase tracking-widest text-[var(--cream)]/60 hover:text-[var(--gold)] transition-colors"
-    >
-      <span className="ch-wrapper">
-        {label.split("").map((ch, i) => (
-          <span key={i} className="ch-top" style={{ "--i": i } as React.CSSProperties}>
-            {ch === " " ? "\u00A0" : ch}
-          </span>
-        ))}
-        {label.split("").map((ch, i) => (
-          <span key={i} className="ch-bot" style={{ "--i": i } as React.CSSProperties}>
-            {ch === " " ? "\u00A0" : ch}
-          </span>
-        ))}
-      </span>
-    </a>
-  );
-}
-
+/**
+ * Abstract Futuristic Hero
+ * Layout:
+ *   LEFT  → vertical nav + statutory metadata
+ *   CENTER → full-bleed showcase image with kinetic overlays
+ *   BOTTOM → floating bar with CTA (center) + logo (right)
+ */
 export default function HeroDossier({ onOpenQuiz }: { onOpenQuiz?: () => void }) {
-  const root = useRef<HTMLElement | null>(null);
-  const titleRef = useRef<HTMLHeadingElement | null>(null);
-  const imgWrap = useRef<HTMLDivElement | null>(null);
-  const badgeRef = useRef<HTMLDivElement | null>(null);
-  const sideTextRef = useRef<HTMLDivElement | null>(null);
+  const rootRef   = useRef<HTMLElement | null>(null);
+  const headRef   = useRef<HTMLHeadingElement | null>(null);
+  const imgWrapRef = useRef<HTMLDivElement | null>(null);
+  const leftRef   = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    if (!root.current) return;
+    if (!rootRef.current || prefersReducedMotion()) return;
     const { gsap } = ensureGsap();
-    const reduced = prefersReducedMotion();
 
     const ctx = gsap.context(() => {
-      /* ── Badge stamp reveal (dossier seal) ── */
-      if (!reduced && badgeRef.current) {
-        gsap.fromTo(badgeRef.current,
-          { scale: 1.2, opacity: 0 },
-          { scale: 1, opacity: 1, duration: 0.65, ease: ease.bounce, delay: 0.1 }
+      /* ── Left panel slide-in ── */
+      if (leftRef.current) {
+        gsap.fromTo(
+          leftRef.current.querySelectorAll(".hero-nav-item"),
+          { opacity: 0, x: -24 },
+          { opacity: 1, x: 0, duration: 0.7, stagger: 0.09, ease: "power3.out", delay: 0.6 }
         );
       }
 
-      /* ── Hero title word-by-word reveal ── */
-      if (!reduced && titleRef.current) {
-        const text = titleRef.current.textContent?.trim() ?? "";
+      /* ── Headline word blur ── */
+      if (headRef.current) {
+        const text = headRef.current.textContent?.trim() ?? "";
         if (text) {
-          titleRef.current.setAttribute("aria-label", text);
+          headRef.current.setAttribute("aria-label", text);
+          headRef.current.textContent = "";
           const words = text.split(/\s+/);
-          const wordSpans: HTMLElement[] = [];
-
-          titleRef.current.textContent = "";
-          words.forEach((word, idx) => {
+          const spans: HTMLElement[] = [];
+          words.forEach((w) => {
             const wrap = document.createElement("span");
-            wrap.className = "inline-block overflow-hidden mr-[0.3em]";
-
+            wrap.className = "inline-block overflow-hidden mr-[0.2em]";
             const inner = document.createElement("span");
             inner.className = "inline-block will-change-transform";
-            inner.textContent = word + (idx < words.length - 1 ? "" : "");
-
+            inner.textContent = w;
             wrap.appendChild(inner);
-            titleRef.current!.appendChild(wrap);
-            wordSpans.push(inner);
+            headRef.current?.appendChild(wrap);
+            spans.push(inner);
           });
-
-          gsap.fromTo(wordSpans,
-            { yPercent: 110, opacity: 0 },
-            { yPercent: 0, opacity: 1, duration: 1.0, stagger: 0.06, ease: ease.cinematic, delay: 0.3 }
+          gsap.fromTo(
+            spans,
+            { opacity: 0, filter: "blur(14px)", y: 32 },
+            { opacity: 1, filter: "blur(0px)", y: 0, duration: 1.0, stagger: 0.06, ease: "power3.out", delay: 0.3 }
           );
         }
       }
 
-      /* ── Fade-up content elements ── */
-      if (!reduced) {
+      /* ── Showcase image parallax on scroll ── */
+      if (imgWrapRef.current) {
         gsap.fromTo(
-          ".hero-content > *",
-          { opacity: 0, y: 20 },
-          { opacity: 1, y: 0, duration: 0.7, stagger: 0.08, ease: ease.expo, delay: 0.4 }
-        );
-        gsap.fromTo(
-          ".hero-nav-item",
-          { opacity: 0, x: -16 },
-          { opacity: 1, x: 0, duration: 0.5, stagger: 0.05, ease: ease.expo, delay: 0.35 }
-        );
-      }
-
-      /* ── Background image parallax ── */
-      if (!reduced && imgWrap.current) {
-        gsap.to(imgWrap.current, {
-          scale: 1.08,
-          yPercent: 5,
-          ease: "none",
-          scrollTrigger: {
-            trigger: root.current,
-            start: "top top",
-            end: "+=100%",
-            scrub: 0.75,
-          },
-        });
-      }
-
-      /* ── Right-side decorative ghost text (Jasmine's vertical caption) ── */
-      if (!reduced && sideTextRef.current) {
-        gsap.fromTo(sideTextRef.current,
-          { opacity: 0, x: 20 },
-          { opacity: 1, x: 0, duration: 1.0, delay: 0.6, ease: ease.smooth }
+          imgWrapRef.current,
+          { scale: 1.04, opacity: 0.7 },
+          {
+            scale: 1, opacity: 1, ease: "power2.out", duration: 1.2,
+            scrollTrigger: {
+              trigger: rootRef.current,
+              start: "top top",
+              end: "bottom top",
+              scrub: 1.2,
+            },
+          }
         );
       }
-
-      /* ── Scroll indicator ── */
-      if (!reduced) {
-        gsap.to(".scroll-indicator", {
-          y: 6,
-          opacity: 0.4,
-          duration: 1.2,
-          repeat: -1,
-          yoyo: true,
-          ease: "power1.inOut",
-          delay: 1.2,
-        });
-      }
-    }, root);
+    }, rootRef);
 
     return () => ctx.revert();
   }, []);
 
   return (
     <section
+      ref={rootRef}
       id="hero"
-      ref={root}
-      className="relative min-h-[100svh] overflow-hidden text-[var(--cream)]"
-      style={{ backgroundColor: "var(--espresso)" }}
+      className="relative w-full overflow-hidden"
+      style={{
+        minHeight: "100dvh",
+        background: "var(--grad-hero)",
+      }}
     >
-      {/* ── Background image with warm overlay ── */}
-      <div ref={imgWrap} className="absolute inset-0 origin-center will-change-transform pointer-events-none">
-        <Image
-          src="/hero background.png"
-          alt="Security professional in a modern corporate setting — PSARA License clearance hero background"
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover object-[center_30%] opacity-30"
-        />
-        <div
-          className="absolute inset-0"
-          style={{
-            background: "linear-gradient(180deg, var(--espresso) 0%, rgba(15, 14, 12, 0.5) 40%, rgba(15, 14, 12, 0.3) 60%, var(--espresso) 100%)",
-          }}
-        />
+      {/* ── Background mesh / glow ── */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 z-0"
+        style={{ background: "var(--grad-mesh)", opacity: 0.6 }}
+      />
+      {/* Blue top glow */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute top-0 left-1/2 -translate-x-1/2 z-0 w-[60vw] h-[40vh]"
+        style={{
+          background: "radial-gradient(ellipse at 50% 0%, rgba(0,71,255,0.18) 0%, transparent 70%)",
+        }}
+      />
 
-      </div>
-
-      <div className="relative z-10 mx-auto flex min-h-[100svh] max-w-[var(--page-max)] flex-col justify-between px-[var(--gutter)] py-8">
-
-        {/* ── Jasmine-style side caption (vertical, right side) ── */}
-        <div
-          ref={sideTextRef}
-          className="hidden lg:block absolute right-4 top-1/2 -translate-y-1/2"
-          aria-hidden
-        >
+      {/* ════════════════════════════════════════════
+          LEFT: Vertical Nav + Metadata
+          ════════════════════════════════════════════ */}
+      <div
+        ref={leftRef}
+        className="absolute left-0 top-0 bottom-0 z-20 flex flex-col justify-between py-8 px-5 hidden md:flex"
+        style={{ width: "clamp(5rem, 9vw, 8rem)" }}
+      >
+        {/* Top: status dot + label */}
+        <div className="flex flex-col items-center gap-3">
           <span
-            className="block text-[0.5rem] font-bold uppercase tracking-widest opacity-30"
+            className="w-1.5 h-1.5 rounded-full"
+            style={{ backgroundColor: "var(--blue)", boxShadow: "0 0 8px var(--blue-glow)" }}
+          />
+          <span
+            className="text-[0.50rem] font-bold uppercase tracking-[0.22em]"
             style={{
-              color: "var(--gold)",
               writingMode: "vertical-rl",
-              textOrientation: "mixed",
-              letterSpacing: "0.3em",
+              color: "var(--white-50)",
+              letterSpacing: "0.22em",
             }}
           >
-            STATUTE · FIRST · DOSSIER · CLEARANCE · SINCE · 2016
+            PSARA ACT 2005
           </span>
         </div>
 
-        {/* ── Main content grid ── */}
-        <div className="grid h-full grid-cols-1 lg:grid-cols-12 gap-8 items-center pt-16 flex-1">
-
-          {/* Left: Dossier Index Navigation (Jasmine's side navigation) */}
-          <aside className="hero-nav hidden lg:flex flex-col justify-center border-r border-[var(--line-gold)] pr-8 lg:col-span-3 space-y-4 relative">
-            <CornerOrnament position="tl" size="sm" />
-            <CornerOrnament position="bl" size="sm" />
-
-            <span className="text-[0.5rem] font-bold uppercase tracking-[0.2em] text-[var(--gold)] mb-4 flex items-center gap-2">
-              <span className="h-px w-6 bg-[var(--gold)]" />
-              DOSSIER INDEX
-            </span>
-
-            {navLinks.map((item, i) => (
-              <div key={item.href} className="hero-nav-item flex items-center gap-3 group">
-                <span className="text-[0.5rem] font-bold text-[var(--text-faint)] w-5 transition-colors group-hover:text-[var(--gold)]">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <ChrHoverNav href={item.href} label={item.label} />
-              </div>
-            ))}
-          </aside>
-
-          {/* Right: Hero Content */}
-          <div className="hero-content lg:col-span-9 lg:pl-10 max-w-3xl">
-            {/* Badge */}
-            <div
-              ref={badgeRef}
-              className="mb-5 inline-flex items-center gap-2 border border-[var(--line-gold)] px-3 py-1.5"
-              style={{ backgroundColor: "color-mix(in srgb, var(--obsidian-2) 80%, transparent)" }}
+        {/* Center: vertical nav links */}
+        <nav className="flex flex-col items-center gap-6">
+          {NAV_ITEMS.map(({ label, href }) => (
+            <Link
+              key={href}
+              href={href}
+              className="hero-nav-item group"
+              style={{
+                writingMode: "vertical-rl",
+                textOrientation: "mixed",
+              }}
             >
-              <span className="w-1.5 h-1.5 rounded-full bg-[var(--gold)]" />
-              <span className="text-[0.5rem] font-bold uppercase tracking-[0.15em] text-[var(--gold)]">
-                PSARA Act 2005 · Statutory Dossier Clearance
-              </span>
-            </div>
-
-            {/* Main heading with word-blur reveal (Luke-inspired) */}
-            <h1
-              ref={titleRef}
-              className="text-[clamp(2rem,4.5vw,4.5rem)] font-bold leading-[0.95] tracking-tight text-[var(--cream)]"
-              style={{ fontFamily: "var(--font-display)", maxWidth: "42rem" }}
-            >
-              PSARA License Clearance Across India.
-            </h1>
-
-            {/* Lead text */}
-            <p className="mt-5 max-w-xl text-[0.95rem] font-medium leading-relaxed text-[var(--text-muted)]">
-              {SITE.name} prepares rejection-free Controlling Authority dossiers — entity objects,
-              training institute MOU, police antecedent verification, and inspection readiness across 28 States.
-            </p>
-
-            {/* CTA buttons */}
-            <div className="mt-7 flex flex-wrap gap-4 items-center">
-              <MagneticButton as="a" href="#contact" className="btn-gold" data-cursor="Start">
-                Start Consultation
-                <ChevronRight className="h-4 w-4" />
-              </MagneticButton>
-              <MagneticButton
-                as="a"
-                href={DEFAULT_WA}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-ghost"
-                data-cursor="WhatsApp"
+              <span
+                className="text-[0.55rem] font-bold uppercase tracking-[0.18em] transition-colors duration-300"
+                style={{ color: "var(--white-40)" }}
+                onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.color = "var(--gold)")}
+                onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.color = "var(--white-40)")}
               >
-                <MessageSquare className="h-4 w-4 text-[var(--gold)]" />
-                WhatsApp Desk
-              </MagneticButton>
+                {label}
+              </span>
+            </Link>
+          ))}
+        </nav>
 
-              {onOpenQuiz && (
-                <button
-                  type="button"
-                  onClick={onOpenQuiz}
-                  className="group flex items-center gap-1.5 text-[0.6rem] font-bold uppercase tracking-wider text-[var(--gold)] hover:gap-2 transition-all"
-                >
-                  60-Sec Readiness Check
-                  <ArrowUpRight className="h-3 w-3 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-                </button>
-              )}
-            </div>
+        {/* Bottom: coordinate */}
+        <span
+          className="text-[0.45rem] font-bold uppercase tracking-[0.15em]"
+          style={{ writingMode: "vertical-rl", color: "var(--white-30)" }}
+        >
+          26.91°N 75.79°E
+        </span>
+      </div>
+
+      {/* ════════════════════════════════════════════
+          MAIN CONTENT: Title + Showcase
+          ════════════════════════════════════════════ */}
+      <div
+        className="relative z-10 flex flex-col"
+        style={{
+          minHeight: "100dvh",
+          paddingTop: "var(--header-h)",
+          paddingLeft: "clamp(1.2rem, 4vw, 3.5rem)",
+          paddingRight: "clamp(1.2rem, 4vw, 3.5rem)",
+          marginLeft: "clamp(0rem, 9vw, 8rem)",
+        }}
+      >
+        {/* ── Top micro-bar ── */}
+        <div
+          className="flex items-center justify-between py-5 border-b"
+          style={{ borderColor: "var(--line)" }}
+        >
+          <div className="flex items-center gap-3">
+            <span
+              className="w-1.5 h-1.5 rounded-full animate-pulse"
+              style={{ backgroundColor: "var(--blue)" }}
+            />
+            <span className="text-[0.60rem] font-bold uppercase tracking-[0.2em]" style={{ color: "var(--white-50)" }}>
+              STATUTORY CONSULTANCY
+            </span>
+          </div>
+          <div className="hidden sm:flex items-center gap-6">
+            <span className="text-[0.60rem] font-bold uppercase tracking-[0.2em]" style={{ color: "var(--white-30)" }}>
+              PAN-INDIA · 28 STATES
+            </span>
+            <span
+              className="px-2.5 py-1 text-[0.55rem] font-bold uppercase tracking-widest rounded border"
+              style={{ color: "var(--gold)", borderColor: "var(--gold-glow)", backgroundColor: "rgba(212,175,55,0.06)" }}
+            >
+              2026 EDITION
+            </span>
           </div>
         </div>
 
-        {/* ── Bottom: Brand mark seal + scroll indicator ── */}
-        <div className="flex items-center justify-between pb-4 mt-8">
+        {/* ── Giant Headline ── */}
+        <div className="pt-10 pb-6">
           <div
-            className="inline-flex items-center gap-3 border border-[var(--line-gold)] px-5 py-2"
-            style={{ backgroundColor: "color-mix(in srgb, var(--espresso) 90%, transparent)" }}
+            className="flex items-center gap-4 mb-4"
+            style={{ color: "var(--blue-bright)" }}
           >
-            <BrandMark />
+            <span
+              className="px-3 py-1.5 text-[0.55rem] font-bold uppercase tracking-widest rounded"
+              style={{
+                color: "var(--blue-bright)",
+                backgroundColor: "var(--blue-surface)",
+                border: "1px solid var(--blue-border)",
+              }}
+            >
+              PSARA LICENSE SPECIALIST
+            </span>
+            <span className="h-px flex-1 hidden sm:block" style={{ backgroundColor: "var(--line-strong)" }} />
           </div>
-          <div className="scroll-indicator flex items-center gap-2 text-[0.5rem] font-bold uppercase tracking-widest text-[var(--text-faint)]">
-            <span className="w-6 h-px bg-[var(--text-faint)]" />
-            Scroll
+
+          <h1
+            ref={headRef}
+            className="font-extrabold uppercase leading-[0.90] tracking-tighter"
+            style={{
+              fontSize: "var(--text-hero)",
+              color: "var(--white)",
+              fontFamily: "var(--font-display)",
+              maxWidth: "56rem",
+            }}
+          >
+            PSARA LICENCE CONSULTANT
+          </h1>
+        </div>
+
+        {/* ── Showcase Image Container ── */}
+        <div
+          ref={imgWrapRef}
+          className="relative flex-1 w-full rounded-2xl overflow-hidden"
+          style={{
+            minHeight: "clamp(240px, 38vh, 460px)",
+            border: "1px solid var(--line-strong)",
+            backgroundColor: "var(--obsidian-card)",
+          }}
+        >
+          {/* Corner captions */}
+          <div
+            className="absolute top-4 left-4 z-20 px-3 py-1.5 rounded text-[0.52rem] font-bold uppercase tracking-widest backdrop-blur-sm"
+            style={{
+              color: "var(--gold)",
+              backgroundColor: "rgba(0,0,0,0.55)",
+              border: "1px solid var(--gold-glow)",
+            }}
+          >
+            MOTION SHOWCASE · REEL 2026
+          </div>
+          <div
+            className="absolute top-4 right-4 z-20 px-3 py-1.5 rounded text-[0.52rem] font-bold uppercase tracking-widest backdrop-blur-sm"
+            style={{ color: "var(--white-60)", backgroundColor: "rgba(0,0,0,0.55)", border: "1px solid var(--line)" }}
+          >
+            CONTROLLING AUTHORITY FILING
+          </div>
+
+          {/* Abstract futuristic background */}
+          <div
+            className="absolute inset-0 flex items-center justify-center"
+            style={{
+              background: `
+                radial-gradient(ellipse at 30% 50%, rgba(0,71,255,0.15) 0%, transparent 55%),
+                radial-gradient(ellipse at 75% 40%, rgba(212,175,55,0.08) 0%, transparent 50%),
+                linear-gradient(180deg, var(--obsidian-card) 0%, var(--black) 100%)
+              `,
+            }}
+          >
+            {/* Grid overlay */}
+            <div
+              className="absolute inset-0 opacity-[0.04]"
+              style={{
+                backgroundImage:
+                  "linear-gradient(var(--white-50) 1px, transparent 1px), linear-gradient(90deg, var(--white-50) 1px, transparent 1px)",
+                backgroundSize: "60px 60px",
+              }}
+            />
+
+            {/* Center abstract kinetic text */}
+            <div className="relative z-10 text-center px-8">
+              <span
+                className="block text-[0.60rem] font-bold uppercase tracking-[0.30em] mb-4"
+                style={{ color: "var(--blue-bright)" }}
+              >
+                VERIFICATION-READY DOSSIERS
+              </span>
+              <p
+                className="font-extrabold uppercase leading-none tracking-tighter"
+                style={{
+                  fontSize: "clamp(1.8rem, 4vw, 3.5rem)",
+                  color: "var(--white)",
+                  fontFamily: "var(--font-display)",
+                }}
+              >
+                STATUTE-FIRST
+                <span style={{ color: "var(--gold)", display: "block" }}>POST-GRANT DISCIPLINE</span>
+              </p>
+            </div>
+
+            {/* Floating blue orb left */}
+            <div
+              className="absolute left-16 top-1/2 -translate-y-1/2 w-32 h-32 rounded-full"
+              style={{
+                background: "radial-gradient(circle, rgba(0,71,255,0.25) 0%, transparent 70%)",
+                filter: "blur(20px)",
+              }}
+            />
+            {/* Floating gold orb right */}
+            <div
+              className="absolute right-20 bottom-12 w-24 h-24 rounded-full"
+              style={{
+                background: "radial-gradient(circle, rgba(212,175,55,0.20) 0%, transparent 70%)",
+                filter: "blur(16px)",
+              }}
+            />
+          </div>
+
+          {/* Bottom step bar */}
+          <div
+            className="absolute bottom-0 left-0 right-0 z-20 flex items-center justify-between px-5 py-3 backdrop-blur-md"
+            style={{ borderTop: "1px solid var(--line)", backgroundColor: "rgba(8,11,18,0.70)" }}
+          >
+            {["01 / PREPARE", "02 / FILE", "03 / VERIFY", "04 / GRANT"].map((step) => (
+              <span
+                key={step}
+                className="text-[0.52rem] font-bold uppercase tracking-widest"
+                style={{ color: "var(--white-40)" }}
+              >
+                {step}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        {/* ════════════════════════════════════════════
+            BOTTOM BAR: Description + CTAs + Logo
+            ════════════════════════════════════════════ */}
+        <div
+          className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5 py-6 border-t mt-4"
+          style={{ borderColor: "var(--line)" }}
+        >
+          {/* Description */}
+          <p
+            className="text-sm font-medium leading-relaxed max-w-sm"
+            style={{ color: "var(--white-60)" }}
+          >
+            Pan-India statutory licensing advisory. Entity hygiene, training MOUs, Controlling Authority dossiers.
+          </p>
+
+          {/* CTA buttons */}
+          <div className="flex flex-wrap items-center gap-3">
+            {onOpenQuiz && (
+              <MagneticButton>
+                <button
+                  type="button"
+                  onClick={onOpenQuiz}
+                  className="px-5 py-2.5 text-xs font-bold uppercase tracking-widest flex items-center gap-2 rounded-lg transition-all duration-300"
+                  style={{
+                    backgroundColor: "var(--blue)",
+                    color: "var(--white)",
+                    boxShadow: "0 0 20px var(--blue-glow)",
+                  }}
+                  onMouseEnter={(e) => {
+                    (e.currentTarget as HTMLElement).style.boxShadow = "0 0 32px var(--blue-glow)";
+                    (e.currentTarget as HTMLElement).style.backgroundColor = "var(--blue-bright)";
+                  }}
+                  onMouseLeave={(e) => {
+                    (e.currentTarget as HTMLElement).style.boxShadow = "0 0 20px var(--blue-glow)";
+                    (e.currentTarget as HTMLElement).style.backgroundColor = "var(--blue)";
+                  }}
+                >
+                  Eligibility Audit
+                  <ArrowDownRight className="w-3.5 h-3.5" />
+                </button>
+              </MagneticButton>
+            )}
+            <MagneticButton>
+              <a
+                href={DEFAULT_WA}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-5 py-2.5 text-xs font-bold uppercase tracking-widest flex items-center gap-2 rounded-lg transition-all duration-300"
+                style={{
+                  color: "var(--gold)",
+                  backgroundColor: "rgba(212,175,55,0.08)",
+                  border: "1px solid var(--gold-glow)",
+                }}
+                onMouseEnter={(e) => {
+                  (e.currentTarget as HTMLElement).style.backgroundColor = "rgba(212,175,55,0.15)";
+                }}
+                onMouseLeave={(e) => {
+                  (e.currentTarget as HTMLElement).style.backgroundColor = "rgba(212,175,55,0.08)";
+                }}
+              >
+                <MessageSquare className="w-3.5 h-3.5" />
+                WhatsApp
+              </a>
+            </MagneticButton>
+            <a
+              href={TEL_HREF}
+              className="px-5 py-2.5 text-xs font-bold uppercase tracking-widest flex items-center gap-2 rounded-lg transition-all duration-300"
+              style={{
+                color: "var(--white-70)",
+                border: "1px solid var(--line-strong)",
+              }}
+              onMouseEnter={(e) => {
+                (e.currentTarget as HTMLElement).style.borderColor = "var(--blue-border)";
+                (e.currentTarget as HTMLElement).style.color = "var(--white)";
+              }}
+              onMouseLeave={(e) => {
+                (e.currentTarget as HTMLElement).style.borderColor = "var(--line-strong)";
+                (e.currentTarget as HTMLElement).style.color = "var(--white-70)";
+              }}
+            >
+              <Phone className="w-3.5 h-3.5" />
+              {CONTACT.phoneDisplay}
+            </a>
+          </div>
+
+          {/* Logo — bottom right */}
+          <div className="hidden lg:block flex-shrink-0">
+            <BrandMark />
           </div>
         </div>
       </div>

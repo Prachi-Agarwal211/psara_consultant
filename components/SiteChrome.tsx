@@ -168,7 +168,7 @@ export default function SiteChrome({ children }: { children: React.ReactNode }) 
           <div className="flex items-center gap-3">
             {/* Jasmine-inspired header metadata (hidden on mobile) */}
             <div className="hidden xl:flex items-center gap-3 text-[0.55rem] font-bold uppercase tracking-widest text-[var(--text-faint)] mr-2">
-              <span>JAIPUR</span>
+              <span>JAIPUR HQ</span>
               <span className="w-px h-3 bg-[var(--line-gold)]" aria-hidden />
               <LiveClock />
               <span className="w-px h-3 bg-[var(--line-gold)]" aria-hidden />
@@ -177,6 +177,7 @@ export default function SiteChrome({ children }: { children: React.ReactNode }) 
 
             <a
               href={TEL_HREF}
+              data-cursor="Call Now"
               className="hidden sm:inline-flex btn-ghost px-4 py-2 text-[0.6rem]"
             >
               <Phone className="h-3 w-3" />
@@ -186,6 +187,7 @@ export default function SiteChrome({ children }: { children: React.ReactNode }) 
               href={DEFAULT_WA}
               target="_blank"
               rel="noopener noreferrer"
+              data-cursor="WhatsApp"
               className="hidden sm:inline-flex btn-gold px-4 py-2 text-[0.6rem]"
             >
               <MessageSquare className="h-3 w-3" />

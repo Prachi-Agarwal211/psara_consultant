@@ -1,128 +1,179 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import Image from "next/image";
-import { lineByLineReveal, initParallaxImage, initFluidLine } from "../../lib/gsap";
-import CornerOrnament from "../ui/CornerOrnament";
+import { ensureGsap, prefersReducedMotion } from "../../lib/gsap";
 
 export default function Philosophy() {
-  const root = useRef<HTMLElement | null>(null);
-  const imgRef = useRef<HTMLDivElement | null>(null);
-  const headingRef = useRef<HTMLHeadingElement | null>(null);
-  const fluidRef = useRef<HTMLDivElement | null>(null);
+  const rootRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
-    if (!root.current) return;
+    if (!rootRef.current || prefersReducedMotion()) return;
+    const { gsap } = ensureGsap();
 
-    if (imgRef.current) {
-      initParallaxImage(imgRef.current, root.current);
-    }
-    if (headingRef.current) {
-      lineByLineReveal(headingRef.current);
-    }
-    if (fluidRef.current) {
-      initFluidLine(fluidRef.current, { trigger: root.current });
-    }
+    const ctx = gsap.context(() => {
+      const lines = rootRef.current?.querySelectorAll(".t-line-inner");
+      if (lines?.length) {
+        gsap.fromTo(
+          lines,
+          { yPercent: 110, opacity: 0 },
+          {
+            yPercent: 0,
+            opacity: 1,
+            duration: 1.0,
+            stagger: 0.10,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: rootRef.current,
+              start: "top 78%",
+              toggleActions: "play none none none",
+            },
+          }
+        );
+      }
+    }, rootRef);
+
+    return () => ctx.revert();
   }, []);
 
   return (
     <section
+      ref={rootRef}
       id="philosophy"
-      ref={root}
-      className="relative h-[75vh] md:h-[85vh] overflow-hidden text-[var(--cream)]"
-      style={{ backgroundColor: "var(--warm-dark, #1a1510)" }}
+      className="py-24 md:py-36 px-[var(--gutter)]"
+      style={{
+        backgroundColor: "var(--obsidian)",
+        borderBottom: "1px solid var(--line)",
+        position: "relative",
+        overflow: "hidden",
+      }}
     >
+      {/* Subtle background glow */}
       <div
-        ref={imgRef}
-        className="absolute inset-0 will-change-transform"
-      >
-        <Image
-          src="/assets/images/government-building.jpg"
-          alt="Government Controlling Authority"
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover object-center"
-        />
-        <div
-          className="absolute inset-0"
-          style={{
-            background:
-              "linear-gradient(180deg, var(--warm-dark, #1a1510) 0%, rgba(26, 21, 16, 0.65) 50%, var(--warm-dark, #1a1510) 100%)",
-          }}
-        />
-      </div>
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background: "radial-gradient(ellipse at 60% 50%, rgba(0,71,255,0.05) 0%, transparent 60%)",
+        }}
+        aria-hidden
+      />
 
-      {/* Fluid line SVG — organic gold bezier that draws on scroll */}
-      <div
-        ref={fluidRef}
-        className="fluid-line"
-        aria-hidden="true"
-      >
-        <svg viewBox="0 0 1200 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-          <path
-            className="fluid-path"
-            d="M0 45 C 200 10, 400 55, 600 30 S 800 10, 1000 40 S 1100 15, 1200 35"
-            stroke="var(--gold)"
-            strokeWidth="1.5"
-            opacity="0.35"
+      <div className="max-w-[var(--page-max)] mx-auto relative">
+        {/* Section eyebrow */}
+        <div className="flex items-center gap-3 mb-10">
+          <span
+            className="w-5 h-px"
+            style={{ backgroundColor: "var(--blue)" }}
           />
-          <path
-            className="fluid-path"
-            d="M0 45 C 200 10, 400 55, 600 30 S 800 10, 1000 40 S 1100 15, 1200 35"
-            stroke="var(--gold)"
-            strokeWidth="0.5"
-            opacity="0.15"
-            transform="translate(0, 6)"
-          />
-          <path
-            className="fluid-path"
-            d="M0 50 C 200 25, 400 40, 600 35 S 800 25, 1000 45 S 1100 30, 1200 42"
-            stroke="var(--gold)"
-            strokeWidth="0.5"
-            opacity="0.1"
-            transform="translate(0, -4)"
-          />
-        </svg>
-      </div>
-
-      <div className="absolute inset-0 z-10 flex items-center justify-center">          <div className="text-center px-[var(--gutter)] max-w-4xl mx-auto">
-          <span className="inline-block text-xs font-bold uppercase tracking-[0.18em] text-[var(--gold)] mb-4">
-            Statute-First · Verification-Ready · Post-Grant Discipline
+          <span
+            className="text-[0.58rem] font-bold uppercase tracking-[0.22em]"
+            style={{ color: "var(--blue-bright)" }}
+          >
+            STATUTORY PHILOSOPHY
           </span>
-          <h2 ref={headingRef} className="display-xl text-[var(--cream)] split-heading relative pl-4 md:pl-8">
-            <span className="side-caption" aria-hidden>STATUTE-FIRST</span>
-            Every dossier maps directly to the
-            <br />
-            <span className="text-[var(--gold)] font-bold">PSARA Act, 2005</span>
-          </h2>
-          <p className="mt-6 text-sm md:text-base max-w-xl mx-auto leading-relaxed text-[var(--cream-warm)]">
-            We compose the application the Authority expects — objects, office proof,
-            training MOU, and antecedent clearance. Not a recycled internet checklist.
+        </div>
+
+        {/* Kinetic 3-line heading */}
+        <div className="flex flex-col gap-1.5">
+          {/* Line 1 */}
+          <div className="overflow-hidden flex items-baseline gap-5 flex-wrap">
+            <div className="overflow-hidden">
+              <h2
+                className="t-line-inner font-extrabold tracking-tighter uppercase leading-[0.88]"
+                style={{
+                  fontSize: "clamp(2.8rem, 7vw, 7rem)",
+                  fontFamily: "var(--font-display)",
+                  color: "var(--white)",
+                }}
+              >
+                PROCURING
+              </h2>
+            </div>
+            <span
+              className="text-[0.52rem] font-bold uppercase tracking-[0.18em] px-2.5 py-1 rounded-md border shrink-0 self-center"
+              style={{
+                color: "var(--white-50)",
+                borderColor: "var(--line-strong)",
+                backgroundColor: "var(--obsidian-lift)",
+              }}
+            >
+              01 PURPOSEFUL COMPLIANCE
+            </span>
+          </div>
+
+          {/* Line 2 */}
+          <div className="overflow-hidden flex items-baseline gap-5 flex-wrap">
+            <div className="overflow-hidden">
+              <h2
+                className="t-line-inner font-extrabold tracking-tighter uppercase leading-[0.88]"
+                style={{
+                  fontSize: "clamp(2.8rem, 7vw, 7rem)",
+                  fontFamily: "var(--font-display)",
+                  color: "var(--white)",
+                }}
+              >
+                STATUTORY
+              </h2>
+            </div>
+            <div className="overflow-hidden">
+              <h2
+                className="t-line-inner font-extrabold tracking-tighter uppercase leading-[0.88]"
+                style={{
+                  fontSize: "clamp(2.8rem, 7vw, 7rem)",
+                  fontFamily: "var(--font-display)",
+                  color: "var(--blue)",
+                  textShadow: "0 0 40px var(--blue-glow)",
+                }}
+              >
+                LICENCES
+              </h2>
+            </div>
+          </div>
+
+          {/* Line 3 */}
+          <div className="overflow-hidden flex items-baseline gap-5 flex-wrap">
+            <span
+              className="text-[0.52rem] font-bold uppercase tracking-[0.18em] px-2.5 py-1 rounded-md border shrink-0 self-center"
+              style={{
+                color: "var(--gold)",
+                borderColor: "var(--gold-glow)",
+                backgroundColor: "rgba(212,175,55,0.06)",
+              }}
+            >
+              PAN-INDIA · 28 STATES
+            </span>
+            <div className="overflow-hidden">
+              <h2
+                className="t-line-inner font-extrabold tracking-tighter uppercase leading-[0.88]"
+                style={{
+                  fontSize: "clamp(2.8rem, 7vw, 7rem)",
+                  fontFamily: "var(--font-display)",
+                  color: "var(--white)",
+                }}
+              >
+                ACROSS INDIA
+              </h2>
+            </div>
+          </div>
+        </div>
+
+        {/* Bottom narrative */}
+        <div
+          className="mt-14 pt-8 grid md:grid-cols-12 gap-6 items-center"
+          style={{ borderTop: "1px solid var(--line)" }}
+        >
+          <p
+            className="md:col-span-8 text-base font-medium leading-relaxed"
+            style={{ color: "var(--white-60)" }}
+          >
+            Every Controlling Authority filing is engineered against official State Rules, mandatory training MOUs,
+            and promoter antecedents — eliminating rejection risk and post-grant non-compliance.
           </p>
-
-          <div className="mt-10 grid grid-cols-1 sm:grid-cols-3 gap-6 text-center max-w-2xl mx-auto">
-            {[
-              { num: '01', title: 'Statute-First Filing', desc: 'Objects · Office · MOA' },
-              { num: '02', title: 'Antecedent Verification', desc: 'Police · SP · Liasion' },
-              { num: '03', title: 'Post-Grant Compliance', desc: 'Renewal · Expansion · Labour' },
-            ].map((item) => (
-              <div key={item.num}
-                   className="relative border border-[var(--line-gold)] p-5 rounded-[var(--radius)] frame-double card-glow-hover"
-                   style={{ backgroundColor: "color-mix(in srgb, var(--warm-dark-2, #241e16) 90%, transparent)" }}>
-                {/* Corner ornaments */}
-                <CornerOrnament position="tl" />
-                <CornerOrnament position="br" />
-
-                <span className="num-marker block mb-2">{item.num}</span>
-                <div className="text-[0.6rem] font-bold uppercase tracking-wider text-[var(--gold)]">
-                  {item.title}
-                </div>
-                <p className="mt-1 text-[0.5rem] font-medium text-[var(--text-faint)]">
-                  {item.desc}
-                </p>
-              </div>
-            ))}
+          <div className="md:col-span-4 flex justify-start md:justify-end">
+            <span
+              className="text-[0.62rem] font-bold uppercase tracking-widest"
+              style={{ color: "var(--white-30)" }}
+            >
+              REGISTRATION · RENEWAL · ADVISORY
+            </span>
           </div>
         </div>
       </div>

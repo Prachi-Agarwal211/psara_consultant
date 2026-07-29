@@ -45,30 +45,24 @@ export default function StateDossierView({
       {/* ════════════════════════════════════════════
           1. EXECUTIVE DOSSIER HERO SUMMARY
           ════════════════════════════════════════════ */}
-      <div className="relative border border-[var(--line-gold)] bg-[color-mix(in_srgb,var(--warm-dark-2)_70%,transparent)] p-6 md:p-10 backdrop-blur-md overflow-hidden ambient-glow-bg shimmer-border">
-        {/* Corner ticks */}
-        <div className="absolute top-3 left-3 w-4 h-4 border-t-2 border-l-2 border-[var(--gold)] opacity-50" aria-hidden />
-        <div className="absolute top-3 right-3 w-4 h-4 border-t-2 border-r-2 border-[var(--gold)] opacity-50" aria-hidden />
-        <div className="absolute bottom-3 left-3 w-4 h-4 border-b-2 border-l-2 border-[var(--gold)] opacity-50" aria-hidden />
-        <div className="absolute bottom-3 right-3 w-4 h-4 border-b-2 border-r-2 border-[var(--gold)] opacity-50" aria-hidden />
-
-        <div className="flex flex-wrap items-center justify-between gap-4 pb-6 border-b border-[var(--line)]">
+      <div className="relative border border-[var(--line-light)] bg-white p-6 md:p-10 rounded-lg shadow-sm overflow-hidden text-[var(--text-dark)]">
+        <div className="flex flex-wrap items-center justify-between gap-4 pb-6 border-b border-[var(--line-light)]">
           <div className="flex items-center gap-3">
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-[var(--gold-faint)] border border-[var(--gold)] text-[var(--gold)] text-xs font-bold uppercase tracking-wider">
-              <Shield className="h-3.5 w-3.5" />
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-[var(--obsidian-bg)] text-white text-xs font-bold uppercase tracking-wider rounded">
+              <Shield className="h-3.5 w-3.5 text-[var(--amber)]" />
               State Licensing Dossier
             </span>
-            <span className="text-xs font-bold tracking-widest uppercase text-[var(--cream-dim)]">
+            <span className="text-xs font-bold tracking-widest uppercase text-[var(--text-dark-muted)]">
               Ref: PSARA-{state.slug.toUpperCase()}
             </span>
           </div>
-          <div className="flex items-center gap-3 text-xs font-medium text-[var(--cream-dim)]">
+          <div className="flex items-center gap-3 text-xs font-bold text-[var(--text-dark-muted)] uppercase tracking-wider">
             <span className="flex items-center gap-1">
-              <MapPin className="h-3.5 w-3.5 text-[var(--gold)]" /> Capital: <strong className="text-[var(--cream)]">{state.capital}</strong>
+              <MapPin className="h-3.5 w-3.5 text-[var(--amber)]" /> Capital: <strong className="text-[var(--text-dark)]">{state.capital}</strong>
             </span>
             <span>•</span>
             <span className="flex items-center gap-1">
-              <Clock className="h-3.5 w-3.5 text-[var(--gold)]" /> Validity: <strong className="text-[var(--cream)]">{state.validityYears} Years</strong>
+              <Clock className="h-3.5 w-3.5 text-[var(--amber)]" /> Validity: <strong className="text-[var(--text-dark)]">{state.validityYears} Years</strong>
             </span>
           </div>
         </div>
@@ -80,24 +74,24 @@ export default function StateDossierView({
               key={idx}
               text={p}
               as="p"
-              className="text-base md:text-lg leading-relaxed text-[var(--cream-soft)] font-medium block"
+              className="text-base md:text-lg leading-relaxed text-[var(--text-dark-muted)] font-medium block"
             />
           ))}
         </div>
 
         {/* Key Framework Parameters */}
-        <div className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-4 pt-6 border-t border-[var(--line)]">
-          <div className="p-4 border border-[var(--line)] bg-[var(--obsidian-soft)] hover:border-[var(--gold)] transition-colors">
-            <span className="block text-[0.65rem] font-bold uppercase tracking-widest text-[var(--gold)]">Application Mode</span>
-            <span className="mt-1 block text-sm font-bold text-[var(--cream)]">{state.applicationMode}</span>
+        <div className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-4 pt-6 border-t border-[var(--line-light)]">
+          <div className="p-4 border border-[var(--line-light)] bg-[var(--cream-bg)] rounded hover:border-[var(--obsidian-bg)] transition-colors">
+            <span className="block text-[0.65rem] font-bold uppercase tracking-widest text-[var(--amber)]">Application Mode</span>
+            <span className="mt-1 block text-sm font-bold text-[var(--text-dark)]">{state.applicationMode}</span>
           </div>
-          <div className="p-4 border border-[var(--line)] bg-[var(--obsidian-soft)] hover:border-[var(--gold)] transition-colors">
-            <span className="block text-[0.65rem] font-bold uppercase tracking-widest text-[var(--gold)]">Rules Framework</span>
-            <span className="mt-1 block text-sm font-bold text-[var(--cream)]">{state.rulesNote}</span>
+          <div className="p-4 border border-[var(--line-light)] bg-[var(--cream-bg)] rounded hover:border-[var(--obsidian-bg)] transition-colors">
+            <span className="block text-[0.65rem] font-bold uppercase tracking-widest text-[var(--amber)]">Rules Framework</span>
+            <span className="mt-1 block text-sm font-bold text-[var(--text-dark)]">{state.rulesNote}</span>
           </div>
-          <div className="p-4 border border-[var(--line)] bg-[var(--obsidian-soft)] hover:border-[var(--gold)] transition-colors">
-            <span className="block text-[0.65rem] font-bold uppercase tracking-widest text-[var(--gold)]">Coverage Potential</span>
-            <span className="mt-1 block text-sm font-bold text-[var(--cream)]">{state.cities.length}+ Major Districts</span>
+          <div className="p-4 border border-[var(--line-light)] bg-[var(--cream-bg)] rounded hover:border-[var(--obsidian-bg)] transition-colors">
+            <span className="block text-[0.65rem] font-bold uppercase tracking-widest text-[var(--amber)]">Coverage Potential</span>
+            <span className="mt-1 block text-sm font-bold text-[var(--text-dark)]">{state.cities.length}+ Major Districts</span>
           </div>
         </div>
       </div>

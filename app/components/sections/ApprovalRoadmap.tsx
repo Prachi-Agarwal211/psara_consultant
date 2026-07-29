@@ -1,212 +1,187 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
-import Image from "next/image";
-import Link from "next/link";
+import { useState } from "react";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
-import Chapter from "../layout/Chapter";
-import MagneticButton from "../ui/MagneticButton";
-import { CONTACT } from "../../../lib/config";
-import { DEFAULT_WA } from "../../../lib/whatsapp";
-import { lineByLineReveal } from "../../lib/gsap";
 
-const stages = [
+const steps = [
   {
-    title: "Entity, Objects & Office Proof",
-    days: "Days 1 – 7",
-    image: "/assets/images/legal-documents.jpg",
-    points: [
-      "Pvt Ltd / LLP / firm structure with PSARA-ready main objects",
-      "Registered office pack: rent/lease, utility bill, landlord NOC, photographs",
-      "Promoter KYC aligned character-for-character across PAN & Aadhaar",
-      "Coverage choice: one district · multi-district · whole State",
-    ],
+    step: "01",
+    title: "Entity & Object Hygiene",
+    desc: "Verification of Private Limited, LLP, or proprietorship structure to ensure main objects explicitly permit private security agency business in the target State.",
+    tag: "DAY 01–05",
   },
   {
-    title: "Training MOU & Affidavits",
-    days: "Days 5 – 15",
-    image: "/assets/images/office-team-working.jpg",
-    points: [
-      "MOU with a State-recognised security training institute",
-      "Hour pathways for entry-level guards and ex-servicemen where Rules allow",
-      "Eligibility / non-conviction affidavits in State-prescribed formats",
-      "Proposed uniform designs that do not resemble police or military",
-    ],
+    step: "02",
+    title: "Training Institute MOU",
+    desc: "Execution of mandatory training MOU with a State-recognised security institute covering unarmed and armed curricula under Model Rules culture.",
+    tag: "DAY 05–15",
   },
   {
-    title: "Police Antecedent Verification",
-    days: "Days 8 – 35+",
-    image: "/assets/images/consultation-meeting.jpg",
-    points: [
-      "Form tracks for each proprietor, partner, or director",
-      "District SP / Special Branch / commissionerate pathways by State",
-      "Address hygiene so field visits do not restart the clock",
-      "Often the longest gate — honest disclosure beats delayed surprises",
-    ],
+    step: "03",
+    title: "Controlling Authority Filing",
+    desc: "Compilation of promoter KYC, affidavits, registered office proof, and official fee payment before the State Controlling Authority portal/desk.",
+    tag: "DAY 15–35",
   },
   {
-    title: "Authority Filing, Inspection & Grant",
-    days: "Days 20 – 60+",
-    image: "/assets/images/handshake-deal.jpg",
-    points: [
-      "Complete dossier to Controlling Authority with correct fee slab",
-      "Premises inspection readiness where the State inspects offices",
-      "Grant letter / licence hand-off on satisfaction of Authority",
-      "Post-grant: registers, labour thresholds, renewal calendar (5-year or 1-year States)",
-    ],
+    step: "04",
+    title: "Police Antecedent Clearance",
+    desc: "Liaison for promoter character & antecedent verification, office premises inspection, and final PSARA License grant issue.",
+    tag: "DAY 35–60",
   },
 ];
 
 export default function ApprovalRoadmap() {
-  const [active, setActive] = useState(0);
-  const headingRef = useRef<HTMLHeadingElement | null>(null);
-  const s = stages[active]!;
-
-  useEffect(() => {
-    if (headingRef.current) {
-      lineByLineReveal(headingRef.current);
-    }
-  }, []);
+  const [active, setActive] = useState<number>(0);
 
   return (
-    <Chapter id="process" tone="ink">
-      <div className="binding-rail pl-0 md:pl-6">
-        <div className="mb-10 max-w-2xl" data-story>
-          <h2 ref={headingRef} className="display-xl text-[var(--cream)]">
-            4-Stage PSARA <span className="text-[var(--gold)]">Licensing Process</span>
-          </h2>
-          <p className="body-copy mt-3 text-[var(--cream-warm)]">
-            Indicative 30–70+ day journey depending on State, police queues, and file completeness.
-            Select a stage. Timelines are not marketing promises — verification dominates the calendar.
-          </p>
-        </div>
+    <section
+      id="process"
+      className="py-24 md:py-36 px-[var(--gutter)]"
+      style={{
+        backgroundColor: "var(--obsidian)",
+        borderBottom: "1px solid var(--line)",
+        position: "relative",
+        overflow: "hidden",
+      }}
+    >
+      {/* Gold bottom glow */}
+      <div
+        className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[50vw] h-[30vh] pointer-events-none"
+        style={{
+          background: "radial-gradient(ellipse at 50% 100%, rgba(212,175,55,0.08) 0%, transparent 65%)",
+        }}
+        aria-hidden
+      />
 
-        <div className="mb-6 grid grid-cols-2 gap-3 sm:grid-cols-4" data-story>
-          {stages.map((st, i) => {
-            const isActive = active === i;
-            return (
-              <button
-                key={st.title}
-                type="button"
-                onClick={() => setActive(i)}
-                className={`relative flex flex-col items-start rounded-[var(--radius)] border p-4 text-left transition-all duration-300 cursor-pointer ${
-                  isActive
-                    ? "border-[var(--gold)] bg-[var(--obsidian-2)]"
-                    : "border-[var(--line-gold)] bg-[var(--obsidian)] hover:border-[var(--gold)]"
-                }`}
-              >
-                {/* Stage number badge — Jasmine/Luke style */}
-                <span className="num-marker num-marker-sm absolute top-2 right-2 text-xs">
-                  {String(i + 1).padStart(2, '0')}
-                </span>
-
-                <span
-                  className={`text-[10px] font-bold uppercase tracking-wider ${
-                    isActive ? "text-[var(--gold)]" : "text-[var(--text-dim)]"
-                  }`}
-                >
-                  {st.days}
-                </span>
-                <p
-                  className={`mt-2 w-full text-sm font-bold leading-tight ${
-                    isActive ? "text-[var(--gold)]" : "text-[var(--cream)]"
-                  }`}
-                >
-                  {st.title}
-                </p>
-              </button>
-            );
-          })}
-        </div>
-
-        {/* Decorative gold progress rule */}
-        <div className="gold-rule gold-rule-left mb-6" data-story></div>
-
+      <div className="max-w-[var(--page-max)] mx-auto relative">
+        {/* Header */}
         <div
-          data-story
-          className="overflow-hidden rounded-[var(--radius)] border border-[var(--line-gold)] bg-[var(--obsidian-2)]"
+          className="flex flex-col md:flex-row md:items-end justify-between pb-10 mb-14 gap-6"
+          style={{ borderBottom: "1px solid var(--line)" }}
         >
-          <div className="grid grid-cols-1 lg:grid-cols-12">
-            <div className="relative min-h-[260px] lg:col-span-6 lg:min-h-[400px]">
-              <Image
-                key={s.image}
-                src={s.image}
-                alt={s.title}
-                fill
-                sizes="(max-width: 1024px) 100vw, 50vw"
-                className="object-cover transition-opacity duration-300"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-[var(--obsidian-2)] via-transparent to-transparent lg:bg-gradient-to-r lg:from-transparent lg:to-[var(--obsidian-2)]" />
+          <div>
+            <div className="flex items-center gap-3 mb-3">
+              <span className="w-5 h-px" style={{ backgroundColor: "var(--blue)" }} />
+              <span
+                className="text-[0.58rem] font-bold uppercase tracking-[0.22em]"
+                style={{ color: "var(--blue-bright)" }}
+              >
+                STATUTORY WORKFLOW
+              </span>
             </div>
-
-            <div className="flex flex-col justify-between p-6 md:p-10 lg:col-span-6">
-              <div>
-                <div className="flex items-center gap-3">
-                  <span className="text-xs font-bold uppercase tracking-wider text-[var(--gold)] border border-[var(--line-gold)] px-2 py-0.5 rounded bg-[var(--obsidian)]">
-                    Stage {active + 1} of 4
-                  </span>
-                  <span className="text-xs font-bold text-[var(--cream-warm)]">· {s.days}</span>
-                </div>
-
-                <h3 className="mt-3 font-[family-name:var(--font-display)] text-2xl font-bold tracking-tight text-[var(--cream)]">
-                  {s.title}
-                </h3>
-
-                <ul className="mt-6 space-y-3.5">
-                  {s.points.map((p) => (
-                    <li
-                      key={p}
-                      className="flex items-start gap-3 text-sm font-medium text-[var(--cream-warm)]"
-                    >
-                      <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-[var(--gold)]" />
-                      <span>{p}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
-                <MagneticButton
-                  as="a"
-                  href={DEFAULT_WA}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn-gold"
-                >
-                  Discuss this stage
-                  <ArrowRight className="h-4 w-4" />
-                </MagneticButton>
-                {active < stages.length - 1 ? (
-                  <button
-                    type="button"
-                    onClick={() => setActive((prev) => prev + 1)}
-                    className="btn-ghost cursor-pointer"
-                  >
-                    Next stage →
-                  </button>
-                ) : (
-                  <Link href="/psara-process" className="btn-ghost">
-                    Full process guide
-                  </Link>
-                )}
-              </div>
-            </div>
+            <h2
+              className="font-extrabold tracking-tighter uppercase leading-[0.90]"
+              style={{
+                fontSize: "clamp(2.5rem, 6vw, 6rem)",
+                fontFamily: "var(--font-display)",
+                color: "var(--white)",
+              }}
+            >
+              APPROVAL ROADMAP
+            </h2>
           </div>
-
-          <div className="h-1 w-full bg-[var(--obsidian)]">
-            <div
-              className="h-full bg-[var(--gold)] transition-all duration-300"
-              style={{ width: `${((active + 1) / stages.length) * 100}%` }}
-            />
+          <div className="flex items-center gap-3">
+            <span
+              className="text-[0.58rem] font-bold uppercase tracking-widest"
+              style={{ color: "var(--white-30)" }}
+            >
+              4-STAGE SEQUENCING · NO SHORTCUTS
+            </span>
           </div>
         </div>
 
-        <p className="mt-6 max-w-3xl text-xs font-medium text-[var(--text-dim)]" data-story>
-          Disclaimer: Day bands are indicative. Madhya Pradesh, Uttarakhand, and Chhattisgarh are
-          widely noted for one-year validity — plan renewals, do not assume a universal five-year
-          seal. Call {CONTACT.phoneDisplay} for a State-specific roadmap.
-        </p>
+        {/* Connector line for desktop */}
+        <div className="relative">
+          <div
+            className="hidden md:block absolute top-8 left-0 right-0 h-px"
+            style={{ backgroundColor: "var(--line)" }}
+            aria-hidden
+          />
+
+          <div className="grid md:grid-cols-4 gap-4">
+            {steps.map((s, idx) => {
+              const isActive = active === idx;
+              return (
+                <div
+                  key={s.step}
+                  onMouseEnter={() => setActive(idx)}
+                  className="relative p-6 sm:p-8 rounded-2xl flex flex-col cursor-pointer transition-all duration-400"
+                  style={{
+                    backgroundColor: isActive ? "var(--obsidian-lift)" : "var(--obsidian-card)",
+                    border: `1px solid ${isActive ? "var(--blue-border)" : "var(--line)"}`,
+                    boxShadow: isActive ? "0 0 32px var(--blue-glow-soft), inset 0 0 0 1px var(--blue-border)" : "none",
+                  }}
+                >
+                  {/* Step number — large */}
+                  <div className="flex items-center justify-between mb-8">
+                    <span
+                      className="font-extrabold leading-none"
+                      style={{
+                        fontSize: "2.8rem",
+                        fontFamily: "var(--font-display)",
+                        color: isActive ? "var(--blue)" : "var(--white-20)",
+                        letterSpacing: "-0.04em",
+                        textShadow: isActive ? "0 0 24px var(--blue-glow)" : "none",
+                        transition: "all 0.3s",
+                      }}
+                    >
+                      {s.step}
+                    </span>
+                    <span
+                      className="text-[0.52rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded-md border"
+                      style={{
+                        color: isActive ? "var(--gold)" : "var(--white-40)",
+                        borderColor: isActive ? "var(--gold-glow)" : "var(--line-strong)",
+                        backgroundColor: isActive ? "rgba(212,175,55,0.08)" : "transparent",
+                      }}
+                    >
+                      {s.tag}
+                    </span>
+                  </div>
+
+                  <h3
+                    className="font-bold mb-3 leading-snug"
+                    style={{
+                      fontSize: "1.05rem",
+                      fontFamily: "var(--font-display)",
+                      color: "var(--white)",
+                    }}
+                  >
+                    {s.title}
+                  </h3>
+
+                  <p
+                    className="text-xs font-medium leading-relaxed mb-auto"
+                    style={{ color: "var(--white-50)" }}
+                  >
+                    {s.desc}
+                  </p>
+
+                  <div
+                    className="flex items-center justify-between pt-5 mt-5"
+                    style={{ borderTop: "1px solid var(--line)" }}
+                  >
+                    <span
+                      className="flex items-center gap-1.5 text-[0.58rem] font-bold uppercase tracking-widest"
+                      style={{ color: isActive ? "var(--blue-bright)" : "var(--white-30)" }}
+                    >
+                      <CheckCircle2 className="w-3 h-3" />
+                      Mandatory
+                    </span>
+                    <ArrowRight
+                      className="w-3.5 h-3.5 transition-all duration-300"
+                      style={{
+                        color: isActive ? "var(--blue-bright)" : "var(--white-20)",
+                        transform: isActive ? "translateX(3px)" : "none",
+                      }}
+                    />
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
       </div>
-    </Chapter>
+    </section>
   );
 }

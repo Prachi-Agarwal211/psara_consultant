@@ -1,111 +1,124 @@
 "use client";
 
-import { useEffect, useRef } from "react";
 import Link from "next/link";
-import { ChevronRight, Clock, ShieldCheck } from "lucide-react";
-import Chapter from "../layout/Chapter";
-import { DEFAULT_WA } from "../../../lib/whatsapp";
-import { lineByLineReveal, cardStaggerReveal } from "../../lib/gsap";
-import CornerOrnament from "../ui/CornerOrnament";
-
-const states = [
-  { name: "Rajasthan (HQ)", time: "25–40 Days", validity: "5 Years", code: "RJ" },
-  { name: "Delhi NCR", time: "30–45 Days", validity: "5 Years", code: "DL" },
-  { name: "Gujarat", time: "25–35 Days", validity: "5 Years", code: "GJ" },
-  { name: "Madhya Pradesh", time: "30–40 Days", validity: "5 Years", code: "MP" },
-  { name: "Uttar Pradesh", time: "35–50 Days", validity: "5 Years", code: "UP" },
-  { name: "Maharashtra", time: "30–45 Days", validity: "5 Years", code: "MH" },
-  { name: "Haryana", time: "25–35 Days", validity: "5 Years", code: "HR" },
-  { name: "Punjab", time: "30–40 Days", validity: "5 Years", code: "PB" },
-  { name: "Karnataka", time: "30–45 Days", validity: "5 Years", code: "KA" },
-  { name: "Telangana", time: "25–35 Days", validity: "5 Years", code: "TS" },
-  { name: "Tamil Nadu", time: "30–45 Days", validity: "5 Years", code: "TN" },
-  { name: "West Bengal", time: "35–50 Days", validity: "5 Years", code: "WB" },
-];
+import { ArrowUpRight } from "lucide-react";
+import { STATES } from "../../../data/states";
 
 export default function StateGridHome() {
-  const root = useRef<HTMLDivElement | null>(null);
-  const headingRef = useRef<HTMLHeadingElement | null>(null);
-
-  useEffect(() => {
-    if (!root.current) return;
-    if (headingRef.current) {
-      lineByLineReveal(headingRef.current);
-    }
-    cardStaggerReveal(root.current, ".state-card");
-  }, []);
+  const featuredStates = STATES.slice(0, 12);
 
   return (
-    <Chapter id="coverage" tone="warm-dark">
-      <div ref={root}>
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
+    <section
+      id="states"
+      className="py-24 md:py-36 px-[var(--gutter)]"
+      style={{
+        backgroundColor: "var(--obsidian)",
+        borderBottom: "1px solid var(--line)",
+        position: "relative",
+        overflow: "hidden",
+      }}
+    >
+      {/* Subtle blue top glow */}
+      <div
+        className="absolute top-0 right-0 w-[40vw] h-[50vh] pointer-events-none"
+        style={{ background: "radial-gradient(ellipse at 100% 0%, rgba(0,71,255,0.06) 0%, transparent 60%)" }}
+        aria-hidden
+      />
+
+      <div className="max-w-[var(--page-max)] mx-auto relative">
+        {/* Header */}
+        <div
+          className="flex flex-col md:flex-row md:items-end justify-between pb-10 mb-14 gap-6"
+          style={{ borderBottom: "1px solid var(--line)" }}
+        >
           <div>
-            <h2 ref={headingRef} className="display-xl text-[var(--cream)] split-heading relative pl-4 md:pl-8">
-              <span className="side-caption" aria-hidden>COVERAGE METRICS</span>
-              State-Wise <span className="text-[var(--gold)]">PSARA Licensing Metrics</span>
+            <div className="flex items-center gap-3 mb-3">
+              <span className="w-5 h-px" style={{ backgroundColor: "var(--blue)" }} />
+              <span className="text-[0.58rem] font-bold uppercase tracking-[0.22em]" style={{ color: "var(--blue-bright)" }}>
+                STATUTORY JURISDICTIONS
+              </span>
+            </div>
+            <h2
+              className="font-extrabold tracking-tighter uppercase leading-[0.90]"
+              style={{ fontSize: "clamp(2.5rem, 6vw, 6rem)", fontFamily: "var(--font-display)", color: "var(--white)" }}
+            >
+              28 STATES & UTs
             </h2>
           </div>
-          <Link
-            href="/states"
-            className="inline-flex items-center gap-1 text-xs font-bold uppercase tracking-wider text-[var(--gold)] hover:underline"
-          >
-            Explore All 28 States & UTs <ChevronRight className="h-4 w-4" />
-          </Link>
+          <span className="text-[0.58rem] font-bold uppercase tracking-widest" style={{ color: "var(--white-30)" }}>
+            CONTROLLING AUTHORITIES · DIRECT DOSSIER FILING
+          </span>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-          {states.map((st, idx) => (
-            <div
-              key={st.code}
-              className="state-card flex flex-col justify-between rounded-[var(--radius)] border border-[var(--line-gold)] p-4 transition-all duration-300 hover:border-[var(--gold)] card-glow-hover relative"
-              style={{ backgroundColor: "var(--warm-dark-2, #241e16)" }}
+        {/* State Tiles */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
+          {featuredStates.map((s) => (
+            <Link
+              key={s.slug}
+              href={`/states/${s.slug}`}
+              className="group flex flex-col justify-between h-[130px] p-4 rounded-xl transition-all duration-300"
+              style={{
+                backgroundColor: "var(--obsidian-card)",
+                border: "1px solid var(--line)",
+              }}
+              onMouseEnter={(e) => {
+                const el = e.currentTarget as HTMLElement;
+                el.style.backgroundColor = "var(--obsidian-lift)";
+                el.style.borderColor = "var(--blue-border)";
+                el.style.boxShadow = "0 0 20px var(--blue-glow-soft)";
+              }}
+              onMouseLeave={(e) => {
+                const el = e.currentTarget as HTMLElement;
+                el.style.backgroundColor = "var(--obsidian-card)";
+                el.style.borderColor = "var(--line)";
+                el.style.boxShadow = "none";
+              }}
             >
-              {/* Jasmine-style corner ornament */}
-              <CornerOrnament position="tr" opacity={0.3} />
-
+              <span
+                className="text-[0.48rem] font-bold uppercase tracking-widest"
+                style={{ color: "var(--white-30)" }}
+              >
+                {s.slug.toUpperCase()} · STATE
+              </span>
               <div>
-                <div className="flex items-center justify-between mb-3">
-                  <span className="flex items-center gap-2">
-                    <span className="text-xs font-bold text-[var(--gold)] px-2 py-0.5 rounded border border-[var(--line-gold)]"
-                         style={{ backgroundColor: "var(--warm-dark, #1a1510)" }}>
-                      {st.code}
-                    </span>
-                  </span>
-                  <span className="text-[10px] text-[var(--text-dim)]">Controlling Authority</span>
-                </div>
-                <h3 className="text-base font-bold text-[var(--cream)]">
-                  {st.name}
-                </h3>
-
-                <div className="mt-3 space-y-1.5 text-xs text-[var(--cream)]/70">
-                  <div className="flex items-center gap-2">
-                    <Clock className="h-3.5 w-3.5 text-[var(--sky)] shrink-0" />
-                    <span>Processing: <strong>{st.time}</strong></span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <ShieldCheck className="h-3.5 w-3.5 text-[var(--emerald)] shrink-0" />
-                    <span>Validity: <strong>{st.validity}</strong></span>
-                  </div>
-                </div>
-              </div>
-
-              <div className="mt-4 pt-3 border-t border-[var(--line)] flex items-center justify-between">
-                <Link href="/states" className="text-[11px] font-bold text-[var(--text-dim)] hover:text-[var(--cream)]">
-                  Details
-                </Link>
-                <a
-                  href={`${DEFAULT_WA}&text=Hi,%20I%20need%20PSARA%20license%20support%20for%20${encodeURIComponent(st.name)}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-[11px] font-bold text-[var(--gold)] hover:underline flex items-center gap-1"
+                <h3
+                  className="font-bold line-clamp-1 mb-1"
+                  style={{ fontSize: "0.90rem", fontFamily: "var(--font-display)", color: "var(--white)" }}
                 >
-                  Apply <ChevronRight className="h-3 w-3" />
-                </a>
+                  {s.name}
+                </h3>
+                <div className="flex items-center justify-between">
+                  <span className="text-[0.52rem] font-semibold uppercase" style={{ color: "var(--white-30)" }}>
+                    {s.validityYears}-Yr
+                  </span>
+                  <ArrowUpRight
+                    className="w-3.5 h-3.5 transition-all duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                    style={{ color: "var(--blue-bright)" }}
+                  />
+                </div>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
+
+        {/* View All CTA */}
+        <div className="mt-10 flex justify-center">
+          <Link
+            href="/states"
+            className="inline-flex items-center gap-2.5 px-8 py-4 rounded-xl font-bold text-xs uppercase tracking-widest transition-all duration-300"
+            style={{
+              backgroundColor: "var(--blue)",
+              color: "var(--white)",
+              boxShadow: "0 0 24px var(--blue-glow)",
+            }}
+            onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.boxShadow = "0 0 40px var(--blue-glow)"; }}
+            onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.boxShadow = "0 0 24px var(--blue-glow)"; }}
+          >
+            Explore All 28 State Licensing Dossiers
+            <ArrowUpRight className="w-4 h-4" />
+          </Link>
+        </div>
       </div>
-    </Chapter>
+    </section>
   );
 }
