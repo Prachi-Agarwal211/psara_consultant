@@ -2,25 +2,25 @@
 
 import { useEffect, useRef } from "react";
 import Link from "next/link";
-import { ChevronRight, Clock, ShieldCheck, Banknote } from "lucide-react";
+import { ChevronRight, Clock, ShieldCheck } from "lucide-react";
 import Chapter from "../layout/Chapter";
 import { DEFAULT_WA } from "../../../lib/whatsapp";
 import { lineByLineReveal, cardStaggerReveal } from "../../lib/gsap";
 import CornerOrnament from "../ui/CornerOrnament";
 
 const states = [
-  { name: "Rajasthan (HQ)", fee: "₹5,000–₹25,000", time: "25–40 Days", validity: "5 Years", code: "RJ" },
-  { name: "Delhi NCR", fee: "₹5,000–₹25,000", time: "30–45 Days", validity: "5 Years", code: "DL" },
-  { name: "Gujarat", fee: "₹5,000–₹25,000", time: "25–35 Days", validity: "5 Years", code: "GJ" },
-  { name: "Madhya Pradesh", fee: "₹5,000–₹25,000", time: "30–40 Days", validity: "5 Years", code: "MP" },
-  { name: "Uttar Pradesh", fee: "₹5,000–₹25,000", time: "35–50 Days", validity: "5 Years", code: "UP" },
-  { name: "Maharashtra", fee: "₹5,000–₹25,000", time: "30–45 Days", validity: "5 Years", code: "MH" },
-  { name: "Haryana", fee: "₹5,000–₹25,000", time: "25–35 Days", validity: "5 Years", code: "HR" },
-  { name: "Punjab", fee: "₹5,000–₹25,000", time: "30–40 Days", validity: "5 Years", code: "PB" },
-  { name: "Karnataka", fee: "₹5,000–₹25,000", time: "30–45 Days", validity: "5 Years", code: "KA" },
-  { name: "Telangana", fee: "₹5,000–₹25,000", time: "25–35 Days", validity: "5 Years", code: "TS" },
-  { name: "Tamil Nadu", fee: "₹5,000–₹25,000", time: "30–45 Days", validity: "5 Years", code: "TN" },
-  { name: "West Bengal", fee: "₹5,000–₹25,000", time: "35–50 Days", validity: "5 Years", code: "WB" },
+  { name: "Rajasthan (HQ)", time: "25–40 Days", validity: "5 Years", code: "RJ" },
+  { name: "Delhi NCR", time: "30–45 Days", validity: "5 Years", code: "DL" },
+  { name: "Gujarat", time: "25–35 Days", validity: "5 Years", code: "GJ" },
+  { name: "Madhya Pradesh", time: "30–40 Days", validity: "5 Years", code: "MP" },
+  { name: "Uttar Pradesh", time: "35–50 Days", validity: "5 Years", code: "UP" },
+  { name: "Maharashtra", time: "30–45 Days", validity: "5 Years", code: "MH" },
+  { name: "Haryana", time: "25–35 Days", validity: "5 Years", code: "HR" },
+  { name: "Punjab", time: "30–40 Days", validity: "5 Years", code: "PB" },
+  { name: "Karnataka", time: "30–45 Days", validity: "5 Years", code: "KA" },
+  { name: "Telangana", time: "25–35 Days", validity: "5 Years", code: "TS" },
+  { name: "Tamil Nadu", time: "30–45 Days", validity: "5 Years", code: "TN" },
+  { name: "West Bengal", time: "35–50 Days", validity: "5 Years", code: "WB" },
 ];
 
 export default function StateGridHome() {
@@ -66,7 +66,6 @@ export default function StateGridHome() {
               <div>
                 <div className="flex items-center justify-between mb-3">
                   <span className="flex items-center gap-2">
-                    <span className="num-marker num-marker-sm text-xs">{String(idx + 1).padStart(2, '0')}</span>
                     <span className="text-xs font-bold text-[var(--gold)] px-2 py-0.5 rounded border border-[var(--line-gold)]"
                          style={{ backgroundColor: "var(--warm-dark, #1a1510)" }}>
                       {st.code}
@@ -79,10 +78,6 @@ export default function StateGridHome() {
                 </h3>
 
                 <div className="mt-3 space-y-1.5 text-xs text-[var(--cream)]/70">
-                  <div className="flex items-center gap-2">
-                    <Banknote className="h-3.5 w-3.5 text-[var(--gold)] shrink-0" />
-                    <span>Govt Fee: <strong>{st.fee}</strong></span>
-                  </div>
                   <div className="flex items-center gap-2">
                     <Clock className="h-3.5 w-3.5 text-[var(--sky)] shrink-0" />
                     <span>Processing: <strong>{st.time}</strong></span>

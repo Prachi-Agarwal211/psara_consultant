@@ -1,117 +1,172 @@
-/* PSARA · Coastal anchor (Authority-First Dossier Tokens)
-   Solid surfaces, statutory color system, warm espresso tones, sand gold accents.
-*/
+/* ═══════════════════════════════════════════════════════════════
+   PSARA · Dossier Authority Design Tokens
+   A unique blend: Jasmine Gunarto's warmth + Luke Baffait's edge
+   + PSARA's statutory authority
+   
+   "Dossier Authority" — warm espresso meets gold seal
+   v3.0 — Complete redesign
+   ═══════════════════════════════════════════════════════════════ */
 
 :root {
-  /* ── Dominant surfaces (Solid obsidian navy, warm dark & paper cream) ── */
-  --obsidian: #0a1628;       /* Deep navy dossier background */
-  --obsidian-2: #12243f;
-  --obsidian-3: #1b3558;
-  --navy-deep: #071220;
-  --navy-mid: #1b3a4b;
-  --navy-lift: #254d66;
+  /* ── Primary Surfaces ─────────────────────────────────────── */
+  --obsidian:       #0c1420;  /* Deep dossier navy — primary background */
+  --obsidian-2:     #162033;  /* Lifted navy — cards, sections */
+  --obsidian-3:     #1e2d47;  /* Elevated navy — hover states */
+  --navy-deep:      #080e18;  /* Deepest navy — hero background */
+  --navy-mid:       #1a3045;  /* Mid navy — secondary surfaces */
 
-  /* ── Warm Dark Tones (Voyeur-inspired warm dark section theme) ── */
-  --warm-dark: #1a1510;       /* Deep espresso — warm alternative to obsidian */
-  --warm-dark-2: #241e16;     /* Lighter warm dark */
-  --warm-dark-3: #2e261c;     /* Rich coffee brown */
+  /* ── Warm Dark Tones (Jasmine-inspired warmth) ──────────────── */
+  --warm-dark:      #1a1510;  /* Deep espresso — warm sections */
+  --warm-dark-2:    #241e16;  /* Coffee — elevated warm surface */
+  --warm-dark-3:    #2e261c;  /* Rich mocha — cards on warm bg */
+  --espresso:       #0f0e0c;  /* Near-black espresso — preloader bg */
 
-  /* ── Support & Accents ── */
-  --sky: #5eb8ff;
-  --sky-bright: #8fd0ff;
-  --sky-soft: #c5e4ff;
-  --sky-mist: #e3f2fc;
-  --sapphire: #2f7fd4;
-  --sapphire-deep: #1a5aab;
-  --azure: #3d9cf0;
-  --teal: #2a9d8f;
-  --teal-deep: #1a7268;
-  --teal-soft: #5ec4b6;
+  /* ── Gold / Amber Accents (Authority Seal) ────────────────── */
+  --gold:           #e0b84a;  /* Primary gold — PSARA seal */
+  --gold-deep:      #b8922a;  /* Deep gold — pressed state */
+  --gold-soft:      #f3df9a;  /* Soft gold — hover glow */
+  --gold-light:     #faf0c8;  /* Light gold — backgrounds */
+  --amber:          #c9945b;  /* Amber bronze — secondary accent */
+  --amber-deep:     #a07644;  /* Deep amber — dark variant */
+  --gold-bg:        #b8863d;  /* Bronze bg — full section backgrounds */
+  --gold-bg-soft:   #d4a853;  /* Brighter gold bg */
+  --gold-bg-pale:   #f5e6c8;  /* Pale gold cream */
 
-  /* ── Sand Gold & Amber (Statutory Gold Tokens) ── */
-  --gold: #e0b84a;           /* Statutory Sand Gold */
-  --gold-deep: #b8922a;
-  --gold-soft: #f3df9a;
-  --gold-light: #faf0c8;
-  --amber: #c9945b;          /* Satin bronze-gold accent */
-  --amber-deep: #a07644;     /* Deep amber background */
-  --orange: #f97316;
-  --orange-deep: #ea580c;
+  /* ── Warm Neutrals (Jasmine's cream palette) ──────────────── */
+  --cream:          #f6fafd;  /* Clean off-white — primary text on dark */
+  --cream-warm:     #f0ece4;  /* Warm cream — softer text */
+  --cream-dim:      #b0b8c4;  /* Dimmed cream — secondary text */
+  --warm-cream:     #f2e8d5;  /* Warm cream — light section bg */
+  --warm-parchment: #e8dccc;  /* Aged parchment — vintage feel */
 
-  /* ── Lemon Green & Royal Blue (Contrast Themes) ── */
-  --lemon-green: #84cc16;
-  --lemon-soft: #ecfccb;
-  --royal-blue: #1e40af;
-  --royal-blue-deep: #1e3a8a;
+  /* ── Earth & Terracotta (Warm accents) ────────────────────── */
+  --terracotta:     #c1694f;  /* Burnt terracotta — warm accent */
+  --terracotta-deep:#9a4d36;  /* Deep terracotta */
+  --sienna:         #d4764a;  /* Warm sienna */
+  --caramel:        #8b6f47;  /* Caramel brown */
+  --caramel-light:  #c4a87c;  /* Light caramel */
 
-  /* ── Emerald (Trust & Compliance) ── */
-  --emerald: #1fb87a;
-  --emerald-deep: #0d8a58;
-  --emerald-soft: #6ee7b0;
+  /* ── Sky / Trust Accents ───────────────────────────────────── */
+  --sky:            #5eb8ff;
+  --sky-bright:     #8fd0ff;
+  --sky-soft:       #c5e4ff;
+  --sapphire:       #2f7fd4;
+  --sapphire-deep:  #1a5aab;
+  --emerald:        #1fb87a;
+  --emerald-deep:   #0d8a58;
 
-  /* ── Light surfaces (Paper) ── */
-  --cream: #f6fafd;
-  --cream-warm: #eef5fb;
-  --cream-dim: color-mix(in srgb, #f6fafd 70%, #7a9ab8);
-  --white: #ffffff;
-  --paper: #f6fafd;
+  /* ── Ink (Light-mode text) ────────────────────────────────── */
+  --ink:            #0c1420;
+  --ink-soft:       #1a3045;
+  --ink-muted:      #3d5a73;
+  --ink-faint:      #6b8aa3;
+  --ink-warm:       #1a1510;
 
-  /* ── Ink on light ── */
-  --ink: #0a1628;
-  --ink-soft: #1b3a4b;
-  --ink-muted: #3d5a73;
-  --ink-faint: #6b8aa3;
+  /* ── Text & Borders ────────────────────────────────────────── */
+  --text:           #f6fafd;     /* Primary light text */
+  --text-muted:     color-mix(in srgb, #f6fafd 78%, transparent);
+  --text-dim:       color-mix(in srgb, #f6fafd 55%, transparent);
+  --text-faint:     color-mix(in srgb, #f6fafd 35%, transparent);
+  --line:           color-mix(in srgb, #7eb6e8 18%, transparent);
+  --line-gold:      color-mix(in srgb, var(--gold) 35%, transparent);
+  --line-amber:     color-mix(in srgb, var(--amber) 30%, transparent);
+  --line-warm:      color-mix(in srgb, var(--warm-cream) 20%, transparent);
 
-  /* ── Text & Borders ── */
-  --text: #eef5fb;
-  --text-muted: color-mix(in srgb, #eef5fb 76%, transparent);
-  --text-dim: color-mix(in srgb, #eef5fb 50%, transparent);
-  --line: color-mix(in srgb, #7eb6e8 20%, transparent);
-  --line-gold: color-mix(in srgb, var(--gold) 45%, transparent);
-  --line-sky: color-mix(in srgb, var(--sky) 35%, transparent);
-  --line-emerald: color-mix(in srgb, var(--emerald) 40%, transparent);
-
-  /* Spectrum rail (vertical accent edge) */
+  /* ── Spectrum Rail (vertical accent edge) ─────────────────── */
   --grad-spectrum-v: linear-gradient(
     180deg,
     var(--sky) 0%,
-    var(--teal) 50%,
+    var(--gold) 50%,
+    var(--amber) 100%
+  );
+
+  /* ── Metallic & Luxury Gradients ─────────────────────────── */
+  --grad-gold-cta: linear-gradient(
+    135deg,
+    var(--gold-bg) 0%,
     var(--gold) 100%
   );
-
-  /* Statutory Gold Spotlight Gradients */
-  --grad-gold-spotlight: radial-gradient(
-    ellipse 80% 60% at 50% 30%,
-    rgba(224, 184, 74, 0.12) 0%,
-    transparent 70%
+  --grad-gold-metallic: linear-gradient(
+    135deg,
+    #bf953f 0%,
+    #fcf6ba 25%,
+    #b38728 50%,
+    #fbf5b7 75%,
+    #aa771c 100%
+  );
+  --grad-gold-radial: radial-gradient(
+    circle at 50% 0%,
+    rgba(224, 184, 74, 0.15) 0%,
+    rgba(12, 20, 32, 0) 70%
+  );
+  --grad-emerald-accent: linear-gradient(
+    135deg,
+    #0d8a58 0%,
+    #1fb87a 50%,
+    #5eb8ff 100%
+  );
+  --grad-obsidian-glow: linear-gradient(
+    180deg,
+    rgba(22, 32, 51, 0.8) 0%,
+    rgba(12, 20, 32, 0.95) 100%
+  );
+  --grad-border-shimmer: linear-gradient(
+    90deg,
+    rgba(224, 184, 74, 0.1) 0%,
+    rgba(224, 184, 74, 0.6) 50%,
+    rgba(224, 184, 74, 0.1) 100%
   );
 
-  --grad-amber-glow: radial-gradient(
-    ellipse 60% 50% at 30% 20%,
-    rgba(201, 148, 91, 0.15) 0%,
-    transparent 60%
-  );
+  /* ── Typography Scale — fluid, expanded ────────────────────── */
+  --text-xs:    clamp(0.60rem, 0.55rem + 0.2vw, 0.70rem);
+  --text-sm:    clamp(0.80rem, 0.75rem + 0.3vw, 0.90rem);
+  --text-base:  clamp(0.95rem, 0.88rem + 0.4vw, 1.05rem);
+  --text-lg:    clamp(1.10rem, 1.00rem + 0.6vw, 1.30rem);
+  --text-xl:    clamp(1.40rem, 1.20rem + 1.2vw, 1.95rem);
+  --text-2xl:   clamp(1.70rem, 1.40rem + 1.8vw, 2.60rem);
+  --text-3xl:   clamp(2.00rem, 1.60rem + 2.5vw, 3.40rem);
+  --text-hero:  clamp(2.20rem, 3.5vw + 1rem, 4.85rem);
 
-  /* Typography Scale */
-  --text-xs: 0.65rem;
-  --text-sm: 0.925rem;
-  --text-base: clamp(0.98rem, 1.4vw, 1.08rem);
-  --text-lg: clamp(1.25rem, 2vw, 1.6rem);
-  --text-xl: clamp(1.75rem, 3.4vw, 2.75rem);
-  --text-hero: clamp(2.55rem, 6.5vw, 4.85rem);
+  /* ── Motion Easings (GSAP) ────────────────────────────────── */
+  --ease-expo:       cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-smooth:     cubic-bezier(0.25, 1, 0.3, 1);
+  --ease-cinematic:  cubic-bezier(0.125, 0.425, 0.27, 1);
+  --ease-spring:     cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-bounce:     cubic-bezier(0.68, -0.55, 0.27, 1.55);
+  --ease-snappy:     cubic-bezier(0.2, 0, 0, 1);
+  --ease-organic:    cubic-bezier(0.45, 0, 0.15, 1);
+  --ease-power4:     cubic-bezier(0.16, 1, 0.3, 1);
 
-  /* Motion & Layout */
-  --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
-  --ease-smooth: cubic-bezier(0.25, 1, 0.3, 1);
-  --ease-cinematic: cubic-bezier(0.125, 0.425, 0.27, 1);
-  --dur-fast: 0.28s;
-  --dur-med: 0.55s;
+  /* ── Durations ─────────────────────────────────────────────── */
+  --dur-fast:       0.28s;
+  --dur-med:        0.55s;
+  --dur-slow:       0.9s;
+  --dur-cinematic:  1.2s;
 
-  --page-max: 74rem;
-  --gutter: clamp(1.1rem, 4vw, 3rem);
-  --section-y: clamp(4.5rem, 10vw, 8rem);
-  --radius: 0.35rem;
-  --header-h: 3.65rem;
-  --font-weight-body: 500;
-  --font-weight-bold: 700;
+  /* ── Layout ────────────────────────────────────────────────── */
+  --page-max:       74rem;
+  --gutter:         clamp(1.1rem, 4vw, 3rem);
+  --section-y:      clamp(4.5rem, 8vh, 8rem);
+  --section-y-sm:   clamp(2.5rem, 5vh, 4.5rem);
+  --radius:         0.35rem;
+  --radius-lg:      0.65rem;
+  --header-h:       3.65rem;
+  --header-offset:  calc(var(--header-h, 3.65rem) + env(safe-area-inset-top, 0px));
+
+  /* ── Glass & Depth ─────────────────────────────────────────── */
+  --glass-bg:       rgba(26, 21, 16, 0.6);
+  --glass-border:   rgba(224, 184, 74, 0.12);
+  --glass-blur:     12px;
+
+  /* ── Shadows (tight, restrained — anti-slop) ──────────────── */
+  --shadow-sm:  0 1px 2px rgba(0, 0, 0, 0.2);
+  --shadow-md:  0 2px 6px rgba(0, 0, 0, 0.25);
+  --shadow-lg:  0 4px 12px rgba(0, 0, 0, 0.3);
+  --shadow-gold: 0 2px 8px rgba(224, 184, 74, 0.1);
+
+  /* ── Breakpoints (reference only) ──────────────────────────── */
+  --bp-sm:  480px;
+  --bp-md:  768px;
+  --bp-lg:  1024px;
+  --bp-xl:  1280px;
 }

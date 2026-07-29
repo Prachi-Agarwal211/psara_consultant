@@ -5,22 +5,13 @@ import { PageHero, PageMain, Prose } from "../../components/PageShell";
 import CtaBar from "../../components/CtaBar";
 import WhatsAppForm from "../../components/WhatsAppForm";
 import { pageMeta } from "../../lib/metadata";
+import { SITE } from "../../lib/config";
+import JsonLd from "../../components/JsonLd";
 
 /** Reserved top-level routes that must not be captured as guides */
 const RESERVED = new Set([
-  "about",
-  "contact",
-  "services",
-  "faq",
-  "states",
-  "cities",
-  "city",
-  "google",
-  "privacy-policy",
-  "terms",
-  "disclaimer",
-  "api",
-  "_next",
+  "about", "contact", "services", "faq", "states", "cities", "city",
+  "google", "privacy-policy", "terms", "disclaimer", "api", "_next",
 ]);
 
 export function generateStaticParams() {
@@ -39,6 +30,8 @@ export async function generateMetadata({
   return pageMeta(g.title, g.description, `/${guide}`);
 }
 
+import GuideDossierView from "../components/sections/GuideDossierView";
+
 export default async function GuidePage({
   params,
 }: {
@@ -49,47 +42,76 @@ export default async function GuidePage({
   const g = getGuide(guide);
   if (!g) notFound();
 
+  const articleSchema = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "@id": `${SITE.url}/${g.slug}#article`,
+    headline: g.title,
+    description: g.description,
+    publisher: {
+      "@type": "Organization",
+      name: SITE.name,
+      logo: { "@type": "ImageObject", "url": `${SITE.url}/logo.png` },
+    },
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": `${SITE.url}/${g.slug}`,
+    },
+  }
+
   return (
     <>
+      <JsonLd data={articleSchema} />
       <PageHero
-        eyebrow="Guide"
         title={g.title}
         lead={g.description}
         crumbs={[{ label: "Guides", href: "/psara-license" }, { label: g.title }]}
       />
       <PageMain>
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-12">
-          <div className="lg:col-span-7">
-            <Prose>
-              {g.sections.map((sec) => (
-                <div key={sec.h}>
-                  <h2>{sec.h}</h2>
-                  <p>{sec.p}</p>
-                </div>
-              ))}
-            </Prose>
-            <div className="mt-10">
-              <p className="label-meta mb-3 font-bold text-[var(--gold)]">More guides</p>
-              <ul className="space-y-2 text-sm font-bold text-[var(--cream-dim)]">
+          <div className="lg:col-span-7 space-y-8">
+            <GuideDossierView guide={g} />
+
+            {/* More guides sidebar */}
+            <div className="mt-10 pt-6 border-t border-[var(--line)]">
+              <p className="label-meta mb-4 font-bold text-[var(--gold)]">More guides</p>
+              <ul className="space-y-2.5 text-sm font-bold text-[var(--text-dim)]">
                 {GUIDES.filter((x) => x.slug !== g.slug)
                   .slice(0, 8)
                   .map((x) => (
                     <li key={x.slug}>
-                      <a href={`/${x.slug}`} className="hover:text-[var(--gold-soft)]">
+                      <a href={`/${x.slug}`}
+                        className="hover:text-[var(--gold)] transition-colors inline-flex items-center gap-2">
+                        <span className="w-1.5 h-1.5 rounded-full bg-[var(--gold)] opacity-40" />
                         {x.title}
                       </a>
                     </li>
                   ))}
               </ul>
             </div>
-            <CtaBar />
+
+            <CtaBar title="Need more clarity?" subtitle="Our team answers PSARA questions within 4 hours — call or WhatsApp." />
           </div>
-          <div className="folio p-6 lg:col-span-5">
-            <h3 className="font-[family-name:var(--font-display)] text-xl font-bold text-[var(--cream)]">
-              Ask about this topic
-            </h3>
-            <div className="mt-4">
-              <WhatsAppForm formType="Guide Enquiry" service={g.title} />
+
+          {/* Sidebar enquiry form */}
+          <div className="lg:col-span-5">
+            <div className="relative border border-[var(--line-gold)] p-6 md:p-8"
+              style={{ backgroundColor: "color-mix(in srgb, var(--warm-dark-2) 60%, transparent)" }}
+            >
+              <div className="absolute top-3 left-3 w-3 h-3 border-t border-l border-[var(--gold)] opacity-30" aria-hidden />
+              <div className="absolute top-3 right-3 w-3 h-3 border-t border-r border-[var(--gold)] opacity-30" aria-hidden />
+              <div className="absolute bottom-3 left-3 w-3 h-3 border-b border-l border-[var(--gold)] opacity-30" aria-hidden />
+              <div className="absolute bottom-3 right-3 w-3 h-3 border-b border-r border-[var(--gold)] opacity-30" aria-hidden />
+
+              <h3 className="font-[family-name:var(--font-display)] text-xl font-bold tracking-tight text-[var(--cream)]">
+                Ask about this topic
+              </h3>
+              <p className="mt-2 text-sm font-medium text-[var(--text-dim)]">
+                Have a specific question about {g.title}? Send us a message.
+              </p>
+              <div className="mt-6">
+                <WhatsAppForm formType="Guide Enquiry" service={g.title} />
+              </div>
             </div>
           </div>
         </div>

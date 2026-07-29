@@ -1,6 +1,6 @@
 import type { StateInfo } from "../data/states";
 import type { CityInfo } from "../data/cities";
-import { CONTACT, SITE } from "./config";
+import { CONTACT, SITE, AGGREGATE_RATING } from "./config";
 
 function stringToHash(str: string): number {
   let hash = 0;
@@ -231,7 +231,7 @@ export function generateStateContent(s: StateInfo): LocationSEOContent {
   return {
     placeName: place,
     placeType: "state",
-    metaDescription: `PSARA License in ${place} — process, documents, training MOU, fees, police verification & Controlling Authority guidance. ${SITE.name}, ${CONTACT.phoneDisplay}.`,
+    metaDescription: `PSARA License in ${place}. Authority: ${s.authority}. Timeline: ${s.timeline}. Process, documents, training MOU, fees & police verification guidance. ${SITE.name}, ${CONTACT.phoneDisplay}.`,
     intro,
     authorityBlock,
     processHeading: `PSARA process we follow in ${place}`,
@@ -368,7 +368,7 @@ export function generateCityContent(c: CityInfo, s: StateInfo | undefined): Loca
   return {
     placeName: place,
     placeType: "city",
-    metaDescription: `PSARA License consultant in ${place}, ${region}. Documentation, training MOU, police verification & filing support. Call ${CONTACT.phoneDisplay}.`,
+    metaDescription: `PSARA License consultant in ${place}, ${region}. ${tags.slice(0, 2).join(', ')} sectors. ${authority === 'the State Controlling Authority' ? '' : 'Authority: ' + authority + '. '}Documentation, training MOU & filing support. Call ${CONTACT.phoneDisplay}.`,
     intro,
     authorityBlock,
     processHeading: `How we run PSARA for ${place} applicants`,
@@ -409,38 +409,109 @@ export function localBusinessJsonLd(opts: {
   lng?: number;
   address?: string;
   pin?: string;
+  /** Nearby city names for areaServed on city pages */
+  nearbyCities?: string[];
+  /** Service names for hasOfferCatalog (use Service.title) */
+  services?: { title: string }[];
 }) {
+  const areaServed: Record<string, string>[] = []
+  if (opts.city) {
+    areaServed.push({ '@type': 'City', name: opts.city })
+  }
+  if (opts.nearbyCities?.length) {
+    for (const c of opts.nearbyCities) {
+      areaServed.push({ '@type': 'City', name: c })
+    }
+  }
+  if (opts.state) {
+    areaServed.push({ '@type': 'State', name: opts.state })
+  }
+
   return {
     "@context": "https://schema.org",
-    "@type": "ProfessionalService",
+    "@type": "LocalBusiness",
+    '@id': opts.url,
     name: opts.name,
     description: opts.description,
     url: opts.url,
     telephone: CONTACT.phone,
     email: CONTACT.email,
-    areaServed: opts.state || "India",
+    image: `${SITE.url}/logo.png`,
     address: {
-      "@type": "PostalAddress",
-      streetAddress: opts.address || OFFICES_STREET_FALLBACK,
-      addressLocality: opts.city || "Jaipur",
-      addressRegion: opts.state || "Rajasthan",
-      postalCode: opts.pin || "302034",
-      addressCountry: "IN",
+      '@type': 'PostalAddress',
+      streetAddress: opts.address || 'C-36, Third Floor, Capital Galleria, Sirsi Road, Kanakpura',
+      addressLocality: opts.city || 'Jaipur',
+      addressRegion: opts.state || 'Rajasthan',
+      postalCode: opts.pin || '302034',
+      addressCountry: 'IN',
     },
     ...(opts.lat && opts.lng
       ? {
           geo: {
-            "@type": "GeoCoordinates",
+            '@type': 'GeoCoordinates',
             latitude: opts.lat,
             longitude: opts.lng,
+          },
+        }
+      : {}),
+    aggregateRating: {
+      '@type': 'AggregateRating',
+      ratingValue: AGGREGATE_RATING.ratingValue,
+      reviewCount: AGGREGATE_RATING.reviewCount,
+      bestRating: AGGREGATE_RATING.bestRating,
+      worstRating: AGGREGATE_RATING.worstRating,
+    },
+    openingHoursSpecification: {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+      opens: '09:30',
+      closes: '18:30',
+    },
+    priceRange: '₹₹',
+    areaServed: areaServed.length > 0 ? areaServed : { '@type': 'Country', name: 'India' },
+    ...(opts.services?.length
+      ? {
+          hasOfferCatalog: {
+            '@type': 'OfferCatalog',
+            name: `PSARA Services in ${opts.city || opts.state || 'India'}`,
+            itemListElement: opts.services.slice(0, 10).map((s) => ({
+              '@type': 'Offer',
+              itemOffered: {
+                '@type': 'Service',
+                name: `${s.title} in ${opts.city || opts.state || 'India'}`,
+              },
+            })),
           },
         }
       : {}),
   };
 }
 
-const OFFICES_STREET_FALLBACK =
-  "C-36, Third Floor, Capital Galleria, Sirsi Road, Kanakpura";
+/** Per-state Organization schema for state SEO pages */
+export function stateOrganizationJsonLd(opts: {
+  name: string
+  description: string
+  url: string
+  state: string
+}) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    '@id': opts.url,
+    url: opts.url,
+    name: opts.name,
+    description: opts.description,
+    image: `${SITE.url}/logo.png`,
+    areaServed: { '@type': 'State', name: opts.state },
+    aggregateRating: {
+      '@type': 'AggregateRating',
+      ratingValue: AGGREGATE_RATING.ratingValue,
+      reviewCount: AGGREGATE_RATING.reviewCount,
+      bestRating: AGGREGATE_RATING.bestRating,
+      worstRating: AGGREGATE_RATING.worstRating,
+    },
+  }
+}
 
 export function faqJsonLd(items: { q: string; a: string }[]) {
   return {
@@ -451,6 +522,26 @@ export function faqJsonLd(items: { q: string; a: string }[]) {
       name: f.q,
       acceptedAnswer: { "@type": "Answer", text: f.a },
     })),
+  };
+}
+
+export function howToJsonLd(title: string, description: string, steps: string[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    name: title,
+    description: description,
+    step: steps.map((stepText, idx) => {
+      const parts = stepText.split(":");
+      const stepName = parts.length > 1 ? parts[0]! : `Step ${idx + 1}`;
+      const stepDesc = parts.length > 1 ? parts.slice(1).join(":") : stepText;
+      return {
+        "@type": "HowToStep",
+        position: idx + 1,
+        name: stepName,
+        text: stepDesc,
+      };
+    }),
   };
 }
 

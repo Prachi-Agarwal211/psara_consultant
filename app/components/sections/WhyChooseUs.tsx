@@ -57,20 +57,20 @@ export default function WhyChooseUs() {
   }, []);
 
   return (
-    <Chapter id="why-us" tone="paper-lemon" className="bg-noise-lemon border-y border-[var(--lemon-green)]/30">
+    <Chapter id="why-us" tone="warm-cream" className="border-y border-[var(--line-gold)]/20">
       <div ref={root} className="py-6">
         <div className="mb-14 text-center max-w-3xl mx-auto">
-          {/* Jasmine-style decorative section heading frame */}
+          {/* Jasmine-style decorative section heading frame — warm gold tone */}
           <div className="section-heading-frame justify-center mb-3">
             <div className="i-line"></div>
-            <span className="text-[10px] font-bold uppercase tracking-[0.18em] px-4 py-1.5 shrink-0 text-[var(--royal-blue)] border border-[var(--royal-blue)]/20 rounded-full bg-[var(--lemon-soft)]">
+            <span className="text-[10px] font-bold uppercase tracking-[0.18em] px-4 py-1.5 shrink-0 text-[var(--gold)] border border-[var(--line-gold)] rounded-full" style={{ backgroundColor: 'color-mix(in srgb, var(--gold) 10%, transparent)' }}>
               Value Advantage · Proven Clearance
             </span>
             <div className="i-line"></div>
           </div>
-          <h2 ref={headingRef} className="display-xl text-[var(--royal-blue)] font-bold split-heading relative pl-4 md:pl-8">
+          <h2 ref={headingRef} className="display-xl text-[var(--ink-warm)] font-bold split-heading relative pl-4 md:pl-8">
             <span className="side-caption" aria-hidden>VALUE ADVANTAGE</span>
-            Why Security Agency Owners Trust <span className="text-[var(--lemon-green)]">PSARA Consultant</span>
+            Why Security Agency Owners Trust <span className="text-[var(--gold)]">PSARA Consultant</span>
           </h2>
           <p className="body-copy mt-4 text-[var(--ink-muted)] text-base mx-auto">
             We don&apos;t just hand you a generic checklist. We build, verify, and clear
@@ -84,25 +84,29 @@ export default function WhyChooseUs() {
             return (
               <div
                 key={idx}
-                className="feature-card tilt-card card-glow-hover flex flex-col justify-between border border-[var(--royal-blue)]/15 bg-white p-6 rounded-[var(--radius)] shadow-sm hover:border-[var(--lemon-green)] hover:shadow-md cursor-pointer relative"
+                className="feature-card tilt-card card-glow-hover flex flex-col justify-between border border-[var(--line-gold)] p-6 rounded-[var(--radius)] shadow-sm hover:border-[var(--gold)] hover:shadow-lg cursor-pointer relative"
+                style={{ backgroundColor: 'color-mix(in srgb, var(--warm-cream) 70%, white)' }}
               >
-                {/* Corner ornaments — Jasmine style */}
-                <CornerOrnament position="tl" color="var(--lemon-green)" opacity={0.4} />
-                <CornerOrnament position="br" color="var(--lemon-green)" opacity={0.4} />
+                {/* Corner ornaments — warm gold tone */}
+                <CornerOrnament position="tl" color="var(--gold)" opacity={0.25} />
+                <CornerOrnament position="br" color="var(--gold)" opacity={0.25} />
 
                 <div>
                   {/* Number marker */}
                   <span className="num-marker num-marker-sm block mb-2">{String(idx + 1).padStart(2, '0')}</span>
 
                   <div className="flex items-center justify-between mb-4">
-                    <div className="flex h-11 w-11 items-center justify-center rounded border border-[var(--lemon-green)]/40 bg-[var(--lemon-soft)] text-[var(--royal-blue)]">
+                    <div className="flex h-11 w-11 items-center justify-center rounded border border-[var(--line-gold)]" style={{
+                      backgroundColor: 'color-mix(in srgb, var(--gold) 12%, transparent)',
+                      color: 'var(--gold-deep)'
+                    }}>
                       <Icon className="h-5 w-5" />
                     </div>
-                    <span className="text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded bg-[var(--royal-blue)] text-white">
+                    <span className="text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded text-[var(--cream)]" style={{ backgroundColor: 'var(--gold-deep)' }}>
                       {feat.badge}
                     </span>
                   </div>
-                  <h3 className="text-lg font-bold text-[var(--royal-blue)]">
+                  <h3 className="text-lg font-bold" style={{ color: 'var(--ink-warm)' }}>
                     {feat.title}
                   </h3>
                   <p className="mt-3 text-xs leading-relaxed text-[var(--ink-muted)] font-medium">
@@ -115,7 +119,7 @@ export default function WhyChooseUs() {
         </div>
 
         <div className="mt-12 text-center">
-          <a href="#contact" className="btn-royal-blue">
+          <a href="#contact" className="btn-gold">
             Start Your PSARA Application
             <ChevronRight className="h-4 w-4" />
           </a>

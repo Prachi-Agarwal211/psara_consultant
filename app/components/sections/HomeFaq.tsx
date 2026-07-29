@@ -36,7 +36,7 @@ export default function HomeFaq() {
   }, []);
 
   return (
-    <Chapter id="faq" tone="paper">
+    <Chapter id="faq" tone="warm-parchment">
       <div ref={root}>
         <div className="mb-10 max-w-2xl" data-story>
           <div className="flex items-center gap-2 mb-3">

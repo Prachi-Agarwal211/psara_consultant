@@ -6,15 +6,9 @@
 
 @layer base {
   html {
-    /* scroll-behavior: smooth removed — Lenis handles smooth scrolling */
     scrollbar-width: none;
     -ms-overflow-style: none;
   }
-
-  /* NOTE: content-visibility:auto removed because it interferes with
-     GSAP ScrollTrigger position calculations for lazy-loaded sections.
-     ScrollTrigger needs accurate layout measurements to fire at the right scroll position,
-     and content-visibility:hidden sections report zero height to the IntersectionObserver. */
 
   html::-webkit-scrollbar {
     display: none;
@@ -33,7 +27,10 @@
     font-size: var(--text-base);
     line-height: 1.65;
     letter-spacing: 0.01em;
+    font-weight: 500;
     scrollbar-width: none;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
   body::-webkit-scrollbar {
@@ -42,7 +39,7 @@
 
   ::selection {
     background-color: var(--gold);
-    color: var(--obsidian);
+    color: var(--warm-dark);
   }
 
   a {
@@ -55,18 +52,26 @@
     height: auto;
   }
 
-  h1,
-  h2,
-  h3 {
+  h1, h2, h3 {
     text-wrap: balance;
     font-family: var(--font-display);
   }
 
-  /* Luke Baffait-inspired mix-blend-mode: difference on hero text
-     Light text automatically inverts over lighter background areas (image/gradients)
-     while remaining readable on dark backgrounds. */
+  /* Luke Baffait-inspired mix-blend-mode: difference */
   .mix-difference {
     mix-blend-mode: difference;
+  }
+
+  /* Split line animation wrapper */
+  .split-line {
+    display: inline-block;
+    overflow: hidden;
+    vertical-align: top;
+  }
+
+  .split-line > span {
+    display: inline-block;
+    will-change: transform;
   }
 }
 

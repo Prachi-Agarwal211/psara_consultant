@@ -16,26 +16,35 @@ export default function TermsPage() {
   return (
     <>
       <PageHero
-        eyebrow="Legal"
         title="Terms & Conditions"
-        lead="Website use and information disclaimer."
+        lead="Website use and practice governance framework."
         crumbs={[{ label: "Terms" }]}
       />
       <PageMain>
-        <Prose>
-          <p>
-            Content on this website is for general information on PSARA licensing and related
-            services. It is not a substitute for formal legal advice. Engagement terms for paid
-            consultancy are agreed separately in writing.
-          </p>
-          <h2>No guarantee of grant</h2>
-          <p>
-            Licence outcomes depend on Authority discretion, police verification, and applicant
-            facts. Timelines are indicative.
-          </p>
-          <h2>Governing law</h2>
-          <p>Laws of India. Disputes subject to competent courts as agreed in engagement letters.</p>
-        </Prose>
+        <div className="max-w-4xl mx-auto space-y-6">
+          <div className="border border-[var(--line-gold)] bg-[var(--obsidian-soft)] p-6 md:p-8 space-y-4">
+            <h2 className="text-xl font-bold text-[var(--gold)]">General Information Notice</h2>
+            <p className="text-sm font-medium leading-relaxed text-[var(--cream)]">
+              Content on this website is provided for general guidance on PSARA licensing, training institute MOUs, and police verification hygiene. Engagement terms for advisory services are executed separately via written agreement.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="border border-[var(--line)] bg-[var(--obsidian-soft)] p-6 space-y-3">
+              <h3 className="text-base font-bold text-[var(--cream)]">Controlling Authority Discretion</h3>
+              <p className="text-xs font-medium leading-relaxed text-[var(--text-dim)]">
+                Licence grants, inspection schedules, and final approvals rest solely with the notified Controlling Authority of the respective State. Indicative timelines are based on practice averages.
+              </p>
+            </div>
+
+            <div className="border border-[var(--line)] bg-[var(--obsidian-soft)] p-6 space-y-3">
+              <h3 className="text-base font-bold text-[var(--cream)]">Governing Jurisdiction</h3>
+              <p className="text-xs font-medium leading-relaxed text-[var(--text-dim)]">
+                Governed by the laws of India. Any legal proceedings or disputes are subject to competent courts as defined in formal engagement contracts.
+              </p>
+            </div>
+          </div>
+        </div>
       </PageMain>
     </>
   );

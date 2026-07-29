@@ -2,13 +2,13 @@
 
 import { useEffect, useRef } from "react";
 import Image from "next/image";
-import { ChevronRight, MessageSquare } from "lucide-react";
+import { ChevronRight, MessageSquare, ArrowUpRight } from "lucide-react";
 import BrandMark from "../ui/BrandMark";
 import MagneticButton from "../ui/MagneticButton";
 import CornerOrnament from "../ui/CornerOrnament";
 import { SITE } from "../../../lib/config";
 import { DEFAULT_WA } from "../../../lib/whatsapp";
-import { ensureGsap, ease, prefersReducedMotion, splitWords, dossierStampReveal } from "../../lib/gsap";
+import { ensureGsap, ease, prefersReducedMotion } from "../../lib/gsap";
 
 const navLinks = [
   { label: "About", href: "#about" },
@@ -23,8 +23,7 @@ function ChrHoverNav({ href, label }: { href: string; label: string }) {
   return (
     <a
       href={href}
-      className="chr-hover text-xs font-bold uppercase tracking-widest text-[var(--cream)]/70 hover:text-[var(--gold)]"
-      data-cursor={label}
+      className="chr-hover text-[0.6rem] font-bold uppercase tracking-widest text-[var(--cream)]/60 hover:text-[var(--gold)] transition-colors"
     >
       <span className="ch-wrapper">
         {label.split("").map((ch, i) => (
@@ -47,6 +46,7 @@ export default function HeroDossier({ onOpenQuiz }: { onOpenQuiz?: () => void })
   const titleRef = useRef<HTMLHeadingElement | null>(null);
   const imgWrap = useRef<HTMLDivElement | null>(null);
   const badgeRef = useRef<HTMLDivElement | null>(null);
+  const sideTextRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     if (!root.current) return;
@@ -54,36 +54,62 @@ export default function HeroDossier({ onOpenQuiz }: { onOpenQuiz?: () => void })
     const reduced = prefersReducedMotion();
 
     const ctx = gsap.context(() => {
+      /* ── Badge stamp reveal (dossier seal) ── */
       if (!reduced && badgeRef.current) {
-        dossierStampReveal(badgeRef.current);
-      }
-
-      if (!reduced && titleRef.current) {
-        const words = splitWords(titleRef.current);
-        gsap.fromTo(
-          words,
-          { yPercent: 110, opacity: 0 },
-          { yPercent: 0, opacity: 1, duration: 1.05, stagger: 0.07, ease: ease.cinematic, delay: 0.2 }
+        gsap.fromTo(badgeRef.current,
+          { scale: 1.2, opacity: 0 },
+          { scale: 1, opacity: 1, duration: 0.65, ease: ease.bounce, delay: 0.1 }
         );
       }
 
+      /* ── Hero title word-by-word reveal ── */
+      if (!reduced && titleRef.current) {
+        const text = titleRef.current.textContent?.trim() ?? "";
+        if (text) {
+          titleRef.current.setAttribute("aria-label", text);
+          const words = text.split(/\s+/);
+          const wordSpans: HTMLElement[] = [];
+
+          titleRef.current.textContent = "";
+          words.forEach((word, idx) => {
+            const wrap = document.createElement("span");
+            wrap.className = "inline-block overflow-hidden mr-[0.3em]";
+
+            const inner = document.createElement("span");
+            inner.className = "inline-block will-change-transform";
+            inner.textContent = word + (idx < words.length - 1 ? "" : "");
+
+            wrap.appendChild(inner);
+            titleRef.current!.appendChild(wrap);
+            wordSpans.push(inner);
+          });
+
+          gsap.fromTo(wordSpans,
+            { yPercent: 110, opacity: 0 },
+            { yPercent: 0, opacity: 1, duration: 1.0, stagger: 0.06, ease: ease.cinematic, delay: 0.3 }
+          );
+        }
+      }
+
+      /* ── Fade-up content elements ── */
       if (!reduced) {
         gsap.fromTo(
-          ".hero-content > *:not(h1)",
-          { opacity: 0, y: 18 },
-          { opacity: 1, y: 0, duration: 0.75, stagger: 0.08, ease: ease.expo, delay: 0.35 }
+          ".hero-content > *",
+          { opacity: 0, y: 20 },
+          { opacity: 1, y: 0, duration: 0.7, stagger: 0.08, ease: ease.expo, delay: 0.4 }
         );
         gsap.fromTo(
-          ".hero-nav a",
+          ".hero-nav-item",
           { opacity: 0, x: -16 },
-          { opacity: 1, x: 0, duration: 0.55, stagger: 0.06, ease: ease.expo, delay: 0.3 }
+          { opacity: 1, x: 0, duration: 0.5, stagger: 0.05, ease: ease.expo, delay: 0.35 }
         );
       }
 
+      /* ── Background image parallax ── */
       if (!reduced && imgWrap.current) {
         gsap.to(imgWrap.current, {
-          scale: 1.1,
-          yPercent: 4,
+          scale: 1.08,
+          yPercent: 5,
           ease: "none",
           scrollTrigger: {
             trigger: root.current,
@@ -91,6 +117,27 @@ export default function HeroDossier({ onOpenQuiz }: { onOpenQuiz?: () => void })
             end: "+=100%",
             scrub: 0.75,
           },
+        });
+      }
+
+      /* ── Right-side decorative ghost text (Jasmine's vertical caption) ── */
+      if (!reduced && sideTextRef.current) {
+        gsap.fromTo(sideTextRef.current,
+          { opacity: 0, x: 20 },
+          { opacity: 1, x: 0, duration: 1.0, delay: 0.6, ease: ease.smooth }
+        );
+      }
+
+      /* ── Scroll indicator ── */
+      if (!reduced) {
+        gsap.to(".scroll-indicator", {
+          y: 6,
+          opacity: 0.4,
+          duration: 1.2,
+          repeat: -1,
+          yoyo: true,
+          ease: "power1.inOut",
+          delay: 1.2,
         });
       }
     }, root);
@@ -102,89 +149,103 @@ export default function HeroDossier({ onOpenQuiz }: { onOpenQuiz?: () => void })
     <section
       id="hero"
       ref={root}
-      className="relative min-h-[100svh] overflow-hidden bg-[var(--obsidian)] text-[var(--cream)]"
+      className="relative min-h-[100svh] overflow-hidden text-[var(--cream)]"
+      style={{ backgroundColor: "var(--espresso)" }}
     >
-      {/* Decorative background ghost text */}
-      <div
-        className="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden select-none"
-        aria-hidden="true"
-      >
-        <div
-          className="text-[clamp(4rem,15vw,12rem)] font-bold leading-none whitespace-nowrap tracking-tight"
-          style={{
-            fontFamily: "var(--font-accent)",
-            color: "color-mix(in srgb, var(--gold, #e0b84a) 8%, transparent)",
-          }}
-        >
-          PSARA<br/>CLEARANCE<br/>ACROSS INDIA
-        </div>
-      </div>
-
+      {/* ── Background image with warm overlay ── */}
       <div ref={imgWrap} className="absolute inset-0 origin-center will-change-transform pointer-events-none">
         <Image
-          src="/assets/images/hero-security-guard.jpg"
-          alt="PSARA License Consultant India"
+          src="/hero background.png"
+          alt="Security professional in a modern corporate setting — PSARA License clearance hero background"
           fill
           priority
           sizes="100vw"
-          className="object-cover object-[center_25%] opacity-30"
+          className="object-cover object-[center_30%] opacity-30"
         />
         <div
           className="absolute inset-0"
           style={{
-            background: "linear-gradient(180deg, var(--obsidian) 0%, rgba(10, 22, 40, 0.75) 50%, var(--obsidian) 100%)",
+            background: "linear-gradient(180deg, var(--espresso) 0%, rgba(15, 14, 12, 0.5) 40%, rgba(15, 14, 12, 0.3) 60%, var(--espresso) 100%)",
           }}
         />
-        <div
-          className="absolute inset-0"
-          style={{
-            background: "radial-gradient(ellipse 80% 60% at 50% 30%, rgba(224, 184, 74, 0.08) 0%, transparent 70%)",
-          }}
-        />
+
       </div>
 
       <div className="relative z-10 mx-auto flex min-h-[100svh] max-w-[var(--page-max)] flex-col justify-between px-[var(--gutter)] py-8">
-        <div className="grid h-full grid-cols-1 lg:grid-cols-12 gap-8 items-center pt-8">
-          {/* Left Vertical Dossier Navigation Index — with Jasmine-style corner ornaments */}
-          <aside className="hero-nav hidden lg:flex flex-col justify-center border-r border-[var(--line-gold)] pr-8 lg:col-span-3 space-y-5 relative mix-difference">
-            {/* Corner ornaments */}
+
+        {/* ── Jasmine-style side caption (vertical, right side) ── */}
+        <div
+          ref={sideTextRef}
+          className="hidden lg:block absolute right-4 top-1/2 -translate-y-1/2"
+          aria-hidden
+        >
+          <span
+            className="block text-[0.5rem] font-bold uppercase tracking-widest opacity-30"
+            style={{
+              color: "var(--gold)",
+              writingMode: "vertical-rl",
+              textOrientation: "mixed",
+              letterSpacing: "0.3em",
+            }}
+          >
+            STATUTE · FIRST · DOSSIER · CLEARANCE · SINCE · 2016
+          </span>
+        </div>
+
+        {/* ── Main content grid ── */}
+        <div className="grid h-full grid-cols-1 lg:grid-cols-12 gap-8 items-center pt-16 flex-1">
+
+          {/* Left: Dossier Index Navigation (Jasmine's side navigation) */}
+          <aside className="hero-nav hidden lg:flex flex-col justify-center border-r border-[var(--line-gold)] pr-8 lg:col-span-3 space-y-4 relative">
             <CornerOrnament position="tl" size="sm" />
             <CornerOrnament position="bl" size="sm" />
 
-            <p className="text-[10px] font-bold uppercase tracking-widest text-[var(--gold)] mb-2 flex items-center gap-2">
-              <span className="h-px w-4 bg-[var(--gold)]"></span>
-              Dossier Cover Index
-              <span className="h-px w-4 bg-[var(--gold)]"></span>
-            </p>
+            <span className="text-[0.5rem] font-bold uppercase tracking-[0.2em] text-[var(--gold)] mb-4 flex items-center gap-2">
+              <span className="h-px w-6 bg-[var(--gold)]" />
+              DOSSIER INDEX
+            </span>
+
             {navLinks.map((item, i) => (
-              <div key={item.href} className="flex items-center gap-3 group">
-                <span className="num-marker num-marker-sm text-[0.6rem] transition-colors group-hover:text-[var(--gold)]">
-                  {String(i + 1).padStart(2, '0')}
+              <div key={item.href} className="hero-nav-item flex items-center gap-3 group">
+                <span className="text-[0.5rem] font-bold text-[var(--text-faint)] w-5 transition-colors group-hover:text-[var(--gold)]">
+                  {String(i + 1).padStart(2, "0")}
                 </span>
                 <ChrHoverNav href={item.href} label={item.label} />
               </div>
             ))}
           </aside>
 
-          {/* Right Dossier Cover Header */}
-          <div className="hero-content lg:col-span-9 lg:pl-10 max-w-2xl">
+          {/* Right: Hero Content */}
+          <div className="hero-content lg:col-span-9 lg:pl-10 max-w-3xl">
+            {/* Badge */}
             <div
               ref={badgeRef}
-              className="mb-4 inline-flex items-center gap-2 rounded border border-[var(--line-gold)] bg-[var(--obsidian-2)] px-3 py-1 text-xs font-bold uppercase tracking-wider text-[var(--gold)]"
+              className="mb-5 inline-flex items-center gap-2 border border-[var(--line-gold)] px-3 py-1.5"
+              style={{ backgroundColor: "color-mix(in srgb, var(--obsidian-2) 80%, transparent)" }}
             >
-              <span>PSARA Act 2005 Statutory Dossier Clearance</span>
+              <span className="w-1.5 h-1.5 rounded-full bg-[var(--gold)]" />
+              <span className="text-[0.5rem] font-bold uppercase tracking-[0.15em] text-[var(--gold)]">
+                PSARA Act 2005 · Statutory Dossier Clearance
+              </span>
             </div>
 
-            <h1 ref={titleRef} className="display-hero text-[var(--cream)] text-3xl md:text-5xl lg:text-6xl font-bold leading-tight mix-difference">
-              PSARA License <span className="text-[var(--gold)]">Clearance Across India.</span>
+            {/* Main heading with word-blur reveal (Luke-inspired) */}
+            <h1
+              ref={titleRef}
+              className="text-[clamp(2rem,4.5vw,4.5rem)] font-bold leading-[0.95] tracking-tight text-[var(--cream)]"
+              style={{ fontFamily: "var(--font-display)", maxWidth: "42rem" }}
+            >
+              PSARA License Clearance Across India.
             </h1>
 
-            <p className="body-copy mt-4 text-[var(--cream-warm)] text-sm md:text-base leading-relaxed">
+            {/* Lead text */}
+            <p className="mt-5 max-w-xl text-[0.95rem] font-medium leading-relaxed text-[var(--text-muted)]">
               {SITE.name} prepares rejection-free Controlling Authority dossiers — entity objects,
               training institute MOU, police antecedent verification, and inspection readiness across 28 States.
             </p>
 
-            <div className="mt-6 flex flex-wrap gap-4 items-center">
+            {/* CTA buttons */}
+            <div className="mt-7 flex flex-wrap gap-4 items-center">
               <MagneticButton as="a" href="#contact" className="btn-gold" data-cursor="Start">
                 Start Consultation
                 <ChevronRight className="h-4 w-4" />
@@ -205,20 +266,27 @@ export default function HeroDossier({ onOpenQuiz }: { onOpenQuiz?: () => void })
                 <button
                   type="button"
                   onClick={onOpenQuiz}
-                  className="text-xs font-bold uppercase tracking-wider text-[var(--gold)] hover:underline ml-2"
-                  data-cursor="Quiz"
+                  className="group flex items-center gap-1.5 text-[0.6rem] font-bold uppercase tracking-wider text-[var(--gold)] hover:gap-2 transition-all"
                 >
-                  60-Sec Readiness Check →
+                  60-Sec Readiness Check
+                  <ArrowUpRight className="h-3 w-3 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
                 </button>
               )}
             </div>
           </div>
         </div>
 
-        {/* Centered Embossed Brandmark Seal */}
-        <div className="flex justify-center pb-4">
-          <div className="rounded border border-[var(--line-gold)] bg-[var(--obsidian)]/90 px-6 py-2 shadow-lg">
+        {/* ── Bottom: Brand mark seal + scroll indicator ── */}
+        <div className="flex items-center justify-between pb-4 mt-8">
+          <div
+            className="inline-flex items-center gap-3 border border-[var(--line-gold)] px-5 py-2"
+            style={{ backgroundColor: "color-mix(in srgb, var(--espresso) 90%, transparent)" }}
+          >
             <BrandMark />
+          </div>
+          <div className="scroll-indicator flex items-center gap-2 text-[0.5rem] font-bold uppercase tracking-widest text-[var(--text-faint)]">
+            <span className="w-6 h-px bg-[var(--text-faint)]" />
+            Scroll
           </div>
         </div>
       </div>

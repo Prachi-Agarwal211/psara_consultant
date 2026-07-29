@@ -4,6 +4,7 @@ import { STATES } from "../data/states";
 import { CITIES } from "../data/cities";
 import { SERVICES } from "../data/services";
 import { GUIDES } from "../data/guides";
+import { BLOG_POSTS } from "../data/blog";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = SITE.url;
@@ -56,5 +57,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.8,
   }));
 
-  return [...staticRoutes, ...services, ...states, ...cities, ...guides];
+  const blogPosts = BLOG_POSTS.map((p) => ({
+    url: `${base}/blog/${p.slug}`,
+    lastModified: new Date(p.modifiedAt),
+    changeFrequency: "monthly" as const,
+    priority: 0.65,
+  }));
+
+  return [...staticRoutes, ...services, ...states, ...cities, ...guides, ...blogPosts];
 }

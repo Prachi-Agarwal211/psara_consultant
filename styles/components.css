@@ -1,3 +1,10 @@
+/* ═══════════════════════════════════════════════════════════════
+   PSARA · Dossier Authority Components
+   Jasmine Gunarto + Luke Baffait blended design patterns
+   Unique "Dossier Authority" identity
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ── Layout Utilities ────────────────────────────────────────── */
 .shell {
   width: 100%;
   max-width: var(--page-max);
@@ -17,6 +24,7 @@
   width: 100%;
   padding-top: clamp(4rem, 8vh, 7.5rem);
   padding-bottom: clamp(4rem, 8vh, 7.5rem);
+  contain: layout style paint;
 }
 
 .section-inner {
@@ -29,29 +37,71 @@
   padding-right: var(--gutter);
 }
 
+/* ═══════════════════════════════════════════════════════════════
+   TYPOGRAPHY HIERARCHY (Jasmine's MG-style weight system)
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Hero — extra bold, tight (like Jasmine's hg-1) */
 .display-hero {
   font-family: var(--font-display);
   font-size: var(--text-hero);
   line-height: 0.94;
   letter-spacing: -0.03em;
-  font-weight: 500;
+  font-weight: 700;
 }
 
+/* Display XL — bold section headings */
 .display-xl {
   font-family: var(--font-display);
   font-size: var(--text-xl);
   line-height: 1.05;
   letter-spacing: -0.025em;
-  font-weight: 500;
+  font-weight: 700;
 }
 
+/* Display LG — sub-headings / card titles */
 .display-lg {
   font-family: var(--font-display);
   font-size: var(--text-lg);
   line-height: 1.25;
-  font-weight: 500;
+  font-weight: 600;
 }
 
+/* Display Bold — dramatic emphasis (like Jasmine's hg-2) */
+.display-bold {
+  font-family: var(--font-display);
+  font-size: var(--text-hero);
+  line-height: 0.9;
+  letter-spacing: -0.04em;
+  font-weight: 700;
+}
+
+/* Display ExtraBold — for key emphasis words */
+.display-xb {
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+
+/* Section headings (h2 level) */
+.heading {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  line-height: 1.05;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+}
+
+/* Sub-headings (h3/card titles) */
+.subhead {
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  line-height: 1.2;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+/* Body copy */
 .body-copy {
   font-family: var(--font-body);
   font-size: var(--text-sm);
@@ -62,20 +112,38 @@
   font-weight: 500;
 }
 
-.font-bold,
-strong {
+/* Small heading / meta labels */
+.meta-heading {
+  font-family: var(--font-display);
+  font-size: 0.65rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
   font-weight: 700;
 }
 
 .label-meta {
   font-family: var(--font-accent);
-  font-size: 0.65rem;
+  font-size: 0.60rem;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  font-weight: 500;
+  font-weight: 600;
 }
 
-/* ── Character Hover Animation (lukebaffait style) ── */
+.small-caps {
+  font-size: 0.50rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.font-bold,
+strong {
+  font-weight: 700;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   CHARACTER HOVER (Luke Baffait chr-hover)
+   ═══════════════════════════════════════════════════════════════ */
 .chr-hover {
   position: relative;
   display: inline-flex;
@@ -117,7 +185,10 @@ strong {
   transform: translateY(0%);
 }
 
-/* ── Solid Dossier Buttons ── */
+/* ═══════════════════════════════════════════════════════════════
+   BUTTONS
+   ═══════════════════════════════════════════════════════════════ */
+
 .btn-gold {
   display: inline-flex;
   align-items: center;
@@ -130,58 +201,40 @@ strong {
   letter-spacing: 0.14em;
   text-transform: uppercase;
   font-weight: 700;
-  color: var(--obsidian);
+  color: var(--warm-dark);
   background-color: var(--gold);
   border: 1px solid var(--gold-soft);
-  transition: background-color var(--dur-fast) var(--ease-smooth), transform var(--dur-fast) var(--ease-smooth);
+  transition: background-color var(--dur-fast) var(--ease-smooth),
+              transform var(--dur-fast) var(--ease-smooth),
+              box-shadow var(--dur-fast) var(--ease-smooth);
 }
 .btn-gold:hover {
   background-color: var(--gold-soft);
   transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(224, 184, 74, 0.25);
 }
 
-.btn-royal-blue {
+.btn-gold-cta {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  padding: 0.85rem 1.65rem;
+  padding: 1rem 2rem;
   border-radius: var(--radius);
   font-family: var(--font-display);
-  font-size: 0.72rem;
-  letter-spacing: 0.14em;
+  font-size: 0.8rem;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
   font-weight: 700;
-  color: #ffffff;
-  background-color: var(--royal-blue);
-  border: 1px solid var(--royal-blue-deep);
-  transition: background-color var(--dur-fast) var(--ease-smooth), transform var(--dur-fast) var(--ease-smooth);
+  color: var(--warm-dark);
+  background: var(--grad-gold-cta);
+  border: 1px solid var(--gold-soft);
+  transition: transform var(--dur-fast) var(--ease-spring),
+              box-shadow var(--dur-fast) var(--ease-smooth);
 }
-.btn-royal-blue:hover {
-  background-color: var(--royal-blue-deep);
-  transform: translateY(-1px);
-}
-
-.btn-lemon-green {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  padding: 0.85rem 1.65rem;
-  border-radius: var(--radius);
-  font-family: var(--font-display);
-  font-size: 0.72rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  font-weight: 700;
-  color: var(--obsidian);
-  background-color: var(--lemon-green);
-  border: 1px solid var(--lemon-green);
-  transition: background-color var(--dur-fast) var(--ease-smooth), transform var(--dur-fast) var(--ease-smooth);
-}
-.btn-lemon-green:hover {
-  background-color: #65a30d;
-  transform: translateY(-1px);
+.btn-gold-cta:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 8px 30px rgba(224, 184, 74, 0.3);
 }
 
 .btn-ghost {
@@ -197,88 +250,238 @@ strong {
   text-transform: uppercase;
   font-weight: 700;
   color: var(--cream);
-  background-color: var(--obsidian-2);
-  border: 1px solid var(--line-sky);
-  transition: border-color var(--dur-fast) var(--ease-smooth), color var(--dur-fast) var(--ease-smooth);
+  background-color: transparent;
+  border: 1px solid var(--line);
+  transition: border-color var(--dur-fast) var(--ease-smooth),
+              color var(--dur-fast) var(--ease-smooth);
 }
 .btn-ghost:hover {
   border-color: var(--gold);
   color: var(--gold);
 }
 
-.office-line {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 0.5rem;
-  padding: 1.1rem 0;
-  border-bottom: 1px solid var(--line);
-  transition: border-color var(--dur-fast) var(--ease-smooth), transform var(--dur-fast) var(--ease-smooth);
-}
-.office-line:hover {
-  border-color: var(--line-gold);
-  transform: translateX(4px);
-}
-@media (min-width: 640px) {
-  .office-line {
-    grid-template-columns: 140px 160px 1fr;
-    align-items: baseline;
-  }
-}
-
-.practice-row {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  align-items: center;
-  gap: 1rem;
-  padding: 1.1rem 1rem;
-  border-bottom: 1px solid var(--line);
+.btn-ghost-light {
+  color: var(--ink-warm);
   background-color: transparent;
-  transition: background-color var(--dur-fast) var(--ease-smooth), border-color var(--dur-fast) var(--ease-smooth);
+  border: 1px solid var(--line-amber);
 }
-.practice-row .title {
-  font-family: var(--font-display);
-  font-size: 1.15rem;
-  font-weight: 500;
-  color: var(--text);
-  transition: color var(--dur-fast) var(--ease-smooth);
-}
-.practice-row .meta {
-  font-family: var(--font-display);
-  font-size: 0.65rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--text-dim);
-}
-.practice-row:hover,
-.practice-row.is-active {
-  background-color: var(--obsidian-2);
-  border-color: var(--line-gold);
-}
-.practice-row:hover .title,
-.practice-row.is-active .title {
+.btn-ghost-light:hover {
+  border-color: var(--gold);
   color: var(--gold);
 }
 
+.btn-emerald {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.85rem 1.65rem;
+  border-radius: var(--radius);
+  font-family: var(--font-display);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: #fff;
+  background-color: var(--emerald);
+  border: 1px solid var(--emerald-deep);
+  transition: background-color var(--dur-fast) var(--ease-smooth),
+              transform var(--dur-fast) var(--ease-smooth);
+}
+.btn-emerald:hover {
+  background-color: var(--emerald-deep);
+  transform: translateY(-1px);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   JASMINE GUNARTO — LINE-BY-LINE HEADING REVEAL
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Line container — overflow hidden for the mask effect */
+.t-line {
+  display: block;
+  overflow: hidden;
+  width: 100%;
+}
+
+/* Inner span — the text that animates in (yPercent: 100 → 0) */
+.t-line-inner {
+  display: inline-block;
+  white-space: normal;
+  will-change: transform;
+}
+
+/* ── Jasmine Split Heading Pattern ── */
+.heading-display {
+  position: relative;
+}
+
+.heading-display .heading-display-inner {
+  display: flex;
+  flex-direction: column;
+}
+
+.heading-display .t-line {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.heading-display .t-line .t-caption-wrapper {
+  flex-shrink: 0;
+}
+
+.heading-display .t-line .t-caption-wrapper .t-caption {
+  font-family: var(--font-display);
+  font-size: 0.55rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--gold);
+  opacity: 0.7;
+}
+
+.heading-display .t-line .t-line-mask {
+  overflow: hidden;
+}
+
+.heading-display .t-line .t-line-mask .hg-1 {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  line-height: 1.05;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  will-change: transform;
+}
+
+@media (max-width: 768px) {
+  .heading-display .t-line {
+    flex-direction: column;
+    gap: 0;
+  }
+  .heading-display .t-line .t-caption-wrapper .t-caption {
+    font-size: 0.50rem;
+  }
+  .heading-display .t-line .t-line-mask .hg-1 {
+    font-size: clamp(1.5rem, 7vw, var(--text-xl));
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   WORD BLUR REVEAL (Luke Baffait about-text pattern)
+   ═══════════════════════════════════════════════════════════════ */
+
+.word-blur-reveal .word {
+  display: inline-block;
+  opacity: 0;
+  filter: blur(8px);
+}
+
+@media (hover: none) and (pointer: coarse) {
+  .word-blur-reveal .word {
+    filter: none;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   MARQUEE ANIMATIONS
+   ═══════════════════════════════════════════════════════════════ */
+
 @keyframes marquee {
-  0% {
-    transform: translateX(0%);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
+  0%   { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes marquee-reverse {
+  0%   { transform: translateX(-50%); }
+  100% { transform: translateX(0%); }
 }
 
 .animate-marquee {
   animation: marquee 28s linear infinite;
 }
 
-/* ── State Briefs Marquee ── */
-.state-briefs-marquee {
-  animation: marquee 40s linear infinite;
-  width: fit-content;
+.animate-marquee-reverse {
+  animation: marquee-reverse 28s linear infinite;
 }
 
-/* ── State Brief Card Hover Preview ── */
+/* ── Ticker Marquee ── */
+.ticker-band {
+  background-color: var(--warm-dark-2);
+  border-top: 1px solid var(--line-gold);
+  border-bottom: 1px solid var(--line-gold);
+  position: relative;
+}
+
+.ticker-band::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--grad-gold-vertical);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.ticker-track {
+  display: flex;
+  width: fit-content;
+  gap: 2rem;
+  align-items: center;
+  animation: marquee 35s linear infinite;
+  padding: 0.8rem 0;
+  mask-image: linear-gradient(90deg, transparent 2%, black 8%, black 92%, transparent 98%);
+  -webkit-mask-image: linear-gradient(90deg, transparent 2%, black 8%, black 92%, transparent 98%);
+}
+
+.ticker-item {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  white-space: nowrap;
+  font-family: var(--font-display);
+  font-size: 0.82rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+
+.ticker-item--gold {
+  color: var(--gold);
+  font-weight: 700;
+}
+
+.ticker-separator {
+  width: 5px;
+  height: 5px;
+  background: var(--gold);
+  border-radius: 50%;
+  opacity: 0.5;
+  flex-shrink: 0;
+}
+
+/* ── Footer Marquee (Jasmine-style) ── */
+.footer-marquee {
+  overflow: hidden;
+  width: 100%;
+}
+
+.footer-marquee-track {
+  display: flex;
+  width: fit-content;
+  animation: marquee 30s linear infinite;
+}
+
+.footer-marquee-text {
+  white-space: nowrap;
+  padding-right: 2rem;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   STATE BRIEF CARDS (Jasmine's Break cards adaptation)
+   ═══════════════════════════════════════════════════════════════ */
+
 .state-brief-card {
   position: relative;
   overflow: hidden;
@@ -297,11 +500,9 @@ strong {
   transition-duration: 0.4s;
 }
 
-.ticker-band {
-  background-color: var(--obsidian-2);
-  border-top: 1px solid var(--line-gold);
-  border-bottom: 1px solid var(--line-gold);
-}
+/* ═══════════════════════════════════════════════════════════════
+   PROGRESS RAIL (Luke's scroll segment)
+   ═══════════════════════════════════════════════════════════════ */
 
 .progress-rail {
   display: flex;
@@ -312,23 +513,31 @@ strong {
   height: 3px;
   border-radius: 2px;
   background-color: var(--line);
+  transition: background-color 0.4s var(--ease-smooth);
 }
 .progress-rail i.on {
   background-color: var(--gold);
 }
 
-/* Interactive tilt card utility */
+/* ═══════════════════════════════════════════════════════════════
+   TILT CARD (Luke's 3D hover)
+   ═══════════════════════════════════════════════════════════════ */
+
 .tilt-card {
-  transition: transform 0.25s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.25s ease;
+  transition: transform 0.25s cubic-bezier(0.25, 1, 0.5, 1),
+              box-shadow 0.25s ease;
   will-change: transform;
 }
 
-/* Form fields — Solid dossier inputs */
+/* ═══════════════════════════════════════════════════════════════
+   FORM FIELDS
+   ═══════════════════════════════════════════════════════════════ */
+
 .form-field {
   width: 100%;
   border-radius: var(--radius);
-  border: 1px solid var(--line-sky);
-  background-color: var(--obsidian-2);
+  border: 1px solid var(--line);
+  background-color: var(--warm-dark-3);
   padding: 0.75rem 0.85rem;
   font-size: 0.875rem;
   font-weight: 500;
@@ -350,32 +559,10 @@ textarea.form-field {
   resize: vertical;
 }
 
-/* ── Scroll Progress Indicator (right rail) ── */
-#scroll-progress {
-  transition: opacity 0.3s ease;
-}
+/* ═══════════════════════════════════════════════════════════════
+   CUSTOM CURSOR SYSTEM (Luke-inspired)
+   ═══════════════════════════════════════════════════════════════ */
 
-.sp-segment {
-  transition: opacity 0.3s cubic-bezier(0.25, 1, 0.5, 1), transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
-}
-
-.sp-segment .sp-active {
-  transform: scale(1.25);
-}
-
-/* ── Line-by-Line Heading Reveal ── */
-.t-line {
-  display: block;
-  overflow: hidden;
-  width: 100%;
-}
-
-.t-line-inner {
-  display: inline-block;
-  white-space: normal;
-}
-
-/* ── Custom Cursor System ── */
 .custom-cursor-dot {
   width: 6px;
   height: 6px;
@@ -417,24 +604,69 @@ textarea.form-field {
   user-select: none;
 }
 
-/* Suppress native cursor ONLY when desktop custom cursor is active */
 .cursor-custom * {
   cursor: none !important;
 }
 
-/* ── Section Transition ── */
+/* ═══════════════════════════════════════════════════════════════
+   SECTION TRANSITIONS & DIVIDERS
+   ═══════════════════════════════════════════════════════════════ */
+
 [data-section-transition] {
   will-change: opacity, transform;
 }
 
-/* ── Voyeur-inspired Pillar Hover Dimming ── */
+/* ── Section Divider (gold rail with diamond) ── */
+.section-divider {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  max-width: var(--page-max);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+  position: relative;
+  z-index: 2;
+}
+
+.section-divider .line {
+  flex: 1;
+  height: 1px;
+  background: var(--line-gold);
+}
+
+.section-divider .diamond {
+  width: 6px;
+  height: 6px;
+  transform: rotate(45deg);
+  background: var(--gold);
+  flex-shrink: 0;
+}
+
+/* ── Gold rule ── */
+.gold-rule {
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, var(--gold) 15%, var(--gold) 85%, transparent 100%);
+  border: none;
+  margin: 1.5rem 0;
+}
+
+.gold-rule-left {
+  background: linear-gradient(90deg, var(--gold) 0%, transparent 100%);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   VOYEUR-VERITE — PILLAR HOVER DIMMING
+   ═══════════════════════════════════════════════════════════════ */
+
 .feature-grid:has(.feature-card:hover) .feature-card:not(:hover) {
   opacity: 0.5;
   filter: saturate(0.5);
   transition: opacity 0.4s ease, filter 0.4s ease;
 }
 .feature-card {
-  transition: opacity 0.4s ease, filter 0.4s ease, border-color 0.3s ease, transform 0.3s ease;
+  transition: opacity 0.4s ease, filter 0.4s ease,
+              border-color 0.3s ease, transform 0.3s ease;
 }
 
 .state-grid:has(.state-tile:hover) .state-tile:not(:hover) {
@@ -445,23 +677,11 @@ textarea.form-field {
   transition: opacity 0.4s ease;
 }
 
-/* ── Footer Marquee (Jasmine-inspired) ── */
-.footer-marquee {
-  overflow: hidden;
-  width: 100%;
-}
+/* ═══════════════════════════════════════════════════════════════
+   DECORATIVE DESIGN UTILITIES
+   ═══════════════════════════════════════════════════════════════ */
 
-.footer-marquee-track {
-  display: flex;
-  width: fit-content;
-  animation: marquee 30s linear infinite;
-}
-
-/* ════════════════════════════════════════════
-   DECORATIVE DESIGN UTILITIES (Jasmine/Luke/Voyeur inspired)
-   ════════════════════════════════════════════ */
-
-/* ── Corner Ornament SVG container (Jasmine's corner-ornament pattern) ── */
+/* ── Corner Ornament SVG (Jasmine's corner-ornament pattern) ── */
 .corner-frame {
   position: absolute;
   pointer-events: none;
@@ -495,37 +715,11 @@ textarea.form-field {
   fill: none;
 }
 
-/* ── Decorative Section Heading Frame (Jasmine's 'i-line' + caption) ── */
-.section-heading-frame {
-  position: relative;
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  margin-bottom: 0.5rem;
-}
-
-.section-heading-frame .i-line {
-  flex: 1;
-  height: 1px;
-  background: linear-gradient(90deg, var(--line-gold) 0%, transparent 100%);
-}
-
-.section-heading-frame .i-line-wrapper {
-  flex-shrink: 0;
-  width: 2rem;
-}
-
-.section-heading-frame .i-line-wrapper .i-line {
-  width: 100%;
-  height: 1px;
-  background: var(--gold);
-}
-
 /* ── Side Caption (Jasmine's caption-1 / caption-2 pattern) ── */
 .side-caption {
   display: block;
   font-family: var(--font-accent);
-  font-size: 0.6rem;
+  font-size: 0.55rem;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   font-weight: 700;
@@ -546,39 +740,7 @@ textarea.form-field {
   }
 }
 
-/* ── Daisy-chain ornamental line group (Jasmine's line-ornament-container) ── */
-.ornament-chain {
-  display: flex;
-  gap: 1.5rem;
-  align-items: flex-end;
-  margin-bottom: 0.5rem;
-}
-
-.ornament-chain .orn-link {
-  display: flex;
-  flex-direction: column;
-}
-
-.ornament-chain .orn-link .t-line {
-  display: flex;
-  gap: 2px;
-  height: 12px;
-  align-items: flex-end;
-}
-
-.ornament-chain .orn-link .t-line__1,
-.ornament-chain .orn-link .t-line__2,
-.ornament-chain .orn-link .t-line__3 {
-  width: 2px;
-  background: var(--line-gold);
-  border-radius: 1px;
-}
-
-.ornament-chain .orn-link .t-line__1 { height: 4px; }
-.ornament-chain .orn-link .t-line__2 { height: 8px; }
-.ornament-chain .orn-link .t-line__3 { height: 12px; }
-
-/* ── Numbered element base (Jasmine's 01, 02 pattern) ── */
+/* ── Numbered Marker (Jasmine's 01, 02 pattern) ── */
 .num-marker {
   font-family: var(--font-accent);
   font-size: 2rem;
@@ -596,7 +758,7 @@ textarea.form-field {
   font-size: 3rem;
 }
 
-/* ── Fluid Line SVG (Luke Baffait-inspired organic draw-on-scroll) ── */
+/* ── Fluid Line SVG (Luke's organic draw-on-scroll) ── */
 .fluid-line {
   position: absolute;
   left: 0;
@@ -607,7 +769,6 @@ textarea.form-field {
   pointer-events: none;
   z-index: 5;
   overflow: hidden;
-  opacity: 1;
 }
 
 .fluid-line svg {
@@ -621,7 +782,7 @@ textarea.form-field {
   stroke-linejoin: round;
 }
 
-/* ── Tag chip with border (Jasmine style) ── */
+/* ── Tag chip (Jasmine style) ── */
 .tag-chip {
   display: inline-flex;
   align-items: center;
@@ -629,7 +790,7 @@ textarea.form-field {
   padding: 0.2rem 0.6rem;
   border: 1px solid var(--line-gold);
   border-radius: var(--radius);
-  font-size: 0.5rem;
+  font-size: 0.50rem;
   font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -646,19 +807,7 @@ textarea.form-field {
   border-color: var(--gold);
 }
 
-/* ── Decorative full-width gold rule with optional ornament ends ── */
-.gold-rule {
-  height: 1px;
-  background: linear-gradient(90deg, transparent 0%, var(--gold) 15%, var(--gold) 85%, transparent 100%);
-  border: none;
-  margin: 1.5rem 0;
-}
-
-.gold-rule-left {
-  background: linear-gradient(90deg, var(--gold) 0%, transparent 100%);
-}
-
-/* ── Decorative box frame with double border (Voyeur-inspired) ── */
+/* ── Decorative box frame with double border ── */
 .frame-double {
   position: relative;
   border: 1px solid var(--line-gold);
@@ -673,7 +822,7 @@ textarea.form-field {
   border-radius: calc(var(--radius) - 2px);
 }
 
-/* ── Card number badge (top-right corner, Jasmine style) ── */
+/* ── Card number badge (Jasmine style) ── */
 .card-number-badge {
   position: absolute;
   top: 0.75rem;
@@ -686,69 +835,7 @@ textarea.form-field {
   z-index: 2;
 }
 
-/* ── Split heading with caption (Jasmine's heading-display pattern) ── */
-.split-heading {
-  position: relative;
-}
-
-.split-heading .t-line {
-  position: relative;
-  display: flex;
-  align-items: baseline;
-  gap: 0.75rem;
-  flex-wrap: wrap;
-}
-
-.split-heading .t-line .t-caption-wrapper {
-  flex-shrink: 0;
-}
-
-.split-heading .t-line .t-caption-wrapper .t-caption {
-  font-family: var(--font-display);
-  font-size: 0.6rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  font-weight: 700;
-  color: var(--gold);
-  opacity: 0.7;
-}
-
-@media (max-width: 768px) {
-  .split-heading .t-line {
-    flex-direction: column;
-    gap: 0;
-  }
-  .split-heading .t-line .t-caption-wrapper .t-caption {
-    font-size: 0.55rem;
-  }
-}
-
-/* ── Decorative section transition line ── */
-.section-divider {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  width: 100%;
-  max-width: var(--page-max);
-  margin: 0 auto;
-  padding: 0 var(--gutter);
-}
-
-.section-divider .line {
-  flex: 1;
-  height: 1px;
-  background: var(--line-gold);
-}
-
-.section-divider .diamond {
-  width: 6px;
-  height: 6px;
-  transform: rotate(45deg);
-  background: var(--gold);
-  flex-shrink: 0;
-}
-
-/* ── Jasmine-style card hover glow ── */
+/* ── Card glow hover (Jasmine style) ── */
 .card-glow-hover {
   transition: box-shadow 0.4s ease, transform 0.3s ease, border-color 0.3s ease;
 }
@@ -759,7 +846,7 @@ textarea.form-field {
   transform: translateY(-2px);
 }
 
-/* ── Large typography ghost text (Voyeur/Jasmine style) ── */
+/* ── Ghost display text (large transparent typography) ── */
 .ghost-display {
   font-family: var(--font-accent);
   font-weight: 700;
@@ -770,66 +857,114 @@ textarea.form-field {
   pointer-events: none;
 }
 
-/* ════════════════════════════════════════════
-   TYPOGRAPHY WEIGHT HIERARCHY 
-   Jasmine/Luke inspired: clear weight contrast between display, heading, subhead, and body
-   ════════════════════════════════════════════ */
+/* ═══════════════════════════════════════════════════════════════
+   OFFICE / PRACTICE ROW STYLES
+   ═══════════════════════════════════════════════════════════════ */
 
-/* Hero-level display — extra bold, tight tracking */
-.display-bold {
-  font-family: var(--font-display);
-  font-size: var(--text-hero);
-  line-height: 0.9;
-  letter-spacing: -0.04em;
-  font-weight: 700;
+.office-line {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.5rem;
+  padding: 1.1rem 0;
+  border-bottom: 1px solid var(--line);
+  transition: border-color var(--dur-fast) var(--ease-smooth),
+              transform var(--dur-fast) var(--ease-smooth);
+}
+.office-line:hover {
+  border-color: var(--line-gold);
+  transform: translateX(4px);
+}
+@media (min-width: 640px) {
+  .office-line {
+    grid-template-columns: 140px 160px 1fr;
+    align-items: baseline;
+  }
 }
 
-/* Display ExtraBold — for dramatic emphasis words */
-.display-xb {
-  font-family: var(--font-display);
-  font-weight: 700;
-  letter-spacing: -0.03em;
+.practice-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.1rem 1rem;
+  border-bottom: 1px solid var(--line);
+  background-color: transparent;
+  transition: background-color var(--dur-fast) var(--ease-smooth),
+              border-color var(--dur-fast) var(--ease-smooth);
 }
-
-/* Section headings (h2 level) */
-.heading {
+.practice-row .title {
   font-family: var(--font-display);
-  font-size: var(--text-xl);
-  line-height: 1.05;
-  font-weight: 700;
-  letter-spacing: -0.025em;
-}
-
-/* Sub-headings (h3/card titles) */
-.subhead {
-  font-family: var(--font-display);
-  font-size: var(--text-lg);
-  line-height: 1.2;
+  font-size: 1.15rem;
   font-weight: 600;
-  letter-spacing: -0.01em;
+  color: var(--text);
+  transition: color var(--dur-fast) var(--ease-smooth);
 }
-
-/* Small heading (card meta, section labels) */
-.meta-heading {
+.practice-row .meta {
   font-family: var(--font-display);
   font-size: 0.65rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  font-weight: 700;
+  color: var(--text-dim);
+}
+.practice-row:hover,
+.practice-row.is-active {
+  background-color: var(--warm-dark-2);
+  border-color: var(--line-gold);
+}
+.practice-row:hover .title,
+.practice-row.is-active .title {
+  color: var(--gold);
 }
 
-/* Strong body emphasis */
-.body-strong {
-  font-family: var(--font-body);
-  font-size: var(--text-sm);
-  line-height: 1.65;
-  font-weight: 600;
+/* ═══════════════════════════════════════════════════════════════
+   LUXURY METALLIC & AMBIENT SHIMMER UTILITIES
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ── Shimmer Border Animation ── */
+@keyframes shimmerBorder {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
 }
 
-/* Small caps utility — for decorative labels */
-.small-caps {
-  font-size: 0.55rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  font-weight: 700;
+.shimmer-border {
+  position: relative;
 }
+
+.shimmer-border::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--grad-border-shimmer);
+  background-size: 200% 100%;
+  animation: shimmerBorder 6s linear infinite;
+  pointer-events: none;
+}
+
+/* ── Ambient Radial Glow Light-Spot ── */
+.ambient-glow-bg {
+  position: relative;
+  background-image: var(--grad-gold-radial);
+  background-position: center top;
+  background-repeat: no-repeat;
+}
+
+/* ── Metallic Text Gradient ── */
+.text-gold-metallic {
+  background: var(--grad-gold-metallic);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ── Noise Grain Overlay ── */
+.noise-overlay-subtle {
+  position: absolute;
+  inset: 0;
+  opacity: 0.035;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.4) 1px, transparent 0);
+  background-size: 8px 8px;
+  pointer-events: none;
+}
+

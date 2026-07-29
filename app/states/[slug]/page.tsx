@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { STATES, getState } from "../../../data/states";
 import { citiesInState } from "../../../data/cities";
+import { SERVICES } from "../../../data/services";
 import { PageHero, PageMain, Prose } from "../../../components/PageShell";
 import CtaBar from "../../../components/CtaBar";
 import WhatsAppForm from "../../../components/WhatsAppForm";
@@ -10,10 +11,13 @@ import JsonLd from "../../../components/JsonLd";
 import { pageMeta } from "../../../lib/metadata";
 import {
   generateStateContent,
-  localBusinessJsonLd,
+  stateOrganizationJsonLd,
   faqJsonLd,
+  howToJsonLd,
 } from "../../../lib/seo-content";
-import { getOfficesForState, SITE } from "../../../lib/config";
+import { getOfficesForState, getOfficesForStatePage, SITE } from "../../../lib/config";
+import GbpOfficeSection from "../../components/sections/GbpOfficeSection";
+import StateDossierView from "../../components/sections/StateDossierView";
 
 export function generateStaticParams() {
   return STATES.map((s) => ({ slug: s.slug }));
@@ -52,120 +56,60 @@ export default async function StatePage({
   const content = generateStateContent(s);
   const cities = citiesInState(s.slug);
   const offices = getOfficesForState(s.slug);
+  const statePageOffices = getOfficesForStatePage(s.slug);
 
   return (
     <>
+      {/* BreadcrumbList handled by DynamicBreadcrumbSchema (client) */}
       <JsonLd
-        data={localBusinessJsonLd({
+        data={stateOrganizationJsonLd({
           name: `${SITE.name} — ${s.name}`,
           description: content.metaDescription,
           url: `${SITE.url}/states/${s.slug}`,
-          city: s.capital,
           state: s.name,
         })}
       />
       <JsonLd data={faqJsonLd(content.faqs)} />
+      <JsonLd data={howToJsonLd(`How to get PSARA License in ${s.name}`, content.metaDescription, content.process)} />
       <PageHero
-        eyebrow={s.name}
         title={`PSARA License in ${s.name}`}
         lead={content.metaDescription}
         crumbs={[{ label: "States", href: "/states" }, { label: s.name }]}
       />
+      {/* Stats strip */}
+      <section className="border-b border-[var(--line)]">
+        <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-center gap-6 px-[var(--gutter)] py-4 text-center text-xs font-bold uppercase tracking-wider md:gap-10">
+          <div>
+            <span className="block text-sm text-[var(--gold)]">{s.name}</span>
+            <span className="block text-[var(--cream-dim)]">State</span>
+          </div>
+          <div className="h-8 w-px bg-[var(--line)]" aria-hidden />
+          <div>
+            <span className="block text-sm text-[var(--gold)]">{s.capital}</span>
+            <span className="block text-[var(--cream-dim)]">Capital</span>
+          </div>
+          <div className="h-8 w-px bg-[var(--line)]" aria-hidden />
+          <div>
+            <span className="block text-sm text-[var(--gold)]">{s.cities.length}</span>
+            <span className="block text-[var(--cream-dim)]">Cities covered</span>
+          </div>
+          <div className="h-8 w-px bg-[var(--line)]" aria-hidden />
+          <div>
+            <span className="block text-sm text-[var(--gold)]">{s.sectors.length}</span>
+            <span className="block text-[var(--cream-dim)]">Key sectors</span>
+          </div>
+        </div>
+      </section>
+
       <PageMain>
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-12">
-          <div className="lg:col-span-7">
-            <Prose>
-              {content.intro.map((p) => (
-                <p key={p.slice(0, 48)}>{p}</p>
-              ))}
-
-              <h2>Controlling Authority & rules</h2>
-              {content.authorityBlock.map((p) => (
-                <p key={p.slice(0, 48)}>{p}</p>
-              ))}
-              <p>
-                <strong>Rules framework:</strong> {s.rulesNote}
-              </p>
-              <p>
-                <strong>Application mode:</strong> {s.applicationMode}
-              </p>
-              <p>
-                <strong>Indicative validity:</strong> {s.validityYears} year
-                {s.validityYears > 1 ? "s" : ""} (verify latest notification)
-              </p>
-
-              <h2>{content.processHeading}</h2>
-              <ul>
-                {content.process.map((st) => (
-                  <li key={st}>{st}</li>
-                ))}
-              </ul>
-
-              <h2>{content.documentsHeading}</h2>
-              <ul>
-                {content.documents.map((d) => (
-                  <li key={d}>{d}</li>
-                ))}
-              </ul>
-
-              <h2>{content.feesHeading}</h2>
-              {content.fees.map((p) => (
-                <p key={p.slice(0, 40)}>{p}</p>
-              ))}
-              <ul>
-                <li>{s.feeOneDistrict}</li>
-                <li>{s.feeMultiDistrict}</li>
-                <li>{s.feeEntireState}</li>
-              </ul>
-
-              <h2>{content.trainingHeading}</h2>
-              {content.training.map((p) => (
-                <p key={p.slice(0, 40)}>{p}</p>
-              ))}
-
-              <h2>{content.marketHeading}</h2>
-              {content.market.map((p) => (
-                <p key={p.slice(0, 40)}>{p}</p>
-              ))}
-              {s.sectors.length > 0 && (
-                <ul>
-                  {s.sectors.map((sec) => (
-                    <li key={sec}>{sec}</li>
-                  ))}
-                </ul>
-              )}
-
-              <h2>{content.rejectionHeading}</h2>
-              <ul>
-                {content.rejections.map((r) => (
-                  <li key={r}>{r}</li>
-                ))}
-              </ul>
-
-              <h2>{content.whyHeading}</h2>
-              <ul>
-                {content.whyPoints.map((w) => (
-                  <li key={w}>{w}</li>
-                ))}
-              </ul>
-
-              <h2>FAQs — PSARA in {s.name}</h2>
-              {content.faqs.map((f) => (
-                <div key={f.q}>
-                  <p>
-                    <strong>{f.q}</strong>
-                  </p>
-                  <p>{f.a}</p>
-                </div>
-              ))}
-
-              <p>{content.closingCta}</p>
-              <p className="text-sm opacity-80">
-                Disclaimer: Fees, timelines, and document lists are indicative and
-                subject to State notifications. Confirm with the Controlling
-                Authority before filing.
-              </p>
-            </Prose>
+          <div className="lg:col-span-7 space-y-12">
+            <StateDossierView
+              state={s}
+              content={content}
+              cities={cities}
+              offices={offices}
+            />
 
             {cities.length > 0 && (
               <div className="mt-12">
@@ -186,33 +130,45 @@ export default async function StatePage({
               </div>
             )}
 
-            {offices.length > 0 && (
-              <div className="mt-10 border border-[var(--line-gold)] p-5">
-                <p className="label-meta font-bold text-[var(--gold)]">
-                  Our desk for this region
-                </p>
-                {offices.map((o) => (
-                  <div key={o.city} className="mt-3">
-                    <p className="font-bold text-[var(--cream)]">{o.placeName}</p>
-                    <p className="text-sm font-semibold text-[var(--cream-dim)]">
-                      {o.address}, {o.pin}
-                    </p>
-                    <a
-                      href={o.mapUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-xs font-bold text-[var(--gold-soft)] underline"
-                    >
-                      Google Maps
-                    </a>
-                  </div>
+            {/* Service cross-links for internal linking */}
+            <div className="mt-12">
+              <h2 className="font-[family-name:var(--font-display)] text-2xl font-bold text-[var(--cream)]">
+                PSARA Services in {s.name}
+              </h2>
+              <p className="mt-2 text-sm font-medium text-[var(--cream-dim)]">
+                Complete PSARA licensing services for agencies operating in {s.name}.
+              </p>
+              <div className="mt-4 flex flex-wrap gap-2">
+                {SERVICES.slice(0, 12).map((svc) => (
+                  <Link
+                    key={svc.slug}
+                    href={`/services/${svc.slug}`}
+                    className="border border-[var(--line)] px-3 py-1.5 text-xs font-bold uppercase tracking-wider text-[var(--cream-dim)] hover:border-[var(--gold)] hover:text-[var(--gold-soft)]"
+                  >
+                    {svc.title}
+                  </Link>
                 ))}
               </div>
+              <p className="mt-3 text-xs font-medium text-[var(--cream-dim)]">
+                View all{" "}
+                <Link href="/services" className="text-[var(--gold-soft)] underline">
+                  PSARA services
+                </Link>
+                .
+              </p>
+            </div>
+
+            {statePageOffices.length > 0 && (
+              <GbpOfficeSection
+                placeLabel={s.name}
+                offices={statePageOffices}
+                isLocalOffice={['rajasthan', 'delhi', 'haryana', 'uttar-pradesh', 'gujarat', 'madhya-pradesh', 'chhattisgarh', 'punjab'].includes(s.slug)}
+              />
             )}
 
             <CtaBar title={`Apply for PSARA in ${s.name}`} />
           </div>
-          <div className="folio p-6 lg:col-span-5">
+          <div id="state-enquiry" className="folio p-6 lg:col-span-5">
             <h3 className="font-[family-name:var(--font-display)] text-xl font-bold text-[var(--cream)]">
               {s.name} enquiry
             </h3>

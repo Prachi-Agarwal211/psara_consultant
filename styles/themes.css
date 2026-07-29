@@ -1,40 +1,136 @@
-/* Section atmospheres — Flat obsidian, warm dark espresso, paper, and paper-lemon contrast */
+/* ═══════════════════════════════════════════════════════════════
+   PSARA · Section Atmospheres
+   Context-driven themes for each section type:
+   Ink (dark dossier) · Warm (coffee room) · Gold (seal chamber)
+   · Parchment (reading room) · Terracotta (earth)
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ═══ Dark Dossier Themes (Authority background) ═══ */
 
 .theme-ink {
   color: var(--cream);
   background-color: var(--obsidian);
 }
 
+.theme-ink h1,
+.theme-ink h2,
+.theme-ink h3 {
+  color: var(--cream);
+}
+
+.theme-ink .body-copy,
+.theme-ink p:not(.text-white):not(.text-cream) {
+  color: var(--text-muted);
+}
+
+.theme-navy {
+  color: var(--cream);
+  background-color: var(--navy-deep);
+}
+
+/* ═══ Warm Dark Themes (Jasmine-inspired warmth) ═══ */
+
 .theme-warm-dark {
   color: var(--cream);
   background-color: var(--warm-dark);
 }
 
-.theme-paper {
-  color: var(--ink);
-  background-color: var(--paper);
+.theme-warm-dark h1,
+.theme-warm-dark h2,
+.theme-warm-dark h3 {
+  color: var(--cream);
 }
 
-.theme-paper-lemon {
-  color: var(--ink);
-  background-color: #ffffff;
+.theme-warm-dark .body-copy,
+.theme-warm-dark p:not(.text-white):not(.text-cream) {
+  color: color-mix(in srgb, var(--cream) 80%, transparent);
 }
 
-.theme-paper-lemon h1,
-.theme-paper-lemon h2,
-.theme-paper-lemon h3 {
-  color: var(--royal-blue);
+.theme-warm-dark-2 {
+  color: var(--cream);
+  background-color: var(--warm-dark-2);
+}
+
+.theme-warm-dark-2 h1,
+.theme-warm-dark-2 h2,
+.theme-warm-dark-2 h3 {
+  color: var(--cream);
+}
+
+.theme-warm-dark-3 {
+  color: var(--cream);
+  background-color: var(--warm-dark-3);
+}
+
+.theme-espresso {
+  color: var(--cream);
+  background-color: var(--espresso);
+}
+
+/* ═══ Gold & Amber Themes (Seal chamber) ═══ */
+
+.theme-gold {
+  color: var(--warm-dark);
+  background-color: var(--gold-bg);
+}
+
+.theme-gold h1,
+.theme-gold h2,
+.theme-gold h3 {
+  color: var(--warm-dark);
+}
+
+.theme-gold .body-copy,
+.theme-gold p:not(.text-white):not(.text-cream) {
+  color: color-mix(in srgb, var(--warm-dark) 80%, transparent);
+}
+
+.theme-gold-soft {
+  color: var(--warm-dark);
+  background-color: var(--gold-bg-soft);
+}
+
+.theme-amber {
+  color: var(--cream);
+  background-color: var(--amber-deep);
+}
+
+/* ═══ Terracotta Bold Theme (Earth accent) ═══ */
+
+.theme-terracotta {
+  color: var(--cream);
+  background-color: var(--terracotta);
+}
+
+/* ═══ Warm Light Themes (Reading room) ═══ */
+
+.theme-warm-cream {
+  color: var(--ink-warm);
+  background-color: var(--warm-cream);
+}
+
+.theme-warm-cream h1,
+.theme-warm-cream h2,
+.theme-warm-cream h3 {
+  color: var(--ink-warm);
   font-weight: 700;
 }
 
-.theme-paper-lemon .body-copy,
-.theme-paper-lemon p:not(.text-white):not(.text-cream) {
-  color: var(--ink-muted);
+.theme-warm-cream .body-copy,
+.theme-warm-cream p:not(.text-white):not(.text-cream) {
+  color: color-mix(in srgb, var(--ink-warm) 75%, transparent);
 }
 
-.theme-paper .body-copy,
-.theme-paper p:not(.text-white):not(.text-cream) {
-  color: var(--ink-muted);
+.theme-warm-parchment {
+  color: var(--ink-warm);
+  background-color: var(--warm-parchment);
+}
+
+/* ═══ Paper Themes (clean light) ═══ */
+
+.theme-paper {
+  color: var(--ink);
+  background-color: var(--cream);
 }
 
 .theme-paper h1,
@@ -44,9 +140,17 @@
   font-weight: 700;
 }
 
+.theme-paper .body-copy,
+.theme-paper p:not(.text-white):not(.text-cream) {
+  color: var(--ink-muted);
+}
+
+/* ═══ Binding Rail (spectrum vertical edge) ═══ */
+
 .binding-rail {
   position: relative;
 }
+
 .binding-rail::before {
   content: "";
   position: absolute;
@@ -59,15 +163,17 @@
   border-radius: 2px;
 }
 
-/* Research noise texture — tactile film grain */
+/* ═══ Noise Texture Overlay (Luke's film grain) ═══ */
+
 .noise-overlay {
   position: fixed;
   inset: 0;
   pointer-events: none;
   z-index: 9990;
-  opacity: 0.038;
+  opacity: 0.035;
   mix-blend-mode: overlay;
 }
+
 .noise-overlay::before {
   content: "";
   position: absolute;
@@ -78,13 +184,8 @@
   background-size: 180px 180px;
 }
 
-.bg-noise-lemon {
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  background-size: 120px 120px;
-}
-
 @media (prefers-reduced-motion: reduce) {
   .noise-overlay {
-    opacity: 0.028;
+    opacity: 0.025;
   }
 }

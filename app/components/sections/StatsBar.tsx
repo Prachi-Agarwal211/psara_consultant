@@ -45,7 +45,11 @@ export default function StatsBar() {
   }, []);
 
   return (
-    <section id="stats" ref={root} className="relative z-20 border-y border-[var(--line-gold)] bg-[var(--obsidian-2)] py-8">
+    <section id="stats" ref={root} className="relative z-20 border-y border-[var(--line-gold)] py-8" style={{ backgroundColor: 'var(--warm-dark-2)' }}>
+      {/* Gold vertical gradient overlay */}
+      <div className="absolute inset-0 pointer-events-none" style={{
+        background: 'linear-gradient(180deg, transparent 0%, rgba(201, 148, 91, 0.06) 30%, rgba(201, 148, 91, 0.04) 60%, transparent 100%)',
+      }} />
       {/* Decorative ornament chain — Jasmine inspired */}
       <div className="absolute top-0 left-0 right-0 flex justify-center -translate-y-1/2 z-10">
         <div className="ornament-chain px-[var(--gutter)]">
@@ -87,9 +91,6 @@ export default function StatsBar() {
                 <div>
                   <div className="flex items-center justify-between mb-2">
                     <span className="flex items-baseline gap-2">
-                      <span className="num-marker num-marker-sm text-xs">
-                        {String(idx + 1).padStart(2, '0')}
-                      </span>
                       <span
                         data-count={item.target}
                         data-suffix={item.suffix}
@@ -98,12 +99,12 @@ export default function StatsBar() {
                         {item.target}{item.suffix}
                       </span>
                     </span>
-                    <Icon className="h-4 w-4 text-[var(--gold)]/50" />
+                    <Icon className="h-4 w-4 text-[var(--gold)]/30" />
                   </div>
                   <h3 className="text-xs font-bold uppercase tracking-wider text-[var(--cream)]">
                     {item.label}
                   </h3>
-                  <p className="mt-1 text-xs text-[var(--text-dim)] leading-relaxed">
+                  <p className="mt-1 text-[0.6rem] font-medium text-[var(--text-faint)] leading-relaxed">
                     {item.desc}
                   </p>
                 </div>

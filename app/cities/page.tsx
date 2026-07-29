@@ -17,25 +17,30 @@ export default function CitiesHubPage() {
   return (
     <>
       <PageHero
-        eyebrow="Cities"
         title="PSARA help near your market"
         lead={`${CITIES.length} city pages for local search intent — each linked to its State guide.`}
         crumbs={[{ label: "Cities" }]}
       />
       <PageMain>
+        {/* City list with multi-column layout */}
         <div className="columns-1 gap-x-8 sm:columns-2 lg:columns-3">
           {sorted.map((c) => (
             <Link
               key={c.slug}
               href={`/city/${c.slug}`}
-              className="mb-2 block break-inside-avoid border-b border-[var(--line)] py-2 text-sm font-bold text-[var(--cream-dim)] hover:text-[var(--gold-soft)]"
+              className="group mb-2 block break-inside-avoid border-b border-[var(--line)] py-2.5 text-sm font-bold text-[var(--text-dim)] hover:text-[var(--gold)] transition-colors"
             >
-              {c.name}
-              <span className="ml-2 text-xs font-semibold text-[var(--gold)]/70">{c.stateName}</span>
+              <span className="group-hover:translate-x-1 inline-block transition-transform">
+                {c.name}
+              </span>
+              <span className="ml-2 text-[0.55rem] font-semibold text-[var(--gold)] opacity-60">
+                {c.stateName}
+              </span>
             </Link>
           ))}
         </div>
-        <CtaBar />
+
+        <CtaBar title="Need help in your city?" subtitle="Call or WhatsApp — we have field desks across major Indian cities." />
       </PageMain>
     </>
   );

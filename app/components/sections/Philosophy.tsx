@@ -115,10 +115,10 @@ export default function Philosophy() {
                 <CornerOrnament position="br" />
 
                 <span className="num-marker block mb-2">{item.num}</span>
-                <div className="text-xs font-bold uppercase tracking-wider text-[var(--gold)]">
+                <div className="text-[0.6rem] font-bold uppercase tracking-wider text-[var(--gold)]">
                   {item.title}
                 </div>
-                <p className="mt-1 text-[10px] font-medium text-[var(--cream-warm)]/60">
+                <p className="mt-1 text-[0.5rem] font-medium text-[var(--text-faint)]">
                   {item.desc}
                 </p>
               </div>

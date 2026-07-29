@@ -46,7 +46,6 @@ export default function GooglePage() {
     <>
       <JsonLd data={graph} />
       <PageHero
-        eyebrow="Google Business"
         title="Our offices on Google Maps"
         lead="Visit or call the desk nearest you. Each location supports PSARA documentation and consultation."
         crumbs={[{ label: "Google Business Profiles" }]}

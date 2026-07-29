@@ -158,7 +158,7 @@ export default function StateBriefs() {
               <div className="state-brief-preview pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-400 group-hover:opacity-[0.06]">
                 <Image
                   src={b.image}
-                  alt=""
+                  alt={`${b.name} state brief preview — ${b.stat}`}
                   fill
                   className="object-cover"
                   sizes="(max-width: 768px) 100vw, 33vw"

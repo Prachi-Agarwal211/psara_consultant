@@ -28,6 +28,7 @@ const navCols = [
       { label: "Documents", href: "/psara-documents" },
       { label: "Fees", href: "/psara-fees" },
       { label: "Multi-State", href: "/multi-state-license" },
+      { label: "Blog", href: "/blog" },
       { label: "FAQ", href: "/faq" },
     ],
   },

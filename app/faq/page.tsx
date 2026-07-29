@@ -5,6 +5,7 @@ import CtaBar from "../../components/CtaBar";
 import JsonLd from "../../components/JsonLd";
 import { pageMeta } from "../../lib/metadata";
 import { faqJsonLd } from "../../lib/seo-content";
+import { ChevronDown } from "lucide-react";
 
 export const metadata: Metadata = pageMeta(
   "PSARA FAQ — 100 Questions Answered",
@@ -21,7 +22,6 @@ export default function FaqPage() {
       <JsonLd data={faqJsonLd(FAQS)} />
       <PageHero
         roman="FAQ"
-        eyebrow={`${FAQS.length} questions`}
         title="PSARA questions, answered clearly"
         lead="A living knowledge base for promoters, CAs, and operators — from Form I to multi-state strategy."
         crumbs={[{ label: "FAQ" }]}
@@ -29,17 +29,20 @@ export default function FaqPage() {
       <PageMain>
         {categories.map((cat) => (
           <section key={cat} className="mb-12">
-            <h2 className="font-[family-name:var(--font-display)] text-2xl font-bold text-[var(--gold-soft)]">
+            <h2 className="font-[family-name:var(--font-display)] text-xl font-bold tracking-tight text-[var(--gold)] mb-6">
               {cat}
             </h2>
-            <div className="mt-4 divide-y divide-[var(--line)] border-t border-[var(--line)]">
+            <div className="divide-y divide-[var(--line)] border-t border-[var(--line)]">
               {FAQS.filter((f) => f.category === cat).map((f) => (
                 <details key={f.q} className="group py-5">
-                  <summary className="cursor-pointer list-none font-[family-name:var(--font-display)] text-lg font-bold text-[var(--cream)] marker:content-none">
-                    <span className="text-[var(--gold)]">Q. </span>
-                    {f.q}
+                  <summary className="cursor-pointer list-none font-[family-name:var(--font-display)] text-base font-bold text-[var(--cream)] marker:content-none flex items-center justify-between gap-4">
+                    <span>
+                      <span className="text-[var(--gold)]">Q. </span>
+                      {f.q}
+                    </span>
+                    <ChevronDown className="h-4 w-4 shrink-0 text-[var(--text-faint)] group-open:rotate-180 transition-transform" />
                   </summary>
-                  <p className="mt-3 max-w-3xl text-sm font-semibold leading-relaxed text-[var(--cream-dim)]">
+                  <p className="mt-3 max-w-3xl text-sm font-medium leading-relaxed text-[var(--text-dim)]">
                     {f.a}
                   </p>
                 </details>
@@ -47,7 +50,7 @@ export default function FaqPage() {
             </div>
           </section>
         ))}
-        <CtaBar title="Still have a question?" />
+        <CtaBar title="Still have a question?" subtitle="Call or WhatsApp — our team answers within 4 hours." />
       </PageMain>
     </>
   );

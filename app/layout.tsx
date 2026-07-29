@@ -6,6 +6,7 @@ import CustomCursor from "./components/CustomCursor";
 import Preloader from "./components/layout/Preloader";
 import PageLoader from "./components/layout/PageLoader";
 import { SITE, CONTACT, AGGREGATE_RATING, OFFICES } from "../lib/config";
+import DynamicBreadcrumbSchema from "../components/DynamicBreadcrumbSchema";
 import "./globals.css";
 
 export const viewport: Viewport = {
@@ -42,7 +43,7 @@ export const metadata: Metadata = {
     siteName: SITE.name,
     images: [
       {
-        url: "/og-image.jpg",
+        url: "/assets/images/og/default-og.png",
         width: 1200,
         height: 630,
         alt: "PSARA Consultant India — PSARA License Clearance Across 28 States",
@@ -55,16 +56,17 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: `${SITE.name} | PSARA License & Security Agency Compliance`,
     description: SITE.description,
-    images: ["/og-image.jpg"],
+    images: ["/assets/images/og/default-og.png"],
     site: "@psaraconsultant",
     creator: "@psaraconsultant",
   },
   icons: {
     icon: [
-      { url: "/favicon-32.png", sizes: "32x32", type: "image/png" },
-      { url: "/favicon-48.png", sizes: "48x48", type: "image/png" },
-      { url: "/favicon-192.png", sizes: "192x192", type: "image/png" },
-      { url: "/favicon-512.png", sizes: "512x512", type: "image/png" },
+      { url: "/favicon.ico", sizes: "any", type: "image/x-icon" },
+      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+      { url: "/favicon-48x48.png", sizes: "48x48", type: "image/png" },
+      { url: "/favicon-192x192.png", sizes: "192x192", type: "image/png" },
+      { url: "/favicon-512x512.png", sizes: "512x512", type: "image/png" },
     ],
     apple: [{ url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" }],
   },
@@ -72,10 +74,27 @@ export const metadata: Metadata = {
     "theme-color": "#e0b84a",
     "msapplication-navbutton-color": "#e0b84a",
     "apple-mobile-web-app-status-bar-style": "#e0b84a",
-    "geo.region": "IN-RJ",
-    "geo.placename": "Jaipur, Rajasthan",
-    "geo.position": "26.8854;75.7365",
-    ICBM: "26.8854, 75.7365",
+    "geo.region": "IN-DL",
+    "geo.placename": "New Delhi, Delhi",
+    "geo.position": "28.6304;77.2177",
+    ICBM: "28.6304, 77.2177",
+  },
+  alternates: {
+    canonical: SITE.url,
+    types: {
+      "text/plain": [{ url: "/llms.txt", title: "llms.txt" }],
+    },
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
   },
 };
 
@@ -87,6 +106,8 @@ export default function RootLayout({
   return (
     <html lang="en" className="h-full antialiased">
       <head>
+        {/* Dynamic per-page breadcrumb */}
+        <DynamicBreadcrumbSchema />
         {/* JSON-LD Structured Data — Organization + WebPage + Service + FAQ schema */}
         <script
           type="application/ld+json"
@@ -157,31 +178,8 @@ export default function RootLayout({
                   provider: { "@id": `${SITE.url}/#organization` },
                   areaServed: { "@type": "Country", name: "India" },
                 },
-                {
-                  "@type": "BreadcrumbList",
-                  "@id": `${SITE.url}/#breadcrumb`,
-                  itemListElement: [
-                    {
-                      "@type": "ListItem",
-                      position: 1,
-                      name: "Home",
-                      item: SITE.url,
-                    },
-                    {
-                      "@type": "ListItem",
-                      position: 2,
-                      name: "Services",
-                      item: `${SITE.url}/services`,
-                    },
-                    {
-                      "@type": "ListItem",
-                      position: 3,
-                      name: "Contact",
-                      item: `${SITE.url}/contact`,
-                    },
-                  ],
-                },
-                ...OFFICES.filter((o) => o.isHQ).map((office) => ({
+                // BreadcrumbList moved to DynamicBreadcrumbSchema component for per-page accuracy
+                ...OFFICES.map((office) => ({
                   "@type": "LocalBusiness",
                   "@id": `${SITE.url}/#office-${office.city.toLowerCase().replace(/\s+/g, "-")}`,
                   name: `${SITE.name} — ${office.city} ${office.badge}`,
@@ -205,8 +203,8 @@ export default function RootLayout({
                   openingHoursSpecification: {
                     "@type": "OpeningHoursSpecification",
                     dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-                    opens: "09:00",
-                    closes: "21:00",
+                    opens: "09:30",
+                    closes: "18:30",
                   },
                   priceRange: "₹₹",
                   areaServed: { "@type": "Country", name: "India" },
@@ -235,6 +233,26 @@ export default function RootLayout({
                       "@type": "Question",
                       name: "What documents are required for PSARA?",
                       acceptedAnswer: { "@type": "Answer", text: "Identity and address proofs of promoters, company incorporation papers, MOA/AOA with suitable objects, registered office proof, photographs, affidavits, training MOU, and police verification forms." },
+                    },
+                    {
+                      "@type": "Question",
+                      name: "How do I check PSARA License status?",
+                      acceptedAnswer: { "@type": "Answer", text: "You can check the status with the State Controlling Authority where the application was filed. Contact us for assistance with status tracking across any State." },
+                    },
+                    {
+                      "@type": "Question",
+                      name: "Can a PSARA License be transferred?",
+                      acceptedAnswer: { "@type": "Answer", text: "Licences are not casually transferable like assets. Change of control or structure usually needs authority intimation or fresh compliance. Plan M&A with licensing counsel." },
+                    },
+                    {
+                      "@type": "Question",
+                      name: "Is training MOU mandatory for PSARA?",
+                      acceptedAnswer: { "@type": "Answer", text: "Yes in almost all practical filings. A training MOU with a State-recognised institute covering unarmed and armed curricula is required before or during the licence process." },
+                    },
+                    {
+                      "@type": "Question",
+                      name: "What is the penalty for operating without PSARA?",
+                      acceptedAnswer: { "@type": "Answer", text: "Operating without a valid PSARA license is a criminal offense under the PSARA Act, 2005, attracting penalties, prosecution risk, and permanent contract ineligibility with serious clients." },
                     },
                   ],
                 },

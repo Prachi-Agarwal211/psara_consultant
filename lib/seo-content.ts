@@ -8,7 +8,9 @@ export {
   stateProcess,
   cityIntro,
   localBusinessJsonLd,
+  stateOrganizationJsonLd,
   faqJsonLd,
+  howToJsonLd,
   type LocationSEOContent,
   type FaqPair,
 } from "./seo-content-generator";

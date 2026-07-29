@@ -42,6 +42,10 @@ yarn-error.log*
 # vercel
 .vercel
 
+# generated build assets (can be regenerated via scripts/generators/)
+public/assets/images/blog/*.svg
+public/assets/images/og/*.svg
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts

@@ -314,6 +314,159 @@ export const SERVICES: Service[] = [
       },
     ],
   },
+  {
+    slug: "startup-india-registration",
+    title: "Startup India Registration (DPIIT)",
+    short: "DPIIT registration for security agencies seeking startup benefits.",
+    description:
+      "Registration under the Startup India initiative through the DPIIT (Department for Promotion of Industry and Internal Trade) recognition process — enabling tax benefits, funding access, and government scheme eligibility for eligible security agency startups.",
+    bullets: [
+      "DPIIT recognition application",
+      "Incorporation certificate alignment",
+      "Startup pitch deck guidance",
+      "Scheme eligibility briefing",
+      "Post-recognition compliance notes",
+    ],
+    keywords: ["Startup India registration", "DPIIT recognition", "startup security agency"],
+    sections: [
+      {
+        h: "Why DPIIT recognition matters",
+        p: "Recognised startups access tax exemptions under Section 80 IAC and 56 of the IT Act, priority in government tenders, self-certification under labour and environment laws, and eligibility for the Fund of Funds and other innovation schemes.",
+      },
+      {
+        h: "Who qualifies",
+        p: "Entities structured as Pvt Ltd or LLP, incorporated within the last 10 years, with turnover under INR 100 crore in any financial year since incorporation, and working towards innovation, development, or commercialisation of a product or process — scalable security technology or service models qualify.",
+      },
+      {
+        h: "What we do",
+        p: "We assess eligibility, align incorporation documents, draft the application narrative, file the DPIIT recognition application, and brief you on post-recognition compliance and annual reporting obligations.",
+      },
+    ],
+    process: [
+      "Eligibility assessment (entity age, turnover, innovation fit)",
+      "Document readiness — incorporation, financials, pitch deck",
+      "DPIIT portal application filing",
+      "Recognition certificate handover",
+      "Tax exemption eligibility briefing (80 IAC, 56)",
+    ],
+    whoFor: [
+      "New security agencies eligible for startup benefits",
+      "Tech-enabled security service startups",
+      "Agencies seeking government tender advantages",
+    ],
+    faqs: [
+      {
+        q: "Is DPIIT registration the same as Startup India recognition?",
+        a: "Yes. DPIIT recognition is the official Startup India registration that unlocks tax benefits, funding access, and government scheme eligibility.",
+      },
+      {
+        q: "Can a security agency qualify as a startup?",
+        a: "Yes, if the entity is within the incorporation age and turnover limits, and demonstrates innovation in security service delivery, training technology, or operational processes.",
+      },
+    ],
+  },
+  {
+    slug: "startup-tax-exemption",
+    title: "Startup Tax Exemption (80 IAC)",
+    short: "Income Tax exemption under Section 80 IAC and Section 56 for DPIIT-recognised startups.",
+    description:
+      "Tax exemption application and compliance support for DPIIT-recognised startups under Section 80 IAC (3-year income tax holiday in a block of 10 years) and Section 56 (exemption on premium share capital) of the Income Tax Act.",
+    bullets: [
+      "Form 1DD and Form 2 filing support",
+      "80 IAC eligibility assessment",
+      "Section 56 exemption for angel investment",
+      "Inter-Ministerial Board briefing notes",
+      "Annual compliance and renewal guidance",
+    ],
+    keywords: ["80 IAC tax exemption", "startup tax benefit", "Section 56 exemption"],
+    sections: [
+      {
+        h: "What 80 IAC offers",
+        p: "A 3-year income tax holiday within a 10-year block, available to DPIIT-recognised startups incorporated between 2016 and 2031. Eligible startups pay nil tax on business income for 3 years out of 10, significantly reducing the effective tax rate during formative years.",
+      },
+      {
+        h: "Section 56 benefit",
+        p: "Startups recognised by DPIIT can issue shares at a premium to angel investors without the excess being taxed as income under Section 56, provided the investment falls within notified limits and conditions.",
+      },
+      {
+        h: "What we do",
+        p: "We assess your startup's eligibility, prepare Form 1DD (application for 80 IAC approval), coordinate with the Inter-Ministerial Board where required, and set up your annual compliance calendar to maintain the exemption.",
+      },
+    ],
+    process: [
+      "Eligibility review — DPIIT status, incorporation date, turnover",
+      "Form 1DD preparation for 80 IAC approval",
+      "IMB submission coordination (if applicable)",
+      "Section 56 advisory for angel/VC rounds",
+      "Annual compliance calendar setup",
+    ],
+    whoFor: [
+      "DPIIT-recognised security startups",
+      "Agencies raising angel or venture funding",
+      "Founders seeking tax holiday on early revenue",
+    ],
+    faqs: [
+      {
+        q: "Is 80 IAC automatic after DPIIT recognition?",
+        a: "No. DPIIT recognition is a prerequisite, but 80 IAC approval requires a separate application (Form 1DD) filed with the Inter-Ministerial Board. We handle this application process.",
+      },
+      {
+        q: "How many years of tax exemption can I claim?",
+        a: "3 years within a 10-year block. You choose which 3 financial years to claim the exemption, allowing flexibility to optimise for your revenue ramp.",
+      },
+    ],
+  },
+  {
+    slug: "startup-funding",
+    title: "Startup Funding & Grant Support",
+    short: "Funding guidance, grant applications, and investor connect support for security startups.",
+    description:
+      "End-to-end funding and grant support for security agencies and security-tech startups — from government scheme navigation (Fund of Funds, SIDBI, MSME grants) to private investor pitch preparation and business plan structuring.",
+    bullets: [
+      "Grant and scheme eligibility mapping",
+      "Project report and financial model preparation",
+      "Pitch deck and investor summary creation",
+      "Fund of Funds (FFS) application support",
+      "Bank loan and MSME subsidy guidance",
+    ],
+    keywords: ["startup funding", "security agency funding", "business grant"],
+    sections: [
+      {
+        h: "Government schemes",
+        p: "We map available central and state schemes for security and service industry startups — Fund of Funds for Startups (FFS) by SIDBI, MSME subsidies, CGTMSE collateral-free loan schemes, and State-specific startup policies that offer grants and interest subvention.",
+      },
+      {
+        h: "Private investment readiness",
+        p: "Investors in the security space evaluate team, market size, and compliance maturity before writing cheques. We help structure your financial model, craft your pitch narrative, and prepare the data room that Angel and VC investors expect.",
+      },
+      {
+        h: "What we deliver",
+        p: "A funding readiness pack customised to your stage — scheme-eligible project reports for government grants, or investor-facing decks and financial projections for private capital raises. We do not guarantee funding but we ensure you walk in prepared.",
+      },
+    ],
+    process: [
+      "Capital needs assessment and stage mapping",
+      "Scheme eligibility scan (govt / private)",
+      "Project report or pitch deck creation",
+      "Application filing or investor introduction",
+      "Follow-up and documentation support",
+    ],
+    whoFor: [
+      "Security agency startups seeking early capital",
+      "Existing agencies expanding to new states or verticals",
+      "Security-tech ventures raising institutional capital",
+    ],
+    faqs: [
+      {
+        q: "Do you guarantee funding?",
+        a: "No. We prepare you for funding applications and investor conversations with professional documentation and scheme navigation. Final funding decisions rest with scheme authorities or investors.",
+      },
+      {
+        q: "Can a small security agency apply for MSME grants?",
+        a: "Yes. MSME schemes like CGTMSE, subsidy programmes, and State-specific grants are accessible to eligible micro and small security enterprises. We map which ones apply to your business.",
+      },
+    ],
+  },
 ];
 
 export function getService(slug: string) {
