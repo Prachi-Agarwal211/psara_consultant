@@ -1,0 +1,16 @@
+{
+  "scrapedFrom": "https://psaraconsultantindia.com",
+  "phone": "+91-9983169555",
+  "landline": "0141-4021078",
+  "email": "info@psaraconsultantindia.com",
+  "hours": "Mon-Sat 09:00-21:00",
+  "hq": {
+    "address": "C-36, Third Floor, Capital Galleria, Sirsi Road, Kanakpura, Jaipur",
+    "pin": "302034"
+  },
+  "social": {
+    "facebook": "https://www.facebook.com/Psaraconsultant/",
+    "youtube": "https://www.youtube.com/@psaraconsultantindia"
+  },
+  "offices": ["Jaipur HQ", "New Delhi Registered", "Gurugram Corporate", "Noida", "Ahmedabad", "Lucknow", "Bhopal", "Indore", "Raipur", "Jodhpur", "Chandigarh", "Ludhiana"]
+}

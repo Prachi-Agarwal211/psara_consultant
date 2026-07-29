@@ -1,0 +1,90 @@
+/* Section atmospheres — Flat obsidian, warm dark espresso, paper, and paper-lemon contrast */
+
+.theme-ink {
+  color: var(--cream);
+  background-color: var(--obsidian);
+}
+
+.theme-warm-dark {
+  color: var(--cream);
+  background-color: var(--warm-dark);
+}
+
+.theme-paper {
+  color: var(--ink);
+  background-color: var(--paper);
+}
+
+.theme-paper-lemon {
+  color: var(--ink);
+  background-color: #ffffff;
+}
+
+.theme-paper-lemon h1,
+.theme-paper-lemon h2,
+.theme-paper-lemon h3 {
+  color: var(--royal-blue);
+  font-weight: 700;
+}
+
+.theme-paper-lemon .body-copy,
+.theme-paper-lemon p:not(.text-white):not(.text-cream) {
+  color: var(--ink-muted);
+}
+
+.theme-paper .body-copy,
+.theme-paper p:not(.text-white):not(.text-cream) {
+  color: var(--ink-muted);
+}
+
+.theme-paper h1,
+.theme-paper h2,
+.theme-paper h3 {
+  color: var(--ink);
+  font-weight: 700;
+}
+
+.binding-rail {
+  position: relative;
+}
+.binding-rail::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: var(--grad-spectrum-v);
+  opacity: 0.85;
+  border-radius: 2px;
+}
+
+/* Research noise texture — tactile film grain */
+.noise-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9990;
+  opacity: 0.038;
+  mix-blend-mode: overlay;
+}
+.noise-overlay::before {
+  content: "";
+  position: absolute;
+  inset: -50%;
+  width: 200%;
+  height: 200%;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 180px 180px;
+}
+
+.bg-noise-lemon {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 120px 120px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .noise-overlay {
+    opacity: 0.028;
+  }
+}

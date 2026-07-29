@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 600" width="500" height="600">
+  <rect width="500" height="600" fill="#f8f9fa" rx="10"/>
+  <text x="250" y="40" font-family="Arial, sans-serif" font-size="20" font-weight="700" fill="#0f1b3d" text-anchor="middle">PSARA Coverage Across India</text>
+  <text x="250" y="60" font-family="Arial, sans-serif" font-size="12" fill="#888" text-anchor="middle">23 States + Union Territories</text>
+
+  <!-- Simplified India outline shape -->
+  <path d="M250 70 L280 80 L300 75 L320 85 L340 95 L350 110 L340 120
+           L360 130 L370 145 L380 160 L390 175 L385 190 L370 200 L360 210
+           L350 220 L340 235 L330 250 L320 265 L310 280 L300 295
+           L290 310 L280 325 L270 340 L260 355 L250 370 L240 385
+           L230 400 L220 415 L210 430 L200 445 L190 460 L180 475
+           L170 490 L160 500 L150 510 L140 515 L130 510 L140 495
+           L150 480 L160 465 L170 450 L180 435 L190 420
+           L200 405 L210 390 L220 375 L230 360 L240 345 L250 330
+           L260 315 L270 300 L280 285 L290 270 L300 255
+           L310 240 L320 225 L330 210 L340 195 L350 180 L360 165
+           L370 150 L380 135 L390 120 L400 105 L410 90 L420 75
+           L250 70 Z"
+        fill="#0f1b3d" opacity="0.85" stroke="#f5b041" stroke-width="1.5"/>
+
+  <!-- Northern region markers -->
+  <circle cx="310" cy="100" r="4" fill="#f5b041"/><text x="318" y="104" font-size="8" fill="#333">J&K</text>
+  <circle cx="330" cy="120" r="4" fill="#f5b041"/><text x="338" y="124" font-size="8" fill="#333">HP</text>
+  <circle cx="345" cy="145" r="4" fill="#f5b041"/><text x="353" y="149" font-size="8" fill="#333">UK</text>
+  <circle cx="360" cy="175" r="4" fill="#f5b041"/><text x="368" y="179" font-size="8" fill="#333">PB</text>
+  <circle cx="350" cy="200" r="4" fill="#f5b041"/><text x="358" y="204" font-size="8" fill="#333">HR</text>
+  <circle cx="370" cy="215" r="4" fill="#f5b041"/><text x="378" y="219" font-size="8" fill="#333">DL</text>
+
+  <!-- Central markers -->
+  <circle cx="330" cy="260" r="4" fill="#f5b041"/><text x="338" y="264" font-size="8" fill="#333">RJ</text>
+  <circle cx="360" cy="290" r="4" fill="#f5b041"/><text x="368" y="294" font-size="8" fill="#333">UP</text>
+  <circle cx="290" cy="320" r="4" fill="#f5b041"/><text x="298" y="324" font-size="8" fill="#333">GJ</text>
+  <circle cx="340" cy="350" r="4" fill="#f5b041"/><text x="348" y="354" font-size="8" fill="#333">MP</text>
+  <circle cx="380" cy="315" r="4" fill="#f5b041"/><text x="388" y="319" font-size="8" fill="#333">BH</text>
+
+  <!-- Eastern markers -->
+  <circle cx="395" cy="370" r="4" fill="#f5b041"/><text x="403" y="374" font-size="8" fill="#333">JH</text>
+  <circle cx="310" cy="390" r="4" fill="#f5b041"/><text x="318" y="394" font-size="8" fill="#333">MH</text>
+  <circle cx="400" cy="400" r="4" fill="#f5b041"/><text x="408" y="404" font-size="8" fill="#333">WB</text>
+  <circle cx="410" cy="420" r="4" fill="#f5b041"/><text x="418" y="424" font-size="8" fill="#333">OD</text>
+  <circle cx="360" cy="435" r="4" fill="#f5b041"/><text x="368" y="439" font-size="8" fill="#333">TS</text>
+  <circle cx="340" cy="455" r="4" fill="#f5b041"/><text x="348" y="459" font-size="8" fill="#333">AP</text>
+  <circle cx="310" cy="420" r="4" fill="#f5b041"/><text x="265" y="424" font-size="8" fill="#333">CG</text>
+
+  <!-- Southern markers -->
+  <circle cx="330" cy="480" r="4" fill="#f5b041"/><text x="338" y="484" font-size="8" fill="#333">KA</text>
+  <circle cx="370" cy="500" r="4" fill="#f5b041"/><text x="378" y="504" font-size="8" fill="#333">TN</text>
+  <circle cx="310" cy="510" r="4" fill="#f5b041"/><text x="283" y="514" font-size="8" fill="#333">KL</text>
+
+  <!-- Legend -->
+  <rect x="30" y="530" width="12" height="12" fill="#0f1b3d" rx="2"/>
+  <text x="48" y="540" font-size="10" fill="#555">States with PSARA Coverage</text>
+  <circle cx="38" cy="560" r="4" fill="#f5b041"/>
+  <text x="48" y="564" font-size="10" fill="#555">Office Locations (Jaipur, Delhi, Gurgaon)</text>
+
+  <!-- Footer -->
+  <text x="250" y="590" font-size="9" fill="#aaa" text-anchor="middle">PSARA Consultant India</text>
+</svg>

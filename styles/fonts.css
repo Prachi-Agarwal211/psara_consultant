@@ -1,0 +1,67 @@
+/* Local fonts: Forma DJR Display, Maison Neue Ext, & Syne (accent) */
+
+/* ── Display Font: Forma DJR Display ── */
+@font-face {
+  font-family: "Forma DJR Display";
+  src: url("/assets/fonts/display/FormaDJRDisplay-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Forma DJR Display";
+  src: url("/assets/fonts/display/FormaDJRDisplay-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Forma DJR Display";
+  src: url("/assets/fonts/display/FormaDJRDisplay-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ── Body Font: Maison Neue Ext ── */
+@font-face {
+  font-family: "Maison Neue Ext";
+  src: url("/assets/fonts/body/MaisonNeueExt-Book.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Maison Neue Ext";
+  src: url("/assets/fonts/body/MaisonNeueExt-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ── Accent Font: Syne (variable weight display font) ──
+     Architectural, distinctive personality for decorative typography.
+     SIL OFL license — free for commercial use.
+     One variable file covers all weights (400–800). */
+@font-face {
+  font-family: "Syne";
+  src: url("/assets/fonts/accent/Syne-Variable-latin-ext.woff2") format("woff2");
+  font-weight: 400 800;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0100-02AF, U+0304, U+0308, U+0329, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: "Syne";
+  src: url("/assets/fonts/accent/Syne-Variable-latin.woff2") format("woff2");
+  font-weight: 400 800;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+:root {
+  --font-display: "Forma DJR Display", "Helvetica Neue", system-ui, sans-serif;
+  --font-body: "Maison Neue Ext", "Helvetica Neue", system-ui, sans-serif;
+  --font-accent: "Syne", "Forma DJR Display", "Helvetica Neue", system-ui, sans-serif;
+}

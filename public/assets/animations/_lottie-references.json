@@ -1,0 +1,20 @@
+{
+  "shield-security.json": {
+    "name": "Shield Security Animation",
+    "source": "LottieFiles",
+    "cdn_url": "https://assets10.lottiefiles.com/packages/lf20_5tl1yy2m.json",
+    "note": "Free shield animation from LottieFiles - load directly from CDN"
+  },
+  "checkmark-success.json": {
+    "name": "Checkmark Success",
+    "source": "LottieFiles",
+    "cdn_url": "https://assets1.lottiefiles.com/packages/lf20_tivlchgv.json",
+    "note": "Free success animation from LottieFiles - load directly from CDN"
+  },
+  "loading-shield.json": {
+    "name": "Loading Shield",
+    "source": "LottieFiles",
+    "cdn_url": "https://assets5.lottiefiles.com/packages/lf20_x1gjd4i1.json",
+    "note": "Free loading animation from LottieFiles - load directly from CDN"
+  }
+}

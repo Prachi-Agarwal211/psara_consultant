@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+  <defs>
+    <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f5b041"/>
+      <stop offset="100%" style="stop-color:#d4942d"/>
+    </linearGradient>
+  </defs>
+  <path d="M25 5 L75 5 Q100 5 100 30 L100 50 Q100 80 50 100 Q0 80 0 50 L0 30 Q0 5 25 5 Z"
+        fill="#0f1b3d" stroke="url(#g)" stroke-width="2.5"/>
+  <polygon points="50,25 54,37 67,37 57,45 60,58 50,50 40,58 43,45 33,37 46,37"
+           fill="url(#g)"/>
+  <polyline points="38,48 47,57 62,40" fill="none" stroke="#f5b041" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

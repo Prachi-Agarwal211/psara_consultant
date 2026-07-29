@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 120" width="400" height="120">
+  <defs>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f5b041"/>
+      <stop offset="100%" style="stop-color:#e6a83a"/>
+    </linearGradient>
+    <linearGradient id="navyGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffffff"/>
+      <stop offset="100%" style="stop-color:#2a4080"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Shield -->
+  <path d="M25 10 L75 10 L75 10 Q100 10 100 35 L100 55 Q100 85 50 105 Q0 85 0 55 L0 35 Q0 10 25 10 Z"
+        fill="url(#navyGrad)" stroke="url(#goldGrad)" stroke-width="3"/>
+
+  <!-- Star inside shield -->
+  <polygon points="50,30 55,42 68,42 58,50 61,63 50,55 39,63 42,50 32,42 45,42"
+           fill="url(#goldGrad)"/>
+
+  <!-- Checkmark -->
+  <polyline points="38,52 47,61 62,44" fill="none" stroke="#f5b041" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- PSARA text -->
+  <text x="115" y="42" font-family="'Playfair Display', Georgia, serif" font-size="22" font-weight="700" fill="#ffffff" letter-spacing="2">PSARA</text>
+  <text x="115" y="62" font-family="'Playfair Display', Georgia, serif" font-size="22" font-weight="700" fill="#ffffff" letter-spacing="2">CONSULTANT</text>
+
+  <!-- Tagline -->
+  <text x="115" y="80" font-family="'Space Grotesk', Arial, sans-serif" font-size="9" fill="#ccc" letter-spacing="3">INDIA</text>
+
+  <!-- Bottom line -->
+  <line x1="115" y1="88" x2="380" y2="88" stroke="url(#goldGrad)" stroke-width="1.5"/>
+
+  <!-- Tagline below -->
+  <text x="115" y="105" font-family="'Space Grotesk', Arial, sans-serif" font-size="8" fill="#aaa" letter-spacing="1.5">Your Trusted PSARA Licensing Partner</text>
+</svg>

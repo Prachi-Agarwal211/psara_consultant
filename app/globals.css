@@ -1,0 +1,81 @@
+@import "tailwindcss";
+@import "../styles/fonts.css";
+@import "../styles/tokens.css";
+@import "../styles/themes.css";
+@import "../styles/components.css";
+
+@layer base {
+  html {
+    /* scroll-behavior: smooth removed — Lenis handles smooth scrolling */
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  /* NOTE: content-visibility:auto removed because it interferes with
+     GSAP ScrollTrigger position calculations for lazy-loaded sections.
+     ScrollTrigger needs accurate layout measurements to fire at the right scroll position,
+     and content-visibility:hidden sections report zero height to the IntersectionObserver. */
+
+  html::-webkit-scrollbar {
+    display: none;
+    width: 0;
+    height: 0;
+  }
+
+  body {
+    font-family: var(--font-body);
+    font-optical-sizing: auto;
+    text-rendering: optimizeLegibility;
+    background-color: var(--obsidian);
+    color: var(--cream);
+    min-height: 100%;
+    overflow-x: hidden;
+    font-size: var(--text-base);
+    line-height: 1.65;
+    letter-spacing: 0.01em;
+    scrollbar-width: none;
+  }
+
+  body::-webkit-scrollbar {
+    display: none;
+  }
+
+  ::selection {
+    background-color: var(--gold);
+    color: var(--obsidian);
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+    font-family: var(--font-display);
+  }
+
+  /* Luke Baffait-inspired mix-blend-mode: difference on hero text
+     Light text automatically inverts over lighter background areas (image/gradients)
+     while remaining readable on dark backgrounds. */
+  .mix-difference {
+    mix-blend-mode: difference;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

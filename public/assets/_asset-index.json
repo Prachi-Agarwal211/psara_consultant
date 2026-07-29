@@ -1,0 +1,61 @@
+{
+  "logos": [
+    "favicon.svg",
+    "og-image.svg",
+    "psara-icon.svg",
+    "psara-logo-white.svg",
+    "psara-logo.svg"
+  ],
+  "icons": [
+    "building.svg",
+    "check-circle.svg",
+    "company-registration.svg",
+    "file-text.svg",
+    "funding-support.svg",
+    "gst-registration.svg",
+    "labour-compliance.svg",
+    "map-pin.svg",
+    "msme-registration.svg",
+    "phone.svg",
+    "police-verification.svg",
+    "psara-license.svg",
+    "roc-filing.svg",
+    "shield-alert.svg",
+    "shield-check.svg",
+    "star.svg",
+    "training-mou.svg",
+    "users.svg",
+    "whatsapp.svg"
+  ],
+  "images": [
+    "abstract-security-bg.jpg",
+    "business-meeting.jpg",
+    "consultation-meeting.jpg",
+    "cyber-security-shield.jpg",
+    "government-building.jpg",
+    "handshake-deal.jpg",
+    "hero-security-guard.jpg",
+    "india-flag.jpg",
+    "india-map.svg",
+    "legal-documents.jpg",
+    "modern-office-building.jpg",
+    "office-team-working.jpg",
+    "psara-badge.svg",
+    "security-guard-building.jpg",
+    "surveillance-camera.jpg"
+  ],
+  "animations": [
+    "_lottie-references.json"
+  ],
+  "fonts": [
+    "6a06a699270853940fed199c_MaisonNeueExt-Book.woff2",
+    "6a06a6b22391d5d6ce159452_MaisonNeueExt-Bold.woff2"
+  ],
+  "libraries": [
+    "CustomEase.min.js",
+    "gsap.min.js",
+    "lottie.min.js",
+    "ScrollTrigger.min.js",
+    "SplitText.min.js"
+  ]
+}
