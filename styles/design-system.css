@@ -1,0 +1,522 @@
+/*
+ * PSARA Consultant — Anti-Slop Design System
+ * Patterns extracted from: meech213, horeca-social, nudot, lukebaffait, santionispirits
+ * 
+ * Design DNA:
+ * - Ultra-condensed massive headlines (horeca)
+ * - Asymmetric text placement (horeca)
+ * - Dot-matrix / bracket metadata (nudot)
+ * - Editorial serif/sans mix (lukebaffait)
+ * - Art Deco minimal luxury (santionispirits)
+ * - Kinetic scattered typography (horeca)
+ */
+
+/* ═══════════════════════════════════════════════════════════════
+   SECTION TRANSITIONS — Full-bleed color blocks
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Void section — deep electric blue (#020814) */
+.section-void {
+  background: #020814;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Electric section — gradient electric blue */
+.section-electric {
+  background: linear-gradient(160deg, #020814 0%, #041030 50%, #0a1a4a 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Metal section — warm dark bronze/gold */
+.section-metal {
+  background: linear-gradient(160deg, #020814 0%, #041030 50%, #0a1a4a 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Night section — near black (meech213 dark energy) */
+.section-night {
+  background: linear-gradient(160deg, #010408 0%, #020814 50%, #010408 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Warm section — warm dark brown (santionispirits energy) */
+.section-warm {
+  background: linear-gradient(160deg, #020814 0%, #041030 50%, #0a1a4a 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Surface section — slightly lighter void */
+.section-surface {
+  background: #041028;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   TYPGRAPHY — Ultra-condensed display, scattered kinetic
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Ultra-condensed headline — horeca-social style */
+.headline-condensed {
+  font-size: clamp(4rem, 15vw, 12rem);
+  line-height: 0.82;
+  letter-spacing: -0.04em;
+  font-weight: 900;
+  font-family: var(--font-display);
+  text-transform: uppercase;
+}
+
+/* Diagonal rotated text — meech213 style */
+.text-diagonal {
+  transform: rotate(-12deg) skewX(-8deg);
+  display: inline-block;
+  font-size: clamp(1.5rem, 4vw, 3rem);
+  font-weight: 800;
+  letter-spacing: 0.05em;
+}
+
+/* Scattered letters — horeca "NOTHING BUT THE TRUTH" energy */
+.scatter-text {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.15em;
+  align-items: center;
+}
+.scatter-text .letter {
+  display: inline-block;
+  font-size: clamp(2rem, 6vw, 5rem);
+  font-weight: 900;
+  line-height: 1;
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  animation: letter-dance 3s ease-in-out infinite;
+}
+.scatter-text .letter:nth-child(odd) {
+  animation-delay: 0.3s;
+  transform: translateY(-8px);
+}
+.scatter-text .letter:nth-child(even) {
+  animation-delay: 0.6s;
+  animation: letter-dance-b 3s ease-in-out infinite;
+}
+.scatter-text .letter.space {
+  width: 0.4em;
+  animation: none;
+  transform: none;
+}
+
+@keyframes letter-dance {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+@keyframes letter-dance-b {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(12px); }
+}
+
+/* Bracket metadata — nudot style */
+.meta-bracket {
+  font-family: "JetBrains Mono", "Fira Code", "Courier New", monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--white-40);
+  padding: 0.2em 0.6em;
+  border: 1px solid var(--white-12);
+  display: inline-block;
+}
+
+/* Kinetic word split — editorial mix */
+.text-editorial {
+  font-family: var(--font-display);
+}
+.text-editorial .serif-accent {
+  font-family: Georgia, "Times New Roman", serif;
+  font-style: italic;
+  font-weight: 400;
+}
+.text-editorial .sans-bold {
+  font-family: var(--font-body);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   GRID — Asymmetric, masonry, staggered
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Asymmetric two-column — horeca offset style */
+.grid-asymmetric {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+@media (min-width: 768px) {
+  .grid-asymmetric {
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 4rem;
+  }
+  .grid-asymmetric .offset-down {
+    margin-top: 15vh;
+  }
+  .grid-asymmetric .offset-up {
+    margin-top: -10vh;
+  }
+}
+
+/* Staggered masonry — nudot archive style */
+.grid-masonry {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 1.5rem;
+}
+.grid-masonry .item-tall {
+  grid-column: span 7;
+  grid-row: span 2;
+}
+.grid-masonry .item-wide {
+  grid-column: span 5;
+}
+.grid-masonry .item-narrow {
+  grid-column: span 4;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   ACCENTS — Glows, lines, decorative elements
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Electric glow line */
+.glow-line-electric {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--electric), transparent);
+  box-shadow: 0 0 12px var(--electric-glow), 0 0 24px var(--electric-glow);
+}
+
+/* Gold shimmer line — santionispirits luxury */
+.glow-line-gold {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold-bright), transparent);
+  box-shadow: 0 0 8px rgba(232,213,163,0.5);
+}
+
+/* Pink accent line — horeca energy */
+.glow-line-pink {
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #e60067, transparent);
+  box-shadow: 0 0 16px rgba(230,0,103,0.5);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   CARDS — Horizontal scroll, 3D tilt, service cards
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Horizontal scroll track — meech213 spatial feel */
+.scroll-track {
+  display: flex;
+  gap: 1.5rem;
+  padding: 1rem 0;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.scroll-track::-webkit-scrollbar { display: none; }
+
+/* Service card with top gradient border */
+.service-card {
+  width: 100%;
+  border: 1px solid var(--white-12);
+  background: var(--white-06);
+  padding: 2.25rem 1.75rem;
+  transition: border-color 0.4s ease, background 0.4s ease, transform 0.4s ease;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.service-card::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--gold), var(--electric), var(--saffron));
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+.service-card:hover {
+  border-color: var(--white-25);
+  background: var(--white-12);
+  transform: translateY(-4px);
+}
+.service-card:hover::before { opacity: 1; }
+
+/* City grid — archive style with visible cells */
+.city-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 1px;
+  background: rgba(255,255,255,0.10);
+  border: 1px solid rgba(255,255,255,0.12);
+}
+.city-cell {
+  background: #0a1228;
+  padding: 1rem 0.5rem;
+  text-align: center;
+  transition: background 0.3s ease, color 0.3s ease;
+  cursor: default;
+}
+.city-cell:hover {
+  background: rgba(255,255,255,0.08);
+  color: var(--gold-bright);
+}
+.city-cell.hq {
+  background: linear-gradient(135deg, rgba(212,184,114,0.22) 0%, rgba(184,142,68,0.12) 100%);
+  color: var(--gold-bright);
+  border-left: 2px solid var(--gold);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   BUTTONS — Magnetic, hover-fill, minimal
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Magnetic CTA — fills on hover */
+.btn-magnetic {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 2.25rem;
+  border: 1px solid var(--gold);
+  background: transparent;
+  color: var(--gold-bright);
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  cursor: pointer;
+  overflow: hidden;
+  transition: color 0.4s ease;
+  font-family: var(--font-body);
+  text-decoration: none;
+}
+.btn-magnetic::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, var(--metal-1) 0%, var(--metal-3) 100%);
+  transform: translateY(101%);
+  transition: transform 0.5s var(--ease-expo);
+}
+.btn-magnetic:hover::before {
+  transform: translateY(0);
+}
+.btn-magnetic:hover {
+  color: var(--void);
+}
+.btn-magnetic > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   ANIMATIONS — Kinetic, scroll-triggered, float
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Float animation */
+@keyframes float {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-16px) rotate(2deg); }
+}
+.float-anim {
+  animation: float 4s ease-in-out infinite;
+}
+
+/* Diagonal slide-in */
+@keyframes diag-slide {
+  from { opacity: 0; transform: translate(-40px, 40px) rotate(-3deg); }
+  to { opacity: 1; transform: translate(0, 0) rotate(0); }
+}
+.diag-enter {
+  animation: diag-slide 0.8s var(--ease-expo) forwards;
+}
+
+/* Scale burst */
+@keyframes scale-burst {
+  0% { transform: scale(0.8); opacity: 0; }
+  60% { transform: scale(1.05); }
+  100% { transform: scale(1); opacity: 1; }
+}
+.burst-enter {
+  animation: scale-burst 0.9s var(--ease-expo) forwards;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   DECORATIVE — Background patterns, grain, grid
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Dot grid background — nudot technical */
+.bg-dot-grid {
+  background-image: radial-gradient(circle, var(--white-12) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* Crosshair grid — lukebaffait footer style */
+.bg-crosshair {
+  background-image:
+    linear-gradient(to right, var(--white-06) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--white-06) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+/* Filmstrip tick marks — nudot hero */
+.tick-marks {
+  display: flex;
+  gap: 2px;
+  align-items: center;
+  opacity: 0.3;
+}
+.tick-marks span {
+  display: inline-block;
+  width: 2px;
+  height: 8px;
+  background: var(--white);
+}
+.tick-marks span:nth-child(3n) { height: 12px; }
+
+/* ═══════════════════════════════════════════════════════════════
+   SECTION ENTRIES — Clip reveal, curtain
+   ═══════════════════════════════════════════════════════════════ */
+
+@keyframes section-reveal {
+  from { clip-path: inset(0 0 100% 0); opacity: 0.2; }
+  to   { clip-path: inset(0 0 0% 0); opacity: 1; }
+}
+.section-reveal {
+  animation: section-reveal 1.3s var(--ease-expo) forwards;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   GRADIENT TEXT — Metallic gold (brand) + solid fallback
+   ═══════════════════════════════════════════════════════════════ */
+
+.text-metal {
+  background: var(--grad-metal);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+@media (prefers-reduced-motion: reduce) {
+  .text-metal {
+    background: none;
+    color: var(--gold-bright);
+    -webkit-text-fill-color: var(--gold-bright);
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   RESPONSIVE — Mobile-first considerations
+   ═══════════════════════════════════════════════════════════════ */
+
+@media (prefers-reduced-motion: reduce) {
+  .float-anim { animation: none; }
+  .diag-enter { animation: none; opacity: 1; transform: none; }
+  .burst-enter { animation: none; opacity: 1; transform: none; }
+  .scatter-text .letter { animation: none; transform: none; }
+  .section-reveal { animation: none; opacity: 1; }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   WORD REVEAL — lukebaffait style blur reveals
+   ═══════════════════════════════════════════════════════════════ */
+
+.word-wrap {
+  display: inline;
+}
+
+.word-line {
+  display: inline;
+  padding: 0.12em 0.02em;
+  margin: -0.12em 0;
+  filter: none;
+  opacity: 1;
+  transform: none;
+}
+
+.word-line.revealed {
+  filter: none;
+  opacity: 1;
+  transform: none;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   FLUID TYPE — enerblock --context pattern
+   ═══════════════════════════════════════════════════════════════ */
+
+:root {
+  --context: 1440;
+}
+
+@media (max-width: 980px) and (min-width: 681px) {
+  :root { --context: 820; }
+}
+
+@media (max-width: 680px) {
+  :root { --context: 402; }
+}
+
+/* Fluid type using --context */
+.font-fluid {
+  font-size: calc(100vw / var(--context) * 16);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   MIX-BLEND-MODE — lukebaffait hero style
+   ═══════════════════════════════════════════════════════════════ */
+
+.mix-difference {
+  mix-blend-mode: difference;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   LETTER SPACING — energetic condensed text
+   ═══════════════════════════════════════════════════════════════ */
+
+.letter-spacing-tight {
+  letter-spacing: -0.015em;
+}
+
+.letter-spacing-ultra {
+  letter-spacing: -0.04em;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   SCROLL-TRIGGERED REVEALS — 100% visible by default
+   ═══════════════════════════════════════════════════════════════ */
+
+.reveal-on-scroll {
+  opacity: 1;
+  transform: none;
+  filter: none;
+}
+
+.reveal-on-scroll.revealed {
+  opacity: 1;
+  transform: none;
+  filter: none;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   PARALLAX NUMBERS
+   ═══════════════════════════════════════════════════════════════ */
+
+.parallax-num {
+  will-change: transform;
+}

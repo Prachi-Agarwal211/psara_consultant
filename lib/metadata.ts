@@ -14,7 +14,7 @@ export function ogMetadata(
   const url = `${SITE.url}${path}`;
   const ogImage = image
     ? `${SITE.url}${image}`
-    : `${SITE.url}/assets/images/og/default-og.png`;
+    : `${SITE.url}/assets/images/og/default-og.jpg`;
 
   return {
     alternates: { canonical: url },
@@ -50,10 +50,16 @@ export function pageMeta(
   keywords: string[] = [],
   image?: string
 ): Metadata {
+  // Clamp descriptions to ~160 chars at a word boundary so SERP snippets
+  // render fully and meta audits stay clean.
+  const trimmed =
+    description.length > 160
+      ? description.slice(0, 157).replace(/\s+\S*$/, "") + "…"
+      : description;
   return {
     title,
-    description,
+    description: trimmed,
     keywords: [title, SITE.name, "PSARA License", ...keywords],
-    ...ogMetadata(title, description, path, image),
+    ...ogMetadata(title, trimmed, path, image),
   };
 }

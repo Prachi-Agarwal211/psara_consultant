@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { PageHero, PageMain, Prose } from "../../components/PageShell";
+import { PageHero, PageMain } from "../../components/PageShell";
+import StageShell from "../components/ui/StageShell";
 import { pageMeta } from "../../lib/metadata";
 import { SITE } from "../../lib/config";
 
@@ -14,7 +15,7 @@ export const metadata: Metadata = {
 
 export default function DisclaimerPage() {
   return (
-    <>
+    <StageShell>
       <PageHero
         title="Disclaimer"
         lead="Informational content & statutory advisory notice."
@@ -37,6 +38,6 @@ export default function DisclaimerPage() {
           </div>
         </div>
       </PageMain>
-    </>
+    </StageShell>
   );
 }

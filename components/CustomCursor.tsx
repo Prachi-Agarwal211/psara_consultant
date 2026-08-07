@@ -1,7 +1,9 @@
 "use client";
 
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useSyncExternalStore } from "react";
 import { isMobile, prefersReducedMotion } from "../app/lib/gsap";
+
+const noopSubscribe = () => () => {};
 
 /**
  * Custom Luxury Spring Cursor System
@@ -9,35 +11,44 @@ import { isMobile, prefersReducedMotion } from "../app/lib/gsap";
  * expanding gold aura ring, and dynamic hover text (data-cursor="Text").
  */
 export default function CustomCursor() {
-  const [enabled, setEnabled] = useState(false);
   const [cursorText, setCursorText] = useState("");
   const [hovered, setHovered] = useState(false);
 
   const cursorRef = useRef<HTMLDivElement | null>(null);
   const dotRef = useRef<HTMLDivElement | null>(null);
 
+  // Enable only on capable desktop devices — SSR-safe (false during hydration).
+  const enabled = useSyncExternalStore(
+    noopSubscribe,
+    () => !isMobile() && !prefersReducedMotion(),
+    () => false
+  );
+
   const pos = useRef({ x: -100, y: -100 });
   const target = useRef({ x: -100, y: -100 });
 
   useEffect(() => {
-    if (isMobile() || prefersReducedMotion()) return;
-    setEnabled(true);
+    if (!enabled) return;
 
     const onMouseMove = (e: MouseEvent) => {
       target.current = { x: e.clientX, y: e.clientY };
 
       // Check if mouse is hovering over an element with data-cursor
       const targetEl = (e.target as HTMLElement)?.closest("[data-cursor]") as HTMLElement | null;
+      let nextText = "";
+      let nextHovered = false;
+
       if (targetEl) {
-        setCursorText(targetEl.getAttribute("data-cursor") || "");
-        setHovered(true);
+        nextText = targetEl.getAttribute("data-cursor") || "";
+        nextHovered = true;
       } else {
-        const isClickable = Boolean(
+        nextHovered = Boolean(
           (e.target as HTMLElement)?.closest("a, button, input, textarea, [role='button']")
         );
-        setHovered(isClickable);
-        setCursorText("");
       }
+
+      setCursorText((prev) => (prev !== nextText ? nextText : prev));
+      setHovered((prev) => (prev !== nextHovered ? nextHovered : prev));
     };
 
     window.addEventListener("mousemove", onMouseMove);
@@ -65,7 +76,7 @@ export default function CustomCursor() {
       window.removeEventListener("mousemove", onMouseMove);
       cancelAnimationFrame(animationFrameId);
     };
-  }, []);
+  }, [enabled]);
 
   if (!enabled) return null;
 

@@ -3,10 +3,9 @@ import SmoothScroll from "./components/providers/SmoothScroll";
 import SiteChrome from "../components/SiteChrome";
 import ScrollProgress from "./components/ScrollProgress";
 import CustomCursor from "../components/CustomCursor";
-import Preloader from "../components/Preloader";
-import PageLoader from "./components/layout/PageLoader";
 import { SITE, CONTACT, AGGREGATE_RATING, OFFICES } from "../lib/config";
 import DynamicBreadcrumbSchema from "../components/DynamicBreadcrumbSchema";
+import Analytics from "./components/Analytics";
 import "./globals.css";
 
 export const viewport: Viewport = {
@@ -14,7 +13,7 @@ export const viewport: Viewport = {
   initialScale: 1,
   maximumScale: 5,
   viewportFit: "cover",
-  themeColor: "#e0b84a",
+  themeColor: "#0066FF",
 };
 
 export const metadata: Metadata = {
@@ -43,7 +42,7 @@ export const metadata: Metadata = {
     siteName: SITE.name,
     images: [
       {
-        url: "/assets/images/og/default-og.png",
+        url: "/assets/images/og/default-og.jpg",
         width: 1200,
         height: 630,
         alt: "PSARA Consultant India — PSARA License Clearance Across 28 States",
@@ -56,7 +55,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: `${SITE.name} | PSARA License & Security Agency Compliance`,
     description: SITE.description,
-    images: ["/assets/images/og/default-og.png"],
+    images: ["/assets/images/og/default-og.jpg"],
     site: "@psaraconsultant",
     creator: "@psaraconsultant",
   },
@@ -82,7 +81,10 @@ export const metadata: Metadata = {
   alternates: {
     canonical: SITE.url,
     types: {
-      "text/plain": [{ url: "/llms.txt", title: "llms.txt" }],
+      "text/plain": [
+        { url: "/llms.txt", title: "llms.txt" },
+        { url: "/ai.txt", title: "ai.txt" },
+      ],
     },
   },
   robots: {
@@ -98,6 +100,163 @@ export const metadata: Metadata = {
   },
 };
 
+import StickyCta from "./components/layout/StickyCta";
+import ExitIntentPopup from "./components/ui/ExitIntentPopup";
+import PageTransition from "./components/layout/PageTransition";
+
+/**
+ * Organization / LocalBusiness / FAQ JSON-LD graph.
+ * Rendered in <body> (not <head>) — React 19 + Next head scripts are hoisted
+ * by the browser which breaks hydration; JSON-LD is parsed identically anywhere.
+ */
+const organizationSchema = JSON.stringify({
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": `${SITE.url}/#organization`,
+      name: SITE.name,
+      url: SITE.url,
+      description: SITE.description,
+      slogan: "Statute-First · Verification-Ready · Post-Grant Discipline",
+      sameAs: [
+        CONTACT.social.facebook,
+        CONTACT.social.youtube,
+        CONTACT.social.linkedin,
+        CONTACT.social.instagram,
+        CONTACT.social.google,
+        `https://wa.me/${CONTACT.whatsapp.number}`,
+        SITE.wikidata.url,
+      ],
+      contactPoint: {
+        "@type": "ContactPoint",
+        contactType: "PSARA Consultation",
+        telephone: CONTACT.phoneDisplay,
+        email: CONTACT.email,
+        availableLanguage: ["English", "Hindi"],
+      },
+      logo: {
+        "@type": "ImageObject",
+        url: `${SITE.url}/logo.png`,
+      },
+      knowsAbout: [
+        "PSARA License",
+        "Security Agency Registration",
+        "Controlling Authority Filing",
+        "Police Antecedent Verification",
+        "Training Institute MOU",
+        "PSARA Renewal",
+        "Multi-State PSARA License",
+      ],
+      areaServed: { "@type": "Country", name: "India" },
+      aggregateRating: {
+        "@type": "AggregateRating",
+        ratingValue: AGGREGATE_RATING.ratingValue,
+        reviewCount: AGGREGATE_RATING.reviewCount,
+        bestRating: AGGREGATE_RATING.bestRating,
+        worstRating: AGGREGATE_RATING.worstRating,
+      },
+    },
+    {
+      "@type": "WebPage",
+      "@id": `${SITE.url}/#webpage`,
+      url: SITE.url,
+      name: `${SITE.name} | PSARA License Clearance Across India`,
+      description: SITE.description,
+      isPartOf: { "@id": `${SITE.url}/#website` },
+      about: { "@id": `${SITE.url}/#organization` },
+      inLanguage: "en-IN",
+    },
+    {
+      "@type": "Service",
+      "@id": `${SITE.url}/#service`,
+      name: "PSARA License Registration & Compliance",
+      description: "Pan-India PSARA licensing advisory, training MOUs, police verification liaison, and multi-state compliance craft under the PSARA Act, 2005.",
+      provider: { "@id": `${SITE.url}/#organization` },
+      areaServed: { "@type": "Country", name: "India" },
+    },
+    ...OFFICES.map((office) => ({
+      "@type": "LocalBusiness",
+      "@id": `${SITE.url}/#office-${office.city.toLowerCase().replace(/\s+/g, "-")}`,
+      name: `${SITE.name} — ${office.city} ${office.badge}`,
+      url: SITE.url,
+      telephone: office.phone,
+      email: CONTACT.email,
+      image: `${SITE.url}/logo.png`,
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: office.address,
+        addressLocality: office.city,
+        addressRegion: office.region,
+        postalCode: office.pin,
+        addressCountry: "IN",
+      },
+      geo: {
+        "@type": "GeoCoordinates",
+        latitude: office.lat,
+        longitude: office.lng,
+      },
+      openingHoursSpecification: {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+        opens: "09:30",
+        closes: "18:30",
+      },
+      priceRange: "₹₹",
+      areaServed: { "@type": "Country", name: "India" },
+      parentOrganization: { "@id": `${SITE.url}/#organization` },
+    })),
+    {
+      "@type": "FAQPage",
+      "@id": `${SITE.url}/faq#faqpage`,
+      mainEntity: [
+        {
+          "@type": "Question",
+          name: "What is a PSARA License?",
+          acceptedAnswer: { "@type": "Answer", text: "A PSARA License is the statutory licence under the Private Security Agencies (Regulation) Act, 2005 that authorises a person or company to run a private security agency in India." },
+        },
+        {
+          "@type": "Question",
+          name: "Who needs a PSARA License in India?",
+          acceptedAnswer: { "@type": "Answer", text: "Any individual or entity intending to start or operate a private security agency providing guards, supervisors, or related security services for hire must obtain a PSARA License from the State Controlling Authority." },
+        },
+        {
+          "@type": "Question",
+          name: "How long is a PSARA License valid?",
+          acceptedAnswer: { "@type": "Answer", text: "Typically five years from the date of grant in most States, subject to Rules and timely renewal. Some States operate with one-year validity regimes." },
+        },
+        {
+          "@type": "Question",
+          name: "What documents are required for PSARA?",
+          acceptedAnswer: { "@type": "Answer", text: "Identity and address proofs of promoters, company incorporation papers, MOA/AOA with suitable objects, registered office proof, photographs, affidavits, training MOU, and police verification forms." },
+        },
+        {
+          "@type": "Question",
+          name: "How do I check PSARA License status?",
+          acceptedAnswer: { "@type": "Answer", text: "You can check the status with the State Controlling Authority where the application was filed. Contact us for assistance with status tracking across any State." },
+        },
+        {
+          "@type": "Question",
+          name: "Can a PSARA License be transferred?",
+          acceptedAnswer: { "@type": "Answer", text: "Licences are not casually transferable like assets. Change of control or structure usually needs authority intimation or fresh compliance. Plan M&A with licensing counsel." },
+        },
+        {
+          "@type": "Question",
+          name: "Is training MOU mandatory for PSARA?",
+          acceptedAnswer: { "@type": "Answer", text: "Yes in almost all practical filings. A training MOU with a State-recognised institute covering unarmed and armed curricula is required before or during the licence process." },
+        },
+        {
+          "@type": "Question",
+          name: "What is the penalty for operating without PSARA?",
+          acceptedAnswer: { "@type": "Answer", text: "Operating without a valid PSARA license is a criminal offense under the PSARA Act, 2005, attracting penalties, prosecution risk, and permanent contract ineligibility with serious clients." },
+        },
+      ],
+    },
+  ],
+});
+
+import CookieBanner from "./components/ui/CookieBanner";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -106,169 +265,29 @@ export default function RootLayout({
   return (
     <html lang="en" className="h-full antialiased">
       <head>
-        {/* Dynamic per-page breadcrumb */}
-        <DynamicBreadcrumbSchema />
-        {/* JSON-LD Structured Data — Organization + WebPage + Service + FAQ schema */}
+        <Analytics />
+      </head>
+      <body
+        suppressHydrationWarning
+        className="min-h-full overflow-x-hidden font-medium bg-[var(--void)] text-white"
+      >
+        {/* JSON-LD Organization / LocalBusiness / FAQ graph — body render avoids React 19 head hydration mismatch */}
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@graph": [
-                {
-                  "@type": "Organization",
-                  "@id": `${SITE.url}/#organization`,
-                  name: SITE.name,
-                  url: SITE.url,
-                  description: SITE.description,
-                  slogan: "Statute-First · Verification-Ready · Post-Grant Discipline",
-                  sameAs: [
-                    CONTACT.social.facebook,
-                    CONTACT.social.youtube,
-                    CONTACT.social.linkedin,
-                    CONTACT.social.instagram,
-                    CONTACT.social.google,
-                    `https://wa.me/${CONTACT.whatsapp.number}`,
-                    SITE.wikidata.url,
-                  ],
-                  contactPoint: {
-                    "@type": "ContactPoint",
-                    contactType: "PSARA Consultation",
-                    telephone: CONTACT.phoneDisplay,
-                    email: CONTACT.email,
-                    availableLanguage: ["English", "Hindi"],
-                  },
-                  logo: {
-                    "@type": "ImageObject",
-                    url: `${SITE.url}/logo.png`,
-                  },
-                  knowsAbout: [
-                    "PSARA License",
-                    "Security Agency Registration",
-                    "Controlling Authority Filing",
-                    "Police Antecedent Verification",
-                    "Training Institute MOU",
-                    "PSARA Renewal",
-                    "Multi-State PSARA License",
-                  ],
-                  areaServed: { "@type": "Country", name: "India" },
-                  aggregateRating: {
-                    "@type": "AggregateRating",
-                    ratingValue: AGGREGATE_RATING.ratingValue,
-                    reviewCount: AGGREGATE_RATING.reviewCount,
-                    bestRating: AGGREGATE_RATING.bestRating,
-                    worstRating: AGGREGATE_RATING.worstRating,
-                  },
-                },
-                {
-                  "@type": "WebPage",
-                  "@id": `${SITE.url}/#webpage`,
-                  url: SITE.url,
-                  name: `${SITE.name} | PSARA License Clearance Across India`,
-                  description: SITE.description,
-                  isPartOf: { "@id": `${SITE.url}/#website` },
-                  about: { "@id": `${SITE.url}/#organization` },
-                  inLanguage: "en-IN",
-                },
-                {
-                  "@type": "Service",
-                  "@id": `${SITE.url}/#service`,
-                  name: "PSARA License Registration & Compliance",
-                  description: "Pan-India PSARA licensing advisory, training MOUs, police verification liaison, and multi-state compliance craft under the PSARA Act, 2005.",
-                  provider: { "@id": `${SITE.url}/#organization` },
-                  areaServed: { "@type": "Country", name: "India" },
-                },
-                // BreadcrumbList moved to DynamicBreadcrumbSchema component for per-page accuracy
-                ...OFFICES.map((office) => ({
-                  "@type": "LocalBusiness",
-                  "@id": `${SITE.url}/#office-${office.city.toLowerCase().replace(/\s+/g, "-")}`,
-                  name: `${SITE.name} — ${office.city} ${office.badge}`,
-                  url: SITE.url,
-                  telephone: office.phone,
-                  email: CONTACT.email,
-                  image: `${SITE.url}/logo.png`,
-                  address: {
-                    "@type": "PostalAddress",
-                    streetAddress: office.address,
-                    addressLocality: office.city,
-                    addressRegion: office.region,
-                    postalCode: office.pin,
-                    addressCountry: "IN",
-                  },
-                  geo: {
-                    "@type": "GeoCoordinates",
-                    latitude: office.lat,
-                    longitude: office.lng,
-                  },
-                  openingHoursSpecification: {
-                    "@type": "OpeningHoursSpecification",
-                    dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-                    opens: "09:30",
-                    closes: "18:30",
-                  },
-                  priceRange: "₹₹",
-                  areaServed: { "@type": "Country", name: "India" },
-                  parentOrganization: { "@id": `${SITE.url}/#organization` },
-                })),
-                {
-                  "@type": "FAQPage",
-                  "@id": `${SITE.url}/faq#faqpage`,
-                  mainEntity: [
-                    {
-                      "@type": "Question",
-                      name: "What is a PSARA License?",
-                      acceptedAnswer: { "@type": "Answer", text: "A PSARA License is the statutory licence under the Private Security Agencies (Regulation) Act, 2005 that authorises a person or company to run a private security agency in India." },
-                    },
-                    {
-                      "@type": "Question",
-                      name: "Who needs a PSARA License in India?",
-                      acceptedAnswer: { "@type": "Answer", text: "Any individual or entity intending to start or operate a private security agency providing guards, supervisors, or related security services for hire must obtain a PSARA License from the State Controlling Authority." },
-                    },
-                    {
-                      "@type": "Question",
-                      name: "How long is a PSARA License valid?",
-                      acceptedAnswer: { "@type": "Answer", text: "Typically five years from the date of grant in most States, subject to Rules and timely renewal. Some States operate with one-year validity regimes." },
-                    },
-                    {
-                      "@type": "Question",
-                      name: "What documents are required for PSARA?",
-                      acceptedAnswer: { "@type": "Answer", text: "Identity and address proofs of promoters, company incorporation papers, MOA/AOA with suitable objects, registered office proof, photographs, affidavits, training MOU, and police verification forms." },
-                    },
-                    {
-                      "@type": "Question",
-                      name: "How do I check PSARA License status?",
-                      acceptedAnswer: { "@type": "Answer", text: "You can check the status with the State Controlling Authority where the application was filed. Contact us for assistance with status tracking across any State." },
-                    },
-                    {
-                      "@type": "Question",
-                      name: "Can a PSARA License be transferred?",
-                      acceptedAnswer: { "@type": "Answer", text: "Licences are not casually transferable like assets. Change of control or structure usually needs authority intimation or fresh compliance. Plan M&A with licensing counsel." },
-                    },
-                    {
-                      "@type": "Question",
-                      name: "Is training MOU mandatory for PSARA?",
-                      acceptedAnswer: { "@type": "Answer", text: "Yes in almost all practical filings. A training MOU with a State-recognised institute covering unarmed and armed curricula is required before or during the licence process." },
-                    },
-                    {
-                      "@type": "Question",
-                      name: "What is the penalty for operating without PSARA?",
-                      acceptedAnswer: { "@type": "Answer", text: "Operating without a valid PSARA license is a criminal offense under the PSARA Act, 2005, attracting penalties, prosecution risk, and permanent contract ineligibility with serious clients." },
-                    },
-                  ],
-                },
-              ],
-            }),
-          }}
+          dangerouslySetInnerHTML={{ __html: organizationSchema }}
         />
-      </head>
-      <body className="min-h-full overflow-x-hidden font-medium bg-[var(--obsidian)] text-[var(--cream)]">
-        <PageLoader />
-        <Preloader />
+        {/* Dynamic per-page breadcrumb — rendered in body to avoid head hydration mismatch */}
+        <DynamicBreadcrumbSchema />
         <CustomCursor />
         <ScrollProgress />
         <SmoothScroll>
-          <SiteChrome>{children}</SiteChrome>
+          <PageTransition>
+            <SiteChrome>{children}</SiteChrome>
+          </PageTransition>
         </SmoothScroll>
+        <StickyCta />
+        <ExitIntentPopup />
+        <CookieBanner />
       </body>
     </html>
   );

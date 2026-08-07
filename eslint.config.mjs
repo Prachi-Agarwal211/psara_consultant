@@ -12,6 +12,15 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Vendored / tooling folders — not app source:
+    ".agents/**",
+    ".grok/**",
+    "ai research prompts/**",
+    "research/**",
+    "scripts/**",
+    "cypress/**",
+    // Minified third-party vendor libs:
+    "public/assets/libs/**",
   ]),
 ]);
 

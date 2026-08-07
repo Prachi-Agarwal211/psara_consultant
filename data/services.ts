@@ -520,6 +520,532 @@ export const SERVICES: Service[] = [
     ],
   },
   {
+    slug: "psara-license-renewal",
+    title: "PSARA License Renewal",
+    short: "On-time renewal filing before expiry — avoid operating a lapsed licence.",
+    description:
+      "Timely PSARA License renewal support for security agencies whose 1-year or 5-year validity is approaching. We track expiry, refresh the dossier, confirm unchanged directors/office/training, and file renewal with the State Controlling Authority before the window closes.",
+    bullets: [
+      "Expiry calendar and renewal-window alerts",
+      "Dossier refresh — directors, office, training MOU re-validation",
+      "Renewal fee slab confirmation by coverage",
+      "Controlling Authority renewal filing",
+      "Continuity documentation for client contracts",
+    ],
+    keywords: ["PSARA renewal", "security license renewal", "PSARA renewal fee"],
+    sections: [
+      {
+        h: "Why renewal timing matters",
+        p: "Operating with an expired PSARA Licence exposes you to penalties and voids client contracts that demand a valid licence. Most States expect renewal before expiry with complete continuity documentation — we run this like a mini fresh filing.",
+      },
+      {
+        h: "What changes between filings",
+        p: "Directors may have changed, the registered office may have moved, training MOUs may have lapsed, and fee notifications may have shifted. We audit each of these before refiling so renewal is not rejected for stale data.",
+      },
+      {
+        h: "Post-renewal hygiene",
+        p: "We hand over the renewed licence file, updated registers guidance, and the next renewal calendar so your compliance never lapses silently again.",
+      },
+    ],
+    process: [
+      "Expiry & validity audit",
+      "Director / office / training change check",
+      "Dossier refresh and affidavit preparation",
+      "Renewal fee payment guidance",
+      "Controlling Authority renewal filing",
+      "Renewed licence handover + calendar",
+    ],
+    whoFor: [
+      "Agencies within 6 months of expiry",
+      "Agencies with changed directors or offices",
+      "Multi-state operators with staggered validity",
+    ],
+    faqs: [
+      {
+        q: "Can I renew after the licence expires?",
+        a: "Practices vary by State — some allow late renewal with penalties, others treat you as a fresh applicant. Do not assume; check the window with us immediately if you are already past expiry.",
+      },
+      {
+        q: "Is renewal cheaper than fresh filing?",
+        a: "Government renewal fees are typically lower than fresh application, but the compliance cost depends on how much of your dossier has changed. We scope it honestly.",
+      },
+    ],
+  },
+  {
+    slug: "psara-license-amendment",
+    title: "PSARA License Amendment & Expansion",
+    short: "Add directors, change office, or expand district coverage mid-licence.",
+    description:
+      "Amendment and expansion support for existing PSARA licence holders — adding directors/partners, shifting the registered office, changing the legal name, or expanding from one-district to multi-district / whole-state coverage.",
+    bullets: [
+      "Director addition / removal filings",
+      "Registered office change support",
+      "Name / entity conversion amendments",
+      "District coverage expansion applications",
+      "Fresh police verification for new key persons",
+    ],
+    keywords: ["PSARA amendment", "add director PSARA", "PSARA district expansion"],
+    sections: [
+      {
+        h: "Do not operate beyond your licence",
+        p: "Deploying guards in districts outside your licensed coverage is non-compliance, even if the client is happy. Expansion amendments protect your contracts and your record before the Authority.",
+      },
+      {
+        h: "Personnel changes",
+        p: "New directors and partners face the same antecedent verification as founders. We sequence verification with the amendment so the file does not stall on the last new signature.",
+      },
+    ],
+    process: [
+      "Current licence coverage audit",
+      "Amendment scope mapping (persons / office / area)",
+      "Supporting documents and affidavits",
+      "New key-person police verification",
+      "Controlling Authority amendment filing",
+      "Amended licence handover",
+    ],
+    whoFor: ["Growing agencies", "Agencies changing structure or address", "Multi-district expansion operators"],
+    faqs: [
+      {
+        q: "How long does an amendment take?",
+        a: "Typically faster than fresh licensing — 15–45 days depending on State and whether new police verification is triggered.",
+      },
+      {
+        q: "Can I expand to a whole new State on my existing licence?",
+        a: "No. PSARA is State-specific. A new State requires a fresh licence there — we advise on sequencing multi-state expansion carefully.",
+      },
+    ],
+  },
+  {
+    slug: "armed-guard-license",
+    title: "Armed Guard & Arms License Support",
+    short: "Arms license eligibility and deployment compliance for armed guards.",
+    description:
+      "Guidance and coordination for armed guard deployment — arms licence eligibility under the Arms Act, 1959, category endorsement on the PSARA licence, ex-servicemen pathways, and the special compliance that cash-in-transit and high-risk sites demand.",
+    bullets: [
+      "Armed category endorsement on PSARA",
+      "Arms licence eligibility and process guidance",
+      "Ex-servicemen pathway support",
+      "Weapon storage & record compliance",
+      "CIT and high-risk deployment readiness",
+    ],
+    keywords: ["armed security guard license", "arms license PSARA", "cash in transit license"],
+    sections: [
+      {
+        h: "Armed is a different licence",
+        p: "Deploying armed guards without the armed category on your PSARA licence and proper arms licensing is a serious compliance breach. Banks, CIT operators, and jewellery units insist on the complete chain.",
+      },
+      {
+        h: "Ex-servicemen advantage",
+        p: "States commonly offer relaxed pathways and reduced training hours for ex-servicemen. We help you build a compliant armed vertical around verified personnel.",
+      },
+    ],
+    process: [
+      "Armed requirement assessment",
+      "Personnel arms licence eligibility check",
+      "Armed category endorsement filing",
+      "Weapon storage & register setup",
+      "CIT / high-risk protocol briefing",
+    ],
+    whoFor: ["Banks & CIT agencies", "Jewellery and high-value retail", "Agencies adding an armed vertical"],
+    faqs: [
+      {
+        q: "Do all States allow armed guards?",
+        a: "Armed deployment is regulated per State with specific categories and endorsements. We map your State's armed guard rules before you recruit.",
+      },
+      {
+        q: "Can ex-servicemen deploy faster?",
+        a: "Often yes — reduced training hours and faster verification pathways exist under several State Rules. We document the pathway for your file.",
+      },
+    ],
+  },
+  {
+    slug: "psara-compliance-audit",
+    title: "PSARA Post-Grant Compliance Audit",
+    short: "Audit registers, uniforms, training, and labour hygiene against the licence.",
+    description:
+      "A structured compliance audit of your operating agency against PSARA obligations and client-contract expectations — staff registers, uniform code, training records, labour registrations, and renewal health — with a fix-it roadmap.",
+    bullets: [
+      "Register & record audit",
+      "Uniform / insignia compliance check",
+      "Training continuity review",
+      "Labour (PF/ESIC) hygiene scan",
+      "Fix-it roadmap with priority ordering",
+    ],
+    keywords: ["PSARA compliance audit", "security agency audit", "PSARA register maintenance"],
+    sections: [
+      {
+        h: "Inspection-ready, always",
+        p: "Controlling Authority inspections and enterprise client audits test the same things: registers, training, uniforms, labour challans. An annual self-audit keeps you grant-worthy instead of reactive.",
+      },
+      {
+        h: "The deliverable is a roadmap",
+        p: "We hand over a prioritised fix-it list — what to correct this week vs this quarter — so the audit pays for itself in avoided penalties and won contracts.",
+      },
+    ],
+    process: [
+      "Licence & coverage verification",
+      "Register and record sampling",
+      "Uniform / training / labour checks",
+      "Risk scoring by severity",
+      "Fix-it roadmap delivery",
+    ],
+    whoFor: ["Operating agencies pre-inspection", "Agencies failing client audits", "Agencies preparing for renewal"],
+    faqs: [
+      {
+        q: "What registers does a PSARA agency need?",
+        a: "Typical expectations include staff deployment registers, training records, attendance, and statutory labour registers. The exact set varies by State — the audit maps yours.",
+      },
+      {
+        q: "Do you fix the gaps too?",
+        a: "Yes — after the audit we can execute the roadmap: registers, renewals, training MOU refresh, and labour registrations.",
+      },
+    ],
+  },
+  {
+    slug: "multi-state-psara",
+    title: "Multi-State PSARA Expansion",
+    short: "One strategy, many States — sequence licences across India correctly.",
+    description:
+      "Strategic multi-state PSARA expansion for agencies winning pan-India contracts — sequencing fresh licences, harmonising entity documents, aligning training institutes per State, and managing staggered renewal calendars.",
+    bullets: [
+      "Multi-state licence sequencing plan",
+      "Entity document harmonisation",
+      "Per-State training institute alignment",
+      "Staggered renewal calendar design",
+      "Contract-first coverage mapping",
+    ],
+    keywords: ["multi-state PSARA", "pan India security license", "PSARA expansion strategy"],
+    sections: [
+      {
+        h: "Sequence wins contracts",
+        p: "Filing all States at once wastes money and attention. We map your client geography, rank States by revenue potential and verification speed, and sequence filings so capital is spent where contracts land first.",
+      },
+      {
+        h: "One entity, many desks",
+        p: "Your single entity files separately in each State, but the dossier must stay consistent. We harmonise objects, director records, and training MOUs so nothing contradicts across desks.",
+      },
+    ],
+    process: [
+      "Contract & geography mapping",
+      "State ranking by ROI and speed",
+      "Sequencing plan and budget",
+      "Per-State filing execution",
+      "Unified renewal calendar",
+    ],
+    whoFor: ["Pan-India contractors", "Agencies in 2–10 States", "Franchise and network operators"],
+    faqs: [
+      {
+        q: "How many States can I file in parallel?",
+        a: "As many as your verification capacity allows — but we usually advise starting with 2–3 priority States and expanding on a rolling basis to protect cash flow.",
+      },
+      {
+        q: "Do I need a local office in every State?",
+        a: "Many States require a verifiable local registered office or authorized representative. We plan office proof per State before filing.",
+      },
+    ],
+  },
+  {
+    slug: "security-training",
+    title: "Security Guard Training & Certification",
+    short: "State-recognised guard training, refresher modules, and certification records.",
+    description:
+      "Security guard training coordination under State-recognised curricula — entry-level unarmed and armed modules, ex-servicemen pathways, supervisor courses, and the certification records that inspections and client audits re-check.",
+    bullets: [
+      "Entry-level guard training placement",
+      "Armed guard module coordination",
+      "Supervisor & field officer courses",
+      "Refresher training scheduling",
+      "Certification record systems",
+    ],
+    keywords: ["security guard training", "PSARA training hours", "guard certification"],
+    sections: [
+      {
+        h: "Training is statutory, not decorative",
+        p: "Training hours and institute recognition are wired into State PSARA Rules. Clients and inspectors verify certificates — untrained deployment risks both licence and contract.",
+      },
+      {
+        h: "Build a training culture",
+        p: "Agencies with structured training win enterprise contracts, reduce attrition, and justify better billing. We help you build the pipeline, not just the MOU.",
+      },
+    ],
+    process: [
+      "State curriculum mapping",
+      "Institute and batch planning",
+      "Trainee enrolment coordination",
+      "Exams and certification records",
+      "Record system handover",
+    ],
+    whoFor: ["New agencies building guard pools", "Agencies facing training-record audits", "Enterprise-focused agencies"],
+    faqs: [
+      {
+        q: "How many training hours are mandatory?",
+        a: "Hours vary by State and module — commonly 150–240 hours for unarmed and more for armed. We map your State's exact requirement.",
+      },
+      {
+        q: "Can existing guards get certified?",
+        a: "Yes — refresher and certification pathways exist for deployed guards, including reduced-hour routes for ex-servicemen.",
+      },
+    ],
+  },
+  {
+    slug: "background-verification",
+    title: "Background & Police Verification Services",
+    short: "Employee-level verification for guards, drivers, and key personnel.",
+    description:
+      "Pre-employment background verification for security guards, drivers, and supervisors — address, identity, education, employment history, and police record checks that keep your deployment pool clean and client audits green.",
+    bullets: [
+      "Identity & address verification",
+      "Police record checks",
+      "Employment & education history",
+      "Reference checks",
+      "Deployment-pool screening at scale",
+    ],
+    keywords: ["background verification", "guard police verification", "employee screening"],
+    sections: [
+      {
+        h: "The pool is your product",
+        p: "Enterprise and government clients verify your guards' antecedents. A screened pool is a competitive advantage; a breach is a contract-ending risk.",
+      },
+      {
+        h: "Scale without shortcuts",
+        p: "We design verification pipelines that scale to hundreds of hires without dropping to checkbox compliance.",
+      },
+    ],
+    process: [
+      "Screening scope design",
+      "Document collection system",
+      "Verification execution",
+      "Report delivery & flags",
+      "Ongoing pool screening",
+    ],
+    whoFor: ["Agencies hiring guard batches", "Facility managers with guard workforces", "Multi-location operators"],
+    faqs: [
+      {
+        q: "Is this the same as the PSARA promoter verification?",
+        a: "No — promoter verification is statutory for the licence; this is employee-level screening for your workforce. Agencies typically need both.",
+      },
+      {
+        q: "How fast is verification?",
+        a: "Identity and address checks complete in days; police record checks depend on the jurisdiction. We set honest SLAs per location.",
+      },
+    ],
+  },
+  {
+    slug: "payroll-management",
+    title: "Security Payroll & Wage Compliance",
+    short: "Guard payroll, PF/ESIC, minimum wage, and attendance-linked billing.",
+    description:
+      "Payroll and wage compliance for security agencies — guard salary structuring, EPF/ESIC administration, minimum wage mapping, attendance-linked payroll runs, and the challan trail enterprise clients audit.",
+    bullets: [
+      "Guard payroll setup & runs",
+      "EPF/ESIC registration & challans",
+      "Minimum wage & overtime mapping",
+      "Attendance integration",
+      "Client-audit-ready reports",
+    ],
+    keywords: ["security guard payroll", "EPF ESIC compliance", "security agency wages"],
+    sections: [
+      {
+        h: "Wage compliance wins tenders",
+        p: "Underpaid or under-registered workforces fail principal employer audits and can trigger client penalties. Compliant payroll is a sales asset, not just a cost.",
+      },
+      {
+        h: "Audit-ready by default",
+        p: "We keep the challan trail, wage registers, and attendance records inspection-ready so client KYC and Authority checks pass without firefighting.",
+      },
+    ],
+    process: [
+      "Wage & threshold mapping",
+      "Payroll structure design",
+      "EPF/ESIC setup or repair",
+      "Monthly payroll runs",
+      "Report pack for client audits",
+    ],
+    whoFor: ["Agencies with 10+ guards", "Agencies failing client wage audits", "Multi-state payroll operators"],
+    faqs: [
+      {
+        q: "Which States have minimum wage surprises?",
+        a: "Minimum wages vary by State and schedule — security guards often fall under scheduled employments with specific rates. We map your deployment States.",
+      },
+      {
+        q: "Can you fix past non-compliance?",
+        a: "Yes — we help regularise arrears, registrations, and records with the appropriate authorities and structure going-forward compliance.",
+      },
+    ],
+  },
+  {
+    slug: "tender-bid-support",
+    title: "Security Tender & Bid Support",
+    short: "Win contracts with compliant, winnable tender responses.",
+    description:
+      "Tender and bid preparation for security services contracts — eligibility mapping (PSARA, GST, labour registrations), technical bid structuring, rate computation, and document packs that clear evaluation criteria.",
+    bullets: [
+      "Tender eligibility mapping",
+      "Technical bid structuring",
+      "Compliant rate computation",
+      "Document pack assembly",
+      "Pre-bid query support",
+    ],
+    keywords: ["security tender support", "PSARA tender bid", "security contract bidding"],
+    sections: [
+      {
+        h: "Licences open the door, bids close it",
+        p: "Most security tenders require PSARA, GST, PF/ESIC registration, and training credentials as minimum criteria. We make sure your compliance portfolio is tender-ready, then help structure a winnable bid.",
+      },
+      {
+        h: "Rates that don't lose money",
+        p: "Underbidding on statutory costs (wages, PF/ESIC, training) loses money on every guard. We build rate models that stay competitive without breaking compliance.",
+      },
+    ],
+    process: [
+      "Tender document review",
+      "Eligibility & compliance check",
+      "Rate model construction",
+      "Bid pack assembly",
+      "Submission support",
+    ],
+    whoFor: ["Agencies targeting government contracts", "Enterprise RFP respondents", "New entrants to formal bidding"],
+    faqs: [
+      {
+        q: "What licences do security tenders usually demand?",
+        a: "PSARA licence (State-specific), GST, EPF/ESIC registration, and often ISO certification and training institute credentials.",
+      },
+      {
+        q: "Do you write the full bid?",
+        a: "We prepare the compliance and technical sections and rate model; we coordinate with your team for commercial strategy.",
+      },
+    ],
+  },
+  {
+    slug: "security-insurance",
+    title: "Security Agency Insurance Advisory",
+    short: "Group accident, liability, and contract-required cover for agencies.",
+    description:
+      "Insurance advisory for security agencies — group accident and health cover for guards, employer's liability, third-party/public liability, and the cover certificates that client contracts and tenders increasingly mandate.",
+    bullets: [
+      "Group accident & health cover",
+      "Employer's liability guidance",
+      "Public liability policies",
+      "Tender-mandated cover mapping",
+      "Policy documentation for client KYC",
+    ],
+    keywords: ["security agency insurance", "guard group insurance", "security liability cover"],
+    sections: [
+      {
+        h: "Contracts now demand cover",
+        p: "Enterprise and government security contracts routinely require group accident and liability insurance certificates. Without them, bids are disqualified regardless of price.",
+      },
+      {
+        h: "Advice, not selling",
+        p: "We advise on the cover profile your contracts need and coordinate placement with insurers — we do not push commission-driven products.",
+      },
+    ],
+    process: [
+      "Contract & risk profile review",
+      "Cover requirement mapping",
+      "Insurer coordination",
+      "Certificate collection for KYC",
+      "Annual renewal tracking",
+    ],
+    whoFor: ["Tender-bound agencies", "Enterprise contractors", "Multi-state operators"],
+    faqs: [
+      {
+        q: "Is insurance mandatory for PSARA?",
+        a: "Not a universal PSARA condition, but increasingly required by client contracts and tenders. We map what your contracts actually need.",
+      },
+      {
+        q: "What cover do most contracts require?",
+        a: "Group accident for guards and public/third-party liability are the most common minimums, with limits set per tender.",
+      },
+    ],
+  },
+  {
+    slug: "government-security-contracts",
+    title: "Government Security Contracts",
+    short: "GeM, tender, and state-level security contract readiness.",
+    description:
+      "Government security contract readiness — GeM (Government e-Marketplace) onboarding, eligibility documentation, manpower supply compliance under GGS (Government Guard Scheme) frameworks, and state-level security tender support.",
+    bullets: [
+      "GeM seller onboarding",
+      "Manpower supply compliance setup",
+      "State security scheme mapping",
+      "Tender eligibility documentation",
+      "Compliance certificate pack",
+    ],
+    keywords: ["government security contract", "GeM security services", "GGS manpower supply"],
+    sections: [
+      {
+        h: "Government is the largest security buyer",
+        p: "Government guard schemes and state security corporations buy enormous manpower volumes. Eligibility is documentation-driven — PSARA, GST, labour registrations, and verified training records.",
+      },
+      {
+        h: "Readiness before the tender",
+        p: "We prepare your compliance portfolio in advance so when the tender drops, you respond in days, not scramble for certificates.",
+      },
+    ],
+    process: [
+      "Scheme & market mapping",
+      "GeM / portal onboarding",
+      "Compliance certificate pack",
+      "Tender response support",
+      "Contract onboarding hygiene",
+    ],
+    whoFor: ["Agencies targeting government work", "Manpower suppliers", "State security scheme bidders"],
+    faqs: [
+      {
+        q: "What is the Government Guard Scheme?",
+        a: "GGS is a central framework under which empanelled agencies supply guards to government offices. Eligibility requires a valid PSARA licence, registration, and compliance credentials.",
+      },
+      {
+        q: "Is GeM registration hard?",
+        a: "GeM onboarding is document-heavy but mechanical. We assemble the seller pack and walk the registration through.",
+      },
+    ],
+  },
+  {
+    slug: "bouncer-bodyguard-licensing",
+    title: "Bouncer & Bodyguard Deployment Licensing",
+    short: "Event security, bouncer, and personal protection officer compliance.",
+    description:
+      "Licensing and compliance for bouncer, event security, and personal protection officer (bodyguard) deployment — the distinct PSARA categories, training requirements, and verification that event companies and VIP clients expect.",
+    bullets: [
+      "Bouncer category licensing",
+      "Event security compliance",
+      "PPO / bodyguard training pathways",
+      "Vendor verification for event companies",
+      "Deployment record compliance",
+    ],
+    keywords: ["bouncer license PSARA", "event security license", "bodyguard training"],
+    sections: [
+      {
+        h: "A separate compliance lane",
+        p: "Bouncer and PPO deployment often sits in distinct categories with stricter physical and training norms. Event companies and hotels increasingly verify vendor licences before booking.",
+      },
+      {
+        h: "Verified vendors win events",
+        p: "Venues audit the agencies they hire. A clean bouncer/PPO category with trained personnel is the difference between being booked and being blocked.",
+      },
+    ],
+    process: [
+      "Category & State rules mapping",
+      "Personnel screening",
+      "Training pathway coordination",
+      "Licence category filing",
+      "Deployment compliance pack",
+    ],
+    whoFor: ["Event security companies", "Hotels & venues", "VIP protection agencies"],
+    faqs: [
+      {
+        q: "Do bouncers need separate licences?",
+        a: "Deployment categories and training expectations vary by State — some treat bouncers under the general guard licence, others expect specific compliance. We map your State.",
+      },
+      {
+        q: "Can hotels hire bouncer agencies directly?",
+        a: "They should hire licensed agencies; unlicensed bouncer deployment creates liability for both the venue and the agency.",
+      },
+    ],
+  },
+  {
     slug: "branding",
     title: "Branding & Digital Identity",
     short: "Logo design, brand identity, and digital presence for agencies.",

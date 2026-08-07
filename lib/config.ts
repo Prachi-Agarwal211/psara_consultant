@@ -144,7 +144,7 @@ export const SITE = {
   url: "https://consult.psaraconsultantindia.com",
   tagline: "Your Trusted Partner for PSARA Licensing Across India",
   description:
-    "Pan-India PSARA License registration, security agency compliance, training MOU, police verification, and company setup. Registered Office in New Delhi with desks across Gurugram, Jaipur, Gujarat, Madhya Pradesh, Uttar Pradesh, and more.",
+    "Pan-India PSARA License registration, security agency compliance, training MOU, police verification, and company setup. Offices in New Delhi, Gurugram, Jaipur.",
   /** Wikidata entity identifier — used for Knowledge Graph eligibility and AI citation */
   wikidata: {
     id: "Q131459731",

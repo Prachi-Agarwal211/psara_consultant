@@ -1,57 +1,60 @@
 import type { Metadata } from "next";
-import { FAQS } from "../../data/faq";
 import { PageHero, PageMain } from "../../components/PageShell";
-import CtaBar from "../../components/CtaBar";
-import JsonLd from "../../components/JsonLd";
+import StageShell from "../components/ui/StageShell";
 import { pageMeta } from "../../lib/metadata";
-import { faqJsonLd } from "../../lib/seo-content";
-import { ChevronDown } from "lucide-react";
+import { FAQS } from "../../data/faq";
+import { DEFAULT_WA } from "../../lib/whatsapp";
 
 export const metadata: Metadata = pageMeta(
-  "PSARA FAQ — 100 Questions Answered",
-  "100 frequently asked questions on PSARA License, documents, training MOU, police verification, fees, renewal, multi-state strategy, and consultancy.",
-  "/faq",
-  ["PSARA FAQ", "PSARA license questions", "PSARA documents FAQ"]
+  "FAQ",
+  "PSARA License FAQs — eligibility, documents, timelines, fees, multi-state, renewal, and more.",
+  "/faq"
 );
 
 export default function FaqPage() {
-  const categories = Array.from(new Set(FAQS.map((f) => f.category)));
+  const items = FAQS;
 
   return (
-    <>
-      <JsonLd data={faqJsonLd(FAQS)} />
+    <StageShell>
       <PageHero
-        roman="FAQ"
-        title="PSARA questions, answered clearly"
-        lead="A living knowledge base for promoters, CAs, and operators — from Form I to multi-state strategy."
+        title="Questions we answer every week"
+        lead="Eligibility, documents, State rules, timelines — practical answers for security agency founders."
         crumbs={[{ label: "FAQ" }]}
       />
       <PageMain>
-        {categories.map((cat) => (
-          <section key={cat} className="mb-12">
-            <h2 className="font-[family-name:var(--font-display)] text-xl font-bold tracking-tight text-[var(--gold)] mb-6">
-              {cat}
-            </h2>
-            <div className="divide-y divide-[var(--line)] border-t border-[var(--line)]">
-              {FAQS.filter((f) => f.category === cat).map((f) => (
-                <details key={f.q} className="group py-5">
-                  <summary className="cursor-pointer list-none font-[family-name:var(--font-display)] text-base font-bold text-[var(--cream)] marker:content-none flex items-center justify-between gap-4">
-                    <span>
-                      <span className="text-[var(--gold)]">Q. </span>
-                      {f.q}
-                    </span>
-                    <ChevronDown className="h-4 w-4 shrink-0 text-[var(--text-faint)] group-open:rotate-180 transition-transform" />
-                  </summary>
-                  <p className="mt-3 max-w-3xl text-sm font-medium leading-relaxed text-[var(--text-dim)]">
-                    {f.a}
-                  </p>
-                </details>
-              ))}
-            </div>
-          </section>
-        ))}
-        <CtaBar title="Still have a question?" subtitle="Call or WhatsApp — our team answers within 4 hours." />
+        <div className="mx-auto max-w-3xl space-y-0" data-stagger>
+          {items.map((item, i) => (
+            <details
+              key={i}
+              className="group border-b border-white/10 py-5"
+            >
+              <summary
+                className="cursor-pointer list-none text-[1.05rem] font-semibold leading-snug marker:content-none"
+                style={{ fontFamily: "var(--font-display)", color: "var(--white)" }}
+              >
+                <span className="flex items-start justify-between gap-4">
+                  {item.q}
+                  <span className="text-metal shrink-0 text-sm transition-transform group-open:rotate-45">+</span>
+                </span>
+              </summary>
+              <p className="mt-3 pr-8 text-sm leading-relaxed" style={{ color: "var(--white-55)", fontFamily: "var(--font-body)" }}>
+                {item.a}
+              </p>
+            </details>
+          ))}
+        </div>
+        <div className="mt-14" data-clip>
+          <a
+            href={DEFAULT_WA}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex rounded-full px-7 py-3.5 text-[0.65rem] font-bold uppercase tracking-[0.18em]"
+            style={{ background: "var(--grad-metal)", color: "var(--void)" }}
+          >
+            Ask on WhatsApp
+          </a>
+        </div>
       </PageMain>
-    </>
+    </StageShell>
   );
 }

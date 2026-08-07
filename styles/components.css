@@ -1,8 +1,38 @@
 /* ═══════════════════════════════════════════════════════════════
-   PSARA · Dossier Authority Components
-   Jasmine Gunarto + Luke Baffait blended design patterns
-   Unique "Dossier Authority" identity
+   LOCATION ACCENT SYSTEM — per-state/city identity
+   Set --acc vars on a wrapper (accentStyleVars) to theme a page.
+   Defined as @utility so hover:/group-hover: variants work.
    ═══════════════════════════════════════════════════════════════ */
+
+@utility text-acc {
+  color: var(--acc, var(--gold));
+}
+
+@utility text-acc-bright {
+  color: var(--acc-bright, var(--gold-bright));
+}
+
+@utility border-acc {
+  border-color: var(--acc-line, var(--line-gold));
+}
+
+@utility bg-acc-soft {
+  background-color: var(--acc-soft, rgba(212, 184, 114, 0.08));
+}
+
+@utility bg-acc-strong {
+  background-color: var(--acc-strong, rgba(212, 184, 114, 0.16));
+}
+
+@utility hairline-acc {
+  background: linear-gradient(90deg, var(--acc, var(--gold)), transparent);
+}
+
+@utility shadow-acc-glow {
+  box-shadow: 0 0 30px var(--acc-soft, rgba(212, 184, 114, 0.12));
+}
+
+/* --- PSARA Dossier Authority Components --- */
 
 /* ── Layout Utilities ────────────────────────────────────────── */
 .shell {
@@ -37,9 +67,7 @@
   padding-right: var(--gutter);
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   TYPOGRAPHY HIERARCHY (Jasmine's MG-style weight system)
-   ═══════════════════════════════════════════════════════════════ */
+/* ── Typography Hierarchy ─────────────────────────────────── */
 
 /* Hero — extra bold, tight (like Jasmine's hg-1) */
 .display-hero {
@@ -141,9 +169,7 @@ strong {
   font-weight: 700;
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   CHARACTER HOVER (Luke Baffait chr-hover)
-   ═══════════════════════════════════════════════════════════════ */
+/* ── Character Hover ─────────────────────────────────────── */
 .chr-hover {
   position: relative;
   display: inline-flex;
@@ -195,23 +221,20 @@ strong {
   justify-content: center;
   gap: 0.5rem;
   padding: 0.85rem 1.65rem;
-  border-radius: var(--radius);
-  font-family: var(--font-display);
-  font-size: 0.72rem;
-  letter-spacing: 0.14em;
+  border-radius: 999px;
+  font-family: var(--font-body);
+  font-size: 0.68rem;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
   font-weight: 700;
-  color: var(--warm-dark);
-  background-color: var(--gold);
-  border: 1px solid var(--gold-soft);
-  transition: background-color var(--dur-fast) var(--ease-smooth),
-              transform var(--dur-fast) var(--ease-smooth),
-              box-shadow var(--dur-fast) var(--ease-smooth);
+  color: var(--void);
+  background: var(--grad-metal);
+  border: none;
+  transition: transform 0.2s var(--ease-smooth), box-shadow 0.2s var(--ease-smooth);
 }
 .btn-gold:hover {
-  background-color: var(--gold-soft);
   transform: translateY(-1px);
-  box-shadow: 0 4px 16px rgba(224, 184, 74, 0.25);
+  box-shadow: 0 8px 28px rgba(0, 102, 255, 0.2);
 }
 
 .btn-gold-cta {
@@ -226,7 +249,7 @@ strong {
   letter-spacing: 0.16em;
   text-transform: uppercase;
   font-weight: 700;
-  color: var(--warm-dark);
+  color: var(--void);
   background: var(--grad-gold-cta);
   border: 1px solid var(--gold-soft);
   transition: transform var(--dur-fast) var(--ease-spring),
@@ -309,6 +332,9 @@ strong {
   display: inline-block;
   white-space: normal;
   will-change: transform;
+  /* Glyph room inside the .t-line overflow mask (no line-spacing change) */
+  padding: 0.12em 0;
+  margin: -0.12em 0;
 }
 
 /* ── Jasmine Split Heading Pattern ── */
@@ -374,14 +400,8 @@ strong {
 
 .word-blur-reveal .word {
   display: inline-block;
-  opacity: 0;
-  filter: blur(8px);
-}
-
-@media (hover: none) and (pointer: coarse) {
-  .word-blur-reveal .word {
-    filter: none;
-  }
+  opacity: 1;
+  filter: none;
 }
 
 /* ═══════════════════════════════════════════════════════════════
@@ -408,7 +428,7 @@ strong {
 
 /* ── Ticker Marquee ── */
 .ticker-band {
-  background-color: var(--warm-dark-2);
+  background-color: var(--void-2);
   border-top: 1px solid var(--line-gold);
   border-bottom: 1px solid var(--line-gold);
   position: relative;
@@ -478,9 +498,7 @@ strong {
   padding-right: 2rem;
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   STATE BRIEF CARDS (Jasmine's Break cards adaptation)
-   ═══════════════════════════════════════════════════════════════ */
+/* ── State Brief Cards ─────────────────────────────────────── */
 
 .state-brief-card {
   position: relative;
@@ -500,9 +518,7 @@ strong {
   transition-duration: 0.4s;
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   PROGRESS RAIL (Luke's scroll segment)
-   ═══════════════════════════════════════════════════════════════ */
+/* ── Progress Rail ─────────────────────────────────────────── */
 
 .progress-rail {
   display: flex;
@@ -519,9 +535,7 @@ strong {
   background-color: var(--gold);
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   TILT CARD (Luke's 3D hover)
-   ═══════════════════════════════════════════════════════════════ */
+/* ── Tilt Card ─────────────────────────────────────────────── */
 
 .tilt-card {
   transition: transform 0.25s cubic-bezier(0.25, 1, 0.5, 1),
@@ -529,27 +543,26 @@ strong {
   will-change: transform;
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   FORM FIELDS
-   ═══════════════════════════════════════════════════════════════ */
+/* ── Form Fields ───────────────────────────────────────────── */
 
 .form-field {
   width: 100%;
   border-radius: var(--radius);
-  border: 1px solid var(--line);
-  background-color: var(--warm-dark-3);
+  border: 1px solid var(--white-12);
+  background-color: rgba(2, 8, 20, 0.55);
   padding: 0.75rem 0.85rem;
   font-size: 0.875rem;
   font-weight: 500;
-  color: var(--cream);
+  color: var(--white);
   outline: none;
-  transition: border-color var(--dur-fast) var(--ease-smooth);
+  transition: border-color 0.2s var(--ease-smooth), box-shadow 0.2s var(--ease-smooth);
 }
 .form-field::placeholder {
-  color: var(--text-dim);
+  color: var(--white-40);
 }
 .form-field:focus {
   border-color: var(--gold);
+  box-shadow: 0 0 0 1px rgba(212, 184, 114, 0.25);
 }
 select.form-field {
   appearance: none;
@@ -559,9 +572,7 @@ textarea.form-field {
   resize: vertical;
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   CUSTOM CURSOR SYSTEM (Luke-inspired)
-   ═══════════════════════════════════════════════════════════════ */
+/* ── Custom Cursor System ──────────────────────────────────── */
 
 .custom-cursor-dot {
   width: 6px;
@@ -908,7 +919,7 @@ textarea.form-field {
 }
 .practice-row:hover,
 .practice-row.is-active {
-  background-color: var(--warm-dark-2);
+  background-color: var(--space);
   border-color: var(--line-gold);
 }
 .practice-row:hover .title,
@@ -959,6 +970,53 @@ textarea.form-field {
 }
 
 /* ── Noise Grain Overlay ── */
+/* Scroll progress rail — active segment */
+.sp-segment.sp-active > div {
+  transform: scale(1.5);
+  background-color: var(--gold-bright) !important;
+  border-color: var(--gold-bright) !important;
+}
+.sp-segment.sp-active > span {
+  color: var(--gold-bright) !important;
+  right: 1.25rem;
+}
+
+/* ── License Stage · cinematic backgrounds ─────────────────── */
+.noise-overlay {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  opacity: 0.035;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 180px 180px;
+}
+
+@keyframes stage-kenburns {
+  0% {
+    transform: scale(1) translate3d(0, 0, 0);
+  }
+  50% {
+    transform: scale(1.08) translate3d(-1.2%, -0.6%, 0);
+  }
+  100% {
+    transform: scale(1) translate3d(0, 0, 0);
+  }
+}
+
+.stage-kenburns {
+  animation: stage-kenburns 22s var(--ease-smooth, cubic-bezier(0.25, 1, 0.5, 1)) infinite alternate;
+  will-change: transform;
+  transform-origin: center center;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stage-kenburns {
+    animation: none;
+  }
+}
+
 .noise-overlay-subtle {
   position: absolute;
   inset: 0;

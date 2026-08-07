@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { PageHero, PageMain, Prose } from "../../components/PageShell";
+import { PageHero, PageMain } from "../../components/PageShell";
+import StageShell from "../components/ui/StageShell";
 import { pageMeta } from "../../lib/metadata";
 import { SITE } from "../../lib/config";
 
@@ -14,7 +15,7 @@ export const metadata: Metadata = {
 
 export default function TermsPage() {
   return (
-    <>
+    <StageShell>
       <PageHero
         title="Terms & Conditions"
         lead="Website use and practice governance framework."
@@ -46,6 +47,6 @@ export default function TermsPage() {
           </div>
         </div>
       </PageMain>
-    </>
+    </StageShell>
   );
 }

@@ -1,0 +1,84 @@
+# ai.txt — PSARA Consultant India
+# https://consult.psaraconsultantindia.com/ai.txt
+# Machine-readable policy for AI crawlers / LLM answer engines.
+# Mirrors app/robots.ts: AI crawlers are allowed to index public content; private paths are blocked.
+# Last updated: 2026-07-31
+
+# General + AI crawlers
+User-Agent: *
+Allow: /
+Disallow: /api/
+Disallow: /_next/
+
+# OpenAI (GPT training + ChatGPT browsing + Search)
+User-Agent: GPTBot
+Allow: /
+Disallow: /api/
+Disallow: /_next/
+
+User-Agent: ChatGPT-User
+Allow: /
+Disallow: /api/
+Disallow: /_next/
+
+User-Agent: OAI-SearchBot
+Allow: /
+Disallow: /api/
+Disallow: /_next/
+
+# Google AI + Gemini / AI Overviews
+User-Agent: Google-Extended
+Allow: /
+Disallow: /api/
+Disallow: /_next/
+
+User-Agent: Google-InspectionTool
+Allow: /
+Disallow: /api/
+Disallow: /_next/
+
+# Anthropic Claude
+User-Agent: ClaudeBot
+Allow: /
+Disallow: /api/
+Disallow: /_next/
+
+User-Agent: Claude-SearchBot
+Allow: /
+Disallow: /api/
+Disallow: /_next/
+
+User-Agent: Claude-User
+Allow: /
+Disallow: /api/
+Disallow: /_next/
+
+# Perplexity
+User-Agent: PerplexityBot
+Allow: /
+Disallow: /api/
+Disallow: /_next/
+
+# Apple
+User-Agent: Applebot-Extended
+Allow: /
+Disallow: /api/
+Disallow: /_next/
+
+# ByteDance / Doubao
+User-Agent: Bytespider
+Allow: /
+Disallow: /api/
+Disallow: /_next/
+
+# xAI Grok
+User-Agent: Grokbot
+Allow: /
+Disallow: /api/
+Disallow: /_next/
+
+# Cohere
+User-Agent: cohere-ai
+Allow: /
+Disallow: /api/
+Disallow: /_next/

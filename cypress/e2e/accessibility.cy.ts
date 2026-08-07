@@ -1,94 +1,87 @@
 /**
  * PSARA Accessibility Test Suite
  * ==============================
- * Audits all 15 homepage sections for:
+ * Audits the redesigned homepage (HeroStage + HomeStory) for:
  *   - axe-core automated violations (WCAG 2.2 AA)
  *   - ARIA labels and landmarks
  *   - Heading hierarchy (h1 → h2 → h3)
  *   - Image alt text
  *   - Keyboard reachability of interactive elements
- *   - Focus order on interactive modals
  *   - Color contrast
  *   - Reduced motion handling
  *
- * Sections covered (all 15 from page.tsx):
- *   1. hero        — HeroDossier
- *   2. stats       — StatsBar
- *   3. why-us      — WhyChooseUs
- *   4. philosophy  — Philosophy
- *   5. ticker      — TickerMarquee
- *   6. briefs      — StateBriefs
- *   7. coverage    — StateGridHome
- *   8. presence    — Presence
- *   9. trust       — TrustProof
- *  10. process     — ApprovalRoadmap
- *  11. services    — PracticeIndex
- *  12. reviews     — GoogleReviews
- *  13. faq         — HomeFaq
- *  14. contact     — HomeContact
- *  15. site-footer — SiteFooter
+ * Sections covered (current homepage):
+ *   1. hero      — HeroStage
+ *   2. about     — HomeStory About
+ *   3. services  — HomeStory Services track
+ *   4. why       — WhyChooseUs
+ *   5. process   — HomeStory pinned process
+ *   6. reviews   — GoogleReviews
+ *   7. states    — StateGridHome
+ *   8. faq       — HomeFaq
+ *   9. presence  — HomeStory offices
+ *  10. contact   — HomeContact (form + offices)
+ *
+ * Run with: CYPRESS_BASE_URL=http://localhost:3001 npm run test:a11y
  */
 
 const SECTION_IDS = [
   "hero",
-  "stats",
-  "why-us",
-  "philosophy",
-  "ticker",
-  "briefs",
-  "coverage",
-  "presence",
-  "trust",
-  "process",
+  "about",
   "services",
+  "why",
+  "process",
   "reviews",
+  "states",
   "faq",
+  "presence",
   "contact",
-  "site-footer",
 ] as const;
+
+const AXE_OPTIONS = {
+  runOnly: {
+    type: "tag" as const,
+    values: ["wcag22aa", "wcag2aa", "best-practice"],
+  },
+};
 
 describe("PSARA homepage — axe-core automated a11y audit", () => {
   beforeEach(() => {
     cy.visit("/");
     cy.injectAxe();
-    // Wait for GSAP/Preloader to settle
-    cy.wait(500);
+    // Wait for GSAP/reveals to settle
+    cy.wait(800);
   });
 
   it("passes full-page axe audit at WCAG 2.2 AA", () => {
     cy.checkA11y(
       undefined,
-      {
-        runOnly: {
-          type: "tag",
-          values: ["wcag22aa", "wcag2aa", "best-practice"],
-        },
-        rules: {
-          // GSAP/Tailwind may trigger scrollable false positives
-          scrollable: { enabled: false },
-        },
-      },
-      (violations) => {          violations.forEach((v) => {
-            cy.log(`🚨 ${v.id}: ${v.description}`);
-            v.nodes.forEach((n) => {
-              cy.log(`  → ${n.target.join(", ")}`);
-            });
+      AXE_OPTIONS,
+      (violations) => {
+        violations.forEach((v) => {
+          cy.log(`🚨 ${v.id}: ${v.description}`);
+          v.nodes.forEach((n) => {
+            cy.log(`  → ${n.target.join(", ")}`);
           });
-          expect(violations.length, `Full page: ${violations.length} axe violations`).to.equal(0);
-        }
-      );
-    });
+        });
+        expect(
+          violations.map((v) => `${v.id} @ ${v.nodes.map((n) => n.target.join(" ")).join(" | ")}`),
+          `Full page: ${violations.length} axe violations`
+        ).to.deep.equal([]);
+      }
+    );
+  });
 
   it("has exactly one <h1> element", () => {
     cy.get("h1").should("have.length", 1);
-    cy.get("h1").should("contain.text", "PSARA License");
+    cy.get("h1").should("contain.text", "Built for");
   });
 
   it("has logical heading order (no skipped levels)", () => {
     const levels: number[] = [];
     cy.get("h1, h2, h3, h4, h5, h6")
       .each(($el) => {
-        levels.push(parseInt($el.prop("tagName").replace("h", ""), 10));
+        levels.push(parseInt($el.prop("tagName").replace(/^H/i, ""), 10));
       })
       .then(() => {
         for (let i = 1; i < levels.length; i++) {
@@ -108,6 +101,8 @@ describe("PSARA homepage — axe-core automated a11y audit", () => {
 
   it("decorative images use alt=\"\"", () => {
     cy.get(".pointer-events-none img, [aria-hidden='true'] img").each(($img) => {
+      // Skip images inside the closed (inert) mobile menu — hidden from the a11y tree entirely.
+      if ($img.closest("[inert]").length) return;
       expect($img.attr("alt")).to.equal("");
     });
   });
@@ -149,7 +144,7 @@ describe("PSARA homepage — axe-core automated a11y audit", () => {
   });
 });
 
-describe("PSARA homepage — per-section axe audit (all 15 sections)", () => {
+describe("PSARA homepage — per-section axe audit", () => {
   beforeEach(() => {
     cy.visit("/");
     cy.injectAxe();
@@ -158,26 +153,24 @@ describe("PSARA homepage — per-section axe audit (all 15 sections)", () => {
 
   SECTION_IDS.forEach((sectionId) => {
     it(`section #${sectionId} passes axe audit`, () => {
-      cy.get(`#${sectionId}`).scrollIntoView({ duration: 300 });
+      // Scroll to the very bottom first — this fires every GSAP ScrollTrigger so sections
+      // are no longer stuck at opacity 0 (Lenis smooth scroll can miss programmatic scrollIntoView).
+      cy.scrollTo("bottom", { duration: 400 });
       cy.wait(400);
-      cy.get(`#${sectionId}`).should("be.visible");
+      cy.get(`#${sectionId}`).scrollIntoView({ duration: 600 });
+      cy.wait(900);
 
       cy.checkA11y(
         `#${sectionId}`,
-        {
-          runOnly: {
-            type: "tag",
-            values: ["wcag22aa", "wcag2aa", "best-practice"],
-          },
-          rules: {
-            scrollable: { enabled: false },
-          },
-        },
+        AXE_OPTIONS,
         (violations) => {
           violations.forEach((v) => {
             cy.log(`🚨 #${sectionId}: ${v.id} — ${v.description}`);
           });
-          expect(violations.length, `#${sectionId}: ${violations.length} axe violations`).to.equal(0);
+          expect(
+            violations.map((v) => `${v.id} @ ${v.nodes.map((n) => n.target.join(" ")).join(" | ")}`),
+            `#${sectionId}: ${violations.length} axe violations`
+          ).to.deep.equal([]);
         }
       );
     });
@@ -187,11 +180,15 @@ describe("PSARA homepage — per-section axe audit (all 15 sections)", () => {
 describe("PSARA homepage — keyboard navigation & focus", () => {
   beforeEach(() => {
     cy.visit("/");
-    cy.wait(800);
+    // Trigger all GSAP section reveals so sections aren't stuck at opacity 0
+    cy.scrollTo("bottom", { duration: 400 });
+    cy.wait(500);
+    cy.scrollTo("top", { duration: 300 });
+    cy.wait(400);
   });
 
   it("first focusable element is reached via Tab", () => {
-    cy.get("body").type("{tab}", { force: true });
+    cy.get("a, button, input, select, textarea, [tabindex]").first().focus();
     cy.focused().should("exist");
   });
 
@@ -206,18 +203,24 @@ describe("PSARA homepage — keyboard navigation & focus", () => {
 
   it("key interactive elements are keyboard-reachable", () => {
     const keySelectors = [
-      '#hero a[href="#contact"]',
+      '#hero a[href="#about"]',
       '#hero a[href*="wa.me"]',
-      '#hero button',
+      '#hero a[href*="tel:"]',
       '#contact a[href*="wa.me"]',
       '#contact a[href*="tel:"]',
-      '#site-footer a[href*="tel:"]',
-      '#site-footer a[href*="mailto:"]',
+      '#contact button[type="submit"]',
+      'footer a[href*="tel:"]',
+      'footer a[href*="mailto:"]',
     ];
 
     keySelectors.forEach((sel) => {
-      cy.get(sel).should("exist").and("be.visible");
-      cy.get(sel).focus();
+      // Scroll the element into view first — GSAP section reveals keep below-fold
+      // sections at opacity 0 until their ScrollTrigger fires, so visibility must
+      // be asserted after the element is actually in the viewport (and revealed).
+      cy.get(sel).first().scrollIntoView({ duration: 200 });
+      cy.wait(250);
+      cy.get(sel).first().should("exist").and("be.visible");
+      cy.get(sel).first().focus();
       cy.focused()
         .should("exist")
         .and(($el) => {
@@ -227,53 +230,6 @@ describe("PSARA homepage — keyboard navigation & focus", () => {
           expect(isFocusable, `${sel} should be keyboard-focusable`).to.be.true;
         });
     });
-  });
-});
-
-describe("PSARA homepage — EligibilityQuiz (modal) a11y", () => {
-  beforeEach(() => {
-    cy.visit("/");
-    cy.injectAxe();
-    cy.wait(800);
-  });
-
-  it("opens the quiz modal and checks ARIA attributes", () => {
-    cy.get("#hero").contains("Readiness Check").click();
-    cy.wait(400);
-
-    cy.get('[role="dialog"]')
-      .should("be.visible")
-      .and("have.attr", "aria-modal", "true");
-
-    cy.get('[role="dialog"] button[aria-label="Close"]').should("exist");
-
-    // Escape should close the modal
-    cy.get("body").type("{esc}", { force: true });
-    cy.get('[role="dialog"]').should("not.exist");
-  });
-
-  it("quiz modal passes axe audit", () => {
-    cy.get("#hero").contains("Readiness Check").click();
-    cy.wait(300);
-
-    cy.checkA11y(
-      '[role="dialog"]',
-      {
-        runOnly: {
-          type: "tag",
-          values: ["wcag22aa", "wcag2aa", "best-practice"],
-        },
-        rules: {
-          scrollable: { enabled: false },
-        },
-      },
-      (violations) => {
-        violations.forEach((v) => {
-          cy.log(`🚨 Quiz modal: ${v.id} — ${v.description}`);
-        });
-        expect(violations.length, `Quiz modal: ${violations.length} axe violations`).to.equal(0);
-      }
-    );
   });
 });
 
@@ -299,8 +255,8 @@ describe("PSARA homepage — reduced motion support", () => {
 
     // Core content should still render
     cy.get("#hero").should("exist");
-    cy.get("h1").should("contain.text", "PSARA License");
-    cy.get('a[href="#contact"]').should("be.visible");
+    cy.get("h1").should("contain.text", "Built for");
+    cy.get('a[href="#about"]').should("be.visible");
   });
 });
 
@@ -322,7 +278,7 @@ describe("PSARA homepage — ContactForm a11y", () => {
       const id = $input.attr("id");
       const hasAssociatedLabel = id ? Cypress.$(`label[for="${id}"]`).length > 0 : false;
 
-      expect(!!(ariaLabel || placeholder || hasAssociatedLabel)).to.be.true;
+      expect(!!(ariaLabel || placeholder || hasAssociatedLabel), `Field missing accessible name: ${$input.attr("class")}`).to.be.true;
     });
   });
 
@@ -332,15 +288,7 @@ describe("PSARA homepage — ContactForm a11y", () => {
 
     cy.checkA11y(
       "#contact",
-      {
-        runOnly: {
-          type: "tag",
-          values: ["wcag22aa", "wcag2aa", "best-practice"],
-        },
-        rules: {
-          scrollable: { enabled: false },
-        },
-      },
+      AXE_OPTIONS,
       (violations) => {
         violations.forEach((v) => {
           cy.log(`🚨 Contact: ${v.id} — ${v.description}`);

@@ -1,6 +1,7 @@
 import type { StateInfo } from "../data/states";
 import type { CityInfo } from "../data/cities";
 import { CONTACT, SITE, AGGREGATE_RATING } from "./config";
+import { getCaContact } from "../data/ca-contacts";
 
 function stringToHash(str: string): number {
   let hash = 0;
@@ -28,6 +29,20 @@ function pickN<T>(seed: number, options: T[], n: number): T[] {
     i++;
   }
   return out;
+}
+
+/**
+ * Build a ≤160-char meta description (Google truncates ~155–160 in the SERP),
+ * keeping the phone CTA intact even when the keyword body is truncated.
+ */
+function truncateMeta(body: string, phone: string, max = 158): string {
+  const phonePart = `Call ${phone}.`;
+  const room = max - phonePart.length - 1; // reserve space + phone
+  if (body.length <= room) return `${body} ${phonePart}`;
+  const cut = body.slice(0, room - 1);
+  const lastSpace = cut.lastIndexOf(" ");
+  const head = (lastSpace > 40 ? cut.slice(0, lastSpace) : cut).trimEnd();
+  return `${head}… ${phonePart}`;
 }
 
 export type FaqPair = { q: string; a: string };
@@ -103,6 +118,7 @@ function validityNote(years: number): string {
 
 function buildStateFaqs(s: StateInfo, seed: number): FaqPair[] {
   const place = s.name;
+  const ca = getCaContact(s.slug);
   const all: FaqPair[] = [
     {
       q: `Who issues the PSARA License in ${place}?`,
@@ -148,8 +164,14 @@ function buildStateFaqs(s: StateInfo, seed: number): FaqPair[] {
           : `Beyond the national core set, follow the Controlling Authority checklist for ${place} — office proof and training MOU are universal bottlenecks.`,
     },
   ];
+  if (ca?.name && ca.name !== "—") {
+    all.push({
+      q: `Who is the current Controlling Authority contact for ${place}?`,
+      a: `The Controlling Authority officer on record is ${ca.name}. Desk contact: ${ca.phone} / ${ca.email}. ${ca.licensesIssued ? `Licences issued in ${place}: ${ca.licensesIssued}.` : ""}`,
+    });
+  }
   const rotate = seed % 3;
-  return [...all.slice(rotate), ...all.slice(0, rotate)].slice(0, 8);
+  return [...all.slice(rotate), ...all.slice(0, rotate)].slice(0, 9);
 }
 
 export function generateStateContent(s: StateInfo): LocationSEOContent {
@@ -164,21 +186,31 @@ export function generateStateContent(s: StateInfo): LocationSEOContent {
   const intro = [
     pick(seed, 1, [
       `${SITE.name} assists companies and entrepreneurs in obtaining a PSARA License in ${place} under the Private Security Agencies (Regulation) Act, 2005. Filings are coordinated with ${s.authority}, with indicative timelines of ${s.timeline}.`,
-      `If you plan to run a private security agency in ${place}, a State PSARA Licence is mandatory before commercial guard deployment. ${SITE.name} builds inspection-ready dossiers for ${s.capital} and multi-district coverage across ${place}.`,
-      `PSARA licensing in ${place} is not a one-page form exercise — it is a Controlling Authority process that tests your entity objects, office proof, training MOU, and promoter antecedents. We specialise in making that file grant-ready.`,
+    `If you plan to run a private security agency in ${place}, a State PSARA Licence is mandatory before commercial guard deployment. ${SITE.name} builds inspection-ready dossiers for ${s.capital} and multi-district coverage across ${place}.`,
+    `PSARA licensing in ${place} is not a one-page form exercise. It is a Controlling Authority process that tests your entity objects, office proof, training MOU, and promoter antecedents. We specialise in making that file grant-ready.`,
     ]),
     pick(seed, 2, [
-      `Demand for licensed agencies in ${place} is driven by ${sectors.slice(0, 4).join(", ")}, and related commercial activity. Clients increasingly insist on PSARA-compliant vendors with labour hygiene — not informal manpower suppliers.`,
+      `Demand for licensed agencies in ${place} is driven by ${sectors.slice(0, 4).join(", ")}, and related commercial activity. Clients increasingly insist on PSARA-compliant vendors with labour hygiene, not informal manpower suppliers.`,
       `${place}'s security market spans ${sectors.slice(0, 5).join(", ")}. Each segment expects trained guards, verifiable agency credentials, and statutory registrations that start with a clean PSARA Licence.`,
-      `From ${s.capital} outwards — including markets such as ${cityList || s.capital} — operators need lawful district coverage, training records, and police-cleared promoters before scaling posts.`,
+      `From ${s.capital} outwards, including markets such as ${cityList || s.capital}, operators need lawful district coverage, training records, and police-cleared promoters before scaling posts.`,
     ]),
     `Application mode in ${place} is typically ${s.applicationMode}. ${s.rulesNote}. ${validityNote(s.validityYears).replace(/\*\*/g, "")}`,
     `We combine documentation discipline with practical liaison: training MOU coordination (${s.trainingNote}), police verification support, and premises readiness so your first submission does not bounce for avoidable defects.`,
   ];
 
+
+  const ca = getCaContact(s.slug);
   const authorityBlock = [
     `The Controlling Authority pathway for ${place} is handled via **${s.authority}**.`,
     `Indicative processing window: **${s.timeline}**. Actual duration depends on verification queues, inspection scheduling, and whether every checklist item is complete on day one.`,
+    ...(ca?.name && ca.name !== "—"
+      ? [`Controlling Authority officer on record: **${ca.name}**${ca.phone !== "—" ? ` — desk ${ca.phone}` : ""}${ca.email !== "—" ? `, ${ca.email}` : ""}.`]
+      : []),
+    ...(ca?.portal ? [`Application portal: **${ca.portal}**.`] : []),
+    ...(ca?.licensesIssued && ca.licensesIssued !== "—"
+      ? [`Licence activity (psara.gov.in, 2026): **${ca.licensesIssued}${ca.licensesActive ? ` issued, ${ca.licensesActive} active` : ""}** in ${place}.`]
+      : []),
+    ...(ca?.bond ? [`Security deposit / bond note: ${ca.bond}.`] : []),
     `Key forms commonly referenced in ${place}: ${s.forms.join("; ")}.`,
     ...s.specialRules.map((r) => r),
   ];
@@ -231,7 +263,10 @@ export function generateStateContent(s: StateInfo): LocationSEOContent {
   return {
     placeName: place,
     placeType: "state",
-    metaDescription: `PSARA License in ${place}. Authority: ${s.authority}. Timeline: ${s.timeline}. Process, documents, training MOU, fees & police verification guidance. ${SITE.name}, ${CONTACT.phoneDisplay}.`,
+    metaDescription: truncateMeta(
+      `PSARA License in ${place}: ${s.timeline} timeline, fees, documents, training MOU & police verification. ${SITE.name}.`,
+      CONTACT.phoneDisplay
+    ),
     intro,
     authorityBlock,
     processHeading: `PSARA process we follow in ${place}`,
@@ -269,7 +304,7 @@ export function generateCityContent(c: CityInfo, s: StateInfo | undefined): Loca
     pick(seed, 1, [
       `Looking for a PSARA License consultant in ${place}? ${SITE.name} supports security agency registration and compliance for businesses based in ${place}, ${region} — from entity hygiene to Controlling Authority filing and police verification.`,
       `${place} entrepreneurs and companies planning a private security agency need a State PSARA Licence before commercial deployment. ${SITE.name} prepares licence-ready dossiers for applicants headquartered in ${place}.`,
-      `If your registered office or principal place of business is in ${place}, your PSARA path still runs through ${region}'s Controlling Authority — but local office proof, district mapping, and inspection readiness are city-practical issues we handle daily.`,
+      `If your registered office or principal place of business is in ${place}, your PSARA path still runs through ${region}'s Controlling Authority, but local office proof, district mapping, and inspection readiness are city-practical issues we handle daily.`,
     ]),
     pick(seed, 2, [
       `${place} is a Tier-${c.tier} market where growth in ${tags.slice(0, 3).join(", ")} increases demand for licensed, trained security manpower rather than informal labour supply.`,
@@ -282,10 +317,15 @@ export function generateCityContent(c: CityInfo, s: StateInfo | undefined): Loca
     `We help with object-clause readiness, training MOU facilitation for ${region}, promoter police verification liaison, inspection-ready office documentation, and post-grant compliance handover.`,
   ];
 
+
+  const ca = s ? getCaContact(s.slug) : undefined;
   const authorityBlock = s
     ? [
         `State framework: **${region}** — ${authority}.`,
         `Timeline guidance: ${timeline}.`,
+        ...(ca?.name && ca.name !== "—" ? [`Controlling Authority officer on record: **${ca.name}** (${ca.phone} / ${ca.email}).`] : []),
+        ...(ca?.portal ? [`Application portal: **${ca.portal}**.`] : []),
+        ...(ca?.licensesIssued && ca.licensesIssued !== "—" ? [`Licence activity in ${region}: ${ca.licensesIssued} issued${ca.licensesActive ? ` (${ca.licensesActive} active)` : ""}.`] : []),
         `Training note: ${s.trainingNote}.`,
         ...s.specialRules.slice(0, 4),
       ]
@@ -368,7 +408,10 @@ export function generateCityContent(c: CityInfo, s: StateInfo | undefined): Loca
   return {
     placeName: place,
     placeType: "city",
-    metaDescription: `PSARA License consultant in ${place}, ${region}. ${tags.slice(0, 2).join(', ')} sectors. ${authority === 'the State Controlling Authority' ? '' : 'Authority: ' + authority + '. '}Documentation, training MOU & filing support. Call ${CONTACT.phoneDisplay}.`,
+    metaDescription: truncateMeta(
+      `PSARA License consultant in ${place}, ${region}. ${tags.slice(0, 2).join(", ")} sectors. Documentation, training MOU & police verification support.`,
+      CONTACT.phoneDisplay
+    ),
     intro,
     authorityBlock,
     processHeading: `How we run PSARA for ${place} applicants`,

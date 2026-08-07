@@ -1,0 +1,212 @@
+/* Section theme backgrounds for scroll storytelling — inspired by meech213 / horeca-social */
+
+/* ── Section Themes ── */
+.section-void     { background-color: var(--void); }
+.section-electric { background: linear-gradient(160deg, var(--void) 0%, #041030 50%, #0a1a4a 100%); }
+.section-metal    { background: linear-gradient(160deg, var(--void) 0%, #041030 50%, #0a1a4a 100%); }
+.section-warm     { background: linear-gradient(160deg, var(--void) 0%, #041030 50%, #0a1a4a 100%); }
+.section-night    { background: linear-gradient(160deg, #010408 0%, var(--void) 50%, #010408 100%); }
+.section-surface  { background-color: var(--space); }
+
+/* ── Section transition curtain ── */
+.section-curtain {
+  position: relative;
+}
+.section-curtain::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 120px;
+  pointer-events: none;
+  z-index: 5;
+}
+.section-void .section-curtain::after,
+.section-night .section-curtain::after {
+  background: linear-gradient(to bottom, transparent, rgba(2,8,20,0.95));
+}
+.section-metal .section-curtain::after,
+.section-warm .section-curtain::after {
+  background: linear-gradient(to bottom, transparent, rgba(4,16,48,0.95));
+}
+.section-electric .section-curtain::after {
+  background: linear-gradient(to bottom, transparent, rgba(4,16,48,0.95));
+}
+
+/* ── Section entry animations ── */
+@keyframes section-reveal {
+  from { clip-path: inset(0 0 100% 0); opacity: 0.3; }
+  to   { clip-path: inset(0 0 0 0); opacity: 1; }
+}
+
+.section-reveal-enter {
+  animation: section-reveal 1.2s var(--ease-expo) forwards;
+}
+
+/* ── Large display typography ── */
+.display-hero {
+  font-size: clamp(3rem, 10vw, 9rem);
+  line-height: 0.88;
+  letter-spacing: -0.03em;
+  font-weight: 700;
+  font-family: var(--font-display);
+}
+
+.display-mega {
+  font-size: clamp(2.2rem, 7vw, 6.5rem);
+  line-height: 0.92;
+  letter-spacing: -0.02em;
+  font-weight: 700;
+  font-family: var(--font-display);
+}
+
+.display-large {
+  font-size: clamp(1.6rem, 4vw, 3.2rem);
+  line-height: 1.05;
+  font-weight: 600;
+  font-family: var(--font-display);
+}
+
+/* ── Thin accent line with glow ── */
+.accent-line {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), var(--electric), transparent);
+  box-shadow: 0 0 8px var(--electric-glow);
+}
+
+.accent-line-gold {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold-bright), transparent);
+  box-shadow: 0 0 12px rgba(232,213,163,0.5);
+}
+
+/* ── Number counter style ── */
+.counter-num {
+  font-size: clamp(3.5rem, 8vw, 7rem);
+  font-weight: 700;
+  line-height: 0.9;
+  letter-spacing: -0.04em;
+  font-family: var(--font-display);
+  background: var(--grad-metal);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ── Service card horizontal scroll (kept in design-system.css only) ── */
+.services-track {
+  display: flex;
+  gap: 1.5rem;
+  padding: 1rem 0;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.services-track::-webkit-scrollbar { display: none; }
+
+/* ── Sticky number for process ── */
+.process-num {
+  font-size: clamp(5rem, 15vw, 12rem);
+  font-weight: 700;
+  line-height: 0.85;
+  letter-spacing: -0.05em;
+  font-family: var(--font-display);
+  color: transparent;
+  -webkit-text-stroke: 1px var(--white-25);
+  transition: -webkit-text-stroke-color 0.5s ease;
+}
+.process-num.active {
+  -webkit-text-stroke-color: var(--gold-bright);
+  text-shadow: 0 0 60px rgba(232,213,163,0.3);
+}
+
+/* ── Presence city grid ── */
+.presence-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 1px;
+  background: var(--white-12);
+  border: 1px solid var(--white-12);
+}
+.presence-cell {
+  background: var(--void);
+  padding: 1.25rem 1rem;
+  text-align: center;
+  transition: background 0.3s ease, color 0.3s ease;
+  cursor: default;
+}
+.presence-cell:hover {
+  background: var(--white-12);
+  color: var(--gold-bright);
+}
+.presence-cell.hq {
+  background: linear-gradient(135deg, rgba(212,184,114,0.15) 0%, rgba(184,142,68,0.08) 100%);
+  color: var(--gold-bright);
+}
+
+/* ── Quote block ── */
+.quote-large {
+  font-size: clamp(1.4rem, 3vw, 2.4rem);
+  line-height: 1.35;
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--white-90);
+  max-width: 800px;
+}
+.quote-large::before {
+  content: "\201C";
+  font-size: 6rem;
+  line-height: 0.6;
+  vertical-align: -0.3em;
+  margin-right: 0.1em;
+  color: var(--gold);
+  font-family: Georgia, serif;
+}
+
+/* ── CTA Magnetic Button ── */
+.cta-magnetic {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 2.25rem;
+  border: 1px solid var(--gold);
+  background: transparent;
+  color: var(--gold-bright);
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  cursor: pointer;
+  overflow: hidden;
+  transition: color 0.4s ease;
+}
+.cta-magnetic::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, var(--metal-1) 0%, var(--metal-3) 100%);
+  transform: translateY(101%);
+  transition: transform 0.5s var(--ease-expo);
+}
+.cta-magnetic:hover::before {
+  transform: translateY(0);
+}
+.cta-magnetic:hover {
+  color: var(--void);
+}
+.cta-magnetic span,
+.cta-magnetic svg {
+  position: relative;
+  z-index: 1;
+}
+
+/* ── Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  .section-reveal-enter { animation: none; opacity: 1; }
+  .process-num { -webkit-text-stroke-color: var(--white-40); }
+}

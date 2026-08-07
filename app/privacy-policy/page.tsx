@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { PageHero, PageMain, Prose } from "../../components/PageShell";
+import { PageHero, PageMain } from "../../components/PageShell";
+import StageShell from "../components/ui/StageShell";
 import { pageMeta } from "../../lib/metadata";
 import { SITE, CONTACT } from "../../lib/config";
 
@@ -14,7 +15,7 @@ export const metadata: Metadata = {
 
 export default function PrivacyPage() {
   return (
-    <>
+    <StageShell>
       <PageHero
         title="Privacy Policy"
         lead="How we collect and protect information when you consult with us."
@@ -53,6 +54,6 @@ export default function PrivacyPage() {
           </div>
         </div>
       </PageMain>
-    </>
+    </StageShell>
   );
 }

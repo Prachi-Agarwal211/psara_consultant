@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { MapPin, Phone, MessageSquare } from "lucide-react";
 import { OFFICES, CONTACT } from "../../../lib/config";
 import { DEFAULT_WA, TEL_HREF } from "../../../lib/whatsapp";
@@ -23,8 +22,8 @@ export default function Presence() {
         >
           <div>
             <div className="flex items-center gap-3 mb-3">
-              <span className="w-5 h-px" style={{ backgroundColor: "var(--blue)" }} />
-              <span className="text-[0.58rem] font-bold uppercase tracking-[0.22em]" style={{ color: "var(--blue-bright)" }}>
+                  <span className="w-5 h-px" style={{ backgroundColor: "var(--gold)" }} />
+              <span className="text-[0.58rem] font-bold uppercase tracking-[0.22em]" style={{ color: "var(--gold-bright)" }}>
                 PHYSICAL PRESENCE
               </span>
             </div>
@@ -45,19 +44,19 @@ export default function Presence() {
           {OFFICES.slice(0, 6).map((off, i) => (
             <div
               key={off.city}
-              className="group p-7 rounded-2xl flex flex-col justify-between transition-all duration-400"
+              className="group p-7 flex flex-col justify-between transition-[color,border-color,background-color] duration-200"
               style={{
                 backgroundColor: "var(--obsidian-card)",
-                border: "1px solid var(--line)",
+                border: "1px solid var(--line-gold)",
               }}
               onMouseEnter={(e) => {
                 const el = e.currentTarget as HTMLElement;
-                el.style.borderColor = "var(--blue-border)";
-                el.style.boxShadow = "0 0 28px var(--blue-glow-soft)";
+                el.style.borderColor = "var(--gold)";
+                el.style.boxShadow = "none";
               }}
               onMouseLeave={(e) => {
                 const el = e.currentTarget as HTMLElement;
-                el.style.borderColor = "var(--line)";
+                el.style.borderColor = "var(--line-gold)";
                 el.style.boxShadow = "none";
               }}
             >
@@ -66,9 +65,9 @@ export default function Presence() {
                   <span
                     className="text-[0.52rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded-md border"
                     style={{
-                      color: i === 0 ? "var(--gold)" : "var(--blue-bright)",
-                      borderColor: i === 0 ? "var(--gold-glow)" : "var(--blue-border)",
-                      backgroundColor: i === 0 ? "rgba(212,175,55,0.08)" : "var(--blue-surface)",
+                      color: i === 0 ? "var(--gold)" : "var(--gold-bright)",
+                      borderColor: i === 0 ? "var(--gold-glow)" : "var(--gold-glow)",
+                      backgroundColor: i === 0 ? "rgba(212,175,55,0.08)" : "rgba(212,175,55,0.04)",
                     }}
                   >
                     {off.badge}
@@ -100,15 +99,14 @@ export default function Presence() {
 
         {/* Central helpdesk bar */}
         <div
-          className="mt-6 p-8 rounded-2xl flex flex-col md:flex-row items-center justify-between gap-6"
+          className="mt-6 p-8 flex flex-col md:flex-row items-center justify-between gap-6"
           style={{
             backgroundColor: "var(--obsidian-lift)",
-            border: "1px solid var(--blue-border)",
-            boxShadow: "0 0 40px var(--blue-glow-soft)",
+            border: "1px solid var(--gold)/30",
           }}
         >
           <div>
-            <span className="text-[0.58rem] font-bold uppercase tracking-widest block mb-2" style={{ color: "var(--blue-bright)" }}>
+            <span className="text-[0.58rem] font-bold uppercase tracking-widest block mb-2" style={{ color: "var(--gold-bright)" }}>
               CENTRAL HELPDESK
             </span>
             <p className="font-bold text-lg" style={{ color: "var(--white)", fontFamily: "var(--font-display)" }}>
@@ -118,10 +116,8 @@ export default function Presence() {
           <div className="flex items-center gap-3">
             <a
               href={TEL_HREF}
-              className="px-6 py-3 rounded-xl font-bold text-xs uppercase tracking-widest flex items-center gap-2 transition-all duration-300"
-              style={{ backgroundColor: "var(--blue)", color: "var(--white)", boxShadow: "0 0 20px var(--blue-glow)" }}
-              onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.boxShadow = "0 0 32px var(--blue-glow)"; }}
-              onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.boxShadow = "0 0 20px var(--blue-glow)"; }}
+              className="px-6 py-3 font-bold text-xs uppercase tracking-widest flex items-center gap-2 transition-[color,border-color,background-color] duration-200"
+              style={{ backgroundColor: "var(--gold)", color: "var(--void)" }}
             >
               <Phone className="w-3.5 h-3.5" />
               Call {CONTACT.phoneDisplay}
@@ -130,7 +126,7 @@ export default function Presence() {
               href={DEFAULT_WA}
               target="_blank"
               rel="noopener noreferrer"
-              className="px-6 py-3 rounded-xl font-bold text-xs uppercase tracking-widest flex items-center gap-2 transition-all duration-300"
+              className="px-6 py-3 font-bold text-xs uppercase tracking-widest flex items-center gap-2 transition-[color,border-color,background-color] duration-200"
               style={{ backgroundColor: "rgba(212,175,55,0.10)", color: "var(--gold)", border: "1px solid var(--gold-glow)" }}
               onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.backgroundColor = "rgba(212,175,55,0.18)"; }}
               onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.backgroundColor = "rgba(212,175,55,0.10)"; }}

@@ -3,6 +3,7 @@
 import { useState, type FormEvent } from "react";
 import { openWhatsApp, formatEnquiryWhatsAppMessage } from "../lib/whatsapp";
 import { CONTACT } from "../lib/config";
+import { validateEnquiryFields, type EnquiryErrors } from "../lib/form-validation";
 
 const STATES = [
   "Rajasthan",
@@ -50,12 +51,17 @@ export default function ContactForm({
   const [coverage, setCoverage] = useState("");
   const [message, setMessage] = useState("");
   const [sent, setSent] = useState(false);
+  const [errors, setErrors] = useState<EnquiryErrors>({});
+  const [tried, setTried] = useState(false);
 
   const field = "form-field";
 
   const onSubmit = (e: FormEvent) => {
     e.preventDefault();
-    if (!name.trim() || !phone.trim()) return;
+    setTried(true);
+    const next = validateEnquiryFields({ name, phone, email, state });
+    setErrors(next);
+    if (Object.keys(next).length > 0) return;
     const text = formatEnquiryWhatsAppMessage({
       name,
       phone,
@@ -79,36 +85,63 @@ export default function ContactForm({
       {/* Decorative label — Voyeur/Jasmine style */}
       <div className="flex items-center gap-2 mb-1">
         <span className="h-px flex-1 bg-[var(--line-gold)]" />
-        <span className="text-[10px] font-bold uppercase tracking-widest text-[var(--gold)] shrink-0">
+        <span className="text-xs font-bold uppercase tracking-widest text-[var(--gold)] shrink-0">
           YOUR DETAILS
         </span>
         <span className="h-px flex-1 bg-[var(--line-gold)]" />
       </div>
 
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-        <input
-          required
-          className={field}
-          placeholder="Full name *"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          autoComplete="name"
-        />
-        <input
-          required
-          className={field}
-          placeholder="Phone / WhatsApp *"
-          value={phone}
-          onChange={(e) => setPhone(e.target.value)}
-          autoComplete="tel"
-          inputMode="tel"
-        />
+        <div>
+          <input
+            required
+            className={`${field} ${errors.name ? "border-[var(--signal-red)]" : ""}`}
+            placeholder="Full name *"
+            aria-label="Full name"
+            aria-invalid={errors.name ? true : undefined}
+            aria-describedby={errors.name ? "cf-name-error" : undefined}
+            value={name}
+            onChange={(e) => {
+              setName(e.target.value);
+              if (errors.name && e.target.value.trim()) {
+                setErrors((prev) => ({ ...prev, name: undefined }));
+              }
+            }}
+            autoComplete="name"
+          />
+          <p id="cf-name-error" role="alert" className={errors.name ? "text-[var(--signal-red)] text-xs font-semibold mt-1" : "hidden"}>
+            {errors.name}
+          </p>
+        </div>
+        <div>
+          <input
+            required
+            className={`${field} ${errors.phone ? "border-[var(--signal-red)]" : ""}`}
+            placeholder="Phone / WhatsApp *"
+            aria-label="Phone or WhatsApp"
+            aria-invalid={errors.phone ? true : undefined}
+            aria-describedby={errors.phone ? "cf-phone-error" : undefined}
+            value={phone}
+            onChange={(e) => {
+              setPhone(e.target.value);
+              if (errors.phone && e.target.value.trim()) {
+                setErrors((prev) => ({ ...prev, phone: undefined }));
+              }
+            }}
+            autoComplete="tel"
+            inputMode="tel"
+          />
+          <p id="cf-phone-error" role="alert" className={errors.phone ? "text-[var(--signal-red)] text-xs font-semibold mt-1" : "hidden"}>
+            {errors.phone}
+          </p>
+        </div>
       </div>
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
         <input
           className={field}
           placeholder="Email"
           type="email"
+          aria-label="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           autoComplete="email"
@@ -116,27 +149,42 @@ export default function ContactForm({
         <input
           className={field}
           placeholder="Company / Firm name"
+          aria-label="Company or firm name"
           value={company}
           onChange={(e) => setCompany(e.target.value)}
         />
       </div>
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-        <select
-          className={field}
-          value={state}
-          onChange={(e) => setState(e.target.value)}
-          required
-        >
-          <option value="">State of operation *</option>
-          {STATES.map((s) => (
-            <option key={s} value={s}>
-              {s}
-            </option>
-          ))}
-        </select>
+        <div>
+          <select
+            required
+            className={`${field} ${errors.state ? "border-[var(--signal-red)]" : ""}`}
+            value={state}
+            onChange={(e) => {
+              setState(e.target.value);
+              if (errors.state && e.target.value.trim()) {
+                setErrors((prev) => ({ ...prev, state: undefined }));
+              }
+            }}
+            aria-label="State of operation"
+            aria-invalid={errors.state ? true : undefined}
+            aria-describedby={errors.state ? "cf-state-error" : undefined}
+          >
+            <option value="">State of operation *</option>
+            {STATES.map((s) => (
+              <option key={s} value={s}>
+                {s}
+              </option>
+            ))}
+          </select>
+          <p id="cf-state-error" role="alert" className={errors.state ? "text-[var(--signal-red)] text-xs font-semibold mt-1" : "hidden"}>
+            {errors.state}
+          </p>
+        </div>
         <input
           className={field}
           placeholder="City / district"
+          aria-label="City or district"
           value={city}
           onChange={(e) => setCity(e.target.value)}
         />
@@ -146,6 +194,7 @@ export default function ContactForm({
           className={field}
           value={service}
           onChange={(e) => setService(e.target.value)}
+          aria-label="Service needed"
         >
           <option value="">Service needed</option>
           {SERVICES.map((s) => (
@@ -158,6 +207,7 @@ export default function ContactForm({
           className={field}
           value={coverage}
           onChange={(e) => setCoverage(e.target.value)}
+          aria-label="Coverage goal"
         >
           <option value="">Coverage goal</option>
           <option value="One district">One district</option>
@@ -170,6 +220,7 @@ export default function ContactForm({
       <textarea
         className={`${field} min-h-[100px] resize-y`}
         placeholder="Tell us about your entity type, office status, and timeline…"
+        aria-label="Message"
         value={message}
         onChange={(e) => setMessage(e.target.value)}
       />
@@ -188,8 +239,12 @@ export default function ContactForm({
           Or email instead
         </a>
       </div>
-      {sent ? (
-        <p className="text-sm font-semibold text-[var(--emerald)]">
+      {tried && Object.keys(errors).length > 0 ? (
+        <p role="alert" className="text-sm font-semibold text-[var(--signal-red)]">
+          Please fix the highlighted fields above and try again.
+        </p>
+      ) : sent ? (
+        <p className="text-sm font-semibold text-[var(--emerald)]" role="status">
           ✓ WhatsApp opened with your details. If it did not open, call{" "}
           {CONTACT.phoneDisplay}.
         </p>

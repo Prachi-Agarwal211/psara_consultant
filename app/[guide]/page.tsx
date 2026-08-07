@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { GUIDES, getGuide } from "../../data/guides";
-import { PageHero, PageMain, Prose } from "../../components/PageShell";
+import { PageHero, PageMain } from "../../components/PageShell";
+import StageShell from "../components/ui/StageShell";
 import CtaBar from "../../components/CtaBar";
 import WhatsAppForm from "../../components/WhatsAppForm";
 import { pageMeta } from "../../lib/metadata";
@@ -27,7 +28,11 @@ export async function generateMetadata({
   if (RESERVED.has(guide)) return {};
   const g = getGuide(guide);
   if (!g) return {};
-  return pageMeta(g.title, g.description, `/${guide}`);
+  // Suffix keeps guide <title>s unique vs. same-named service pages
+  // (e.g. /psara-renewal guide vs /services/psara-license-renewal).
+  // Skip when the guide title already contains the phrase.
+  const suffix = g.title.toLowerCase().includes("complete guide") ? "" : " — Complete Guide";
+  return pageMeta(`${g.title}${suffix}`, g.description, `/${guide}`);
 }
 
 import GuideDossierView from "../components/sections/GuideDossierView";
@@ -60,7 +65,7 @@ export default async function GuidePage({
   }
 
   return (
-    <>
+    <StageShell>
       <JsonLd data={articleSchema} />
       <PageHero
         title={g.title}
@@ -73,16 +78,16 @@ export default async function GuidePage({
             <GuideDossierView guide={g} />
 
             {/* More guides sidebar */}
-            <div className="mt-10 pt-6 border-t border-[var(--line)]">
-              <p className="label-meta mb-4 font-bold text-[var(--gold)]">More guides</p>
-              <ul className="space-y-2.5 text-sm font-bold text-[var(--text-dim)]">
+            <div className="mt-10 pt-6 border-t border-white/10">
+              <p className="mb-4 text-xs font-bold uppercase tracking-wider text-[var(--gold-bright)]">More guides</p>
+              <ul className="space-y-2.5 text-sm font-bold text-[var(--white-55)]">
                 {GUIDES.filter((x) => x.slug !== g.slug)
                   .slice(0, 8)
                   .map((x) => (
                     <li key={x.slug}>
                       <a href={`/${x.slug}`}
-                        className="hover:text-[var(--gold)] transition-colors inline-flex items-center gap-2">
-                        <span className="w-1.5 h-1.5 rounded-full bg-[var(--gold)] opacity-40" />
+                        className="hover:text-[var(--gold-bright)] transition-colors inline-flex items-center gap-2">
+                        <span className="w-1.5 h-1.5 rounded-full bg-[var(--gold-bright)] opacity-40" />
                         {x.title}
                       </a>
                     </li>
@@ -95,18 +100,13 @@ export default async function GuidePage({
 
           {/* Sidebar enquiry form */}
           <div className="lg:col-span-5">
-            <div className="relative border border-[var(--line-gold)] p-6 md:p-8"
-              style={{ backgroundColor: "color-mix(in srgb, var(--warm-dark-2) 60%, transparent)" }}
+            <div className="relative border border-white/10 p-6 md:p-8"
+              style={{ backgroundColor: "rgba(2,8,20,0.4)" }}
             >
-              <div className="absolute top-3 left-3 w-3 h-3 border-t border-l border-[var(--gold)] opacity-30" aria-hidden />
-              <div className="absolute top-3 right-3 w-3 h-3 border-t border-r border-[var(--gold)] opacity-30" aria-hidden />
-              <div className="absolute bottom-3 left-3 w-3 h-3 border-b border-l border-[var(--gold)] opacity-30" aria-hidden />
-              <div className="absolute bottom-3 right-3 w-3 h-3 border-b border-r border-[var(--gold)] opacity-30" aria-hidden />
-
-              <h3 className="font-[family-name:var(--font-display)] text-xl font-bold tracking-tight text-[var(--cream)]">
+              <h3 className="font-[family-name:var(--font-display)] text-xl font-bold tracking-tight text-white">
                 Ask about this topic
               </h3>
-              <p className="mt-2 text-sm font-medium text-[var(--text-dim)]">
+              <p className="mt-2 text-sm font-medium text-[var(--white-55)]">
                 Have a specific question about {g.title}? Send us a message.
               </p>
               <div className="mt-6">
@@ -116,6 +116,6 @@ export default async function GuidePage({
           </div>
         </div>
       </PageMain>
-    </>
+    </StageShell>
   );
 }

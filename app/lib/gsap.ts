@@ -81,6 +81,9 @@ export function wordBlurReveal(headingEl: HTMLElement, start = "top 88%") {
   words.forEach((word) => {
     const wrap = document.createElement("span");
     wrap.className = "inline-block overflow-hidden mr-[0.25em]";
+    // Glyph room inside the mask — avoids descender clipping at tight line-heights
+    wrap.style.paddingBottom = "0.12em";
+    wrap.style.marginBottom = "-0.12em";
 
     const inner = document.createElement("span");
     inner.className = "inline-block will-change-transform";
@@ -392,71 +395,9 @@ export function initSectionTransition(
     duration?: number;
   } = {}
 ) {
-  if (!section || prefersReducedMotion()) {
-    section?.style.setProperty("opacity", "1");
-    return;
-  }
-  const { gsap: g } = ensureGsap();
-
-  const { start = "top 88%", duration = 0.85, variant = "fade" } = options;
-
-  // Ensure section starts in hidden state
-  g.set(section, { opacity: variant === "blur" ? 0 : 1 });
-
-  const clipConfig = CLIP_CONFIGS[variant];
-  if (clipConfig) {
-    // Clip-path wipe (Luke's hero clip reveal pattern)
-    const { from, to } = clipConfig;
-    g.fromTo(
-      section,
-      { clipPath: from, opacity: 0 },
-      {
-        clipPath: to,
-        opacity: 1,
-        duration,
-        ease: "power3.inOut",
-        scrollTrigger: {
-          trigger: section,
-          start,
-          toggleActions: "play none none none",
-        },
-      }
-    );
-  } else if (variant === "blur") {
-    // Blur-in reveal (cinematic)
-    g.fromTo(
-      section,
-      { opacity: 0, filter: "blur(6px)" },
-      {
-        opacity: 1,
-        filter: "blur(0px)",
-        duration,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: section,
-          start,
-          toggleActions: "play none none none",
-        },
-      }
-    );
-  } else {
-    // Default fade-up
-    g.fromTo(
-      section,
-      { opacity: 0, y: 24 },
-      {
-        opacity: 1,
-        y: 0,
-        duration,
-        ease: "power2.out",
-        scrollTrigger: {
-          trigger: section,
-          start,
-          toggleActions: "play none none none",
-        },
-      }
-    );
-  }
+  if (!section) return;
+  section.style.setProperty("opacity", "1");
+  section.style.setProperty("filter", "none");
 }
 
 /**
@@ -605,4 +546,88 @@ export function initLiveClock(container: HTMLElement, selector = "[data-live-clo
   const interval = setInterval(update, 30000);
 
   return () => clearInterval(interval);
+}
+
+/** Card Hover Video preview helper (Jasmine-inspired) */
+export function initHoverVideo(card: HTMLElement, videoSrc: string): () => void {
+  if (!card) return () => {};
+
+  const video = document.createElement("video");
+  video.src = videoSrc;
+  video.muted = true;
+  video.loop = true;
+  video.playsInline = true;
+  video.preload = "metadata";
+  video.className = "t-card-hover-media";
+  video.style.cssText = `
+    position: absolute; inset: 0; width: 100%; height: 100%;
+    object-fit: cover; opacity: 0; transition: opacity 0.4s ease;
+    z-index: 2; pointer-events: none;
+  `;
+
+  card.style.position = "relative";
+  card.insertBefore(video, card.firstChild);
+
+  const onEnter = () => {
+    video.style.opacity = "1";
+    video.play().catch(() => {});
+  };
+  const onLeave = () => {
+    video.style.opacity = "0";
+    video.pause();
+  };
+
+  card.addEventListener("mouseenter", onEnter);
+  card.addEventListener("mouseleave", onLeave);
+
+  return () => {
+    video.remove();
+    card.removeEventListener("mouseenter", onEnter);
+    card.removeEventListener("mouseleave", onLeave);
+  };
+}
+
+/** Data-Parallax attribute system for cards and image containers */
+export function initDataParallax(scope: HTMLElement) {
+  if (!scope || prefersReducedMotion() || isMobile()) return;
+  const { gsap: g } = ensureGsap();
+
+  scope.querySelectorAll<HTMLElement>("[data-parallax]").forEach((el) => {
+    const amount = parseFloat(el.getAttribute("data-parallax") || "0");
+    const targetSelector = el.getAttribute("data-parallax-target");
+    const target = targetSelector ? el.querySelector(targetSelector) : el;
+
+    if (!target) return;
+
+    g.to(target, {
+      yPercent: amount,
+      ease: "none",
+      scrollTrigger: {
+        trigger: el,
+        start: "top bottom",
+        end: "bottom top",
+        scrub: 0.5,
+      },
+    });
+  });
+}
+
+/** GSAP Scroll-driven Marquee Headings */
+export function initMarqueeScroll(container: HTMLElement, selector: string, speed: number = 40) {
+  if (!container || prefersReducedMotion()) return;
+  const { gsap: g } = ensureGsap();
+
+  const el = container.querySelector(selector);
+  if (!el) return;
+
+  g.to(el, {
+    xPercent: -speed,
+    ease: "none",
+    scrollTrigger: {
+      trigger: container,
+      start: "top bottom",
+      end: "bottom top",
+      scrub: 0.8,
+    },
+  });
 }

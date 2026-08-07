@@ -2,169 +2,213 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { ArrowUp } from "lucide-react";
+import { ShieldCheck, MapPin, Phone, Mail, Share2, Globe, Sparkles } from "lucide-react";
+import { CONTACT, SITE } from "@/lib/config";
+import { TEL_HREF } from "@/lib/whatsapp";
 import BrandMark from "../ui/BrandMark";
-import { CONTACT, SITE } from "../../../lib/config";
-import { DEFAULT_WA, TEL_HREF } from "../../../lib/whatsapp";
 
 function LiveClock() {
   const [time, setTime] = useState("");
 
   useEffect(() => {
-    function pad(n: number) {
-      return n.toString().padStart(2, "0");
-    }
+    function pad(n: number) { return n.toString().padStart(2, "0"); }
     function update() {
       const now = new Date();
       const ist = new Date(now.toLocaleString("en-US", { timeZone: "Asia/Kolkata" }));
-      setTime(`${pad(ist.getHours())}:${pad(ist.getMinutes())} IST`);
+      setTime(`${pad(ist.getHours())}:${pad(ist.getMinutes())}:${pad(ist.getSeconds())} IST`);
     }
     update();
-    const interval = setInterval(update, 30000);
+    const interval = setInterval(update, 1000);
     return () => clearInterval(interval);
   }, []);
 
   return <span>{time}</span>;
 }
 
-/**
- * Jasmine Gunarto Signature Footer Component
- * Features:
- * - Giant "LET'S TALK" kinetic marquee banner
- * - Multi-column social & navigation links
- * - Geographic coordinates & live IST clock
- * - Smooth back-to-top trigger
- */
-export default function SiteFooter() {
-  const scrollToTop = () => {
-    if (typeof window !== "undefined") {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    }
-  };
+const TRUST_BADGES = [
+  { label: "PSARA Specialist Practice", sub: "Dedicated Regulatory Filing" },
+  { label: "28 States & 8 UTs", sub: "Controlling Authority Network" },
+  { label: "Licensed Agency Track Record", sub: "Pan-India Dossier Clearance" },
+  { label: "Statutory Advisory", sub: "PSARA Act 2005 Compliant" },
+];
 
+import StateDirectoryFooter from "./StateDirectoryFooter";
+
+export default function SiteFooter() {
   return (
-    <footer className="relative theme-obsidian-dark border-t border-white/10 pt-20 pb-12 px-[var(--gutter)] text-white">
-      <div className="max-w-[var(--page-max)] mx-auto">
-        {/* Top Label Bar */}
-        <div className="flex items-center justify-between border-b border-white/10 pb-6 text-[0.6rem] font-bold uppercase tracking-[0.2em] text-white/50">
-          <span>(CONNECT & SOCIAL)</span>
-          <span>(STATUTORY NAVIGATION)</span>
+    <footer
+      className="relative z-10 border-t border-[var(--gold)]/20 bg-[var(--void)] text-white overflow-hidden"
+    >
+      {/* Full-bleed ambient glow */}
+      <div className="pointer-events-none absolute inset-0" aria-hidden>
+        <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, transparent 0%, rgba(212,184,114,0.03) 50%, rgba(212,184,114,0.01) 100%)" }} />
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[80vw] h-[300px]" style={{ background: "radial-gradient(ellipse 50% 80% at 50% 0%, rgba(212,184,114,0.06) 0%, transparent 70%)" }} />
+      </div>
+
+      <div className="relative mx-auto max-w-[var(--page-max)]">
+        {/* Marquee CTA Banner — horeca energy */}
+        <div className="mb-14 overflow-hidden border-y border-[var(--gold)]/20 py-5 bg-black/30">
+          <div className="flex whitespace-nowrap animate-marquee">
+            <span className="text-lg md:text-2xl font-bold uppercase tracking-[0.3em] text-[var(--gold)]/80 px-6">
+              START YOUR PSARA LICENSE APPLICATION &nbsp;&middot;&nbsp; 28 STATES &amp; 8 UTs COVERAGE &nbsp;&middot;&nbsp; REGULATORY COMPLIANCE &nbsp;&middot;&nbsp;
+            </span>
+            <span className="text-lg md:text-2xl font-bold uppercase tracking-[0.3em] text-[var(--gold)]/80 px-6">
+              START YOUR PSARA LICENSE APPLICATION &nbsp;&middot;&nbsp; 28 STATES &amp; 8 UTs COVERAGE &nbsp;&middot;&nbsp; REGULATORY COMPLIANCE &nbsp;&middot;&nbsp;
+            </span>
+          </div>
         </div>
 
-        {/* Multi-Column Links Section */}
-        <div className="py-12 grid grid-cols-1 md:grid-cols-12 gap-10 items-start border-b border-white/10">
-          {/* Brand Column */}
-          <div className="md:col-span-5">
-            <BrandMark />
-            <p className="mt-4 text-sm font-medium text-white/60 leading-relaxed max-w-sm">
-              Pan-India statutory licensing advisory for private security agencies.
-              Statute-first preparation, training MOUs, and post-grant compliance craft.
-            </p>
+        {/* Trust Badges Row — minimalist, no cards */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16 border-b border-white/5 pb-10">
+          {TRUST_BADGES.map((b) => (
+            <div key={b.label} className="flex items-center gap-3">
+              <ShieldCheck className="h-5 w-5 text-[var(--gold-bright)] shrink-0" />
+              <div>
+                <span className="block text-xs font-bold text-white">{b.label}</span>
+                <span className="block text-xs text-[var(--white-45)]">{b.sub}</span>
+              </div>
+            </div>
+          ))}
+        </div>
 
-            <div className="mt-6 flex flex-wrap items-center gap-3">
-              <a
-                href={TEL_HREF}
-                data-cursor="Call Now"
-                className="px-4 py-2 rounded bg-white/10 border border-white/20 text-white font-bold text-xs uppercase tracking-wider hover:bg-white hover:text-black transition-colors"
-              >
-                Call {CONTACT.phoneDisplay}
+        {/* 5-Column Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 mb-16">
+          {/* Column 1: Brand & Contact */}
+          <div className="lg:col-span-1">
+            <BrandMark />
+            <p className="mt-4 text-xs font-normal leading-relaxed text-[var(--white-70)]">
+              India&apos;s leading legal consultancy specialized exclusively in PSARA License registration, Security Agency setup, Police Verification, Director MOUs, and Security Training Institute affiliations across all 36 States &amp; UTs.
+            </p>
+            <div className="mt-6 space-y-2 text-xs">
+              <a href={TEL_HREF} className="flex items-center gap-2 text-white hover:text-[var(--gold-bright)] transition-colors">
+                <Phone className="h-3.5 w-3.5 text-[var(--gold-bright)]" />
+                <span>{CONTACT.phoneDisplay}</span>
               </a>
-              <a
-                href={DEFAULT_WA}
-                target="_blank"
-                rel="noopener noreferrer"
-                data-cursor="WhatsApp"
-                className="px-4 py-2 rounded bg-[var(--amber)] text-black font-bold text-xs uppercase tracking-wider hover:bg-white transition-colors"
-              >
-                WhatsApp Desk
+              <a href={`mailto:${CONTACT.email}`} className="flex items-center gap-2 text-[var(--white-70)] hover:text-white transition-colors">
+                <Mail className="h-3.5 w-3.5 text-[var(--gold-bright)]" />
+                <span>{CONTACT.email}</span>
               </a>
             </div>
           </div>
 
-          {/* Social Links */}
-          <div className="md:col-span-3">
-            <span className="text-[0.6rem] font-bold uppercase tracking-widest text-[var(--amber)] block mb-4">
-              Social Channels
+          {/* Column 2: Explore Navigation */}
+          <div>
+            <span className="block text-xs font-bold uppercase tracking-widest text-[var(--gold-bright)] mb-4">
+              Explore
             </span>
-            <ul className="space-y-3 text-xs font-bold uppercase tracking-wider text-white/70">
-              <li>
-                <a href={CONTACT.social.linkedin} target="_blank" rel="noopener noreferrer" className="hover:text-[var(--amber)] transition-colors">
-                  LinkedIn
-                </a>
-              </li>
-              <li>
-                <a href={CONTACT.social.facebook} target="_blank" rel="noopener noreferrer" className="hover:text-[var(--amber)] transition-colors">
-                  Facebook
-                </a>
-              </li>
-              <li>
-                <a href={CONTACT.social.instagram} target="_blank" rel="noopener noreferrer" className="hover:text-[var(--amber)] transition-colors">
-                  Instagram
-                </a>
-              </li>
-              <li>
-                <a href={`mailto:${CONTACT.email}`} className="hover:text-[var(--amber)] transition-colors">
-                  Email Desk
-                </a>
-              </li>
+            <ul className="space-y-2.5 text-xs text-[var(--white-70)]">
+              <li><Link href="/" className="hover:text-white transition-colors">Home</Link></li>
+              <li><Link href="/about" className="hover:text-white transition-colors">About Leadership</Link></li>
+              <li><Link href="/careers" className="hover:text-white transition-colors">Careers</Link></li>
+              <li><Link href="/case-studies" className="hover:text-white transition-colors">Case Studies</Link></li>
+              <li><Link href="/certification" className="hover:text-white transition-colors">ISO &amp; Certifications</Link></li>
+              <li><Link href="/calculator" className="hover:text-white transition-colors">Fee Calculator</Link></li>
+              <li><Link href="/gallery" className="hover:text-white transition-colors">Photo Gallery</Link></li>
+              <li><Link href="/csr" className="hover:text-white transition-colors">Welfare &amp; CSR</Link></li>
             </ul>
           </div>
 
-          {/* Navigation & Back to Top */}
-          <div className="md:col-span-4 flex flex-col justify-between h-full">
-            <div>
-              <span className="text-[0.6rem] font-bold uppercase tracking-widest text-[var(--amber)] block mb-4">
-                Core Sections
-              </span>
-              <div className="grid grid-cols-2 gap-2 text-xs font-bold uppercase tracking-wider text-white/70">
-                <Link href="/about" className="hover:text-[var(--amber)] transition-colors">About</Link>
-                <Link href="/services" className="hover:text-[var(--amber)] transition-colors">Services</Link>
-                <Link href="/franchise" className="hover:text-[var(--amber)] transition-colors">Franchise</Link>
-                <Link href="/states" className="hover:text-[var(--amber)] transition-colors">States</Link>
-                <Link href="/cities" className="hover:text-[var(--amber)] transition-colors">Cities</Link>
-                <Link href="/blog" className="hover:text-[var(--amber)] transition-colors">Blog</Link>
-                <Link href="/contact" className="hover:text-[var(--amber)] transition-colors">Contact</Link>
+          {/* Column 3: PSARA Services */}
+          <div>
+            <span className="block text-xs font-bold uppercase tracking-widest text-[var(--gold-bright)] mb-4">
+              Services
+            </span>
+            <ul className="space-y-2.5 text-xs text-[var(--white-70)]">
+              <li><Link href="/services/fresh-psara-license" className="hover:text-white transition-colors">Fresh PSARA License</Link></li>
+              <li><Link href="/services/psara-renewal" className="hover:text-white transition-colors">PSARA License Renewal</Link></li>
+              <li><Link href="/services/multi-state-psara" className="hover:text-white transition-colors">Multi-State Licensing</Link></li>
+              <li><Link href="/services/training-mou-affiliation" className="hover:text-white transition-colors">Training Institute MOUs</Link></li>
+              <li><Link href="/services/police-verification-clearance" className="hover:text-white transition-colors">Police Verification &amp; NOC</Link></li>
+              <li><Link href="/services/security-agency-setup" className="hover:text-white transition-colors">Security Agency Setup</Link></li>
+              <li><Link href="/emergency" className="hover:text-white transition-colors font-semibold text-[var(--gold-bright)]">24/7 Urgent Desk</Link></li>
+            </ul>
+          </div>
+
+          {/* Column 4: Top States Directory */}
+          <div>
+            <span className="block text-xs font-bold uppercase tracking-widest text-[var(--gold-bright)] mb-4">
+              State Coverage
+            </span>
+            <ul className="space-y-2.5 text-xs text-[var(--white-70)]">
+              <li><Link href="/states/rajasthan" className="hover:text-white transition-colors">Rajasthan PSARA</Link></li>
+              <li><Link href="/states/delhi" className="hover:text-white transition-colors">Delhi NCR PSARA</Link></li>
+              <li><Link href="/states/maharashtra" className="hover:text-white transition-colors">Maharashtra PSARA</Link></li>
+              <li><Link href="/states/karnataka" className="hover:text-white transition-colors">Karnataka PSARA</Link></li>
+              <li><Link href="/states/uttar-pradesh" className="hover:text-white transition-colors">Uttar Pradesh PSARA</Link></li>
+              <li><Link href="/states/haryana" className="hover:text-white transition-colors">Haryana PSARA</Link></li>
+              <li><Link href="/states" className="hover:text-[var(--gold-bright)] font-semibold transition-colors">View All 36 States &rarr;</Link></li>
+            </ul>
+          </div>
+
+          {/* Column 5: Headquarters & Socials */}
+          <div>
+            <span className="block text-xs font-bold uppercase tracking-widest text-[var(--gold-bright)] mb-4">
+              Headquarters
+            </span>
+            <div className="text-xs text-[var(--white-70)] space-y-2">
+              <p className="flex items-start gap-2">
+                <MapPin className="h-4 w-4 text-[var(--gold-bright)] shrink-0 mt-0.5" />
+                <span>C-36, Capital Galleria, Sirsi Road, Kanakpura, Jaipur, Rajasthan 302034</span>
+              </p>
+              <div className="pt-3 border-t border-white/10 flex items-center gap-3 text-xs text-[var(--white-55)]">
+                <span>Jaipur Time:</span>
+                <span className="text-[var(--gold-bright)] font-mono font-bold"><LiveClock /></span>
               </div>
+              <p className="text-xs text-[var(--white-40)] font-mono">
+                GPS: 26.9124° N, 75.7873° E
+              </p>
             </div>
 
-            <button
-              type="button"
-              onClick={scrollToTop}
-              data-cursor="Top"
-              className="mt-8 self-start inline-flex items-center gap-2 px-4 py-2 rounded border border-white/20 text-[0.6rem] font-bold uppercase tracking-widest text-white hover:border-[var(--amber)] hover:text-[var(--amber)] transition-colors"
-            >
-              Back to Top
-              <ArrowUp className="w-3.5 h-3.5" />
-            </button>
+            <div className="mt-6 pt-4 border-t border-white/10">
+              <span className="block text-xs font-bold uppercase tracking-widest text-[var(--gold-bright)] mb-3">
+                Follow Official Handles
+              </span>
+              <div className="flex items-center gap-3">
+                <a href={CONTACT.social.linkedin || "#"} target="_blank" rel="noopener noreferrer" className="p-2 rounded bg-white/5 border border-white/10 text-white hover:border-[var(--gold)] hover:text-[var(--gold-bright)] transition-colors" aria-label="LinkedIn">
+                  <Share2 className="h-4 w-4" />
+                </a>
+                <a href={CONTACT.social.facebook || "#"} target="_blank" rel="noopener noreferrer" className="p-2 rounded bg-white/5 border border-white/10 text-white hover:border-[var(--gold)] hover:text-[var(--gold-bright)] transition-colors" aria-label="Facebook">
+                  <Share2 className="h-4 w-4" />
+                </a>
+                <a href={CONTACT.social.instagram || "#"} target="_blank" rel="noopener noreferrer" className="p-2 rounded bg-white/5 border border-white/10 text-white hover:border-[var(--gold)] hover:text-[var(--gold-bright)] transition-colors" aria-label="Instagram">
+                  <Share2 className="h-4 w-4" />
+                </a>
+                <Link href="/google" className="p-2 rounded bg-white/5 border border-white/10 text-white hover:border-[var(--gold)] hover:text-[var(--gold-bright)] transition-colors" aria-label="Google Business Profile">
+                  <Globe className="h-4 w-4" />
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
 
-        {/* Giant Marquee Heading: LET'S TALK */}
-        <div className="py-8 border-b border-white/10 overflow-hidden">
-          <div className="flex whitespace-nowrap animate-marquee">
-            <span className="font-[family-name:var(--font-display)] text-6xl sm:text-8xl md:text-9xl font-extrabold tracking-tighter text-white/10 hover:text-[var(--amber)] transition-colors duration-500 mr-12 select-none">
-              LET&apos;S TALK PSARA COMPLIANCE —
-            </span>
-            <span className="font-[family-name:var(--font-display)] text-6xl sm:text-8xl md:text-9xl font-extrabold tracking-tighter text-white/10 hover:text-[var(--amber)] transition-colors duration-500 mr-12 select-none">
-              LET&apos;S TALK PSARA COMPLIANCE —
-            </span>
-          </div>
-        </div>
+        {/* Statewise 36 States & UTs Directory Grid */}
+        <StateDirectoryFooter />
 
-        {/* Bottom Metadata Bar (Jasmine Style) */}
-        <div className="pt-8 flex flex-col md:flex-row md:items-center justify-between gap-4 text-[0.6rem] font-bold uppercase tracking-widest text-white/40">
-          <div className="flex items-center gap-4">
-            <span>JAIPUR, INDIA</span>
-            <span>·</span>
-            <LiveClock />
-            <span>·</span>
-            <span>26.9124° N, 75.7873° E</span>
+        {/* Bottom Bar */}
+        <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-[var(--white-55)]">
+          <div className="space-y-1">
+            <div>
+              © {new Date().getFullYear()} {SITE.name}. All Rights Reserved. Statutory PSARA Advisory Network India.
+            </div>
+            <div className="flex items-center gap-2 pt-1 text-slate-300">
+              <span className="text-white/60 font-medium">Designed &amp; Engineered by</span>
+              <a
+                href="https://reverbex.in"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 px-3 py-1 rounded bg-sky-950/80 border border-sky-400/50 text-sky-300 font-extrabold uppercase tracking-wider hover:border-[var(--gold)] hover:bg-[var(--gold)] hover:text-black transition-all duration-200 shadow-md"
+              >
+                <Sparkles className="w-3.5 h-3.5 text-sky-400" />
+                <span>Reverbex Technologies</span>
+              </a>
+            </div>
           </div>
-
-          <div className="flex items-center gap-6">
-            <span>© {new Date().getFullYear()} {SITE.name}</span>
-            <Link href="/privacy-policy" className="hover:text-white transition-colors">Privacy</Link>
-            <Link href="/terms" className="hover:text-white transition-colors">Terms</Link>
+          <div className="flex flex-wrap gap-4">
+            <Link href="/privacy-policy" className="hover:text-white transition-colors">Privacy Policy</Link>
+            <Link href="/terms" className="hover:text-white transition-colors">Terms of Service</Link>
+            <Link href="/disclaimer" className="hover:text-white transition-colors">Disclaimer</Link>
+            <Link href="/franchise" className="hover:text-[var(--gold-bright)] transition-colors">Franchise Desk</Link>
+            <Link href="/sitemap.xml" className="hover:text-white transition-colors">XML Sitemap</Link>
           </div>
         </div>
       </div>

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { PageHero, PageMain, Prose } from "../../components/PageShell";
+import StageShell from "../components/ui/StageShell";
 import CtaBar from "../../components/CtaBar";
 import { pageMeta } from "../../lib/metadata";
 import { OFFICES, CONTACT, SITE } from "../../lib/config";
@@ -43,7 +44,7 @@ export default function GooglePage() {
   };
 
   return (
-    <>
+    <StageShell>
       <JsonLd data={graph} />
       <PageHero
         title="Our offices on Google Maps"
@@ -90,6 +91,6 @@ export default function GooglePage() {
         </div>
         <CtaBar title="Book a visit or video consult" />
       </PageMain>
-    </>
+    </StageShell>
   );
 }

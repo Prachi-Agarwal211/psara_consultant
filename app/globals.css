@@ -2,6 +2,8 @@
 @import "../styles/fonts.css";
 @import "../styles/tokens.css";
 @import "../styles/themes.css";
+@import "../styles/sections.css";
+@import "../styles/design-system.css";
 @import "../styles/components.css";
 
 @layer base {
@@ -17,11 +19,11 @@
   }
 
   body {
-    font-family: var(--font-body);
+    font-family: "Maison Neue Ext", var(--font-body), system-ui, sans-serif;
     font-optical-sizing: auto;
     text-rendering: optimizeLegibility;
-    background-color: var(--canvas);
-    color: var(--text-primary);
+    background-color: var(--void, #020814);
+    color: var(--white, #ffffff);
     min-height: 100%;
     overflow-x: hidden;
     font-size: var(--text-base);
@@ -62,7 +64,6 @@
     color: var(--text-secondary);
   }
 
-  /* Utility: clip reveal animation wrapper */
   .clip-reveal {
     display: inline-block;
     overflow: hidden;
@@ -74,11 +75,31 @@
     will-change: transform;
   }
 
-  /* Content visibility for perf */
   .content-vis-auto {
     content-visibility: auto;
     contain-intrinsic-size: 500px;
   }
+}
+
+/* ── Custom marquee animation ── */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+.animate-marquee {
+  animation: marquee 30s linear infinite;
+}
+
+/* ── Grain overlay ── */
+.grain-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.025;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 140px 140px;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -89,4 +110,5 @@
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
+  .animate-marquee { animation: none; }
 }

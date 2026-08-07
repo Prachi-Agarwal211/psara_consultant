@@ -1,17 +1,60 @@
+/* continuous-ambient-override */
+.theme-paper-jasmine, .theme-obsidian-dark, .theme-ink {
+  background-color: transparent !important;
+  background-image: none !important;
+}
 /* ═══════════════════════════════════════════════════════════════
    PSARA · Abstract Futuristic Section Themes
    Deep Black Canvas × Electric Blue Glow × Metallic Gold Accent
    ═══════════════════════════════════════════════════════════════ */
 
-/* ── Primary Dark Theme (default) ────────────────────────────── */
-.theme-dark,
-.theme-paper-jasmine,
-.theme-obsidian-dark,
-.theme-ink,
-.theme-warm-dark,
-.theme-warm-cream {
+/* ── Primary Themes ────────────────────────────────────────────── */
+.theme-dark {
   color: var(--white);
   background-color: var(--obsidian);
+}
+
+.theme-warm-dark {
+  color: var(--white);
+  background-color: var(--warm-dark) !important;
+}
+
+.theme-warm-dark-2 {
+  color: var(--white);
+  background-color: var(--warm-dark-2) !important;
+}
+
+.theme-warm-dark-3 {
+  color: var(--white);
+  background-color: var(--warm-dark-3) !important;
+}
+
+.theme-gold {
+  color: #1a1510 !important;
+  background-color: var(--gold-bg) !important;
+}
+
+.theme-gold h1, .theme-gold h2, .theme-gold h3, .theme-gold p {
+  color: #1a1510 !important;
+}
+
+.theme-amber {
+  color: var(--white);
+  background-color: var(--gold-bg-dark) !important;
+}
+
+.theme-warm-cream {
+  color: #1a1510 !important;
+  background-color: var(--warm-cream) !important;
+}
+
+.theme-warm-cream h1, .theme-warm-cream h2, .theme-warm-cream h3 {
+  color: #1a1510 !important;
+}
+
+.theme-warm-parchment {
+  color: #1a1510 !important;
+  background-color: var(--warm-parchment) !important;
 }
 
 .theme-dark h1,
