@@ -141,7 +141,7 @@ export function getOfficesForStatePage(stateSlug: string): OfficeLocation[] {
 export const SITE = {
   name: "PSARA Consultant India",
   legalName: "PSARA Consultant India",
-  url: "https://consult.psaraconsultantindia.com",
+  url: "https://psaraconsultantindia.com",
   tagline: "Your Trusted Partner for PSARA Licensing Across India",
   description:
     "Pan-India PSARA License registration, security agency compliance, training MOU, police verification, and company setup. Offices in New Delhi, Gurugram, Jaipur.",

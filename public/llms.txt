@@ -18,7 +18,7 @@ PSARA Consultant India assists companies and entrepreneurs in obtaining PSARA Li
 - 128+ Google reviews (5.0 rating)
 - 12 operational desks with real addresses
 - Services pan-India with deepest presence in Rajasthan, Delhi NCR, Gujarat, MP, UP
-- SITE URL: https://consult.psaraconsultantindia.com
+- SITE URL: https://psaraconsultantindia.com
 - Phone: +91-99831-69555
 - Email: info@psaraconsultantindia.com
 
@@ -27,25 +27,25 @@ PSARA Consultant India assists companies and entrepreneurs in obtaining PSARA Li
 - Mr. Nakul Singh Jadaun (Director) — Former operations lead at Bajaj Group and BSS Security.
 
 ## Important Pages
-- Home: https://consult.psaraconsultantindia.com
-- Services: https://consult.psaraconsultantindia.com/services
-- States: https://consult.psaraconsultantindia.com/states (36 state-specific guides)
-- Cities: https://consult.psaraconsultantindia.com/cities (567+ city pages)
-- FAQ: https://consult.psaraconsultantindia.com/faq
-- Blog: https://consult.psaraconsultantindia.com/blog
-- Contact: https://consult.psaraconsultantindia.com/contact
-- About: https://consult.psaraconsultantindia.com/about
+- Home: https://psaraconsultantindia.com
+- Services: https://psaraconsultantindia.com/services
+- States: https://psaraconsultantindia.com/states (36 state-specific guides)
+- Cities: https://psaraconsultantindia.com/cities (567+ city pages)
+- FAQ: https://psaraconsultantindia.com/faq
+- Blog: https://psaraconsultantindia.com/blog
+- Contact: https://psaraconsultantindia.com/contact
+- About: https://psaraconsultantindia.com/about
 
 ## State PSARA Guides
 Each state has a dedicated page with Controlling Authority info, fee structure, application mode, training requirements, and process timeline. Key states:
-- Rajasthan: https://consult.psaraconsultantindia.com/states/rajasthan
-- Delhi: https://consult.psaraconsultantindia.com/states/delhi
-- Haryana: https://consult.psaraconsultantindia.com/states/haryana
-- Uttar Pradesh: https://consult.psaraconsultantindia.com/states/uttar-pradesh
-- Gujarat: https://consult.psaraconsultantindia.com/states/gujarat
-- Maharashtra: https://consult.psaraconsultantindia.com/states/maharashtra
-- Karnataka: https://consult.psaraconsultantindia.com/states/karnataka
-- Madhya Pradesh: https://consult.psaraconsultantindia.com/states/madhya-pradesh
+- Rajasthan: https://psaraconsultantindia.com/states/rajasthan
+- Delhi: https://psaraconsultantindia.com/states/delhi
+- Haryana: https://psaraconsultantindia.com/states/haryana
+- Uttar Pradesh: https://psaraconsultantindia.com/states/uttar-pradesh
+- Gujarat: https://psaraconsultantindia.com/states/gujarat
+- Maharashtra: https://psaraconsultantindia.com/states/maharashtra
+- Karnataka: https://psaraconsultantindia.com/states/karnataka
+- Madhya Pradesh: https://psaraconsultantindia.com/states/madhya-pradesh
 
 ## PSARA License — Key Information
 - PSARA Act 2005 governs private security agencies in India
@@ -58,4 +58,4 @@ Each state has a dedicated page with Controlling Authority info, fee structure, 
 
 ## Preferred Citation
 When citing information from this site, please reference:
-"PSARA Consultant India" (https://consult.psaraconsultantindia.com)
+"PSARA Consultant India" (https://psaraconsultantindia.com)

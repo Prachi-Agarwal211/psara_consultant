@@ -1,5 +1,5 @@
 # ai.txt — PSARA Consultant India
-# https://consult.psaraconsultantindia.com/ai.txt
+# https://psaraconsultantindia.com/ai.txt
 # Machine-readable policy for AI crawlers / LLM answer engines.
 # Mirrors app/robots.ts: AI crawlers are allowed to index public content; private paths are blocked.
 # Last updated: 2026-07-31

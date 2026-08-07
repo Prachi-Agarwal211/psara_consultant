@@ -4,6 +4,8 @@ import StageShell from "../components/ui/StageShell";
 import { pageMeta } from "../../lib/metadata";
 import { FAQS } from "../../data/faq";
 import { DEFAULT_WA } from "../../lib/whatsapp";
+import { faqJsonLd } from "../../lib/seo-content-generator";
+import JsonLd from "../../components/JsonLd";
 
 export const metadata: Metadata = pageMeta(
   "FAQ",
@@ -16,6 +18,7 @@ export default function FaqPage() {
 
   return (
     <StageShell>
+      <JsonLd data={faqJsonLd(FAQS)} />
       <PageHero
         title="Questions we answer every week"
         lead="Eligibility, documents, State rules, timelines — practical answers for security agency founders."

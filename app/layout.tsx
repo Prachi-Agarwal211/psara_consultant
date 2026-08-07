@@ -206,52 +206,6 @@ const organizationSchema = JSON.stringify({
       areaServed: { "@type": "Country", name: "India" },
       parentOrganization: { "@id": `${SITE.url}/#organization` },
     })),
-    {
-      "@type": "FAQPage",
-      "@id": `${SITE.url}/faq#faqpage`,
-      mainEntity: [
-        {
-          "@type": "Question",
-          name: "What is a PSARA License?",
-          acceptedAnswer: { "@type": "Answer", text: "A PSARA License is the statutory licence under the Private Security Agencies (Regulation) Act, 2005 that authorises a person or company to run a private security agency in India." },
-        },
-        {
-          "@type": "Question",
-          name: "Who needs a PSARA License in India?",
-          acceptedAnswer: { "@type": "Answer", text: "Any individual or entity intending to start or operate a private security agency providing guards, supervisors, or related security services for hire must obtain a PSARA License from the State Controlling Authority." },
-        },
-        {
-          "@type": "Question",
-          name: "How long is a PSARA License valid?",
-          acceptedAnswer: { "@type": "Answer", text: "Typically five years from the date of grant in most States, subject to Rules and timely renewal. Some States operate with one-year validity regimes." },
-        },
-        {
-          "@type": "Question",
-          name: "What documents are required for PSARA?",
-          acceptedAnswer: { "@type": "Answer", text: "Identity and address proofs of promoters, company incorporation papers, MOA/AOA with suitable objects, registered office proof, photographs, affidavits, training MOU, and police verification forms." },
-        },
-        {
-          "@type": "Question",
-          name: "How do I check PSARA License status?",
-          acceptedAnswer: { "@type": "Answer", text: "You can check the status with the State Controlling Authority where the application was filed. Contact us for assistance with status tracking across any State." },
-        },
-        {
-          "@type": "Question",
-          name: "Can a PSARA License be transferred?",
-          acceptedAnswer: { "@type": "Answer", text: "Licences are not casually transferable like assets. Change of control or structure usually needs authority intimation or fresh compliance. Plan M&A with licensing counsel." },
-        },
-        {
-          "@type": "Question",
-          name: "Is training MOU mandatory for PSARA?",
-          acceptedAnswer: { "@type": "Answer", text: "Yes in almost all practical filings. A training MOU with a State-recognised institute covering unarmed and armed curricula is required before or during the licence process." },
-        },
-        {
-          "@type": "Question",
-          name: "What is the penalty for operating without PSARA?",
-          acceptedAnswer: { "@type": "Answer", text: "Operating without a valid PSARA license is a criminal offense under the PSARA Act, 2005, attracting penalties, prosecution risk, and permanent contract ineligibility with serious clients." },
-        },
-      ],
-    },
   ],
 });
 

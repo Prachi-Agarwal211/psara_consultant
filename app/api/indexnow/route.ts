@@ -13,7 +13,7 @@ import { CAREERS } from "@/data/careers";
  * POST /api/indexnow — submits the entire site URL set to IndexNow
  * for instant Bing/Yandex/Naver indexing after a deploy or content change.
  *
- * Usage: curl -X POST https://consult.psaraconsultantindia.com/api/indexnow
+ * Usage: curl -X POST https://psaraconsultantindia.com/api/indexnow
  */
 export async function POST() {
   const statics = [
