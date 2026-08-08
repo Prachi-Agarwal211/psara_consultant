@@ -129,14 +129,14 @@ export default function HeroStage() {
         </div>
       </aside>
 
-      {/* Hero Copy (Positioned in right area matching mockup) */}
-      <div className="absolute inset-x-0 top-[8dvh] md:top-[11dvh] lg:top-[13dvh] z-20 flex justify-end pointer-events-none px-6 md:pr-12 lg:pr-20">
-        <div className="w-full md:w-[48%] lg:w-[44%] max-w-xl pointer-events-auto text-left space-y-4">
+      {/* Hero Copy (Positioned in right area on desktop, stacked cleanly on mobile) */}
+      <div className="relative md:absolute md:inset-x-0 md:top-[11dvh] lg:top-[13dvh] z-20 flex flex-col md:flex-row md:justify-end pointer-events-none px-6 pt-24 pb-12 md:py-0 md:pr-12 lg:pr-20">
+        <div className="w-full md:w-[50%] lg:w-[44%] max-w-xl pointer-events-auto text-left space-y-4">
           {/* Headline */}
           <h1
             className="font-black leading-[0.95] text-[#0A213D]"
             style={{
-              fontSize: "clamp(2.6rem, 4.4vw, 4.8rem)",
+              fontSize: "clamp(2.4rem, 4.4vw, 4.8rem)",
               fontFamily: "var(--font-display)",
               letterSpacing: "-0.03em",
             }}
@@ -157,7 +157,7 @@ export default function HeroStage() {
             {["(( PSARA CONSULTANCY ))", "(( PAN INDIA ))", "(( 28 STATES & 8 UTs ))", "(( 300+ FILES ))"].map((m) => (
               <span
                 key={m}
-                className="bg-[#D9E6F2] text-[#0D3459] font-extrabold text-[0.66rem] tracking-wider px-2.5 py-1 rounded-md shadow-sm border border-[#C2D8EC]"
+                className="bg-[#D9E6F2] text-[#0D3459] font-extrabold text-[0.62rem] sm:text-[0.66rem] tracking-wider px-2.5 py-1 rounded-md shadow-sm border border-[#C2D8EC]"
                 style={{ fontFamily: "var(--font-body)" }}
               >
                 {m}
@@ -173,10 +173,10 @@ export default function HeroStage() {
           </div>
 
           {/* Action Buttons */}
-          <div className="flex flex-wrap gap-3 pt-2">
+          <div className="flex flex-col sm:flex-row gap-3 pt-2">
             <a
               href="#services"
-              className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#F5E6BA] px-6 py-3.5 text-xs font-black uppercase tracking-[0.18em] text-[#1F1707] shadow-md hover:bg-[#EFE0B0] hover:scale-105 transition-all duration-200 border border-[#E8D49E]"
+              className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#F5E6BA] px-6 py-3.5 text-xs font-black uppercase tracking-[0.18em] text-[#1F1707] shadow-md hover:bg-[#EFE0B0] hover:scale-105 transition-all duration-200 border border-[#E8D49E] w-full sm:w-auto"
               style={{ fontFamily: "var(--font-body)" }}
             >
               <span>EXPLORE SERVICES</span>
@@ -186,7 +186,7 @@ export default function HeroStage() {
               href={DEFAULT_WA}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 rounded-xl border-2 border-[#0A233F] bg-white px-6 py-3.5 text-xs font-black uppercase tracking-[0.18em] text-[#0A233F] shadow-md hover:bg-[#0A233F] hover:text-white transition-all duration-200 group"
+              className="inline-flex items-center justify-center gap-2 rounded-xl border-2 border-[#0A233F] bg-white px-6 py-3.5 text-xs font-black uppercase tracking-[0.18em] text-[#0A233F] shadow-md hover:bg-[#0A233F] hover:text-white transition-all duration-200 group w-full sm:w-auto"
               style={{ fontFamily: "var(--font-body)" }}
             >
               <MessageSquare className="h-4 w-4 text-[#25D366] group-hover:text-white stroke-[2.5]" />
