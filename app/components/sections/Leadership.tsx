@@ -6,22 +6,16 @@ import { LEADERS } from "../../../data/team";
 
 export default function Leadership() {
   return (
-    <section className="relative py-20 px-4 md:px-8 border-t border-white/10 bg-[var(--void-2)] overflow-hidden">
-      {/* Background ambient spotlight */}
-      <div
-        className="pointer-events-none absolute inset-0 opacity-30"
-        style={{ background: "var(--grad-amber-glow)" }}
-      />
-
+    <section className="relative py-20 px-4 md:px-8 border-t border-[#C89B3C]/30 bg-[#0A233F] text-white overflow-hidden rounded-3xl my-16 shadow-2xl">
       <div className="relative mx-auto max-w-7xl">
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <span className="inline-flex items-center gap-2 border border-[var(--gold)]/30 bg-[var(--gold)]/10 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-[var(--gold-bright)]">
-            <ShieldCheck className="h-4 w-4" /> Board of Leadership
+          <span className="inline-flex items-center gap-2 rounded-lg border border-[#C89B3C] bg-[#FFF2BA] px-4 py-1.5 text-xs font-black uppercase tracking-widest text-[#0F3C65]">
+            <ShieldCheck className="h-4 w-4 text-[#0F3C65]" /> Board of Leadership
           </span>
-          <h2 className="mt-4 font-[family-name:var(--font-display)] text-3xl md:text-5xl font-bold tracking-tight text-white leading-[0.95]">
+          <h2 className="mt-4 text-3xl md:text-5xl font-black tracking-tight text-white leading-[0.95]" style={{ fontFamily: "var(--font-display)" }}>
             Pioneering Compliance &amp; Regulatory Leadership
           </h2>
-          <p className="mt-4 text-base text-[var(--white-70)] leading-relaxed max-w-xl">
+          <p className="mt-4 text-base text-slate-300 font-medium leading-relaxed max-w-xl mx-auto">
             Led by veteran security domain architects with decades of executive leadership across SIS, SLV Security, Jaguar Security, ICICI Bank, Bajaj Group, and BSS Security.
           </p>
         </div>
@@ -30,16 +24,16 @@ export default function Leadership() {
           {LEADERS.map((leader) => (
             <div
               key={leader.id}
-              className="relative flex flex-col md:flex-row gap-6 border border-white/10 bg-white/[0.02] p-6 md:p-8 transition-[color,border-color,background-color] duration-300 hover:border-[var(--gold)]/50 hover:bg-white/[0.04]"
+              className="relative flex flex-col md:flex-row gap-6 rounded-2xl border border-[#C89B3C]/30 bg-[#07192C] p-6 md:p-8 shadow-xl transition-all duration-300 hover:border-[#C89B3C]"
             >
-              {/* Leader Photo — sharp editorial, no rounding */}
-              <div className="relative w-36 h-36 md:w-44 md:h-44 shrink-0 overflow-hidden border border-[var(--gold)]/40 self-center md:self-start">
+              {/* Leader Photo */}
+              <div className="relative w-36 h-36 md:w-44 md:h-44 shrink-0 overflow-hidden rounded-2xl border-2 border-[#C89B3C] self-center md:self-start shadow-md">
                 <Image
                   src={leader.photo}
                   alt={leader.name}
                   fill
                   sizes="176px"
-                  className="object-cover grayscale hover:grayscale-0 transition-[filter,opacity] duration-700"
+                  className="object-cover"
                 />
               </div>
 
@@ -47,31 +41,31 @@ export default function Leadership() {
               <div className="flex flex-col justify-between flex-1">
                 <div>
                   <div className="flex items-center justify-between gap-2">
-                    <h3 className="font-[family-name:var(--font-display)] text-2xl font-bold text-white">
+                    <h3 className="text-2xl font-black text-white" style={{ fontFamily: "var(--font-display)" }}>
                       {leader.name}
                     </h3>
-                    <span className="bg-[var(--gold)]/20 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-[var(--gold-bright)]">
+                    <span className="bg-[#FFF2BA] px-2.5 py-1 text-[10px] font-black uppercase tracking-wider text-[#0F3C65] rounded-md">
                       {leader.role}
                     </span>
                   </div>
 
-                  <p className="mt-3 text-xs md:text-sm font-normal leading-relaxed text-[var(--white-70)]">
+                  <p className="mt-3 text-xs md:text-sm font-medium leading-relaxed text-slate-300">
                     {leader.bio}
                   </p>
                 </div>
 
                 {/* Key Track Record Tags */}
                 <div className="mt-6 border-t border-white/10 pt-4">
-                  <span className="text-[10px] font-bold uppercase tracking-widest text-[var(--gold-bright)] mb-2 block">
+                  <span className="text-[10px] font-black uppercase tracking-widest text-[#C89B3C] mb-2 block">
                     Proven Experience
                   </span>
                   <div className="flex flex-wrap gap-1.5">
                     {leader.credentials.map((cred) => (
                       <span
                         key={cred}
-                        className="inline-flex items-center gap-1 rounded border border-white/10 bg-white/5 px-2 py-1 text-[11px] text-[var(--white-90)]"
+                        className="inline-flex items-center gap-1 rounded-lg border border-white/15 bg-white/5 px-2.5 py-1 text-[11px] font-bold text-white"
                       >
-                        <CheckCircle2 className="h-3 w-3 text-[var(--gold-bright)]" />
+                        <CheckCircle2 className="h-3 w-3 text-[#C89B3C]" />
                         {cred}
                       </span>
                     ))}

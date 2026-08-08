@@ -547,25 +547,29 @@ strong {
 
 .form-field {
   width: 100%;
-  border-radius: var(--radius);
-  border: 1px solid var(--white-12);
-  background-color: rgba(2, 8, 20, 0.55);
-  padding: 0.75rem 0.85rem;
+  border-radius: 0.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background-color: rgba(7, 25, 44, 0.8);
+  padding: 0.75rem 1rem;
   font-size: 0.875rem;
-  font-weight: 500;
-  color: var(--white);
+  font-weight: 600;
+  color: #ffffff;
   outline: none;
-  transition: border-color 0.2s var(--ease-smooth), box-shadow 0.2s var(--ease-smooth);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.form-field option {
+  background-color: #0A233F;
+  color: #ffffff;
 }
 .form-field::placeholder {
-  color: var(--white-40);
+  color: rgba(255, 255, 255, 0.6);
 }
 .form-field:focus {
-  border-color: var(--gold);
-  box-shadow: 0 0 0 1px rgba(212, 184, 114, 0.25);
+  border-color: #C89B3C;
+  box-shadow: 0 0 0 2px rgba(200, 155, 60, 0.3);
 }
 select.form-field {
-  appearance: none;
+  appearance: auto;
 }
 textarea.form-field {
   min-height: 120px;

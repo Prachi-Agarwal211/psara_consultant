@@ -84,32 +84,32 @@ export default async function StatePage({
         image={heroImage}
         meta={`( PSARA CONSULTANCY ) ( ${s.capital} )`}
       />
-      {/* Stats strip — accent-tinted */}
-      <section className="border-b border-white/10" style={accentStyle}>
-        <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-center gap-6 px-[var(--gutter)] py-4 text-center text-xs font-bold uppercase tracking-wider md:gap-10">
+      {/* Stats strip */}
+      <section className="border-b border-[#0F3C65]/15 bg-[#FBF7F0]">
+        <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-center gap-6 px-[var(--gutter)] py-4 text-center text-xs font-black uppercase tracking-wider md:gap-10">
           <div>
-            <span className="block text-sm text-acc-bright">{s.name}</span>
-            <span className="block text-[var(--white-55)]">State</span>
+            <span className="block text-sm text-[#0F3C65] font-black">{s.name}</span>
+            <span className="block text-[#486581]">State</span>
           </div>
-          <div className="h-8 w-px bg-white/10" aria-hidden />
+          <div className="h-8 w-px bg-[#0F3C65]/15" aria-hidden />
           <div>
-            <span className="block text-sm text-acc-bright">{s.capital}</span>
-            <span className="block text-[var(--white-55)]">Capital</span>
+            <span className="block text-sm text-[#0F3C65] font-black">{s.capital}</span>
+            <span className="block text-[#486581]">Capital</span>
           </div>
-          <div className="h-8 w-px bg-white/10" aria-hidden />
+          <div className="h-8 w-px bg-[#0F3C65]/15" aria-hidden />
           <div>
-            <span className="block text-sm text-acc-bright">{s.cities.length}</span>
-            <span className="block text-[var(--white-55)]">Cities covered</span>
+            <span className="block text-sm text-[#0F3C65] font-black">{s.cities.length}</span>
+            <span className="block text-[#486581]">Cities covered</span>
           </div>
-          <div className="h-8 w-px bg-white/10" aria-hidden />
+          <div className="h-8 w-px bg-[#0F3C65]/15" aria-hidden />
           <div>
-            <span className="block text-sm text-acc-bright">{s.sectors.length}</span>
-            <span className="block text-[var(--white-55)]">Key sectors</span>
+            <span className="block text-sm text-[#0F3C65] font-black">{s.sectors.length}</span>
+            <span className="block text-[#486581]">Key sectors</span>
           </div>
         </div>
       </section>
 
-      <PageMain>
+      <PageMain className="bg-[#FFFEF9] text-[#0F3C65]">
         <div style={accentStyle} className="grid grid-cols-1 gap-12 lg:grid-cols-12">
           <div className="lg:col-span-7 space-y-12">
             <StateDossierView
@@ -120,7 +120,7 @@ export default async function StatePage({
 
             {cities.length > 0 && (
               <div data-section-transition data-transition="fade" className="mt-12">
-                <h2 className="font-[family-name:var(--font-display)] text-2xl font-bold text-white">
+                <h2 className="text-2xl font-black text-[#0F3C65]" style={{ fontFamily: "var(--font-display)" }}>
                   Cities we cover in {s.name}
                 </h2>
                 <div data-stagger className="mt-4 flex flex-wrap gap-2">
@@ -128,7 +128,7 @@ export default async function StatePage({
                     <Link
                       key={c.slug}
                       href={`/city/${c.slug}`}
-                      className="border border-white/10 px-3 py-1.5 text-xs font-bold uppercase tracking-wider text-[var(--white-55)] transition-colors hover:border-acc hover:text-acc-bright hover:bg-acc-soft"
+                      className="rounded-xl border border-[#0F3C65]/15 bg-[#FBF7F0] px-3.5 py-2 text-xs font-black uppercase tracking-wider text-[#0F3C65] transition-all hover:border-[#C89B3C] hover:bg-[#0A233F] hover:text-white"
                     >
                       {c.name}
                     </Link>
@@ -139,39 +139,35 @@ export default async function StatePage({
 
             {/* Regulatory Tools & Interlinking — dossier cards */}
             <div data-section-transition data-transition="clip-right" className="mt-12">
-              <h2 className="font-[family-name:var(--font-display)] text-2xl font-bold text-white">
+              <h2 className="text-2xl font-black text-[#0F3C65]" style={{ fontFamily: "var(--font-display)" }}>
                 Statutory Tools for {s.name}
               </h2>
               <div data-stagger className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-3">
-                <Link href="/calculator" className="group relative overflow-hidden border border-white/10 bg-white/[0.02] p-4 transition-[color,border-color,background-color] duration-300 hover:-translate-y-0.5 hover:border-acc ">
-                  <span className="absolute right-3 top-2 font-mono text-2xl font-bold text-acc opacity-[0.14]">₹</span>
-                  <span className="block text-xs font-bold text-white">{s.name} Fee Calculator</span>
-                  <span className="mt-1 block text-[11px] text-[var(--white-55)]">Estimate 1 district, 5 districts or state fees</span>
+                <Link href="/calculator" className="group rounded-2xl border border-[#0F3C65]/15 bg-[#FBF7F0] p-4 shadow-sm transition-all hover:border-[#C89B3C] hover:bg-white">
+                  <span className="block text-xs font-black text-[#0F3C65]">{s.name} Fee Calculator</span>
+                  <span className="mt-1 block text-[11px] font-medium text-[#486581]">Estimate 1 district, 5 districts or state fees</span>
                 </Link>
-                <Link href="/emergency" className="group relative overflow-hidden border border-acc bg-acc-soft p-4 transition-[color,border-color,background-color] duration-300 hover:-translate-y-0.5 hover:bg-acc-strong">
-                  <span className="absolute right-3 top-2 font-mono text-2xl font-bold text-acc opacity-[0.2]">24/7</span>
-                  <span className="block text-xs font-bold text-acc-bright">Notice &amp; Expiry Emergency Desk</span>
-                  <span className="mt-1 block text-[11px] text-[var(--white-55)]">Urgent Controlling Authority notice response</span>
+                <Link href="/emergency" className="group rounded-2xl border-2 border-[#C89B3C] bg-[#FFF2BA] p-4 shadow-sm transition-all hover:bg-[#C89B3C]">
+                  <span className="block text-xs font-black text-[#0F3C65] group-hover:text-white">Notice &amp; Expiry Emergency Desk</span>
+                  <span className="mt-1 block text-[11px] font-bold text-[#0F3C65]/80 group-hover:text-white/90">Urgent Controlling Authority notice response</span>
                 </Link>
-                <Link href="/case-studies" className="group relative overflow-hidden border border-white/10 bg-white/[0.02] p-4 transition-[color,border-color,background-color] duration-300 hover:-translate-y-0.5 hover:border-acc ">
-                  <span className="absolute right-3 top-2 font-mono text-2xl font-bold text-acc opacity-[0.14]">OK</span>
-                  <span className="block text-xs font-bold text-white">Licensing Case Studies</span>
-                  <span className="mt-1 block text-[11px] text-[var(--white-55)]">Proven security clearance success stories</span>
+                <Link href="/case-studies" className="group rounded-2xl border border-[#0F3C65]/15 bg-[#FBF7F0] p-4 shadow-sm transition-all hover:border-[#C89B3C] hover:bg-white">
+                  <span className="block text-xs font-black text-[#0F3C65]">Licensing Case Studies</span>
+                  <span className="mt-1 block text-[11px] font-medium text-[#486581]">Proven security clearance success stories</span>
                 </Link>
-                <Link href="/industries" className="group relative overflow-hidden border border-white/10 bg-white/[0.02] p-4 transition-[color,border-color,background-color] duration-300 hover:-translate-y-0.5 hover:border-acc ">
-                  <span className="absolute right-3 top-2 font-mono text-2xl font-bold text-acc opacity-[0.14]">II</span>
-                  <span className="block text-xs font-bold text-white">Industry PSARA Compliance</span>
-                  <span className="mt-1 block text-[11px] text-[var(--white-55)]">Manufacturing, Tech Parks &amp; Hospital rules</span>
+                <Link href="/industries" className="group rounded-2xl border border-[#0F3C65]/15 bg-[#FBF7F0] p-4 shadow-sm transition-all hover:border-[#C89B3C] hover:bg-white">
+                  <span className="block text-xs font-black text-[#0F3C65]">Industry PSARA Compliance</span>
+                  <span className="mt-1 block text-[11px] font-medium text-[#486581]">Manufacturing, Tech Parks &amp; Hospital rules</span>
                 </Link>
               </div>
             </div>
 
-            {/* Service cross-links for internal linking */}
+            {/* Service cross-links */}
             <div data-section-transition data-transition="fade" className="mt-12">
-              <h2 className="font-[family-name:var(--font-display)] text-2xl font-bold text-white">
+              <h2 className="text-2xl font-black text-[#0F3C65]" style={{ fontFamily: "var(--font-display)" }}>
                 PSARA Services in {s.name}
               </h2>
-              <p className="mt-2 text-sm font-medium text-[var(--white-55)]">
+              <p className="mt-2 text-sm font-medium text-[#486581]">
                 Complete PSARA licensing services for agencies operating in {s.name}.
               </p>
               <div data-stagger className="mt-4 flex flex-wrap gap-2">
@@ -179,19 +175,12 @@ export default async function StatePage({
                   <Link
                     key={svc.slug}
                     href={`/services/${svc.slug}`}
-                    className="border border-white/10 px-3 py-1.5 text-xs font-bold uppercase tracking-wider text-[var(--white-55)] transition-colors hover:border-acc hover:text-acc-bright hover:bg-acc-soft"
+                    className="rounded-xl border border-[#0F3C65]/15 bg-[#FBF7F0] px-3.5 py-2 text-xs font-black uppercase tracking-wider text-[#0F3C65] transition-all hover:border-[#C89B3C] hover:bg-[#0A233F] hover:text-white"
                   >
                     {svc.title}
                   </Link>
                 ))}
               </div>
-              <p className="mt-3 text-xs font-medium text-[var(--white-55)]">
-                View all{" "}
-                <Link href="/services" className="text-acc-bright underline">
-                  PSARA services
-                </Link>
-                .
-              </p>
             </div>
 
             {statePageOffices.length > 0 && (
@@ -204,17 +193,13 @@ export default async function StatePage({
 
             <CtaBar title={`Apply for PSARA in ${s.name}`} />
           </div>
-          <div id="state-enquiry" data-clip className="relative overflow-hidden border border-acc bg-acc-soft p-6 lg:col-span-5">
-            <div
-              className="pointer-events-none absolute -right-16 -top-16 h-48 w-48 rounded-full"
-              style={{ background: `radial-gradient(circle, ${accent.base}1f 0%, transparent 70%)` }}
-              aria-hidden
-            />
-            <span className="text-[0.6rem] font-bold uppercase tracking-[0.24em] text-acc-bright">State Desk</span>
-            <h3 className="mt-2 font-[family-name:var(--font-display)] text-xl font-bold text-white">
+
+          <div id="state-enquiry" data-clip className="relative overflow-hidden rounded-3xl border-2 border-[#C89B3C]/40 bg-[#0A233F] text-white p-6 md:p-8 lg:col-span-5 shadow-2xl">
+            <span className="text-[0.6rem] font-black uppercase tracking-[0.24em] text-[#C89B3C]">State Desk</span>
+            <h3 className="mt-2 text-xl font-black text-white" style={{ fontFamily: "var(--font-display)" }}>
               {s.name} enquiry
             </h3>
-            <p className="mt-2 text-sm font-medium text-[var(--white-55)]">
+            <p className="mt-2 text-sm font-medium text-slate-300">
               WhatsApp form — pre-fills a message to our consultants.
             </p>
             <div className="mt-4">

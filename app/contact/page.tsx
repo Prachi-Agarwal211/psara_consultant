@@ -39,22 +39,22 @@ export default function ContactPage() {
         crumbs={[{ label: "Contact Us" }]}
       />
 
-      <PageMain>
+      <PageMain className="bg-[#FFFEF9] text-[#0F3C65]">
         {/* Contact Info Header Grid */}
         <div className="mb-16 grid grid-cols-1 md:grid-cols-3 gap-6">
           <a
             href={TEL_HREF}
-            className="flex items-center gap-4 border border-white/10 bg-[var(--void-2)] p-6 transition-colors duration-200 hover:border-[var(--gold)]"
+            className="flex items-center gap-4 rounded-2xl border border-[#0F3C65]/15 bg-[#FBF7F0] p-6 shadow-sm transition-all duration-200 hover:border-[#C89B3C] hover:bg-white"
           >
-            <div className="p-3 rounded bg-[var(--gold)]/10 text-[var(--gold-bright)]">
+            <div className="p-3.5 rounded-xl bg-[#FFF2BA] text-[#0F3C65]">
               <Phone className="h-6 w-6" />
             </div>
             <div>
-              <span className="block text-[10px] font-bold uppercase tracking-widest text-[var(--gold-bright)]">
+              <span className="block text-[10px] font-black uppercase tracking-widest text-[#C89B3C]">
                 Direct Helpline
               </span>
-              <span className="text-base font-bold text-white">{CONTACT.phoneDisplay}</span>
-              <span className="block text-[10px] text-[var(--white-55)]">Mon–Sat: 9:30 AM – 6:30 PM</span>
+              <span className="text-base font-black text-[#0F3C65]">{CONTACT.phoneDisplay}</span>
+              <span className="block text-[10px] text-[#486581] font-medium">Mon–Sat: 9:30 AM – 6:30 PM</span>
             </div>
           </a>
 
@@ -62,33 +62,33 @@ export default function ContactPage() {
             href={DEFAULT_WA}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-4 border border-white/10 bg-[var(--void-2)] p-6 transition-colors duration-200 hover:border-[var(--gold)]"
+            className="flex items-center gap-4 rounded-2xl border border-[#0F3C65]/15 bg-[#FBF7F0] p-6 shadow-sm transition-all duration-200 hover:border-[#C89B3C] hover:bg-white"
           >
-            <div className="p-3 rounded bg-[var(--gold)]/10 text-[var(--gold-bright)]">
+            <div className="p-3.5 rounded-xl bg-[#FFF2BA] text-[#0F3C65]">
               <MessageSquare className="h-6 w-6" />
             </div>
             <div>
-              <span className="block text-[10px] font-bold uppercase tracking-widest text-[var(--gold-bright)]">
+              <span className="block text-[10px] font-black uppercase tracking-widest text-[#C89B3C]">
                 WhatsApp Desk
               </span>
-              <span className="text-base font-bold text-white">Instant Consultation</span>
-              <span className="block text-[10px] text-[var(--white-55)]">Average response: &lt; 15 mins</span>
+              <span className="text-base font-black text-[#0F3C65]">Instant Consultation</span>
+              <span className="block text-[10px] text-[#486581] font-medium">Average response: &lt; 15 mins</span>
             </div>
           </a>
 
           <a
             href={`mailto:${CONTACT.email}`}
-            className="flex items-center gap-4 border border-white/10 bg-[var(--void-2)] p-6 transition-colors duration-200 hover:border-[var(--gold)]"
+            className="flex items-center gap-4 rounded-2xl border border-[#0F3C65]/15 bg-[#FBF7F0] p-6 shadow-sm transition-all duration-200 hover:border-[#C89B3C] hover:bg-white"
           >
-            <div className="p-3 rounded bg-[var(--gold)]/10 text-[var(--gold-bright)]">
+            <div className="p-3.5 rounded-xl bg-[#FFF2BA] text-[#0F3C65]">
               <Mail className="h-6 w-6" />
             </div>
             <div>
-              <span className="block text-[10px] font-bold uppercase tracking-widest text-[var(--gold-bright)]">
+              <span className="block text-[10px] font-black uppercase tracking-widest text-[#C89B3C]">
                 Official Email
               </span>
-              <span className="text-sm font-bold text-white">{CONTACT.email}</span>
-              <span className="block text-[10px] text-[var(--white-55)]">Statutory document reviews</span>
+              <span className="text-sm font-black text-[#0F3C65]">{CONTACT.email}</span>
+              <span className="block text-[10px] text-[#486581] font-medium">Statutory document reviews</span>
             </div>
           </a>
         </div>
@@ -96,14 +96,14 @@ export default function ContactPage() {
         {/* Main Form & Office Cards Section */}
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 mb-20">
           <div className="lg:col-span-7">
-            <div className="border border-[var(--gold)]/30 bg-[var(--void-2)] p-6 md:p-8">
-              <span className="text-xs font-bold uppercase tracking-widest text-[var(--gold-bright)]">
+            <div className="rounded-3xl border-2 border-[#C89B3C]/40 bg-[#0A233F] text-white p-6 md:p-8 shadow-2xl">
+              <span className="text-xs font-black uppercase tracking-widest text-[#C89B3C]">
                 Filing Request
               </span>
-              <h2 className="mt-1 font-[family-name:var(--font-display)] text-2xl font-bold text-white">
+              <h2 className="mt-1 text-2xl font-black text-white" style={{ fontFamily: "var(--font-display)" }}>
                 Submit Your State Licensing Inquiry
               </h2>
-              <p className="mt-2 text-xs text-[var(--white-70)] mb-6">
+              <p className="mt-2 text-xs text-slate-300 font-medium mb-6">
                 Fill in your company details to receive a state statutory fee quote, MOU format, and checklist.
               </p>
               <ContactForm />
@@ -111,27 +111,27 @@ export default function ContactPage() {
           </div>
 
           <div className="lg:col-span-5 space-y-6">
-            <span className="text-xs font-bold uppercase tracking-widest text-[var(--gold-bright)] block">
+            <span className="text-xs font-black uppercase tracking-widest text-[#C89B3C] block">
               Physical Office Network
             </span>
 
             {OFFICES.map((o) => (
-              <div key={o.city} className="border border-white/10 bg-white/[0.02] p-5">
+              <div key={o.city} className="rounded-2xl border border-[#0F3C65]/15 bg-[#FBF7F0] p-5 shadow-sm">
                 <div className="flex items-center justify-between">
-                  <h3 className="font-[family-name:var(--font-display)] text-base font-bold text-white flex items-center gap-2">
-                    <MapPin className="h-4 w-4 text-[var(--gold-bright)]" />
+                  <h3 className="text-base font-black text-[#0F3C65] flex items-center gap-2" style={{ fontFamily: "var(--font-display)" }}>
+                    <MapPin className="h-4 w-4 text-[#C89B3C]" />
                     {o.city} {o.badge}
                   </h3>
                   {o.isHQ && (
-                    <span className="rounded bg-[var(--gold)]/20 px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider text-[var(--gold-bright)]">
+                    <span className="rounded-lg bg-[#FFF2BA] px-2 py-0.5 text-[9px] font-black uppercase tracking-wider text-[#0F3C65]">
                       Headquarters
                     </span>
                   )}
                 </div>
-                <p className="mt-2 text-xs text-[var(--white-70)] leading-relaxed">{o.address}</p>
-                <div className="mt-3 pt-3 border-t border-white/10 flex items-center justify-between text-[11px] text-[var(--white-55)]">
+                <p className="mt-2 text-xs text-[#334E68] font-medium leading-relaxed">{o.address}</p>
+                <div className="mt-3 pt-3 border-t border-[#0F3C65]/10 flex items-center justify-between text-[11px] text-[#486581] font-bold">
                   <span>Phone: {o.phone}</span>
-                  <a href={TEL_HREF} className="text-[var(--gold-bright)] font-bold hover:underline">Call Desk &rarr;</a>
+                  <a href={TEL_HREF} className="text-[#0F3C65] font-black hover:text-[#C89B3C]">Call Desk &rarr;</a>
                 </div>
               </div>
             ))}
@@ -139,24 +139,24 @@ export default function ContactPage() {
         </div>
 
         {/* Google Business Profile & Map Section */}
-        <section className="border-t border-white/10 pt-16">
+        <section className="border-t border-[#0F3C65]/15 pt-16">
           <div className="text-center max-w-2xl mx-auto mb-10">
-            <span className="text-xs font-bold uppercase tracking-wider text-[var(--gold-bright)]">Google Business Profile</span>
-            <h2 className="mt-2 font-[family-name:var(--font-display)] text-2xl font-bold text-white">
+            <span className="text-xs font-black uppercase tracking-wider text-[#C89B3C]">Google Business Profile</span>
+            <h2 className="mt-2 text-2xl font-black text-[#0F3C65]" style={{ fontFamily: "var(--font-display)" }}>
               Visit Jaipur Headquarters &amp; Regional Locations
             </h2>
-            <p className="mt-2 text-xs text-[var(--white-70)]">
+            <p className="mt-2 text-xs text-[#334E68] font-medium">
               Verified business profile across Google Maps with real client ratings and location directions.
             </p>
           </div>
 
-          <div className="relative overflow-hidden border border-white/10 rounded h-96">
+          <div className="relative overflow-hidden rounded-3xl border border-[#0F3C65]/15 shadow-md h-96">
             <iframe
               title="PSARA Consultant Jaipur Location"
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3557.067469273516!2d75.7275813!3d26.9330279!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x396db34571cb6013%3A0x86bbdbb5d5cf2027!2sCapital%20Galleria%20Jaipur!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
               width="100%"
               height="100%"
-              style={{ border: 0, filter: "brightness(0.9) contrast(1.1)" }}
+              style={{ border: 0 }}
               allowFullScreen
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"

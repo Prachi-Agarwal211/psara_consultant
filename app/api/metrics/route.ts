@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import fs from "fs";
 import path from "path";
-import { METRICS_PASSWORD, MAX_LEADS_PER_HOUR, ADMIN_IP_WHITELIST } from "@/lib/metrics-security";
+import { METRICS_PASSWORD, MAX_LEADS_PER_HOUR, ADMIN_IP_WHITELIST } from "../../../lib/metrics-security";
 
 // Move data file OUT of public folder for security
 const DATA_FILE = path.join(process.cwd(), ".data", "metrics-data.json");

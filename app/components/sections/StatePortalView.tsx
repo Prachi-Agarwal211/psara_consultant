@@ -17,22 +17,22 @@ export default function StatePortalView() {
   });
 
   return (
-    <div className="space-y-10">
+    <div className="space-y-10 bg-[#FFFEF9] text-[#0F3C65]">
       {/* Search Bar */}
-      <div data-section-transition data-transition="fade" className="border border-white/10 bg-white/[0.02] p-4">
+      <div data-section-transition data-transition="fade" className="rounded-2xl border border-[#0F3C65]/15 bg-[#FBF7F0] p-4 shadow-sm">
         <div className="relative">
-          <Search className="absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-[var(--gold-bright)]" />
+          <Search className="absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-[#C89B3C]" />
           <input
             type="text"
             placeholder="Search State, Union Territory, or Capital…"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full rounded-md border border-white/10 bg-white/5 pl-10 pr-4 py-3 text-sm text-white outline-none placeholder-[var(--white-40)] transition-colors focus:border-[var(--gold)]"
+            className="w-full rounded-xl border border-[#0F3C65]/20 bg-white pl-12 pr-4 py-3.5 text-sm font-medium text-[#0F3C65] outline-none placeholder-[#486581] transition-all focus:border-[#C89B3C] focus:ring-2 focus:ring-[#C89B3C]/20 shadow-inner"
           />
         </div>
       </div>
 
-      {/* State Cards Grid — each card gets its own deterministic accent */}
+      {/* State Cards Grid */}
       <div data-stagger className="state-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {filteredStates.map((s) => {
           const acc = getLocationAccent(s.slug);
@@ -42,37 +42,28 @@ export default function StatePortalView() {
               key={s.slug}
               href={`/states/${s.slug}`}
               style={accVars}
-              className="group relative overflow-hidden border border-white/10 bg-white/[0.02] p-6 transition-[color,border-color,background-color] duration-300 hover:-translate-y-1 hover:border-acc  flex flex-col justify-between"
+              className="group relative overflow-hidden rounded-2xl border border-[#0F3C65]/15 bg-[#FBF7F0] p-6 shadow-sm transition-all duration-300 hover:border-[#C89B3C] hover:bg-white flex flex-col justify-between"
             >
-              {/* Ghost index */}
-              <span aria-hidden className="pointer-events-none absolute -right-1 -top-3 font-mono text-5xl font-bold text-acc opacity-[0.07] transition-opacity duration-300 group-hover:opacity-[0.16]">
-                {s.slug.slice(0, 2).toUpperCase()}
-              </span>
-              {/* Corner accent */}
-              <span
-                className="pointer-events-none absolute left-0 top-0 h-0.5 w-0 bg-acc transition-[color,border-color,background-color] duration-500 group-hover:w-full"
-                aria-hidden
-              />
               <div>
                 <div className="flex items-center justify-between">
-                  <span className="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-widest text-acc-bright">
-                    <MapPin className="h-3 w-3" /> {s.validityYears}-Year License
+                  <span className="flex items-center gap-1.5 text-[10px] font-black uppercase tracking-widest text-[#C89B3C]">
+                    <MapPin className="h-3.5 w-3.5 text-[#C89B3C]" /> {s.validityYears}-Year License
                   </span>
-                  <ArrowUpRight className="h-4 w-4 text-[var(--white-40)] transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-acc-bright" />
+                  <ArrowUpRight className="h-4 w-4 text-[#0F3C65] transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-[#C89B3C] stroke-[2.5]" />
                 </div>
 
-                <h3 className="mt-3 font-[family-name:var(--font-display)] text-xl font-bold text-white transition-colors group-hover:text-acc-bright">
+                <h3 className="mt-3 text-xl font-black text-[#0F3C65] group-hover:text-[#0A233F]" style={{ fontFamily: "var(--font-display)" }}>
                   {s.name}
                 </h3>
 
-                <p className="mt-2 text-xs text-[var(--white-55)] line-clamp-2">
+                <p className="mt-2 text-xs font-medium text-[#486581] line-clamp-2">
                   {s.authority}
                 </p>
               </div>
 
-              <div className="mt-6 flex items-center justify-between border-t border-white/10 pt-3 text-[11px] text-[var(--white-40)]">
+              <div className="mt-6 flex items-center justify-between border-t border-[#0F3C65]/10 pt-3 text-[11px] text-[#486581] font-bold">
                 <span>{s.cities ? `${s.cities.length} Cities` : "Statewide Coverage"}</span>
-                <span className="font-bold text-acc-bright">View Guide →</span>
+                <span className="font-black text-[#0F3C65] group-hover:text-[#C89B3C]">View Guide &rarr;</span>
               </div>
             </Link>
           );
@@ -80,8 +71,8 @@ export default function StatePortalView() {
       </div>
 
       {filteredStates.length === 0 && (
-        <div className="border border-white/10 bg-white/[0.01] py-12 text-center">
-          <p className="text-sm text-[var(--white-55)]">No States found matching &quot;{search}&quot;.</p>
+        <div className="rounded-2xl border border-[#0F3C65]/15 bg-[#FBF7F0] py-12 text-center">
+          <p className="text-sm font-medium text-[#486581]">No States found matching &quot;{search}&quot;.</p>
         </div>
       )}
     </div>

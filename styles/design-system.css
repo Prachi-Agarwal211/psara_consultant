@@ -15,44 +15,45 @@
    SECTION TRANSITIONS — Full-bleed color blocks
    ═══════════════════════════════════════════════════════════════ */
 
-/* Void section — deep electric blue (#020814) */
+/* Void section — primary light ivory (#FFFEF9) */
 .section-void {
-  background: #020814;
+  background: #FFFEF9;
   position: relative;
   overflow: hidden;
 }
 
-/* Electric section — gradient electric blue */
+/* Electric section — soft light cream background */
 .section-electric {
-  background: linear-gradient(160deg, #020814 0%, #041030 50%, #0a1a4a 100%);
+  background: #FBF7F0;
   position: relative;
   overflow: hidden;
 }
 
-/* Metal section — warm dark bronze/gold */
+/* Metal section — warm cream background */
 .section-metal {
-  background: linear-gradient(160deg, #020814 0%, #041030 50%, #0a1a4a 100%);
+  background: #F8F3EA;
   position: relative;
   overflow: hidden;
 }
 
-/* Night section — near black (meech213 dark energy) */
+/* Night section — executive navy section callout */
 .section-night {
-  background: linear-gradient(160deg, #010408 0%, #020814 50%, #010408 100%);
+  background: #0A233F;
+  color: #FFFFFF;
   position: relative;
   overflow: hidden;
 }
 
-/* Warm section — warm dark brown (santionispirits energy) */
+/* Warm section — warm ivory background */
 .section-warm {
-  background: linear-gradient(160deg, #020814 0%, #041030 50%, #0a1a4a 100%);
+  background: #FBF7F0;
   position: relative;
   overflow: hidden;
 }
 
-/* Surface section — slightly lighter void */
+/* Surface section — soft parchment surface */
 .section-surface {
-  background: #041028;
+  background: #F4EFE6;
   position: relative;
   overflow: hidden;
 }

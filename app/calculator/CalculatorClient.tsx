@@ -35,139 +35,139 @@ export default function CalculatorClient() {
         crumbs={[{ label: "Fee Calculator" }]}
       />
 
-      <PageMain>
+      <PageMain className="bg-[#FFFEF9] text-[#0F3C65]">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
           {/* Controls */}
-          <div className="lg:col-span-7 border border-white/10 bg-[var(--void-2)] p-6 md:p-8 space-y-6">
-            <h2 className="font-[family-name:var(--font-display)] text-xl font-bold text-white flex items-center gap-2">
-              <Calculator className="h-5 w-5 text-[var(--gold-bright)]" /> Configure License Parameters
+          <div className="lg:col-span-7 rounded-3xl border border-[#0F3C65]/15 bg-[#FBF7F0] p-6 md:p-8 space-y-6 shadow-sm">
+            <h2 className="text-xl font-black text-[#0F3C65] flex items-center gap-2" style={{ fontFamily: "var(--font-display)" }}>
+              <Calculator className="h-5 w-5 text-[#C89B3C]" /> Configure License Parameters
             </h2>
 
             {/* State Selection */}
             <div>
-              <label className="block text-xs font-bold uppercase tracking-wider text-[var(--gold-bright)] mb-2">
+              <label className="block text-xs font-black uppercase tracking-wider text-[#C89B3C] mb-2">
                 1. Target Operating State
               </label>
               <select
                 value={selectedState}
                 onChange={(e) => setSelectedState(e.target.value)}
-                className="w-full rounded border border-white/20 bg-white/5 p-3 text-sm text-white focus:border-[var(--gold)] outline-none"
+                className="w-full rounded-xl border border-[#0F3C65]/20 bg-white p-3.5 text-sm font-bold text-[#0F3C65] focus:border-[#C89B3C] outline-none shadow-sm"
               >
-                <option value="rajasthan" className="bg-[var(--void-2)]">Rajasthan</option>
-                <option value="delhi" className="bg-[var(--void-2)]">Delhi NCR</option>
-                <option value="maharashtra" className="bg-[var(--void-2)]">Maharashtra</option>
-                <option value="karnataka" className="bg-[var(--void-2)]">Karnataka</option>
-                <option value="haryana" className="bg-[var(--void-2)]">Haryana</option>
-                <option value="uttar-pradesh" className="bg-[var(--void-2)]">Uttar Pradesh</option>
-                <option value="other" className="bg-[var(--void-2)]">Other State / UT</option>
+                <option value="rajasthan">Rajasthan</option>
+                <option value="delhi">Delhi NCR</option>
+                <option value="maharashtra">Maharashtra</option>
+                <option value="karnataka">Karnataka</option>
+                <option value="haryana">Haryana</option>
+                <option value="uttar-pradesh">Uttar Pradesh</option>
+                <option value="other">Other State / UT</option>
               </select>
             </div>
 
             {/* Territory Scale */}
             <div>
-              <label className="block text-xs font-bold uppercase tracking-wider text-[var(--gold-bright)] mb-2">
+              <label className="block text-xs font-black uppercase tracking-wider text-[#C89B3C] mb-2">
                 2. District Coverage Scale
               </label>
               <div className="grid grid-cols-3 gap-3">
                 <button
                   type="button"
                   onClick={() => setScale("d1")}
-                  className={`p-3 rounded border text-xs font-bold transition-colors duration-200 ${
+                  className={`p-3.5 rounded-2xl border text-xs font-black transition-all ${
                     scale === "d1"
-                      ? "border-[var(--gold)] bg-[var(--gold)]/20 text-white"
-                      : "border-white/10 bg-white/5 text-[var(--white-70)]"
+                      ? "border-[#C89B3C] bg-[#0A233F] text-white shadow-md"
+                      : "border-[#0F3C65]/15 bg-white text-[#0F3C65] hover:bg-[#FFF2BA]"
                   }`}
                 >
                   1 District
-                  <span className="block text-[10px] font-normal text-[var(--white-55)] mt-0.5">Govt Fee: ₹5,000</span>
+                  <span className="block text-[10px] font-medium opacity-80 mt-0.5">Govt Fee: ₹5,000</span>
                 </button>
 
                 <button
                   type="button"
                   onClick={() => setScale("d5")}
-                  className={`p-3 rounded border text-xs font-bold transition-colors duration-200 ${
+                  className={`p-3.5 rounded-2xl border text-xs font-black transition-all ${
                     scale === "d5"
-                      ? "border-[var(--gold)] bg-[var(--gold)]/20 text-white"
-                      : "border-white/10 bg-white/5 text-[var(--white-70)]"
+                      ? "border-[#C89B3C] bg-[#0A233F] text-white shadow-md"
+                      : "border-[#0F3C65]/15 bg-white text-[#0F3C65] hover:bg-[#FFF2BA]"
                   }`}
                 >
                   5 Districts
-                  <span className="block text-[10px] font-normal text-[var(--white-55)] mt-0.5">Govt Fee: ₹10,000</span>
+                  <span className="block text-[10px] font-medium opacity-80 mt-0.5">Govt Fee: ₹10,000</span>
                 </button>
 
                 <button
                   type="button"
                   onClick={() => setScale("state")}
-                  className={`p-3 rounded border text-xs font-bold transition-colors duration-200 ${
+                  className={`p-3.5 rounded-2xl border text-xs font-black transition-all ${
                     scale === "state"
-                      ? "border-[var(--gold)] bg-[var(--gold)]/20 text-white"
-                      : "border-white/10 bg-white/5 text-[var(--white-70)]"
+                      ? "border-[#C89B3C] bg-[#0A233F] text-white shadow-md"
+                      : "border-[#0F3C65]/15 bg-white text-[#0F3C65] hover:bg-[#FFF2BA]"
                   }`}
                 >
                   Entire State
-                  <span className="block text-[10px] font-normal text-[var(--white-55)] mt-0.5">Govt Fee: ₹25,000</span>
+                  <span className="block text-[10px] font-medium opacity-80 mt-0.5">Govt Fee: ₹25,000</span>
                 </button>
               </div>
             </div>
 
             {/* Addons */}
             <div className="space-y-3 pt-2">
-              <label className="flex items-center gap-3 cursor-pointer">
+              <label className="flex items-center gap-3 cursor-pointer font-bold text-xs text-[#0F3C65]">
                 <input
                   type="checkbox"
                   checked={needMou}
                   onChange={(e) => setNeedMou(e.target.checked)}
-                  className="h-4 w-4 accent-[var(--gold)] rounded"
+                  className="h-4 w-4 accent-[#C89B3C] rounded"
                 />
-                <span className="text-xs text-white">Include Security Training Institute MOU Tie-up</span>
+                <span>Include Security Training Institute MOU Tie-up</span>
               </label>
 
-              <label className="flex items-center gap-3 cursor-pointer">
+              <label className="flex items-center gap-3 cursor-pointer font-bold text-xs text-[#0F3C65]">
                 <input
                   type="checkbox"
                   checked={needArmed}
                   onChange={(e) => setNeedArmed(e.target.checked)}
-                  className="h-4 w-4 accent-[var(--gold)] rounded"
+                  className="h-4 w-4 accent-[#C89B3C] rounded"
                 />
-                <span className="text-xs text-white">Include Armed Guard Endorsement Preparation</span>
+                <span>Include Armed Guard Endorsement Preparation</span>
               </label>
             </div>
           </div>
 
           {/* Breakdown Result */}
-          <div className="lg:col-span-5 border border-[var(--gold)]/40 bg-[var(--void-2)] p-6 md:p-8 flex flex-col justify-between">
+          <div className="lg:col-span-5 rounded-3xl border-2 border-[#C89B3C]/40 bg-[#0A233F] text-white p-6 md:p-8 flex flex-col justify-between shadow-2xl">
             <div>
-              <span className="text-xs font-bold uppercase tracking-widest text-[var(--gold-bright)]">
+              <span className="text-xs font-black uppercase tracking-widest text-[#C89B3C]">
                 Estimated Breakdown
               </span>
 
-              <div className="mt-6 space-y-4 text-xs">
-                <div className="flex justify-between py-2 border-b border-white/10 text-[var(--white-70)]">
+              <div className="mt-6 space-y-4 text-xs font-medium">
+                <div className="flex justify-between py-2 border-b border-white/10 text-slate-300">
                   <span>Statutory Government Fee:</span>
                   <span className="font-bold text-white">₹{baseGovFee.toLocaleString("en-IN")}</span>
                 </div>
 
                 {needMou && (
-                  <div className="flex justify-between py-2 border-b border-white/10 text-[var(--white-70)]">
+                  <div className="flex justify-between py-2 border-b border-white/10 text-slate-300">
                     <span>Training Institute MOU Execution:</span>
                     <span className="font-bold text-white">₹{mouEst.toLocaleString("en-IN")}</span>
                   </div>
                 )}
 
                 {needArmed && (
-                  <div className="flex justify-between py-2 border-b border-white/10 text-[var(--white-70)]">
+                  <div className="flex justify-between py-2 border-b border-white/10 text-slate-300">
                     <span>Armed Weapon Clearance Prep:</span>
                     <span className="font-bold text-white">₹{armedEst.toLocaleString("en-IN")}</span>
                   </div>
                 )}
 
                 <div className="pt-4 flex justify-between items-center">
-                  <span className="text-sm font-bold text-white">Estimated Base Budget:</span>
-                  <span className="text-2xl font-bold text-metal font-mono">₹{totalEst.toLocaleString("en-IN")}*</span>
+                  <span className="text-sm font-black text-white">Estimated Base Budget:</span>
+                  <span className="text-2xl font-black text-[#FFF2BA] font-mono">₹{totalEst.toLocaleString("en-IN")}*</span>
                 </div>
               </div>
 
-              <div className="mt-6 p-4 bg-white/[0.03] border border-white/10 text-[11px] text-[var(--white-70)] space-y-1">
+              <div className="mt-6 p-4 bg-white/5 border border-white/10 rounded-2xl text-[11px] text-slate-300 space-y-1">
                 <p><strong className="text-white">Timeline:</strong> 45 to 60 Business Days</p>
                 <p><strong className="text-white">Validity:</strong> 5 Years (Renewable)</p>
               </div>
@@ -178,12 +178,11 @@ export default function CalculatorClient() {
                 href={`${DEFAULT_WA}&text=Hi,%20I%20used%20the%20PSARA%20Calculator%20for%20${selectedState}%20(${scale}).%20Total%20estimate:%20₹${totalEst}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full flex items-center justify-center gap-2 rounded-full py-3.5 text-xs font-bold uppercase tracking-wider"
-                style={{ background: "var(--grad-metal)", color: "var(--void)" }}
+                className="w-full flex items-center justify-center gap-2 rounded-xl py-3.5 text-xs font-black uppercase tracking-wider bg-[#FFF2BA] text-[#0F3C65] hover:bg-[#C89B3C] hover:text-white transition-all shadow-lg"
               >
-                Lock Your Estimate on WhatsApp <ArrowRight className="h-4 w-4" />
+                Lock Your Estimate on WhatsApp <ArrowRight className="h-4 w-4 stroke-[2.5]" />
               </a>
-              <span className="block text-[10px] text-center text-[var(--white-40)] mt-2">*Official government fee subject to state controlling authority rules.</span>
+              <span className="block text-[10px] text-center text-slate-400 mt-2.5">*Official government fee subject to state controlling authority rules.</span>
             </div>
           </div>
         </div>

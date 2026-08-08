@@ -5,60 +5,60 @@
    ═══════════════════════════════════════════════════════════════ */
 
 :root {
-  /* ── Space (reference mockups: electric-lit deep blue, not muddy navy) */
-  --void:           #020814;
-  --void-2:         #041028;
-  --space:          #061433;
-  /* ── Sky Blue & Electric Lit Blue ── */
-  --electric:       #0066FF;   /* primary electric */
-  --electric-2:     #1A7BFF;
-  --electric-3:     #4D9FFF;
-  --sky-blue:       #00A3FF;   /* sky blue highlight */
-  --sky-bright:     #38BDF8;   /* vibrant sky blue */
-  --sky-glow:       rgba(0, 163, 255, 0.45);
-  --electric-glow:  rgba(0, 102, 255, 0.45);
-  --electric-soft:  rgba(26, 123, 255, 0.18);
+  /* ── Light Executive Theme (Buttermilk / Midnight Blue / Gold) ── */
+  --void:           #FFFEF9;   /* Primary light ivory background */
+  --void-2:         #FBF7F0;   /* Secondary cream background */
+  --space:          #F4EFE6;   /* Card surface background */
 
-  /* ── Metallic gold (champagne metal — NOT yellow mustard) */
-  --metal-1:        #F2E6C4;   /* highlight */
-  --metal-2:        #D4B872;   /* face */
-  --metal-3:        #B8954A;   /* mid */
-  --metal-4:        #8C6E2F;   /* shade */
-  --gold:           #D4B872;
-  --gold-bright:    #F5E6BA;
-  --gold-dim:       rgba(212, 184, 114, 0.70);
+  /* ── Midnight Blue & Vista Blue ── */
+  --electric:       #0F3C65;   /* Midnight Blue */
+  --electric-2:     #0B5497;   /* Ocean Blue */
+  --electric-3:     #78A2D2;   /* Vista Blue */
+  --sky-blue:       #78A2D2;
+  --sky-bright:     #0B5497;
+  --sky-glow:       rgba(120, 162, 210, 0.3);
+  --electric-glow:  rgba(15, 60, 101, 0.2);
+  --electric-soft:  rgba(217, 230, 242, 0.6);
 
-  /* ── White hierarchy — High contrast, super crisp ── */
-  --white:          #FFFFFF;
-  --white-90:       rgba(255, 255, 255, 0.95);
-  --white-70:       rgba(255, 255, 255, 0.88);
-  --white-55:       rgba(255, 255, 255, 0.78);
-  --white-40:       rgba(255, 255, 255, 0.68);
-  --white-25:       rgba(255, 255, 255, 0.35);
-  --white-18:       rgba(255, 255, 255, 0.18);
-  --white-12:       rgba(255, 255, 255, 0.12);
-  --white-08:       rgba(255, 255, 255, 0.08);
-  --white-06:       rgba(255, 255, 255, 0.06);
+  /* ── Metallic gold & Buttermilk ── */
+  --metal-1:        #FFF2BA;   /* Buttermilk */
+  --metal-2:        #C89B3C;   /* Warm Gold */
+  --metal-3:        #B88E2F;   /* Deep Gold */
+  --metal-4:        #8C651A;   /* Shade */
+  --gold:           #C89B3C;
+  --gold-bright:    #C89B3C;
+  --gold-dim:       rgba(200, 155, 60, 0.70);
+
+  /* ── Text hierarchy — Deep Midnight Blue contrast ── */
+  --white:          #0F3C65;   /* Midnight Blue primary text */
+  --white-90:       #0A233F;
+  --white-70:       #173B63;
+  --white-55:       #334E68;
+  --white-40:       #627D98;
+  --white-25:       rgba(15, 60, 101, 0.25);
+  --white-18:       rgba(15, 60, 101, 0.18);
+  --white-12:       rgba(15, 60, 101, 0.12);
+  --white-08:       rgba(15, 60, 101, 0.08);
+  --white-06:       rgba(15, 60, 101, 0.06);
 
   /* ── India energy (ambient only) */
   --saffron:        #FF8C28;
   --india-green:    #0E8A52;
 
-  /* ── Gradients (atmosphere — continuous, not section themes) */
+  /* ── Gradients ── */
   --grad-metal: linear-gradient(
     115deg,
-    var(--metal-4) 0%,
-    var(--metal-2) 28%,
-    var(--metal-1) 50%,
-    var(--metal-2) 72%,
-    var(--metal-4) 100%
+    #B88E2F 0%,
+    #C89B3C 40%,
+    #EAD28D 70%,
+    #C89B3C 100%
   );
   --grad-gold-cta: var(--grad-metal);
   --grad-gold-metallic: var(--grad-metal);
-  --line-amber: rgba(212, 184, 114, 0.35);
+  --line-amber: rgba(200, 155, 60, 0.35);
   --grad-electric: radial-gradient(
     ellipse 80% 60% at 70% 30%,
-    rgba(0, 102, 255, 0.35) 0%,
+    rgba(15, 60, 101, 0.15) 0%,
     transparent 55%
   );
 
@@ -85,95 +85,6 @@
   --section-y:  clamp(5.5rem, 12vh, 9rem);
   --header-h:   3.5rem;
   --rail:       clamp(4.25rem, 6.5vw, 5.75rem);
-
-  /* ── Legacy aliases — full map so every page inherits stage DNA ── */
-  --blue-900: var(--void);
-  --blue-800: var(--void-2);
-  --blue-700: var(--space);
-  --blue-600: #0a2a5c;
-  --blue-500: var(--electric);
-  --blue-400: var(--electric-2);
-  --blue-300: var(--electric-3);
-  --blue-200: #8ab8ff;
-  --blue-100: #c5dbff;
-  --blue-50: #ebf2ff;
-  --blue-surface: rgba(0, 102, 255, 0.12);
-  --blue-border: rgba(0, 102, 255, 0.28);
-  --blue-glow-soft: rgba(0, 102, 255, 0.18);
-
-  --obsidian: var(--void);
-  --obsidian-2: var(--void-2);
-  --obsidian-bg: var(--void);
-  --obsidian-card: var(--space);
-  --obsidian-soft: rgba(6, 20, 51, 0.65);
-  --obsidian-lift: var(--space);
-
-  --cream: var(--white);
-  --cream-dim: var(--white-40);
-  --cream-bg: var(--void-2);
-  --cream-warm: var(--white-90);
-  --off-white: var(--white);
-  --canvas: var(--void);
-  --surface: rgba(255, 255, 255, 0.04);
-  --surface-alt: rgba(255, 255, 255, 0.06);
-
-  --text-primary: var(--white);
-  --text-secondary: var(--white-70);
-  --text-muted: var(--white-40);
-  --text-faint: var(--white-25);
-  --text-dim: var(--white-55);
-  --text-on-dark: var(--white);
-  --text-dark: var(--white);
-  --text-dark-muted: var(--white-55);
-  --ink-muted: var(--white-40);
-  --ink-warm: var(--white-70);
-
-  --line: var(--white-12);
-  --line-soft: rgba(255, 255, 255, 0.08);
-  --line-light: rgba(255, 255, 255, 0.14);
-  --line-gold: rgba(212, 184, 114, 0.35);
-  --line-strong: var(--white-25);
-  --line-dark: rgba(255, 255, 255, 0.1);
-
-  --gold-600: var(--metal-4);
-  --gold-500: var(--metal-3);
-  --gold-300: var(--gold-bright);
-  --gold-400: var(--gold);
-  --gold-200: var(--metal-1);
-  --gold-100: #faf3dd;
-  --gold-soft: var(--metal-1);
-  --gold-glow: rgba(212, 184, 114, 0.4);
-  --gold-bg: #b8863d;
-  --gold-bg-dark: #8c6a3c;
-  --gold-bg-pale: #f5e6c8;
-
-  --amber: #c9945b;
-  --amber-soft: var(--gold-bright);
-  --warm-dark: #1a1510;
-  --warm-dark-2: #241e16;
-  --warm-dark-3: #2e261c;
-  --paper: #f6fafd;
-  --paper-soft: rgba(246, 250, 253, 0.92);
-  --warm-cream: #f2e8d5;
-  --warm-parchment: #e8dccc;
-  --obsidian-warm: #1a1a1a;
-
-  --grad-gold-spotlight: radial-gradient(ellipse 80% 60% at 50% 30%, rgba(184, 134, 61, 0.18) 0%, transparent 70%);
-  --grad-amber-glow: radial-gradient(ellipse 60% 50% at 30% 20%, rgba(201, 148, 91, 0.22) 0%, transparent 60%);
-  --grad-warm-ambient: radial-gradient(ellipse 70% 50% at 80% 80%, rgba(201, 148, 91, 0.12) 0%, transparent 50%);
-
-  --blue: var(--electric);
-  --blue-glow: var(--electric-glow);
-  --blue-bright: var(--electric-2);
-  --accent: var(--electric);
-  --accent-gold: var(--gold);
-  --accent-primary: var(--electric);
-  --accent-bright: var(--electric-2);
-  --sapphire: var(--electric-2);
-  --sapphire-deep: var(--electric);
-  --emerald: #0e8a52;
-  --emerald-deep: #0a6b3f;
-  --signal-red: #e53935;
 
   --bg-primary: var(--void);
   --bg-card: var(--surface);

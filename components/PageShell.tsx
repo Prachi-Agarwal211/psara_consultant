@@ -130,11 +130,10 @@ export function PageHero({
         )}
         <h1
           ref={hRef}
-          className="max-w-4xl font-semibold leading-[1.05] tracking-tight"
+          className="max-w-4xl font-black leading-[1.05] tracking-tight text-[#0F3C65]"
           style={{
             fontSize: "clamp(2rem, 4.5vw, 3.6rem)",
             fontFamily: "var(--font-display)",
-            color: "var(--white)",
           }}
         >
           {title}
@@ -142,8 +141,8 @@ export function PageHero({
         {lead && (
           <p
             data-clip
-            className="mt-6 max-w-2xl text-[1.02rem] leading-relaxed"
-            style={{ color: "var(--white-70)", fontFamily: "var(--font-body)" }}
+            className="mt-6 max-w-2xl text-[1.02rem] font-medium leading-relaxed text-[#334E68]"
+            style={{ fontFamily: "var(--font-body)" }}
           >
             {lead}
           </p>
@@ -166,7 +165,6 @@ export function PageMain({
     if (!ref.current || prefersReducedMotion()) return;
     const { gsap } = ensureGsap();
     const kids = ref.current.querySelectorAll("[data-clip], [data-stagger]");
-    // lightweight entrance for main content blocks
     gsap.fromTo(
       ref.current.querySelectorAll(":scope > *"),
       { opacity: 0, y: 24 },
@@ -185,8 +183,7 @@ export function PageMain({
   return (
     <main
       ref={ref}
-      className={`relative bg-transparent px-[var(--gutter)] pb-24 ${className}`}
-      style={{ color: "var(--white)" }}
+      className={`relative bg-[#FFFEF9] text-[#0F3C65] px-[var(--gutter)] pb-24 ${className}`}
     >
       <div className="mx-auto max-w-[var(--page-max)]">{children}</div>
     </main>

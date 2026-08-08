@@ -149,17 +149,17 @@ export default function SiteChrome({ children }: { children: React.ReactNode }) 
         <div
           className={`flex items-center justify-between gap-4 px-[var(--gutter)] transition-colors duration-300 ${
             scrolled
-              ? "bg-[#020814]/95 backdrop-blur-md border-b border-white/15 shadow-xl"
-              : "bg-[#020814]/80 backdrop-blur-sm border-b border-white/10"
+              ? "bg-[#0A233F]/95 backdrop-blur-md border-b border-[#C89B3C]/30 shadow-xl text-white"
+              : "bg-[#0A233F]/90 backdrop-blur-sm border-b border-white/10 text-white"
           }`}
           style={{ height: "4.5rem" }}
         >
-          {/* Left: Brand Logo (Enlarged) */}
+          {/* Left: Brand Logo */}
           <Link href="/" className="shrink-0 origin-left" onClick={() => triggerHaptic(25)}>
-            <BrandMark />
+            <BrandMark variant="light" />
           </Link>
 
-          {/* Center: Primary Essential Nav Links (Decluttered: 4 items) */}
+          {/* Center: Primary Essential Nav Links */}
           <nav aria-label="Primary" className="hidden lg:flex items-center gap-8">
             {[
               { label: "Services", href: "/services" },
@@ -176,27 +176,27 @@ export default function SiteChrome({ children }: { children: React.ReactNode }) 
             ))}
           </nav>
 
-          {/* Right: Actions (Call Desk + Menu Button) */}
+          {/* Right: Actions */}
           <div className="flex items-center gap-3.5">
             {/* Quick Call Desk CTA */}
             <a
               href={TEL_HREF}
-              className="hidden sm:inline-flex items-center gap-2 rounded border border-[var(--gold)]/50 bg-[var(--gold)]/10 px-4 py-2 text-xs font-extrabold uppercase tracking-wider text-[var(--gold-bright)] transition-all duration-200 hover:bg-[var(--gold)] hover:text-black"
+              className="hidden sm:inline-flex items-center gap-2 rounded-xl border border-[#C89B3C] bg-[#FFF2BA] px-4 py-2 text-xs font-black uppercase tracking-wider text-[#0F3C65] transition-all duration-200 hover:bg-[#C89B3C] hover:text-white"
               style={{ fontFamily: "var(--font-body)" }}
             >
-              <Phone className="h-3.5 w-3.5 text-[var(--gold-bright)]" />
+              <Phone className="h-3.5 w-3.5 text-[#0F3C65]" />
               <span>{CONTACT.phoneDisplay}</span>
             </a>
 
             {/* Universal Menu Button */}
             <button
               type="button"
-              className="flex items-center gap-2 rounded border border-sky-400/50 bg-[#040D21] px-4 py-2 text-xs font-extrabold uppercase tracking-widest text-sky-200 hover:border-[var(--gold)] hover:bg-[var(--gold)] hover:text-black active:scale-95 transition-all duration-200 shadow-lg shadow-sky-500/10"
+              className="flex items-center gap-2 rounded-xl border border-[#C89B3C]/50 bg-[#07192C] px-4 py-2 text-xs font-black uppercase tracking-widest text-[#FFF2BA] hover:bg-[#C89B3C] hover:text-[#0F3C65] active:scale-95 transition-all duration-200 shadow-lg"
               onClick={() => { triggerHaptic(40); setMenuOpen(true); }}
               aria-label="Open navigation menu"
               style={{ fontFamily: "var(--font-body)" }}
             >
-              <Menu className="h-4 w-4" />
+              <Menu className="h-4 w-4 text-[#C89B3C]" />
               <span>Menu</span>
             </button>
           </div>
@@ -211,17 +211,18 @@ export default function SiteChrome({ children }: { children: React.ReactNode }) 
           menuOpen ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"
         }`}
         style={{
-          backgroundColor: "var(--obsidian)",
+          backgroundColor: "#0A233F",
+          color: "#FFFFFF",
           paddingTop: "env(safe-area-inset-top, 0px)",
           paddingBottom: "env(safe-area-inset-bottom, 0px)",
         }}
       >
         {/* Header row */}
-        <div className="flex items-center justify-between border-b border-[var(--line)] px-[var(--gutter)] py-4">
-          <BrandMark />
+        <div className="flex items-center justify-between border-b border-white/15 px-[var(--gutter)] py-4">
+          <BrandMark variant="light" />
           <button
             type="button"
-            className="flex h-9 w-9 items-center justify-center border border-[var(--line)] text-[var(--cream)] hover:border-[var(--gold)] transition-colors"
+            className="flex h-9 w-9 items-center justify-center rounded-xl border border-white/20 text-white hover:border-[#C89B3C] hover:text-[#FFF2BA] transition-colors"
             onClick={() => { triggerHaptic(30); setMenuOpen(false); }}
             aria-label="Close"
           >
@@ -234,7 +235,7 @@ export default function SiteChrome({ children }: { children: React.ReactNode }) 
           <Link
             href="/"
             onClick={() => { triggerHaptic(30); setMenuOpen(false); }}
-            className="border-b border-[var(--line)] py-4 font-[family-name:var(--font-display)] text-xl font-bold text-[var(--cream)] hover:text-[var(--gold)] transition-colors"
+            className="border-b border-white/10 py-4 font-black text-xl text-white hover:text-[#FFF2BA] transition-colors"
           >
             Home
           </Link>
@@ -243,7 +244,7 @@ export default function SiteChrome({ children }: { children: React.ReactNode }) 
               key={l.href}
               href={l.href}
               onClick={() => { triggerHaptic(30); setMenuOpen(false); }}
-              className="border-b border-[var(--line)] py-4 font-[family-name:var(--font-display)] text-xl font-bold text-[var(--cream)] hover:text-[var(--gold)] transition-colors"
+              className="border-b border-white/10 py-4 font-black text-xl text-white hover:text-[#FFF2BA] transition-colors"
             >
               {l.label}
             </Link>
@@ -251,20 +252,20 @@ export default function SiteChrome({ children }: { children: React.ReactNode }) 
         </nav>
 
         {/* Contact actions */}
-        <div className="flex flex-col gap-3 px-[var(--gutter)] pb-8 pt-4 border-t border-[var(--line)]">
+        <div className="flex flex-col gap-3 px-[var(--gutter)] pb-8 pt-4 border-t border-white/15">
           <a
             href={TEL_HREF}
-            className="btn-ghost w-full justify-center"
+            className="inline-flex items-center justify-center gap-2 rounded-xl border border-white/20 bg-white/10 px-5 py-3 text-xs font-black uppercase text-white"
             onClick={() => { triggerHaptic(45); setMenuOpen(false); }}
           >
-            <Phone className="h-3.5 w-3.5" />
+            <Phone className="h-3.5 w-3.5 text-[#C89B3C]" />
             Call {CONTACT.phoneDisplay}
           </a>
           <a
             href={DEFAULT_WA}
             target="_blank"
             rel="noopener noreferrer"
-            className="btn-gold w-full justify-center"
+            className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#C89B3C] px-5 py-3 text-xs font-black uppercase text-[#0F3C65]"
             onClick={() => { triggerHaptic(45); setMenuOpen(false); }}
           >
             <MessageSquare className="h-3.5 w-3.5" />

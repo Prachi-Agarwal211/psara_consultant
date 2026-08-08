@@ -12,50 +12,46 @@ export default function StateGridHome() {
       id="states"
       data-section-transition
       data-transition="clip-right"
-      className="relative overflow-hidden section-night py-[var(--section-y)]"
+      className="relative overflow-hidden bg-[#FBF7F0] text-[#0F3C65] py-20 lg:py-28"
     >
-      {/* Dot grid + electric glow */}
-      <div className="pointer-events-none absolute inset-0 bg-dot-grid opacity-30" aria-hidden />
-      <div className="pointer-events-none absolute top-0 right-0 w-[40vw] h-[50vh]" style={{ background: "radial-gradient(ellipse at 100% 0%, rgba(0,102,255,0.08) 0%, transparent 60%)" }} aria-hidden />
-
-      <div className="relative z-10 px-[var(--gutter)] max-w-[var(--page-max)] mx-auto">
+      <div className="relative z-10 px-[var(--gutter)] max-w-7xl mx-auto">
         {/* Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between pb-10 mb-12 gap-6 border-b border-white/10">
+        <div className="flex flex-col md:flex-row md:items-end justify-between pb-8 mb-12 gap-6 border-b border-[#0F3C65]/15">
           <div>
-            <span className="meta-bracket mb-4 text-xs! text-[var(--gold)]! border-[var(--gold)]/30! inline-block" style={{ fontFamily: "var(--font-body)" }}>
+            <span className="text-xs font-black uppercase tracking-[0.25em] text-[#C89B3C] block mb-2" style={{ fontFamily: "var(--font-body)" }}>
               ( STATUTORY JURISDICTIONS )
             </span>
             <h2
-              className="display-mega text-white font-bold mt-4"
+              className="text-4xl sm:text-5xl font-black text-[#0F3C65]"
               style={{ fontFamily: "var(--font-display)" }}
             >
-              28 States <span className="text-metal">&amp; UTs</span>
+              28 States <span className="text-[#C89B3C]">&amp; UTs</span>
             </h2>
           </div>
-          <span className="text-xs font-bold uppercase tracking-widest text-white/50" style={{ fontFamily: "var(--font-body)" }}>
+          <span className="text-xs font-black uppercase tracking-widest text-[#334E68]" style={{ fontFamily: "var(--font-body)" }}>
             Controlling Authorities · Direct Dossier Filing
           </span>
         </div>
 
-        {/* State Tiles — hover dimming language (voyeur-verite DNA) */}
-        <div className="state-grid grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
+        {/* State Tiles */}
+        <div className="state-grid grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3.5">
           {featuredStates.map((s) => (
             <Link
               key={s.slug}
               href={`/states/${s.slug}`}
               data-cursor="State Dossier"
-              className="state-tile group relative flex flex-col justify-between h-[132px] p-4 overflow-hidden border border-white/10 bg-white/[0.02] transition-[color,border-color,background-color] duration-300 hover:border-[var(--gold)]/50 hover:bg-white/[0.05]"
+              className="state-tile group relative flex flex-col justify-between h-[135px] p-4 rounded-2xl border border-[#0F3C65]/15 bg-white shadow-sm transition-all duration-300 hover:border-[#C89B3C] hover:bg-[#0A233F] hover:text-white"
             >
-              <span className="font-mono text-xs font-bold uppercase tracking-widest text-white/50 group-hover:text-[var(--gold-bright)] transition-colors" style={{ fontFamily: "var(--font-body)" }}>
+              <span className="font-mono text-xs font-black uppercase tracking-widest text-[#C89B3C] group-hover:text-[#FFF2BA] transition-colors" style={{ fontFamily: "var(--font-body)" }}>
                 {s.slug.toUpperCase()} · STATE
               </span>
 
               <div>
-                <h3 className="font-bold line-clamp-1 text-[0.95rem] text-white group-hover:text-[var(--gold-bright)] transition-colors" style={{ fontFamily: "var(--font-display)" }}>
+                <h3 className="font-black line-clamp-1 text-sm md:text-base text-[#0F3C65] group-hover:text-white transition-colors" style={{ fontFamily: "var(--font-display)" }}>
                   {s.name}
                 </h3>
                 <div className="mt-2 flex items-center justify-between">
-                  <span className="text-xs font-semibold uppercase tracking-wider text-white/55">
+                  <span className="text-[0.68rem] font-black uppercase tracking-wider text-[#486581] group-hover:text-slate-300">
                     {s.validityYears}-Yr · {s.applicationMode?.split(" ")[0] ?? "Online"}
                   </span>
                   <ArrowUpRight

@@ -40,13 +40,12 @@ function DossierTitle({ index, children }: { index: string; children: React.Reac
     <div className="flex items-center gap-4">
       <span
         aria-hidden
-        className="font-mono text-xs font-bold tracking-widest text-acc"
-        style={{ opacity: 0.75 }}
+        className="font-mono text-xs font-black tracking-widest text-[#C89B3C]"
       >
         {index}
       </span>
-      <div className="hairline-acc h-px w-10" aria-hidden />
-      <h2 className="font-[family-name:var(--font-display)] text-2xl font-bold tracking-tight text-white">
+      <div className="h-px w-10 bg-[#C89B3C]" aria-hidden />
+      <h2 className="text-2xl font-black tracking-tight text-[#0F3C65]" style={{ fontFamily: "var(--font-display)" }}>
         {children}
       </h2>
     </div>
@@ -63,15 +62,9 @@ export default function StateDossierView({
   const accVars = accentStyleVars(acc) as CSSProperties;
   const ca = getCaContact(state.slug);
 
-  /**
-   * Per-state layout variant (0–3, deterministic by slug hash).
-   * Each variant changes PROCESS STYLE and the ORDER of fees vs training
-   * so no two state pages render the same template.
-   */
   const variant = hashSlug(state.slug) % 4;
   const processAsTimeline = variant % 2 === 1;
   const hasCa = !!(ca && ca.name && ca.name !== "—");
-  // Numbering: glance(01) + statutory(02) + [CA(03)] + variant section + process...
   const variantIdx = hasCa ? 4 : 3;
   const processIdx = variantIdx + 1;
   const feesIdx = processIdx + 1;
@@ -82,7 +75,7 @@ export default function StateDossierView({
 
   return (
     <div
-      className="space-y-20 py-6"
+      className="space-y-16 py-4 text-[#0F3C65]"
       itemScope
       itemType="https://schema.org/HowTo"
       style={accVars}
@@ -94,31 +87,25 @@ export default function StateDossierView({
       <section
         data-section-transition
         data-transition="clip-up"
-        className="relative overflow-hidden border border-white/10 bg-white/[0.02] p-6 md:p-10"
+        className="relative overflow-hidden rounded-3xl border border-[#0F3C65]/15 bg-[#FBF7F0] p-6 md:p-10 shadow-sm"
       >
-        {/* Accent aura */}
-        <div
-          className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full"
-          style={{ background: `radial-gradient(circle, ${acc.base}22 0%, transparent 70%)` }}
-          aria-hidden
-        />
-        <div className="flex flex-wrap items-center justify-between gap-4 pb-6 border-b border-white/10">
+        <div className="flex flex-wrap items-center justify-between gap-4 pb-6 border-b border-[#0F3C65]/15">
           <div className="flex items-center gap-3">
-            <span className="inline-flex items-center gap-1.5 border border-acc px-3 py-1 text-xs font-bold uppercase tracking-wider text-acc-bright bg-acc-soft">
-              <Shield className="h-3.5 w-3.5" />
+            <span className="inline-flex items-center gap-1.5 rounded-lg border border-[#C89B3C] bg-[#FFF2BA] px-3 py-1 text-xs font-black uppercase tracking-wider text-[#0F3C65]">
+              <Shield className="h-3.5 w-3.5 text-[#0F3C65]" />
               State Licensing Framework
             </span>
-            <span className="text-xs font-bold tracking-widest uppercase text-[var(--white-40)]">
+            <span className="text-xs font-black tracking-widest uppercase text-[#486581]">
               Ref: PSARA-{state.slug.toUpperCase()}
             </span>
           </div>
-          <div className="flex items-center gap-3 text-xs font-bold text-[var(--white-55)] uppercase tracking-wider">
+          <div className="flex items-center gap-3 text-xs font-bold text-[#334E68] uppercase tracking-wider">
             <span className="flex items-center gap-1">
-              <MapPin className="h-3.5 w-3.5 text-acc-bright" /> Capital: <strong className="text-white">{state.capital}</strong>
+              <MapPin className="h-3.5 w-3.5 text-[#C89B3C]" /> Capital: <strong className="text-[#0F3C65] font-black">{state.capital}</strong>
             </span>
             <span>•</span>
             <span className="flex items-center gap-1">
-              <Clock className="h-3.5 w-3.5 text-acc-bright" /> Validity: <strong className="text-white">{state.validityYears} Years</strong>
+              <Clock className="h-3.5 w-3.5 text-[#C89B3C]" /> Validity: <strong className="text-[#0F3C65] font-black">{state.validityYears} Years</strong>
             </span>
           </div>
         </div>
@@ -130,55 +117,55 @@ export default function StateDossierView({
               key={idx}
               text={p}
               as="p"
-              className="text-base md:text-lg leading-relaxed text-[var(--white-70)] font-normal block"
+              className="text-base md:text-lg leading-relaxed text-[#334E68] font-medium block"
             />
           ))}
         </div>
 
         {/* Key Framework Parameters */}
-        <div data-stagger className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-4 pt-6 border-t border-white/10">
-          <div className="group relative overflow-hidden border border-white/10 bg-white/[0.02] p-4 transition-[color,border-color,background-color] duration-300 hover:border-acc hover:bg-acc-soft">
-            <span className="block text-[0.65rem] font-bold uppercase tracking-widest text-acc-bright">Application Mode</span>
-            <span className="mt-1 block text-sm font-bold text-white">{state.applicationMode}</span>
+        <div data-stagger className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-4 pt-6 border-t border-[#0F3C65]/15">
+          <div className="rounded-2xl border border-[#0F3C65]/15 bg-white p-4 shadow-sm">
+            <span className="block text-[0.65rem] font-black uppercase tracking-widest text-[#C89B3C]">Application Mode</span>
+            <span className="mt-1 block text-sm font-black text-[#0F3C65]">{state.applicationMode}</span>
           </div>
-          <div className="group relative overflow-hidden border border-white/10 bg-white/[0.02] p-4 transition-[color,border-color,background-color] duration-300 hover:border-acc hover:bg-acc-soft">
-            <span className="block text-[0.65rem] font-bold uppercase tracking-widest text-acc-bright">Rules Framework</span>
-            <span className="mt-1 block text-sm font-bold text-white">{state.rulesNote}</span>
+          <div className="rounded-2xl border border-[#0F3C65]/15 bg-white p-4 shadow-sm">
+            <span className="block text-[0.65rem] font-black uppercase tracking-widest text-[#C89B3C]">Rules Framework</span>
+            <span className="mt-1 block text-sm font-black text-[#0F3C65]">{state.rulesNote}</span>
           </div>
-          <div className="group relative overflow-hidden border border-white/10 bg-white/[0.02] p-4 transition-[color,border-color,background-color] duration-300 hover:border-acc hover:bg-acc-soft">
-            <span className="block text-[0.65rem] font-bold uppercase tracking-widest text-acc-bright">Coverage Potential</span>
-            <span className="mt-1 block text-sm font-bold text-white">{state.cities.length}+ Major Districts</span>
+          <div className="rounded-2xl border border-[#0F3C65]/15 bg-white p-4 shadow-sm">
+            <span className="block text-[0.65rem] font-black uppercase tracking-widest text-[#C89B3C]">Coverage Potential</span>
+            <span className="mt-1 block text-sm font-black text-[#0F3C65]">{state.cities.length}+ Major Districts</span>
           </div>
         </div>
       </section>
 
-      {/* 2. STATE AT A GLANCE — unique statutory fact band per state */}
+      {/* 2. STATE AT A GLANCE */}
       <section data-section-transition data-transition="blur" className="space-y-6">
         <DossierTitle index="01">State at a glance</DossierTitle>
-        <div data-stagger className="grid grid-cols-2 lg:grid-cols-3 gap-3">
-          <div className="relative overflow-hidden border border-acc bg-acc-soft p-4">
-            <span className="block text-[0.6rem] font-bold uppercase tracking-widest text-acc-bright">Controlling Authority</span>
-            <span className="mt-1.5 block text-xs font-bold text-white leading-snug">{state.authority}</span>
+        <div data-stagger className="grid grid-cols-2 lg:grid-cols-3 gap-3.5">
+          <div className="rounded-2xl border-2 border-[#C89B3C]/40 bg-[#FFFDF5] p-4 shadow-sm">
+            <span className="block text-[0.6rem] font-black uppercase tracking-widest text-[#C89B3C]">Controlling Authority</span>
+            <span className="mt-1.5 block text-xs font-black text-[#0F3C65] leading-snug">{state.authority}</span>
           </div>
-          <div className="relative overflow-hidden border border-white/10 bg-white/[0.02] p-4">
-            <span className="block text-[0.6rem] font-bold uppercase tracking-widest text-acc-bright">Indicative Timeline</span>
-            <span className="mt-1.5 block text-lg font-bold text-white font-mono">{state.timeline}</span>
+          <div className="rounded-2xl border border-[#0F3C65]/15 bg-[#FBF7F0] p-4 shadow-sm">
+            <span className="block text-[0.6rem] font-black uppercase tracking-widest text-[#C89B3C]">Indicative Timeline</span>
+            <span className="mt-1.5 block text-lg font-black text-[#0F3C65] font-mono">{state.timeline}</span>
           </div>
-          <div className="relative overflow-hidden border border-white/10 bg-white/[0.02] p-4">
-            <span className="block text-[0.6rem] font-bold uppercase tracking-widest text-acc-bright">Application Mode</span>
-            <span className="mt-1.5 block text-xs font-bold text-white leading-snug">{state.applicationMode}</span>
+          <div className="rounded-2xl border border-[#0F3C65]/15 bg-[#FBF7F0] p-4 shadow-sm">
+            <span className="block text-[0.6rem] font-black uppercase tracking-widest text-[#C89B3C]">Application Mode</span>
+            <span className="mt-1.5 block text-xs font-black text-[#0F3C65] leading-snug">{state.applicationMode}</span>
           </div>
-          <div className="relative overflow-hidden border border-white/10 bg-white/[0.02] p-4">
-            <span className="block text-[0.6rem] font-bold uppercase tracking-widest text-acc-bright">Licence Validity</span>
-            <span className="mt-1.5 block text-lg font-bold text-white font-mono">{state.validityYears} year{state.validityYears > 1 ? "s" : ""}</span>
+          <div className="rounded-2xl border border-[#0F3C65]/15 bg-[#FBF7F0] p-4 shadow-sm">
+            <span className="block text-[0.6rem] font-black uppercase tracking-widest text-[#C89B3C]">Licence Validity</span>
+            <span className="mt-1.5 block text-lg font-black text-[#0F3C65] font-mono">{state.validityYears} year{state.validityYears > 1 ? "s" : ""}</span>
           </div>
-          <div className="relative overflow-hidden border border-white/10 bg-white/[0.02] p-4">
-            <span className="block text-[0.6rem] font-bold uppercase tracking-widest text-acc-bright">State Capital</span>
-            <span className="mt-1.5 block text-sm font-bold text-white">{state.capital}</span>
+          <div className="rounded-2xl border border-[#0F3C65]/15 bg-[#FBF7F0] p-4 shadow-sm">
+            <span className="block text-[0.6rem] font-black uppercase tracking-widest text-[#C89B3C]">State Capital</span>
+            <span className="mt-1.5 block text-sm font-black text-[#0F3C65]">{state.capital}</span>
           </div>
-          <div className="relative overflow-hidden border border-white/10 bg-white/[0.02] p-4">
-            <span className="block text-[0.6rem] font-bold uppercase tracking-widest text-acc-bright">Fee Slabs (Indicative)</span>
-            <span className="mt-1.5 block text-xs font-bold text-white leading-snug">{state.feeOneDistrict} / {state.feeMultiDistrict} / {state.feeEntireState}</span>
+          <div className="rounded-2xl border border-[#0F3C65]/15 bg-[#FBF7F0] p-4 shadow-sm">
+            <span className="block text-[0.6rem] font-black uppercase tracking-widest text-[#C89B3C]">Fee Slabs (Indicative)</span>
+            <span className="mt-1.5 block text-xs font-black text-[#0F3C65] leading-snug">{state.feeOneDistrict} / {state.feeMultiDistrict} / {state.feeEntireState}</span>
           </div>
         </div>
       </section>
@@ -188,14 +175,9 @@ export default function StateDossierView({
         <DossierTitle index="02">{`Statutory Rules & Application Pathway`}</DossierTitle>
 
         <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
-          <div className="relative md:col-span-8 overflow-hidden border border-white/10 bg-white/[0.02] p-6 md:p-8 space-y-4">
-            <div
-              className="pointer-events-none absolute -left-24 bottom-0 h-64 w-64 rounded-full"
-              style={{ background: `radial-gradient(circle, ${acc.base}14 0%, transparent 70%)` }}
-              aria-hidden
-            />
-            <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-acc-bright">
-              <Scale className="h-4 w-4" />
+          <div className="relative md:col-span-8 rounded-3xl border border-[#0F3C65]/15 bg-[#FBF7F0] p-6 md:p-8 space-y-4 shadow-sm">
+            <div className="flex items-center gap-2 text-xs font-black uppercase tracking-wider text-[#C89B3C]">
+              <Scale className="h-4 w-4 text-[#C89B3C]" />
               Jurisdiction & Administration
             </div>
             {content.authorityBlock.map((p, idx) => (
@@ -203,20 +185,20 @@ export default function StateDossierView({
                 key={idx}
                 text={p}
                 as="p"
-                className="text-sm font-normal leading-relaxed text-[var(--white-70)] block"
+                className="text-sm font-medium leading-relaxed text-[#334E68] block"
               />
             ))}
           </div>
 
-          <div className="md:col-span-4 flex flex-col justify-between space-y-4 border border-acc bg-acc-soft p-6">
+          <div className="md:col-span-4 flex flex-col justify-between space-y-4 rounded-3xl border-2 border-[#C89B3C] bg-[#FFF2BA] p-6 text-[#0F3C65] shadow-md">
             <div>
-              <span className="text-[0.65rem] font-bold uppercase tracking-widest text-acc-bright">Fast-Track Compliance Checklist</span>
-              <h3 className="mt-2 text-lg font-bold text-white">Ready for Authority Inspection?</h3>
-              <p className="mt-2 text-xs text-[var(--white-55)] leading-relaxed">
+              <span className="text-[0.65rem] font-black uppercase tracking-widest text-[#0F3C65]/80">Fast-Track Compliance Checklist</span>
+              <h3 className="mt-2 text-lg font-black text-[#0F3C65]">Ready for Authority Inspection?</h3>
+              <p className="mt-2 text-xs text-[#0F3C65]/90 font-bold leading-relaxed">
                 Ensure your office address proof and training institute agreement conform strictly with state-notified rules before submission.
               </p>
             </div>
-            <a href="#state-enquiry" className="inline-flex items-center justify-center gap-2 px-5 py-3 text-xs font-bold uppercase tracking-wider transition-[color,border-color,background-color] duration-200 hover:translate-x-1" style={{ background: "var(--grad-metal)", color: "var(--void)" }}>
+            <a href="#state-enquiry" className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#0F3C65] px-5 py-3 text-xs font-black uppercase tracking-wider text-white hover:bg-[#0A233F] transition-all shadow-md">
               Verify Your Documents Now
             </a>
           </div>
@@ -229,67 +211,37 @@ export default function StateDossierView({
           <DossierTitle index="03">{`Controlling Authority — Officer & Contact Details`}</DossierTitle>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-            <div className="relative overflow-hidden border border-white/10 bg-white/[0.02] p-5 transition-[color,border-color,background-color] duration-[250ms] ease-out hover:border-acc hover:bg-acc-soft">
-              <BadgeCheck className="h-4 w-4 text-acc-bright mb-2" />
-              <span className="block text-[0.6rem] font-bold uppercase tracking-widest text-acc-bright">Officer on Record</span>
-              <span className="mt-1 block text-sm font-bold text-white leading-snug">{ca.name}</span>
+            <div className="rounded-2xl border border-[#0F3C65]/15 bg-[#FBF7F0] p-5 shadow-sm">
+              <BadgeCheck className="h-4 w-4 text-[#C89B3C] mb-2" />
+              <span className="block text-[0.6rem] font-black uppercase tracking-widest text-[#C89B3C]">Officer on Record</span>
+              <span className="mt-1 block text-sm font-black text-[#0F3C65] leading-snug">{ca.name}</span>
             </div>
             {ca.phone && ca.phone !== "—" && (
-              <div className="relative overflow-hidden border border-white/10 bg-white/[0.02] p-5 transition-[color,border-color,background-color] duration-[250ms] ease-out hover:border-acc hover:bg-acc-soft">
-                <Phone className="h-4 w-4 text-acc-bright mb-2" />
-                <span className="block text-[0.6rem] font-bold uppercase tracking-widest text-acc-bright">Phone</span>
-                <a href={`tel:${ca.phone}`} className="mt-1 block text-sm font-bold text-white hover:text-acc-bright break-all">{ca.phone}</a>
+              <div className="rounded-2xl border border-[#0F3C65]/15 bg-[#FBF7F0] p-5 shadow-sm">
+                <Phone className="h-4 w-4 text-[#C89B3C] mb-2" />
+                <span className="block text-[0.6rem] font-black uppercase tracking-widest text-[#C89B3C]">Phone</span>
+                <a href={`tel:${ca.phone}`} className="mt-1 block text-sm font-black text-[#0F3C65] hover:text-[#C89B3C] break-all">{ca.phone}</a>
               </div>
             )}
             {ca.email && ca.email !== "—" && (
-              <div className="relative overflow-hidden border border-white/10 bg-white/[0.02] p-5 transition-[color,border-color,background-color] duration-[250ms] ease-out hover:border-acc hover:bg-acc-soft">
-                <Mail className="h-4 w-4 text-acc-bright mb-2" />
-                <span className="block text-[0.6rem] font-bold uppercase tracking-widest text-acc-bright">Email</span>
-                <a href={`mailto:${ca.email}`} className="mt-1 block text-sm font-bold text-white hover:text-acc-bright break-all">{ca.email}</a>
+              <div className="rounded-2xl border border-[#0F3C65]/15 bg-[#FBF7F0] p-5 shadow-sm">
+                <Mail className="h-4 w-4 text-[#C89B3C] mb-2" />
+                <span className="block text-[0.6rem] font-black uppercase tracking-widest text-[#C89B3C]">Email</span>
+                <a href={`mailto:${ca.email}`} className="mt-1 block text-sm font-black text-[#0F3C65] hover:text-[#C89B3C] break-all">{ca.email}</a>
               </div>
             )}
             {ca.portal && (
-              <div className="relative overflow-hidden border border-white/10 bg-white/[0.02] p-5 transition-[color,border-color,background-color] duration-[250ms] ease-out hover:border-acc hover:bg-acc-soft">
-                <Globe className="h-4 w-4 text-acc-bright mb-2" />
-                <span className="block text-[0.6rem] font-bold uppercase tracking-widest text-acc-bright">Portal</span>
-                <span className="mt-1 block text-sm font-bold text-white break-all">{ca.portal}</span>
+              <div className="rounded-2xl border border-[#0F3C65]/15 bg-[#FBF7F0] p-5 shadow-sm">
+                <Globe className="h-4 w-4 text-[#C89B3C] mb-2" />
+                <span className="block text-[0.6rem] font-black uppercase tracking-widest text-[#C89B3C]">Portal</span>
+                <span className="mt-1 block text-sm font-black text-[#0F3C65] break-all">{ca.portal}</span>
               </div>
             )}
           </div>
-
-          {(ca.licensesIssued || ca.policeVerification || ca.bond) && (
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-              {ca.licensesIssued && ca.licensesIssued !== "—" && (
-                <div className="border border-acc bg-acc-soft p-5">
-                  <span className="block text-[0.6rem] font-bold uppercase tracking-widest text-acc-bright">Licences Issued (psara.gov.in)</span>
-                  <span className="mt-2 block text-3xl font-bold text-white font-mono">{ca.licensesIssued}</span>
-                  {ca.licensesActive && <span className="text-xs text-[var(--white-55)]">{ca.licensesActive} currently active</span>}
-                </div>
-              )}
-              {ca.policeVerification && (
-                <div className="border border-white/10 bg-white/[0.02] p-5">
-                  <span className="block text-[0.6rem] font-bold uppercase tracking-widest text-acc-bright">Police Verification Window</span>
-                  <span className="mt-2 block text-sm font-bold text-white">{ca.policeVerification}</span>
-                </div>
-              )}
-              {ca.bond && (
-                <div className="border border-white/10 bg-white/[0.02] p-5">
-                  <span className="block text-[0.6rem] font-bold uppercase tracking-widest text-acc-bright">Security Bond / Deposit</span>
-                  <span className="mt-2 block text-sm font-bold text-white">{ca.bond}</span>
-                </div>
-              )}
-              {ca.address && (
-                <div className="border border-white/10 bg-white/[0.02] p-5">
-                  <span className="block text-[0.6rem] font-bold uppercase tracking-widest text-acc-bright">Office Address</span>
-                  <span className="mt-2 block text-xs font-normal text-[var(--white-70)] leading-relaxed">{ca.address}</span>
-                </div>
-              )}
-            </div>
-          )}
         </section>
       )}
 
-      {/* 3b. VARIANT-SPECIFIC SECTION — different type + data per layout variant */}
+      {/* 3b. VARIANT-SPECIFIC SECTION */}
       {variant === 0 && <StateSpecialRules state={state} index={pad(variantIdx)} />}
       {variant === 1 && <StateFeeSlabs state={state} index={pad(variantIdx)} />}
       {variant === 2 && <StateFormsDocuments state={state} index={pad(variantIdx)} />}
@@ -297,20 +249,19 @@ export default function StateDossierView({
 
       {/* 4. INTERACTIVE PROCESS ROADMAP & TABS */}
       <section data-section-transition data-transition="clip-left" className="space-y-8">
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-white/10 pb-4">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-[#0F3C65]/15 pb-4">
           <DossierTitle index={pad(processIdx)}>{content.processHeading}</DossierTitle>
 
-          {/* Tab selectors for quick navigation */}
-          <div className="flex gap-2 border border-white/10 bg-white/[0.03] p-1">
+          <div className="flex gap-2 border border-[#0F3C65]/15 bg-[#FBF7F0] p-1 rounded-xl">
             {(["process", "documents"] as const).map((tab) => (
               <button
                 key={tab}
                 onClick={() => setActiveTab(tab)}
                 aria-pressed={activeTab === tab}
-                className={`px-4 py-1.5 text-xs font-bold uppercase tracking-wider transition-colors ${
+                className={`px-4 py-1.5 text-xs font-black uppercase tracking-wider rounded-lg transition-all ${
                   activeTab === tab
-                    ? "bg-acc-bright text-[var(--void)]"
-                    : "text-[var(--white-55)] hover:text-white"
+                    ? "bg-[#0F3C65] text-white shadow-sm"
+                    : "text-[#486581] hover:text-[#0F3C65]"
                 }`}
               >
                 {tab}
@@ -319,7 +270,7 @@ export default function StateDossierView({
           </div>
         </div>
 
-        {/* Tab 1: Step-by-Step Approval Process — style varies per variant */}
+        {/* Tab 1: Step-by-Step Approval Process */}
         {activeTab === "process" && !processAsTimeline && (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {content.process.map((stepText, idx) => {
@@ -330,31 +281,27 @@ export default function StateDossierView({
               return (
                 <div
                   key={idx}
-                  className="group relative overflow-hidden border border-white/10 bg-white/[0.02] p-6 transition-[color,border-color,background-color] duration-300 hover:-translate-y-1 hover:border-acc "
+                  className="group relative overflow-hidden rounded-2xl border border-[#0F3C65]/15 bg-[#FBF7F0] p-6 shadow-sm transition-all duration-300 hover:border-[#C89B3C] hover:bg-white"
                 >
-                  {/* Ghost number */}
-                  <span aria-hidden className="pointer-events-none absolute -right-1 -top-3 font-mono text-6xl font-bold text-acc opacity-[0.08] transition-opacity duration-300 group-hover:opacity-[0.18]">
-                    {String(idx + 1).padStart(2, "0")}
-                  </span>
                   <div className="flex items-center justify-between">
-                    <span className="border border-acc bg-acc-soft px-2 py-0.5 text-[0.6rem] font-bold uppercase tracking-wider text-acc-bright">
+                    <span className="rounded-lg border border-[#C89B3C] bg-[#FFF2BA] px-2.5 py-1 text-[0.6rem] font-black uppercase tracking-wider text-[#0F3C65]">
                       Phase {idx + 1}
                     </span>
                   </div>
 
-                  <h3 className="mt-4 font-[family-name:var(--font-display)] text-lg font-bold text-white transition-colors group-hover:text-acc-bright">
+                  <h3 className="mt-4 text-lg font-black text-[#0F3C65]" style={{ fontFamily: "var(--font-display)" }}>
                     {title}
                   </h3>
 
-                  <p className="mt-2 text-sm font-normal leading-relaxed text-[var(--white-70)]">
+                  <p className="mt-2 text-sm font-medium leading-relaxed text-[#334E68]">
                     {desc}
                   </p>
 
-                  <div className="mt-4 flex items-center justify-between border-t border-white/10 pt-4 text-xs font-semibold text-[var(--white-55)]">
+                  <div className="mt-4 flex items-center justify-between border-t border-[#0F3C65]/10 pt-4 text-xs font-bold text-[#486581]">
                     <span className="flex items-center gap-1.5">
-                      <CheckCircle2 className="h-3.5 w-3.5 text-acc-bright" /> Verified Track
+                      <CheckCircle2 className="h-3.5 w-3.5 text-[#C89B3C]" /> Verified Track
                     </span>
-                    <ArrowRight className="h-3.5 w-3.5 text-acc-bright opacity-0 transition-opacity group-hover:opacity-100" />
+                    <ArrowRight className="h-3.5 w-3.5 text-[#C89B3C] opacity-0 transition-opacity group-hover:opacity-100" />
                   </div>
                 </div>
               );
@@ -362,26 +309,25 @@ export default function StateDossierView({
           </div>
         )}
 
-        {/* Tab 1b: Timeline variant for odd hash variants */}
+        {/* Tab 1b: Timeline variant */}
         {activeTab === "process" && processAsTimeline && (
-          <ol className="relative space-y-8 border-l-2 border-acc/30 pl-8">
+          <ol className="relative space-y-8 border-l-2 border-[#C89B3C] pl-8">
             {content.process.map((stepText, idx) => {
               const parts = stepText.split(":");
-              // Strip a leading "Phase N" prefix so the Stage label isn't doubled up
               const rawTitle = parts.length > 1 ? parts[0] : `Step ${idx + 1}`;
               const title = rawTitle.replace(/^Phase\s*\d+[:\s-]*/i, "").trim() || `Step ${idx + 1}`;
               const desc = parts.length > 1 ? parts.slice(1).join(":") : stepText;
               return (
                 <li key={idx} className="relative">
-                  <span aria-hidden className="absolute -left-[41px] top-0 flex h-5 w-5 items-center justify-center rounded-full border border-acc bg-acc-soft">
-                    <span className="h-1.5 w-1.5 rounded-full bg-acc-bright" />
+                  <span aria-hidden className="absolute -left-[41px] top-0 flex h-5 w-5 items-center justify-center rounded-full border border-[#C89B3C] bg-[#FFF2BA]">
+                    <span className="h-1.5 w-1.5 rounded-full bg-[#0F3C65]" />
                   </span>
-                  <div className="border border-white/10 bg-white/[0.02] p-5 transition-[color,border-color,background-color] duration-300 hover:border-acc">
-                    <span className="font-mono text-[0.6rem] font-bold uppercase tracking-widest text-acc-bright">
+                  <div className="rounded-2xl border border-[#0F3C65]/15 bg-[#FBF7F0] p-5 shadow-sm transition-all hover:border-[#C89B3C]">
+                    <span className="font-mono text-[0.6rem] font-black uppercase tracking-widest text-[#C89B3C]">
                       Stage {String(idx + 1).padStart(2, "0")}
                     </span>
-                    <h3 className="mt-1.5 font-[family-name:var(--font-display)] text-lg font-bold text-white">{title}</h3>
-                    <p className="mt-1.5 text-sm font-normal leading-relaxed text-[var(--white-70)]">{desc}</p>
+                    <h3 className="mt-1.5 text-lg font-black text-[#0F3C65]" style={{ fontFamily: "var(--font-display)" }}>{title}</h3>
+                    <p className="mt-1.5 text-sm font-medium leading-relaxed text-[#334E68]">{desc}</p>
                   </div>
                 </li>
               );
@@ -392,18 +338,18 @@ export default function StateDossierView({
         {/* Tab 2: Document Checklist Grid */}
         {activeTab === "documents" && (
           <div className="space-y-6">
-            <h3 className="flex items-center gap-2 text-lg font-bold text-white">
-              <FileCheck className="h-5 w-5 text-acc-bright" /> Mandatory Document Checklist ({state.name})
+            <h3 className="flex items-center gap-2 text-lg font-black text-[#0F3C65]">
+              <FileCheck className="h-5 w-5 text-[#C89B3C]" /> Mandatory Document Checklist ({state.name})
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {content.documents.map((doc, idx) => (
-                <div key={idx} className="flex items-start gap-3 border border-white/10 bg-white/[0.02] p-4 transition-colors duration-300 hover:border-acc hover:bg-acc-soft">
-                  <span className="mt-0.5 shrink-0 rounded bg-acc-soft p-1 text-acc-bright">
+                <div key={idx} className="flex items-start gap-3 rounded-2xl border border-[#0F3C65]/15 bg-[#FBF7F0] p-4 shadow-sm">
+                  <span className="mt-0.5 shrink-0 rounded-lg bg-[#FFF2BA] p-1.5 text-[#0F3C65]">
                     <FileText className="h-4 w-4" />
                   </span>
                   <div>
-                    <span className="block text-sm font-bold text-white">{doc}</span>
-                    <span className="text-xs text-[var(--white-55)]">Required for Controlling Authority dossier verification</span>
+                    <span className="block text-sm font-black text-[#0F3C65]">{doc}</span>
+                    <span className="text-xs font-medium text-[#486581]">Required for Controlling Authority dossier verification</span>
                   </div>
                 </div>
               ))}

@@ -229,7 +229,7 @@ export default function RootLayout({
       </head>
       <body
         suppressHydrationWarning
-        className="min-h-full overflow-x-hidden font-medium bg-[var(--void)] text-white"
+        className="min-h-full overflow-x-hidden font-medium bg-[#FFFEF9] text-[#0F3C65]"
       >
         {/* JSON-LD Organization / LocalBusiness / FAQ graph — body render avoids React 19 head hydration mismatch */}
         <script
