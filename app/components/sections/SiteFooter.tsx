@@ -198,8 +198,9 @@ export default function SiteFooter() {
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-1.5 px-3 py-1 rounded bg-sky-950/80 border border-sky-400/50 text-sky-300 font-extrabold uppercase tracking-wider hover:border-[var(--gold)] hover:bg-[var(--gold)] hover:text-black transition-all duration-200 shadow-md"
               >
-                <Sparkles className="w-3.5 h-3.5 text-sky-400" />
-                <span>Reverbex Technologies</span>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src="/reverbex-logo.png" alt="Reverbex Technology" className="w-4 h-4 rounded object-contain" />
+                <span>Reverbex Technology</span>
               </a>
             </div>
           </div>

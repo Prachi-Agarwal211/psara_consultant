@@ -144,9 +144,7 @@ export default function PsaraEstimator() {
             >
               <MessageSquare className="h-4 w-4" /> Get Custom Quote on WhatsApp
             </button>
-            <p className="mt-2 text-center text-xs text-[var(--white-40)]">
-              Free consultation with senior licensing advisor within 4 hours.
-            </p>
+
           </div>
         </div>
       </div>

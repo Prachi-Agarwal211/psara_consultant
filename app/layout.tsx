@@ -139,6 +139,12 @@ const organizationSchema = JSON.stringify({
         "@type": "ImageObject",
         url: `${SITE.url}/logo.png`,
       },
+      creator: {
+        "@type": "Organization",
+        name: "Reverbex Technology",
+        url: "https://reverbex.in",
+        description: "Elite Software Engineering, AI Automations, and Web Systems.",
+      },
       knowsAbout: [
         "PSARA License",
         "Security Agency Registration",

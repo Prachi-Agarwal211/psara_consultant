@@ -209,18 +209,16 @@ export default function HomeStory() {
 
             {/* Right Column: 3D India Map Visual Asset Showcase (6 Cols) */}
             <div className="lg:col-span-6 relative flex items-center justify-center">
-              <div className="relative w-full aspect-[4/3] max-w-[620px] rounded-2xl border border-white/15 bg-[#061127] p-4 shadow-2xl overflow-hidden">
-                <Image
-                  src="/about section.png"
+              <div className="relative inline-block">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/about-3d-map.png"
                   alt="PSARA Offices across India Map"
-                  fill
-                  priority
-                  className="object-contain p-2 hover:scale-105 transition-transform duration-500"
-                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  className="w-full max-w-[560px] h-auto hover:scale-105 transition-transform duration-500 drop-shadow-2xl"
                 />
 
                 {/* Floating Office HQ Pin Badge */}
-                <div className="absolute top-4 left-4 flex items-center gap-2.5 px-3.5 py-2 rounded-xl border border-[var(--gold)]/50 bg-[#040D21]/95 backdrop-blur-md shadow-xl">
+                <div className="absolute top-4 left-4 flex items-center gap-2.5 px-3.5 py-2 rounded-xl border border-[var(--gold)]/50 bg-[#040D21]/95 backdrop-blur-md shadow-xl z-10">
                   <div className="w-2.5 h-2.5 rounded-full bg-[var(--gold)] animate-ping" />
                   <span className="text-xs font-extrabold uppercase tracking-wider text-[var(--gold-bright)]">
                     Jaipur Headquarters
@@ -228,7 +226,7 @@ export default function HomeStory() {
                 </div>
 
                 {/* Floating Metro Desks Badge */}
-                <div className="absolute bottom-4 right-4 flex items-center gap-2.5 px-3.5 py-2 rounded-xl border border-sky-400/50 bg-[#040D21]/95 backdrop-blur-md shadow-xl">
+                <div className="absolute bottom-4 right-4 flex items-center gap-2.5 px-3.5 py-2 rounded-xl border border-sky-400/50 bg-[#040D21]/95 backdrop-blur-md shadow-xl z-10">
                   <Globe className="w-4 h-4 text-sky-400" />
                   <span className="text-xs font-extrabold uppercase tracking-wider text-sky-200">
                     Desks in 28 States

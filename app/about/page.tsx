@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { Award, Target, Eye, CheckCircle2, MapPin } from "lucide-react";
-import { PageHero, PageMain } from "../../components/PageShell";
+import { PageMain } from "../../components/PageShell";
 import StageShell from "../components/ui/StageShell";
+import AboutSection from "../components/sections/AboutSection";
 import WhatsAppForm from "../../components/WhatsAppForm";
 import Leadership from "../components/sections/Leadership";
 import { SITE, OFFICES } from "../../lib/config";
@@ -61,11 +62,8 @@ const CERTIFICATIONS = [
 export default function AboutPage() {
   return (
     <StageShell>
-      <PageHero
-        title="Building Trust Through Professional Security & Compliance"
-        lead={`${SITE.name} is a regulatory consultancy dedicated exclusively to Private Security Agencies (Regulation) Act licensing, training MOUs, and police verification.`}
-        crumbs={[{ label: "About Us" }]}
-      />
+      {/* Featured Hero About Section matching design mockup */}
+      <AboutSection imageSrc="/about-map-artwork.png" showHeaderBar={false} className="pt-28 pb-16 border-b border-white/10" />
 
       <PageMain>
         {/* Stats Grid */}
