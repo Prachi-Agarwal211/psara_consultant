@@ -52,7 +52,7 @@ export default function AboutSection({
   return (
     <section
       id="about"
-      className={`relative min-h-[85vh] py-16 lg:py-24 overflow-hidden bg-[#FFFEF9] text-[#0F3C65] ${className}`}
+      className={`relative min-h-[85vh] py-16 lg:py-24 overflow-hidden bg-gradient-to-b from-[#FFFEF9] via-[#FBF7F0] to-[#FFFEF9] text-[#0F3C65] ${className}`}
     >
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 space-y-10 lg:space-y-14">
         {/* Optional Header Row */}
@@ -62,7 +62,7 @@ export default function AboutSection({
               <div className="p-1.5 rounded-xl bg-white border border-[#0F3C65]/15 shadow-md">
                 <BrandMark variant="dark" />
               </div>
-              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#C89B3C]/40 bg-[#FFF2BA]/60 text-[#0A233F] text-[11px] font-black tracking-widest uppercase shadow-sm">
+              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#C89B3C] bg-[#FFF2BA] text-[#0A233F] text-[11px] font-black tracking-widest uppercase shadow-sm">
                 <Sparkles className="w-3.5 h-3.5 text-[#C89B3C]" />
                 <span>Pan-India Statutory Advisory</span>
               </div>
@@ -77,9 +77,8 @@ export default function AboutSection({
 
         {/* Main 2-Column Hero / About Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-          {/* Left Column: Text & 2x2 Feature Grid (6 Cols) */}
+          {/* Left Column: Text & 2x2 Feature Grid */}
           <div className="lg:col-span-6 space-y-7 z-10">
-            {/* Eyebrow & Main Title */}
             <div>
               <span className="text-xs font-black uppercase tracking-[0.25em] text-[#C89B3C] block mb-3">
                 ABOUT US
@@ -98,17 +97,22 @@ export default function AboutSection({
               </p>
             </div>
 
-            {/* 2x2 Feature Cards Grid matching Mockup 2 */}
+            {/* 2x2 Feature Cards Grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-1">
-              {FEATURES.map((feature) => {
+              {FEATURES.map((feature, idx) => {
                 const IconComp = feature.icon;
+                const isVista = idx % 2 === 0;
                 return (
                   <div
                     key={feature.title}
-                    className="p-4 rounded-2xl bg-[#EBF3FA] border border-[#D0E1F0] space-y-2 group hover:bg-[#E2EFFC] transition-all shadow-sm"
+                    className={`p-5 rounded-2xl border space-y-2 group transition-all shadow-md ${
+                      isVista
+                        ? "bg-gradient-to-br from-[#EBF3FA] to-[#D9E6F2] border-[#78A2D2]/40 hover:border-[#0F3C65]"
+                        : "bg-gradient-to-br from-[#FFFDF5] to-[#FFF2BA]/60 border-[#C89B3C]/40 hover:border-[#C89B3C]"
+                    }`}
                   >
-                    <div className="w-10 h-10 rounded-full bg-[#FFF2BA] border border-[#C89B3C]/30 flex items-center justify-center text-[#0F3C65] group-hover:scale-105 transition-transform shadow-sm">
-                      <IconComp className="w-5 h-5 stroke-[2]" />
+                    <div className="w-10 h-10 rounded-xl bg-[#0F3C65] text-[#FFF2BA] flex items-center justify-center group-hover:scale-105 transition-transform shadow-md">
+                      <IconComp className="w-5 h-5 stroke-[2.5]" />
                     </div>
                     <h3
                       className="text-xs sm:text-sm font-black tracking-wider text-[#0F3C65] uppercase pt-1"
@@ -116,7 +120,7 @@ export default function AboutSection({
                     >
                       {feature.title}
                     </h3>
-                    <p className="text-xs leading-relaxed text-[#486581] font-medium">
+                    <p className="text-xs leading-relaxed text-[#334E68] font-bold">
                       {feature.desc}
                     </p>
                   </div>
@@ -128,17 +132,17 @@ export default function AboutSection({
             <div className="flex flex-wrap items-center gap-4 pt-3">
               <Link
                 href="/about"
-                className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#0F3C65] px-7 py-3.5 text-xs font-black uppercase tracking-wider text-white shadow-lg hover:bg-[#0A233F] hover:scale-105 transition-all duration-200"
+                className="inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#0F3C65] to-[#0A233F] px-7 py-3.5 text-xs font-black uppercase tracking-wider text-white shadow-lg hover:scale-105 transition-all duration-200"
                 style={{ fontFamily: "var(--font-body)" }}
               >
                 <span>Firm Profile</span>
-                <ArrowUpRight className="h-4 w-4 text-white stroke-[2.5]" />
+                <ArrowUpRight className="h-4 w-4 text-[#FFF2BA] stroke-[2.5]" />
               </Link>
               <a
                 href={DEFAULT_WA}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 rounded-xl border-2 border-[#0F3C65] bg-white px-7 py-3.5 text-xs font-black uppercase tracking-wider text-[#0F3C65] hover:bg-[#0F3C65] hover:text-white transition-all duration-200"
+                className="inline-flex items-center justify-center gap-2 rounded-xl border-2 border-[#0F3C65] bg-white px-7 py-3.5 text-xs font-black uppercase tracking-wider text-[#0F3C65] hover:bg-[#0F3C65] hover:text-white transition-all duration-200 shadow-sm"
                 style={{ fontFamily: "var(--font-body)" }}
               >
                 <MessageSquare className="h-4 w-4 text-[#25D366] stroke-[2.5]" />
@@ -147,9 +151,8 @@ export default function AboutSection({
             </div>
           </div>
 
-          {/* Right Column: Clean 3D India Map Artwork (6 Cols) */}
+          {/* Right Column: Clean 3D India Map Artwork */}
           <div className="lg:col-span-6 flex items-center justify-center relative">
-            {/* Soft ambient golden/blue background ring */}
             <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-40">
               <div className="w-[480px] h-[480px] rounded-full border border-[#C89B3C]/30 animate-spin-slow" />
               <div className="absolute w-[360px] h-[360px] rounded-full border border-[#78A2D2]/30" />

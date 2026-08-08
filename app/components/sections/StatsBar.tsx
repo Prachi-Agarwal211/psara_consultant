@@ -71,8 +71,14 @@ export default function StatsBar() {
   }, []);
 
   return (
-    <section ref={rootRef} className="relative overflow-hidden bg-[#FFFEF9] py-10 lg:py-14">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8 space-y-10">
+    <section ref={rootRef} className="relative overflow-hidden bg-gradient-to-b from-[#0A233F] via-[#0F3C65] to-[#07192C] text-white py-12 lg:py-16">
+      {/* Background ambient lighting */}
+      <div className="pointer-events-none absolute inset-0 opacity-20" aria-hidden>
+        <div className="absolute top-0 right-1/4 w-96 h-96 rounded-full bg-[#C89B3C] blur-3xl" />
+        <div className="absolute bottom-0 left-1/4 w-96 h-96 rounded-full bg-[#78A2D2] blur-3xl" />
+      </div>
+
+      <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 space-y-10">
         {/* Service Category Pills Bar */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {CATEGORIES.map((c) => {
@@ -80,12 +86,12 @@ export default function StatsBar() {
             return (
               <div
                 key={c.label}
-                className="flex items-center gap-3.5 p-3 md:p-4 rounded-2xl bg-[#FBF7F0] border border-[#0F3C65]/10 shadow-sm hover:border-[#C89B3C] transition-colors group"
+                className="flex items-center gap-3.5 p-4 rounded-2xl bg-white/10 border border-white/15 shadow-lg backdrop-blur-md hover:border-[#C89B3C] hover:bg-white/15 transition-all group"
               >
-                <div className={`w-11 h-11 rounded-full ${c.bg} flex items-center justify-center ${c.text} shrink-0 group-hover:scale-105 transition-transform`}>
-                  <IconComp className="w-5 h-5 stroke-[2]" />
+                <div className="w-11 h-11 rounded-xl bg-[#FFF2BA] flex items-center justify-center text-[#0F3C65] shrink-0 group-hover:scale-105 transition-transform shadow-md">
+                  <IconComp className="w-5 h-5 stroke-[2.5]" />
                 </div>
-                <span className="text-xs md:text-sm font-black tracking-wider text-[#0F3C65] uppercase" style={{ fontFamily: "var(--font-display)" }}>
+                <span className="text-xs md:text-sm font-black tracking-wider text-white uppercase" style={{ fontFamily: "var(--font-display)" }}>
                   {c.label}
                 </span>
               </div>
@@ -93,14 +99,16 @@ export default function StatsBar() {
           })}
         </div>
 
-        {/* Executive Midnight Blue Feature Ribbon */}
-        <div className="rounded-2xl bg-[#0A233F] text-white p-4 md:p-5 shadow-xl grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 border border-[#0A233F]">
+        {/* Executive Gold Accent Ribbon */}
+        <div className="rounded-2xl bg-gradient-to-r from-[#FFF2BA] via-[#F5E6BA] to-[#FFF2BA] text-[#0F3C65] p-4 md:p-5 shadow-2xl grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 border-2 border-[#C89B3C]">
           {RIBBON_ITEMS.map((item) => {
             const IconComp = item.icon;
             return (
               <div key={item.label} className="flex items-center gap-3 px-2">
-                <IconComp className="w-5 h-5 text-[#C89B3C] shrink-0" />
-                <span className="text-[0.68rem] md:text-xs font-black uppercase tracking-wider text-white" style={{ fontFamily: "var(--font-body)" }}>
+                <div className="w-8 h-8 rounded-lg bg-[#0F3C65] text-[#FFF2BA] flex items-center justify-center shrink-0 shadow-sm">
+                  <IconComp className="w-4 h-4" />
+                </div>
+                <span className="text-[0.68rem] md:text-xs font-black uppercase tracking-wider text-[#0F3C65]" style={{ fontFamily: "var(--font-body)" }}>
                   {item.label}
                 </span>
               </div>
@@ -108,26 +116,26 @@ export default function StatsBar() {
           })}
         </div>
 
-        {/* 4-Column Stat Cards Grid (Matching Mockup 1) */}
-        <div className="rounded-3xl bg-[#FFFDF5] border-2 border-[#EAD28D]/50 p-6 md:p-10 shadow-xl">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 divide-y sm:divide-y-0 lg:divide-x divide-[#0F3C65]/15">
+        {/* 4-Column Stat Cards Grid */}
+        <div className="rounded-3xl bg-[#07192C]/90 border border-white/20 p-6 md:p-10 shadow-2xl backdrop-blur-xl">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 divide-y sm:divide-y-0 lg:divide-x divide-white/15">
             {STATS.map((s, idx) => {
               const IconComp = s.icon;
               return (
                 <div key={s.title} className={`space-y-4 text-center px-4 ${idx !== 0 ? "pt-6 sm:pt-0" : ""}`}>
-                  <div className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-[#FFF2BA] border border-[#C89B3C]/40 text-[#0F3C65] shadow-md">
+                  <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-[#78A2D2] to-[#0F3C65] border border-white/20 text-white shadow-lg">
                     <IconComp className="w-7 h-7 stroke-[2]" />
                   </div>
-                  <div className="counter-num text-4xl sm:text-5xl font-black text-[#0F3C65]" style={{ fontFamily: "var(--font-display)" }}>
+                  <div className="counter-num text-4xl sm:text-5xl font-black text-[#FFF2BA]" style={{ fontFamily: "var(--font-display)" }}>
                     <span data-count={s.num} data-suffix={s.suffix}>
                       {s.num}{s.suffix}
                     </span>
                   </div>
                   <div className="space-y-1">
-                    <h3 className="text-xs font-black uppercase tracking-wider text-[#0F3C65]" style={{ fontFamily: "var(--font-display)" }}>
+                    <h3 className="text-xs font-black uppercase tracking-wider text-white" style={{ fontFamily: "var(--font-display)" }}>
                       {s.title}
                     </h3>
-                    <p className="text-xs text-[#486581] font-medium leading-relaxed max-w-xs mx-auto">
+                    <p className="text-xs text-slate-300 font-medium leading-relaxed max-w-xs mx-auto">
                       {s.desc}
                     </p>
                   </div>
