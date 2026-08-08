@@ -196,19 +196,6 @@ export default function HeroStage() {
         </div>
       </div>
 
-      {/* Right Rail Navigation Indicator Dots */}
-      <div className="absolute right-6 top-1/2 -translate-y-1/2 z-30 hidden lg:flex flex-col items-center gap-2">
-        <span className="text-[0.62rem] font-black uppercase tracking-[0.2em] text-[#0A233F] mb-1">INTRO</span>
-        {[true, false, false, false, false, false].map((active, idx) => (
-          <span
-            key={idx}
-            className={`w-2 h-2 rounded-full transition-all ${
-              active ? "bg-[#0A233F] ring-4 ring-[#0A233F]/20" : "bg-[#0A233F]/30"
-            }`}
-          />
-        ))}
-      </div>
-
       {/* Bottom-Left Info Bar */}
       <div className="absolute bottom-6 left-6 md:left-10 z-30 flex items-center gap-3">
         <Shield className="w-4 h-4 text-[#C89B3C] fill-[#C89B3C]" />
@@ -219,17 +206,6 @@ export default function HeroStage() {
           <span>•</span>
           <span>JAIPUR · DELHI · GURUGRAM</span>
         </div>
-      </div>
-
-      {/* Bottom-Right Call Desk Button */}
-      <div className="absolute bottom-6 right-6 md:right-10 z-30">
-        <a
-          href={TEL_HREF}
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#0A233F] text-white text-xs font-black uppercase tracking-wider shadow-lg hover:bg-[#0D3459] transition-colors"
-        >
-          <PhoneCall className="w-3.5 h-3.5 text-[#C89B3C]" />
-          <span>CALL DESK</span>
-        </a>
       </div>
     </section>
   );

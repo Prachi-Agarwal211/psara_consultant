@@ -356,35 +356,35 @@ export default function SiteChrome({ children }: { children: React.ReactNode }) 
         </footer>
       )}
 
-      {/* ── FLOATING CTA BUTTONS (mobile + desktop) ── */}
+      {/* ── FLOATING QUICK CONTACT DESK ── */}
       <div
         role="complementary"
         aria-label="Quick contact"
-        className="fixed z-50 flex flex-col items-end gap-3"
+        className="fixed z-50 flex items-center gap-3"
         style={{
-          right: "calc(1.25rem + env(safe-area-inset-right, 0px))",
-          bottom: "calc(1.25rem + env(safe-area-inset-bottom, 0px))",
+          right: "calc(1.5rem + env(safe-area-inset-right, 0px))",
+          bottom: "calc(1.5rem + env(safe-area-inset-bottom, 0px))",
         }}
       >
         <a
           href={TEL_HREF}
           onClick={() => triggerHaptic(40)}
-          className="flex h-11 items-center gap-2.5 rounded-full border border-white/30 bg-white/10 px-5 text-[0.65rem] font-bold uppercase tracking-wider text-white shadow-[0_0_20px_rgba(0,0,0,0.5)] backdrop-blur-md transition-[color,border-color,background-color] duration-300 hover:border-[var(--gold-bright)] hover:shadow-[0_0_25px_rgba(232,213,163,0.6)] hover:scale-105 active:scale-95"
-          aria-label="Call"
+          className="flex h-11 items-center gap-2.5 rounded-full border-2 border-[#C89B3C] bg-[#0A233F] px-4 py-2 text-xs font-black uppercase tracking-wider text-white shadow-2xl transition-all duration-300 hover:bg-[#0F3C65] hover:scale-105 active:scale-95"
+          aria-label="Call Desk"
         >
-          <Phone className="h-3.5 w-3.5 text-[var(--gold-bright)]" />
-          <span className="hidden sm:inline">Call Desk</span>
+          <Phone className="h-4 w-4 text-[#FFF2BA]" />
+          <span className="hidden sm:inline">CALL DESK</span>
         </a>
+
         <a
           href={DEFAULT_WA}
           target="_blank"
           rel="noopener noreferrer"
           onClick={() => triggerHaptic(40)}
-          className="flex h-12 w-12 items-center justify-center rounded-full border border-[var(--gold)]/60 text-white shadow-[0_0_25px_rgba(212,184,114,0.4)] backdrop-blur-md transition-[color,border-color,background-color] duration-300 hover:scale-110 hover:shadow-[0_0_35px_rgba(232,213,163,0.8)] hover:border-[var(--gold-bright)] active:scale-95"
-          style={{ background: "linear-gradient(135deg, rgba(232,213,163,0.35) 0%, rgba(184,142,68,0.6) 100%)" }}
-          aria-label="WhatsApp"
+          className="flex h-12 w-12 items-center justify-center rounded-full border-2 border-[#25D366] bg-[#25D366] text-white shadow-2xl transition-all duration-300 hover:scale-110 active:scale-95"
+          aria-label="WhatsApp Desk"
         >
-          <MessageSquare className="h-5 w-5 text-white" />
+          <MessageSquare className="h-5 w-5 fill-white text-white" />
         </a>
       </div>
     </>
