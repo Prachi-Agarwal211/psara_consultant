@@ -63,14 +63,23 @@ function getCategory(slug: string): CategoryId {
 
 export default function ServicesSection() {
   const [activeCategory, setActiveCategory] = useState<CategoryId>("all");
+  const [showAll, setShowAll] = useState(false);
 
   const filteredServices = SERVICES.filter((s) => {
     if (activeCategory === "all") return true;
     return getCategory(s.slug) === activeCategory;
   });
 
+  const visibleServices = showAll ? filteredServices : filteredServices.slice(0, 3);
+  const hasMore = filteredServices.length > 3;
+
+  const handleCategoryChange = (catId: CategoryId) => {
+    setActiveCategory(catId);
+    setShowAll(false);
+  };
+
   return (
-    <section id="services" className="relative py-24 bg-[#0A233F] text-white overflow-hidden" data-parallax-root>
+    <section id="services" className="relative py-20 lg:py-24 bg-[#0A233F] text-white overflow-hidden" data-parallax-root>
       {/* Background glow accents */}
       <div className="pointer-events-none absolute inset-0 z-0" aria-hidden>
         <div
@@ -102,7 +111,7 @@ export default function ServicesSection() {
           {CATEGORIES.map((cat) => (
             <button
               key={cat.id}
-              onClick={() => setActiveCategory(cat.id)}
+              onClick={() => handleCategoryChange(cat.id)}
               className={`px-5 py-2.5 text-xs font-black uppercase tracking-[0.16em] rounded-xl transition-all duration-300 ${
                 activeCategory === cat.id
                   ? "bg-[#FFF2BA] text-[#0F3C65] shadow-lg"
@@ -118,7 +127,7 @@ export default function ServicesSection() {
 
         {/* Services Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredServices.map((service, idx) => {
+          {visibleServices.map((service, idx) => {
             const IconComponent = getServiceIcon(service.slug);
             const num = String(idx + 1).padStart(2, "0");
 
@@ -174,6 +183,30 @@ export default function ServicesSection() {
             );
           })}
         </div>
+
+        {/* See More Services Button */}
+        {hasMore && (
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
+            <button
+              type="button"
+              onClick={() => setShowAll((prev) => !prev)}
+              className="inline-flex items-center gap-2.5 rounded-xl border-2 border-[#C89B3C] bg-[#FFF2BA] px-8 py-4 text-xs font-black uppercase tracking-[0.18em] text-[#0F3C65] transition-all duration-300 hover:bg-white shadow-xl hover:scale-105 active:scale-95"
+              style={{ fontFamily: "var(--font-body)" }}
+            >
+              <span>{showAll ? "Show Fewer Services" : `See More Services (${filteredServices.length - 3} More)`}</span>
+              <ArrowRight className={`h-4 w-4 stroke-[2.5] transition-transform duration-300 ${showAll ? "-rotate-90" : "rotate-90"}`} />
+            </button>
+
+            <Link
+              href="/services"
+              className="inline-flex items-center gap-2 rounded-xl border border-white/20 bg-white/10 px-6 py-4 text-xs font-black uppercase tracking-[0.18em] text-white hover:bg-white/20 transition-all"
+              style={{ fontFamily: "var(--font-body)" }}
+            >
+              <span>All 26 Services Page</span>
+              <ArrowRight className="h-4 w-4" />
+            </Link>
+          </div>
+        )}
 
         {/* Bottom Advisory Callout Box */}
         <div className="relative overflow-hidden rounded-2xl border-2 border-[#C89B3C]/40 bg-gradient-to-r from-[#0D3459] via-[#0A233F] to-[#0D3459] p-8 md:p-10 flex flex-col md:flex-row md:items-center justify-between gap-8 shadow-2xl">

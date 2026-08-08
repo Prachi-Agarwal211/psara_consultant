@@ -29,6 +29,9 @@ const faqs = [
 
 export default function HomeFaq() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
+  const [showAll, setShowAll] = useState(false);
+
+  const visibleFaqs = showAll ? faqs : faqs.slice(0, 3);
 
   const toggle = (idx: number) => {
     setOpenIndex(openIndex === idx ? null : idx);
@@ -39,11 +42,11 @@ export default function HomeFaq() {
       id="faq"
       data-section-transition
       data-transition="blur"
-      className="relative overflow-hidden bg-gradient-to-b from-[#FFFEF9] via-[#FBF7F0] to-[#FFFDF5] text-[#0F3C65] py-20 lg:py-28"
+      className="relative overflow-hidden bg-gradient-to-b from-[#FFFEF9] via-[#FBF7F0] to-[#FFFDF5] text-[#0F3C65] py-16 lg:py-24"
     >
       <div className="relative z-10 px-[var(--gutter)] max-w-7xl mx-auto">
         {/* Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between border-b border-[#0F3C65]/15 pb-8 mb-12 gap-6">
+        <div className="flex flex-col md:flex-row md:items-end justify-between border-b border-[#0F3C65]/15 pb-8 mb-10 gap-6">
           <div>
             <span className="text-xs font-black uppercase tracking-[0.25em] text-[#C89B3C] block mb-2" style={{ fontFamily: "var(--font-body)" }}>
               ( STATUTORY CLARITY )
@@ -65,7 +68,7 @@ export default function HomeFaq() {
 
         {/* FAQ Accordion */}
         <div className="max-w-4xl mx-auto divide-y divide-[#0F3C65]/15 border-t border-b border-[#0F3C65]/15">
-          {faqs.map((item, idx) => {
+          {visibleFaqs.map((item, idx) => {
             const isOpen = openIndex === idx;
 
             return (
@@ -96,13 +99,24 @@ export default function HomeFaq() {
           })}
         </div>
 
-        <div className="mt-10 text-center">
-          <Link
-            href="/faq"
-            className="inline-flex items-center gap-2 rounded-xl bg-[#0F3C65] px-6 py-3 text-xs font-black uppercase tracking-wider text-white hover:bg-[#0A233F] transition-all shadow-md"
+        {/* Action Buttons */}
+        <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+          <button
+            type="button"
+            onClick={() => setShowAll((prev) => !prev)}
+            className="inline-flex items-center gap-2 rounded-xl border-2 border-[#C89B3C] bg-[#FFF2BA] px-6 py-3.5 text-xs font-black uppercase tracking-wider text-[#0F3C65] hover:bg-white transition-all shadow-md"
             style={{ fontFamily: "var(--font-body)" }}
           >
-            <span>Read all 100+ statutory FAQs</span>
+            <span>{showAll ? "Show Fewer Questions" : `See More Questions (+${faqs.length - 3} More)`}</span>
+            <ArrowUpRight className={`h-4 w-4 stroke-[2.5] transition-transform duration-300 ${showAll ? "-rotate-90" : "rotate-90"}`} />
+          </button>
+
+          <Link
+            href="/faq"
+            className="inline-flex items-center gap-2 rounded-xl bg-[#0F3C65] px-6 py-3.5 text-xs font-black uppercase tracking-wider text-white hover:bg-[#0A233F] transition-all shadow-md"
+            style={{ fontFamily: "var(--font-body)" }}
+          >
+            <span>All 100+ statutory FAQs</span>
             <ArrowUpRight className="h-4 w-4 stroke-[2.5]" />
           </Link>
         </div>
