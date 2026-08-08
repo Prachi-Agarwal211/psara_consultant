@@ -8,7 +8,7 @@ function Stars({ count }: { count: number }) {
   return (
     <div className="flex items-center gap-1" role="img" aria-label={`${count} out of 5 stars`}>
       {Array.from({ length: 5 }).map((_, i) => (
-        <Star key={i} className={`h-4 w-4 ${i < count ? "fill-[var(--gold-bright)] text-[var(--gold-bright)]" : "text-white/15"}`} />
+        <Star key={i} className={`h-4 w-4 ${i < count ? "fill-[#C89B3C] text-[#C89B3C]" : "text-white/15"}`} />
       ))}
     </div>
   );
