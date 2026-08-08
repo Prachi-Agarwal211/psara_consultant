@@ -21,123 +21,124 @@ export default function HomeContact() {
       id="contact"
       data-section-transition
       data-transition="fade"
-      className="relative overflow-hidden section-void py-[var(--section-y)]"
+      className="relative overflow-hidden bg-gradient-to-b from-[#0A233F] via-[#0F3C65] to-[#07192C] text-white py-20 lg:py-28"
     >
-      <div className="pointer-events-none absolute inset-0" aria-hidden>
-        <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse 60% 50% at 50% 100%, rgba(0,102,255,0.12) 0%, transparent 70%)" }} />
+      <div className="pointer-events-none absolute inset-0 opacity-20" aria-hidden>
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] bg-[#C89B3C] blur-3xl" />
       </div>
 
-      <div className="relative z-10 px-[var(--gutter)] max-w-[var(--page-max)] mx-auto">
-        <div className="mb-10 max-w-2xl">
-          <span className="meta-bracket mb-4 text-xs! text-[var(--gold)]! border-[var(--gold)]/30! inline-block" style={{ fontFamily: "var(--font-body)" }}>
-            ( CONSULTATION )
+      <div className="relative z-10 px-[var(--gutter)] max-w-7xl mx-auto">
+        <div className="mb-12 max-w-2xl">
+          <span className="text-xs font-black uppercase tracking-[0.25em] text-[#FFF2BA] block mb-2" style={{ fontFamily: "var(--font-body)" }}>
+            ( DIRECT CONSULTATION )
           </span>
-          <h2 ref={headingRef} className="display-mega text-white font-bold mt-4" style={{ fontFamily: "var(--font-display)" }}>
-            Start a File <span className="text-metal">With Us</span>
+          <h2 ref={headingRef} className="text-4xl sm:text-5xl font-black text-white" style={{ fontFamily: "var(--font-display)" }}>
+            Start a File <span className="text-[#FFF2BA]">With Us</span>
           </h2>
-          <p className="mt-3 text-sm text-[var(--white-70)] leading-relaxed max-w-lg" style={{ fontFamily: "var(--font-body)" }}>
+          <p className="mt-3 text-base text-slate-200 leading-relaxed font-medium" style={{ fontFamily: "var(--font-body)" }}>
             Structured enquiry opens WhatsApp with your details so our team can reply with a State-specific checklist. Or call during business hours.
           </p>
         </div>
 
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 items-start">
-          <div className="space-y-5 lg:col-span-5">
+          <div className="space-y-6 lg:col-span-5">
             <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
               <a
                 href={TEL_HREF}
-                className="btn-ghost inline-flex w-full justify-center gap-2 sm:w-auto"
+                className="inline-flex items-center justify-center gap-2 rounded-xl border border-white/20 bg-white/10 px-6 py-3.5 text-xs font-black uppercase tracking-wider text-white hover:bg-white/20 transition-all shadow-md"
                 style={{ fontFamily: "var(--font-body)" }}
               >
-                <Phone className="h-4 w-4" />
-                {CONTACT.phoneDisplay}
+                <Phone className="h-4 w-4 text-[#FFF2BA]" />
+                <span>{CONTACT.phoneDisplay}</span>
               </a>
               <a
                 href={DEFAULT_WA}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn-gold inline-flex w-full justify-center gap-2 sm:w-auto"
+                className="inline-flex items-center justify-center gap-2 rounded-xl border-2 border-[#25D366] bg-[#25D366] px-6 py-3.5 text-xs font-black uppercase tracking-wider text-white hover:bg-emerald-600 transition-all shadow-xl"
                 style={{ fontFamily: "var(--font-body)" }}
               >
-                <MessageSquare className="h-4 w-4" />
-                WhatsApp Desk
+                <MessageSquare className="h-4 w-4 fill-white" />
+                <span>WhatsApp Desk</span>
               </a>
             </div>
 
             {/* Contact detail card */}
-            <div className="relative space-y-3 border border-white/10 bg-white/[0.02] p-5 text-sm">
-              <p className="flex items-center gap-2.5 text-[var(--white-70)]">
-                <Mail className="h-4 w-4 shrink-0 text-[var(--gold-bright)]" />
-                <a href={`mailto:${CONTACT.email}`} className="hover:text-[var(--gold-bright)] transition-colors">
+            <div className="relative space-y-4 rounded-3xl border-2 border-white/15 bg-[#07192C]/90 p-6 text-sm shadow-xl backdrop-blur-md">
+              <p className="flex items-center gap-3 text-slate-200 font-medium">
+                <Mail className="h-5 w-5 shrink-0 text-[#C89B3C]" />
+                <a href={`mailto:${CONTACT.email}`} className="hover:text-[#FFF2BA] font-bold transition-colors">
                   {CONTACT.email}
                 </a>
               </p>
-              <p className="flex items-start gap-2.5 text-[var(--white-70)]">
-                <Clock className="mt-0.5 h-4 w-4 shrink-0 text-[var(--gold-bright)]" />
-                {CONTACT.hours}
+              <p className="flex items-start gap-3 text-slate-200 font-medium">
+                <Clock className="mt-0.5 h-5 w-5 shrink-0 text-[#C89B3C]" />
+                <span>{CONTACT.hours}</span>
               </p>
-              <p className="flex items-start gap-2.5 text-[var(--white-70)]">
-                <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-[var(--gold-bright)]" />
+              <p className="flex items-start gap-3 text-slate-200 font-medium">
+                <MapPin className="mt-0.5 h-5 w-5 shrink-0 text-[#C89B3C]" />
                 <span>
-                  <strong className="text-white">HQ · {hq.city}</strong>
-                  <br />
-                  <span className="text-xs">{hq.address}, {hq.pin}</span>
+                  <strong className="text-[#FFF2BA] font-black uppercase tracking-wider block">HQ · {hq.city}</strong>
+                  <span className="text-xs text-slate-300 font-medium">{hq.address}, {hq.pin}</span>
                 </span>
               </p>
             </div>
 
             {/* Map */}
-            <div className="overflow-hidden border border-white/10">
+            <div className="overflow-hidden rounded-2xl border-2 border-white/15 shadow-xl">
               <iframe
                 title={`PSARA Consultant India ${hq.city} map`}
                 src={hq.mapEmbed}
-                className="h-44 w-full border-0 grayscale-[35%] contrast-125 opacity-80"
+                className="h-44 w-full border-0 grayscale-[25%] contrast-125 opacity-90"
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
               />
             </div>
 
             {/* Other desks — office-line pattern */}
-            <div className="pt-2">
-              <p className="pb-3 text-xs font-bold uppercase tracking-[0.2em] text-[var(--gold)]" style={{ fontFamily: "var(--font-body)" }}>
+            <div className="pt-2 space-y-3">
+              <p className="text-xs font-black uppercase tracking-[0.2em] text-[#FFF2BA]" style={{ fontFamily: "var(--font-body)" }}>
                 Other Desks
               </p>
-              {OFFICES.filter((o) => !o.isHQ)
-                .slice(0, 4)
-                .map((o) => (
-                  <div key={o.city} className="office-line">
-                    <span className="text-xs font-bold uppercase tracking-wider text-white">{o.city}</span>
-                    <span className="text-xs text-[var(--gold-bright)]">{o.badge}</span>
-                    <span className="text-xs text-white/45">{o.address}, {o.pin}</span>
-                  </div>
-                ))}
+              <div className="space-y-2">
+                {OFFICES.filter((o) => !o.isHQ)
+                  .slice(0, 4)
+                  .map((o) => (
+                    <div key={o.city} className="flex items-center justify-between p-3 rounded-xl border border-white/15 bg-white/10 text-xs">
+                      <span className="font-black uppercase tracking-wider text-white">{o.city}</span>
+                      <span className="font-mono text-[10px] font-bold text-[#FFF2BA] bg-white/10 px-2 py-0.5 rounded">{o.badge}</span>
+                    </div>
+                  ))}
+              </div>
               <Link
                 href="/contact"
-                className="inline-flex items-center gap-2 py-3 text-xs font-bold uppercase tracking-[0.18em] text-[var(--gold-bright)] hover:text-white transition-colors"
+                className="inline-flex items-center gap-2 pt-2 text-xs font-black uppercase tracking-[0.18em] text-[#FFF2BA] hover:text-white transition-colors"
                 style={{ fontFamily: "var(--font-body)" }}
               >
-                All offices & full contact page <ArrowUpRight className="h-3.5 w-3.5" />
+                <span>All offices &amp; full contact page</span>
+                <ArrowUpRight className="h-4 w-4 stroke-[2.5]" />
               </Link>
             </div>
           </div>
 
           {/* Form card */}
-          <div className="relative lg:col-span-7 border border-[var(--gold)]/30 bg-white/[0.02] p-6 md:p-9">
-            <div className="flex items-center justify-between pb-5 border-b border-white/10 mb-6">
+          <div className="relative lg:col-span-7 rounded-3xl border-2 border-[#C89B3C]/50 bg-[#07192C]/95 p-7 md:p-10 shadow-2xl backdrop-blur-xl">
+            <div className="flex items-center justify-between pb-5 border-b border-white/15 mb-6">
               <div>
-                <span className="meta-bracket text-xs!" style={{ fontFamily: "var(--font-body)" }}>
+                <span className="text-xs font-black uppercase tracking-wider text-[#FFF2BA] block mb-1" style={{ fontFamily: "var(--font-body)" }}>
                   ( FREE CONSULTATION )
                 </span>
-                <h3 className="mt-2 font-[family-name:var(--font-display)] text-2xl font-bold text-white">
+                <h3 className="text-2xl md:text-3xl font-black text-white" style={{ fontFamily: "var(--font-display)" }}>
                   Free PSARA Consultation Form
                 </h3>
               </div>
-              <span className="hidden md:block font-mono text-[0.55rem] tracking-[0.2em] text-white/25" aria-hidden>FORM-01</span>
+              <span className="hidden md:block font-mono text-xs font-black tracking-widest text-[#C89B3C]/80" aria-hidden>FORM-01</span>
             </div>
-            <p className="mb-6 text-sm text-[var(--white-70)]">
+            <p className="mb-6 text-sm text-slate-200 font-medium">
               Submit opens WhatsApp with a clean brief for our consultants. Email backup available on the same form.
             </p>
             <ContactForm formType="Homepage Consultation" />
-            <p className="mt-4 text-center text-xs text-[var(--white-40)]">
+            <p className="mt-4 text-center text-xs font-bold text-slate-300">
               WhatsApp to {CONTACT.phoneDisplay} · Landline {CONTACT.landlineDisplay}
             </p>
           </div>
