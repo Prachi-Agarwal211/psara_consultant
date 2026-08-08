@@ -68,32 +68,27 @@ export default function StatementInterstitial() {
   return (
     <section
       ref={rootRef}
-      className="relative min-h-[85dvh] flex flex-col items-center justify-center section-night overflow-hidden py-[var(--section-y)]"
+      className="relative min-h-[85dvh] flex flex-col items-center justify-center bg-gradient-to-b from-[#0A233F] via-[#0F3C65] to-[#07192C] text-white overflow-hidden py-24"
       data-parallax-root
     >
-      {/* Subtle background glow */}
-      <div className="pointer-events-none absolute inset-0 z-0" aria-hidden>
-        <div
-          className="absolute inset-0"
-          style={{
-            background: "radial-gradient(ellipse 70% 50% at 50% 50%, rgba(212,184,114,0.08) 0%, transparent 70%)",
-          }}
-        />
+      {/* Background glow */}
+      <div className="pointer-events-none absolute inset-0 z-0 opacity-20" aria-hidden>
+        <div className="absolute inset-0 bg-[#C89B3C] blur-3xl" />
       </div>
 
       {/* Statement text */}
       <div className="relative z-10 max-w-5xl mx-auto px-6 md:px-14 text-center">
         <div data-statement-line className="overflow-hidden mb-2">
           <p
-            className="text-[0.7rem] font-bold uppercase tracking-[0.35em] text-[var(--gold)]"
+            className="text-xs font-black uppercase tracking-[0.35em] text-[#FFF2BA]"
             style={{ fontFamily: "var(--font-body)" }}
           >
-            The Compliance Gap
+            The Compliance Risk
           </p>
         </div>
 
         <h2
-          className="display-mega text-white leading-[0.95] font-bold"
+          className="text-4xl sm:text-6xl md:text-7xl font-black text-white leading-[0.95] tracking-tight"
           style={{ fontFamily: "var(--font-display)" }}
         >
           <span data-statement-line className="overflow-hidden inline-block">
@@ -103,7 +98,7 @@ export default function StatementInterstitial() {
           </span>
           <br />
           <span data-statement-line className="overflow-hidden inline-block">
-            <span className="text-metal inline-block" data-statement-word>
+            <span className="text-[#FFF2BA] inline-block" data-statement-word>
               without
             </span>
           </span>
@@ -116,29 +111,23 @@ export default function StatementInterstitial() {
         </h2>
 
         <div className="mt-8 flex items-center justify-center gap-6">
-          <span className="accent-line-gold w-16" />
+          <span className="h-0.5 w-16 bg-[#C89B3C]" />
           <p
-            className="text-sm md:text-base text-white/50 max-w-md leading-relaxed"
+            className="text-sm md:text-base text-slate-200 max-w-md leading-relaxed font-medium"
             style={{ fontFamily: "var(--font-body)" }}
           >
             Operating without PSARA compliance isn&apos;t just risky — it&apos;s a criminal offense under the Private Security Agencies Act, 2005.
           </p>
-          <span className="accent-line-gold w-16" />
+          <span className="h-0.5 w-16 bg-[#C89B3C]" />
         </div>
 
-        <div className="mt-10 flex items-center justify-center gap-3 text-xs font-bold uppercase tracking-[0.25em] text-white/30" style={{ fontFamily: "var(--font-body)" }}>
-          <span>300+</span>
-          <span className="w-1 h-1 rounded-full bg-[var(--gold)]/40" />
-          <span>28 States</span>
-          <span className="w-1 h-1 rounded-full bg-[var(--gold)]/40" />
-          <span>10+ Years</span>
+        <div className="mt-10 flex items-center justify-center gap-3 text-xs font-black uppercase tracking-[0.25em] text-[#FFF2BA]" style={{ fontFamily: "var(--font-body)" }}>
+          <span>500+ LICENSES</span>
+          <span className="w-1.5 h-1.5 rounded-full bg-[#C89B3C]" />
+          <span>28 STATES</span>
+          <span className="w-1.5 h-1.5 rounded-full bg-[#C89B3C]" />
+          <span>10+ YEARS</span>
         </div>
-      </div>
-
-      {/* Bottom scroll indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-white/20">
-        <span className="text-[0.5rem] uppercase tracking-[0.3em]">Continue</span>
-        <div className="w-px h-8 bg-gradient-to-b from-white/20 to-transparent" />
       </div>
     </section>
   );

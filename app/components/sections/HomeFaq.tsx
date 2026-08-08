@@ -39,34 +39,32 @@ export default function HomeFaq() {
       id="faq"
       data-section-transition
       data-transition="blur"
-      className="relative overflow-hidden section-electric py-[var(--section-y)]"
+      className="relative overflow-hidden bg-gradient-to-b from-[#FFFEF9] via-[#FBF7F0] to-[#FFFDF5] text-[#0F3C65] py-20 lg:py-28"
     >
-      <div className="pointer-events-none absolute inset-0 opacity-[0.04]" aria-hidden style={{ backgroundImage: "radial-gradient(circle, var(--gold) 1px, transparent 1px)", backgroundSize: "28px 28px" }} />
-
-      <div className="relative z-10 px-[var(--gutter)] max-w-[var(--page-max)] mx-auto">
+      <div className="relative z-10 px-[var(--gutter)] max-w-7xl mx-auto">
         {/* Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between border-b border-white/10 pb-8 mb-12 gap-6">
+        <div className="flex flex-col md:flex-row md:items-end justify-between border-b border-[#0F3C65]/15 pb-8 mb-12 gap-6">
           <div>
-            <span className="meta-bracket mb-4 text-xs! text-[var(--gold)]! border-[var(--gold)]/30! inline-block" style={{ fontFamily: "var(--font-body)" }}>
+            <span className="text-xs font-black uppercase tracking-[0.25em] text-[#C89B3C] block mb-2" style={{ fontFamily: "var(--font-body)" }}>
               ( STATUTORY CLARITY )
             </span>
             <h2
-              className="display-mega text-white font-bold mt-4"
+              className="text-4xl sm:text-5xl font-black text-[#0F3C65]"
               style={{ fontFamily: "var(--font-display)" }}
             >
-              Frequent <span className="text-metal">Questions</span>
+              Frequent <span className="text-[#C89B3C]">Questions</span>
             </h2>
           </div>
 
-          <div className="flex items-center gap-3 text-xs font-bold uppercase tracking-widest text-white/40" style={{ fontFamily: "var(--font-body)" }}>
+          <div className="flex items-center gap-3 text-xs font-black uppercase tracking-widest text-[#334E68]" style={{ fontFamily: "var(--font-body)" }}>
             <span>PSARA Act 2005</span>
-            <span className="w-1 h-1 rounded-full bg-[var(--gold)]/50" />
+            <span className="w-1.5 h-1.5 rounded-full bg-[#C89B3C]" />
             <span>Direct Answers</span>
           </div>
         </div>
 
         {/* FAQ Accordion */}
-        <div className="max-w-4xl mx-auto divide-y divide-white/10 border-t border-b border-white/10">
+        <div className="max-w-4xl mx-auto divide-y divide-[#0F3C65]/15 border-t border-b border-[#0F3C65]/15">
           {faqs.map((item, idx) => {
             const isOpen = openIndex === idx;
 
@@ -75,21 +73,20 @@ export default function HomeFaq() {
                 <button
                   type="button"
                   onClick={() => toggle(idx)}
-                  data-cursor="Toggle FAQ"
                   aria-expanded={isOpen}
                   className="group w-full flex items-center justify-between gap-6 text-left"
                 >
-                  <span className="font-[family-name:var(--font-display)] text-lg md:text-xl font-bold text-white transition-colors group-hover:text-[var(--gold-bright)]">
-                      {item.q}
-                    </span>
-                  <span className={`shrink-0 flex h-8 w-8 items-center justify-center border transition-[color,border-color,background-color] duration-300 ${isOpen ? "rotate-180 border-[var(--gold)] bg-[var(--gold)]/10 text-[var(--gold-bright)]" : "border-white/15 text-white/50 group-hover:border-[var(--gold)]/50 group-hover:text-[var(--gold-bright)]"}`}>
-                    <ChevronDown className="h-4 w-4" />
+                  <span className="text-lg md:text-xl font-black text-[#0F3C65] transition-colors group-hover:text-[#C89B3C]" style={{ fontFamily: "var(--font-display)" }}>
+                    {item.q}
+                  </span>
+                  <span className={`shrink-0 flex h-9 w-9 items-center justify-center rounded-xl border transition-all duration-300 ${isOpen ? "rotate-180 border-[#C89B3C] bg-[#FFF2BA] text-[#0F3C65]" : "border-[#0F3C65]/20 bg-[#FBF7F0] text-[#0F3C65] group-hover:border-[#C89B3C]"}`}>
+                    <ChevronDown className="h-4 w-4 stroke-[2.5]" />
                   </span>
                 </button>
 
                 {isOpen && (
-                  <div className="mt-4 pl-0 md:pl-12">
-                    <p className="text-sm font-normal leading-relaxed text-[var(--white-70)] max-w-3xl" style={{ fontFamily: "var(--font-body)" }}>
+                  <div className="mt-4 pl-0 md:pl-2">
+                    <p className="text-sm font-medium leading-relaxed text-[#334E68] max-w-3xl" style={{ fontFamily: "var(--font-body)" }}>
                       {item.a}
                     </p>
                   </div>
@@ -102,10 +99,11 @@ export default function HomeFaq() {
         <div className="mt-10 text-center">
           <Link
             href="/faq"
-            className="inline-flex items-center gap-2 text-[0.65rem] font-bold uppercase tracking-[0.2em] text-[var(--gold-bright)] hover:text-white transition-colors"
+            className="inline-flex items-center gap-2 rounded-xl bg-[#0F3C65] px-6 py-3 text-xs font-black uppercase tracking-wider text-white hover:bg-[#0A233F] transition-all shadow-md"
             style={{ fontFamily: "var(--font-body)" }}
           >
-            Read all {">"} 100 statutory FAQs <ArrowUpRight className="h-3.5 w-3.5" />
+            <span>Read all 100+ statutory FAQs</span>
+            <ArrowUpRight className="h-4 w-4 stroke-[2.5]" />
           </Link>
         </div>
       </div>

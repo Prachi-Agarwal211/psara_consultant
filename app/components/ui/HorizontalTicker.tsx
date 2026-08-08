@@ -20,7 +20,7 @@ export default function HorizontalTicker({
   const doubled = [...items, ...items];
 
   return (
-    <div className={`relative overflow-hidden py-6 ${className}`} aria-hidden>
+    <div className={`relative overflow-hidden bg-[#0A233F] py-4 border-y border-[#C89B3C]/30 ${className}`} aria-hidden>
       <div
         ref={trackRef}
         className="flex w-max gap-10 whitespace-nowrap will-change-transform"
@@ -29,11 +29,11 @@ export default function HorizontalTicker({
         {doubled.map((item, i) => (
           <span
             key={`${item}-${i}`}
-            className="text-[clamp(1.4rem,3vw,2.4rem)] font-semibold uppercase tracking-[0.08em]"
-            style={{ color: i % 2 === 0 ? "var(--white-25)" : "var(--gold-dim)" }}
+            className="text-[clamp(1.2rem,2.5vw,2rem)] font-black uppercase tracking-[0.14em]"
+            style={{ color: i % 2 === 0 ? "#FFF2BA" : "#C89B3C" }}
           >
             {item}
-            <span className="mx-6" style={{ color: "var(--electric)" }}>
+            <span className="mx-6 text-[#78A2D2]">
               ·
             </span>
           </span>

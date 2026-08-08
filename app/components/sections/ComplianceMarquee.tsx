@@ -13,13 +13,13 @@ const ITEMS = [
 
 export default function ComplianceMarquee() {
   return (
-    <section className="relative w-full overflow-hidden border-y border-white/10 bg-white/[0.015] py-4" aria-label="Trust Signals">
-      <div className="flex w-max animate-marquee gap-8" data-cursor="PSARA Trust">
+    <section className="relative w-full overflow-hidden border-y border-[#C89B3C]/30 bg-[#07192C] py-3.5" aria-label="Trust Signals">
+      <div className="flex w-max animate-marquee gap-8">
         {[...ITEMS, ...ITEMS, ...ITEMS].map((item, i) => (
-          <div key={i} className="flex items-center gap-3.5 whitespace-nowrap text-xs font-bold uppercase tracking-[0.18em] text-[var(--white-70)]">
-            <item.icon className="h-4 w-4 shrink-0 text-[var(--gold-bright)]" />
+          <div key={i} className="flex items-center gap-3.5 whitespace-nowrap text-xs font-black uppercase tracking-[0.18em] text-[#FFF2BA]">
+            <item.icon className="h-4 w-4 shrink-0 text-[#C89B3C]" />
             <span>{item.text}</span>
-            <span className="h-1 w-1 rounded-full bg-[var(--gold-bright)] opacity-40" />
+            <span className="h-1.5 w-1.5 rounded-full bg-[#78A2D2]" />
           </div>
         ))}
       </div>
