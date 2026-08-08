@@ -23,20 +23,20 @@ const REGION_GROUPS = [
 
 export default function StateDirectoryFooter() {
   return (
-    <div className="border-t border-white/10 bg-[var(--void-2)] py-12 px-[var(--gutter)] text-white">
-      <div className="max-w-[var(--page-max)] mx-auto">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-white/10 pb-6 mb-8 gap-4">
+    <div className="border-t-2 border-[#C89B3C]/30 bg-gradient-to-b from-[#0A233F] via-[#0F3C65] to-[#07192C] py-12 px-[var(--gutter)] text-white rounded-3xl my-8 shadow-2xl">
+      <div className="max-w-7xl mx-auto">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-white/15 pb-6 mb-8 gap-4">
           <div>
-            <span className="text-xs font-bold uppercase tracking-widest text-[var(--gold-bright)] flex items-center gap-1.5">
-              <MapPin className="h-3.5 w-3.5" /> Pan-India Statutory Directory
+            <span className="text-xs font-black uppercase tracking-widest text-[#FFF2BA] flex items-center gap-1.5">
+              <MapPin className="h-4 w-4 text-[#C89B3C]" /> Pan-India Statutory Directory
             </span>
-            <h3 className="font-[family-name:var(--font-display)] text-xl font-bold text-white mt-1">
+            <h3 className="font-black text-xl text-white mt-1" style={{ fontFamily: "var(--font-display)" }}>
               PSARA License Advisory across 36 States &amp; Union Territories
             </h3>
           </div>
           <Link
             href="/security-services"
-            className="text-xs font-bold text-[var(--gold-bright)] hover:underline whitespace-nowrap"
+            className="text-xs font-black text-[#FFF2BA] hover:text-white transition-colors whitespace-nowrap"
           >
             Full Directory Index &rarr;
           </Link>
@@ -49,18 +49,18 @@ export default function StateDirectoryFooter() {
 
             return (
               <div key={group.name} className="space-y-3">
-                <span className="text-xs font-bold text-white block border-b border-white/10 pb-2">
+                <span className="text-xs font-black text-[#FFF2BA] block border-b border-white/15 pb-2 uppercase tracking-wider">
                   {group.name}
                 </span>
-                <ul className="space-y-1.5 text-xs text-[var(--white-70)]">
+                <ul className="space-y-1.5 text-xs text-slate-200">
                   {groupStates.map((st) => (
                     <li key={st.slug}>
                       <Link
                         href={`/states/${st.slug}`}
-                        className="hover:text-[var(--gold-bright)] transition-colors flex items-center justify-between group min-h-[2rem] py-1"
+                        className="hover:text-[#FFF2BA] transition-colors flex items-center justify-between group min-h-[2rem] py-1"
                       >
-                        <span>PSARA {st.name}</span>
-                        <span className="text-xs text-[var(--white-55)] group-hover:text-[var(--gold-bright)] font-mono">
+                        <span className="font-medium">PSARA {st.name}</span>
+                        <span className="text-xs text-slate-400 group-hover:text-[#FFF2BA] font-mono">
                           {st.capital}
                         </span>
                       </Link>
