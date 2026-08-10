@@ -14,6 +14,7 @@ import {
 } from "lucide-react";
 import BrandMark from "../ui/BrandMark";
 import { DEFAULT_WA } from "../../../lib/whatsapp";
+import FloatProps, { PROPS } from "../ui/FloatProps";
 
 interface AboutSectionProps {
   imageSrc?: string;
@@ -52,9 +53,10 @@ export default function AboutSection({
   return (
     <section
       id="about"
-      className={`relative min-h-[85vh] py-16 lg:py-24 overflow-hidden bg-gradient-to-b from-[#FFFEF9] via-[#FBF7F0] to-[#FFFEF9] text-[#0F3C65] ${className}`}
+      className={`relative min-h-[85vh] overflow-hidden bg-gradient-to-b from-[#FFFEF9] via-[#FBF7F0] to-[#FFFEF9] py-16 text-[#0F3C65] lg:py-24 ${className}`}
     >
-      <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 space-y-10 lg:space-y-14">
+      <FloatProps slots={PROPS.about} />
+      <div className="relative z-10 mx-auto max-w-7xl space-y-10 px-6 lg:space-y-14 lg:px-8">
         {/* Optional Header Row */}
         {showHeaderBar && (
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 pb-6 border-b border-[#0F3C65]/15">

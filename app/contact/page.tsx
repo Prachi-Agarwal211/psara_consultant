@@ -96,17 +96,21 @@ export default function ContactPage() {
         {/* Main Form & Office Cards Section */}
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 mb-20">
           <div className="lg:col-span-7">
-            <div className="rounded-3xl border-2 border-[#C89B3C]/40 bg-[#0A233F] text-white p-6 md:p-8 shadow-2xl">
+            <div className="rounded-3xl border-2 border-[#C89B3C]/40 bg-[#0A233F] p-6 text-white shadow-2xl md:p-8">
               <span className="text-xs font-black uppercase tracking-widest text-[#C89B3C]">
-                Filing Request
+                Filing Request · WhatsApp desk
               </span>
-              <h2 className="mt-1 text-2xl font-black text-white" style={{ fontFamily: "var(--font-display)" }}>
+              <h2
+                className="mt-1 text-2xl font-black text-white"
+                style={{ fontFamily: "var(--font-display)" }}
+              >
                 Submit Your State Licensing Inquiry
               </h2>
-              <p className="mt-2 text-xs text-slate-300 font-medium mb-6">
-                Fill in your company details to receive a state statutory fee quote, MOU format, and checklist.
+              <p className="mb-6 mt-2 text-xs font-medium text-slate-300">
+                Fill in your company details — submit opens WhatsApp with a pre-filled brief for fee quote,
+                MOU format, and checklist.
               </p>
-              <ContactForm />
+              <ContactForm formType="Contact Page Enquiry" variant="dark" />
             </div>
           </div>
 

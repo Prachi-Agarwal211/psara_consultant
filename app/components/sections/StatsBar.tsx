@@ -13,6 +13,7 @@ import {
   CheckCircle2,
 } from "lucide-react";
 import { counterStampAnimation } from "../../lib/gsap";
+import FloatProps, { PROPS } from "../ui/FloatProps";
 
 const CATEGORIES = [
   { label: "TRAINING MOU", icon: FileText, bg: "bg-[#FFF2BA]", text: "text-[#0F3C65]" },
@@ -73,10 +74,11 @@ export default function StatsBar() {
   return (
     <section ref={rootRef} className="relative overflow-hidden bg-gradient-to-b from-[#0A233F] via-[#0F3C65] to-[#07192C] text-white py-12 lg:py-16">
       {/* Background ambient lighting */}
-      <div className="pointer-events-none absolute inset-0 opacity-20" aria-hidden>
+      <div className="pointer-events-none absolute inset-0 z-0 opacity-20" aria-hidden>
         <div className="absolute top-0 right-1/4 w-96 h-96 rounded-full bg-[#C89B3C] blur-3xl" />
         <div className="absolute bottom-0 left-1/4 w-96 h-96 rounded-full bg-[#78A2D2] blur-3xl" />
       </div>
+      <FloatProps slots={PROPS.stats} />
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 space-y-10">
         {/* Service Category Pills Bar */}

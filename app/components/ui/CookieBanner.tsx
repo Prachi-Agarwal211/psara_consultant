@@ -58,7 +58,7 @@ export default function CookieBanner() {
         <div
           role="dialog"
           aria-label="Cookie consent banner"
-          className="fixed bottom-4 left-4 right-4 md:right-auto md:max-w-md z-[999] p-5 rounded-2xl border-2 border-sky-400/50 bg-[#040D21]/95 text-white shadow-2xl backdrop-blur-xl transition-all duration-300 animate-in fade-in slide-in-from-bottom-5"
+          className="fixed bottom-[calc(4.75rem+env(safe-area-inset-bottom,0px))] left-4 right-4 z-[999] rounded-2xl border-2 border-sky-400/50 bg-[#040D21]/95 p-5 text-white shadow-2xl backdrop-blur-xl transition-all duration-300 animate-in fade-in slide-in-from-bottom-5 md:bottom-4 md:right-auto md:max-w-md"
         >
           <div className="flex items-start justify-between gap-3 mb-3">
             <div className="flex items-center gap-2.5">

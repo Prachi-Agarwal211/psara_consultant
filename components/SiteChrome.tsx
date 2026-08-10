@@ -356,11 +356,15 @@ export default function SiteChrome({ children }: { children: React.ReactNode }) 
         </footer>
       )}
 
-      {/* ── FLOATING QUICK CONTACT DESK ── */}
+      {/*
+        FLOATING QUICK CONTACT — desktop / tablet only.
+        Mobile uses StickyCta (full-width Call + WhatsApp) so these FABs
+        never stack on top of the sticky bar or cookie banner.
+      */}
       <div
         role="complementary"
         aria-label="Quick contact"
-        className="fixed z-50 flex items-center gap-3"
+        className="fixed z-50 hidden items-center gap-3 md:flex"
         style={{
           right: "calc(1.5rem + env(safe-area-inset-right, 0px))",
           bottom: "calc(1.5rem + env(safe-area-inset-bottom, 0px))",
@@ -369,11 +373,11 @@ export default function SiteChrome({ children }: { children: React.ReactNode }) 
         <a
           href={TEL_HREF}
           onClick={() => triggerHaptic(40)}
-          className="flex h-11 items-center gap-2.5 rounded-full border-2 border-[#C89B3C] bg-[#0A233F] px-4 py-2 text-xs font-black uppercase tracking-wider text-white shadow-2xl transition-all duration-300 hover:bg-[#0F3C65] hover:scale-105 active:scale-95"
+          className="flex h-11 items-center gap-2.5 rounded-full border-2 border-[#C89B3C] bg-[#0A233F] px-4 py-2 text-xs font-black uppercase tracking-wider text-white shadow-2xl transition-all duration-300 hover:scale-105 hover:bg-[#0F3C65] active:scale-95"
           aria-label="Call Desk"
         >
           <Phone className="h-4 w-4 text-[#FFF2BA]" />
-          <span className="hidden sm:inline">CALL DESK</span>
+          <span>CALL DESK</span>
         </a>
 
         <a

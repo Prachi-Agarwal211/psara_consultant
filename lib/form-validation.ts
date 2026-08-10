@@ -12,9 +12,12 @@ export type EnquiryErrors = {
   state?: string;
 };
 
+/** Indian mobile: 10 digits starting 6–9, or 91 + 10 digits. */
 export function validatePhone(raw: string): boolean {
   const digits = raw.replace(/\D/g, "");
-  return digits.length >= 10 && digits.length <= 13;
+  const national =
+    digits.startsWith("91") && digits.length >= 12 ? digits.slice(-10) : digits;
+  return /^[6-9]\d{9}$/.test(national);
 }
 
 export function validateEmail(raw: string): boolean {

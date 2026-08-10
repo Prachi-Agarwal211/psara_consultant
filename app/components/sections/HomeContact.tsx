@@ -134,10 +134,11 @@ export default function HomeContact() {
               </div>
               <span className="hidden md:block font-mono text-xs font-black tracking-widest text-[#C89B3C]" aria-hidden>FORM-01</span>
             </div>
-            <p className="mb-6 text-sm text-[#334E68] font-medium leading-relaxed">
-              Submit opens WhatsApp with a clean brief for our consultants. Email backup available on the same form.
+            <p className="mb-6 text-sm font-medium leading-relaxed text-[#334E68]">
+              Fill the form — we open WhatsApp with your details so the licensing desk can reply with a
+              state checklist. Same pattern as our sister desk ops.
             </p>
-            <ContactForm formType="Homepage Consultation" />
+            <ContactForm formType="Homepage Consultation" variant="light" />
             <p className="mt-4 text-center text-xs font-bold text-[#486581]">
               WhatsApp to {CONTACT.phoneDisplay} · Landline {CONTACT.landlineDisplay}
             </p>

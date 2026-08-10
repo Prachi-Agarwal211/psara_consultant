@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import { ensureGsap, prefersReducedMotion } from "../../../app/lib/motion";
+import FloatProps, { PROPS } from "../ui/FloatProps";
 
 /**
  * Interstitial typographic statement — full-screen dramatic text reveal
@@ -76,7 +77,9 @@ export default function StatementInterstitial() {
         <div className="absolute inset-0 bg-[#C89B3C] blur-3xl" />
       </div>
 
-      {/* Statement text */}
+      <FloatProps slots={PROPS.statement} />
+
+      {/* Statement text — z-10 above props, never under floats */}
       <div className="relative z-10 max-w-5xl mx-auto px-6 md:px-14 text-center">
         <div data-statement-line className="overflow-hidden mb-2">
           <p
@@ -110,22 +113,26 @@ export default function StatementInterstitial() {
           </span>
         </h2>
 
-        <div className="mt-8 flex items-center justify-center gap-6">
-          <span className="h-0.5 w-16 bg-[#C89B3C]" />
+        {/* Stack on mobile so lines never squeeze the paragraph */}
+        <div className="mt-8 flex flex-col items-center gap-4 md:flex-row md:justify-center md:gap-6">
+          <span className="hidden h-0.5 w-16 shrink-0 bg-[#C89B3C] md:block" />
           <p
-            className="text-sm md:text-base text-slate-200 max-w-md leading-relaxed font-medium"
+            className="max-w-md text-sm font-medium leading-relaxed text-slate-200 md:text-base"
             style={{ fontFamily: "var(--font-body)" }}
           >
             Operating without PSARA compliance isn&apos;t just risky — it&apos;s a criminal offense under the Private Security Agencies Act, 2005.
           </p>
-          <span className="h-0.5 w-16 bg-[#C89B3C]" />
+          <span className="hidden h-0.5 w-16 shrink-0 bg-[#C89B3C] md:block" />
         </div>
 
-        <div className="mt-10 flex items-center justify-center gap-3 text-xs font-black uppercase tracking-[0.25em] text-[#FFF2BA]" style={{ fontFamily: "var(--font-body)" }}>
+        <div
+          className="mt-10 flex flex-wrap items-center justify-center gap-x-3 gap-y-2 text-[0.65rem] font-black uppercase tracking-[0.2em] text-[#FFF2BA] sm:text-xs sm:tracking-[0.25em]"
+          style={{ fontFamily: "var(--font-body)" }}
+        >
           <span>500+ LICENSES</span>
-          <span className="w-1.5 h-1.5 rounded-full bg-[#C89B3C]" />
+          <span className="h-1.5 w-1.5 rounded-full bg-[#C89B3C]" />
           <span>28 STATES</span>
-          <span className="w-1.5 h-1.5 rounded-full bg-[#C89B3C]" />
+          <span className="h-1.5 w-1.5 rounded-full bg-[#C89B3C]" />
           <span>10+ YEARS</span>
         </div>
       </div>

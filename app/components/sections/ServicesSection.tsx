@@ -19,6 +19,7 @@ import {
 } from "lucide-react";
 import { SERVICES, type Service } from "../../../data/services";
 import { DEFAULT_WA } from "../../../lib/whatsapp";
+import FloatProps, { PROPS } from "../ui/FloatProps";
 
 // Category definitions to map services dynamically
 const CATEGORIES = [
@@ -87,6 +88,7 @@ export default function ServicesSection() {
           style={{ background: "radial-gradient(ellipse 60% 40% at 50% 50%, rgba(200,155,60,0.2) 0%, transparent 70%)" }}
         />
       </div>
+      <FloatProps slots={PROPS.services} />
 
       <div className="relative z-10 px-[var(--gutter)] max-w-7xl mx-auto space-y-12">
         {/* Section Header */}

@@ -30,6 +30,7 @@ import StatementInterstitial from "./StatementInterstitial";
 import ServicesSection from "./ServicesSection";
 import ApprovalRoadmap from "./ApprovalRoadmap";
 import { initAllSectionTransitions } from "../../lib/gsap";
+import FloatProps, { PROPS } from "../ui/FloatProps";
 
 const TICKER = [
   "PSARA LICENSE",
@@ -242,44 +243,85 @@ export default function HomeStory() {
       <HomeContact />
 
       {/* ── CLOSING CTA ── */}
-      <section id="start" className="relative min-h-[80dvh] flex flex-col items-center justify-center bg-[#040812] py-[var(--section-y)] border-t border-sky-500/20" data-parallax-root>
+      <section
+        id="start"
+        className="relative flex min-h-[80dvh] flex-col items-center justify-center border-t border-sky-500/20 bg-[#040812] py-[var(--section-y)] pb-[calc(var(--section-y)+5rem)] md:pb-[var(--section-y)]"
+        data-parallax-root
+      >
         <div className="pointer-events-none absolute inset-0 z-0" aria-hidden>
-          <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse 60% 50% at 50% 50%, rgba(0,163,255,0.18) 0%, transparent 70%)" }} />
+          <div
+            className="absolute inset-0"
+            style={{
+              background:
+                "radial-gradient(ellipse 60% 50% at 50% 50%, rgba(0,163,255,0.18) 0%, transparent 70%)",
+            }}
+          />
         </div>
+        <FloatProps slots={PROPS.closing} />
 
-        <div className="relative z-10 text-center px-6 max-w-4xl">
-          <h2 className="text-4xl sm:text-5xl md:text-6xl text-white leading-tight font-extrabold mb-8" style={{ fontFamily: "var(--font-display)" }}>
-            Let&apos;s move <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 to-blue-500">your PSARA file</span>
+        <div className="relative z-10 max-w-4xl px-6 text-center">
+          <h2
+            className="mb-8 text-4xl font-extrabold leading-tight text-white sm:text-5xl md:text-6xl"
+            style={{ fontFamily: "var(--font-display)" }}
+          >
+            Let&apos;s move{" "}
+            <span className="bg-gradient-to-r from-[#FFF2BA] via-[#C89B3C] to-[#FFF2BA] bg-clip-text text-transparent">
+              your PSARA file
+            </span>
           </h2>
 
-          <p className="text-lg md:text-xl text-slate-300 max-w-lg mx-auto mb-12 leading-relaxed">
+          <p className="mx-auto mb-12 max-w-lg text-lg leading-relaxed text-slate-300 md:text-xl">
             State + entity type on WhatsApp — we reply with next steps within hours.
           </p>
 
-          <div className="flex flex-wrap justify-center gap-4 mb-12">
-            <a href={DEFAULT_WA} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2.5 px-8 py-4 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-400 hover:to-teal-500 text-white font-bold text-sm tracking-wider uppercase shadow-xl shadow-emerald-500/20 transition-all duration-200">
+          <div className="mb-12 flex flex-wrap justify-center gap-4">
+            <a
+              href={DEFAULT_WA}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2.5 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-600 px-8 py-4 text-sm font-bold uppercase tracking-wider text-white shadow-xl shadow-emerald-500/20 transition-all duration-200 hover:from-emerald-400 hover:to-teal-500"
+            >
               <MessageSquare className="h-5 w-5" />
               <span>WhatsApp Now</span>
             </a>
-            <Link href="/contact" className="inline-flex items-center gap-2 rounded-xl border border-slate-700 bg-slate-900/80 px-7 py-4 text-xs font-bold uppercase tracking-wider text-slate-200 hover:border-sky-400 hover:text-sky-300 transition-colors">
+            <Link
+              href="/contact"
+              className="inline-flex items-center gap-2 rounded-xl border border-slate-700 bg-slate-900/80 px-7 py-4 text-xs font-bold uppercase tracking-wider text-slate-200 transition-colors hover:border-sky-400 hover:text-sky-300"
+            >
               Contact Page <ArrowUpRight className="h-4 w-4" />
             </Link>
           </div>
 
-          <div className="flex flex-wrap justify-center gap-6 text-xs font-mono tracking-wider text-slate-400">
-            <a href={`tel:${CONTACT.phoneRaw}`} className="hover:text-sky-400 transition-colors">{CONTACT.phoneDisplay}</a>
-            <span className="w-1.5 h-1.5 rounded-full bg-slate-700 self-center" />
-            <a href={`mailto:${CONTACT.email}`} className="hover:text-sky-400 transition-colors">{CONTACT.email}</a>
-            <span className="w-1.5 h-1.5 rounded-full bg-slate-700 self-center" />
+          <div className="flex flex-wrap justify-center gap-6 font-mono text-xs tracking-wider text-slate-400">
+            <a href={`tel:${CONTACT.phoneRaw}`} className="transition-colors hover:text-sky-400">
+              {CONTACT.phoneDisplay}
+            </a>
+            <span className="h-1.5 w-1.5 self-center rounded-full bg-slate-700" />
+            <a href={`mailto:${CONTACT.email}`} className="transition-colors hover:text-sky-400">
+              {CONTACT.email}
+            </a>
+            <span className="h-1.5 w-1.5 self-center rounded-full bg-slate-700" />
             <span>{CONTACT.hours}</span>
           </div>
         </div>
 
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-slate-500">
-          <span className="text-[0.65rem] uppercase tracking-widest font-mono">Scroll to top</span>
-          <button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="w-8 h-8 border border-slate-700 rounded-full flex items-center justify-center hover:border-sky-400 hover:text-sky-400 transition-colors" aria-label="Scroll to top">
+        {/* Desktop only — mobile has sticky CTA + FAB zone, so no collision */}
+        <div className="absolute bottom-10 left-1/2 z-10 hidden -translate-x-1/2 flex-col items-center gap-2 text-slate-500 md:flex">
+          <span className="font-mono text-[0.65rem] uppercase tracking-widest">Scroll to top</span>
+          <button
+            type="button"
+            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+            className="flex h-8 w-8 items-center justify-center rounded-full border border-slate-700 transition-colors hover:border-sky-400 hover:text-sky-400"
+            aria-label="Scroll to top"
+          >
             <svg width="10" height="6" viewBox="0 0 10 6" fill="none">
-              <path d="M1 5L5 1L9 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+              <path
+                d="M1 5L5 1L9 5"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
             </svg>
           </button>
         </div>
