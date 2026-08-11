@@ -143,10 +143,12 @@ export const BLOG_POSTS: BlogPost[] = [
       <p><em>Note: Some states like Karnataka report higher whole-state fees (often ₹50,000). Always verify the latest notification from the state Controlling Authority.</em></p>
 
       <h2>Additional Costs to Budget For</h2>
-      <p>Beyond government fees, agencies should budget for:</p>
+      <p>Beyond government fees, a full-service PSARA license filing includes these one-time costs:</p>
       <ul>
-        <li><strong>Professional Documentation Fees:</strong> Varies by consultant and scope of work</li>
-        <li><strong>Training MOU Fees:</strong> Institute may charge for MOU execution and training delivery</li>
+        <li><strong>Consultancy / Professional Fees:</strong> ₹30,000 — end-to-end dossier preparation, Form-I filing, authority liaison and follow-up till licence grant</li>
+        <li><strong>Training Institute MOU Tie-up:</strong> ₹25,000 — MOU execution with a State-recognised training institute covering unarmed and armed curricula</li>
+        <li><strong>Documents, Affidavits &amp; Notarization:</strong> ₹5,000 — promoter affidavits, character declarations, notarization and KYC assembly</li>
+        <li><strong>Armed Guard Endorsement (Optional):</strong> ₹15,000 — additional preparation for armed deployment permissions</li>
         <li><strong>Police Verification Costs:</strong> Nominal fees for character certificate processing</li>
         <li><strong>Inspection Readiness:</strong> Office setup, signage, registers, and equipment</li>
         <li><strong>Post-Grant Compliance:</strong> Labour registrations (EPF/ESIC), renewal tracking</li>

@@ -19,8 +19,8 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
   title: {
-    default: `${SITE.name} | PSARA License & Security Agency Compliance`,
-    template: `%s | ${SITE.name}`,
+    default: "PSARA Consultant India | PSARA License",
+    template: "%s | PSARA Consultant India",
   },
   description: SITE.description,
   keywords: [
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     "PSARA Renewal",
   ],
   openGraph: {
-    title: `${SITE.name} | PSARA License Clearance Across India`,
+    title: "PSARA Consultant India | PSARA License",
     description: SITE.description,
     url: SITE.url,
     siteName: SITE.name,
@@ -53,7 +53,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: `${SITE.name} | PSARA License & Security Agency Compliance`,
+    title: "PSARA Consultant India | PSARA License",
     description: SITE.description,
     images: ["/assets/images/og/default-og.jpg"],
     site: "@psaraconsultant",

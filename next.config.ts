@@ -49,6 +49,7 @@ const nextConfig: NextConfig = {
   },
   // 301s for city slugs merged to canonical spellings (katni, davangere, raebareli,
   // mangalore -> mangaluru) — preserves legacy live-site URLs through the migration.
+  // Canonical: consolidate www → non-www (single hostname for authority)
   async redirects() {
     const merged = [
       ["kathni", "katni"],
@@ -56,10 +57,18 @@ const nextConfig: NextConfig = {
       ["rae-bareli", "raebareli"],
       ["mangalore", "mangaluru"],
     ];
-    return merged.flatMap(([from, to]) => [
-      { source: `/city/${from}`, destination: `/city/${to}`, permanent: true },
-      { source: `/security-services/city/${from}`, destination: `/security-services/city/${to}`, permanent: true },
-    ]);
+    return [
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "www.psaraconsultantindia.com" }],
+        destination: "https://psaraconsultantindia.com/:path*",
+        permanent: true,
+      },
+      ...merged.flatMap(([from, to]) => [
+        { source: `/city/${from}`, destination: `/city/${to}`, permanent: true },
+        { source: `/security-services/city/${from}`, destination: `/security-services/city/${to}`, permanent: true },
+      ]),
+    ];
   },
   async headers() {
     return [

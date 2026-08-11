@@ -160,14 +160,14 @@ export default function ApprovalRoadmap() {
                 </div>
 
                 <div className="space-y-1">
-                  <h3
-                    className={`text-sm font-black leading-snug transition-colors duration-300 ${
+                  <span
+                    className={`text-sm font-black leading-snug transition-colors duration-300 block ${
                       isActive ? "text-[#0F3C65]" : "text-white"
                     }`}
                     style={{ fontFamily: "var(--font-display)" }}
                   >
                     {p.title}
-                  </h3>
+                  </span>
                 </div>
               </button>
             );

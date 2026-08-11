@@ -74,7 +74,7 @@ describe("PSARA homepage — axe-core automated a11y audit", () => {
 
   it("has exactly one <h1> element", () => {
     cy.get("h1").should("have.length", 1);
-    cy.get("h1").should("contain.text", "Built for");
+    cy.get("h1").should("contain.text", "PSARA License");
   });
 
   it("has logical heading order (no skipped levels)", () => {
@@ -255,7 +255,7 @@ describe("PSARA homepage — reduced motion support", () => {
 
     // Core content should still render
     cy.get("#hero").should("exist");
-    cy.get("h1").should("contain.text", "Built for");
+    cy.get("h1").should("contain.text", "PSARA License");
     cy.get('a[href="#about"]').should("be.visible");
   });
 });

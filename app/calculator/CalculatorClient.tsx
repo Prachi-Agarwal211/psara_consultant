@@ -16,6 +16,11 @@ const STATE_FEE_MAP: Record<string, { d1: number; d5: number; state: number }> =
   other: { d1: 5000, d5: 10000, state: 25000 },
 };
 
+const CONSULTANCY_FEE = 30000;
+const MOU_TRAINING_FEE = 25000;
+const DOCUMENTS_FEE = 5000;
+const ARMED_GUARD_FEE = 15000;
+
 export default function CalculatorClient() {
   const [selectedState, setSelectedState] = useState("rajasthan");
   const [scale, setScale] = useState<"d1" | "d5" | "state">("d5");
@@ -23,15 +28,15 @@ export default function CalculatorClient() {
   const [needArmed, setNeedArmed] = useState(false);
 
   const baseGovFee = STATE_FEE_MAP[selectedState]?.[scale] || 10000;
-  const mouEst = needMou ? 35000 : 0;
-  const armedEst = needArmed ? 15000 : 0;
-  const totalEst = baseGovFee + mouEst + armedEst;
+  const totalEst = baseGovFee + CONSULTANCY_FEE + MOU_TRAINING_FEE + DOCUMENTS_FEE + (needArmed ? ARMED_GUARD_FEE : 0);
+
+  const formatINR = (n: number) => `₹${n.toLocaleString("en-IN")}`;
 
   return (
     <StageShell>
       <PageHero
         title="PSARA License Fee &amp; Timeline Estimator"
-        lead="Calculate statutory government fees, training MOU costs, and expected clearance timelines based on your state and operational scale."
+        lead="Complete cost breakdown for PSARA license registration — government fees, consultancy, training MOU, documents, and optional armed guard endorsement."
         crumbs={[{ label: "Fee Calculator" }]}
       />
 
@@ -115,21 +120,11 @@ export default function CalculatorClient() {
               <label className="flex items-center gap-3 cursor-pointer font-bold text-xs text-[#0F3C65]">
                 <input
                   type="checkbox"
-                  checked={needMou}
-                  onChange={(e) => setNeedMou(e.target.checked)}
-                  className="h-4 w-4 accent-[#C89B3C] rounded"
-                />
-                <span>Include Security Training Institute MOU Tie-up</span>
-              </label>
-
-              <label className="flex items-center gap-3 cursor-pointer font-bold text-xs text-[#0F3C65]">
-                <input
-                  type="checkbox"
                   checked={needArmed}
                   onChange={(e) => setNeedArmed(e.target.checked)}
                   className="h-4 w-4 accent-[#C89B3C] rounded"
                 />
-                <span>Include Armed Guard Endorsement Preparation</span>
+                <span>Include Armed Guard Endorsement Preparation (+₹15,000)</span>
               </label>
             </div>
           </div>
@@ -138,51 +133,60 @@ export default function CalculatorClient() {
           <div className="lg:col-span-5 rounded-3xl border-2 border-[#C89B3C]/40 bg-[#0A233F] text-white p-6 md:p-8 flex flex-col justify-between shadow-2xl">
             <div>
               <span className="text-xs font-black uppercase tracking-widest text-[#C89B3C]">
-                Estimated Breakdown
+                Complete Fee Breakdown
               </span>
 
               <div className="mt-6 space-y-4 text-xs font-medium">
                 <div className="flex justify-between py-2 border-b border-white/10 text-slate-300">
-                  <span>Statutory Government Fee:</span>
-                  <span className="font-bold text-white">₹{baseGovFee.toLocaleString("en-IN")}</span>
+                  <span>Consultancy / Professional Fees</span>
+                  <span className="font-bold text-white">{formatINR(CONSULTANCY_FEE)}</span>
                 </div>
 
-                {needMou && (
-                  <div className="flex justify-between py-2 border-b border-white/10 text-slate-300">
-                    <span>Training Institute MOU Execution:</span>
-                    <span className="font-bold text-white">₹{mouEst.toLocaleString("en-IN")}</span>
-                  </div>
-                )}
+                <div className="flex justify-between py-2 border-b border-white/10 text-slate-300">
+                  <span>Training Institute MOU Tie-up</span>
+                  <span className="font-bold text-white">{formatINR(MOU_TRAINING_FEE)}</span>
+                </div>
+
+                <div className="flex justify-between py-2 border-b border-white/10 text-slate-300">
+                  <span>Statutory Government Fee ({scale === "d1" ? "1 District" : scale === "d5" ? "5 Districts" : "Entire State"})</span>
+                  <span className="font-bold text-white">{formatINR(baseGovFee)}</span>
+                </div>
+
+                <div className="flex justify-between py-2 border-b border-white/10 text-slate-300">
+                  <span>Documents, Affidavits &amp; Notarization</span>
+                  <span className="font-bold text-white">{formatINR(DOCUMENTS_FEE)}</span>
+                </div>
 
                 {needArmed && (
                   <div className="flex justify-between py-2 border-b border-white/10 text-slate-300">
-                    <span>Armed Weapon Clearance Prep:</span>
-                    <span className="font-bold text-white">₹{armedEst.toLocaleString("en-IN")}</span>
+                    <span>Armed Guard Endorsement Preparation</span>
+                    <span className="font-bold text-white">{formatINR(ARMED_GUARD_FEE)}</span>
                   </div>
                 )}
 
                 <div className="pt-4 flex justify-between items-center">
-                  <span className="text-sm font-black text-white">Estimated Base Budget:</span>
-                  <span className="text-2xl font-black text-[#FFF2BA] font-mono">₹{totalEst.toLocaleString("en-IN")}*</span>
+                  <span className="text-sm font-black text-white">Total Estimated Cost:</span>
+                  <span className="text-2xl font-black text-[#FFF2BA] font-mono">{formatINR(totalEst)}*</span>
                 </div>
               </div>
 
               <div className="mt-6 p-4 bg-white/5 border border-white/10 rounded-2xl text-[11px] text-slate-300 space-y-1">
-                <p><strong className="text-white">Timeline:</strong> 45 to 60 Business Days</p>
+                <p><strong className="text-white">Timeline:</strong> 30 to 45 Business Days</p>
                 <p><strong className="text-white">Validity:</strong> 5 Years (Renewable)</p>
+                <p><strong className="text-white">Includes:</strong> Full dossier preparation, police verification filing, authority liaison, training MOU execution, and application follow-up.</p>
               </div>
             </div>
 
             <div className="mt-8 pt-4 border-t border-white/10">
               <a
-                href={`${DEFAULT_WA}&text=Hi,%20I%20used%20the%20PSARA%20Calculator%20for%20${selectedState}%20(${scale}).%20Total%20estimate:%20₹${totalEst}`}
+                href={`${DEFAULT_WA}&text=Hi,%20I%20used%20the%20PSARA%20Calculator.%20State:%20${selectedState},%20Scale:%20${scale},%20Total:%20${formatINR(totalEst)}.%20Please%20share%20detailed%20breakdown.`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-full flex items-center justify-center gap-2 rounded-xl py-3.5 text-xs font-black uppercase tracking-wider bg-[#FFF2BA] text-[#0F3C65] hover:bg-[#C89B3C] hover:text-white transition-all shadow-lg"
               >
-                Lock Your Estimate on WhatsApp <ArrowRight className="h-4 w-4 stroke-[2.5]" />
+                Get Detailed Quote on WhatsApp <ArrowRight className="h-4 w-4 stroke-[2.5]" />
               </a>
-              <span className="block text-[10px] text-center text-slate-400 mt-2.5">*Official government fee subject to state controlling authority rules.</span>
+              <span className="block text-[10px] text-center text-slate-400 mt-2.5">*Government fee subject to state controlling authority rules. Multi-state licensing custom quoted.</span>
             </div>
           </div>
         </div>

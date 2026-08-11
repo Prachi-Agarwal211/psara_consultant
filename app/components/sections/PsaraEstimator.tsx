@@ -6,17 +6,29 @@ import { STATES } from "../../../data/states";
 import { formatEnquiryWhatsAppMessage, openWhatsApp } from "../../../lib/whatsapp";
 
 const COVERAGE_OPTIONS = [
-  { id: "district", label: "1 District", fee: "₹5,000", desc: "Single District operations within State" },
-  { id: "multi-district", label: "Up to 5 Districts", fee: "₹10,000", desc: "Multi-district regional coverage" },
-  { id: "statewide", label: "Entire State", fee: "₹25,000", desc: "Full State-wide licensing & deployment" },
-  { id: "multi-state", label: "Multi-State Plan", fee: "Custom", desc: "Strategic expansion across 2+ States" },
+  { id: "district", label: "1 District", govtFee: 5000, desc: "Single District operations within State" },
+  { id: "multi-district", label: "Up to 5 Districts", govtFee: 10000, desc: "Multi-district regional coverage" },
+  { id: "statewide", label: "Entire State", govtFee: 25000, desc: "Full State-wide licensing & deployment" },
+  { id: "multi-state", label: "Multi-State Plan", govtFee: null, desc: "Strategic expansion across 2+ States" },
 ];
+
+const CONSULTANCY_FEE = 30000;
+const MOU_TRAINING_FEE = 25000;
+const DOCUMENTS_FEE = 5000;
+const ARMED_GUARD_FEE = 15000;
+
+const formatINR = (n: number) => `₹${n.toLocaleString("en-IN")}`;
 
 export default function PsaraEstimator() {
   const [selectedState, setSelectedState] = useState("Rajasthan");
   const [coverageId, setCoverageId] = useState("statewide");
+  const [needArmed, setNeedArmed] = useState(false);
 
   const selectedCoverage = COVERAGE_OPTIONS.find((c) => c.id === coverageId) || COVERAGE_OPTIONS[2];
+
+  const govtFee = selectedCoverage.govtFee ?? 0;
+  const isCustom = selectedCoverage.govtFee === null;
+  const totalEst = isCustom ? null : govtFee + CONSULTANCY_FEE + MOU_TRAINING_FEE + DOCUMENTS_FEE + (needArmed ? ARMED_GUARD_FEE : 0);
 
   const handleWhatsAppConsultation = () => {
     const text = formatEnquiryWhatsAppMessage({
@@ -27,7 +39,11 @@ export default function PsaraEstimator() {
       formType: "PSARA Fee Estimator",
       extra: {
         "Coverage Plan": selectedCoverage.label,
-        "Est Govt Fee": selectedCoverage.fee,
+        "Consultancy Fee": formatINR(CONSULTANCY_FEE),
+        "Govt Fee": selectedCoverage.govtFee ? formatINR(selectedCoverage.govtFee) : "Custom",
+        "MOU Training": formatINR(MOU_TRAINING_FEE),
+        "Documents": formatINR(DOCUMENTS_FEE),
+        "Armed Endorsement": needArmed ? formatINR(ARMED_GUARD_FEE) : "Not Required",
       },
     });
     openWhatsApp(text);
@@ -45,10 +61,10 @@ export default function PsaraEstimator() {
             <Calculator className="h-4 w-4 text-[#C89B3C]" /> PSARA Fee &amp; License Estimator
           </span>
           <h3 className="mt-2 font-black text-2xl md:text-3xl text-white" style={{ fontFamily: "var(--font-display)" }}>
-            Calculate Statutory Fee &amp; Requirements
+            Complete Cost of PSARA License
           </h3>
           <p className="mt-1 text-sm text-slate-300 font-medium">
-            Select your target State and operational scale to view official government fees and timeline expectations.
+            Full transparent breakdown — consultancy, training MOU, statutory government fee, and document costs.
           </p>
         </div>
         <div className="shrink-0">
@@ -70,20 +86,29 @@ export default function PsaraEstimator() {
             <select
               value={selectedState}
               onChange={(e) => setSelectedState(e.target.value)}
-              className="w-full rounded-xl border border-white/20 bg-[#07192C] p-3.5 text-sm font-bold text-white outline-none focus:border-[#C89B3C] shadow-inner"
+              className="w-full rounded-xl border border-white/20 bg-[#07192C] p-3.5 text-sm font-bold text-white focus:border-[#C89B3C] outline-none"
             >
-              {STATES.map((s) => (
-                <option key={s.slug} value={s.name} className="bg-[#0A233F] text-white">
-                  {s.name}
-                </option>
-              ))}
+              <option>Rajasthan</option>
+              <option>Delhi</option>
+              <option>Maharashtra</option>
+              <option>Karnataka</option>
+              <option>Haryana</option>
+              <option>Uttar Pradesh</option>
+              <option>Gujarat</option>
+              <option>Madhya Pradesh</option>
+              <option>Punjab</option>
+              <option>Bihar</option>
+              <option>Tamil Nadu</option>
+              <option>Telangana</option>
+              <option>West Bengal</option>
+              <option>Other State / UT</option>
             </select>
           </div>
 
-          {/* Select Coverage Level */}
+          {/* Coverage */}
           <div>
             <label className="block text-xs font-black uppercase tracking-wider text-slate-200 mb-2">
-              2. Select Coverage Radius
+              2. District Coverage Scale
             </label>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               {COVERAGE_OPTIONS.map((c) => (
@@ -99,12 +124,27 @@ export default function PsaraEstimator() {
                 >
                   <div className="flex items-center justify-between">
                     <span className="font-black text-sm">{c.label}</span>
-                    <span className={`text-xs font-black ${coverageId === c.id ? "text-[#0F3C65]" : "text-[#C89B3C]"}`}>{c.fee}</span>
+                    <span className={`text-xs font-black ${coverageId === c.id ? "text-[#0F3C65]" : "text-[#C89B3C]"}`}>
+                      {c.govtFee ? formatINR(c.govtFee) : "Custom"}
+                    </span>
                   </div>
                   <p className={`mt-1 text-xs font-medium line-clamp-1 ${coverageId === c.id ? "text-[#0F3C65]/80" : "text-slate-400"}`}>{c.desc}</p>
                 </button>
               ))}
             </div>
+          </div>
+
+          {/* Armed endorsement */}
+          <div>
+            <label className="flex items-center gap-3 cursor-pointer text-sm font-bold text-white">
+              <input
+                type="checkbox"
+                checked={needArmed}
+                onChange={(e) => setNeedArmed(e.target.checked)}
+                className="h-4 w-4 accent-[#C89B3C] rounded"
+              />
+              <span>Include Armed Guard Endorsement Preparation (+₹15,000)</span>
+            </label>
           </div>
         </div>
 
@@ -114,27 +154,61 @@ export default function PsaraEstimator() {
             <span className="text-xs font-black uppercase tracking-wider text-[#C89B3C]">Estimated Breakdown</span>
             <div className="mt-2 flex items-baseline justify-between">
               <span className="text-lg font-black text-white">{selectedState} — {selectedCoverage.label}</span>
-              <span className="text-2xl font-black text-[#FFF2BA]">{selectedCoverage.fee}</span>
             </div>
             <p className="mt-1 text-xs text-slate-400 font-medium">
-              Official Controlling Authority Application Fee under PSARA Section 7.
+              Complete PSARA license cost estimate, all-inclusive.
             </p>
           </div>
 
+          {/* Fee Breakdown */}
+          <div className="space-y-3 border-t border-b border-white/10 py-4 text-xs font-medium">
+            <div className="flex justify-between text-slate-300">
+              <span>Consultancy / Professional Fees</span>
+              <span className="font-black text-white">{formatINR(CONSULTANCY_FEE)}</span>
+            </div>
+            <div className="flex justify-between text-slate-300">
+              <span>Training Institute MOU Tie-up</span>
+              <span className="font-black text-white">{formatINR(MOU_TRAINING_FEE)}</span>
+            </div>
+            <div className="flex justify-between text-slate-300">
+              <span>Statutory Govt Fee ({selectedCoverage.label})</span>
+              <span className="font-black text-white">{selectedCoverage.govtFee ? formatINR(selectedCoverage.govtFee) : "Custom"}</span>
+            </div>
+            <div className="flex justify-between text-slate-300">
+              <span>Documents, Affidavits &amp; Notarization</span>
+              <span className="font-black text-white">{formatINR(DOCUMENTS_FEE)}</span>
+            </div>
+            {needArmed && (
+              <div className="flex justify-between text-slate-300">
+                <span>Armed Guard Endorsement</span>
+                <span className="font-black text-white">{formatINR(ARMED_GUARD_FEE)}</span>
+              </div>
+            )}
+          </div>
+
+          {/* Total */}
+          <div className="flex items-center justify-between">
+            <span className="text-sm font-black text-white">Total Estimated Cost</span>
+            <span className="text-2xl font-black text-[#FFF2BA] font-mono">
+              {totalEst ? formatINR(totalEst) : "Custom"}
+            </span>
+          </div>
+          <p className="text-[10px] text-slate-400 font-medium">*Government fee subject to State Controlling Authority rules. Multi-state licensing custom quoted.</p>
+
           {/* Included Features */}
-          <ul className="space-y-3 border-t border-b border-white/10 py-4 text-xs font-medium text-slate-200">
-            <li className="flex items-center gap-2.5">
-              <CheckCircle2 className="h-4 w-4 text-[#C89B3C] shrink-0" />
-              <span>Training Institute MOU execution assistance included</span>
-            </li>
-            <li className="flex items-center gap-2.5">
-              <CheckCircle2 className="h-4 w-4 text-[#C89B3C] shrink-0" />
-              <span>Promoter antecedent &amp; police verification filing</span>
-            </li>
-            <li className="flex items-center gap-2.5">
-              <CheckCircle2 className="h-4 w-4 text-[#C89B3C] shrink-0" />
-              <span>Estimated timeline: <strong className="text-white">30–45 Working Days</strong></span>
-            </li>
+          <ul className="space-y-2 text-xs text-slate-300 font-medium">
+            {[
+              "Complete dossier preparation & Form-I filing",
+              "Training MOU execution with recognized institute",
+              "Police verification & antecedent filing",
+              "Office inspection preparation & liaison",
+              "End-to-end follow-up till licence grant",
+            ].map((f) => (
+              <li key={f} className="flex items-start gap-2">
+                <CheckCircle2 className="h-3.5 w-3.5 text-[#C89B3C] shrink-0 mt-0.5" />
+                <span>{f}</span>
+              </li>
+            ))}
           </ul>
 
           {/* Call to action */}
@@ -145,7 +219,7 @@ export default function PsaraEstimator() {
               className="w-full inline-flex items-center justify-center gap-2 rounded-xl px-6 py-3.5 text-xs font-black uppercase tracking-wider bg-[#C89B3C] text-[#0F3C65] hover:bg-[#FFF2BA] transition-colors shadow-lg"
             >
               <MessageSquare className="h-4 w-4 stroke-[2.5]" />
-              <span>Get Custom Quote on WhatsApp</span>
+              <span>Get Detailed Quote on WhatsApp</span>
             </button>
           </div>
         </div>
@@ -153,4 +227,3 @@ export default function PsaraEstimator() {
     </section>
   );
 }
-

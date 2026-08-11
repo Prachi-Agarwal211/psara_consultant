@@ -55,9 +55,9 @@ export default function StateGridHome() {
               </span>
 
               <div>
-                <h3 className="font-black line-clamp-1 text-sm md:text-base text-white group-hover:text-[#0F3C65] transition-colors" style={{ fontFamily: "var(--font-display)" }}>
+                <span className="font-black line-clamp-1 text-sm md:text-base text-white group-hover:text-[#0F3C65] transition-colors" style={{ fontFamily: "var(--font-display)" }}>
                   {s.name}
-                </h3>
+                </span>
                 <div className="mt-2 flex items-center justify-between">
                   <span className="text-[0.68rem] font-black uppercase tracking-wider text-slate-300 group-hover:text-[#0F3C65]/80">
                     {s.validityYears}-Yr · {s.applicationMode?.split(" ")[0] ?? "Online"}

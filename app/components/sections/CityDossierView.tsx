@@ -545,6 +545,28 @@ function FeeSnapshot({ city, state, index }: { city: CityInfo; state?: StateInfo
         Fees for a PSARA application from {city.name} follow the {state.name} rules — the table above is
         indicative and is confirmed against the current Controlling Authority schedule at filing time.
       </p>
+
+      {/* Complete cost breakdown — consultancy + MOU + govt fee + documents */}
+      <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        {[
+          { label: "Consultancy / Professional Fees", value: "₹30,000" },
+          { label: "Training Institute MOU Tie-up", value: "₹25,000" },
+          { label: "Documents, Affidavits & Notarization", value: "₹5,000" },
+          { label: "Armed Guard Endorsement (Optional)", value: "₹15,000" },
+        ].map((c) => (
+          <div key={c.label} className="relative overflow-hidden border border-acc bg-acc-soft p-5">
+            <span aria-hidden className="pointer-events-none absolute -right-2 -top-4 font-mono text-5xl font-bold text-acc opacity-[0.12]">₹</span>
+            <span className="block text-[0.65rem] font-bold uppercase tracking-widest text-acc-bright">{c.label}</span>
+            <span className="mt-2 block font-mono text-lg font-bold text-white leading-snug">{c.value}</span>
+          </div>
+        ))}
+      </div>
+      <p className="max-w-3xl text-xs font-normal leading-relaxed text-[var(--white-55)]">
+        These are the complete one-time costs for a full-service PSARA license filing: end-to-end consultancy,
+        recognized training institute MOU execution, statutory government fees, and document/affidavit
+        preparation. Government fees vary by coverage scale — see the table above. Multi-state expansion is
+        custom quoted.
+      </p>
     </section>
   );
 }

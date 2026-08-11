@@ -42,7 +42,7 @@ function ChrHoverLink({ href, label, active }: { href: string; label: string; ac
           </span>
         ))}
         {label.split("").map((ch, i) => (
-          <span key={i} className="ch-bot" style={{ animationDelay: `${i * 30}ms` }}>
+          <span key={i} className="ch-bot" aria-hidden="true" style={{ animationDelay: `${i * 30}ms` }}>
             {ch === " " ? "\u00A0" : ch}
           </span>
         ))}
