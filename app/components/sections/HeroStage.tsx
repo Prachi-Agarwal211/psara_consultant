@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import {
   ArrowUpRight,
@@ -39,6 +39,12 @@ const META_BADGES = [
   "(( 300+ FILES ))",
 ];
 
+// Mobile-only subset — keep hero short on small screens
+const META_BADGES_MOBILE = [
+  "(( PSARA CONSULTANCY ))",
+  "(( PAN INDIA ))",
+];
+
 /**
  * Hero stage
  *
@@ -50,6 +56,14 @@ export default function HeroStage() {
   const rootRef = useRef<HTMLElement | null>(null);
   const visualRef = useRef<HTMLDivElement | null>(null);
   const propsRef = useRef<HTMLDivElement | null>(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 640);
+    check();
+    window.addEventListener('resize', check);
+    return () => window.removeEventListener('resize', check);
+  }, []);
 
   useEffect(() => {
     if (!rootRef.current || prefersReducedMotion()) return;
@@ -201,7 +215,7 @@ export default function HeroStage() {
                 letterSpacing: "-0.03em",
               }}
             >
-              Built for <span className="text-[#C89B3C]">Trust.</span>
+              PSARA License <span className="text-[#C89B3C]">Consultant</span>
             </h1>
 
             <div className="flex items-center gap-2.5 sm:gap-3">
@@ -215,7 +229,7 @@ export default function HeroStage() {
             </div>
 
             <div className="grid grid-cols-2 gap-1.5 sm:flex sm:flex-wrap sm:gap-2">
-              {META_BADGES.map((m) => (
+              {(isMobile ? META_BADGES_MOBILE : META_BADGES).map((m) => (
                 <span
                   key={m}
                   className="rounded-md border border-[#C2D8EC] bg-[#D9E6F2] px-2 py-1 text-center text-[0.56rem] font-extrabold tracking-wide text-[#0D3459] shadow-sm sm:px-2.5 sm:text-left sm:text-[0.66rem] sm:tracking-wider"
@@ -226,7 +240,8 @@ export default function HeroStage() {
               ))}
             </div>
 
-            <div className="max-w-md rounded-2xl border border-[#0A233F]/20 bg-[#0A233F] p-3.5 text-white shadow-2xl sm:p-5 md:p-6">
+            {/* Dark info box — hidden on mobile to reduce clutter */}
+            <div className={!isMobile ? "max-w-md rounded-2xl border border-[#0A233F]/20 bg-[#0A233F] p-3.5 text-white shadow-2xl sm:p-5 md:p-6" : "hidden sm:block"}>
               <p
                 className="text-[0.78rem] font-semibold leading-snug sm:text-xs sm:leading-relaxed md:text-sm lg:text-base"
                 style={{ fontFamily: "var(--font-body)" }}
@@ -256,23 +271,12 @@ export default function HeroStage() {
                 <span>WHATSAPP DESK</span>
               </a>
             </div>
-
-            {/* Compact trust line under CTAs — mobile only, no overlay on art */}
-            <div className="flex items-center gap-2 pt-0.5 md:hidden">
-              <Shield className="h-3.5 w-3.5 shrink-0 fill-[#C89B3C] text-[#C89B3C]" />
-              <p
-                className="text-[0.56rem] font-black uppercase tracking-[0.12em] text-[#0A233F]/85"
-                style={{ fontFamily: "var(--font-body)" }}
-              >
-                28 STATES · 500+ LICENSES · JAIPUR · DELHI · GURUGRAM
-              </p>
-            </div>
           </div>
         </div>
 
         {/* Mobile portrait art stage — dedicated lower half */}
         <div
-          className="relative mt-1 min-h-[min(48dvh,460px)] flex-1 md:hidden"
+          className={`relative mt-1 flex-1 md:hidden ${isMobile ? "min-h-[min(36dvh,340px)]" : "min-h-[min(48dvh,460px)]"}`}
           style={{ paddingBottom: "env(safe-area-inset-bottom, 0px)" }}
           aria-hidden
         >
