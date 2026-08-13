@@ -134,9 +134,9 @@ export default function StatsBar() {
                     </span>
                   </div>
                   <div className="space-y-1">
-                    <h3 className="text-xs font-black uppercase tracking-wider text-white" style={{ fontFamily: "var(--font-display)" }}>
+                    <h2 className="text-xs font-black uppercase tracking-wider text-white" style={{ fontFamily: "var(--font-display)" }}>
                       {s.title}
-                    </h3>
+                    </h2>
                     <p className="text-xs text-slate-300 font-medium leading-relaxed max-w-xs mx-auto">
                       {s.desc}
                     </p>

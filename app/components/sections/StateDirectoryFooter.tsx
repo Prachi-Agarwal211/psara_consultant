@@ -30,9 +30,9 @@ export default function StateDirectoryFooter() {
             <span className="text-xs font-black uppercase tracking-widest text-[#FFF2BA] flex items-center gap-1.5">
               <MapPin className="h-4 w-4 text-[#C89B3C]" /> Pan-India Statutory Directory
             </span>
-            <h3 className="font-black text-xl text-white mt-1" style={{ fontFamily: "var(--font-display)" }}>
+            <h2 className="font-black text-xl text-white mt-1" style={{ fontFamily: "var(--font-display)" }}>
               PSARA License Advisory across 36 States &amp; Union Territories
-            </h3>
+            </h2>
           </div>
           <Link
             href="/security-services"

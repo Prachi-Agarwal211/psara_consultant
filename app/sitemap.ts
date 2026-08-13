@@ -20,10 +20,7 @@ const SITE_LAUNCH_DATE = new Date("2026-07-01T00:00:00.000Z");
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = SITE.url;
-  const now = new Date();
-  /** Use a stable "last reviewed" date for static pages so Googlebot
-   *  doesn't re-crawl unchanged pages as if they were daily updates. */
-  const stable = new Date("2026-01-15");
+  const stable = new Date("2026-08-11T00:00:00.000Z");
 
   const staticRoutes: MetadataRoute.Sitemap = [
     "",
@@ -34,9 +31,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/states",
     "/cities",
     "/google",
-    "/privacy-policy",
-    "/terms",
-    "/disclaimer",
     "/franchise",
     "/careers",
     "/case-studies",
@@ -49,7 +43,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/security-services",
   ].map((path) => ({
     url: `${base}${path || "/"}`,
-    lastModified: path === "" || path === "/services" || path === "/states" || path === "/cities" ? now : stable,
+    lastModified: stable,
     changeFrequency: path === "" ? "daily" : "weekly",
     priority: path === "" ? 1.0 : path === "/about" || path === "/services" || path === "/contact" ? 0.9 : 0.8,
   }));

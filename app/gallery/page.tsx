@@ -42,7 +42,7 @@ export default function GalleryPage() {
                 />
               </div>
               <div className="p-4">
-                <h3 className="font-[family-name:var(--font-display)] text-base font-bold text-white">{img.title}</h3>
+                <h2 className="font-[family-name:var(--font-display)] text-base font-bold text-white">{img.title}</h2>
                 <p className="mt-1 text-xs text-[var(--white-70)]">{img.caption}</p>
               </div>
             </div>

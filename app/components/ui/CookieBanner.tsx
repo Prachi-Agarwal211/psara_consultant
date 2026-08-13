@@ -5,7 +5,7 @@ import Link from "next/link";
 import { Cookie, ShieldCheck, X, Settings, Check, Lock } from "lucide-react";
 
 export default function CookieBanner() {
-  const [mounted, setMounted] = useState(false);
+  const [mounted, setMounted] = useState(() => typeof window !== "undefined");
   const [isOpen, setIsOpen] = useState(false);
   const [showSettingsModal, setShowSettingsModal] = useState(false);
 
@@ -14,7 +14,6 @@ export default function CookieBanner() {
   const [marketingCookies, setMarketingCookies] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
     const consent = localStorage.getItem("psara_cookie_consent");
     if (!consent) {
       // Delay entrance slightly for non-intrusive presentation

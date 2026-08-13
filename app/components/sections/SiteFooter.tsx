@@ -113,12 +113,12 @@ export default function SiteFooter() {
               Services
             </span>
             <ul className="space-y-2.5 text-xs text-slate-300 font-medium">
-              <li><Link href="/services/fresh-psara-license" className="hover:text-white transition-colors">Fresh PSARA License</Link></li>
-              <li><Link href="/services/psara-renewal" className="hover:text-white transition-colors">PSARA License Renewal</Link></li>
+              <li><Link href="/services/psara-license" className="hover:text-white transition-colors">Fresh PSARA License</Link></li>
+              <li><Link href="/services/psara-license-renewal" className="hover:text-white transition-colors">PSARA License Renewal</Link></li>
               <li><Link href="/services/multi-state-psara" className="hover:text-white transition-colors">Multi-State Licensing</Link></li>
-              <li><Link href="/services/training-mou-affiliation" className="hover:text-white transition-colors">Training Institute MOUs</Link></li>
-              <li><Link href="/services/police-verification-clearance" className="hover:text-white transition-colors">Police Verification &amp; NOC</Link></li>
-              <li><Link href="/services/security-agency-setup" className="hover:text-white transition-colors">Security Agency Setup</Link></li>
+              <li><Link href="/services/training-mou" className="hover:text-white transition-colors">Training Institute MOUs</Link></li>
+              <li><Link href="/services/police-verification" className="hover:text-white transition-colors">Police Verification &amp; NOC</Link></li>
+              <li><Link href="/services/company-registration" className="hover:text-white transition-colors">Security Agency Setup</Link></li>
               <li><Link href="/emergency" className="hover:text-[#FFF2BA] transition-colors font-bold text-[#C89B3C]">24/7 Urgent Desk</Link></li>
             </ul>
           </div>
@@ -204,6 +204,7 @@ export default function SiteFooter() {
             </div>
           </div>
           <div className="flex flex-wrap gap-4">
+            <a href="https://psara.gov.in/" target="_blank" rel="noopener noreferrer" className="hover:text-[#FFF2BA] transition-colors">MHA PSARA portal</a>
             <Link href="/privacy-policy" className="hover:text-white transition-colors">Privacy Policy</Link>
             <Link href="/terms" className="hover:text-white transition-colors">Terms of Service</Link>
             <Link href="/disclaimer" className="hover:text-white transition-colors">Disclaimer</Link>

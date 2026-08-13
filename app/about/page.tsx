@@ -63,7 +63,7 @@ export default function AboutPage() {
   return (
     <StageShell>
       {/* Featured Hero About Section matching design mockup */}
-      <AboutSection imageSrc="/about-map-artwork.png" showHeaderBar={false} className="pt-28 pb-16 border-b border-[#0F3C65]/15" />
+      <AboutSection imageSrc="/about-map-artwork.png" showHeaderBar={false} headingLevel="h1" className="pt-28 pb-16 border-b border-[#0F3C65]/15" />
 
       <PageMain className="bg-[#FFFEF9] text-[#0F3C65]">
         {/* Stats Grid */}

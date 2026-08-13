@@ -1,11 +1,8 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Link from "next/link";
-import { getStoredLeads, getStoredMetrics, trackSectionClick, LeadEntry, SectionMetric } from "@/lib/metrics-store";
-
-// Password protection for metrics dashboard
-const METRICS_PASSWORD = process.env.NEXT_PUBLIC_METRICS_PASSWORD || "";
+import { getStoredLeads, getStoredMetrics, LeadEntry, SectionMetric } from "@/lib/metrics-store";
 
 export default function MetricsDashboardPage() {
   const [leads, setLeads] = useState<LeadEntry[]>([]);
@@ -14,16 +11,8 @@ export default function MetricsDashboardPage() {
   const [searchTerm, setSearchTerm] = useState("");
   const [activeTab, setActiveTab] = useState<"leads" | "heatmap" | "traffic">("leads");
   const [password, setPassword] = useState("");
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(() => typeof window !== "undefined" && sessionStorage.getItem("metrics_auth") === "true");
   const [authError, setAuthError] = useState("");
-
-  // Check if already authenticated
-  useEffect(() => {
-    const auth = sessionStorage.getItem("metrics_auth");
-    if (auth === "true") {
-      setIsAuthenticated(true);
-    }
-  }, []);
 
   const handleLogin = async () => {
     try {

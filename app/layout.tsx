@@ -77,6 +77,8 @@ export const metadata: Metadata = {
     "geo.placename": "New Delhi, Delhi",
     "geo.position": "28.6304;77.2177",
     ICBM: "28.6304, 77.2177",
+    "ai-content-declaration": "public",
+    "geo-optimized": "true",
   },
   alternates: {
     canonical: SITE.url,

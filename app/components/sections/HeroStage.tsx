@@ -264,7 +264,7 @@ export default function HeroStage() {
                 href={DEFAULT_WA}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group inline-flex w-full items-center justify-center gap-2 rounded-xl border-2 border-[#0A233F] bg-white px-5 py-3 text-[0.68rem] font-black uppercase tracking-[0.14em] text-[#0A233F] shadow-md transition-all duration-200 hover:bg-[#0A233F] hover:text-white sm:w-auto sm:px-6 sm:py-3.5 sm:text-xs sm:tracking-[0.18em]"
+                className="group hidden w-full items-center justify-center gap-2 rounded-xl border-2 border-[#0A233F] bg-white px-5 py-3 text-[0.68rem] font-black uppercase tracking-[0.14em] text-[#0A233F] shadow-md transition-all duration-200 hover:bg-[#0A233F] hover:text-white sm:inline-flex sm:w-auto sm:px-6 sm:py-3.5 sm:text-xs sm:tracking-[0.18em]"
                 style={{ fontFamily: "var(--font-body)" }}
               >
                 <MessageSquare className="h-4 w-4 stroke-[2.5] text-[#25D366] group-hover:text-white" />

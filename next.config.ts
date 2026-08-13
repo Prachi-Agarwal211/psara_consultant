@@ -38,6 +38,7 @@ const securityHeaders = [
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   compress: true,
+  poweredByHeader: false,
   images: {
     formats: ["image/avif", "image/webp"],
     minimumCacheTTL: 31536000,
@@ -49,7 +50,7 @@ const nextConfig: NextConfig = {
   },
   // 301s for city slugs merged to canonical spellings (katni, davangere, raebareli,
   // mangalore -> mangaluru) — preserves legacy live-site URLs through the migration.
-  // Canonical: consolidate www → non-www (single hostname for authority)
+  // Live Vercel host is www — send apex there so sitemap/canonical match.
   async redirects() {
     const merged = [
       ["kathni", "katni"],
@@ -60,8 +61,8 @@ const nextConfig: NextConfig = {
     return [
       {
         source: "/:path*",
-        has: [{ type: "host", value: "www.psaraconsultantindia.com" }],
-        destination: "https://psaraconsultantindia.com/:path*",
+        has: [{ type: "host", value: "psaraconsultantindia.com" }],
+        destination: "https://www.psaraconsultantindia.com/:path*",
         permanent: true,
       },
       ...merged.flatMap(([from, to]) => [

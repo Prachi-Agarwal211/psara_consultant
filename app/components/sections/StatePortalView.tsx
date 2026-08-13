@@ -52,9 +52,9 @@ export default function StatePortalView() {
                   <ArrowUpRight className="h-4 w-4 text-[#0F3C65] transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-[#C89B3C] stroke-[2.5]" />
                 </div>
 
-                <h3 className="mt-3 text-xl font-black text-[#0F3C65] group-hover:text-[#0A233F]" style={{ fontFamily: "var(--font-display)" }}>
+                <h2 className="mt-3 text-xl font-black text-[#0F3C65] group-hover:text-[#0A233F]" style={{ fontFamily: "var(--font-display)" }}>
                   {s.name}
-                </h3>
+                </h2>
 
                 <p className="mt-2 text-xs font-medium text-[#486581] line-clamp-2">
                   {s.authority}

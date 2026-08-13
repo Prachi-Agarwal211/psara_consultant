@@ -20,6 +20,7 @@ interface AboutSectionProps {
   imageSrc?: string;
   showHeaderBar?: boolean;
   className?: string;
+  headingLevel?: "h1" | "h2";
 }
 
 const FEATURES = [
@@ -49,7 +50,9 @@ export default function AboutSection({
   imageSrc = "/about-3d-map.png",
   showHeaderBar = true,
   className = "",
+  headingLevel = "h2",
 }: AboutSectionProps) {
+  const Heading = headingLevel;
   return (
     <section
       id="about"
@@ -85,7 +88,7 @@ export default function AboutSection({
               <span className="text-xs font-black uppercase tracking-[0.25em] text-[#C89B3C] block mb-3">
                 ABOUT US
               </span>
-              <h2
+              <Heading
                 className="text-4xl sm:text-5xl md:text-6xl font-black tracking-tight text-[#0F3C65] leading-[1.06]"
                 style={{ fontFamily: "var(--font-display)" }}
               >
@@ -93,7 +96,7 @@ export default function AboutSection({
                 <span className="text-[#C89B3C]">
                   Every State.
                 </span>
-              </h2>
+              </Heading>
               <p className="mt-4 text-sm sm:text-base leading-relaxed text-[#334E68] max-w-xl font-medium">
                 PSARA Consultant India empowers security agencies with seamless licensing, training, verification &amp; compliance support across 28 States &amp; 8 UTs.
               </p>
@@ -116,12 +119,12 @@ export default function AboutSection({
                     <div className="w-10 h-10 rounded-xl bg-[#0F3C65] text-[#FFF2BA] flex items-center justify-center group-hover:scale-105 transition-transform shadow-md">
                       <IconComp className="w-5 h-5 stroke-[2.5]" />
                     </div>
-                    <h3
+                    <h2
                       className="text-xs sm:text-sm font-black tracking-wider text-[#0F3C65] uppercase pt-1"
                       style={{ fontFamily: "var(--font-display)" }}
                     >
                       {feature.title}
-                    </h3>
+                    </h2>
                     <p className="text-xs leading-relaxed text-[#334E68] font-bold">
                       {feature.desc}
                     </p>
