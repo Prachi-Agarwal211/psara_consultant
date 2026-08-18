@@ -19,20 +19,22 @@
   }
 
   body {
-    font-family: "Maison Neue Ext", var(--font-body), system-ui, sans-serif;
+    font-family: var(--font-body);
     font-optical-sizing: auto;
+    font-synthesis: none;
     text-rendering: optimizeLegibility;
-    background-color: var(--void, #020814);
+    background-color: var(--canvas-void, #050714);
     color: var(--white, #ffffff);
     min-height: 100%;
     overflow-x: hidden;
-    font-size: var(--text-base);
+    font-size: 1.0625rem;
     line-height: 1.65;
-    letter-spacing: 0.01em;
-    font-weight: 500;
+    letter-spacing: 0;
+    font-weight: 400;
     scrollbar-width: none;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    -webkit-text-size-adjust: 100%;
   }
 
   body::-webkit-scrollbar {
@@ -40,8 +42,8 @@
   }
 
   ::selection {
-    background-color: var(--gold-400);
-    color: var(--off-black);
+    background-color: var(--gold-bright, #F5D061);
+    color: #050714;
   }
 
   a {
@@ -54,14 +56,24 @@
     height: auto;
   }
 
-  h1, h2, h3 {
+  h1, h2, h3, h4, h5, h6 {
     text-wrap: balance;
     font-family: var(--font-display);
-    color: var(--text-primary);
+    font-weight: 700;
+    font-synthesis: none;
+    line-height: 1.2;
+    letter-spacing: -0.015em;
   }
 
   p {
-    color: var(--text-secondary);
+    text-wrap: pretty;
+  }
+
+  button,
+  input,
+  textarea,
+  select {
+    font: inherit;
   }
 
   .clip-reveal {
@@ -74,29 +86,80 @@
     display: inline-block;
     will-change: transform;
   }
+}
 
-  .content-vis-auto {
-    content-visibility: auto;
-    contain-intrinsic-size: 500px;
+@layer utilities {
+  .font-black,
+  .font-extrabold {
+    font-weight: 700;
+  }
+
+  .tracking-widest {
+    letter-spacing: 0.12em;
+  }
+
+  .tracking-wider {
+    letter-spacing: 0.08em;
   }
 }
 
-/* ── Custom marquee animation ── */
+/* ═══════════════════════════════════════════════════════════════
+   VIEW TRANSITIONS API & CLIP-PATH PAGE TRANSITION SYSTEM
+   ═══════════════════════════════════════════════════════════════ */
+
+::view-transition-group(navbar) {
+  animation: none;
+  z-index: 100;
+}
+
+::view-transition-old(root),
+::view-transition-old(page-exit) {
+  animation: 600ms cubic-bezier(0.8, 0, 0.1, 1) both page-out;
+}
+
+::view-transition-new(root),
+::view-transition-new(page-enter) {
+  animation: 600ms cubic-bezier(0.8, 0, 0.1, 1) both page-in;
+}
+
+@keyframes page-out {
+  0% {
+    transform: translateY(0%) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-15%) scale(0.97);
+    opacity: 0.2;
+  }
+}
+
+@keyframes page-in {
+  0% {
+    transform: translateY(15%);
+    clip-path: polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%);
+  }
+  100% {
+    transform: translateY(0%);
+    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+  }
+}
+
+/* ── Marquee animation ── */
 @keyframes marquee {
   from { transform: translateX(0); }
   to   { transform: translateX(-50%); }
 }
 .animate-marquee {
-  animation: marquee 30s linear infinite;
+  animation: marquee 32s linear infinite;
 }
 
-/* ── Grain overlay ── */
+/* ── Subtle grain overlay ── */
 .grain-overlay {
   position: fixed;
   inset: 0;
   pointer-events: none;
   z-index: 9999;
-  opacity: 0.025;
+  opacity: 0.018;
   mix-blend-mode: overlay;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   background-size: 140px 140px;
@@ -111,4 +174,50 @@
     transition-duration: 0.01ms !important;
   }
   .animate-marquee { animation: none; }
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none !important;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   HIGH CONTRAST & ACCESSIBILITY GUARDRAILS
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Metallic gold text helper */
+.gold-text-gradient {
+  background: linear-gradient(135deg, #FFF0B8 0%, #F5D061 35%, #D4AF37 70%, #AA771C 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+.purple-text-gradient {
+  background: linear-gradient(135deg, #CBB0FF 0%, #7638FA 50%, #5821C7 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Mobile tap target & accessibility */
+@media (max-width: 768px) {
+  body {
+    font-size: 16px;
+    padding-bottom: calc(4.5rem + env(safe-area-inset-bottom, 0px));
+  }
+
+  a, button, input, select, textarea {
+    min-height: 44px;
+  }
+}
+
+/* Dark on Dark Correction Guardrails: Ensure no dark text inside dark sections */
+#hero, #proof, #why, #services, #states, #estimator, #faq, #presence, #contact, #start, footer, .psara-site-footer {
+  color: #FFFFFF;
+}
+
+#hero p, #proof p, #services p, #states p, #estimator p, #faq p, #presence p, #start p {
+  color: #E2E8F0;
 }

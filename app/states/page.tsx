@@ -19,6 +19,8 @@ export default function StatesHubPage() {
         title="PSARA License across India"
         lead={`${STATES.length} State & UT guides with Controlling Authority context, timelines, and city links.`}
         crumbs={[{ label: "States" }]}
+        kicker="The India jurisdiction index"
+        meta="28 STATES · 8 UNION TERRITORIES · ONE COMPLIANCE DESK"
       />
       <PageMain>
         <StatePortalView />

@@ -2,7 +2,7 @@
 
 /**
  * Continuous ambient field — MAAC DynamicBackground approach,
- * recolored to electric blue space + metal dust + soft India energy.
+ * recolored to midnight black + cherry red + warm gold atmosphere.
  * Fixed behind ALL content. Sections stay transparent.
  */
 
@@ -84,11 +84,11 @@ export default function AmbientCanvas() {
           const intensity = (n2(i + mouse.x * 2.2, j + mouse.y * 2.2, t) + 1) * 0.5;
           const r = 160 + intensity * 160;
           const g = ctx.createRadialGradient(px, py, 0, px, py, r);
-          // Electric blue core — brighter than muddy navy
-          g.addColorStop(0, `rgba(0, 102, 255, ${0.07 + intensity * 0.14})`);
-          g.addColorStop(0.35, `rgba(26, 123, 255, ${0.04 + intensity * 0.08})`);
-          g.addColorStop(0.7, `rgba(4, 16, 40, 0.15)`);
-          g.addColorStop(1, "rgba(2, 8, 20, 0)");
+          // Cherry glow carries the visual identity across route families.
+          g.addColorStop(0, `rgba(140, 31, 50, ${0.07 + intensity * 0.14})`);
+          g.addColorStop(0.35, `rgba(166, 41, 64, ${0.04 + intensity * 0.08})`);
+          g.addColorStop(0.7, `rgba(41, 37, 36, 0.15)`);
+          g.addColorStop(1, "rgba(11, 14, 20, 0)");
           ctx.fillStyle = g;
           ctx.beginPath();
           ctx.arc(px, py, r, 0, Math.PI * 2);
@@ -96,7 +96,7 @@ export default function AmbientCanvas() {
         }
       }
 
-      // Hero-right electric glow (where plaque lives in refs)
+      // Hero-right cherry glow (where plaque lives in refs)
       const hero = ctx.createRadialGradient(
         w * 0.72 + (mouse.x - 0.5) * 60,
         h * 0.38 + (mouse.y - 0.5) * 40,
@@ -105,23 +105,23 @@ export default function AmbientCanvas() {
         h * 0.4,
         w * 0.42
       );
-      hero.addColorStop(0, "rgba(0, 102, 255, 0.22)");
-      hero.addColorStop(0.4, "rgba(26, 123, 255, 0.08)");
+      hero.addColorStop(0, "rgba(140, 31, 50, 0.22)");
+      hero.addColorStop(0.4, "rgba(166, 41, 64, 0.08)");
       hero.addColorStop(1, "transparent");
       ctx.fillStyle = hero;
       ctx.fillRect(0, 0, w, h);
 
-      // Soft saffron / green energy (right edge only — India identity)
+      // Gold atmosphere (right edge only)
       const saff = ctx.createRadialGradient(w * 0.92, h * 0.22, 0, w * 0.92, h * 0.22, w * 0.28);
       saff.addColorStop(0, "rgba(255, 140, 40, 0.12)");
       saff.addColorStop(1, "transparent");
       ctx.fillStyle = saff;
       ctx.fillRect(0, 0, w, h);
 
-      const grn = ctx.createRadialGradient(w * 0.9, h * 0.72, 0, w * 0.9, h * 0.72, w * 0.26);
-      grn.addColorStop(0, "rgba(14, 138, 82, 0.1)");
-      grn.addColorStop(1, "transparent");
-      ctx.fillStyle = grn;
+      const lowerGold = ctx.createRadialGradient(w * 0.9, h * 0.72, 0, w * 0.9, h * 0.72, w * 0.26);
+      lowerGold.addColorStop(0, "rgba(191, 149, 63, 0.1)");
+      lowerGold.addColorStop(1, "transparent");
+      ctx.fillStyle = lowerGold;
       ctx.fillRect(0, 0, w, h);
 
       // Metallic dust
@@ -132,7 +132,7 @@ export default function AmbientCanvas() {
         const s = 0.5 + (i % 4) * 0.35;
         ctx.beginPath();
         ctx.fillStyle =
-          i % 4 === 0 ? "rgba(232, 213, 163, 0.55)" : "rgba(77, 159, 255, 0.35)";
+          i % 4 === 0 ? "rgba(232, 213, 163, 0.55)" : "rgba(140, 31, 50, 0.35)";
         ctx.arc(px, py, s, 0, Math.PI * 2);
         ctx.fill();
       }
@@ -140,7 +140,7 @@ export default function AmbientCanvas() {
 
       // Soft vignette
       const vig = ctx.createRadialGradient(w * 0.5, h * 0.45, h * 0.15, w * 0.5, h * 0.5, h * 0.9);
-      vig.addColorStop(0, "rgba(2,8,20,0)");
+      vig.addColorStop(0, "rgba(11,14,20,0)");
       vig.addColorStop(1, "rgba(1,4,12,0.55)");
       ctx.fillStyle = vig;
       ctx.fillRect(0, 0, w, h);
@@ -169,11 +169,11 @@ export default function AmbientCanvas() {
         className="absolute inset-0"
         style={{
           background: `
-            radial-gradient(ellipse 70% 55% at 72% 32%, rgba(0,102,255,0.28) 0%, transparent 55%),
+            radial-gradient(ellipse 70% 55% at 72% 32%, rgba(140,31,50,0.28) 0%, transparent 55%),
             radial-gradient(ellipse 45% 40% at 92% 18%, rgba(255,140,40,0.12) 0%, transparent 50%),
-            radial-gradient(ellipse 40% 38% at 88% 78%, rgba(14,138,82,0.1) 0%, transparent 50%),
-            radial-gradient(ellipse 60% 50% at 20% 70%, rgba(26,123,255,0.1) 0%, transparent 55%),
-            linear-gradient(165deg, #020814 0%, #041028 45%, #020814 100%)
+            radial-gradient(ellipse 40% 38% at 88% 78%, rgba(191,149,63,0.1) 0%, transparent 50%),
+            radial-gradient(ellipse 60% 50% at 20% 70%, rgba(92,18,32,0.1) 0%, transparent 55%),
+            linear-gradient(165deg, #0B0E14 0%, #1A0A0D 45%, #0B0E14 100%)
           `,
         }}
       />

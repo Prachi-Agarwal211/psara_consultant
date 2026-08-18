@@ -4,7 +4,6 @@ import { useState } from "react";
 import Link from "next/link";
 import {
   ShieldCheck,
-  FileText,
   BadgeCheck,
   Globe,
   Building2,
@@ -17,11 +16,9 @@ import {
   Calculator,
   MessageSquare,
 } from "lucide-react";
-import { SERVICES, type Service } from "../../../data/services";
+import { SERVICES } from "../../../data/services";
 import { DEFAULT_WA } from "../../../lib/whatsapp";
-import FloatProps, { PROPS } from "../ui/FloatProps";
 
-// Category definitions to map services dynamically
 const CATEGORIES = [
   { id: "all", label: "All Services" },
   { id: "licensing", label: "Licensing & Grants" },
@@ -31,7 +28,6 @@ const CATEGORIES = [
 
 type CategoryId = (typeof CATEGORIES)[number]["id"];
 
-// Icon mapping per service slug
 function getServiceIcon(slug: string) {
   switch (slug) {
     case "psara-license":
@@ -51,7 +47,6 @@ function getServiceIcon(slug: string) {
   }
 }
 
-// Category classification helper
 function getCategory(slug: string): CategoryId {
   if (slug.includes("training") || slug.includes("verification") || slug.includes("police")) {
     return "training";
@@ -71,8 +66,8 @@ export default function ServicesSection() {
     return getCategory(s.slug) === activeCategory;
   });
 
-  const visibleServices = showAll ? filteredServices : filteredServices.slice(0, 3);
-  const hasMore = filteredServices.length > 3;
+  const visibleServices = showAll ? filteredServices : filteredServices.slice(0, 6);
+  const hasMore = filteredServices.length > 6;
 
   const handleCategoryChange = (catId: CategoryId) => {
     setActiveCategory(catId);
@@ -80,44 +75,35 @@ export default function ServicesSection() {
   };
 
   return (
-    <section id="services" className="relative py-20 lg:py-24 bg-[#0A233F] text-white overflow-hidden" data-parallax-root>
-      {/* Background glow accents */}
-      <div className="pointer-events-none absolute inset-0 z-0" aria-hidden>
-        <div
-          className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[80vw] h-[400px] opacity-20"
-          style={{ background: "radial-gradient(ellipse 60% 40% at 50% 50%, rgba(200,155,60,0.2) 0%, transparent 70%)" }}
-        />
-      </div>
-      <FloatProps slots={PROPS.services} />
-
+    <section id="services" className="relative py-20 lg:py-28 bg-[#050714] text-white border-b border-white/10">
       <div className="relative z-10 px-[var(--gutter)] max-w-7xl mx-auto space-y-12">
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-white/15 pb-8">
           <div>
-            <div className="flex items-center gap-2 text-xs font-black uppercase tracking-[0.25em] text-[#C89B3C]" style={{ fontFamily: "var(--font-body)" }}>
-              <Sparkles className="h-3.5 w-3.5 text-[#C89B3C]" />
+            <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-[0.16em] text-[#D4AF37]" style={{ fontFamily: "var(--font-body)" }}>
+              <Sparkles className="h-3.5 w-3.5 text-[#D4AF37]" />
               Statutory Advisory &amp; Licensing Services
             </div>
-            <h2 className="mt-3 font-black text-white leading-tight" style={{ fontSize: "clamp(2rem, 4.5vw, 3.4rem)", fontFamily: "var(--font-display)" }}>
-              Services that secure your <span className="text-[#C89B3C]">security agency</span>
+            <h2 className="mt-3 text-3xl sm:text-4xl md:text-5xl font-bold text-white leading-tight" style={{ fontFamily: "var(--font-display)" }}>
+              Services that secure your <span className="gold-metallic-text">security agency</span>
             </h2>
           </div>
 
-          <p className="max-w-md text-sm md:text-base text-slate-300 leading-relaxed font-medium" style={{ fontFamily: "var(--font-body)" }}>
-            From first incorporation to Controlling Authority filing, recognized training MOUs, police verification, and multi-state compliance.
+          <p className="max-w-md text-sm md:text-base text-[#E2E8F0] leading-relaxed font-normal" style={{ fontFamily: "var(--font-body)" }}>
+            From company incorporation to Controlling Authority filing, recognized training MOUs, police verification, and multi-state compliance.
           </p>
         </div>
 
         {/* Category Navigation Tabs */}
-        <div className="flex flex-wrap items-center gap-2 border border-white/15 bg-white/5 p-1.5 rounded-2xl backdrop-blur-md">
+        <div className="flex flex-wrap items-center gap-2 border border-white/10 bg-[#0A1224] p-1.5 rounded-2xl shadow-inner">
           {CATEGORIES.map((cat) => (
             <button
               key={cat.id}
               onClick={() => handleCategoryChange(cat.id)}
-              className={`px-5 py-2.5 text-xs font-black uppercase tracking-[0.16em] rounded-xl transition-all duration-300 ${
+              className={`px-5 py-2.5 text-xs font-bold uppercase tracking-[0.1em] rounded-xl transition-all duration-200 ${
                 activeCategory === cat.id
-                  ? "bg-[#FFF2BA] text-[#0F3C65] shadow-lg"
-                  : "text-white/70 hover:text-white hover:bg-white/10"
+                  ? "bg-gradient-to-r from-[#5821C7] to-[#6D4CC2] text-white shadow-lg shadow-purple-950/60"
+                  : "text-[#CBD5E1] hover:text-white hover:bg-white/5"
               }`}
               style={{ fontFamily: "var(--font-body)" }}
             >
@@ -127,8 +113,8 @@ export default function ServicesSection() {
           ))}
         </div>
 
-        {/* Services Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {/* Services Grid with Shaded Navy Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
           {visibleServices.map((service, idx) => {
             const IconComponent = getServiceIcon(service.slug);
             const num = String(idx + 1).padStart(2, "0");
@@ -137,38 +123,35 @@ export default function ServicesSection() {
               <Link
                 key={service.slug}
                 href={`/services/${service.slug}`}
-                className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-white/15 bg-[#07192C]/90 p-7 transition-all duration-300 hover:-translate-y-1 hover:border-[#C89B3C] hover:bg-[#0E2F52] shadow-xl"
+                className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-[rgba(200,155,60,0.22)] bg-gradient-to-b from-[#0E1B33] to-[#081020] p-6 sm:p-8 shadow-xl transition-all duration-200 hover:-translate-y-1 hover:border-[#D4AF37] hover:from-[#14284D] hover:to-[#0A1428]"
               >
-                {/* Top gradient border reveal */}
-                <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#C89B3C] via-[#78A2D2] to-[#FFF2BA] opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-
                 <div>
-                  {/* Top Row: Icon + Number Badge */}
+                  {/* Top Row: Icon + Badge */}
                   <div className="flex items-center justify-between gap-4 mb-6">
-                    <div className="flex items-center justify-center h-11 w-11 rounded-xl border border-[#C89B3C]/40 bg-[#FFF2BA]/15 text-[#C89B3C] transition-colors duration-300 group-hover:bg-[#C89B3C] group-hover:text-[#0F3C65]">
-                      <IconComponent className="h-5 w-5 stroke-[2]" />
+                    <div className="flex items-center justify-center h-12 w-12 rounded-xl border border-[#D4AF37]/40 bg-[#0A1224] text-[#D4AF37] transition-all duration-200 group-hover:bg-[#5821C7] group-hover:text-white group-hover:border-[#5821C7] shadow-md">
+                      <IconComponent className="h-6 w-6" />
                     </div>
-                    <span className="font-mono text-xs font-black text-[#C89B3C]/70 group-hover:text-[#FFF2BA]">
+                    <span className="font-mono text-xs font-bold text-[#D4AF37]">
                       SRV-{num}
                     </span>
                   </div>
 
                   {/* Title */}
-                  <h3 className="text-xl font-black text-white transition-colors duration-300 group-hover:text-[#FFF2BA] mb-3" style={{ fontFamily: "var(--font-display)" }}>
+                  <h3 className="text-xl font-bold text-white transition-colors duration-200 group-hover:text-[#F5D061] mb-3 leading-snug" style={{ fontFamily: "var(--font-display)" }}>
                     {service.title}
                   </h3>
 
                   {/* Description */}
-                  <p className="text-sm leading-relaxed text-slate-300 mb-6 font-medium" style={{ fontFamily: "var(--font-body)" }}>
+                  <p className="text-sm leading-relaxed text-[#E2E8F0] mb-6 font-normal" style={{ fontFamily: "var(--font-body)" }}>
                     {service.short}
                   </p>
 
-                  {/* Deliverables / Bullets */}
+                  {/* Bullets */}
                   {service.bullets && service.bullets.length > 0 && (
                     <div className="space-y-2 border-t border-white/10 pt-4 mb-6">
                       {service.bullets.slice(0, 2).map((b, bIdx) => (
-                        <div key={bIdx} className="flex items-start gap-2 text-xs text-slate-200">
-                          <CheckCircle2 className="h-3.5 w-3.5 shrink-0 text-[#C89B3C] mt-0.5" />
+                        <div key={bIdx} className="flex items-start gap-2 text-xs text-[#CBD5E1]">
+                          <CheckCircle2 className="h-4 w-4 shrink-0 text-[#D4AF37] mt-0.5" />
                           <span className="line-clamp-1">{b}</span>
                         </div>
                       ))}
@@ -177,60 +160,60 @@ export default function ServicesSection() {
                 </div>
 
                 {/* Footer Link */}
-                <div className="flex items-center justify-between border-t border-white/10 pt-4 text-xs font-black uppercase tracking-[0.18em] text-slate-300 transition-colors duration-300 group-hover:text-[#FFF2BA]" style={{ fontFamily: "var(--font-body)" }}>
+                <div className="flex items-center justify-between border-t border-white/10 pt-4 text-xs font-bold uppercase tracking-[0.14em] text-white/80 transition-colors duration-200 group-hover:text-[#F5D061]" style={{ fontFamily: "var(--font-body)" }}>
                   <span>View Requirements</span>
-                  <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+                  <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1 text-[#D4AF37]" />
                 </div>
               </Link>
             );
           })}
         </div>
 
-        {/* See More Services Button */}
+        {/* See More Toggle */}
         {hasMore && (
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
             <button
               type="button"
               onClick={() => setShowAll((prev) => !prev)}
-              className="inline-flex items-center gap-2.5 rounded-xl border-2 border-[#C89B3C] bg-[#FFF2BA] px-8 py-4 text-xs font-black uppercase tracking-[0.18em] text-[#0F3C65] transition-all duration-300 hover:bg-white shadow-xl hover:scale-105 active:scale-95"
+              className="inline-flex items-center gap-2 rounded-xl border border-[#D4AF37] bg-gradient-to-r from-[#FFF6D9]/15 to-[#D4AF37]/20 hover:from-[#D4AF37] hover:to-[#C89B3C] hover:text-[#050714] px-8 py-3.5 text-xs font-bold uppercase tracking-[0.12em] text-[#F5D061] transition-all duration-200 shadow-md"
               style={{ fontFamily: "var(--font-body)" }}
             >
-              <span>{showAll ? "Show Fewer Services" : `See More Services (${filteredServices.length - 3} More)`}</span>
-              <ArrowRight className={`h-4 w-4 stroke-[2.5] transition-transform duration-300 ${showAll ? "-rotate-90" : "rotate-90"}`} />
+              <span>{showAll ? "Show Fewer Services" : `See More Services (${filteredServices.length - 6} More)`}</span>
+              <ArrowRight className={`h-4 w-4 transition-transform duration-200 ${showAll ? "-rotate-90" : "rotate-90"}`} />
             </button>
 
             <Link
               href="/services"
-              className="inline-flex items-center gap-2 rounded-xl border border-white/20 bg-white/10 px-6 py-4 text-xs font-black uppercase tracking-[0.18em] text-white hover:bg-white/20 transition-all"
+              className="inline-flex items-center gap-2 rounded-xl border border-white/20 bg-[#0A1224] hover:bg-white/10 px-6 py-3.5 text-xs font-bold uppercase tracking-[0.12em] text-white transition-all"
               style={{ fontFamily: "var(--font-body)" }}
             >
-              <span>All 26 Services Page</span>
+              <span>All 26 Services Index</span>
               <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
         )}
 
-        {/* Bottom Advisory Callout Box */}
-        <div className="relative overflow-hidden rounded-2xl border-2 border-[#C89B3C]/40 bg-gradient-to-r from-[#0D3459] via-[#0A233F] to-[#0D3459] p-8 md:p-10 flex flex-col md:flex-row md:items-center justify-between gap-8 shadow-2xl">
+        {/* Bottom Callout Box with Multi-Depth Shading */}
+        <div className="rounded-3xl border border-[rgba(200,155,60,0.3)] bg-gradient-to-r from-[#0E1B33] via-[#0A1428] to-[#0E1B33] p-8 md:p-10 flex flex-col md:flex-row md:items-center justify-between gap-8 shadow-2xl">
           <div className="space-y-2 max-w-2xl">
-            <span className="text-[0.68rem] font-black uppercase tracking-[0.25em] text-[#C89B3C]" style={{ fontFamily: "var(--font-body)" }}>
-              Multi-State &amp; Custom Bundles
+            <span className="text-xs font-bold uppercase tracking-[0.16em] text-[#D4AF37]" style={{ fontFamily: "var(--font-body)" }}>
+              Multi-District &amp; State Bundles
             </span>
-            <h3 className="text-2xl font-black text-white" style={{ fontFamily: "var(--font-display)" }}>
+            <h3 className="text-2xl font-bold text-white" style={{ fontFamily: "var(--font-display)" }}>
               Need multi-district licensing or training MOU support in a specific State?
             </h3>
-            <p className="text-sm text-slate-300 leading-relaxed font-medium" style={{ fontFamily: "var(--font-body)" }}>
+            <p className="text-sm text-[#E2E8F0] leading-relaxed font-normal" style={{ fontFamily: "var(--font-body)" }}>
               Our regulatory desk provides instant clarity on State fee slabs, Controlling Authority checklists, and police clearance timelines.
             </p>
           </div>
 
-          <div className="flex flex-wrap items-center gap-4 shrink-0">
+          <div className="flex flex-wrap items-center gap-3 shrink-0">
             <Link
               href="/calculator"
-              className="inline-flex items-center gap-2 border border-white/20 bg-white/10 px-6 py-3.5 rounded-xl text-xs font-black uppercase tracking-[0.16em] text-white transition-all duration-300 hover:bg-[#FFF2BA] hover:text-[#0F3C65]"
+              className="inline-flex items-center gap-2 rounded-xl border border-white/20 bg-white/5 hover:bg-white/10 px-6 py-3.5 text-xs font-bold uppercase tracking-[0.1em] text-white transition-all"
               style={{ fontFamily: "var(--font-body)" }}
             >
-              <Calculator className="h-4 w-4" />
+              <Calculator className="h-4 w-4 text-[#D4AF37]" />
               <span>Fee Calculator</span>
             </Link>
 
@@ -238,10 +221,9 @@ export default function ServicesSection() {
               href={DEFAULT_WA}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 border border-[#C89B3C] bg-[#C89B3C] px-6 py-3.5 rounded-xl text-xs font-black uppercase tracking-[0.16em] text-[#0F3C65] transition-all duration-300 hover:bg-[#FFF2BA]"
-              style={{ fontFamily: "var(--font-body)" }}
+              className="btn-whatsapp"
             >
-              <MessageSquare className="h-4 w-4" />
+              <MessageSquare className="h-4 w-4 fill-white" />
               <span>WhatsApp Desk</span>
             </a>
           </div>

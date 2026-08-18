@@ -1,155 +1,241 @@
-/* continuous-ambient-override */
-.theme-paper-jasmine, .theme-obsidian-dark, .theme-ink {
-  background-color: transparent !important;
-  background-image: none !important;
-}
 /* ═══════════════════════════════════════════════════════════════
-   PSARA · Abstract Futuristic Section Themes
-   Deep Black Canvas × Electric Blue Glow × Metallic Gold Accent
+   PSARA Consultant India · Themes, Shaded Surfaces & Contrast Mixtures
    ═══════════════════════════════════════════════════════════════ */
 
-/* ── Primary Themes ────────────────────────────────────────────── */
-.theme-dark {
+/* ── 1. Master Dark Surface (Deep Statutory Navy) ─────────────── */
+.theme-dark,
+[data-theme="dark"] {
   color: var(--white);
-  background-color: var(--obsidian);
-}
-
-.theme-warm-dark {
-  color: var(--white);
-  background-color: var(--warm-dark) !important;
-}
-
-.theme-warm-dark-2 {
-  color: var(--white);
-  background-color: var(--warm-dark-2) !important;
-}
-
-.theme-warm-dark-3 {
-  color: var(--white);
-  background-color: var(--warm-dark-3) !important;
-}
-
-.theme-gold {
-  color: #1a1510 !important;
-  background-color: var(--gold-bg) !important;
-}
-
-.theme-gold h1, .theme-gold h2, .theme-gold h3, .theme-gold p {
-  color: #1a1510 !important;
-}
-
-.theme-amber {
-  color: var(--white);
-  background-color: var(--gold-bg-dark) !important;
-}
-
-.theme-warm-cream {
-  color: #1a1510 !important;
-  background-color: var(--warm-cream) !important;
-}
-
-.theme-warm-cream h1, .theme-warm-cream h2, .theme-warm-cream h3 {
-  color: #1a1510 !important;
-}
-
-.theme-warm-parchment {
-  color: #1a1510 !important;
-  background-color: var(--warm-parchment) !important;
+  background-color: var(--canvas-void) !important;
 }
 
 .theme-dark h1,
 .theme-dark h2,
-.theme-dark h3,
-.theme-paper-jasmine h1,
-.theme-paper-jasmine h2,
-.theme-paper-jasmine h3,
-.theme-obsidian-dark h1,
-.theme-obsidian-dark h2,
-.theme-obsidian-dark h3 {
-  color: var(--white);
+.theme-dark h3 {
+  color: #FFFFFF !important;
 }
 
-.theme-dark p:not(.text-white):not(.text-blue):not(.text-gold),
-.theme-paper-jasmine p:not(.text-white):not(.text-blue),
-.theme-obsidian-dark p:not(.text-white) {
-  color: var(--white-70);
+.theme-dark p {
+  color: #E2E8F0 !important;
 }
 
-/* ── Light Section Variant (rare, for contrast) ───────────────── */
-.theme-light {
-  color: var(--obsidian);
-  background-color: #F8FAFC;
+/* ── 2. Master Light Surface (Editorial Cream & Pure White) ──── */
+.theme-light,
+.theme-white,
+[data-theme="light"],
+[data-theme="white"] {
+  color: #0F172A !important;
+  background-color: #FFFFFF !important;
+}
+
+.theme-cream,
+[data-theme="cream"] {
+  color: #0F172A !important;
+  background-color: #FBF7F0 !important;
 }
 
 .theme-light h1,
 .theme-light h2,
-.theme-light h3 {
-  color: var(--obsidian);
+.theme-light h3,
+.theme-white h1,
+.theme-white h2,
+.theme-white h3,
+.theme-cream h1,
+.theme-cream h2,
+.theme-cream h3 {
+  color: #0F172A !important;
 }
 
-/* ── Electric Blue accent theme (hero CTAs, feature sections) ── */
-.theme-electric {
-  color: var(--white);
-  background: linear-gradient(135deg, var(--obsidian) 0%, #0A0F2A 100%);
+.theme-light p,
+.theme-white p,
+.theme-cream p {
+  color: #334155 !important;
 }
 
-/* ── Grid / Mesh Background ──────────────────────────────────── */
-.bg-mesh {
-  background-color: var(--obsidian);
-  background-image: var(--grad-mesh);
+/* ── 3. Contrast Card Surfaces ──────────────────────────────── */
+.card-dark,
+.card-navy-gradient {
+  background: linear-gradient(160deg, #0E1B33 0%, #081020 100%);
+  border: 1px solid rgba(200, 155, 60, 0.25);
+  color: #FFFFFF;
+  border-radius: 1.125rem;
+  box-shadow: 0 16px 36px -8px rgba(0, 0, 0, 0.55);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* ── Hairline Divider ────────────────────────────────────────── */
-.i-line {
-  height: 1px;
-  width: 100%;
-  background: var(--line);
-  margin: 1.5rem 0;
+.card-dark:hover,
+.card-navy-gradient:hover {
+  background: linear-gradient(160deg, #14284D 0%, #0B162B 100%);
+  border-color: #D4AF37;
+  transform: translateY(-2px);
+  box-shadow: 0 20px 48px -10px rgba(0, 0, 0, 0.7);
 }
 
-.i-line-gold {
-  height: 1px;
-  width: 100%;
-  background: linear-gradient(90deg, transparent, var(--gold), transparent);
-  margin: 1.5rem 0;
+.card-light,
+.card-cream-gradient {
+  background: linear-gradient(160deg, #FFFFFF 0%, #F8F9FD 100%);
+  border: 1px solid rgba(15, 23, 42, 0.1);
+  color: #0F172A;
+  border-radius: 1.125rem;
+  box-shadow: 0 16px 40px -10px rgba(15, 23, 42, 0.07);
 }
 
-/* ── Blue Glow Pulse animation ──────────────────────────────── */
-@keyframes blue-pulse {
-  0%, 100% { box-shadow: 0 0 0 0 var(--blue-glow); }
-  50%       { box-shadow: 0 0 20px 6px var(--blue-glow-soft); }
-}
-
-/* ── Gold Shimmer Animation ──────────────────────────────────── */
-@keyframes gold-shimmer {
-  0%   { background-position: -200% center; }
-  100% { background-position: 200% center; }
-}
-
-.gold-shimmer-text {
-  background: var(--gold-shimmer);
-  background-size: 200% auto;
+/* ── 4. Metallic & Contrast Text Mixtures ───────────────────── */
+.gold-metallic-text {
+  background: linear-gradient(135deg, #FFF6D9 0%, #F5E6BA 25%, #D4AF37 55%, #C89B3C 85%, #8F681B 100%);
   -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
   background-clip: text;
-  animation: gold-shimmer 3s linear infinite;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
 }
 
-/* ── Glassmorphism card ──────────────────────────────────────── */
-.glass-card {
-  background: var(--grad-card);
-  border: 1px solid var(--line);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+.navy-gradient-text {
+  background: linear-gradient(135deg, #0A213D 0%, #0F3560 60%, #1A4D85 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
 }
 
-.glass-card:hover {
-  background: var(--grad-card-hover);
-  border-color: var(--blue-border);
+/* ── 5. Statutory Badges & Contrast Pills ───────────────────── */
+.badge-gold,
+.badge-metallic-gold {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.4rem 0.95rem;
+  font-size: 0.6875rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  border-radius: 9999px;
+  background: linear-gradient(135deg, rgba(255, 246, 217, 0.15) 0%, rgba(200, 155, 60, 0.22) 100%);
+  border: 1px solid rgba(212, 175, 55, 0.55);
+  color: #D4AF37;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
 }
 
-/* ── Blue glow border ────────────────────────────────────────── */
-.blue-border {
-  border: 1px solid var(--blue-border);
-  box-shadow: 0 0 0 1px var(--blue-glow-soft) inset;
+.badge-navy {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.4rem 0.95rem;
+  font-size: 0.6875rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  border-radius: 9999px;
+  background: linear-gradient(135deg, #D9E6F2 0%, #C2D8EC 100%);
+  border: 1px solid #A6C8E4;
+  color: #0A233F;
+  box-shadow: 0 2px 8px rgba(10, 35, 63, 0.08);
+}
+
+/* ── 6. Tactile Action Buttons ──────────────────────────────── */
+.btn-gold-editorial {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.875rem 1.75rem;
+  font-size: 0.8125rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  border-radius: 0.75rem;
+  background: linear-gradient(135deg, #FFF6D9 0%, #F5E6BA 50%, #EBD6A0 100%);
+  border: 1px solid #D8BF80;
+  color: #1F1707 !important;
+  box-shadow: 0 4px 14px rgba(200, 155, 60, 0.2);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-gold-editorial:hover {
+  background: linear-gradient(135deg, #FFFFFF 0%, #FFF0B8 50%, #E5CC8C 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(200, 155, 60, 0.3);
+}
+
+.btn-primary-purple {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.875rem 1.75rem;
+  font-size: 0.875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  border-radius: 0.75rem;
+  background: linear-gradient(135deg, #5821C7 0%, #6D4CC2 60%, #7638FA 100%);
+  color: #FFFFFF !important;
+  box-shadow: 0 8px 24px -4px rgba(88, 33, 199, 0.45);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-primary-purple:hover {
+  background: linear-gradient(135deg, #6D4CC2 0%, #7638FA 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px -4px rgba(118, 56, 250, 0.55);
+}
+
+.btn-secondary-gold {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.875rem 1.75rem;
+  font-size: 0.875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  border-radius: 0.75rem;
+  background: rgba(200, 155, 60, 0.08);
+  border: 1.5px solid #D4AF37;
+  color: #F5D061 !important;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-secondary-gold:hover {
+  background: #D4AF37;
+  color: #050714 !important;
+  transform: translateY(-2px);
+}
+
+.btn-whatsapp {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.875rem 1.75rem;
+  font-size: 0.875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  border-radius: 0.75rem;
+  background: linear-gradient(135deg, #25D366 0%, #1DA851 100%);
+  color: #FFFFFF !important;
+  box-shadow: 0 8px 24px -4px rgba(37, 211, 102, 0.35);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-whatsapp:hover {
+  background: linear-gradient(135deg, #1DA851 0%, #128C7E 100%);
+  transform: translateY(-2px);
+}
+
+/* ── 7. Hairline Dividers ────────────────────────────────────── */
+.hairline-gold {
+  height: 1px;
+  width: 100%;
+  background: linear-gradient(90deg, transparent, #D4AF37, transparent);
+  opacity: 0.45;
+  margin: 1.5rem 0;
+}
+
+.hairline-subtle {
+  height: 1px;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.12);
+  margin: 1.5rem 0;
 }

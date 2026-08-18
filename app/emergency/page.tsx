@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Phone, AlertTriangle, ShieldCheck, Clock } from "lucide-react";
+import { Phone, AlertTriangle, ShieldCheck, Clock, MessageSquare, Sparkles } from "lucide-react";
 import { PageHero, PageMain } from "../../components/PageShell";
 import StageShell from "../components/ui/StageShell";
 import { pageMeta } from "../../lib/metadata";
@@ -22,16 +22,16 @@ export default function EmergencyPage() {
         crumbs={[{ label: "Emergency Desk" }]}
       />
 
-      <PageMain>
+      <PageMain className="bg-[#050714] text-white">
         <div className="max-w-4xl mx-auto space-y-8">
           {/* Emergency Alert Box */}
-          <div className="border border-[var(--signal-red)]/40 bg-[var(--signal-red)]/[0.06] p-6 md:p-8 flex items-start gap-4">
-            <AlertTriangle className="h-8 w-8 text-[var(--signal-red)] shrink-0 mt-1" />
+          <div className="rounded-3xl border border-red-500/40 bg-red-950/30 p-6 md:p-8 flex items-start gap-4 shadow-xl">
+            <AlertTriangle className="h-8 w-8 text-red-400 shrink-0 mt-1" />
             <div>
-              <h2 className="font-[family-name:var(--font-display)] text-xl font-bold text-white mb-2">
+              <h2 className="text-xl font-bold text-white mb-2" style={{ fontFamily: "var(--font-display)" }}>
                 Facing Notice or Impending License Expiry?
               </h2>
-              <p className="text-xs md:text-sm text-[var(--signal-red)]/80 leading-relaxed">
+              <p className="text-xs md:text-sm text-red-200 leading-relaxed font-normal">
                 Operating past PSARA expiration or failing to reply to a Controlling Authority show-cause notice within statutory timelines puts your agency at risk of immediate blacklisting and criminal prosecution under Section 20 of the PSARA Act.
               </p>
             </div>
@@ -39,34 +39,46 @@ export default function EmergencyPage() {
 
           {/* Rapid Interventions */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="border border-white/10 bg-[var(--void-2)] p-6">
-              <Clock className="h-6 w-6 text-[var(--gold-bright)] mb-3" />
-              <h3 className="font-[family-name:var(--font-display)] text-base font-bold text-white mb-2">Same-Day Renewal Refiling</h3>
-              <p className="text-xs text-[var(--white-70)] leading-relaxed">Fast-track re-submission of Form-I renewal applications with temporary acknowledgement receipt generation.</p>
+            <div className="rounded-2xl border border-white/10 bg-gradient-to-b from-[#0E1B33] to-[#081020] p-6 shadow-md space-y-2">
+              <Clock className="h-6 w-6 text-[#D4AF37] mb-2" />
+              <h3 className="text-base font-bold text-white" style={{ fontFamily: "var(--font-display)" }}>Same-Day Renewal Refiling</h3>
+              <p className="text-xs text-[#CBD5E1] leading-relaxed font-normal">Fast-track re-submission of Form-I renewal applications with temporary acknowledgement receipt generation.</p>
             </div>
 
-            <div className="border border-white/10 bg-[var(--void-2)] p-6">
-              <ShieldCheck className="h-6 w-6 text-[var(--gold-bright)] mb-3" />
-              <h3 className="font-[family-name:var(--font-display)] text-base font-bold text-white mb-2">Police Inspection Audit Prep</h3>
-              <p className="text-xs text-[var(--white-70)] leading-relaxed">Immediate pre-audit of register entries, guard antecedent logs, and office proofs before physical SP/CP visits.</p>
+            <div className="rounded-2xl border border-white/10 bg-gradient-to-b from-[#0E1B33] to-[#081020] p-6 shadow-md space-y-2">
+              <ShieldCheck className="h-6 w-6 text-[#D4AF37] mb-2" />
+              <h3 className="text-base font-bold text-white" style={{ fontFamily: "var(--font-display)" }}>Police Inspection Audit Prep</h3>
+              <p className="text-xs text-[#CBD5E1] leading-relaxed font-normal">Immediate pre-audit of register entries, guard antecedent logs, and office proofs before physical SP/CP visits.</p>
             </div>
           </div>
 
-          {/* Call & WhatsApp CTAs */}
-          <div className="border border-[var(--gold)] p-8 text-center bg-[var(--gold-bg)] text-black">
-            <span className="text-xs font-bold uppercase tracking-widest text-black/80">Immediate Action Required</span>
-            <h2 className="mt-1 font-[family-name:var(--font-display)] text-2xl font-bold text-black">
+          {/* Call & WhatsApp CTAs Card */}
+          <div className="rounded-3xl border border-[rgba(200,155,60,0.35)] bg-gradient-to-r from-[#0E1B33] via-[#0A1428] to-[#0E1B33] p-8 text-center shadow-2xl space-y-4">
+            <span className="badge-metallic-gold mb-1">
+              Immediate Statutory Intervention
+            </span>
+            <h2 className="text-2xl md:text-3xl font-bold text-white" style={{ fontFamily: "var(--font-display)" }}>
               Call the Emergency Advisory Hotline
             </h2>
-            <p className="mt-2 text-xs text-black/80 font-semibold">
-              Available 24 hours for urgent compliance interventions.
+            <p className="text-xs sm:text-sm text-[#E2E8F0] font-normal max-w-lg mx-auto">
+              Available for immediate compliance rescue, notice responses, and expedited police clearances.
             </p>
-            <div className="mt-6 flex flex-wrap justify-center gap-4">
-              <a href={TEL_HREF} className="inline-flex items-center gap-2 rounded-full bg-black px-8 py-3.5 text-xs font-bold uppercase tracking-wider text-white">
-                <Phone className="h-4 w-4" /> Call {CONTACT.phoneDisplay} Now
+            <div className="mt-6 flex flex-wrap justify-center gap-4 pt-2">
+              <a
+                href={TEL_HREF}
+                className="btn-gold-editorial"
+              >
+                <Phone className="h-4 w-4" />
+                <span>Call {CONTACT.phoneDisplay} Now</span>
               </a>
-              <a href={`${DEFAULT_WA}&text=URGENT:%20Need%20emergency%20PSARA%20help`} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-full border border-black px-8 py-3.5 text-xs font-bold uppercase tracking-wider text-black hover:bg-black/10">
-                WhatsApp Urgent Desk
+              <a
+                href={`${DEFAULT_WA}&text=URGENT:%20Need%20emergency%20PSARA%20help`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-whatsapp"
+              >
+                <MessageSquare className="h-4 w-4 fill-white" />
+                <span>WhatsApp Urgent Desk</span>
               </a>
             </div>
           </div>

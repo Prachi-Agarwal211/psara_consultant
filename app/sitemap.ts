@@ -25,12 +25,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes: MetadataRoute.Sitemap = [
     "",
     "/about",
+    "/blog",
     "/contact",
     "/services",
     "/faq",
     "/states",
     "/cities",
-    "/google",
     "/franchise",
     "/careers",
     "/case-studies",
@@ -61,10 +61,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     changeFrequency: "weekly",
     priority: 0.85,
   }));
-
-  // NOTE: /security-services/{state} and /security-services/city/{city} are
-  // thin duplicates of /states/{state} and /city/{city} — noindexed and
-  // deliberately EXCLUDED from the sitemap to avoid duplicate-content signals.
 
   const cities: MetadataRoute.Sitemap = CITIES.map((c) => ({
     url: `${base}/city/${c.slug}`,

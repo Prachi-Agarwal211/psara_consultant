@@ -29,7 +29,6 @@ import HomeContact from "./HomeContact";
 import StatementInterstitial from "./StatementInterstitial";
 import ServicesSection from "./ServicesSection";
 import ApprovalRoadmap from "./ApprovalRoadmap";
-import { initAllSectionTransitions } from "../../lib/gsap";
 import FloatProps, { PROPS } from "../ui/FloatProps";
 
 const TICKER = [
@@ -56,7 +55,6 @@ export default function HomeStory() {
     initFloatDrift(root);
     initStaggerChildren(root);
     initVisualScrub(root);
-    initAllSectionTransitions(root);
 
     // Harden triggers after async layout settles
     const raf = requestAnimationFrame(() => {

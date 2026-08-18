@@ -13,7 +13,7 @@ export const viewport: Viewport = {
   initialScale: 1,
   maximumScale: 5,
   viewportFit: "cover",
-  themeColor: "#0066FF",
+  themeColor: "#30266F",
 };
 
 export const metadata: Metadata = {
@@ -67,12 +67,12 @@ export const metadata: Metadata = {
       { url: "/favicon-192x192.png", sizes: "192x192", type: "image/png" },
       { url: "/favicon-512x512.png", sizes: "512x512", type: "image/png" },
     ],
-    apple: [{ url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" }],
+    apple: [{ url: "/apple-icon.png", sizes: "180x180", type: "image/png" }],
   },
   other: {
-    "theme-color": "#e0b84a",
-    "msapplication-navbutton-color": "#e0b84a",
-    "apple-mobile-web-app-status-bar-style": "#e0b84a",
+    "theme-color": "#30266F",
+    "msapplication-navbutton-color": "#30266F",
+    "apple-mobile-web-app-status-bar-style": "#30266F",
     "geo.region": "IN-DL",
     "geo.placename": "New Delhi, Delhi",
     "geo.position": "28.6304;77.2177",
@@ -141,12 +141,6 @@ const organizationSchema = JSON.stringify({
         "@type": "ImageObject",
         url: `${SITE.url}/logo.png`,
       },
-      creator: {
-        "@type": "Organization",
-        name: "Reverbex Technology",
-        url: "https://reverbex.in",
-        description: "Elite Software Engineering, AI Automations, and Web Systems.",
-      },
       knowsAbout: [
         "PSARA License",
         "Security Agency Registration",
@@ -164,6 +158,15 @@ const organizationSchema = JSON.stringify({
         bestRating: AGGREGATE_RATING.bestRating,
         worstRating: AGGREGATE_RATING.worstRating,
       },
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${SITE.url}/#website`,
+      url: SITE.url,
+      name: SITE.name,
+      description: SITE.description,
+      publisher: { "@id": `${SITE.url}/#organization` },
+      inLanguage: "en-IN",
     },
     {
       "@type": "WebPage",
@@ -231,7 +234,7 @@ export default function RootLayout({
       </head>
       <body
         suppressHydrationWarning
-        className="min-h-full overflow-x-hidden font-medium bg-[#FFFEF9] text-[#0F3C65]"
+        className="min-h-full overflow-x-hidden font-normal bg-[#08060D] text-white selection:bg-[#D8B4FE] selection:text-black"
       >
         {/* JSON-LD Organization / LocalBusiness / FAQ graph — body render avoids React 19 head hydration mismatch */}
         <script

@@ -13,7 +13,8 @@ type PropName =
   | "ink-pen"
   | "corner-ornament"
   | "portfolio-binder"
-  | "seal-and-pen";
+  | "seal-and-pen"
+  | "statutory-compass";
 
 type Slot = {
   name: PropName;
@@ -178,11 +179,13 @@ export const PROPS = {
   ],
   closing: [
     {
-      name: "shield-gold" as const,
-      className: "left-[calc(50%-3rem)] top-10",
-      size: 96,
-      opacity: 0.25,
-      drift: 10,
+      name: "statutory-compass" as const,
+      className: "-right-14 top-10 md:right-8 md:top-16",
+      size: 210,
+      opacity: 0.34,
+      rotate: 8,
+      desktopOnly: true,
+      drift: 9,
     },
     {
       name: "wax-seal" as const,

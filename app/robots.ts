@@ -41,7 +41,7 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: "*",
         allow: "/",
-        disallow: ["/api/", "/_next/"],
+        disallow: ["/api/", "/_next/", "/admin/", "/metrics/"],
       },
       // Explicit allow for all AI crawlers — permits LLM training + retrieval
       ...AI_CRAWLERS.map((ua) => ({

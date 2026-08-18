@@ -11,6 +11,7 @@ import { SITE } from "../../../lib/config";
 import { DEFAULT_WA } from "../../../lib/whatsapp";
 import { hubHeroImage } from "../../lib/location-accent";
 import Link from "next/link";
+import { CheckCircle2, ShieldCheck, ArrowRight, MessageSquare, Sparkles, Clock, Calculator } from "lucide-react";
 
 export function generateStaticParams() {
   return SERVICES.map((s) => ({ slug: s.slug }));
@@ -59,7 +60,7 @@ export default async function ServiceDetailPage({
       "@type": "Audience",
       audienceType: "Security Agencies",
     },
-  }
+  };
 
   return (
     <StageShell>
@@ -73,45 +74,55 @@ export default async function ServiceDetailPage({
         image={heroImage}
         meta={`( STATUTORY ADVISORY ) ( ${s.slug.toUpperCase()} )`}
       />
-      <PageMain className="bg-[#FFFEF9] text-[#0F3C65]">
+      <PageMain className="bg-[#050714] text-white">
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-12">
-          {/* Main content column */}
-          <div className="space-y-12 lg:col-span-7" data-stagger>
-            <Prose>
-              <p className="text-base md:text-lg font-medium leading-relaxed text-[#334E68]">{s.description}</p>
-            </Prose>
+          {/* Main Content Column */}
+          <div className="space-y-12 lg:col-span-7">
+            {/* Overview Card */}
+            <div className="rounded-3xl border border-[rgba(200,155,60,0.3)] bg-gradient-to-b from-[#0E1B33] via-[#0A1428] to-[#050714] p-6 sm:p-8 shadow-2xl">
+              <span className="badge-metallic-gold mb-4">
+                <Sparkles className="h-3.5 w-3.5 text-[#D4AF37]" /> Service Overview
+              </span>
+              <p className="text-base sm:text-lg font-normal leading-relaxed text-[#E2E8F0] mt-2">
+                {s.description}
+              </p>
+            </div>
 
-            {/* Bullets */}
-            <div data-section-transition data-transition="clip-up" className="space-y-3">
-              <h2 className="text-xs font-black uppercase tracking-[0.24em] text-[#C89B3C]">Key Deliverables</h2>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            {/* Key Deliverables */}
+            <div className="space-y-4">
+              <h2 className="text-xs font-bold uppercase tracking-[0.2em] text-[#D4AF37] flex items-center gap-2">
+                <ShieldCheck className="h-4 w-4 text-[#D4AF37]" /> Core Deliverables &amp; Outcomes
+              </h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {s.bullets.map((b) => (
-                  <div key={b} className="group flex items-start gap-3 rounded-2xl border border-[#0F3C65]/15 bg-[#FBF7F0] p-4 shadow-sm transition-all hover:border-[#C89B3C] hover:bg-white">
-                    <span className="mt-1 h-2 w-2 shrink-0 rounded-full bg-[#C89B3C]" />
-                    <span className="text-xs font-black leading-normal text-[#0F3C65]">{b}</span>
+                  <div key={b} className="flex items-start gap-3 rounded-2xl border border-white/10 bg-gradient-to-b from-[#0E1B33] to-[#081020] p-4 shadow-md transition-all hover:border-[#D4AF37]">
+                    <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-[#D4AF37]" />
+                    <span className="text-xs sm:text-sm font-bold text-white leading-relaxed">{b}</span>
                   </div>
                 ))}
               </div>
             </div>
 
-            {/* Sections */}
+            {/* Detailed Sections */}
             {s.sections.map((sec, i) => (
-              <div key={sec.h} data-section-transition data-transition={i % 2 ? "clip-left" : "fade"} className="border-t border-[#0F3C65]/15 pt-8">
-                <h2 className="text-xl font-black text-[#0F3C65]" style={{ fontFamily: "var(--font-display)" }}>{sec.h}</h2>
-                <p className="mt-3 text-sm font-medium leading-relaxed text-[#334E68]">{sec.p}</p>
+              <div key={sec.h} className="rounded-2xl border border-white/10 bg-gradient-to-b from-[#0E1B33] to-[#081020] p-6 shadow-md space-y-3">
+                <h3 className="text-xl font-bold text-white" style={{ fontFamily: "var(--font-display)" }}>{sec.h}</h3>
+                <p className="text-sm font-normal leading-relaxed text-[#E2E8F0]">{sec.p}</p>
               </div>
             ))}
 
-            {/* Process Timeline */}
-            <div data-section-transition data-transition="clip-right" className="border-t border-[#0F3C65]/15 pt-8">
-              <h2 className="text-xl font-black text-[#0F3C65] mb-6" style={{ fontFamily: "var(--font-display)" }}>Engagement Roadmap</h2>
-              <div className="space-y-4">
+            {/* Engagement Roadmap */}
+            <div className="space-y-4">
+              <h2 className="text-xl font-bold text-white flex items-center gap-2" style={{ fontFamily: "var(--font-display)" }}>
+                <Clock className="h-5 w-5 text-[#D4AF37]" /> Engagement Roadmap
+              </h2>
+              <div className="space-y-3">
                 {s.process.map((step, idx) => (
-                  <div key={step} className="group flex items-start gap-4 rounded-2xl border border-[#0F3C65]/15 bg-[#FBF7F0] p-4 shadow-sm transition-all hover:border-[#C89B3C] hover:bg-white">
-                    <span className="shrink-0 rounded-xl bg-[#FFF2BA] px-3 py-1 text-[11px] font-black uppercase tracking-wider text-[#0F3C65]">
+                  <div key={step} className="flex items-start gap-4 rounded-2xl border border-white/10 bg-gradient-to-b from-[#0E1B33] to-[#081020] p-4 shadow-md transition-all hover:border-[#D4AF37]">
+                    <span className="badge-metallic-gold shrink-0 text-[10px]">
                       Phase {idx + 1}
                     </span>
-                    <p className="pt-0.5 text-sm font-medium text-[#334E68]">{step}</p>
+                    <p className="pt-0.5 text-sm font-normal text-[#E2E8F0]">{step}</p>
                   </div>
                 ))}
               </div>
@@ -119,74 +130,80 @@ export default async function ServiceDetailPage({
 
             {/* FAQs */}
             {s.faqs.length > 0 && (
-              <div data-section-transition data-transition="blur" className="border-t border-[#0F3C65]/15 pt-8">
-                <h2 className="text-xl font-black text-[#0F3C65] mb-6" style={{ fontFamily: "var(--font-display)" }}>Frequently Asked Questions</h2>
-                <div className="space-y-4">
-                  {s.faqs.map((f) => (
-                    <div key={f.q} className="rounded-2xl border border-[#0F3C65]/15 bg-[#FBF7F0] p-5 shadow-sm transition-all hover:border-[#C89B3C]">
-                      <p className="text-sm font-black text-[#0F3C65]">{f.q}</p>
-                      <p className="mt-2 text-xs font-medium leading-relaxed text-[#334E68]">{f.a}</p>
-                    </div>
+              <div className="space-y-4 border-t border-white/10 pt-8">
+                <h2 className="text-xl font-bold text-white mb-6" style={{ fontFamily: "var(--font-display)" }}>Frequently Asked Questions</h2>
+                <div className="divide-y divide-white/10 border-y border-white/10">
+                  {s.faqs.map((f, idx) => (
+                    <details key={idx} className="group py-4">
+                      <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-bold text-white hover:text-[#F5D061] text-sm sm:text-base">
+                        <span>{f.q}</span>
+                        <span className="text-[#D4AF37] text-sm transition-transform group-open:rotate-180">↓</span>
+                      </summary>
+                      <p className="mt-2.5 text-xs sm:text-sm font-normal leading-relaxed text-[#E2E8F0]">
+                        {f.a}
+                      </p>
+                    </details>
                   ))}
                 </div>
               </div>
             )}
 
-            {/* Inner Page Interlinking Shortcuts */}
-            <div data-section-transition data-transition="fade" className="space-y-4 border-t border-[#0F3C65]/15 pt-8">
-              <h2 className="text-xl font-black text-[#0F3C65]" style={{ fontFamily: "var(--font-display)" }}>
-                Regulatory Advisory &amp; Tools
-              </h2>
+            {/* Cross-Link Shortcuts */}
+            <div className="space-y-4 border-t border-white/10 pt-8">
+              <h3 className="text-lg font-bold text-white">Related Statutory Desks</h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                <Link href="/calculator" className="group rounded-2xl border border-[#0F3C65]/15 bg-[#FBF7F0] p-4 shadow-sm transition-all hover:border-[#C89B3C] hover:bg-white">
-                  <span className="block text-xs font-black text-[#0F3C65]">Fee &amp; Timeline Calculator</span>
-                  <span className="mt-1 block text-[11px] font-medium text-[#486581]">Estimate statutory government fees by state &amp; districts</span>
+                <Link href="/calculator" className="p-4 rounded-xl border border-white/10 bg-[#0A1224] hover:border-[#D4AF37] transition-all flex items-center justify-between">
+                  <div>
+                    <span className="text-xs font-bold text-white block">Statutory Fee Calculator</span>
+                    <span className="text-[11px] text-[#94A3B8]">Calculate state and district fees</span>
+                  </div>
+                  <Calculator className="h-4 w-4 text-[#D4AF37]" />
                 </Link>
-                <Link href="/emergency" className="group rounded-2xl border-2 border-[#C89B3C] bg-[#FFF2BA] p-4 shadow-sm transition-all hover:bg-[#C89B3C]">
-                  <span className="block text-xs font-black text-[#0F3C65] group-hover:text-white">24/7 Emergency Desk</span>
-                  <span className="mt-1 block text-[11px] font-bold text-[#0F3C65]/80 group-hover:text-white/90">Urgent renewal refiling &amp; inspection notice response</span>
-                </Link>
-                <Link href="/certification" className="group rounded-2xl border border-[#0F3C65]/15 bg-[#FBF7F0] p-4 shadow-sm transition-all hover:border-[#C89B3C] hover:bg-white">
-                  <span className="block text-xs font-black text-[#0F3C65]">ISO &amp; MSME Credentials</span>
-                  <span className="mt-1 block text-[11px] font-medium text-[#486581]">ISO 9001/27001 and Startup India accreditation</span>
-                </Link>
-                <Link href="/states" className="group rounded-2xl border border-[#0F3C65]/15 bg-[#FBF7F0] p-4 shadow-sm transition-all hover:border-[#C89B3C] hover:bg-white">
-                  <span className="block text-xs font-black text-[#0F3C65]">Pan-India State Desks</span>
-                  <span className="mt-1 block text-[11px] font-medium text-[#486581]">Explore Controlling Authority rules for 36 States &amp; UTs</span>
+                <Link href="/states" className="p-4 rounded-xl border border-white/10 bg-[#0A1224] hover:border-[#D4AF37] transition-all flex items-center justify-between">
+                  <div>
+                    <span className="text-xs font-bold text-white block">All 28 State Dossiers</span>
+                    <span className="text-[11px] text-[#94A3B8]">Controlling Authority portals &amp; rules</span>
+                  </div>
+                  <ArrowRight className="h-4 w-4 text-[#D4AF37]" />
                 </Link>
               </div>
-            </div>
-
-            <div className="pt-4">
-              <Link href="/services" className="inline-flex items-center gap-2 text-xs font-black text-[#0F3C65] hover:text-[#C89B3C]">
-                &larr; Return to Services Directory
-              </Link>
             </div>
           </div>
 
-          {/* Sticky Consultation Sidebar */}
-          <div className="lg:col-span-5" data-clip>
-            <div className="sticky top-24 rounded-3xl border-2 border-[#C89B3C]/40 bg-[#0A233F] text-white p-6 md:p-8 shadow-2xl">
-              <span className="text-[10px] font-black uppercase tracking-widest text-[#C89B3C]">Instant Consultation</span>
-              <h3 className="mt-2 text-xl font-black text-white" style={{ fontFamily: "var(--font-display)" }}>
-                Request {s.title}
-              </h3>
-              <p className="mt-2 text-xs text-slate-300 font-medium">
-                Fill details below for a statutory compliance evaluation and fast dossier filing.
+          {/* Sticky Sidebar Lead Capture Card */}
+          <div className="lg:col-span-5 space-y-6">
+            <div className="sticky top-24 rounded-3xl border border-[rgba(200,155,60,0.35)] bg-gradient-to-b from-[#0E1B33] to-[#060B18] p-6 sm:p-8 shadow-2xl text-white space-y-6">
+              <div>
+                <span className="badge-metallic-gold mb-2">
+                  Direct Statutory Desk
+                </span>
+                <h3 className="text-xl font-bold text-white mt-1" style={{ fontFamily: "var(--font-display)" }}>
+                  Enquire for {s.title}
+                </h3>
+                <p className="mt-2 text-xs text-[#E2E8F0] font-normal leading-relaxed">
+                  Connect directly with our legal licensing officers for document auditing, training MOU alignment, and official filing.
+                </p>
+              </div>
+
+              {/* Sidebar Lead Form */}
+              <div className="rounded-2xl bg-[#060B18] p-4 border border-white/10 shadow-inner">
+                <WhatsAppForm formType={`Service: ${s.title}`} service={s.title} />
+              </div>
+
+              {/* Direct WhatsApp Action */}
+              <a
+                href={`${DEFAULT_WA}&text=Hi,%20I%20am%20enquiring%20about%20${encodeURIComponent(s.title)}.%20Please%20guide%20me%20with%20the%20process.`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-whatsapp w-full"
+              >
+                <MessageSquare className="h-4 w-4 fill-white" />
+                <span>Instant WhatsApp Consultation</span>
+              </a>
+
+              <p className="text-[11px] text-center text-[#94A3B8]">
+                Confidential • Controlling Authority Compliant • Pan-India Desks
               </p>
-              <div className="mt-6">
-                <WhatsAppForm formType="Service Enquiry" service={s.title} />
-              </div>
-              <div className="mt-6 pt-4 border-t border-white/10 text-center">
-                <a
-                  href={DEFAULT_WA}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 text-xs font-black uppercase tracking-wider text-[#FFF2BA] hover:text-[#C89B3C]"
-                >
-                  Direct WhatsApp Helpdesk &rarr;
-                </a>
-              </div>
             </div>
           </div>
         </div>

@@ -17,7 +17,7 @@ import { CAREERS } from "@/data/careers";
  */
 export async function POST() {
   const statics = [
-    "/", "/about", "/contact", "/services", "/faq", "/states", "/cities",
+    "/", "/about", "/blog", "/contact", "/services", "/faq", "/states", "/cities",
     "/google", "/privacy-policy", "/terms", "/disclaimer", "/franchise",
     "/careers", "/case-studies", "/industries", "/certification",
     "/calculator", "/csr", "/gallery", "/emergency", "/security-services",

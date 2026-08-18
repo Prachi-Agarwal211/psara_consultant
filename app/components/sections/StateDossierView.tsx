@@ -17,35 +17,39 @@ import {
   Mail,
   Globe,
   BadgeCheck,
-  IndianRupee,
+  Calculator,
+  CheckSquare,
+  Square,
+  Copy,
+  Check,
+  MessageSquare,
 } from "lucide-react";
 import FormattedText from "../../../components/FormattedText";
 import { getCaContact } from "../../../data/ca-contacts";
 import type { StateInfo } from "../../../data/states";
 import type { generateStateContent } from "../../../lib/seo-content";
 import { getLocationAccent, accentStyleVars, hashSlug, type LocationAccent } from "../../lib/location-accent";
+import { DEFAULT_WA } from "../../../lib/whatsapp";
 
 type StateContent = ReturnType<typeof generateStateContent>;
 
 interface StateDossierViewProps {
   state: StateInfo;
   content: StateContent;
-  /** Optional — accent overrides the gold default with per-state identity */
   accent?: LocationAccent;
 }
 
-/** Section title with accent hairline — dossier identity */
 function DossierTitle({ index, children }: { index: string; children: React.ReactNode }) {
   return (
     <div className="flex items-center gap-4">
       <span
         aria-hidden
-        className="font-mono text-xs font-black tracking-widest text-[#C89B3C]"
+        className="font-mono text-xs font-bold tracking-widest text-[#D4AF37]"
       >
         {index}
       </span>
-      <div className="h-px w-10 bg-[#C89B3C]" aria-hidden />
-      <h2 className="text-2xl font-black tracking-tight text-[#0F3C65]" style={{ fontFamily: "var(--font-display)" }}>
+      <div className="h-px w-10 bg-[#D4AF37]" aria-hidden />
+      <h2 className="text-2xl font-bold tracking-tight text-white" style={{ fontFamily: "var(--font-display)" }}>
         {children}
       </h2>
     </div>
@@ -57,13 +61,16 @@ export default function StateDossierView({
   content,
   accent,
 }: StateDossierViewProps) {
-  const [activeTab, setActiveTab] = useState<"process" | "documents">("process");
+  const [activeTab, setActiveTab] = useState<"process" | "documents" | "calculator">("process");
+  const [checkedDocs, setCheckedDocs] = useState<Record<number, boolean>>({});
+  const [calcScale, setCalcScale] = useState<"d1" | "d5" | "state">("state");
+  const [copiedField, setCopiedField] = useState<string | null>(null);
+
   const acc = accent ?? getLocationAccent(state.slug);
   const accVars = accentStyleVars(acc) as CSSProperties;
   const ca = getCaContact(state.slug);
 
   const variant = hashSlug(state.slug) % 4;
-  const processAsTimeline = variant % 2 === 1;
   const hasCa = !!(ca && ca.name && ca.name !== "—");
   const variantIdx = hasCa ? 4 : 3;
   const processIdx = variantIdx + 1;
@@ -73,9 +80,26 @@ export default function StateDossierView({
   const faqIdx = marketIdx + 2;
   const pad = (n: number) => String(n).padStart(2, "0");
 
+  const toggleDoc = (idx: number) => {
+    setCheckedDocs((prev) => ({ ...prev, [idx]: !prev[idx] }));
+  };
+
+  const copyToClipboard = (text: string, field: string) => {
+    navigator.clipboard.writeText(text);
+    setCopiedField(field);
+    setTimeout(() => setCopiedField(null), 2000);
+  };
+
+  // Fee calculation numbers
+  const govFee = calcScale === "d1" ? 5000 : calcScale === "d5" ? 10000 : 25000;
+  const consultancyFee = 30000;
+  const mouFee = 35000;
+  const docFee = 5000;
+  const totalStateEst = govFee + consultancyFee + mouFee + docFee;
+
   return (
     <div
-      className="space-y-16 py-4 text-[#0F3C65]"
+      className="space-y-16 py-4 text-white"
       itemScope
       itemType="https://schema.org/HowTo"
       style={accVars}
@@ -84,194 +108,167 @@ export default function StateDossierView({
       <meta itemProp="description" content={content.metaDescription} />
 
       {/* 1. EXECUTIVE DOSSIER HERO SUMMARY */}
-      <section
-        data-section-transition
-        data-transition="clip-up"
-        className="relative overflow-hidden rounded-3xl border border-[#0F3C65]/15 bg-[#FBF7F0] p-6 md:p-10 shadow-sm"
-      >
-        <div className="flex flex-wrap items-center justify-between gap-4 pb-6 border-b border-[#0F3C65]/15">
+      <section className="relative overflow-hidden rounded-3xl border border-[rgba(200,155,60,0.3)] bg-gradient-to-b from-[#0E1B33] via-[#0A1428] to-[#050714] p-6 md:p-10 shadow-2xl">
+        <div className="flex flex-wrap items-center justify-between gap-4 pb-6 border-b border-white/10">
           <div className="flex items-center gap-3">
-            <span className="inline-flex items-center gap-1.5 rounded-lg border border-[#C89B3C] bg-[#FFF2BA] px-3 py-1 text-xs font-black uppercase tracking-wider text-[#0F3C65]">
-              <Shield className="h-3.5 w-3.5 text-[#0F3C65]" />
-              State Licensing Framework
+            <span className="badge-metallic-gold">
+              <Shield className="h-3.5 w-3.5 text-[#D4AF37]" />
+              State Statutory Framework
             </span>
-            <span className="text-xs font-black tracking-widest uppercase text-[#486581]">
+            <span className="text-xs font-mono font-bold tracking-widest uppercase text-[#D4AF37]">
               Ref: PSARA-{state.slug.toUpperCase()}
             </span>
           </div>
-          <div className="flex items-center gap-3 text-xs font-bold text-[#334E68] uppercase tracking-wider">
+          <div className="flex items-center gap-3 text-xs font-bold text-[#E2E8F0] uppercase tracking-wider">
             <span className="flex items-center gap-1">
-              <MapPin className="h-3.5 w-3.5 text-[#C89B3C]" /> Capital: <strong className="text-[#0F3C65] font-black">{state.capital}</strong>
+              <MapPin className="h-3.5 w-3.5 text-[#D4AF37]" /> Capital: <strong className="text-white font-bold">{state.capital}</strong>
             </span>
             <span>•</span>
             <span className="flex items-center gap-1">
-              <Clock className="h-3.5 w-3.5 text-[#C89B3C]" /> Validity: <strong className="text-[#0F3C65] font-black">{state.validityYears} Years</strong>
+              <Clock className="h-3.5 w-3.5 text-[#D4AF37]" /> Validity: <strong className="text-white font-bold">{state.validityYears} Years</strong>
             </span>
           </div>
         </div>
 
-        {/* Intro text cards with AI-answer markup */}
-        <div className="mt-6 space-y-4" data-ai-answer="state-overview">
+        {/* Intro text */}
+        <div className="mt-6 space-y-4">
           {content.intro.map((p, idx) => (
             <FormattedText
               key={idx}
               text={p}
               as="p"
-              className="text-base md:text-lg leading-relaxed text-[#334E68] font-medium block"
+              className="text-base md:text-lg leading-relaxed text-[#E2E8F0] font-normal block"
             />
           ))}
         </div>
 
         {/* Key Framework Parameters */}
-        <div data-stagger className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-4 pt-6 border-t border-[#0F3C65]/15">
-          <div className="rounded-2xl border border-[#0F3C65]/15 bg-white p-4 shadow-sm">
-            <span className="block text-[0.65rem] font-black uppercase tracking-widest text-[#C89B3C]">Application Mode</span>
-            <span className="mt-1 block text-sm font-black text-[#0F3C65]">{state.applicationMode}</span>
+        <div className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-4 pt-6 border-t border-white/10">
+          <div className="rounded-2xl border border-white/10 bg-[#060B18] p-4 shadow-inner">
+            <span className="block text-[0.65rem] font-bold uppercase tracking-widest text-[#D4AF37]">Application Mode</span>
+            <span className="mt-1 block text-sm font-bold text-white">{state.applicationMode}</span>
           </div>
-          <div className="rounded-2xl border border-[#0F3C65]/15 bg-white p-4 shadow-sm">
-            <span className="block text-[0.65rem] font-black uppercase tracking-widest text-[#C89B3C]">Rules Framework</span>
-            <span className="mt-1 block text-sm font-black text-[#0F3C65]">{state.rulesNote}</span>
+          <div className="rounded-2xl border border-white/10 bg-[#060B18] p-4 shadow-inner">
+            <span className="block text-[0.65rem] font-bold uppercase tracking-widest text-[#D4AF37]">Rules Framework</span>
+            <span className="mt-1 block text-sm font-bold text-white">{state.rulesNote}</span>
           </div>
-          <div className="rounded-2xl border border-[#0F3C65]/15 bg-white p-4 shadow-sm">
-            <span className="block text-[0.65rem] font-black uppercase tracking-widest text-[#C89B3C]">Coverage Potential</span>
-            <span className="mt-1 block text-sm font-black text-[#0F3C65]">{state.cities.length}+ Major Districts</span>
+          <div className="rounded-2xl border border-white/10 bg-[#060B18] p-4 shadow-inner">
+            <span className="block text-[0.65rem] font-bold uppercase tracking-widest text-[#D4AF37]">Coverage Scale</span>
+            <span className="mt-1 block text-sm font-bold text-white">{state.cities.length}+ Major Districts</span>
           </div>
         </div>
       </section>
 
       {/* 2. STATE AT A GLANCE */}
-      <section data-section-transition data-transition="blur" className="space-y-6">
-        <DossierTitle index="01">State at a glance</DossierTitle>
-        <div data-stagger className="grid grid-cols-2 lg:grid-cols-3 gap-3.5">
-          <div className="rounded-2xl border-2 border-[#C89B3C]/40 bg-[#FFFDF5] p-4 shadow-sm">
-            <span className="block text-[0.6rem] font-black uppercase tracking-widest text-[#C89B3C]">Controlling Authority</span>
-            <span className="mt-1.5 block text-xs font-black text-[#0F3C65] leading-snug">{state.authority}</span>
+      <section className="space-y-6">
+        <DossierTitle index="01">State at a Glance</DossierTitle>
+        <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="rounded-2xl border border-[rgba(200,155,60,0.3)] bg-gradient-to-br from-[#0E1B33] to-[#081020] p-5 shadow-md">
+            <span className="block text-[0.65rem] font-bold uppercase tracking-widest text-[#D4AF37]">Controlling Authority</span>
+            <span className="mt-1.5 block text-xs font-bold text-white leading-snug">{state.authority}</span>
           </div>
-          <div className="rounded-2xl border border-[#0F3C65]/15 bg-[#FBF7F0] p-4 shadow-sm">
-            <span className="block text-[0.6rem] font-black uppercase tracking-widest text-[#C89B3C]">Indicative Timeline</span>
-            <span className="mt-1.5 block text-lg font-black text-[#0F3C65] font-mono">{state.timeline}</span>
+          <div className="rounded-2xl border border-white/10 bg-gradient-to-br from-[#0E1B33] to-[#081020] p-5 shadow-md">
+            <span className="block text-[0.65rem] font-bold uppercase tracking-widest text-[#D4AF37]">Indicative Timeline</span>
+            <span className="mt-1.5 block text-lg font-bold text-white font-mono">{state.timeline}</span>
           </div>
-          <div className="rounded-2xl border border-[#0F3C65]/15 bg-[#FBF7F0] p-4 shadow-sm">
-            <span className="block text-[0.6rem] font-black uppercase tracking-widest text-[#C89B3C]">Application Mode</span>
-            <span className="mt-1.5 block text-xs font-black text-[#0F3C65] leading-snug">{state.applicationMode}</span>
+          <div className="rounded-2xl border border-white/10 bg-gradient-to-br from-[#0E1B33] to-[#081020] p-5 shadow-md">
+            <span className="block text-[0.65rem] font-bold uppercase tracking-widest text-[#D4AF37]">Application Mode</span>
+            <span className="mt-1.5 block text-xs font-bold text-white leading-snug">{state.applicationMode}</span>
           </div>
-          <div className="rounded-2xl border border-[#0F3C65]/15 bg-[#FBF7F0] p-4 shadow-sm">
-            <span className="block text-[0.6rem] font-black uppercase tracking-widest text-[#C89B3C]">Licence Validity</span>
-            <span className="mt-1.5 block text-lg font-black text-[#0F3C65] font-mono">{state.validityYears} year{state.validityYears > 1 ? "s" : ""}</span>
+          <div className="rounded-2xl border border-white/10 bg-gradient-to-br from-[#0E1B33] to-[#081020] p-5 shadow-md">
+            <span className="block text-[0.65rem] font-bold uppercase tracking-widest text-[#D4AF37]">Licence Validity</span>
+            <span className="mt-1.5 block text-lg font-bold text-white font-mono">{state.validityYears} year{state.validityYears > 1 ? "s" : ""}</span>
           </div>
-          <div className="rounded-2xl border border-[#0F3C65]/15 bg-[#FBF7F0] p-4 shadow-sm">
-            <span className="block text-[0.6rem] font-black uppercase tracking-widest text-[#C89B3C]">State Capital</span>
-            <span className="mt-1.5 block text-sm font-black text-[#0F3C65]">{state.capital}</span>
+          <div className="rounded-2xl border border-white/10 bg-gradient-to-br from-[#0E1B33] to-[#081020] p-5 shadow-md">
+            <span className="block text-[0.65rem] font-bold uppercase tracking-widest text-[#D4AF37]">State Capital</span>
+            <span className="mt-1.5 block text-sm font-bold text-white">{state.capital}</span>
           </div>
-          <div className="rounded-2xl border border-[#0F3C65]/15 bg-[#FBF7F0] p-4 shadow-sm">
-            <span className="block text-[0.6rem] font-black uppercase tracking-widest text-[#C89B3C]">Fee Slabs (Indicative)</span>
-            <span className="mt-1.5 block text-xs font-black text-[#0F3C65] leading-snug">{state.feeOneDistrict} / {state.feeMultiDistrict} / {state.feeEntireState}</span>
-          </div>
-        </div>
-      </section>
-
-      {/* 3. CONTROLLING AUTHORITY INFOCARD */}
-      <section data-section-transition data-transition="fade" className="space-y-8">
-        <DossierTitle index="02">{`Statutory Rules & Application Pathway`}</DossierTitle>
-
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
-          <div className="relative md:col-span-8 rounded-3xl border border-[#0F3C65]/15 bg-[#FBF7F0] p-6 md:p-8 space-y-4 shadow-sm">
-            <div className="flex items-center gap-2 text-xs font-black uppercase tracking-wider text-[#C89B3C]">
-              <Scale className="h-4 w-4 text-[#C89B3C]" />
-              Jurisdiction & Administration
-            </div>
-            {content.authorityBlock.map((p, idx) => (
-              <FormattedText
-                key={idx}
-                text={p}
-                as="p"
-                className="text-sm font-medium leading-relaxed text-[#334E68] block"
-              />
-            ))}
-          </div>
-
-          <div className="md:col-span-4 flex flex-col justify-between space-y-4 rounded-3xl border-2 border-[#C89B3C] bg-[#FFF2BA] p-6 text-[#0F3C65] shadow-md">
-            <div>
-              <span className="text-[0.65rem] font-black uppercase tracking-widest text-[#0F3C65]/80">Fast-Track Compliance Checklist</span>
-              <h3 className="mt-2 text-lg font-black text-[#0F3C65]">Ready for Authority Inspection?</h3>
-              <p className="mt-2 text-xs text-[#0F3C65]/90 font-bold leading-relaxed">
-                Ensure your office address proof and training institute agreement conform strictly with state-notified rules before submission.
-              </p>
-            </div>
-            <a href="#state-enquiry" className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#0F3C65] px-5 py-3 text-xs font-black uppercase tracking-wider text-white hover:bg-[#0A233F] transition-all shadow-md">
-              Verify Your Documents Now
-            </a>
+          <div className="rounded-2xl border border-white/10 bg-gradient-to-br from-[#0E1B33] to-[#081020] p-5 shadow-md">
+            <span className="block text-[0.65rem] font-bold uppercase tracking-widest text-[#D4AF37]">Fee Slabs (Govt)</span>
+            <span className="mt-1.5 block text-xs font-bold text-white leading-snug">₹5,000 / ₹10,000 / ₹25,000</span>
           </div>
         </div>
       </section>
 
-      {/* 3. CA CONTACT CARD */}
+      {/* 3. CA CONTACT CARD WITH ONE-CLICK COPY */}
       {hasCa && (
-        <section data-section-transition data-transition="fade" className="space-y-6">
-          <DossierTitle index="03">{`Controlling Authority — Officer & Contact Details`}</DossierTitle>
+        <section className="space-y-6">
+          <DossierTitle index="02">{`Controlling Authority — Officer & Contact Details`}</DossierTitle>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-            <div className="rounded-2xl border border-[#0F3C65]/15 bg-[#FBF7F0] p-5 shadow-sm">
-              <BadgeCheck className="h-4 w-4 text-[#C89B3C] mb-2" />
-              <span className="block text-[0.6rem] font-black uppercase tracking-widest text-[#C89B3C]">Officer on Record</span>
-              <span className="mt-1 block text-sm font-black text-[#0F3C65] leading-snug">{ca.name}</span>
+            <div className="rounded-2xl border border-white/10 bg-gradient-to-b from-[#0E1B33] to-[#081020] p-5 shadow-md">
+              <BadgeCheck className="h-4 w-4 text-[#D4AF37] mb-2" />
+              <span className="block text-[0.6rem] font-bold uppercase tracking-widest text-[#D4AF37]">Officer on Record</span>
+              <span className="mt-1 block text-sm font-bold text-white leading-snug">{ca.name}</span>
             </div>
             {ca.phone && ca.phone !== "—" && (
-              <div className="rounded-2xl border border-[#0F3C65]/15 bg-[#FBF7F0] p-5 shadow-sm">
-                <Phone className="h-4 w-4 text-[#C89B3C] mb-2" />
-                <span className="block text-[0.6rem] font-black uppercase tracking-widest text-[#C89B3C]">Phone</span>
-                <a href={`tel:${ca.phone}`} className="mt-1 block text-sm font-black text-[#0F3C65] hover:text-[#C89B3C] break-all">{ca.phone}</a>
+              <div className="rounded-2xl border border-white/10 bg-gradient-to-b from-[#0E1B33] to-[#081020] p-5 shadow-md">
+                <div className="flex items-center justify-between">
+                  <Phone className="h-4 w-4 text-[#D4AF37] mb-2" />
+                  <button
+                    onClick={() => copyToClipboard(ca.phone, "phone")}
+                    className="text-[10px] text-[#D4AF37] font-bold flex items-center gap-1 hover:underline"
+                  >
+                    {copiedField === "phone" ? <Check className="h-3 w-3" /> : <Copy className="h-3 w-3" />}
+                    {copiedField === "phone" ? "Copied" : "Copy"}
+                  </button>
+                </div>
+                <span className="block text-[0.6rem] font-bold uppercase tracking-widest text-[#D4AF37]">Phone</span>
+                <a href={`tel:${ca.phone}`} className="mt-1 block text-sm font-bold text-white hover:text-[#F5D061] break-all">{ca.phone}</a>
               </div>
             )}
             {ca.email && ca.email !== "—" && (
-              <div className="rounded-2xl border border-[#0F3C65]/15 bg-[#FBF7F0] p-5 shadow-sm">
-                <Mail className="h-4 w-4 text-[#C89B3C] mb-2" />
-                <span className="block text-[0.6rem] font-black uppercase tracking-widest text-[#C89B3C]">Email</span>
-                <a href={`mailto:${ca.email}`} className="mt-1 block text-sm font-black text-[#0F3C65] hover:text-[#C89B3C] break-all">{ca.email}</a>
+              <div className="rounded-2xl border border-white/10 bg-gradient-to-b from-[#0E1B33] to-[#081020] p-5 shadow-md">
+                <div className="flex items-center justify-between">
+                  <Mail className="h-4 w-4 text-[#D4AF37] mb-2" />
+                  <button
+                    onClick={() => copyToClipboard(ca.email, "email")}
+                    className="text-[10px] text-[#D4AF37] font-bold flex items-center gap-1 hover:underline"
+                  >
+                    {copiedField === "email" ? <Check className="h-3 w-3" /> : <Copy className="h-3 w-3" />}
+                    {copiedField === "email" ? "Copied" : "Copy"}
+                  </button>
+                </div>
+                <span className="block text-[0.6rem] font-bold uppercase tracking-widest text-[#D4AF37]">Email</span>
+                <a href={`mailto:${ca.email}`} className="mt-1 block text-sm font-bold text-white hover:text-[#F5D061] break-all">{ca.email}</a>
               </div>
             )}
             {ca.portal && (
-              <div className="rounded-2xl border border-[#0F3C65]/15 bg-[#FBF7F0] p-5 shadow-sm">
-                <Globe className="h-4 w-4 text-[#C89B3C] mb-2" />
-                <span className="block text-[0.6rem] font-black uppercase tracking-widest text-[#C89B3C]">Portal</span>
-                <span className="mt-1 block text-sm font-black text-[#0F3C65] break-all">{ca.portal}</span>
+              <div className="rounded-2xl border border-white/10 bg-gradient-to-b from-[#0E1B33] to-[#081020] p-5 shadow-md">
+                <Globe className="h-4 w-4 text-[#D4AF37] mb-2" />
+                <span className="block text-[0.6rem] font-bold uppercase tracking-widest text-[#D4AF37]">Portal</span>
+                <span className="mt-1 block text-xs font-bold text-white break-all">{ca.portal}</span>
               </div>
             )}
           </div>
         </section>
       )}
 
-      {/* 3b. VARIANT-SPECIFIC SECTION */}
-      {variant === 0 && <StateSpecialRules state={state} index={pad(variantIdx)} />}
-      {variant === 1 && <StateFeeSlabs state={state} index={pad(variantIdx)} />}
-      {variant === 2 && <StateFormsDocuments state={state} index={pad(variantIdx)} />}
-      {variant === 3 && <StateStatutoryNotes state={state} index={pad(variantIdx)} />}
+      {/* 4. INTERACTIVE TABS: PROCESS / CHECKLIST / LIVE FEE CALCULATOR */}
+      <section className="space-y-8">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-white/10 pb-4">
+          <DossierTitle index={pad(processIdx)}>{`Compliance Toolkit for ${state.name}`}</DossierTitle>
 
-      {/* 4. INTERACTIVE PROCESS ROADMAP & TABS */}
-      <section data-section-transition data-transition="clip-left" className="space-y-8">
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-[#0F3C65]/15 pb-4">
-          <DossierTitle index={pad(processIdx)}>{content.processHeading}</DossierTitle>
-
-          <div className="flex gap-2 border border-[#0F3C65]/15 bg-[#FBF7F0] p-1 rounded-xl">
-            {(["process", "documents"] as const).map((tab) => (
+          <div className="flex gap-2 border border-white/10 bg-[#060B18] p-1.5 rounded-xl">
+            {(["process", "documents", "calculator"] as const).map((tab) => (
               <button
                 key={tab}
                 onClick={() => setActiveTab(tab)}
                 aria-pressed={activeTab === tab}
-                className={`px-4 py-1.5 text-xs font-black uppercase tracking-wider rounded-lg transition-all ${
+                className={`px-4 py-2 text-xs font-bold uppercase tracking-wider rounded-lg transition-all ${
                   activeTab === tab
-                    ? "bg-[#0F3C65] text-white shadow-sm"
-                    : "text-[#486581] hover:text-[#0F3C65]"
+                    ? "bg-gradient-to-r from-[#5821C7] to-[#6D4CC2] text-white shadow-md"
+                    : "text-[#CBD5E1] hover:text-white"
                 }`}
               >
-                {tab}
+                {tab === "process" ? "Roadmap" : tab === "documents" ? "Checklist" : "Fee Calculator"}
               </button>
             ))}
           </div>
         </div>
 
         {/* Tab 1: Step-by-Step Approval Process */}
-        {activeTab === "process" && !processAsTimeline && (
+        {activeTab === "process" && (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {content.process.map((stepText, idx) => {
               const parts = stepText.split(":");
@@ -281,27 +278,27 @@ export default function StateDossierView({
               return (
                 <div
                   key={idx}
-                  className="group relative overflow-hidden rounded-2xl border border-[#0F3C65]/15 bg-[#FBF7F0] p-6 shadow-sm transition-all duration-300 hover:border-[#C89B3C] hover:bg-white"
+                  className="group relative overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-b from-[#0E1B33] to-[#081020] p-6 shadow-md transition-all duration-200 hover:border-[#D4AF37]"
                 >
                   <div className="flex items-center justify-between">
-                    <span className="rounded-lg border border-[#C89B3C] bg-[#FFF2BA] px-2.5 py-1 text-[0.6rem] font-black uppercase tracking-wider text-[#0F3C65]">
+                    <span className="badge-metallic-gold text-[0.6rem]">
                       Phase {idx + 1}
                     </span>
                   </div>
 
-                  <h3 className="mt-4 text-lg font-black text-[#0F3C65]" style={{ fontFamily: "var(--font-display)" }}>
+                  <h3 className="mt-4 text-lg font-bold text-white" style={{ fontFamily: "var(--font-display)" }}>
                     {title}
                   </h3>
 
-                  <p className="mt-2 text-sm font-medium leading-relaxed text-[#334E68]">
+                  <p className="mt-2 text-xs sm:text-sm font-normal leading-relaxed text-[#E2E8F0]">
                     {desc}
                   </p>
 
-                  <div className="mt-4 flex items-center justify-between border-t border-[#0F3C65]/10 pt-4 text-xs font-bold text-[#486581]">
+                  <div className="mt-4 flex items-center justify-between border-t border-white/10 pt-4 text-xs font-bold text-[#94A3B8]">
                     <span className="flex items-center gap-1.5">
-                      <CheckCircle2 className="h-3.5 w-3.5 text-[#C89B3C]" /> Verified Track
+                      <CheckCircle2 className="h-3.5 w-3.5 text-[#D4AF37]" /> Verified Track
                     </span>
-                    <ArrowRight className="h-3.5 w-3.5 text-[#C89B3C] opacity-0 transition-opacity group-hover:opacity-100" />
+                    <ArrowRight className="h-3.5 w-3.5 text-[#D4AF37] transition-transform group-hover:translate-x-1" />
                   </div>
                 </div>
               );
@@ -309,126 +306,142 @@ export default function StateDossierView({
           </div>
         )}
 
-        {/* Tab 1b: Timeline variant */}
-        {activeTab === "process" && processAsTimeline && (
-          <ol className="relative space-y-8 border-l-2 border-[#C89B3C] pl-8">
-            {content.process.map((stepText, idx) => {
-              const parts = stepText.split(":");
-              const rawTitle = parts.length > 1 ? parts[0] : `Step ${idx + 1}`;
-              const title = rawTitle.replace(/^Phase\s*\d+[:\s-]*/i, "").trim() || `Step ${idx + 1}`;
-              const desc = parts.length > 1 ? parts.slice(1).join(":") : stepText;
-              return (
-                <li key={idx} className="relative">
-                  <span aria-hidden className="absolute -left-[41px] top-0 flex h-5 w-5 items-center justify-center rounded-full border border-[#C89B3C] bg-[#FFF2BA]">
-                    <span className="h-1.5 w-1.5 rounded-full bg-[#0F3C65]" />
-                  </span>
-                  <div className="rounded-2xl border border-[#0F3C65]/15 bg-[#FBF7F0] p-5 shadow-sm transition-all hover:border-[#C89B3C]">
-                    <span className="font-mono text-[0.6rem] font-black uppercase tracking-widest text-[#C89B3C]">
-                      Stage {String(idx + 1).padStart(2, "0")}
-                    </span>
-                    <h3 className="mt-1.5 text-lg font-black text-[#0F3C65]" style={{ fontFamily: "var(--font-display)" }}>{title}</h3>
-                    <p className="mt-1.5 text-sm font-medium leading-relaxed text-[#334E68]">{desc}</p>
-                  </div>
-                </li>
-              );
-            })}
-          </ol>
-        )}
-
-        {/* Tab 2: Document Checklist Grid */}
+        {/* Tab 2: Interactive Document Verification Checklist */}
         {activeTab === "documents" && (
           <div className="space-y-6">
-            <h3 className="flex items-center gap-2 text-lg font-black text-[#0F3C65]">
-              <FileCheck className="h-5 w-5 text-[#C89B3C]" /> Mandatory Document Checklist ({state.name})
-            </h3>
+            <div className="flex items-center justify-between">
+              <h3 className="flex items-center gap-2 text-lg font-bold text-white">
+                <FileCheck className="h-5 w-5 text-[#D4AF37]" /> Mandatory Document Checklist ({state.name})
+              </h3>
+              <span className="text-xs text-[#F5D061] font-mono font-bold">
+                {Object.values(checkedDocs).filter(Boolean).length} of {content.documents.length} Checked
+              </span>
+            </div>
+
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {content.documents.map((doc, idx) => (
-                <div key={idx} className="flex items-start gap-3 rounded-2xl border border-[#0F3C65]/15 bg-[#FBF7F0] p-4 shadow-sm">
-                  <span className="mt-0.5 shrink-0 rounded-lg bg-[#FFF2BA] p-1.5 text-[#0F3C65]">
-                    <FileText className="h-4 w-4" />
-                  </span>
-                  <div>
-                    <span className="block text-sm font-black text-[#0F3C65]">{doc}</span>
-                    <span className="text-xs font-medium text-[#486581]">Required for Controlling Authority dossier verification</span>
-                  </div>
-                </div>
-              ))}
+              {content.documents.map((doc, idx) => {
+                const isChecked = !!checkedDocs[idx];
+                return (
+                  <button
+                    key={idx}
+                    type="button"
+                    onClick={() => toggleDoc(idx)}
+                    className={`flex items-start gap-3 rounded-2xl border p-4 text-left transition-all ${
+                      isChecked
+                        ? "border-[#25D366] bg-[#0E1B33]/80 shadow-md"
+                        : "border-white/10 bg-[#060B18] hover:border-white/30"
+                    }`}
+                  >
+                    <span className="mt-0.5 shrink-0 text-[#D4AF37]">
+                      {isChecked ? (
+                        <CheckSquare className="h-5 w-5 text-[#25D366]" />
+                      ) : (
+                        <Square className="h-5 w-5 text-white/40" />
+                      )}
+                    </span>
+                    <div>
+                      <span className={`block text-sm font-bold ${isChecked ? "text-white line-through opacity-80" : "text-white"}`}>
+                        {doc}
+                      </span>
+                      <span className="text-xs text-[#94A3B8] font-normal">
+                        Required for Controlling Authority dossier verification
+                      </span>
+                    </div>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        )}
+
+        {/* Tab 3: Interactive State Fee Calculator */}
+        {activeTab === "calculator" && (
+          <div className="rounded-3xl border border-[rgba(200,155,60,0.35)] bg-gradient-to-b from-[#0E1B33] to-[#060B18] p-6 sm:p-8 space-y-6 shadow-2xl">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/10 pb-4">
+              <div>
+                <span className="badge-metallic-gold mb-2">
+                  <Calculator className="h-3.5 w-3.5 text-[#D4AF37]" /> State Fee Calculator
+                </span>
+                <h3 className="text-xl font-bold text-white" style={{ fontFamily: "var(--font-display)" }}>
+                  {state.name} Cost Breakdown
+                </h3>
+              </div>
+              <div className="flex gap-2">
+                <button
+                  onClick={() => setCalcScale("d1")}
+                  className={`px-3 py-1.5 text-xs font-bold rounded-lg border ${calcScale === "d1" ? "bg-[#5821C7] border-[#D4AF37] text-white" : "border-white/10 text-[#CBD5E1]"}`}
+                >
+                  1 District
+                </button>
+                <button
+                  onClick={() => setCalcScale("d5")}
+                  className={`px-3 py-1.5 text-xs font-bold rounded-lg border ${calcScale === "d5" ? "bg-[#5821C7] border-[#D4AF37] text-white" : "border-white/10 text-[#CBD5E1]"}`}
+                >
+                  5 Districts
+                </button>
+                <button
+                  onClick={() => setCalcScale("state")}
+                  className={`px-3 py-1.5 text-xs font-bold rounded-lg border ${calcScale === "state" ? "bg-[#5821C7] border-[#D4AF37] text-white" : "border-white/10 text-[#CBD5E1]"}`}
+                >
+                  Whole State
+                </button>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-xs">
+              <div className="p-4 rounded-xl bg-[#060B18] border border-white/10">
+                <span className="text-[#94A3B8] block">Statutory Govt Fee</span>
+                <span className="text-lg font-bold text-white font-mono mt-1 block">₹{govFee.toLocaleString("en-IN")}</span>
+              </div>
+              <div className="p-4 rounded-xl bg-[#060B18] border border-white/10">
+                <span className="text-[#94A3B8] block">Training MOU Fee</span>
+                <span className="text-lg font-bold text-white font-mono mt-1 block">₹{mouFee.toLocaleString("en-IN")}</span>
+              </div>
+              <div className="p-4 rounded-xl bg-[#060B18] border border-white/10">
+                <span className="text-[#94A3B8] block">Consultancy Fee</span>
+                <span className="text-lg font-bold text-white font-mono mt-1 block">₹{consultancyFee.toLocaleString("en-IN")}</span>
+              </div>
+              <div className="p-4 rounded-xl bg-[#060B18] border border-white/10">
+                <span className="text-[#94A3B8] block">Documentation &amp; Affidavits</span>
+                <span className="text-lg font-bold text-white font-mono mt-1 block">₹{docFee.toLocaleString("en-IN")}</span>
+              </div>
+            </div>
+
+            <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-[#D4AF37]/40">
+              <div>
+                <span className="text-xs text-[#CBD5E1] font-bold">Total Estimated Budget:</span>
+                <span className="text-2xl font-bold gold-metallic-text font-mono block">₹{totalStateEst.toLocaleString("en-IN")}</span>
+              </div>
+
+              <a
+                href={`${DEFAULT_WA}&text=Hi,%20I%20am%20enquiring%20for%20PSARA%20License%20in%20${state.name}.%20Estimated%20Total:%20₹${totalStateEst.toLocaleString("en-IN")}.%20Please%20guide%20with%20filing.`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-whatsapp"
+              >
+                <MessageSquare className="h-4 w-4 fill-white" />
+                <span>Start {state.name} Application</span>
+              </a>
             </div>
           </div>
         )}
       </section>
 
-      {/* 4b. FEES, COVERAGE & VALIDITY — rendered via shared section */}
-      <FeesSection content={content} acc={acc} index={pad(feesIdx)} />
-
-      {/* 5. STATUTORY REQUIREMENTS: TRAINING & REJECTION — rendered via shared section */}
-      <TrainingRejectionSection content={content} />
-
-      {/* 6. MARKET SECTORS */}
-      <section data-section-transition data-transition="blur" className="space-y-8">
-        <DossierTitle index={pad(marketIdx)}>{content.marketHeading}</DossierTitle>
-
-        <div className="relative overflow-hidden border border-white/10 bg-white/[0.02] p-6 space-y-6">
-          <div
-            className="pointer-events-none absolute -left-20 -top-20 h-64 w-64 rounded-full"
-            style={{ background: `radial-gradient(circle, ${acc.base}12 0%, transparent 70%)` }}
-            aria-hidden
-          />
-          {content.market.map((p, idx) => (
-            <p key={idx} className="text-sm font-normal leading-relaxed text-[var(--white-70)]">
-              {p}
-            </p>
-          ))}
-
-          {state.sectors.length > 0 && (
-            <div className="border-t border-white/10 pt-4">
-              <span className="mb-3 block text-xs font-bold uppercase tracking-wider text-acc-bright">
-                High-Demand Security Sectors in {state.name}:
-              </span>
-              <div className="flex flex-wrap gap-2">
-                {state.sectors.map((sec) => (
-                  <span
-                    key={sec}
-                    className="border border-acc bg-acc-soft px-3 py-1 text-xs font-bold uppercase tracking-wider text-acc-bright transition-colors hover:bg-acc-strong"
-                  >
-                    {sec}
-                  </span>
-                ))}
-              </div>
-            </div>
-          )}
-        </div>
-      </section>
-
-      {/* Why Choose Us Points */}
-      <section data-section-transition data-transition="fade" className="space-y-8">
-        <DossierTitle index={pad(whyIdx)}>{content.whyHeading}</DossierTitle>
-
-        <div data-stagger className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {content.whyPoints.map((pt, idx) => (
-            <div key={idx} className="group flex items-start gap-3 border border-white/10 bg-white/[0.02] p-4 transition-[color,border-color,background-color] duration-300 hover:-translate-y-0.5 hover:border-acc">
-              <Sparkles className="mt-1 h-4 w-4 shrink-0 text-acc-bright" />
-              <span className="text-sm font-bold text-white">{pt}</span>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* 7. INTERACTIVE STATE FAQS */}
-      <section data-section-transition data-transition="clip-up" className="space-y-8">
+      {/* 5. INTERACTIVE STATE FAQS */}
+      <section className="space-y-8">
         <DossierTitle index={pad(faqIdx)}>{`Frequently Asked Questions — ${state.name}`}</DossierTitle>
 
         <div className="divide-y divide-white/10 border-y border-white/10">
           {content.faqs.map((faq, idx) => (
             <details key={idx} className="group py-5 transition-colors">
-              <summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-2 font-[family-name:var(--font-display)] text-base font-bold text-white">
+              <summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-2 font-[family-name:var(--font-display)] text-base font-bold text-white hover:text-[#F5D061]">
                 <span className="flex items-center gap-2">
-                  <span aria-hidden className="font-mono text-[0.6rem] text-acc opacity-60">{String(idx + 1).padStart(2, "0")}</span>
+                  <span aria-hidden className="font-mono text-xs text-[#D4AF37]">{String(idx + 1).padStart(2, "0")}</span>
                   {faq.q}
                 </span>
-                <span className="text-acc-bright text-sm transition-transform group-open:rotate-180">↓</span>
+                <span className="text-[#D4AF37] text-sm transition-transform group-open:rotate-180">↓</span>
               </summary>
-              <p className="mt-3 max-w-3xl px-2 text-sm font-normal leading-relaxed text-[var(--white-70)]">
+              <p className="mt-3 max-w-3xl px-2 text-sm font-normal leading-relaxed text-[#E2E8F0]">
                 {faq.a}
               </p>
             </details>
@@ -436,224 +449,5 @@ export default function StateDossierView({
         </div>
       </section>
     </div>
-  );
-}
-
-/** FEES, COVERAGE & VALIDITY — shared section */
-function FeesSection({ content, acc, index }: { content: StateContent; acc: LocationAccent; index: string }) {
-  return (
-    <section data-section-transition data-transition="fade" className="space-y-8">
-      <DossierTitle index={index}>{content.feesHeading}</DossierTitle>
-
-      <div className="relative overflow-hidden border border-white/10 bg-white/[0.02] p-6 md:p-8 space-y-4">
-        <div
-          className="pointer-events-none absolute -right-20 top-0 h-56 w-56 rounded-full"
-          style={{ background: `radial-gradient(circle, ${acc.base}14 0%, transparent 70%)` }}
-          aria-hidden
-        />
-        <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-acc-bright">
-          <IndianRupee className="h-4 w-4" />
-          Government Fees, Coverage Slabs & Deposit
-        </div>
-        {content.fees.map((p, idx) => (
-          <FormattedText
-            key={idx}
-            text={p}
-            as="p"
-            className="text-sm font-normal leading-relaxed text-[var(--white-70)] block"
-          />
-        ))}
-      </div>
-    </section>
-  );
-}
-
-/** VARIANT 0 — SPECIAL RULES: state-specific statutory quirks (unique per state) */
-function StateSpecialRules({ state, index }: { state: StateInfo; index: string }) {
-  const rules = state.specialRules ?? [];
-  return (
-    <section data-section-transition data-transition="fade" className="space-y-8">
-      <DossierTitle index={index}>{`Special rules that trip up ${state.name} applicants`}</DossierTitle>
-      <div className="space-y-3">
-        {rules.length > 0 ? (
-          rules.map((rule, idx) => (
-            <div
-              key={idx}
-              className="flex items-start gap-3 border border-white/10 bg-white/[0.02] p-4 transition-[color,border-color,background-color] duration-[250ms] ease-out hover:border-acc"
-            >
-              <span aria-hidden className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center border border-acc bg-acc-soft">
-                <AlertTriangle className="h-3 w-3 text-acc-bright" />
-              </span>
-              <span className="text-sm font-normal leading-relaxed text-[var(--white-70)]">{rule}</span>
-            </div>
-          ))
-        ) : (
-          <div className="flex items-start gap-3 border border-white/10 bg-white/[0.02] p-4">
-            <span aria-hidden className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center border border-acc bg-acc-soft">
-              <AlertTriangle className="h-3 w-3 text-acc-bright" />
-            </span>
-            <span className="text-sm font-normal leading-relaxed text-[var(--white-70)]">
-              No additional state-specific rules have been notified for {state.name}; the standard PSARA Model Rules apply.
-            </span>
-          </div>
-        )}
-      </div>
-      <p className="max-w-3xl text-xs font-normal leading-relaxed text-[var(--white-55)]">
-        {state.rulesNote}
-      </p>
-    </section>
-  );
-}
-
-/** VARIANT 1 — FEE SLABS: three fee cards + validity band (unique per state) */
-function StateFeeSlabs({ state, index }: { state: StateInfo; index: string }) {
-  const rows = [
-    { label: "Single District", value: state.feeOneDistrict },
-    { label: "Multiple Districts", value: state.feeMultiDistrict },
-    { label: "Entire State", value: state.feeEntireState },
-  ];
-  return (
-    <section data-section-transition data-transition="clip-left" className="space-y-8">
-      <DossierTitle index={index}>{`PSARA fee structure — ${state.name}`}</DossierTitle>
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        {rows.map((r) => (
-          <div key={r.label} className="relative overflow-hidden border border-acc bg-acc-soft p-5">
-            <span aria-hidden className="pointer-events-none absolute -right-2 -top-4 font-mono text-5xl font-bold text-acc opacity-[0.12]">₹</span>
-            <span className="block text-[0.65rem] font-bold uppercase tracking-widest text-acc-bright">{r.label}</span>
-            <span className="mt-2 block font-mono text-lg font-bold text-white leading-snug">{r.value}</span>
-          </div>
-        ))}
-      </div>
-      <div className="flex flex-wrap gap-x-6 gap-y-2 border border-white/10 bg-white/[0.02] px-5 py-4 text-xs font-semibold text-[var(--white-70)]">
-        <span>Validity: <span className="text-acc-bright">{state.validityYears} years</span></span>
-        <span>Timeline: <span className="text-acc-bright">{state.timeline}</span></span>
-        <span>Mode: <span className="text-acc-bright">{state.applicationMode}</span></span>
-        <span className="basis-full text-[var(--white-55)] font-normal">{state.feeNote}</span>
-      </div>
-    </section>
-  );
-}
-
-/** VARIANT 2 — FORMS & DOCUMENTS: official forms + state-extra documents (unique per state) */
-function StateFormsDocuments({ state, index }: { state: StateInfo; index: string }) {
-  const forms = state.forms ?? [];
-  const extra = state.documentsExtra ?? [];
-  return (
-    <section data-section-transition data-transition="clip-right" className="space-y-8">
-      <DossierTitle index={index}>{`Forms & extra documents — ${state.name}`}</DossierTitle>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div className="border border-white/10 bg-white/[0.02] p-6 space-y-4">
-          <span className="block text-xs font-bold uppercase tracking-wider text-acc-bright">Official Forms</span>
-          <ul className="space-y-3">
-            {forms.length > 0 ? (
-              forms.map((f, idx) => (
-                <li key={idx} className="flex items-start gap-2 text-sm font-normal text-[var(--white-70)]">
-                  <FileCheck className="mt-0.5 h-4 w-4 shrink-0 text-acc-bright" />
-                  <span>{f}</span>
-                </li>
-              ))
-            ) : (
-              <li className="flex items-start gap-2 text-sm font-normal text-[var(--white-55)]">
-                <FileCheck className="mt-0.5 h-4 w-4 shrink-0 text-acc-bright" />
-                <span>Standard PSARA application forms as per the Central Model Rules.</span>
-              </li>
-            )}
-          </ul>
-        </div>
-        <div className="border border-white/10 bg-white/[0.02] p-6 space-y-4">
-          <span className="block text-xs font-bold uppercase tracking-wider text-acc-bright">State-Extra Documents</span>
-          <ul className="space-y-3">
-            {extra.length > 0 ? (
-              extra.map((d, idx) => (
-                <li key={idx} className="flex items-start gap-2 text-sm font-normal text-[var(--white-70)]">
-                  <FileText className="mt-0.5 h-4 w-4 shrink-0 text-acc-bright" />
-                  <span>{d}</span>
-                </li>
-              ))
-            ) : (
-              <li className="flex items-start gap-2 text-sm font-normal text-[var(--white-55)]">
-                <FileText className="mt-0.5 h-4 w-4 shrink-0 text-acc-bright" />
-                <span>No state-extra documents notified; national checklist applies.</span>
-              </li>
-            )}
-          </ul>
-        </div>
-      </div>
-      <p className="max-w-3xl text-xs font-normal leading-relaxed text-[var(--white-55)]">
-        {state.trainingNote}
-      </p>
-    </section>
-  );
-}
-
-/** VARIANT 3 — STATUTORY NOTES: mode, timeline, training + rules band (unique per state) */
-function StateStatutoryNotes({ state, index }: { state: StateInfo; index: string }) {
-  return (
-    <section data-section-transition data-transition="blur" className="space-y-8">
-      <DossierTitle index={index}>{`How ${state.name} processes PSARA applications`}</DossierTitle>
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <div className="relative overflow-hidden border border-acc bg-acc-soft p-5">
-          <span className="block text-[0.65rem] font-bold uppercase tracking-widest text-acc-bright">Application Mode</span>
-          <span className="mt-2 block text-sm font-bold text-white leading-snug">{state.applicationMode}</span>
-        </div>
-        <div className="relative overflow-hidden border border-white/10 bg-white/[0.02] p-5">
-          <span className="block text-[0.65rem] font-bold uppercase tracking-widest text-acc-bright">Indicative Timeline</span>
-          <span className="mt-2 block font-mono text-lg font-bold text-white">{state.timeline}</span>
-        </div>
-        <div className="relative overflow-hidden border border-white/10 bg-white/[0.02] p-5">
-          <span className="block text-[0.65rem] font-bold uppercase tracking-widest text-acc-bright">Coverage Districts</span>
-          <span className="mt-2 block font-mono text-lg font-bold text-white">{state.cities.length}+</span>
-        </div>
-      </div>
-      <div className="space-y-4 border border-white/10 bg-white/[0.02] p-6">
-        <div className="flex items-start gap-2 text-sm font-normal leading-relaxed text-[var(--white-70)]">
-          <Building2 className="mt-0.5 h-4 w-4 shrink-0 text-acc-bright" />
-          <span><strong className="text-white">Training:</strong> {state.trainingNote}</span>
-        </div>
-        <div className="flex items-start gap-2 text-sm font-normal leading-relaxed text-[var(--white-70)]">
-          <Scale className="mt-0.5 h-4 w-4 shrink-0 text-acc-bright" />
-          <span><strong className="text-white">Rules:</strong> {state.rulesNote}</span>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/** TRAINING & REJECTION — shared section */
-function TrainingRejectionSection({ content }: { content: StateContent }) {
-  return (
-    <section data-section-transition data-transition="clip-right" className="grid grid-cols-1 md:grid-cols-2 gap-8">
-      <div className="relative overflow-hidden border border-white/10 bg-white/[0.02] p-6 md:p-8 space-y-4">
-        <div
-          className="pointer-events-none absolute -right-20 top-0 h-56 w-56 rounded-full"
-          style={{ background: `radial-gradient(circle, rgba(212,184,114,0.08) 0%, transparent 70%)` }}
-          aria-hidden
-        />
-        <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-acc-bright">
-          <Building2 className="h-4 w-4" />
-          {content.trainingHeading}
-        </div>
-        {content.training.map((p, idx) => (
-          <p key={idx} className="text-sm font-normal leading-relaxed text-[var(--white-70)]">
-            {p}
-          </p>
-        ))}
-      </div>
-
-      <div className="border border-[var(--signal-red)]/20 bg-[var(--signal-red)]/[0.04] p-6 md:p-8 space-y-4">
-        <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[var(--signal-red)]">
-          <AlertTriangle className="h-4 w-4" />
-          {content.rejectionHeading}
-        </div>
-        <ul className="space-y-3">
-          {content.rejections.map((rej, idx) => (
-            <li key={idx} className="flex items-start gap-2 text-xs md:text-sm font-normal text-[var(--white-70)]">
-              <span className="font-bold text-[var(--signal-red)]">•</span>
-              <span>{rej}</span>
-            </li>
-          ))}
-        </ul>
-      </div>
-    </section>
   );
 }

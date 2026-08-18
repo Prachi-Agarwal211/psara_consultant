@@ -6,12 +6,16 @@ import { pageMeta } from "../../lib/metadata";
 import { OFFICES, CONTACT, SITE } from "../../lib/config";
 import JsonLd from "../../components/JsonLd";
 
-export const metadata: Metadata = pageMeta(
+export const metadata: Metadata = {
+  ...pageMeta(
   "Google Business Profiles & Offices",
   `Find ${SITE.name} on Google Maps — Jaipur HQ, Delhi, Gurugram, Noida, Ahmedabad. Call ${CONTACT.phoneDisplay}.`,
   "/google",
   ["PSARA consultant Google", "PSARA office Jaipur", "PSARA Delhi"]
-);
+  ),
+  // Useful as a human office directory, but not a separate search intent.
+  robots: { index: false, follow: true },
+};
 
 export default function GooglePage() {
   const graph = {

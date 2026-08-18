@@ -36,9 +36,9 @@
   overflow: hidden;
 }
 
-/* Night section — executive navy section callout */
+/* Night section — executive black/cherry section callout */
 .section-night {
-  background: #0A233F;
+  background: #0B0E14;
   color: #FFFFFF;
   position: relative;
   overflow: hidden;
@@ -209,8 +209,8 @@
 /* Pink accent line — horeca energy */
 .glow-line-pink {
   height: 2px;
-  background: linear-gradient(90deg, transparent, #e60067, transparent);
-  box-shadow: 0 0 16px rgba(230,0,103,0.5);
+  background: linear-gradient(90deg, transparent, var(--electric), transparent);
+  box-shadow: 0 0 16px var(--electric-glow);
 }
 
 /* ═══════════════════════════════════════════════════════════════
@@ -267,7 +267,7 @@
   border: 1px solid rgba(255,255,255,0.12);
 }
 .city-cell {
-  background: #0a1228;
+  background: var(--void-2);
   padding: 1rem 0.5rem;
   text-align: center;
   transition: background 0.3s ease, color 0.3s ease;

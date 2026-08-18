@@ -371,58 +371,6 @@ export function initScrollProgress(): () => void {
   };
 }
 
-/** Section transition variant types */
-export type SectionTransitionVariant = "fade" | "clip-left" | "clip-right" | "clip-up" | "blur";
-
-/** Clip-path configs by variant — memoized outside function */
-const CLIP_CONFIGS: Record<SectionTransitionVariant, { from: string; to: string } | undefined> = {
-  "fade": undefined,
-  "clip-left":  { from: "inset(0 100% 0 0)", to: "inset(0 0% 0 0)" },
-  "clip-right": { from: "inset(0 0% 0 100%)", to: "inset(0 0% 0 0)" },
-  "clip-up":    { from: "inset(100% 0 0 0)", to: "inset(0% 0 0 0)" },
-  "blur": undefined,
-};
-
-/**
- * Section entrance transition — supports clip-path wipes, blur-ins, and fade-ups.
- * Jasmine/Luke inspired: each section can have a different reveal personality.
- */
-export function initSectionTransition(
-  section: HTMLElement,
-  options: {
-    variant?: SectionTransitionVariant;
-    start?: string;
-    duration?: number;
-  } = {}
-) {
-  if (!section) return;
-  section.style.setProperty("opacity", "1");
-  section.style.setProperty("filter", "none");
-}
-
-/**
- * Initialize transition animations on all section elements with the given selector.
- * Sections can specify their variant via data attribute: data-transition="clip-left|clip-right|clip-up|blur|fade"
- */
-export function initAllSectionTransitions(
-  scope: HTMLElement,
-  selector = "[data-section-transition]"
-) {
-  if (!scope || prefersReducedMotion()) return;
-  const sections = scope.querySelectorAll<HTMLElement>(selector);
-  if (!sections.length) return;
-
-  sections.forEach((section) => {
-    const attr = section.getAttribute("data-transition");
-    const variant: SectionTransitionVariant = (
-      attr === "clip-left" || attr === "clip-right" || attr === "clip-up" || attr === "blur"
-        ? attr
-        : "fade"
-    );
-    initSectionTransition(section, { variant });
-  });
-}
-
 /**
  * Navigation loading bar — animates a thin gold bar across the top of the page.
  * Call start() when navigation begins, finish() when complete.

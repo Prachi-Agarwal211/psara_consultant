@@ -9,7 +9,6 @@ import {
   Award,
   Clock,
   CheckCircle2,
-  ArrowRight,
   Sparkles,
   ChevronRight,
   MessageSquare,
@@ -38,7 +37,7 @@ const PHASES = [
     title: "Training MOU & Dossier Compilation",
     window: "Days 4–10",
     tagline: "State-recognized institute empanelment & affidavit drafting",
-    icon: BookOpenIcon,
+    icon: FileCheck,
     desc: "A mandatory requirement in every State is a live MOU with a recognized security guard training institute. We facilitate MOU execution, draft promoter affidavits in prescribed State formats, and assemble director KYC, photos, and legal declarations into an inspection-ready dossier.",
     deliverables: [
       "Recognized Training Institute MOU",
@@ -94,40 +93,30 @@ const PHASES = [
   },
 ];
 
-function BookOpenIcon(props: React.SVGProps<SVGSVGElement>) {
-  return <FileCheck {...props} />;
-}
-
 export default function ApprovalRoadmap() {
   const [activeStep, setActiveStep] = useState<number>(0);
 
   return (
-    <section id="process" className="relative py-24 bg-gradient-to-b from-[#0A233F] via-[#0F3C65] to-[#07192C] text-white overflow-hidden" data-parallax-root>
-      {/* Background glow lines */}
-      <div className="pointer-events-none absolute inset-0 z-0 opacity-20" aria-hidden>
-        <div className="absolute top-1/3 right-0 w-[50vw] h-[500px] bg-[#C89B3C] blur-3xl" />
-        <div className="absolute bottom-0 left-10 w-[400px] h-[400px] bg-[#78A2D2] blur-3xl" />
-      </div>
-
-      <div className="relative z-10 px-[var(--gutter)] max-w-7xl mx-auto space-y-14">
+    <section id="process" className="relative py-20 lg:py-28 bg-[#050714] text-white border-b border-white/10">
+      <div className="relative z-10 px-[var(--gutter)] max-w-7xl mx-auto space-y-12">
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-white/15 pb-8">
           <div>
-            <div className="flex items-center gap-2 text-xs font-black uppercase tracking-[0.25em] text-[#FFF2BA]" style={{ fontFamily: "var(--font-body)" }}>
-              <Sparkles className="h-3.5 w-3.5 text-[#C89B3C]" />
+            <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-[0.16em] text-[#D4AF37]" style={{ fontFamily: "var(--font-body)" }}>
+              <Sparkles className="h-3.5 w-3.5 text-[#D4AF37]" />
               Proven Licensing Methodology
             </div>
-            <h2 className="mt-3 font-black text-white leading-tight" style={{ fontSize: "clamp(2rem, 4.5vw, 3.4rem)", fontFamily: "var(--font-display)" }}>
-              From first call <span className="text-[#FFF2BA]">to PSARA licence grant</span>
+            <h2 className="mt-3 text-3xl sm:text-4xl md:text-5xl font-bold text-white leading-tight" style={{ fontFamily: "var(--font-display)" }}>
+              From First Call <span className="gold-metallic-text">to PSARA Licence Grant</span>
             </h2>
           </div>
 
-          <p className="max-w-md text-sm md:text-base text-slate-200 leading-relaxed font-medium" style={{ fontFamily: "var(--font-body)" }}>
+          <p className="max-w-md text-sm md:text-base text-[#E2E8F0] leading-relaxed font-normal" style={{ fontFamily: "var(--font-body)" }}>
             Our 5-phase structured roadmap eliminates documentation errors, prepares your premises for inspection, and tracks police verifications daily.
           </p>
         </div>
 
-        {/* Phase Stepper Tabs */}
+        {/* Phase Stepper Tabs with Multi-Tone Shading */}
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
           {PHASES.map((p, idx) => {
             const isActive = activeStep === idx;
@@ -136,81 +125,76 @@ export default function ApprovalRoadmap() {
               <button
                 key={p.num}
                 onClick={() => setActiveStep(idx)}
-                className={`group relative flex flex-col justify-between p-5 text-left border rounded-2xl transition-all duration-300 ${
+                className={`group relative flex flex-col justify-between p-5 text-left border rounded-2xl transition-all duration-200 ${
                   isActive
-                    ? "border-[#C89B3C] bg-[#FFF2BA] text-[#0F3C65] shadow-xl"
-                    : "border-white/15 bg-white/10 text-white hover:border-[#FFF2BA] hover:bg-white/20"
+                    ? "border-[#D4AF37] bg-gradient-to-b from-[#14284D] to-[#0A162B] text-white shadow-xl shadow-black/60"
+                    : "border-white/12 bg-[#060B18] text-[#CBD5E1] hover:border-white/30 hover:text-white"
                 }`}
               >
                 <div className="flex items-center justify-between gap-2 mb-4">
-                  <span className={`font-mono text-xs font-black ${isActive ? "text-[#0F3C65]" : "text-[#FFF2BA]"}`}>
+                  <span className={`font-mono text-xs font-bold ${isActive ? "text-[#F5D061]" : "text-[#D4AF37]"}`}>
                     {p.num}
                   </span>
                   <span
-                    className={`inline-flex items-center gap-1 text-[0.6rem] font-black uppercase tracking-wider px-2 py-0.5 rounded-lg border ${
+                    className={`inline-flex items-center gap-1 text-[0.625rem] font-bold uppercase tracking-wider px-2 py-0.5 rounded-lg border ${
                       isActive
-                        ? "border-[#0F3C65]/30 bg-[#0F3C65]/10 text-[#0F3C65]"
-                        : "border-white/20 text-white/80"
+                        ? "border-[#D4AF37]/50 bg-[#050714] text-[#F5D061]"
+                        : "border-white/10 text-[#94A3B8]"
                     }`}
-                    style={{ fontFamily: "var(--font-body)" }}
                   >
                     <Clock className="h-2.5 w-2.5" />
                     {p.window}
                   </span>
                 </div>
 
-                <div className="space-y-1">
-                  <span
-                    className={`text-sm font-black leading-snug transition-colors duration-300 block ${
-                      isActive ? "text-[#0F3C65]" : "text-white"
-                    }`}
-                    style={{ fontFamily: "var(--font-display)" }}
-                  >
-                    {p.title}
-                  </span>
-                </div>
+                <span
+                  className="text-sm font-bold leading-snug block text-white"
+                  style={{ fontFamily: "var(--font-display)" }}
+                >
+                  {p.title}
+                </span>
               </button>
             );
           })}
         </div>
 
-        {/* Selected Phase Detail Showcase Card */}
+        {/* Selected Phase Detail Showcase Card with Deep Gradient Surface */}
         {(() => {
           const p = PHASES[activeStep]!;
           const IconComp = p.icon;
 
           return (
-            <div className="relative overflow-hidden rounded-3xl border-2 border-[#C89B3C]/50 bg-[#07192C]/90 p-8 md:p-12 shadow-2xl backdrop-blur-xl">
+            <div className="rounded-3xl border border-[rgba(200,155,60,0.3)] bg-gradient-to-b from-[#0E1B33] via-[#0A1224] to-[#050714] p-8 md:p-12 shadow-2xl">
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
                 {/* Left Col: Details */}
                 <div className="lg:col-span-7 space-y-6">
                   <div className="flex flex-wrap items-center gap-3">
-                    <span className="rounded-lg border border-[#C89B3C] bg-[#FFF2BA] px-3.5 py-1 text-xs font-black uppercase tracking-[0.2em] text-[#0F3C65]">
+                    <span className="badge-metallic-gold">
                       {p.phase} • {p.statusTag}
                     </span>
-                    <span className="flex items-center gap-1.5 text-xs text-slate-300 font-mono">
-                      <Clock className="h-3.5 w-3.5 text-[#C89B3C]" />
+                    <span className="flex items-center gap-1.5 text-xs text-[#CBD5E1] font-mono">
+                      <Clock className="h-3.5 w-3.5 text-[#D4AF37]" />
                       Estimated Window: {p.window}
                     </span>
                   </div>
 
-                  <h3 className="text-2xl md:text-3xl font-black text-white leading-snug" style={{ fontFamily: "var(--font-display)" }}>
+                  <h3 className="text-2xl md:text-3xl font-bold text-white leading-snug" style={{ fontFamily: "var(--font-display)" }}>
                     {p.title}
                   </h3>
 
-                  <p className="text-base text-slate-200 leading-relaxed font-medium" style={{ fontFamily: "var(--font-body)" }}>
+                  <p className="text-base text-[#E2E8F0] leading-relaxed font-normal" style={{ fontFamily: "var(--font-body)" }}>
                     {p.desc}
                   </p>
 
                   {/* Deliverables List */}
-                  <div className="space-y-3 border-t border-white/15 pt-6">
-                    <span className="block text-xs font-black uppercase tracking-[0.2em] text-[#FFF2BA]" style={{ fontFamily: "var(--font-body)" }}>
+                  <div className="space-y-3 border-t border-white/10 pt-6">
+                    <span className="block text-xs font-bold uppercase tracking-wider text-[#D4AF37]">
                       Phase Key Deliverables:
                     </span>
                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                       {p.deliverables.map((d, dIdx) => (
-                        <div key={dIdx} className="flex items-center gap-2 rounded-xl border border-white/15 bg-white/10 p-3 text-xs font-black text-white">
-                          <CheckCircle2 className="h-4 w-4 shrink-0 text-[#C89B3C]" />
+                        <div key={dIdx} className="flex items-center gap-2 rounded-xl border border-white/10 bg-[#060B18] p-3 text-xs font-bold text-white shadow-inner">
+                          <CheckCircle2 className="h-4 w-4 shrink-0 text-[#D4AF37]" />
                           <span>{d}</span>
                         </div>
                       ))}
@@ -218,43 +202,40 @@ export default function ApprovalRoadmap() {
                   </div>
                 </div>
 
-                {/* Right Col: Interactive Visual Box */}
-                <div className="lg:col-span-5 flex flex-col justify-between space-y-6 rounded-2xl border border-white/15 bg-white/10 p-7 md:p-8">
-                  <div className="flex items-center justify-between border-b border-white/15 pb-4">
-                    <div className="flex items-center gap-3">
-                      <div className="p-2.5 rounded-xl border border-[#C89B3C] bg-[#FFF2BA] text-[#0F3C65]">
-                        <IconComp className="h-6 w-6 stroke-[2.5]" />
-                      </div>
-                      <div>
-                        <span className="block text-xs text-[#FFF2BA] uppercase font-mono font-bold">Step {p.num} of 05</span>
-                        <span className="text-sm font-black text-white">{p.tagline}</span>
-                      </div>
+                {/* Right Col: Action Box */}
+                <div className="lg:col-span-5 flex flex-col justify-between space-y-6 rounded-2xl border border-[rgba(200,155,60,0.25)] bg-[#060B18] p-6 sm:p-8 shadow-inner">
+                  <div className="flex items-center gap-3 border-b border-white/10 pb-4">
+                    <div className="p-3 rounded-xl bg-gradient-to-br from-[#0A233F] to-[#14284D] border border-[#D4AF37]/30 text-[#D4AF37]">
+                      <IconComp className="h-6 w-6" />
+                    </div>
+                    <div>
+                      <span className="block text-xs text-[#D4AF37] uppercase font-mono font-bold">Step {p.num} of 05</span>
+                      <span className="text-sm font-bold text-white">{p.tagline}</span>
                     </div>
                   </div>
 
                   <div className="space-y-4">
-                    <div className="text-xs text-slate-200 leading-relaxed font-medium">
+                    <p className="text-xs text-[#CBD5E1] leading-relaxed">
                       Have questions about this phase for your specific State or office city? Speak directly with our regulatory liaison desk.
-                    </div>
+                    </p>
 
                     <a
                       href={DEFAULT_WA}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center justify-center gap-2.5 w-full rounded-xl bg-[#FFF2BA] px-6 py-3.5 text-xs font-black uppercase tracking-[0.16em] text-[#0F3C65] transition-all duration-300 hover:bg-white shadow-lg"
-                      style={{ fontFamily: "var(--font-body)" }}
+                      className="btn-whatsapp w-full"
                     >
-                      <MessageSquare className="h-4 w-4 stroke-[2.5]" />
+                      <MessageSquare className="h-4 w-4 fill-white" />
                       <span>Discuss {p.phase} Requirements</span>
                     </a>
                   </div>
 
                   {/* Step Switcher Navigation */}
-                  <div className="flex items-center justify-between border-t border-white/15 pt-4 text-xs font-black text-slate-200">
+                  <div className="flex items-center justify-between border-t border-white/10 pt-4 text-xs font-bold text-[#CBD5E1]">
                     <button
                       disabled={activeStep === 0}
                       onClick={() => setActiveStep((prev) => Math.max(0, prev - 1))}
-                      className="hover:text-[#FFF2BA] disabled:opacity-30 transition-colors"
+                      className="hover:text-white disabled:opacity-30 transition-colors"
                     >
                       ← Previous Phase
                     </button>
@@ -262,9 +243,9 @@ export default function ApprovalRoadmap() {
                     <button
                       disabled={activeStep === PHASES.length - 1}
                       onClick={() => setActiveStep((prev) => Math.min(PHASES.length - 1, prev + 1))}
-                      className="hover:text-[#FFF2BA] disabled:opacity-30 transition-colors flex items-center gap-1"
+                      className="hover:text-white disabled:opacity-30 transition-colors flex items-center gap-1"
                     >
-                      Next Phase <ChevronRight className="h-3.5 w-3.5 stroke-[2.5]" />
+                      Next Phase <ChevronRight className="h-3.5 w-3.5" />
                     </button>
                   </div>
                 </div>

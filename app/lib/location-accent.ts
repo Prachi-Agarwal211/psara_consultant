@@ -3,7 +3,7 @@
  * Deterministic accent + hero image per slug, so every location page
  * reads as hand-built while staying stable across builds.
  *
- * Accents: gold (brand) / amber / bronze / electric — assigned by slug hash.
+ * Accents: cherry (brand) / gold / bronze / parchment — assigned by slug hash.
  * Heroes: generated state imagery where available, themed backgrounds otherwise.
  */
 
@@ -36,7 +36,7 @@ export const LOCATION_ACCENTS: Record<AccentId, LocationAccent> = {
     line: "rgba(212,184,114,0.35)",
     soft: "rgba(212,184,114,0.08)",
     strong: "rgba(212,184,114,0.16)",
-    glow: "radial-gradient(ellipse 60% 55% at 70% 20%, rgba(212,184,114,0.14) 0%, transparent 65%)",
+    glow: "rgba(212,184,114,0.08)",
   },
   amber: {
     id: "amber",
@@ -46,7 +46,7 @@ export const LOCATION_ACCENTS: Record<AccentId, LocationAccent> = {
     line: "rgba(201,148,91,0.38)",
     soft: "rgba(201,148,91,0.08)",
     strong: "rgba(201,148,91,0.16)",
-    glow: "radial-gradient(ellipse 60% 55% at 70% 20%, rgba(201,148,91,0.16) 0%, transparent 65%)",
+    glow: "rgba(201,148,91,0.08)",
   },
   bronze: {
     id: "bronze",
@@ -56,17 +56,17 @@ export const LOCATION_ACCENTS: Record<AccentId, LocationAccent> = {
     line: "rgba(176,141,87,0.38)",
     soft: "rgba(176,141,87,0.08)",
     strong: "rgba(176,141,87,0.16)",
-    glow: "radial-gradient(ellipse 60% 55% at 70% 20%, rgba(176,141,87,0.15) 0%, transparent 65%)",
+    glow: "rgba(176,141,87,0.08)",
   },
   electric: {
     id: "electric",
-    base: "#4D9FFF",
-    bright: "#8AB8FF",
-    deep: "#0066FF",
-    line: "rgba(77,159,255,0.38)",
-    soft: "rgba(77,159,255,0.08)",
-    strong: "rgba(77,159,255,0.16)",
-    glow: "radial-gradient(ellipse 60% 55% at 70% 20%, rgba(0,102,255,0.16) 0%, transparent 65%)",
+    base: "#6557E8",
+    bright: "#B8B2FF",
+    deep: "#30266F",
+    line: "rgba(101,87,232,0.38)",
+    soft: "rgba(101,87,232,0.08)",
+    strong: "rgba(101,87,232,0.16)",
+    glow: "rgba(101,87,232,0.12)",
   },
 };
 
@@ -124,6 +124,13 @@ const CINEMATIC_HEROES = [
   "/assets/images/cinematic/process-path.jpg",
 ];
 
+const HUB_HERO_OVERRIDES: Record<string, string> = {
+  "services-hub": "/assets/images/generated/inner-hero-dossier.png",
+  "blog-hub": "/assets/images/generated/inner-hero-dossier.png",
+  "about-hub": "/assets/images/generated/inner-hero-parchment.png",
+  "contact-hub": "/assets/images/generated/inner-hero-parchment.png",
+};
+
 export function stateHeroImage(slug: string): string {
   const direct = STATE_HEROES[slug];
   if (direct) return direct;
@@ -136,5 +143,6 @@ export function cityHeroImage(citySlug: string): string {
 
 /** Generic fallback for non-location hubs (services, guides) */
 export function hubHeroImage(seed: string): string {
+  if (HUB_HERO_OVERRIDES[seed]) return HUB_HERO_OVERRIDES[seed];
   return CINEMATIC_HEROES[hashSlug(seed) % CINEMATIC_HEROES.length];
 }

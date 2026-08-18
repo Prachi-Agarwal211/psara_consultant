@@ -2,10 +2,10 @@
 
 /* ── Section Themes ── */
 .section-void     { background-color: var(--void); }
-.section-electric { background: linear-gradient(160deg, var(--void) 0%, #041030 50%, #0a1a4a 100%); }
-.section-metal    { background: linear-gradient(160deg, var(--void) 0%, #041030 50%, #0a1a4a 100%); }
-.section-warm     { background: linear-gradient(160deg, var(--void) 0%, #041030 50%, #0a1a4a 100%); }
-.section-night    { background: linear-gradient(160deg, #010408 0%, var(--void) 50%, #010408 100%); }
+.section-electric { background-color: var(--cherry-deep); }
+.section-metal    { background-color: var(--space); }
+.section-warm     { background-color: var(--void-2); }
+.section-night    { background-color: var(--void); }
 .section-surface  { background-color: var(--space); }
 
 /* ── Section transition curtain ── */
@@ -24,14 +24,14 @@
 }
 .section-void .section-curtain::after,
 .section-night .section-curtain::after {
-  background: linear-gradient(to bottom, transparent, rgba(2,8,20,0.95));
+  background: rgba(8,6,13,0.95);
 }
 .section-metal .section-curtain::after,
 .section-warm .section-curtain::after {
-  background: linear-gradient(to bottom, transparent, rgba(4,16,48,0.95));
+  background: rgba(33,23,47,0.95);
 }
 .section-electric .section-curtain::after {
-  background: linear-gradient(to bottom, transparent, rgba(4,16,48,0.95));
+  background: rgba(76,29,149,0.95);
 }
 
 /* ── Section entry animations ── */
@@ -71,13 +71,13 @@
 /* ── Thin accent line with glow ── */
 .accent-line {
   height: 1px;
-  background: linear-gradient(90deg, transparent, var(--gold), var(--electric), transparent);
+  background: var(--gold);
   box-shadow: 0 0 8px var(--electric-glow);
 }
 
 .accent-line-gold {
   height: 1px;
-  background: linear-gradient(90deg, transparent, var(--gold-bright), transparent);
+  background: var(--gold-bright);
   box-shadow: 0 0 12px rgba(232,213,163,0.5);
 }
 
@@ -88,11 +88,7 @@
   line-height: 0.9;
   letter-spacing: -0.04em;
   font-family: var(--font-display);
-  background: var(--grad-metal);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  -webkit-text-fill-color: transparent;
+  color: var(--gold-bright);
 }
 
 /* ── Service card horizontal scroll (kept in design-system.css only) ── */
@@ -143,7 +139,7 @@
   color: var(--gold-bright);
 }
 .presence-cell.hq {
-  background: linear-gradient(135deg, rgba(212,184,114,0.15) 0%, rgba(184,142,68,0.08) 100%);
+  background: rgba(201,163,78,0.15);
   color: var(--gold-bright);
 }
 

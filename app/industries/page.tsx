@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowUpRight, ShieldCheck } from "lucide-react";
+import { ArrowUpRight, ShieldCheck, Sparkles, MessageSquare } from "lucide-react";
 import { PageHero, PageMain } from "../../components/PageShell";
 import StageShell from "../components/ui/StageShell";
 import { pageMeta } from "../../lib/metadata";
@@ -23,48 +23,61 @@ export default function IndustriesPage() {
         crumbs={[{ label: "Industries" }]}
       />
 
-      <PageMain>
+      <PageMain className="bg-[#050714] text-white">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {INDUSTRIES.map((ind) => (
             <Link
               key={ind.slug}
               href={`/industries/${ind.slug}`}
-              className="group border border-white/10 bg-[var(--void-2)] p-8 transition-colors duration-200 hover:border-[var(--gold)] flex flex-col justify-between"
+              className="group rounded-3xl border border-[rgba(200,155,60,0.25)] bg-gradient-to-b from-[#0E1B33] to-[#081020] p-6 sm:p-8 transition-all duration-200 hover:-translate-y-1 hover:border-[#D4AF37] hover:from-[#14284D] hover:to-[#0A1428] flex flex-col justify-between shadow-xl"
             >
               <div>
                 <div className="flex items-center justify-between mb-4">
-                  <span className="text-[10px] font-bold uppercase tracking-widest text-[var(--gold-bright)]">
+                  <span className="badge-metallic-gold text-[10px]">
                     Sector Standard
                   </span>
-                  <ArrowUpRight className="h-4 w-4 text-[var(--white-40)] transition-transform group-hover:text-[var(--gold-bright)] group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                  <ArrowUpRight className="h-4 w-4 text-[#D4AF37] transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                 </div>
 
-                <h2 className="font-[family-name:var(--font-display)] text-2xl font-bold text-white group-hover:text-[var(--gold-bright)] transition-colors">
+                <h2 className="text-2xl font-bold text-white group-hover:text-[#F5D061] transition-colors" style={{ fontFamily: "var(--font-display)" }}>
                   {ind.title}
                 </h2>
 
-                <p className="mt-3 text-xs md:text-sm text-[var(--white-70)] leading-relaxed">
+                <p className="mt-3 text-sm text-[#E2E8F0] leading-relaxed font-normal">
                   {ind.short}
                 </p>
               </div>
 
-              <div className="mt-8 pt-4 border-t border-white/10 flex items-center justify-between text-xs">
-                <span className="text-[var(--white-55)]">Custom Regulatory Requirements</span>
-                <span className="font-bold text-[var(--gold-bright)] group-hover:underline">Explore Industry Rules &rarr;</span>
+              <div className="mt-8 pt-4 border-t border-white/10 flex items-center justify-between text-xs font-bold uppercase tracking-wider text-[#94A3B8]">
+                <span>Custom Regulatory Rules</span>
+                <span className="text-[#F5D061] group-hover:underline flex items-center gap-1">
+                  Explore Rules &rarr;
+                </span>
               </div>
             </Link>
           ))}
         </div>
 
-        <section className="mt-16 border border-[var(--gold)]/30 bg-[var(--void-2)] p-8 text-center">
-          <ShieldCheck className="h-8 w-8 text-[var(--gold-bright)] mx-auto mb-3" />
-          <h2 className="font-[family-name:var(--font-display)] text-2xl font-bold text-white">Need Sector-Specific Tender Clearance?</h2>
-          <p className="mt-2 text-xs text-[var(--white-70)] max-w-xl mx-auto">
+        {/* Bottom Callout */}
+        <section className="mt-16 rounded-3xl border border-[rgba(200,155,60,0.35)] bg-gradient-to-r from-[#0E1B33] via-[#0A1224] to-[#0E1B33] p-8 md:p-12 text-center shadow-2xl space-y-4">
+          <div className="inline-flex p-3 rounded-2xl bg-[#060B18] border border-[#D4AF37]/40 text-[#D4AF37] mb-2">
+            <ShieldCheck className="h-8 w-8" />
+          </div>
+          <h2 className="text-2xl md:text-4xl font-bold text-white" style={{ fontFamily: "var(--font-display)" }}>
+            Need Sector-Specific Tender Clearance?
+          </h2>
+          <p className="text-sm text-[#E2E8F0] max-w-xl mx-auto font-normal leading-relaxed">
             We review client tender conditions (armed vs unarmed, guard height/education criteria, supervisor ratios) and align your PSARA dossier accordingly.
           </p>
-          <div className="mt-6">
-            <a href={DEFAULT_WA} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-full px-8 py-3.5 text-xs font-bold uppercase tracking-wider" style={{ background: "var(--grad-metal)", color: "var(--void)" }}>
-              Consult Industry Legal Specialist
+          <div className="pt-4">
+            <a
+              href={DEFAULT_WA}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-whatsapp"
+            >
+              <MessageSquare className="h-4 w-4 fill-white" />
+              <span>Consult Industry Legal Specialist</span>
             </a>
           </div>
         </section>

@@ -6,16 +6,16 @@ import { LEADERS } from "../../../data/team";
 
 export default function Leadership() {
   return (
-    <section className="relative py-20 px-4 md:px-8 border-t border-[#0F3C65]/15 bg-gradient-to-b from-[#FFFEF9] via-[#FBF7F0] to-[#FFFDF5] text-[#0F3C65] overflow-hidden my-12">
+    <section className="relative py-20 px-4 md:px-8 border-t border-white/10 bg-[#0B0E14] text-white overflow-hidden my-12">
       <div className="relative mx-auto max-w-7xl">
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <span className="inline-flex items-center gap-2 rounded-xl border border-[#C89B3C] bg-[#FFF2BA] px-4 py-1.5 text-xs font-black uppercase tracking-widest text-[#0F3C65] shadow-sm">
-            <ShieldCheck className="h-4 w-4 text-[#0F3C65]" /> Board of Leadership
+          <span className="inline-flex items-center gap-2 rounded-xl border border-[#BF953F]/40 bg-[#8C1F32]/30 px-4 py-1.5 text-xs font-black uppercase tracking-widest text-[#BF953F] shadow-md">
+            <ShieldCheck className="h-4 w-4 text-[#BF953F]" /> Board of Leadership
           </span>
-          <h2 className="mt-4 text-3xl md:text-5xl font-black tracking-tight text-[#0F3C65] leading-[0.95]" style={{ fontFamily: "var(--font-display)" }}>
+          <h2 className="mt-4 text-3xl md:text-5xl font-black tracking-tight text-white leading-[0.95]" style={{ fontFamily: "var(--font-display)" }}>
             Pioneering Compliance &amp; Regulatory Leadership
           </h2>
-          <p className="mt-4 text-base text-[#334E68] font-medium leading-relaxed max-w-xl mx-auto">
+          <p className="mt-4 text-base text-slate-300 font-medium leading-relaxed max-w-xl mx-auto">
             Led by veteran security domain architects with decades of executive leadership across SIS, SLV Security, Jaguar Security, ICICI Bank, Bajaj Group, and BSS Security.
           </p>
         </div>

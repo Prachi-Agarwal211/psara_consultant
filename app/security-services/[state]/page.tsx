@@ -18,7 +18,8 @@ export async function generateMetadata({ params }: { params: Promise<{ state: st
   if (!st) return {};
   return {
     ...pageMeta(`PSARA License in ${st.name} — Controlling Authority & Rules`, `Complete PSARA License guide for ${st.name}: ${st.authority}, fees, training MOU, and police verification.`, `/security-services/${st.slug}`),
-    // Thin duplicate of /states/{slug} — never index, point crawlers at the canonical dossier.
+    // Keep this useful supporting route live, but make the long-form dossier
+    // the only index target for this state intent.
     robots: { index: false, follow: true },
     alternates: { canonical: `/states/${st.slug}` },
   };

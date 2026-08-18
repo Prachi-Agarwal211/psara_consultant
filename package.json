@@ -11,6 +11,8 @@
     "cy:open": "cypress open",
     "cy:run": "cypress run",
     "test:a11y": "cypress run --spec cypress/e2e/accessibility.cy.ts",
+    "submit:indexnow": "node scripts/submit-indexnow.mjs",
+    "validate:jsonld": "node scripts/validate-jsonld.mjs",
     "postinstall": "node scripts/fix-lightningcss.js"
   },
   "dependencies": {

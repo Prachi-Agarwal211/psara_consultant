@@ -24,7 +24,7 @@ for (const f of files) {
     totalBlocks++;
     try {
       const obj = JSON.parse(raw.replace(/&quot;/g, '"').replace(/&amp;/g, "&").replace(/&#x27;/g, "'").replace(/&lt;/g, "<").replace(/&gt;/g, ">"));
-      const list = Array.isArray(obj) ? obj : [obj];
+      const list = Array.isArray(obj) ? obj : obj["@graph"] ? obj["@graph"] : [obj];
       for (const item of list) {
         const t = item["@type"];
         if (!t) { invalid++; console.log(`  NO @TYPE in ${relative(root, f)}`); continue; }

@@ -140,7 +140,7 @@ export default function MetricsDashboardPage() {
 
           <div className="mt-8 pt-6 border-t border-white/10">
             <p className="text-xs text-gray-500 text-center">
-              Secured by Reverbex Technology
+              Secured Analytics Portal
             </p>
           </div>
         </div>
@@ -154,7 +154,6 @@ export default function MetricsDashboardPage() {
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-4 border-b border-white/10 pb-6">
         <div>
           <div className="flex items-center gap-3">
-            <img src="/reverbex-logo.png" alt="Reverbex Logo" className="w-8 h-8 rounded object-contain bg-white/10 p-1" />
             <h1 className="text-2xl md:text-3xl font-extrabold tracking-tight">Client Analytics & Lead Intelligence</h1>
           </div>
           <p className="text-sm text-gray-400 mt-1">

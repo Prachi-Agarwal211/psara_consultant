@@ -1,153 +1,156 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import Image from "next/image";
 import {
-  FileText,
-  ShieldCheck,
-  Building2,
-  Users,
-  Calendar,
-  Building,
   Award,
+  Building2,
+  CalendarDays,
+  FileText,
   MapPin,
-  CheckCircle2,
+  PenLine,
+  ShieldCheck,
+  UsersRound,
 } from "lucide-react";
 import { counterStampAnimation } from "../../lib/gsap";
-import FloatProps, { PROPS } from "../ui/FloatProps";
+import { ensureGsap, prefersReducedMotion } from "../../../app/lib/motion";
 
 const CATEGORIES = [
-  { label: "TRAINING MOU", icon: FileText, bg: "bg-[#FFF2BA]", text: "text-[#0F3C65]" },
-  { label: "POLICE VERIFICATION", icon: ShieldCheck, bg: "bg-[#D9E6F2]", text: "text-[#0F3C65]" },
-  { label: "MULTI-STATE", icon: Building2, bg: "bg-[#FFF2BA]", text: "text-[#0F3C65]" },
-  { label: "COMPANY SUPPORT", icon: Users, bg: "bg-[#D9E6F2]", text: "text-[#0F3C65]" },
+  { label: "Training MOU", icon: FileText },
+  { label: "Police Verification", icon: ShieldCheck },
+  { label: "Multi-State", icon: Building2 },
+  { label: "Company Support", icon: UsersRound },
 ];
 
 const RIBBON_ITEMS = [
-  { label: "QUICK 30-45 DAY PROCESSING", icon: Calendar },
-  { label: "JAIPUR HQ • DELHI • GURUGRAM • NOIDA DESKS", icon: Building },
-  { label: "500+ PSARA LICENSES GRANTED", icon: Award },
-  { label: "28 STATES & UTs COVERED", icon: MapPin },
+  { label: "Quick 30–45 day processing", icon: CalendarDays },
+  { label: "Jaipur HQ · Delhi · Gurugram · Noida desks", icon: Building2 },
+  { label: "500+ PSARA licenses granted", icon: Award },
+  { label: "28 states & UTs covered", icon: MapPin },
 ];
 
 const STATS = [
-  {
-    num: "28",
-    suffix: "",
-    title: "STATES & UTs COVERED",
-    desc: "Controlling Authority filing desks across India.",
-    icon: MapPin,
-    badgeBg: "bg-[#FFF2BA]",
-  },
-  {
-    num: "570",
-    suffix: "+",
-    title: "CITY DESKS",
-    desc: "One desk per district HQ for seamless coordination.",
-    icon: Building2,
-    badgeBg: "bg-[#D9E6F2]",
-  },
-  {
-    num: "500",
-    suffix: "+",
-    title: "LICENSES CLEARED",
-    desc: "Agencies served with end-to-end support.",
-    icon: ShieldCheck,
-    badgeBg: "bg-[#FFF2BA]",
-  },
-  {
-    num: "10",
-    suffix: " Yrs",
-    title: "STATUTORY PRACTICE",
-    desc: "PSARA Act, 2005 specialists with a decade of expertise.",
-    icon: FileText,
-    badgeBg: "bg-[#D9E6F2]",
-  },
+  { num: "28", suffix: "", title: "States & UTs covered", desc: "Controlling Authority filing desks across India.", icon: MapPin },
+  { num: "570", suffix: "+", title: "City desks", desc: "One desk per district HQ for seamless coordination.", icon: Building2 },
+  { num: "500", suffix: "+", title: "Licenses cleared", desc: "Agencies served with end-to-end support.", icon: ShieldCheck },
+  { num: "10", suffix: " Yrs", title: "Statutory practice", desc: "PSARA Act, 2005 specialists with a decade of expertise.", icon: PenLine },
 ];
 
 export default function StatsBar() {
   const rootRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
-    if (rootRef.current) counterStampAnimation(rootRef.current);
+    const root = rootRef.current;
+    if (!root) return;
+
+    counterStampAnimation(root);
+    if (prefersReducedMotion()) return;
+
+    const { gsap } = ensureGsap();
+    const ctx = gsap.context(() => {
+      gsap.from("[data-proof-category]", {
+        opacity: 0,
+        y: 18,
+        stagger: 0.08,
+        duration: 0.7,
+        ease: "power3.out",
+        scrollTrigger: { trigger: root, start: "top 75%" },
+      });
+      gsap.from("[data-proof-row]", {
+        opacity: 0,
+        x: -30,
+        stagger: 0.12,
+        duration: 0.85,
+        ease: "power3.out",
+        scrollTrigger: { trigger: "[data-proof-list]", start: "top 80%" },
+      });
+      gsap.to("[data-proof-watermark]", {
+        yPercent: -12,
+        rotate: -4,
+        ease: "none",
+        scrollTrigger: { trigger: root, start: "top bottom", end: "bottom top", scrub: 1 },
+      });
+    }, root);
+
+    return () => ctx.revert();
   }, []);
 
   return (
-    <section ref={rootRef} className="relative overflow-hidden bg-gradient-to-b from-[#0A233F] via-[#0F3C65] to-[#07192C] text-white py-12 lg:py-16">
-      {/* Background ambient lighting */}
-      <div className="pointer-events-none absolute inset-0 z-0 opacity-20" aria-hidden>
-        <div className="absolute top-0 right-1/4 w-96 h-96 rounded-full bg-[#C89B3C] blur-3xl" />
-        <div className="absolute bottom-0 left-1/4 w-96 h-96 rounded-full bg-[#78A2D2] blur-3xl" />
-      </div>
-      <FloatProps slots={PROPS.stats} />
+    <section ref={rootRef} id="proof" className="relative isolate overflow-hidden bg-gradient-to-b from-[#050714] via-[#0A1224] to-[#050714] py-20 text-white sm:py-24 lg:py-28 border-b border-white/10" aria-label="PSARA proof and coverage">
+      <Image
+        data-proof-watermark
+        src="/apple-touch-icon.png"
+        alt=""
+        width={640}
+        height={640}
+        className="pointer-events-none absolute -right-[9rem] top-16 -z-10 w-[min(52vw,620px)] opacity-[.06] mix-blend-screen sm:-right-[7rem] lg:right-[-3rem] lg:top-4"
+        aria-hidden
+      />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 space-y-10">
-        {/* Service Category Pills Bar */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          {CATEGORIES.map((c) => {
-            const IconComp = c.icon;
-            return (
-              <div
-                key={c.label}
-                className="flex items-center gap-3.5 p-4 rounded-2xl bg-white/10 border border-white/15 shadow-lg backdrop-blur-md hover:border-[#C89B3C] hover:bg-white/15 transition-all group"
-              >
-                <div className="w-11 h-11 rounded-xl bg-[#FFF2BA] flex items-center justify-center text-[#0F3C65] shrink-0 group-hover:scale-105 transition-transform shadow-md">
-                  <IconComp className="w-5 h-5 stroke-[2.5]" />
-                </div>
-                <span className="text-xs md:text-sm font-black tracking-wider text-white uppercase" style={{ fontFamily: "var(--font-display)" }}>
-                  {c.label}
-                </span>
-              </div>
-            );
-          })}
-        </div>
-
-        {/* Executive Gold Accent Ribbon */}
-        <div className="rounded-2xl bg-gradient-to-r from-[#FFF2BA] via-[#F5E6BA] to-[#FFF2BA] text-[#0F3C65] p-4 md:p-5 shadow-2xl grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 border-2 border-[#C89B3C]">
-          {RIBBON_ITEMS.map((item) => {
-            const IconComp = item.icon;
-            return (
-              <div key={item.label} className="flex items-center gap-3 px-2">
-                <div className="w-8 h-8 rounded-lg bg-[#0F3C65] text-[#FFF2BA] flex items-center justify-center shrink-0 shadow-sm">
-                  <IconComp className="w-4 h-4" />
-                </div>
-                <span className="text-[0.68rem] md:text-xs font-black uppercase tracking-wider text-[#0F3C65]" style={{ fontFamily: "var(--font-body)" }}>
-                  {item.label}
-                </span>
-              </div>
-            );
-          })}
-        </div>
-
-        {/* 4-Column Stat Cards Grid */}
-        <div className="rounded-3xl bg-[#07192C]/90 border border-white/20 p-6 md:p-10 shadow-2xl backdrop-blur-xl">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 divide-y sm:divide-y-0 lg:divide-x divide-white/15">
-            {STATS.map((s, idx) => {
-              const IconComp = s.icon;
-              return (
-                <div key={s.title} className={`space-y-4 text-center px-4 ${idx !== 0 ? "pt-6 sm:pt-0" : ""}`}>
-                  <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-[#78A2D2] to-[#0F3C65] border border-white/20 text-white shadow-lg">
-                    <IconComp className="w-7 h-7 stroke-[2]" />
-                  </div>
-                  <div className="counter-num text-4xl sm:text-5xl font-black text-[#FFF2BA]" style={{ fontFamily: "var(--font-display)" }}>
-                    <span data-count={s.num} data-suffix={s.suffix}>
-                      {s.num}{s.suffix}
-                    </span>
-                  </div>
-                  <div className="space-y-1">
-                    <h2 className="text-xs font-black uppercase tracking-wider text-white" style={{ fontFamily: "var(--font-display)" }}>
-                      {s.title}
-                    </h2>
-                    <p className="text-xs text-slate-300 font-medium leading-relaxed max-w-xs mx-auto">
-                      {s.desc}
-                    </p>
-                  </div>
-                </div>
-              );
-            })}
+      <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-12">
+        <div className="flex flex-col gap-7 border-b border-white/15 pb-8 md:flex-row md:items-end md:justify-between md:gap-10">
+          <div className="max-w-xl">
+            <p className="mb-4 flex items-center gap-2 text-xs font-bold uppercase tracking-[.2em] text-[#D4AF37]">
+              <span className="h-px w-8 bg-[#D4AF37]" /> The PSARA Ledger
+            </p>
+            <h2 className="text-balance text-3xl sm:text-4xl md:text-5xl font-bold leading-[1.1] text-white" style={{ fontFamily: "var(--font-display)" }}>
+              Evidence that moves <br /><span className="gold-metallic-text">a file forward.</span>
+            </h2>
           </div>
+          <p className="max-w-xs text-sm font-normal leading-relaxed text-[#E2E8F0] md:pb-1" style={{ fontFamily: "var(--font-body)" }}>
+            Statute-first guidance, verification-ready dossiers, and filing support across India&apos;s controlling authorities.
+          </p>
+        </div>
+
+        {/* Categories Bar */}
+        <div className="flex flex-wrap items-center gap-x-7 gap-y-4 border-b border-white/15 py-6" aria-label="Core capabilities">
+          {CATEGORIES.map(({ label, icon: Icon }) => (
+            <div key={label} data-proof-category className="flex items-center gap-2.5 text-xs font-bold uppercase tracking-[.14em] text-white">
+              <Icon className="h-4 w-4 text-[#D4AF37]" strokeWidth={2} />
+              <span>{label}</span>
+            </div>
+          ))}
+        </div>
+
+        {/* Ribbon Items */}
+        <div className="flex flex-wrap items-center gap-x-8 gap-y-3 border-b border-[#D4AF37]/30 py-5 text-xs font-bold uppercase tracking-[.12em] text-[#F5D061]">
+          {RIBBON_ITEMS.map(({ label, icon: Icon }) => (
+            <div key={label} className="flex items-center gap-2.5">
+              <Icon className="h-4 w-4 text-[#D4AF37]" strokeWidth={2} />
+              <span>{label}</span>
+            </div>
+          ))}
+        </div>
+
+        {/* Stats Row List */}
+        <div data-proof-list className="mt-8 border-t border-white/15">
+          {STATS.map(({ num, suffix, title, desc, icon: Icon }, index) => (
+            <div key={title} data-proof-row className="group flex flex-col gap-5 border-b border-white/15 py-7 sm:flex-row sm:items-center sm:gap-8 sm:py-8 lg:gap-14">
+              <div className="flex w-full items-center gap-5 sm:w-[44%] lg:w-[40%]">
+                <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-[rgba(200,155,60,0.4)] bg-gradient-to-br from-[#0E1B33] to-[#081020] text-[#D4AF37] transition-all group-hover:border-[#D4AF37] group-hover:text-white shadow-md">
+                  <Icon className="h-5 w-5" strokeWidth={2} />
+                </span>
+                <div className="counter-num whitespace-nowrap text-4xl sm:text-5xl md:text-6xl font-bold leading-none gold-metallic-text" style={{ fontFamily: "var(--font-display)" }}>
+                  <span data-count={num} data-suffix={suffix}>{num}{suffix}</span>
+                </div>
+                {index === 0 && <span className="hidden text-xs font-bold uppercase tracking-[.14em] text-white/60 sm:block">Coverage</span>}
+              </div>
+              <div className="flex max-w-xl flex-1 items-baseline justify-between gap-6">
+                <div>
+                  <h3 className="text-sm font-bold uppercase tracking-[.14em] text-white sm:text-base" style={{ fontFamily: "var(--font-display)" }}>{title}</h3>
+                  <p className="mt-1.5 max-w-md text-sm leading-relaxed text-[#CBD5E1] font-normal">{desc}</p>
+                </div>
+                <span className="hidden text-xs font-mono font-bold tracking-[.2em] text-[#D4AF37] sm:block">0{index + 1}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div className="flex items-center justify-between pt-7 text-xs font-bold uppercase tracking-[.16em] text-white/60">
+          <span>PSARA Act · 2005</span>
+          <span className="flex items-center gap-2"><span className="h-2 w-2 rounded-full bg-[#D4AF37]" /> Verification-ready practice</span>
         </div>
       </div>
     </section>
   );
 }
-

@@ -6,6 +6,7 @@ import { PageHero, PageMain } from "../../components/PageShell";
 import StageShell from "../components/ui/StageShell";
 import { pageMeta } from "../../lib/metadata";
 import { hubHeroImage } from "../lib/location-accent";
+import { ArrowUpRight, Clock3 } from "lucide-react";
 
 export const metadata: Metadata = pageMeta(
   "PSARA License Blog — Guides & Compliance Insights",
@@ -23,6 +24,7 @@ export default async function BlogPage({
   const posts = cat
     ? BLOG_POSTS.filter((p) => p.category === cat)
     : BLOG_POSTS;
+  const [featured, ...remaining] = posts;
 
   return (
     <StageShell>
@@ -34,8 +36,16 @@ export default async function BlogPage({
         image={hubHeroImage("blog-hub")}
         meta="( INSIGHTS ) ( COMPLIANCE )"
       />
-      <PageMain>
-        <div className="mb-10 flex flex-wrap gap-3" data-stagger>
+      <PageMain className="psara-blog-main">
+        <div className="psara-blog-intro" data-stagger>
+          <div>
+            <p className="psara-blog-kicker">PSARA CONSULTANT INDIA / JOURNAL</p>
+            <h2>Clear guidance for serious security founders.</h2>
+          </div>
+          <p className="psara-blog-count">{posts.length.toString().padStart(2, "0")} articles<br /><span>licensing · compliance · growth</span></p>
+        </div>
+
+        <div className="psara-blog-filters" data-stagger>
           <Link
             href="/blog"
             className="text-[0.6rem] font-bold uppercase tracking-[0.16em]"
@@ -55,37 +65,35 @@ export default async function BlogPage({
           ))}
         </div>
 
-        <div className="divide-y divide-white/10 border-t border-white/10" data-stagger>
-          {posts.map((post) => (
-            <Link
-              key={post.slug}
-              href={`/blog/${post.slug}`}
-              className="group flex flex-col gap-3 py-7 transition-[color,border-color,background-color] duration-300 hover:pl-2 md:flex-row md:items-center md:gap-8"
-            >
-              {post.coverImage && (
-                <div className="relative h-28 w-full shrink-0 overflow-hidden md:h-20 md:w-32">
-                  <Image
-                    src={post.coverImage}
-                    alt=""
-                    fill
-                    className="object-cover opacity-80 transition-[color,border-color,background-color] duration-500 group-hover:opacity-100"
-                    sizes="128px"
-                  />
-                </div>
-              )}
-              <div className="min-w-0 flex-1">
-                <p className="text-[0.55rem] uppercase tracking-[0.16em]" style={{ color: "var(--gold-dim)" }}>
-                  {post.category}
-                </p>
-                <h2
-                  className="mt-1 text-lg font-semibold transition-colors group-hover:text-[var(--gold-bright)]"
-                  style={{ fontFamily: "var(--font-display)" }}
-                >
-                  {post.title}
-                </h2>
-                <p className="mt-1 line-clamp-2 text-sm" style={{ color: "var(--white-55)" }}>
-                  {post.excerpt}
-                </p>
+        {featured && (
+          <Link href={`/blog/${featured.slug}`} className="psara-blog-feature" data-stagger>
+            <div className="psara-blog-feature-image">
+              <Image src={featured.coverImage} alt={featured.title} fill priority sizes="(max-width: 900px) 100vw, 58vw" className="object-cover transition-transform duration-700 group-hover:scale-105" />
+              <div className="psara-blog-feature-wash" />
+              <span className="psara-blog-feature-label">Featured briefing</span>
+            </div>
+            <div className="psara-blog-feature-copy">
+              <p className="psara-blog-kicker">{featured.category}</p>
+              <h2>{featured.title}</h2>
+              <p>{featured.excerpt}</p>
+              <span className="psara-blog-read">Read briefing <ArrowUpRight size={16} /></span>
+            </div>
+          </Link>
+        )}
+
+        <div className="psara-blog-grid" data-stagger>
+          {remaining.map((post, index) => (
+            <Link key={post.slug} href={`/blog/${post.slug}`} className={`psara-blog-card ${index === 0 ? "psara-blog-card-tall" : ""}`}>
+              <div className="psara-blog-card-image">
+                <Image src={post.coverImage} alt={post.title} fill sizes="(max-width: 700px) 100vw, 33vw" className="object-cover transition-transform duration-700 group-hover:scale-105" />
+                <div className="psara-blog-card-wash" />
+                <span>{String(index + 2).padStart(2, "0")}</span>
+              </div>
+              <div className="psara-blog-card-copy">
+                <p className="psara-blog-kicker">{post.category} <i>·</i> <Clock3 size={12} /> {post.readTime}</p>
+                <h3>{post.title}</h3>
+                <p>{post.excerpt}</p>
+                <span className="psara-blog-read">Open article <ArrowUpRight size={15} /></span>
               </div>
             </Link>
           ))}

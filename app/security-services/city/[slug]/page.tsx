@@ -6,7 +6,9 @@ import { PageHero, PageMain } from "../../../../components/PageShell";
 import StageShell from "../../../components/ui/StageShell";
 import { pageMeta } from "../../../../lib/metadata";
 import { CITIES } from "../../../../data/cities";
+import { STATES } from "../../../../data/states";
 import { DEFAULT_WA } from "../../../../lib/whatsapp";
+import { generateCityContent } from "../../../../lib/seo-content-generator";
 
 export function generateStaticParams() {
   return CITIES.map((c) => ({ slug: c.slug }));
@@ -17,15 +19,12 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const c = CITIES.find((item) => item.slug === slug);
   if (!c) return {};
   return {
-    ...pageMeta(`PSARA Security Agency License in ${c.name}, ${c.stateName}`, `Get PSARA License clearance in ${c.name}, ${c.stateName}. Local police verification and training institute MOU.`, `/security-services/city/${c.slug}`),
-    alternates: {
-      canonical: `/city/${c.slug}`,
-    },
-    robots: {
-      // Thin duplicate of /city/{slug} — never index, point crawlers at the canonical dossier.
-      index: false,
-      follow: true,
-    },
+    ...pageMeta(`PSARA Compliance Checklist: ${c.name}`, `Local PSARA filing checklist for ${c.name}, ${c.stateName}: office proof, police verification, training MOU, and district coverage.`, `/security-services/city/${c.slug}`),
+    // Keep this checklist route accessible, but consolidate the city intent
+    // into the richer canonical dossier rather than creating a second index
+    // target for every city.
+    alternates: { canonical: `/city/${c.slug}` },
+    robots: { index: false, follow: true },
   };
 }
 
@@ -33,6 +32,8 @@ export default async function SecurityServiceCityPage({ params }: { params: Prom
   const { slug } = await params;
   const c = CITIES.find((item) => item.slug === slug);
   if (!c) notFound();
+  const state = STATES.find((item) => item.slug === c.stateSlug);
+  const content = generateCityContent(c, state);
 
   return (
     <StageShell>
@@ -51,6 +52,30 @@ export default async function SecurityServiceCityPage({ params }: { params: Prom
             <p className="text-xs text-[var(--white-70)] leading-relaxed">
               Security agency promoters operating in {c.name} must file Form-I with the {c.stateName} Controlling Authority, obtain police antecedent verification from local SP/CP offices, and execute an MOU with a state-recognized security training institute.
             </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <section className="border border-white/10 bg-[var(--void-2)] p-8">
+              <h2 className="font-[family-name:var(--font-display)] text-xl font-bold text-white mb-4">
+                What the {c.name} filing needs
+              </h2>
+              <div className="space-y-3 text-xs text-[var(--white-70)]">
+                {content.documents.slice(0, 6).map((item) => (
+                  <div key={item} className="flex items-start gap-3">
+                    <CheckCircle2 className="h-4 w-4 text-[var(--gold-bright)] shrink-0 mt-0.5" />
+                    <span>{item}</span>
+                  </div>
+                ))}
+              </div>
+            </section>
+            <section className="border border-white/10 bg-[var(--void-2)] p-8">
+              <h2 className="font-[family-name:var(--font-display)] text-xl font-bold text-white mb-4">
+                Local filing sequence
+              </h2>
+              <ol className="space-y-3 text-xs text-[var(--white-70)] list-decimal list-inside">
+                {content.process.slice(0, 6).map((step) => <li key={step}>{step}</li>)}
+              </ol>
+            </section>
           </div>
 
           <div className="border border-white/10 bg-[var(--void-2)] p-8">

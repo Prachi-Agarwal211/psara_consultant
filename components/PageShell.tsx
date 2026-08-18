@@ -1,12 +1,8 @@
 "use client";
 
-/**
- * Stage-aligned page shell for all inner routes.
- * Transparent over AmbientCanvas (via StageShell in layout pages).
- */
-
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { useEffect, useRef, type CSSProperties } from "react";
 import { initWordReveal, prefersReducedMotion, ensureGsap } from "../app/lib/motion";
 import { getLocationAccent, accentStyleVars } from "../app/lib/location-accent";
@@ -18,23 +14,23 @@ export function PageHero({
   kicker,
   locationSlug,
   image,
+  mobileImage,
   meta,
 }: {
   title: string;
   lead?: string;
   crumbs?: { label: string; href?: string }[];
   kicker?: string;
-  roman?: string; // ignored — kill 01/roman chrome
-  /** Deterministic per-location accent (states/cities) */
   locationSlug?: string;
-  /** Full-bleed hero backdrop (generated/thematic) */
   image?: string;
-  /** Bracket metadata line — nudot DNA, accent-tinted */
+  mobileImage?: string;
   meta?: string;
 }) {
   const hRef = useRef<HTMLHeadingElement | null>(null);
+  const pathname = usePathname();
   const accent = locationSlug ? getLocationAccent(locationSlug) : null;
   const accentVars = accent ? accentStyleVars(accent) : {};
+  const heroImage = image ?? "/assets/images/generated/inner-hero-dossier.png";
 
   useEffect(() => {
     if (!hRef.current || prefersReducedMotion()) return;
@@ -43,110 +39,86 @@ export function PageHero({
 
   return (
     <header
-      className="relative overflow-hidden bg-transparent px-[var(--gutter)] pb-12 pt-28 md:pt-32"
+      className="psara-page-hero relative overflow-hidden px-[var(--gutter)] pb-14 pt-28 md:min-h-[26rem] md:pb-20 md:pt-36 bg-[#050714] text-white border-b border-white/10"
       data-parallax-root
       style={accentVars as CSSProperties}
     >
-      {/* Full-bleed hero backdrop (location identity) */}
-      {image && (
-        <div className="pointer-events-none absolute inset-0 z-0" aria-hidden>
-          <div data-speed="0.14" className="absolute inset-0 h-[130%] -top-[15%]">
-            <Image
-              src={image}
-              alt=""
-              fill
-              priority
-              sizes="100vw"
-              className="object-cover object-center opacity-45"
-            />
-          </div>
-          {/* Blend into ambient + accent glow */}
-          <div
-            className="absolute inset-0"
-            style={{
-              background:
-                "linear-gradient(180deg, rgba(2,8,20,0.82) 0%, rgba(2,8,20,0.35) 40%, rgba(2,8,20,0.82) 100%)",
-            }}
+      {/* Background visual asset */}
+      {heroImage && (
+        <div className="pointer-events-none absolute inset-0 z-0 opacity-20" aria-hidden>
+          <Image
+            src={heroImage}
+            alt=""
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover object-center mix-blend-screen"
           />
-          <div
-            className="absolute inset-0"
-            style={{ backgroundImage: accent ? accent.glow : "none" }}
-          />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#050714]/80 via-[#050714]/95 to-[#050714]" />
         </div>
       )}
 
-      {/* Accent aura even without an image */}
-      {!image && (
-        <div
-          data-speed="0.15"
-          className="pointer-events-none absolute -right-20 top-10 h-64 w-64 rounded-full opacity-40"
-          style={{
-            background: accent
-              ? `radial-gradient(circle, ${accent.base}33 0%, transparent 70%)`
-              : "radial-gradient(circle, rgba(0,102,255,0.35) 0%, transparent 70%)",
-          }}
-          aria-hidden
-        />
-      )}
-
-      <div className="relative z-10">
+      <div className="relative z-10 max-w-7xl mx-auto">
+        {/* Breadcrumb */}
         {crumbs.length > 0 && (
           <nav
-            className="mb-6 flex flex-wrap gap-2 text-[0.65rem] uppercase tracking-[0.14em]"
-            style={{ color: "var(--white-40)", fontFamily: "var(--font-body)" }}
+            aria-label="Breadcrumb"
+            className="mb-6 flex flex-wrap gap-x-2 gap-y-1 text-xs uppercase tracking-[0.1em] text-white/60 font-bold"
+            style={{ fontFamily: "var(--font-body)" }}
           >
-            <Link href="/" className="hover:text-acc-bright">
+            <Link href="/" className="hover:text-[#F5D061] transition-colors">
               Home
             </Link>
             {crumbs.map((c) => (
               <span key={c.label} className="flex items-center gap-2">
                 <span>/</span>
                 {c.href ? (
-                  <Link href={c.href} className="hover:text-acc-bright">
+                  <Link href={c.href} className="hover:text-[#F5D061] transition-colors">
                     {c.label}
                   </Link>
                 ) : (
-                  <span style={{ color: "var(--acc-deep, var(--gold-dim))" }}>{c.label}</span>
+                  <span className="text-[#F5D061]">{c.label}</span>
                 )}
               </span>
             ))}
           </nav>
         )}
+
         {meta && (
           <p
-            className="meta-bracket mb-4 inline-block !border-0 !px-0"
-            style={{ color: "var(--acc, var(--gold))", fontFamily: "var(--font-body)" }}
+            className="mb-3 text-xs font-bold uppercase tracking-[0.16em] text-[#D4AF37]"
+            style={{ fontFamily: "var(--font-body)" }}
           >
             {meta}
           </p>
         )}
+
         {kicker && (
           <p
-            className="mb-4 text-[0.58rem] font-semibold uppercase tracking-[0.28em]"
-            style={{ color: "var(--acc-deep, var(--gold-dim))", fontFamily: "var(--font-body)" }}
+            className="mb-3 text-xs font-bold uppercase tracking-[0.14em] text-[#F5D061]"
+            style={{ fontFamily: "var(--font-body)" }}
           >
             {kicker}
           </p>
         )}
-        <h1
-          ref={hRef}
-          className="max-w-4xl font-black leading-[1.05] tracking-tight text-[#0F3C65]"
-          style={{
-            fontSize: "clamp(2rem, 4.5vw, 3.6rem)",
-            fontFamily: "var(--font-display)",
-          }}
-        >
-          {title}
-        </h1>
-        {lead && (
-          <p
-            data-clip
-            className="mt-6 max-w-2xl text-[1.02rem] font-medium leading-relaxed text-[#334E68]"
-            style={{ fontFamily: "var(--font-body)" }}
+
+        <div className="max-w-4xl border-l-2 border-[#D4AF37] pl-5 md:pl-6 space-y-4">
+          <h1
+            ref={hRef}
+            className="text-3xl sm:text-4xl md:text-5xl font-bold leading-[1.15] tracking-tight text-white"
+            style={{ fontFamily: "var(--font-display)" }}
           >
-            {lead}
-          </p>
-        )}
+            {title}
+          </h1>
+          {lead && (
+            <p
+              className="text-base sm:text-lg text-[#E2E8F0] font-normal leading-relaxed max-w-3xl"
+              style={{ fontFamily: "var(--font-body)" }}
+            >
+              {lead}
+            </p>
+          )}
+        </div>
       </div>
     </header>
   );
@@ -164,28 +136,26 @@ export function PageMain({
   useEffect(() => {
     if (!ref.current || prefersReducedMotion()) return;
     const { gsap } = ensureGsap();
-    const kids = ref.current.querySelectorAll("[data-clip], [data-stagger]");
     gsap.fromTo(
       ref.current.querySelectorAll(":scope > *"),
-      { opacity: 0, y: 24 },
+      { opacity: 0, y: 18 },
       {
         opacity: 1,
         y: 0,
-        duration: 0.85,
-        stagger: 0.06,
+        duration: 0.7,
+        stagger: 0.05,
         ease: "power3.out",
-        delay: 0.1,
+        delay: 0.05,
       }
     );
-    void kids;
   }, []);
 
   return (
     <main
       ref={ref}
-      className={`relative bg-[#FFFEF9] text-[#0F3C65] px-[var(--gutter)] pb-24 ${className}`}
+      className={`psara-page-main relative px-[var(--gutter)] py-16 bg-[#050714] text-white min-h-[50vh] ${className}`}
     >
-      <div className="mx-auto max-w-[var(--page-max)]">{children}</div>
+      <div className="mx-auto max-w-7xl">{children}</div>
     </main>
   );
 }
@@ -199,8 +169,8 @@ export function Prose({
 }) {
   return (
     <div
-      className={`prose-stage max-w-3xl space-y-5 text-[0.98rem] leading-relaxed ${className}`}
-      style={{ color: "var(--white-70)", fontFamily: "var(--font-body)" }}
+      className={`prose-stage max-w-3xl space-y-5 text-base leading-relaxed text-[#E2E8F0] ${className}`}
+      style={{ fontFamily: "var(--font-body)" }}
     >
       {children}
     </div>

@@ -1,29 +1,32 @@
-export async function GET() {
-  const content = `# PSARA Consultant India
+import { SITE } from "@/lib/config";
 
-> Official AI Index & Documentation for LLMs and Search Agents.
-> Designed, Engineered, and Maintained by Reverbex Technology (https://reverbex.in).
+export async function GET() {
+  const content = `# ${SITE.name}
+
+> Official website index for search agents, answer engines and LLM crawlers.
 
 ## About
-PSARA Consultant India (https://psaraconsultantindia.com) assists companies and security entrepreneurs in obtaining PSARA Licenses under the Private Security Agencies (Regulation) Act, 2005 across all 36 States and UTs in India. Headquartered in Jaipur, Rajasthan with regional desks in New Delhi, Gurugram, Noida, Ahmedabad, Indore, Bhopal, Lucknow, Raipur, Chandigarh, and Ludhiana.
+${SITE.name} provides PSARA licensing, renewal, training MOU, police-verification and security-agency compliance advisory across India under the Private Security Agencies (Regulation) Act, 2005.
 
-## Core Advisory & Compliance Services
-- **PSARA License Registration:** End-to-end Controlling Authority filing across all Indian states.
-- **Security Training MOU:** Authorized training institute tie-ups and certificate issuing.
-- **Police Antecedent Verification:** Character verification and clearance for directors, key personnel, and guards.
-- **Multi-State Expansion:** Single-window filing for national security agencies expanding across state lines.
+## Primary pages
+- [Homepage](${SITE.url}/): Pan-India PSARA licensing and compliance desk.
+- [Services](${SITE.url}/services): Licensing, renewal, MOU, verification and company setup services.
+- [States](${SITE.url}/states): State-wise PSARA requirements and filing desks.
+- [Cities](${SITE.url}/cities): City-specific consultation and filing information.
+- [Security services](${SITE.url}/security-services): Security-agency compliance information by location.
+- [Fee calculator](${SITE.url}/calculator): Estimate statutory and professional filing costs.
+- [Guides](${SITE.url}/psara-license): PSARA eligibility, process, documents, fees and renewal guidance.
+- [Blog](${SITE.url}/blog): Regulatory explanations and current PSARA guidance.
+- [Case studies](${SITE.url}/case-studies): Anonymised licensing and compliance outcomes.
+- [Contact](${SITE.url}/contact): Consultation channels and office information.
 
-## Key URLs & Sitemap
-- Homepage: https://psaraconsultantindia.com
-- State Guides: https://psaraconsultantindia.com/states
-- City Desks: https://psaraconsultantindia.com/cities
-- Calculator: https://psaraconsultantindia.com/calculator
-- Sitemap: https://psaraconsultantindia.com/sitemap.xml
+## Discovery
+- [XML sitemap](${SITE.url}/sitemap.xml)
+- [Robots policy](${SITE.url}/robots.txt)
+- [AI crawler policy](${SITE.url}/ai.txt)
 
-## Engineering & Development Credit
-- Developer Agency: Reverbex Technology
-- Agency Website: https://reverbex.in
-- Capabilities: Elite Software Engineering, High-Performance Web Craft, AI Search Visibility, Custom Next.js Architecture, and Regulatory Compliance Platforms.
+Content language: English (India), with consultation available in English and Hindi.
+Canonical domain: ${SITE.url}
 `;
 
   return new Response(content, {

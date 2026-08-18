@@ -1,13 +1,11 @@
 import type { Metadata } from "next";
-import type { CSSProperties } from "react";
 import Link from "next/link";
-import { Calculator, ArrowRight, ArrowUpRight, Phone } from "lucide-react";
+import { Calculator, ArrowRight, ArrowUpRight, Phone, MessageSquare, Sparkles } from "lucide-react";
 import { PageHero, PageMain } from "../../components/PageShell";
 import StageShell from "../components/ui/StageShell";
 import { pageMeta } from "../../lib/metadata";
 import { SERVICES } from "../../data/services";
 import { DEFAULT_WA, TEL_HREF } from "../../lib/whatsapp";
-import { getLocationAccent, accentStyleVars, hubHeroImage } from "../lib/location-accent";
 
 export const metadata: Metadata = pageMeta(
   "PSARA Licensing Services & Regulatory Advisory",
@@ -28,114 +26,108 @@ export default function ServicesHubPage() {
   return (
     <StageShell>
       <PageHero
-        title="PSARA License & Regulatory Advisory Services"
+        title="PSARA License &amp; Regulatory Advisory Services"
         lead="From first-time security agency incorporation to multi-state PSARA grants — statute-first advisory built for speed, compliance, and zero verification delays."
         crumbs={[{ label: "Services" }]}
-        locationSlug="services-hub"
-        image={hubHeroImage("services-hub")}
-        meta="( STATUTORY ADVISORY ) ( PAN INDIA )"
       />
 
-      <PageMain className="bg-[#FFFEF9] text-[#0F3C65]">
+      <PageMain className="bg-[#050714] text-white">
         {/* Service Pillars Grid */}
         <div className="mb-16">
-          <span className="text-xs font-black uppercase tracking-wider text-[#C89B3C]">Our Core Services</span>
-          <h2 className="mt-2 text-3xl font-black tracking-tight text-[#0F3C65] mb-8" style={{ fontFamily: "var(--font-display)" }}>
+          <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#F5D061] mb-2">
+            <Sparkles className="h-4 w-4" /> Comprehensive Portfolio
+          </div>
+          <h2 className="text-3xl font-bold tracking-tight text-white mb-8" style={{ fontFamily: "var(--font-display)" }}>
             Complete PSARA Regulatory Portfolio
           </h2>
 
-          <div data-stagger className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {SERVICES.map((s) => {
-              const acc = getLocationAccent(s.slug);
-              const accVars = accentStyleVars(acc) as CSSProperties;
-              return (
-                <Link
-                  key={s.slug}
-                  href={`/services/${s.slug}`}
-                  style={accVars}
-                  className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-[#0F3C65]/15 bg-[#FBF7F0] p-6 shadow-sm transition-all duration-300 hover:border-[#C89B3C] hover:bg-white"
-                >
-                  <div>
-                    <div className="flex items-center justify-between">
-                      <span className="text-[10px] font-black uppercase tracking-widest text-[#C89B3C]">
-                        Statutory Service
-                      </span>
-                      <ArrowUpRight className="h-4 w-4 text-[#0F3C65] transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-[#C89B3C] stroke-[2.5]" />
-                    </div>
-                    <h3
-                      className="mt-3 text-xl font-black text-[#0F3C65] group-hover:text-[#0A233F]"
-                      style={{ fontFamily: "var(--font-display)" }}
-                    >
-                      {s.title}
-                    </h3>
-                    <p className="mt-3 text-xs font-medium leading-relaxed text-[#334E68] line-clamp-3">
-                      {s.short}
-                    </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+            {SERVICES.map((s) => (
+              <Link
+                key={s.slug}
+                href={`/services/${s.slug}`}
+                className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-white/12 bg-[#0A1022] p-6 sm:p-8 shadow-md transition-all duration-200 hover:-translate-y-1 hover:border-[#D4AF37] hover:bg-[#0D162C]"
+              >
+                <div>
+                  <div className="flex items-center justify-between mb-4">
+                    <span className="text-[10px] font-bold uppercase tracking-widest text-[#F5D061]">
+                      Statutory Service
+                    </span>
+                    <ArrowUpRight className="h-4 w-4 text-white/50 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-[#F5D061]" />
                   </div>
+                  <h3
+                    className="text-xl font-bold text-white group-hover:text-[#F5D061] transition-colors leading-snug"
+                    style={{ fontFamily: "var(--font-display)" }}
+                  >
+                    {s.title}
+                  </h3>
+                  <p className="mt-3 text-xs sm:text-sm font-normal leading-relaxed text-[#E2E8F0] line-clamp-3">
+                    {s.short}
+                  </p>
+                </div>
 
-                  <div className="mt-6 flex items-center justify-between border-t border-[#0F3C65]/10 pt-4 text-[11px]">
-                    <span className="text-[#486581] font-bold">Pan-India Support</span>
-                    <span className="font-black text-[#0F3C65] group-hover:text-[#C89B3C] group-hover:underline">View Details &rarr;</span>
-                  </div>
-                </Link>
-              );
-            })}
+                <div className="mt-6 flex items-center justify-between border-t border-white/10 pt-4 text-xs">
+                  <span className="text-[#94A3B8] font-bold">Pan-India Support</span>
+                  <span className="font-bold text-[#F5D061] group-hover:underline">View Details &rarr;</span>
+                </div>
+              </Link>
+            ))}
           </div>
         </div>
 
         {/* Process Roadmap */}
-        <section className="mb-20 border-t border-[#0F3C65]/15 pt-16">
-          <span className="text-xs font-black uppercase tracking-wider text-[#C89B3C]">Statutory Workflow</span>
-          <h2 className="mt-2 text-3xl font-black tracking-tight text-[#0F3C65]" style={{ fontFamily: "var(--font-display)" }}>
+        <section className="mb-20 border-t border-white/10 pt-16">
+          <span className="text-xs font-bold uppercase tracking-wider text-[#F5D061]">Statutory Workflow</span>
+          <h2 className="mt-2 text-3xl font-bold tracking-tight text-white" style={{ fontFamily: "var(--font-display)" }}>
             5-Stage PSARA License Acquisition Process
           </h2>
-          <p className="mt-2 text-sm text-[#334E68] font-medium max-w-2xl">
+          <p className="mt-2 text-sm text-[#E2E8F0] font-normal max-w-2xl">
             Our systematic approach eliminates common rejection triggers like flawed MOA objects, unverified training MOUs, or incomplete police clearance forms.
           </p>
 
-          <div data-stagger className="mt-10 grid grid-cols-1 md:grid-cols-5 gap-4">
+          <div className="mt-10 grid grid-cols-1 md:grid-cols-5 gap-4">
             {PROCESS_STEPS.map((ps) => (
-              <div key={ps.step} className="group relative overflow-hidden rounded-2xl border border-[#0F3C65]/15 bg-white p-5 shadow-sm transition-all hover:border-[#C89B3C]">
-                <span className="mb-2 block font-mono text-2xl font-black text-[#C89B3C]">{ps.step}</span>
-                <h3 className="mb-2 text-sm font-black text-[#0F3C65]" style={{ fontFamily: "var(--font-display)" }}>{ps.title}</h3>
-                <p className="text-[11px] text-[#486581] font-medium leading-relaxed">{ps.desc}</p>
+              <div key={ps.step} className="rounded-2xl border border-white/10 bg-[#0A1022] p-5 shadow-md">
+                <span className="mb-2 block font-mono text-2xl font-bold text-[#F5D061]">{ps.step}</span>
+                <h3 className="mb-2 text-sm font-bold text-white" style={{ fontFamily: "var(--font-display)" }}>{ps.title}</h3>
+                <p className="text-xs text-[#CBD5E1] font-normal leading-relaxed">{ps.desc}</p>
               </div>
             ))}
           </div>
         </section>
 
         {/* Fee Calculator CTA Banner */}
-        <section className="mb-20 rounded-3xl border border-[#C89B3C]/40 bg-[#0A233F] text-white p-8 md:p-12 shadow-2xl">
+        <section className="mb-20 rounded-3xl border border-white/15 bg-[#0A1022] text-white p-8 md:p-12 shadow-2xl">
           <div className="flex flex-col lg:flex-row items-center justify-between gap-8">
             <div>
-              <div className="flex items-center gap-2 text-[#FFF2BA] text-xs font-black uppercase tracking-widest">
-                <Calculator className="h-4 w-4 text-[#C89B3C]" /> PSARA Cost Estimator
+              <div className="flex items-center gap-2 text-[#F5D061] text-xs font-bold uppercase tracking-widest">
+                <Calculator className="h-4 w-4" /> PSARA Cost Estimator
               </div>
-              <h2 className="mt-2 text-2xl md:text-3xl font-black text-white" style={{ fontFamily: "var(--font-display)" }}>
+              <h2 className="mt-2 text-2xl md:text-3xl font-bold text-white" style={{ fontFamily: "var(--font-display)" }}>
                 Calculate Official State License Fees
               </h2>
-              <p className="mt-2 text-xs md:text-sm text-slate-300 font-medium max-w-xl">
-                Statutory fees vary based on territory scale: 1 District (₹5,000), 5 Districts (₹10,000), or Entire State (₹25,000). Estimate total costs including training MOUs.
+              <p className="mt-2 text-xs md:text-sm text-[#E2E8F0] font-normal max-w-xl leading-relaxed">
+                Consultancy &amp; Professional Fees: ₹30,000 | Training MOU Fee: ₹35,000 | Statutory Government fees: 1 District (₹5,000), 5 Districts (₹10,000), Entire State (₹25,000).
               </p>
             </div>
             <Link
               href="/calculator"
-              className="shrink-0 inline-flex items-center gap-2 rounded-xl bg-[#FFF2BA] px-6 py-3.5 text-xs font-black uppercase tracking-wider text-[#0F3C65] hover:bg-[#C89B3C] hover:text-white transition-all shadow-lg"
+              className="shrink-0 inline-flex items-center gap-2 rounded-xl bg-[#5821C7] hover:bg-[#7638FA] px-7 py-4 text-xs font-bold uppercase tracking-wider text-white transition-all shadow-lg shadow-purple-900/40"
             >
-              Launch Cost Calculator <ArrowRight className="h-4 w-4 stroke-[2.5]" />
+              Launch Cost Calculator <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
         </section>
 
-        {/* Full Gold CTA Section Bar */}
-        <section className="rounded-3xl border-2 border-[#C89B3C] p-8 md:p-12 text-[#0F3C65] bg-[#FFF2BA] shadow-xl">
+        {/* Direct Advisory CTA Section Bar */}
+        <section className="rounded-3xl border border-[#D4AF37]/40 p-8 md:p-12 text-white bg-[#0A1022] shadow-xl">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
             <div>
-              <span className="text-xs font-black uppercase tracking-widest text-[#0F3C65]/80">Direct Advisory</span>
-              <h2 className="mt-1 text-2xl md:text-3xl font-black text-[#0F3C65]" style={{ fontFamily: "var(--font-display)" }}>
+              <span className="text-xs font-bold uppercase tracking-widest text-[#F5D061]">Direct Advisory</span>
+              <h2 className="mt-1 text-2xl md:text-3xl font-bold text-white" style={{ fontFamily: "var(--font-display)" }}>
                 Need Help Selecting the Right PSARA Category?
               </h2>
-              <p className="mt-2 text-xs md:text-sm text-[#0F3C65]/90 max-w-2xl font-bold">
+              <p className="mt-2 text-xs md:text-sm text-[#E2E8F0] max-w-2xl font-normal leading-relaxed">
                 Our senior compliance officers assess your business model (guarding, cash-in-transit, bouncer deployment, armed escort) and craft your complete filing strategy.
               </p>
             </div>
@@ -144,13 +136,14 @@ export default function ServicesHubPage() {
                 href={DEFAULT_WA}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 rounded-xl bg-[#0F3C65] px-6 py-3.5 text-xs font-black uppercase tracking-wider text-white hover:bg-[#0A233F] transition-all shadow-md"
+                className="inline-flex items-center gap-2 rounded-xl bg-[#5821C7] hover:bg-[#7638FA] px-6 py-3.5 text-xs font-bold uppercase tracking-wider text-white transition-all shadow-md shadow-purple-900/40"
               >
-                WhatsApp Desk <ArrowRight className="h-4 w-4 text-[#FFF2BA] stroke-[2.5]" />
+                <MessageSquare className="h-4 w-4 fill-white" />
+                <span>WhatsApp Desk</span>
               </a>
               <a
                 href={TEL_HREF}
-                className="inline-flex items-center gap-2 rounded-xl border-2 border-[#0F3C65] px-6 py-3.5 text-xs font-black uppercase tracking-wider text-[#0F3C65] hover:bg-[#0F3C65] hover:text-white transition-all"
+                className="inline-flex items-center gap-2 rounded-xl border border-white/20 bg-white/5 hover:bg-white/10 px-6 py-3.5 text-xs font-bold uppercase tracking-wider text-white transition-all"
               >
                 <Phone className="h-4 w-4" /> Call Advisor
               </a>

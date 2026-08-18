@@ -34,7 +34,7 @@ async function worker(queue) {
 }
 
 // Rewrite absolute production URLs to the audit target (dev server by default)
-const queue = urls.map((u) => u.replace(/^https:\/\/consult\.psaraconsultantindia\.com/, base));
+const queue = urls.map((u) => u.replace(/^https:\/\/(?:www\.)?psaraconsultantindia\.com/, base));
 await Promise.all(Array.from({ length: concurrency }, () => worker(queue)));
 console.log(`\nDONE: ${done} crawled, ${failures.length} non-200`);
 failures.slice(0, 40).forEach((f) => console.log("  ", f));

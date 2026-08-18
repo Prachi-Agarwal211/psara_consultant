@@ -108,22 +108,26 @@ export default async function BlogPostPage({
         meta={`( ${post.category.toUpperCase()} ) ( ${post.readTime} )`}
       />
 
-      <PageMain>
+      <PageMain className="psara-article-main">
         {/* Featured cover image */}
-        <div className="relative mb-10 aspect-[21/9] overflow-hidden rounded-[var(--radius)] border border-[var(--line)] bg-[var(--obsidian)]">
+        <div className="psara-article-cover relative mb-10 aspect-[21/9] overflow-hidden rounded-[var(--radius)] border border-[var(--line)] bg-[var(--obsidian)]">
           <Image
             src={post.coverImage}
-            alt={`${post.title} — Featured image for PSARA Consultant India Blog`}
+            alt={`${post.title} — PSARA Consultant India blog cover`}
             fill
             priority
             sizes="100vw"
             className="object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-[var(--obsidian)]/40 via-transparent to-transparent" />
+          <div className="absolute left-5 top-5 flex items-center gap-3 rounded-full border border-white/20 bg-black/45 px-3 py-2 backdrop-blur-md">
+            <Image src="/assets/images/brand/psara-consultant-india-mark-transparent.png" alt="PSARA Consultant India" width={34} height={34} className="h-8 w-8 object-contain" />
+            <span className="text-[10px] font-bold uppercase tracking-[0.18em] text-white">PSARA Consultant India</span>
+          </div>
         </div>
 
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-12">
-          <article className="lg:col-span-8">
+          <article className="psara-article-body lg:col-span-8">
             {/* Meta info bar */}
             <div className="mb-8 flex flex-wrap items-center gap-4 text-sm font-medium text-[var(--white-55)]">
               <span className="flex items-center gap-1.5">
@@ -209,7 +213,7 @@ export default async function BlogPostPage({
           </article>
 
           {/* Sidebar */}
-          <aside className="lg:col-span-4">
+          <aside className="psara-article-aside lg:col-span-4">
             <div className="sticky top-24 space-y-6">
               {/* Category */}
               <div className="rounded border border-white/10 bg-white/[0.02] p-5">

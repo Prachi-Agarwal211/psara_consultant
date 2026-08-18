@@ -85,31 +85,31 @@ export default async function StatePage({
         meta={`( PSARA CONSULTANCY ) ( ${s.capital} )`}
       />
       {/* Stats strip */}
-      <section className="border-b border-[#0F3C65]/15 bg-[#FBF7F0]">
+      <section className="border-b border-white/10 bg-[#12161F]">
         <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-center gap-6 px-[var(--gutter)] py-4 text-center text-xs font-black uppercase tracking-wider md:gap-10">
           <div>
-            <span className="block text-sm text-[#0F3C65] font-black">{s.name}</span>
-            <span className="block text-[#486581]">State</span>
+            <span className="block text-sm text-white font-black">{s.name}</span>
+            <span className="block text-slate-400">State</span>
           </div>
-          <div className="h-8 w-px bg-[#0F3C65]/15" aria-hidden />
+          <div className="h-8 w-px bg-white/10" aria-hidden />
           <div>
-            <span className="block text-sm text-[#0F3C65] font-black">{s.capital}</span>
-            <span className="block text-[#486581]">Capital</span>
+            <span className="block text-sm text-white font-black">{s.capital}</span>
+            <span className="block text-slate-400">Capital</span>
           </div>
-          <div className="h-8 w-px bg-[#0F3C65]/15" aria-hidden />
+          <div className="h-8 w-px bg-white/10" aria-hidden />
           <div>
-            <span className="block text-sm text-[#0F3C65] font-black">{s.cities.length}</span>
-            <span className="block text-[#486581]">Cities covered</span>
+            <span className="block text-sm text-white font-black">{s.cities.length}</span>
+            <span className="block text-slate-400">Cities covered</span>
           </div>
-          <div className="h-8 w-px bg-[#0F3C65]/15" aria-hidden />
+          <div className="h-8 w-px bg-white/10" aria-hidden />
           <div>
-            <span className="block text-sm text-[#0F3C65] font-black">{s.sectors.length}</span>
-            <span className="block text-[#486581]">Key sectors</span>
+            <span className="block text-sm text-white font-black">{s.sectors.length}</span>
+            <span className="block text-slate-400">Key sectors</span>
           </div>
         </div>
       </section>
 
-      <PageMain className="bg-[#FFFEF9] text-[#0F3C65]">
+      <PageMain className="bg-[#0B0E14] text-white">
         <div style={accentStyle} className="grid grid-cols-1 gap-12 lg:grid-cols-12">
           <div className="lg:col-span-7 space-y-12">
             <StateDossierView
@@ -120,7 +120,7 @@ export default async function StatePage({
 
             {cities.length > 0 && (
               <div data-section-transition data-transition="fade" className="mt-12">
-                <h2 className="text-2xl font-black text-[#0F3C65]" style={{ fontFamily: "var(--font-display)" }}>
+                <h2 className="text-2xl font-black text-white" style={{ fontFamily: "var(--font-display)" }}>
                   Cities we cover in {s.name}
                 </h2>
                 <div data-stagger className="mt-4 flex flex-wrap gap-2">
@@ -128,7 +128,7 @@ export default async function StatePage({
                     <Link
                       key={c.slug}
                       href={`/city/${c.slug}`}
-                      className="rounded-xl border border-[#0F3C65]/15 bg-[#FBF7F0] px-3.5 py-2 text-xs font-black uppercase tracking-wider text-[#0F3C65] transition-all hover:border-[#C89B3C] hover:bg-[#0A233F] hover:text-white"
+                      className="rounded-xl border border-white/10 bg-[#12161F] px-3.5 py-2 text-xs font-black uppercase tracking-wider text-white transition-all hover:border-[#BF953F] hover:bg-[#8C1F32]"
                     >
                       {c.name}
                     </Link>
@@ -139,35 +139,35 @@ export default async function StatePage({
 
             {/* Regulatory Tools & Interlinking — dossier cards */}
             <div data-section-transition data-transition="clip-right" className="mt-12">
-              <h2 className="text-2xl font-black text-[#0F3C65]" style={{ fontFamily: "var(--font-display)" }}>
+              <h2 className="text-2xl font-black text-white" style={{ fontFamily: "var(--font-display)" }}>
                 Statutory Tools for {s.name}
               </h2>
               <div data-stagger className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-3">
-                <Link href="/calculator" className="group rounded-2xl border border-[#0F3C65]/15 bg-[#FBF7F0] p-4 shadow-sm transition-all hover:border-[#C89B3C] hover:bg-white">
-                  <span className="block text-xs font-black text-[#0F3C65]">{s.name} Fee Calculator</span>
-                  <span className="mt-1 block text-[11px] font-medium text-[#486581]">Estimate 1 district, 5 districts or state fees</span>
+                <Link href="/calculator" className="group rounded-2xl border border-white/10 bg-[#12161F] p-4 shadow-md transition-all hover:border-[#BF953F]">
+                  <span className="block text-xs font-black text-white">{s.name} Fee Calculator</span>
+                  <span className="mt-1 block text-[11px] font-medium text-slate-400">Estimate 1 district, 5 districts or state fees</span>
                 </Link>
-                <Link href="/emergency" className="group rounded-2xl border-2 border-[#C89B3C] bg-[#FFF2BA] p-4 shadow-sm transition-all hover:bg-[#C89B3C]">
-                  <span className="block text-xs font-black text-[#0F3C65] group-hover:text-white">Notice &amp; Expiry Emergency Desk</span>
-                  <span className="mt-1 block text-[11px] font-bold text-[#0F3C65]/80 group-hover:text-white/90">Urgent Controlling Authority notice response</span>
+                <Link href="/emergency" className="group rounded-2xl border-2 border-[#BF953F] bg-[#12161F] p-4 shadow-md transition-all hover:border-[#8C1F32]">
+                  <span className="block text-xs font-black text-[#BF953F] group-hover:text-white">Notice &amp; Expiry Emergency Desk</span>
+                  <span className="mt-1 block text-[11px] font-bold text-slate-300">Urgent Controlling Authority notice response</span>
                 </Link>
-                <Link href="/case-studies" className="group rounded-2xl border border-[#0F3C65]/15 bg-[#FBF7F0] p-4 shadow-sm transition-all hover:border-[#C89B3C] hover:bg-white">
-                  <span className="block text-xs font-black text-[#0F3C65]">Licensing Case Studies</span>
-                  <span className="mt-1 block text-[11px] font-medium text-[#486581]">Proven security clearance success stories</span>
+                <Link href="/case-studies" className="group rounded-2xl border border-white/10 bg-[#12161F] p-4 shadow-md transition-all hover:border-[#BF953F]">
+                  <span className="block text-xs font-black text-white">Licensing Case Studies</span>
+                  <span className="mt-1 block text-[11px] font-medium text-slate-400">Proven security clearance success stories</span>
                 </Link>
-                <Link href="/industries" className="group rounded-2xl border border-[#0F3C65]/15 bg-[#FBF7F0] p-4 shadow-sm transition-all hover:border-[#C89B3C] hover:bg-white">
-                  <span className="block text-xs font-black text-[#0F3C65]">Industry PSARA Compliance</span>
-                  <span className="mt-1 block text-[11px] font-medium text-[#486581]">Manufacturing, Tech Parks &amp; Hospital rules</span>
+                <Link href="/industries" className="group rounded-2xl border border-white/10 bg-[#12161F] p-4 shadow-md transition-all hover:border-[#BF953F]">
+                  <span className="block text-xs font-black text-white">Industry PSARA Compliance</span>
+                  <span className="mt-1 block text-[11px] font-medium text-slate-400">Manufacturing, Tech Parks &amp; Hospital rules</span>
                 </Link>
               </div>
             </div>
 
             {/* Service cross-links */}
             <div data-section-transition data-transition="fade" className="mt-12">
-              <h2 className="text-2xl font-black text-[#0F3C65]" style={{ fontFamily: "var(--font-display)" }}>
+              <h2 className="text-2xl font-black text-white" style={{ fontFamily: "var(--font-display)" }}>
                 PSARA Services in {s.name}
               </h2>
-              <p className="mt-2 text-sm font-medium text-[#486581]">
+              <p className="mt-2 text-sm font-medium text-slate-300">
                 Complete PSARA licensing services for agencies operating in {s.name}.
               </p>
               <div data-stagger className="mt-4 flex flex-wrap gap-2">
@@ -175,7 +175,7 @@ export default async function StatePage({
                   <Link
                     key={svc.slug}
                     href={`/services/${svc.slug}`}
-                    className="rounded-xl border border-[#0F3C65]/15 bg-[#FBF7F0] px-3.5 py-2 text-xs font-black uppercase tracking-wider text-[#0F3C65] transition-all hover:border-[#C89B3C] hover:bg-[#0A233F] hover:text-white"
+                    className="rounded-xl border border-white/10 bg-[#12161F] px-3.5 py-2 text-xs font-black uppercase tracking-wider text-white transition-all hover:border-[#BF953F] hover:bg-[#8C1F32]"
                   >
                     {svc.title}
                   </Link>

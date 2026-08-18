@@ -1,125 +1,118 @@
 /* ═══════════════════════════════════════════════════════════════
-   PSARA · Reference DNA
-   Electric blue space · Metallic gold · Pure white
-   Continuous ambient — no section boxes
+   PSARA Consultant India · Master Design Tokens & DNA
+   Statutory Authority · Multi-Shade Contrast Mixing · Rich Depth
    ═══════════════════════════════════════════════════════════════ */
 
 :root {
-  /* ── Light Executive Theme (Buttermilk / Midnight Blue / Gold) ── */
-  --void:           #FFFEF9;   /* Primary light ivory background */
-  --void-2:         #FBF7F0;   /* Secondary cream background */
-  --space:          #F4EFE6;   /* Card surface background */
+  /* ── 1. Canvas & Surface Foundations ── */
+  --canvas-void:       #050714;   /* Deepest Navy Void */
+  --void:              #050714;
+  --void-2:            #0A1224;   /* Elevated Deep Navy */
+  --surface-dark:      #0A1224;
+  --surface-card-dark: #0E1B33;   /* Solid Rich Navy Card */
+  --space:             #0E1B33;
+  --space-lift:        #132545;   /* Lifted Navy Surface */
 
-  /* ── Midnight Blue & Vista Blue ── */
-  --electric:       #0F3C65;   /* Midnight Blue */
-  --electric-2:     #0B5497;   /* Ocean Blue */
-  --electric-3:     #78A2D2;   /* Vista Blue */
-  --sky-blue:       #78A2D2;
-  --sky-bright:     #0B5497;
-  --sky-glow:       rgba(120, 162, 210, 0.3);
-  --electric-glow:  rgba(15, 60, 101, 0.2);
-  --electric-soft:  rgba(217, 230, 242, 0.6);
+  /* ── 2. Editorial Light Surfaces ── */
+  --canvas-cream:      #FBF7F0;   /* Warm Alabaster Cream */
+  --white:             #FFFFFF;   /* Pure White */
+  --white-bg:          #FFFFFF;
+  --surface-light:     #FFFFFF;
+  --surface-card-light:#F8F9FD;   /* Off-White Lead Card */
+  --paper:             #FFFFFF;
+  --paper-ink:         #0F172A;   /* Crisp Dark Slate */
+  --ink:               #0F172A;
+  --ink-soft:          #334155;   /* Secondary Slate */
+  --ink-muted:         #64748B;
 
-  /* ── Metallic gold & Buttermilk ── */
-  --metal-1:        #FFF2BA;   /* Buttermilk */
-  --metal-2:        #C89B3C;   /* Warm Gold */
-  --metal-3:        #B88E2F;   /* Deep Gold */
-  --metal-4:        #8C651A;   /* Shade */
-  --gold:           #C89B3C;
-  --gold-bright:    #C89B3C;
-  --gold-dim:       rgba(200, 155, 60, 0.70);
+  /* ── 3. Primary Statutory Accent: Antique & Metallic Gold ── */
+  --gold-root:         #C89B3C;
+  --gold:              #C89B3C;   /* Antique Statutory Gold */
+  --gold-primary:      #C89B3C;
+  --gold-bright:       #D4AF37;   /* Polished Gold */
+  --gold-light:        #F5E6BA;   /* Pale Champagne Gold */
+  --gold-cream:        #FFF6D9;   /* High-Contrast Cream Gold */
+  --gold-deep:         #8F681B;   /* Deep Bronze Gold */
+  --gold-dim:          rgba(200, 155, 60, 0.75);
+  --gold-soft:         rgba(200, 155, 60, 0.12);
 
-  /* ── Text hierarchy — Deep Midnight Blue contrast ── */
-  --white:          #0F3C65;   /* Midnight Blue primary text */
-  --white-90:       #0A233F;
-  --white-70:       #173B63;
-  --white-55:       #334E68;
-  --white-40:       #627D98;
-  --white-25:       rgba(15, 60, 101, 0.25);
-  --white-18:       rgba(15, 60, 101, 0.18);
-  --white-12:       rgba(15, 60, 101, 0.12);
-  --white-08:       rgba(15, 60, 101, 0.08);
-  --white-06:       rgba(15, 60, 101, 0.06);
+  /* ── 4. Primary Dark Navy Ramps ── */
+  --navy-deep:         #0A233F;   /* Classic Statutory Navy */
+  --navy-dark:         #0A1224;
+  --navy-surface:      #0E1B33;
+  --navy-lift:         #14284D;
+  --navy-border:       rgba(200, 155, 60, 0.22);
 
-  /* ── India energy (ambient only) */
-  --saffron:        #FF8C28;
-  --india-green:    #0E8A52;
+  /* ── 5. Conversion Green (WhatsApp & Trust) ── */
+  --whatsapp:          #25D366;
+  --whatsapp-hover:    #128C7E;
+  --emerald:           #25D366;
+  --emerald-deep:      #128C7E;
 
-  /* ── Gradients ── */
-  --grad-metal: linear-gradient(
-    115deg,
-    #B88E2F 0%,
-    #C89B3C 40%,
-    #EAD28D 70%,
-    #C89B3C 100%
-  );
-  --grad-gold-cta: var(--grad-metal);
-  --grad-gold-metallic: var(--grad-metal);
-  --line-amber: rgba(200, 155, 60, 0.35);
-  --grad-electric: radial-gradient(
-    ellipse 80% 60% at 70% 30%,
-    rgba(15, 60, 101, 0.15) 0%,
-    transparent 55%
-  );
+  /* ── 6. Saturated CTA Accent ── */
+  --purple-cta:        #5821C7;
+  --purple-electric:   #6D4CC2;
+  --purple-light:      #8C64E8;
+  --purple-shimmer:    #CBB0FF;
 
-  /* ── Typography */
-  --font-display: "Forma DJR Display", "Syne", system-ui, sans-serif;
+  /* Aliases */
+  --violet-deep:       #0A1224;
+  --violet-base:       #0A233F;
+  --violet-primary:    #5821C7;
+  --violet-electric:   #6D4CC2;
+  --violet-light:      #8C64E8;
+  --violet-shimmer:    #CBB0FF;
+  --electric:          #5821C7;
+  --electric-2:        #6D4CC2;
+  --electric-3:        #0A1224;
+  --cherry:            #5821C7;
+  --cherry-bright:     #6D4CC2;
+  --cherry-deep:       #0A1224;
+
+  /* ── 7. Text Contrast Scale ── */
+  --white-100:         #FFFFFF;
+  --white-90:          #F1F5F9;   /* High-Contrast Body */
+  --white-75:          #E2E8F0;
+  --white-60:          #94A3B8;
+  --white-45:          #64748B;
+  --white-25:          rgba(255, 255, 255, 0.25);
+  --white-15:          rgba(255, 255, 255, 0.15);
+  --white-10:          rgba(255, 255, 255, 0.10);
+  --white-05:          rgba(255, 255, 255, 0.05);
+
+  --text-primary:      #FFFFFF;
+  --text-secondary:    #E2E8F0;
+  --text-muted:        #94A3B8;
+
+  /* ── 8. Rich Same-Color Gradient Mixtures (Contrast Depth) ── */
+  --grad-gold-metallic: linear-gradient(135deg, #FFF6D9 0%, #F5E6BA 25%, #D4AF37 55%, #C89B3C 80%, #8F681B 100%);
+  --grad-gold-surface:  linear-gradient(145deg, rgba(200, 155, 60, 0.18) 0%, rgba(200, 155, 60, 0.05) 100%);
+  --grad-gold-border:   linear-gradient(90deg, #D4AF37 0%, rgba(200, 155, 60, 0.3) 50%, #8F681B 100%);
+
+  --grad-navy-card:     linear-gradient(160deg, #0E1B33 0%, #081020 100%);
+  --grad-navy-lift:     linear-gradient(160deg, #14284D 0%, #0A1428 100%);
+  --grad-navy-header:   linear-gradient(180deg, rgba(5, 7, 20, 0.96) 0%, rgba(10, 18, 36, 0.94) 100%);
+  --grad-cream-card:    linear-gradient(160deg, #FFFFFF 0%, #F8F9FD 100%);
+  --grad-purple-cta:    linear-gradient(135deg, #5821C7 0%, #6D4CC2 60%, #7638FA 100%);
+
+  /* ── 9. Typography Scale ── */
+  --font-display: "Forma DJR Display", "Helvetica Neue", system-ui, sans-serif;
   --font-body:    "Maison Neue Ext", system-ui, sans-serif;
-  --font-accent:  "Syne", system-ui, sans-serif;
+  --font-accent:  "Maison Neue Ext", system-ui, sans-serif;
   --font-label:   "Maison Neue Ext", system-ui, sans-serif;
 
-  --text-xs:    clamp(0.75rem, 0.72rem + 0.2vw, 0.82rem);
-  --text-sm:    clamp(0.9rem, 0.87rem + 0.3vw, 0.98rem);
-  --text-base:  clamp(1rem, 0.96rem + 0.3vw, 1.1rem);
-  --text-lg:    clamp(1.15rem, 1.05rem + 0.5vw, 1.35rem);
-  --text-xl:    clamp(1.35rem, 1.1rem + 1vw, 1.85rem);
-  --text-2xl:   clamp(1.7rem, 1.3rem + 1.6vw, 2.5rem);
-  --text-3xl:   clamp(2.1rem, 1.6rem + 2.4vw, 3.4rem);
-  --text-hero:  clamp(2.6rem, 4.8vw + 0.8rem, 4.8rem);
+  --h1-size: clamp(2.25rem, 5.5vw, 4.25rem);
+  --h2-size: clamp(1.75rem, 3.5vw, 2.5rem);
+  --h3-size: clamp(1.25rem, 2.2vw, 1.65rem);
+  --body-size: 1.0625rem;
+  --body-line-height: 1.65;
 
-  --ease-expo:     cubic-bezier(0.16, 1, 0.3, 1);
-  --ease-power3:   cubic-bezier(0.22, 1, 0.36, 1);
-  --ease-smooth:   cubic-bezier(0.25, 1, 0.5, 1);
-
-  --gutter:     clamp(1.25rem, 4vw, 3.5rem);
-  --section-y:  clamp(5.5rem, 12vh, 9rem);
-  --header-h:   3.5rem;
-  --rail:       clamp(4.25rem, 6.5vw, 5.75rem);
-
-  --bg-primary: var(--void);
-  --bg-card: var(--surface);
-  --bg-dark: var(--void);
-  --bg-dark-card: var(--void-2);
-  --bg-dark-lift: var(--space);
-
-  --page-max: 86rem;
-  --radius: 4px;
-  --radius-sm: 2px;
-  --radius-md: 4px;
-  --radius-lg: 8px;
-  --dur-fast: 0.2s;
-  --white-20: rgba(255, 255, 255, 0.2);
-  --white-30: rgba(255, 255, 255, 0.3);
-  --white-45: rgba(255, 255, 255, 0.55);  /* ≥4.5:1 on --void */
-  --white-50: rgba(255, 255, 255, 0.5);
-  --white-60: rgba(255, 255, 255, 0.6);
-  --white-90: rgba(255, 255, 255, 0.9);
-}
-
-/* Metallic gold text utility */
-.text-metal {
-  background: var(--grad-metal);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  -webkit-text-fill-color: transparent;
-}
-
-/* Prefer solid metal when reduced motion / print */
-@media (prefers-reduced-motion: reduce) {
-  .text-metal {
-    background: none;
-    color: var(--gold-bright);
-    -webkit-text-fill-color: var(--gold-bright);
-  }
+  /* ── 10. Layout & Spacing ── */
+  --gutter: clamp(1.25rem, 4vw, 3.5rem);
+  --page-max: 82rem;
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
 }

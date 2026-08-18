@@ -8,7 +8,7 @@ import { validateEnquiryFields, type EnquiryErrors } from "../lib/form-validatio
 
 const STATES = [
   "Rajasthan",
-  "Delhi",
+  "Delhi NCR",
   "Haryana",
   "Uttar Pradesh",
   "Gujarat",
@@ -19,34 +19,27 @@ const STATES = [
   "Telangana",
   "West Bengal",
   "Punjab",
-  "Chhattisgarh",
-  "Other",
+  "Bihar",
+  "Odisha",
+  "Other State / UT",
 ];
 
-const SERVICES = [
-  "PSARA License Registration",
-  "PSARA Renewal",
-  "Company Registration",
-  "Training MOU",
-  "Police Verification",
-  "Multi-State Expansion",
-  "Labour Compliance",
-  "Other / Not sure",
+const DISTRICT_OPTIONS = [
+  "1 District (Single-District Setup)",
+  "Up to 5 Districts (Regional Coverage)",
+  "Entire State (All-State PSARA)",
+  "Multi-State Expansion Plan",
+  "Not Sure Yet / Need Advice",
 ];
 
 type Props = {
   formType?: string;
   className?: string;
-  /** light = cream card (homepage). dark = navy card (/contact). */
   variant?: "light" | "dark";
 };
 
-/**
- * Silbar-style enquiry form: validates fields, then opens WhatsApp
- * with a pre-filled structured message. No backend / no password.
- */
 export default function ContactForm({
-  formType = "Contact Page Enquiry",
+  formType = "Lead Advisory Form",
   className = "",
   variant = "light",
 }: Props) {
@@ -55,11 +48,9 @@ export default function ContactForm({
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
-  const [company, setCompany] = useState("");
   const [state, setState] = useState("");
   const [city, setCity] = useState("");
-  const [service, setService] = useState("");
-  const [coverage, setCoverage] = useState("");
+  const [districts, setDistricts] = useState(DISTRICT_OPTIONS[0]!);
   const [message, setMessage] = useState("");
   const [errors, setErrors] = useState<EnquiryErrors>({});
   const [tried, setTried] = useState(false);
@@ -67,28 +58,26 @@ export default function ContactForm({
   const [isSuccess, setIsSuccess] = useState(false);
 
   const inputBase = dark
-    ? "w-full rounded-xl border border-white/20 bg-[#07192C] px-4 py-3 text-sm font-medium text-white outline-none placeholder:text-white/50 focus:border-[#C89B3C] focus:ring-2 focus:ring-[#C89B3C]/30"
-    : "w-full rounded-xl border border-[#0F3C65]/20 bg-white px-4 py-3 text-sm font-medium text-[#0F3C65] outline-none placeholder:text-[#627D98] focus:border-[#C89B3C] focus:ring-2 focus:ring-[#C89B3C]/25";
+    ? "w-full rounded-xl border border-white/20 bg-[#050714] px-4 py-3.5 text-sm font-medium text-white outline-none placeholder:text-white/40 focus:border-[#D4AF37] focus:ring-2 focus:ring-[#D4AF37]/20 transition-all"
+    : "w-full rounded-xl border border-slate-300 bg-white px-4 py-3.5 text-sm font-medium text-[#0F172A] outline-none placeholder:text-slate-400 focus:border-[#5821C7] focus:ring-2 focus:ring-[#5821C7]/20 transition-all shadow-sm";
 
   const labelCls = dark
-    ? "mb-1.5 block text-[0.65rem] font-black uppercase tracking-[0.16em] text-[#FFF2BA]"
-    : "mb-1.5 block text-[0.65rem] font-black uppercase tracking-[0.16em] text-[#0F3C65]";
+    ? "mb-1.5 block text-xs font-bold uppercase tracking-[0.1em] text-[#CBD5E1]"
+    : "mb-1.5 block text-xs font-bold uppercase tracking-[0.1em] text-[#334155]";
 
-  const errCls = "mt-1 text-xs font-semibold text-red-500";
+  const errCls = "mt-1.5 text-xs font-semibold text-rose-500 flex items-center gap-1";
 
   const openWa = () => {
     const text = formatEnquiryWhatsAppMessage({
       name,
       phone,
       email,
-      company,
       state,
       city,
-      service,
       message,
       formType,
       extra: {
-        Coverage: coverage || undefined,
+        "Number of Districts": districts,
       },
     });
     openWhatsApp(text);
@@ -107,61 +96,51 @@ export default function ContactForm({
     setIsSuccess(true);
   };
 
-  /* ── Success (Silbar pattern) ── */
+  /* ── Success Screen ── */
   if (isSuccess) {
     return (
       <div
-        className={`space-y-5 rounded-2xl border-2 p-6 text-center ${
+        className={`space-y-6 rounded-2xl border p-8 text-center ${
           dark
-            ? "border-[#C89B3C]/40 bg-[#07192C] text-white"
-            : "border-[#C89B3C]/50 bg-[#FFFDF5] text-[#0F3C65]"
+            ? "border-white/20 bg-[#0A1022] text-white"
+            : "border-slate-200 bg-white text-[#0F172A] shadow-xl"
         } ${className}`}
         role="status"
       >
-        <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366]/15 text-[#25D366]">
-          <CheckCircle2 className="h-8 w-8" />
+        <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-[#25D366]/20 text-[#25D366]">
+          <CheckCircle2 className="h-10 w-10" />
         </div>
-        <h3
-          className="text-xl font-black"
-          style={{ fontFamily: "var(--font-display)" }}
-        >
-          Opening WhatsApp…
-        </h3>
-        <p className={`text-sm leading-relaxed ${dark ? "text-slate-300" : "text-[#334E68]"}`}>
-          Your enquiry is pre-filled. Tap <strong>Send</strong> in WhatsApp to deliver it to
-          PSARA Consultant India.
-        </p>
-
-        <div
-          className={`rounded-xl border p-4 text-left text-sm ${
-            dark ? "border-white/10 bg-white/5 text-slate-200" : "border-[#0F3C65]/10 bg-white text-[#334E68]"
-          }`}
-        >
-          <p className="mb-2 text-[0.65rem] font-black uppercase tracking-wider text-[#C89B3C]">
-            What happens next
+        <div>
+          <h3 className="text-2xl font-bold" style={{ fontFamily: "var(--font-display)" }}>
+            Opening WhatsApp Desk…
+          </h3>
+          <p className={`mt-2 text-sm leading-relaxed ${dark ? "text-[#CBD5E1]" : "text-[#475569]"}`}>
+            Your PSARA inquiry is pre-filled. Tap <strong>Send</strong> on WhatsApp to connect directly with our statutory advisory team.
           </p>
-          <ul className="list-disc space-y-1.5 pl-5">
-            <li>WhatsApp opens with your full enquiry text</li>
-            <li>Press Send to message our licensing desk</li>
-            <li>We typically reply within a few business hours with a state checklist</li>
+        </div>
+
+        <div className={`rounded-xl p-4 text-left text-xs ${dark ? "bg-[#050714] text-[#CBD5E1]" : "bg-slate-50 text-[#334155]"}`}>
+          <span className="font-bold text-[#D4AF37] uppercase tracking-wider block mb-1.5">What to expect:</span>
+          <ul className="list-disc pl-4 space-y-1">
+            <li>Instant review of your operating state &amp; district coverage</li>
+            <li>State-specific Controlling Authority document checklist</li>
+            <li>Direct phone follow-up during regular business hours</li>
           </ul>
         </div>
 
-        <div className="flex flex-col gap-3 sm:flex-row sm:justify-center">
+        <div className="flex flex-col sm:flex-row gap-3 justify-center">
           <button
             type="button"
             onClick={openWa}
-            className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#25D366] px-6 py-3.5 text-xs font-black uppercase tracking-wider text-white shadow-lg transition hover:bg-emerald-600"
+            className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#25D366] hover:bg-[#128C7E] px-6 py-3.5 text-xs font-bold uppercase tracking-wider text-white shadow-lg transition-all"
           >
             <MessageSquare className="h-4 w-4 fill-white" />
             Open WhatsApp Again
           </button>
           <a
             href={TEL_HREF}
-            className={`inline-flex items-center justify-center gap-2 rounded-xl border-2 px-6 py-3.5 text-xs font-black uppercase tracking-wider transition ${
-              dark
-                ? "border-white/25 text-white hover:border-[#C89B3C]"
-                : "border-[#0F3C65]/25 text-[#0F3C65] hover:border-[#C89B3C]"
+            className={`inline-flex items-center justify-center gap-2 rounded-xl border px-6 py-3.5 text-xs font-bold uppercase tracking-wider transition-all ${
+              dark ? "border-white/20 text-white hover:bg-white/10" : "border-slate-300 text-[#0F172A] hover:bg-slate-100"
             }`}
           >
             <Phone className="h-4 w-4" />
@@ -172,29 +151,21 @@ export default function ContactForm({
     );
   }
 
-  /* ── Form ── */
+  /* ── Lead Form ── */
   return (
     <form onSubmit={onSubmit} noValidate className={`space-y-4 ${className}`}>
-      <div className="flex items-center gap-2">
-        <span className={`h-px flex-1 ${dark ? "bg-white/15" : "bg-[#0F3C65]/15"}`} />
-        <span className="shrink-0 text-[0.62rem] font-black uppercase tracking-[0.2em] text-[#C89B3C]">
-          Your details → WhatsApp desk
-        </span>
-        <span className={`h-px flex-1 ${dark ? "bg-white/15" : "bg-[#0F3C65]/15"}`} />
-      </div>
-
-      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+      {/* 1. Name & Mobile */}
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <div>
           <label htmlFor="cf-name" className={labelCls}>
-            Full name *
+            Full Name *
           </label>
           <div className="relative">
             <input
               id="cf-name"
               required
-              className={`${inputBase} ${errors.name ? "border-red-500" : ""} pr-10`}
+              className={`${inputBase} ${errors.name ? "border-rose-500 focus:border-rose-500 focus:ring-rose-500/20" : ""}`}
               placeholder="e.g. Rahul Sharma"
-              aria-invalid={errors.name ? true : undefined}
               value={name}
               onChange={(e) => {
                 setName(e.target.value);
@@ -204,31 +175,24 @@ export default function ContactForm({
               }}
               autoComplete="name"
             />
-            {tried && name.trim() && !errors.name && (
-              <CheckCircle2 className="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-emerald-500" />
-            )}
-            {errors.name && (
-              <AlertCircle className="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-red-500" />
-            )}
           </div>
           {errors.name && (
             <p role="alert" className={errCls}>
-              {errors.name}
+              <AlertCircle className="h-3.5 w-3.5" /> {errors.name}
             </p>
           )}
         </div>
 
         <div>
           <label htmlFor="cf-phone" className={labelCls}>
-            Phone / WhatsApp *
+            Mobile / WhatsApp *
           </label>
           <div className="relative">
             <input
               id="cf-phone"
               required
-              className={`${inputBase} ${errors.phone ? "border-red-500" : ""} pr-10`}
+              className={`${inputBase} ${errors.phone ? "border-rose-500 focus:border-rose-500 focus:ring-rose-500/20" : ""}`}
               placeholder="+91 99831 69555"
-              aria-invalid={errors.phone ? true : undefined}
               value={phone}
               onChange={(e) => {
                 setPhone(e.target.value);
@@ -239,31 +203,26 @@ export default function ContactForm({
               autoComplete="tel"
               inputMode="tel"
             />
-            {tried && phone.trim() && !errors.phone && (
-              <CheckCircle2 className="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-emerald-500" />
-            )}
-            {errors.phone && (
-              <AlertCircle className="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-red-500" />
-            )}
           </div>
           {errors.phone && (
             <p role="alert" className={errCls}>
-              {errors.phone}
+              <AlertCircle className="h-3.5 w-3.5" /> {errors.phone}
             </p>
           )}
         </div>
       </div>
 
-      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+      {/* 2. Email & City/State */}
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <div>
           <label htmlFor="cf-email" className={labelCls}>
-            Email
+            Email Address
           </label>
           <input
             id="cf-email"
-            className={`${inputBase} ${errors.email ? "border-red-500" : ""}`}
-            placeholder="you@company.com"
             type="email"
+            className={`${inputBase} ${errors.email ? "border-rose-500 focus:border-rose-500 focus:ring-rose-500/20" : ""}`}
+            placeholder="you@agency.com"
             value={email}
             onChange={(e) => {
               setEmail(e.target.value);
@@ -273,34 +232,19 @@ export default function ContactForm({
           />
           {errors.email && (
             <p role="alert" className={errCls}>
-              {errors.email}
+              <AlertCircle className="h-3.5 w-3.5" /> {errors.email}
             </p>
           )}
         </div>
-        <div>
-          <label htmlFor="cf-company" className={labelCls}>
-            Company / firm
-          </label>
-          <input
-            id="cf-company"
-            className={inputBase}
-            placeholder="Security agency name"
-            value={company}
-            onChange={(e) => setCompany(e.target.value)}
-            autoComplete="organization"
-          />
-        </div>
-      </div>
 
-      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
         <div>
           <label htmlFor="cf-state" className={labelCls}>
-            State of operation *
+            State of Operation *
           </label>
           <select
             id="cf-state"
             required
-            className={`${inputBase} ${errors.state ? "border-red-500" : ""}`}
+            className={`${inputBase} ${errors.state ? "border-rose-500 focus:border-rose-500 focus:ring-rose-500/20" : ""}`}
             value={state}
             onChange={(e) => {
               setState(e.target.value);
@@ -308,9 +252,8 @@ export default function ContactForm({
                 setErrors((prev) => ({ ...prev, state: undefined }));
               }
             }}
-            aria-invalid={errors.state ? true : undefined}
           >
-            <option value="">Select state *</option>
+            <option value="">Select Target State *</option>
             {STATES.map((s) => (
               <option key={s} value={s}>
                 {s}
@@ -319,117 +262,85 @@ export default function ContactForm({
           </select>
           {errors.state && (
             <p role="alert" className={errCls}>
-              {errors.state}
+              <AlertCircle className="h-3.5 w-3.5" /> {errors.state}
             </p>
           )}
         </div>
+      </div>
+
+      {/* 3. City & Number of Districts */}
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <div>
           <label htmlFor="cf-city" className={labelCls}>
-            City / district
+            City / Headquarters Location
           </label>
           <input
             id="cf-city"
             className={inputBase}
-            placeholder="e.g. Jaipur"
+            placeholder="e.g. Jaipur / Mumbai / Delhi"
             value={city}
             onChange={(e) => setCity(e.target.value)}
           />
         </div>
-      </div>
 
-      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
         <div>
-          <label htmlFor="cf-service" className={labelCls}>
-            Service needed
+          <label htmlFor="cf-districts" className={labelCls}>
+            Number of Districts / Scope
           </label>
           <select
-            id="cf-service"
+            id="cf-districts"
             className={inputBase}
-            value={service}
-            onChange={(e) => setService(e.target.value)}
+            value={districts}
+            onChange={(e) => setDistricts(e.target.value)}
           >
-            <option value="">Select service</option>
-            {SERVICES.map((s) => (
-              <option key={s} value={s}>
-                {s}
+            {DISTRICT_OPTIONS.map((opt) => (
+              <option key={opt} value={opt}>
+                {opt}
               </option>
             ))}
           </select>
         </div>
-        <div>
-          <label htmlFor="cf-coverage" className={labelCls}>
-            Coverage goal
-          </label>
-          <select
-            id="cf-coverage"
-            className={inputBase}
-            value={coverage}
-            onChange={(e) => setCoverage(e.target.value)}
-          >
-            <option value="">Select coverage</option>
-            <option value="One district">One district</option>
-            <option value="Multi-district (up to 5)">Multi-district (up to 5)</option>
-            <option value="Whole state">Whole state</option>
-            <option value="Multi-state plan">Multi-state plan</option>
-            <option value="Not sure yet">Not sure yet</option>
-          </select>
-        </div>
       </div>
 
+      {/* 4. How can we help? */}
       <div>
         <label htmlFor="cf-message" className={labelCls}>
-          Message
+          How can we help?
         </label>
         <textarea
           id="cf-message"
-          className={`${inputBase} min-h-[110px] resize-y`}
-          placeholder="Entity type, office status, timeline…"
+          rows={3}
+          className={`${inputBase} resize-y min-h-[90px]`}
+          placeholder="Describe your security agency type, office readiness, training MOU requirements, or expected timeline…"
           value={message}
           onChange={(e) => setMessage(e.target.value)}
         />
       </div>
 
-      <div className="flex flex-col gap-3 pt-1 sm:flex-row sm:items-center">
+      {/* 5. Submit Button (Consistent Saturated Purple Button) */}
+      <div className="pt-2">
         <button
           type="submit"
           disabled={isSubmitting}
-          className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-[#25D366] px-6 py-3.5 text-xs font-black uppercase tracking-[0.14em] text-white shadow-lg shadow-emerald-500/25 transition hover:bg-emerald-600 disabled:opacity-70 sm:w-auto"
+          className="w-full inline-flex items-center justify-center gap-2.5 rounded-xl bg-[#5821C7] hover:bg-[#7638FA] px-8 py-4 text-xs font-bold uppercase tracking-[0.1em] text-white transition-all duration-200 shadow-xl shadow-purple-950/40 hover:-translate-y-0.5 active:scale-95 disabled:opacity-70"
+          style={{ fontFamily: "var(--font-body)" }}
         >
           <MessageSquare className="h-4 w-4 fill-white" />
-          {isSubmitting ? "Opening WhatsApp…" : "Submit on WhatsApp"}
+          <span>{isSubmitting ? "Opening WhatsApp…" : "Get PSARA Statutory Advisory Support"}</span>
         </button>
-        <a
-          href={`mailto:${CONTACT.email}?subject=${encodeURIComponent(
-            "PSARA consultation enquiry"
-          )}&body=${encodeURIComponent(
-            `Name: ${name}\nPhone: ${phone}\nEmail: ${email}\nCompany: ${company}\nState: ${state}\nCity: ${city}\nService: ${service}\nCoverage: ${coverage}\n\n${message}`
-          )}`}
-          className={`inline-flex w-full items-center justify-center rounded-xl border-2 px-5 py-3.5 text-xs font-black uppercase tracking-wider transition sm:w-auto ${
-            dark
-              ? "border-white/20 text-white hover:border-[#C89B3C]"
-              : "border-[#0F3C65]/20 text-[#0F3C65] hover:border-[#C89B3C]"
-          }`}
-        >
-          Or email instead
-        </a>
       </div>
 
-      {tried && Object.keys(errors).length > 0 ? (
-        <p role="alert" className="text-sm font-semibold text-red-500">
-          Please fix the highlighted fields above and try again.
-        </p>
-      ) : (
-        <p className={`text-xs font-medium leading-relaxed ${dark ? "text-slate-400" : "text-[#486581]"}`}>
-          Submits a pre-filled WhatsApp message to{" "}
-          <strong className={dark ? "text-white" : "text-[#0F3C65]"}>{CONTACT.phoneDisplay}</strong>
-          . No account required.
-          <br />
-          <span className="text-[#C89B3C]">
-            ★ {GOOGLE_REVIEWS.ratingLabel} · {GOOGLE_REVIEWS.reviewCount} Google reviews ·{" "}
-            {CONTACT.hours}
-          </span>
-        </p>
-      )}
+      {/* Privacy & Trust Footnote */}
+      <div className={`pt-2 text-center text-xs ${dark ? "text-[#94A3B8]" : "text-slate-500"}`}>
+        <span>Opens a structured consultation with our Jaipur HQ &amp; Regional Desks.</span>
+        <div className="mt-1 flex items-center justify-center gap-3 font-semibold text-[#D4AF37]">
+          <span>★ {GOOGLE_REVIEWS.ratingLabel} Rating</span>
+          <span>•</span>
+          <span>{GOOGLE_REVIEWS.reviewCount} Reviews</span>
+          <span>•</span>
+          <span>Mon–Sat 9:30 AM – 6:30 PM</span>
+        </div>
+      </div>
     </form>
   );
 }

@@ -20,11 +20,11 @@
 
 const INDEXNOW_ENDPOINT = 'https://api.indexnow.org/indexnow'
 
-// Key file hosted at https://psaraconsultantindia.com/9c4d8b2e-5a71-4f3d-8e6a-1b7c2d9f4a55.txt
+// Key file hosted at https://www.psaraconsultantindia.com/9c4d8b2e-5a71-4f3d-8e6a-1b7c2d9f4a55.txt
 const KEY = '9c4d8b2e-5a71-4f3d-8e6a-1b7c2d9f4a55'
 
 // Override via SITE_URL env var for preview/staging deployments
-const SITE_URL = process.env.SITE_URL || 'https://psaraconsultantindia.com'
+const SITE_URL = process.env.SITE_URL || 'https://www.psaraconsultantindia.com'
 
 export interface IndexNowResult {
   success: boolean

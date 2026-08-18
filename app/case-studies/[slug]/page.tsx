@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { ArrowLeft, MapPin } from "lucide-react";
+import { ArrowLeft, MapPin, MessageSquare, ShieldCheck, Sparkles, Building2 } from "lucide-react";
 import { PageHero, PageMain } from "../../../components/PageShell";
 import StageShell from "../../components/ui/StageShell";
 import { pageMeta } from "../../../lib/metadata";
@@ -32,54 +32,60 @@ export default async function CaseStudyDetailPage({ params }: { params: Promise<
         crumbs={[{ label: "Case Studies", href: "/case-studies" }, { label: cs.clientType }]}
       />
 
-      <PageMain>
-        <div className="max-w-4xl mx-auto space-y-12">
+      <PageMain className="bg-[#050714] text-white">
+        <div className="max-w-4xl mx-auto space-y-10">
           {/* Key Metrics Banner */}
-          <div className="border border-[var(--gold)]/40 bg-[var(--void-2)] p-6 flex flex-col md:flex-row items-center justify-between gap-4">
-            <div>
-              <span className="text-[10px] font-bold uppercase tracking-widest text-[var(--gold-bright)]">Territory &amp; Scale</span>
-              <p className="text-sm font-bold text-white flex items-center gap-1.5 mt-1">
-                <MapPin className="h-4 w-4 text-[var(--gold-bright)]" /> {cs.state}
+          <div className="rounded-3xl border border-[rgba(200,155,60,0.35)] bg-gradient-to-r from-[#0E1B33] via-[#0A1428] to-[#0E1B33] p-6 sm:p-8 flex flex-col sm:flex-row items-center justify-between gap-6 shadow-2xl">
+            <div className="space-y-1">
+              <span className="text-xs font-bold uppercase tracking-widest text-[#D4AF37] block">Territory &amp; Sector</span>
+              <p className="text-base font-bold text-white flex items-center gap-2">
+                <MapPin className="h-4 w-4 text-[#D4AF37]" /> {cs.state} • {cs.clientType}
               </p>
             </div>
             <div className="text-right">
-              <span className="text-[10px] font-bold uppercase tracking-widest text-[var(--gold-bright)]">Result Achieved</span>
-              <p className="text-lg font-bold text-metal font-mono mt-1">{cs.metric}</p>
+              <span className="text-xs font-bold uppercase tracking-widest text-[#D4AF37] block">Result Metric</span>
+              <p className="text-2xl font-bold gold-metallic-text font-mono mt-0.5">{cs.metric}</p>
             </div>
           </div>
 
           {/* Breakdown Sections */}
-          <div className="space-y-8 text-sm text-[var(--white-70)] leading-relaxed">
-            <div className="border border-white/10 bg-white/[0.02] p-8">
-              <h2 className="font-[family-name:var(--font-display)] text-xl font-bold text-white mb-3 text-[var(--gold-bright)]">
-                The Regulatory Challenge
+          <div className="space-y-6 text-sm text-[#E2E8F0] leading-relaxed">
+            <div className="rounded-2xl border border-white/10 bg-gradient-to-b from-[#0E1B33] to-[#081020] p-6 sm:p-8 shadow-md space-y-3">
+              <h2 className="text-xl font-bold text-[#D4AF37] flex items-center gap-2" style={{ fontFamily: "var(--font-display)" }}>
+                <ShieldCheck className="h-5 w-5 text-[#D4AF37]" /> 1. The Regulatory Challenge
               </h2>
-              <p>{cs.challenge}</p>
+              <p className="font-normal text-base text-[#E2E8F0] leading-relaxed">{cs.challenge}</p>
             </div>
 
-            <div className="border border-white/10 bg-white/[0.02] p-8">
-              <h2 className="font-[family-name:var(--font-display)] text-xl font-bold text-white mb-3 text-[var(--gold-bright)]">
-                PSARA Advisory Solution
+            <div className="rounded-2xl border border-white/10 bg-gradient-to-b from-[#0E1B33] to-[#081020] p-6 sm:p-8 shadow-md space-y-3">
+              <h2 className="text-xl font-bold text-[#D4AF37] flex items-center gap-2" style={{ fontFamily: "var(--font-display)" }}>
+                <Sparkles className="h-5 w-5 text-[#D4AF37]" /> 2. PSARA Advisory Solution &amp; Filing
               </h2>
-              <p>{cs.solution}</p>
+              <p className="font-normal text-base text-[#E2E8F0] leading-relaxed">{cs.solution}</p>
             </div>
 
-            <div className="border border-white/10 bg-white/[0.02] p-8">
-              <h2 className="font-[family-name:var(--font-display)] text-xl font-bold text-white mb-3 text-[var(--gold-bright)]">
-                Final Statutory Outcome
+            <div className="rounded-2xl border border-white/10 bg-gradient-to-b from-[#0E1B33] to-[#081020] p-6 sm:p-8 shadow-md space-y-3">
+              <h2 className="text-xl font-bold text-[#D4AF37] flex items-center gap-2" style={{ fontFamily: "var(--font-display)" }}>
+                <Building2 className="h-5 w-5 text-[#D4AF37]" /> 3. Final Statutory Outcome
               </h2>
-              <p>{cs.outcome}</p>
+              <p className="font-normal text-base text-[#E2E8F0] leading-relaxed">{cs.outcome}</p>
             </div>
           </div>
 
           {/* Navigation & Action */}
           <div className="pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
-            <Link href="/case-studies" className="inline-flex items-center gap-2 text-xs font-bold text-[var(--white-70)] hover:text-white">
+            <Link href="/case-studies" className="inline-flex items-center gap-2 text-xs font-bold text-[#CBD5E1] hover:text-white uppercase tracking-wider">
               <ArrowLeft className="h-4 w-4" /> Back to Case Studies
             </Link>
 
-            <a href={DEFAULT_WA} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-full px-6 py-3 text-xs font-bold uppercase tracking-wider" style={{ background: "var(--grad-metal)", color: "var(--void)" }}>
-              Get Similar PSARA Results
+            <a
+              href={`${DEFAULT_WA}&text=Hi,%20I%20read%20the%20case%20study%20for%20${encodeURIComponent(cs.title)}.%20I%20want%20to%20achieve%20similar%20PSARA%20licensing%20results.`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-whatsapp"
+            >
+              <MessageSquare className="h-4 w-4 fill-white" />
+              <span>Get Similar PSARA Results</span>
             </a>
           </div>
         </div>
