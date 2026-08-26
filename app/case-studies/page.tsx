@@ -23,12 +23,12 @@ export default function CaseStudiesPage() {
         crumbs={[{ label: "Case Studies" }]}
       />
 
-      <PageMain className="bg-[#050714] text-white">
+      <PageMain className="bg-[#080714] text-white">
         <div className="grid grid-cols-1 gap-8">
           {CASE_STUDIES.map((cs) => (
             <div
               key={cs.slug}
-              className="rounded-3xl border border-[rgba(200,155,60,0.3)] bg-gradient-to-b from-[#0E1B33] via-[#0A1428] to-[#081020] p-6 md:p-8 shadow-2xl space-y-6 transition-all duration-200 hover:border-[#D4AF37]"
+              className="rounded-3xl border border-[rgba(212,175,55,0.3)] bg-gradient-to-b from-[#14102A] via-[#0A1428] to-[#0F0C1F] p-6 md:p-8 shadow-2xl space-y-6 transition-all duration-200 hover:border-[#D4AF37]"
             >
               {/* Header */}
               <div className="flex flex-wrap items-center justify-between gap-4 pb-4 border-b border-white/10">
@@ -84,7 +84,7 @@ export default function CaseStudiesPage() {
         </div>
 
         {/* Bottom CTA Box */}
-        <section className="mt-16 rounded-3xl border border-[rgba(200,155,60,0.35)] bg-gradient-to-r from-[#0E1B33] via-[#0A1224] to-[#0E1B33] p-8 md:p-12 text-center shadow-2xl space-y-4">
+        <section className="mt-16 rounded-3xl border border-[rgba(212,175,55,0.35)] bg-gradient-to-r from-[#14102A] via-[#0F0C1F] to-[#0E1B33] p-8 md:p-12 text-center shadow-2xl space-y-4">
           <div className="inline-flex p-3 rounded-2xl bg-[#060B18] border border-[#D4AF37]/40 text-[#D4AF37] mb-2">
             <Award className="h-8 w-8" />
           </div>

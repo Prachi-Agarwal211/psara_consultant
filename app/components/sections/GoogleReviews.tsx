@@ -8,7 +8,7 @@ function Stars({ count }: { count: number }) {
   return (
     <div className="flex items-center gap-1" role="img" aria-label={`${count} out of 5 stars`}>
       {Array.from({ length: 5 }).map((_, i) => (
-        <Star key={i} className={`h-4 w-4 ${i < count ? "fill-[#D4AF37] text-[#D4AF37]" : "text-slate-300"}`} />
+        <Star key={i} className={`h-4 w-4 ${i < count ? "fill-[#D4AF37] text-[#8F681B]" : "text-slate-300"}`} />
       ))}
     </div>
   );
@@ -21,28 +21,28 @@ export default function GoogleReviews() {
   return (
     <section
       id="reviews"
-      className="relative overflow-hidden bg-[#FFFFFF] text-[#0F172A] py-20 lg:py-28 border-b border-slate-200"
+      className="on-light relative overflow-hidden text-[#0F172A] py-20 lg:py-28 border-b border-[#E5DDF3]"
     >
       <div className="relative z-10 px-[var(--gutter)] max-w-7xl mx-auto space-y-12">
         {/* Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between border-b border-slate-200 pb-8 gap-6">
+        <div className="flex flex-col md:flex-row md:items-end justify-between border-b border-[#E5DDF3] pb-8 gap-6">
           <div>
-            <div className="mb-3 flex items-center gap-2 text-xs font-bold uppercase tracking-[0.14em] text-[#D4AF37]" style={{ fontFamily: "var(--font-body)" }}>
-              <Sparkles className="h-3.5 w-3.5 text-[#D4AF37]" />
+            <div className="mb-3 flex items-center gap-2 text-xs font-bold uppercase tracking-[0.14em] text-[#8F681B]" style={{ fontFamily: "var(--font-body)" }}>
+              <Sparkles className="h-3.5 w-3.5 text-[#8F681B]" />
               Client Proof &amp; Track Record
             </div>
             <h2
               className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#0F172A]"
               style={{ fontFamily: "var(--font-display)" }}
             >
-              Proof in <span className="text-[#5821C7]">the Field</span>
+              Proof in <span className="text-[#8F681B]">the Field</span>
             </h2>
           </div>
 
           <div className="flex items-center gap-4">
             <div className="flex items-center gap-1" aria-hidden="true">
               {Array.from({ length: 5 }).map((_, i) => (
-                <Star key={i} className="h-5 w-5 fill-[#D4AF37] text-[#D4AF37]" />
+                <Star key={i} className="h-5 w-5 fill-[#D4AF37] text-[#8F681B]" />
               ))}
             </div>
             <div>
@@ -59,7 +59,7 @@ export default function GoogleReviews() {
         {/* Review Layout */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
           {/* Featured Review */}
-          <figure className="relative lg:col-span-7 rounded-3xl border border-slate-200 bg-[#F8F9FD] p-8 md:p-10 flex flex-col justify-between shadow-lg">
+          <figure className="relative lg:col-span-7 rounded-3xl border border-[#E5DDF3] bg-[#F4F0FA] p-8 md:p-10 flex flex-col justify-between shadow-lg">
             <div>
               <div className="flex items-center justify-between mb-6">
                 <Stars count={featured.rating} />
@@ -72,34 +72,34 @@ export default function GoogleReviews() {
               </blockquote>
             </div>
 
-            <figcaption className="mt-8 pt-6 border-t border-slate-200 flex items-center justify-between">
+            <figcaption className="mt-8 pt-6 border-t border-[#E5DDF3] flex items-center justify-between">
               <div>
-                <p className="text-base font-bold text-[#5821C7]" style={{ fontFamily: "var(--font-display)" }}>{featured.name}</p>
+                <p className="text-base font-bold text-[#8F681B]" style={{ fontFamily: "var(--font-display)" }}>{featured.name}</p>
                 <p className="text-xs font-medium text-[#64748B]">{featured.company} · {featured.city}</p>
               </div>
-              <CheckCircle className="h-6 w-6 text-[#5821C7] shrink-0" />
+              <CheckCircle className="h-6 w-6 text-[#8F681B] shrink-0" />
             </figcaption>
           </figure>
 
           {/* Stacked Reviews */}
           <div className="lg:col-span-5 space-y-4 flex flex-col justify-between">
             {rest.map((r) => (
-              <figure key={r.name} className="rounded-2xl border border-slate-200 bg-[#F8F9FD] p-6 flex flex-col justify-between shadow-sm transition-all hover:border-[#5821C7]">
+              <figure key={r.name} className="rounded-2xl border border-[#E5DDF3] bg-[#F4F0FA] p-6 flex flex-col justify-between shadow-sm transition-all hover:border-[#C89B3C]">
                 <div>
                   <div className="flex items-center justify-between mb-3">
                     <Stars count={r.rating} />
-                    <span className="text-xs font-bold uppercase tracking-wider text-[#5821C7]">{r.service}</span>
+                    <span className="text-xs font-bold uppercase tracking-wider text-[#8F681B]">{r.service}</span>
                   </div>
                   <blockquote className="text-sm font-normal leading-relaxed text-[#334155] italic">
                     &ldquo;{r.quote.slice(0, 150)}{r.quote.length > 150 ? "…" : ""}&rdquo;
                   </blockquote>
                 </div>
-                <figcaption className="mt-4 pt-3 border-t border-slate-200 flex items-center justify-between">
+                <figcaption className="mt-4 pt-3 border-t border-[#E5DDF3] flex items-center justify-between">
                   <div>
                     <p className="text-sm font-bold text-[#0F172A]">{r.name}</p>
                     <p className="text-xs font-medium text-[#64748B]">{r.company} · {r.city}</p>
                   </div>
-                  <Quote className="h-4 w-4 text-[#D4AF37]" />
+                  <Quote className="h-4 w-4 text-[#8F681B]" />
                 </figcaption>
               </figure>
             ))}
@@ -116,7 +116,7 @@ export default function GoogleReviews() {
             style={{ fontFamily: "var(--font-body)" }}
           >
             <span>Read All Reviews on Google Business Profile</span>
-            <Star className="h-4 w-4 fill-[#F5D061] text-[#F5D061]" />
+            <Star className="h-4 w-4 fill-[#F5D061] text-[#8F681B]" />
           </a>
         </div>
       </div>

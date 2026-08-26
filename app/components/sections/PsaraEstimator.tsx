@@ -70,15 +70,15 @@ export default function PsaraEstimator() {
   };
 
   return (
-    <section className="relative w-full my-12 rounded-3xl border border-[rgba(200,155,60,0.3)] p-6 md:p-10 bg-gradient-to-b from-[#0E1B33] via-[#0A1224] to-[#050714] text-white shadow-2xl overflow-hidden">
+    <section className="relative w-full my-12 rounded-3xl border border-[rgba(212,175,55,0.28)] p-6 md:p-10 bg-gradient-to-b from-[#14102A] via-[#0F0C1F] to-[#080714] text-white shadow-2xl overflow-hidden">
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-white/15 pb-6">
         <div>
           <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#D4AF37] mb-2">
             <Sparkles className="h-4 w-4 text-[#D4AF37]" /> Statutory Cost Transparency
           </div>
-          <h3 className="font-bold text-2xl md:text-4xl text-white" style={{ fontFamily: "var(--font-display)" }}>
-            Complete Cost of <span className="gold-metallic-text">PSARA License</span>
+            <h3 className="font-bold text-2xl md:text-4xl text-white" style={{ fontFamily: "var(--font-display)" }}>
+            Complete Cost of <span className="gold-text-gradient">PSARA License</span>
           </h3>
           <p className="mt-2 text-sm text-[#E2E8F0] font-normal max-w-2xl">
             Transparent fee structure — professional consultancy, training MOU, statutory government fee, and document costs under the PSARA Act, 2005.
@@ -103,7 +103,7 @@ export default function PsaraEstimator() {
             <select
               value={selectedState}
               onChange={(e) => setSelectedState(e.target.value)}
-              className="w-full rounded-xl border border-white/20 bg-[#060B18] p-3.5 text-sm font-bold text-white focus:border-[#D4AF37] outline-none shadow-inner"
+              className="w-full rounded-xl border border-white/20 bg-[#0F0C1F] p-3.5 text-sm font-bold text-white focus:border-[#D4AF37] outline-none shadow-inner"
             >
               <option>Rajasthan</option>
               <option>Delhi NCR</option>
@@ -137,8 +137,8 @@ export default function PsaraEstimator() {
                     onClick={() => setCoverageId(c.id)}
                     className={`text-left p-4 rounded-xl border transition-all duration-200 ${
                       active
-                        ? "border-[#D4AF37] bg-gradient-to-br from-[#14284D] to-[#0A162B] text-white shadow-xl shadow-black/60"
-                        : "border-white/12 bg-[#060B18] text-[#CBD5E1] hover:border-white/30"
+                        ? "border-[#D4AF37] bg-gradient-to-br from-[#1E1140] to-[#0A162B] text-white shadow-xl shadow-black/60"
+                        : "border-white/12 bg-[#0F0C1F] text-[#CBD5E1] hover:border-white/30"
                     }`}
                   >
                     <span className="font-bold text-xs block leading-snug text-white">{c.label}</span>
@@ -153,7 +153,7 @@ export default function PsaraEstimator() {
           </div>
 
           {/* Armed Endorsement */}
-          <div className="rounded-xl border border-white/12 bg-[#060B18] p-4">
+          <div className="rounded-xl border border-white/12 bg-[#0F0C1F] p-4">
             <label className="flex items-center gap-3 cursor-pointer text-sm font-bold text-white">
               <input
                 type="checkbox"
@@ -169,7 +169,7 @@ export default function PsaraEstimator() {
           </div>
 
           {/* Additional / Other Costs Section */}
-          <div className="rounded-2xl border border-white/12 bg-[#060B18] p-5 space-y-3 shadow-inner">
+          <div className="rounded-2xl border border-white/12 bg-[#0F0C1F] p-5 space-y-3 shadow-inner">
             <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#D4AF37]">
               <Info className="h-4 w-4" /> Other Third-Party / Statutory Expenses
             </div>
@@ -191,7 +191,7 @@ export default function PsaraEstimator() {
         </div>
 
         {/* Right Structured Fee Grid Table & Total */}
-        <div className="lg:col-span-5 rounded-2xl border border-[rgba(200,155,60,0.35)] p-6 bg-gradient-to-b from-[#0E1B33] to-[#060B18] space-y-6 shadow-2xl">
+        <div className="lg:col-span-5 rounded-2xl border border-[rgba(212,175,55,0.35)] p-6 bg-gradient-to-b from-[#14102A] to-[#0F0C1F] space-y-6 shadow-2xl">
           <div>
             <span className="text-xs font-bold uppercase tracking-wider text-[#D4AF37] block">
               Structured Cost Breakdown
@@ -244,9 +244,9 @@ export default function PsaraEstimator() {
           </div>
 
           {/* Total Row */}
-          <div className="border-t-2 border-[#D4AF37]/50 pt-4 flex items-center justify-between">
+          <div className="border-t-2 border-[#D4AF37]/40 pt-4 flex items-center justify-between">
             <span className="text-sm font-bold text-white">Total Estimated Cost</span>
-            <span className="text-2xl font-bold gold-metallic-text font-mono">
+            <span className="text-2xl font-bold gold-text-gradient font-mono">
               {formatINR(totalEst)}
             </span>
           </div>

@@ -12,7 +12,7 @@ export default function HomeContact() {
   return (
     <section
       id="contact"
-      className="relative overflow-hidden bg-[#050714] text-white py-20 lg:py-28 border-b border-white/10"
+      className="relative overflow-hidden bg-[#080714] text-white py-20 lg:py-28 border-b border-white/10"
     >
       <div className="relative z-10 px-[var(--gutter)] max-w-7xl mx-auto space-y-12">
         {/* Header */}
@@ -21,8 +21,8 @@ export default function HomeContact() {
             <Sparkles className="h-3.5 w-3.5 text-[#D4AF37]" />
             Direct Statutory Advisory
           </div>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-white leading-tight" style={{ fontFamily: "var(--font-display)" }}>
-            Start a File <span className="gold-metallic-text">With Us</span>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-white leading-tight" style={{ fontFamily: "var(--font-display)" }}>
+            Start a File <span className="gold-text-gradient">With Us</span>
           </h2>
           <p className="text-base text-[#E2E8F0] leading-relaxed font-normal" style={{ fontFamily: "var(--font-body)" }}>
             Connect directly with our senior statutory advisors. Submit your agency parameters below to receive a customized state regulatory roadmap, training MOU checklist, and fee structure.
@@ -37,7 +37,7 @@ export default function HomeContact() {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <a
                 href={TEL_HREF}
-                className="inline-flex items-center justify-center gap-2 rounded-xl border border-[#D4AF37]/50 bg-gradient-to-br from-[#0E1B33] to-[#081020] hover:border-[#D4AF37] px-5 py-3.5 text-xs font-bold uppercase tracking-wider text-white transition-all shadow-md"
+                className="inline-flex items-center justify-center gap-2 rounded-xl border border-[#D4AF37]/50 bg-gradient-to-br from-[#14102A] to-[#0F0C1F] hover:border-[#D4AF37] px-5 py-3.5 text-xs font-bold uppercase tracking-wider text-white transition-all shadow-md"
                 style={{ fontFamily: "var(--font-body)" }}
               >
                 <Phone className="h-4 w-4 text-[#D4AF37]" />
@@ -55,8 +55,8 @@ export default function HomeContact() {
               </a>
             </div>
 
-            {/* HQ Information Card with Multi-Shade Navy Surface */}
-            <div className="space-y-4 rounded-2xl border border-[rgba(200,155,60,0.25)] bg-gradient-to-b from-[#0E1B33] to-[#081020] p-6 text-sm shadow-xl">
+            {/* HQ Information Card — plum */}
+            <div className="space-y-4 rounded-2xl border border-[rgba(212,175,55,0.25)] bg-gradient-to-b from-[#14102A] to-[#0F0C1F] p-6 text-sm shadow-xl">
               <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#D4AF37] pb-2 border-b border-white/10">
                 <ShieldCheck className="h-4 w-4 text-[#D4AF37]" />
                 <span>Headquarters Contact</span>
@@ -81,7 +81,7 @@ export default function HomeContact() {
             </div>
 
             {/* Map Preview Box */}
-            <div className="overflow-hidden rounded-2xl border border-[rgba(200,155,60,0.25)] shadow-md">
+              <div className="overflow-hidden rounded-2xl border border-[rgba(212,175,55,0.25)] shadow-md">
               <iframe
                 title={`PSARA Consultant India ${hq.city} Location`}
                 src={hq.mapEmbed}
@@ -100,7 +100,7 @@ export default function HomeContact() {
                 {OFFICES.filter((o) => !o.isHQ)
                   .slice(0, 4)
                   .map((o) => (
-                    <div key={o.city} className="p-3 rounded-xl border border-white/10 bg-[#0A1224] text-xs">
+                    <div key={o.city} className="p-3 rounded-xl border border-white/10 bg-[#14102A] text-xs">
                       <strong className="font-bold text-white block">{o.city}</strong>
                       <span className="text-[10px] text-[#94A3B8]">{o.badge}</span>
                     </div>
@@ -118,8 +118,8 @@ export default function HomeContact() {
           </div>
 
           {/* Right Column: Highlighted Light Form Card */}
-          <div className="lg:col-span-7 rounded-3xl border border-slate-200 bg-gradient-to-b from-[#FFFFFF] to-[#F8F9FD] p-7 md:p-10 shadow-2xl text-[#0F172A]">
-            <div className="flex items-center justify-between pb-5 border-b border-slate-200 mb-6">
+          <div className="lg:col-span-7 rounded-3xl border border-[#E5DDF3] bg-gradient-to-b from-[#FDFCFF] to-[#F3EEFB] p-7 md:p-10 shadow-2xl text-[#0F172A]">
+            <div className="flex items-center justify-between pb-5 border-b border-[#E5DDF3] mb-6">
               <div>
                 <span className="badge-navy mb-2">
                   Direct Statutory Advisory Support

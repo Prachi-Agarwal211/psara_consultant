@@ -39,14 +39,14 @@ export default function ContactPage() {
         crumbs={[{ label: "Contact Us" }]}
       />
 
-      <PageMain className="bg-[#050714] text-white">
+      <PageMain className="bg-[#080714] text-white">
         {/* Contact Info Header Grid */}
         <div className="mb-16 grid grid-cols-1 md:grid-cols-3 gap-6">
           <a
             href={TEL_HREF}
             className="flex items-center gap-4 rounded-2xl border border-white/12 bg-[#0A1022] p-6 shadow-md transition-all duration-200 hover:border-[#D4AF37]"
           >
-            <div className="p-3.5 rounded-xl bg-[#5821C7] text-white">
+            <div className="p-3.5 rounded-xl text-[#241703]" style={{ background: "var(--grad-gold-metallic)", boxShadow: "inset 0 1px 0 rgba(255,250,230,0.8)" }}>
               <Phone className="h-6 w-6" />
             </div>
             <div>
@@ -80,7 +80,7 @@ export default function ContactPage() {
             href={`mailto:${CONTACT.email}`}
             className="flex items-center gap-4 rounded-2xl border border-white/12 bg-[#0A1022] p-6 shadow-md transition-all duration-200 hover:border-[#D4AF37]"
           >
-            <div className="p-3.5 rounded-xl bg-[#5821C7] text-white">
+            <div className="p-3.5 rounded-xl text-[#241703]" style={{ background: "var(--grad-gold-metallic)", boxShadow: "inset 0 1px 0 rgba(255,250,230,0.8)" }}>
               <Mail className="h-6 w-6" />
             </div>
             <div>
@@ -96,10 +96,13 @@ export default function ContactPage() {
         {/* Main Form & Office Cards Section */}
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 mb-20 items-start">
           {/* Highlighted Light Card Form */}
-          <div className="lg:col-span-7 rounded-3xl border-2 border-white/20 bg-[#FFFFFF] p-7 md:p-10 shadow-2xl text-[#0F172A]">
+          <div
+            className="lg:col-span-7 rounded-3xl border-2 border-[#E5DDF3] p-7 md:p-10 shadow-2xl text-[#0F172A]"
+            style={{ background: "linear-gradient(165deg, #FDFCFF 0%, #F3EEFB 100%)" }}
+          >
             <div className="flex items-center justify-between pb-5 border-b border-slate-200 mb-6">
               <div>
-                <span className="inline-block rounded-lg border border-[#5821C7]/30 bg-[#5821C7]/10 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-[#5821C7] mb-2">
+                <span className="inline-block rounded-lg border border-[#C89B3C]/35 bg-[#C89B3C]/10 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-[#8F681B] mb-2">
                   Direct Advisory Support
                 </span>
                 <h2

@@ -1,7 +1,6 @@
 @import "tailwindcss";
 @import "../styles/fonts.css";
 @import "../styles/tokens.css";
-@import "../styles/themes.css";
 @import "../styles/sections.css";
 @import "../styles/design-system.css";
 @import "../styles/components.css";
@@ -10,6 +9,7 @@
   html {
     scrollbar-width: none;
     -ms-overflow-style: none;
+    overflow-x: hidden;
   }
 
   html::-webkit-scrollbar {
@@ -59,10 +59,10 @@
   h1, h2, h3, h4, h5, h6 {
     text-wrap: balance;
     font-family: var(--font-display);
-    font-weight: 700;
+    font-weight: 400;
     font-synthesis: none;
-    line-height: 1.2;
-    letter-spacing: -0.015em;
+    line-height: 1.12;
+    letter-spacing: -0.012em;
   }
 
   p {
@@ -165,6 +165,20 @@
   background-size: 140px 140px;
 }
 
+/* ── 2026 motion easings — from psara-redesign — */
+:root {
+  --ease-snappy: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-reveal: cubic-bezier(0.77, 0, 0.175, 1);
+  --ease-elastic: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* below-fold perf — psara-redesign */
+.content-section {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 720px;
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -184,13 +198,134 @@
    HIGH CONTRAST & ACCESSIBILITY GUARDRAILS
    ═══════════════════════════════════════════════════════════════ */
 
-/* Metallic gold text helper */
+/* Metallic gold text — banded oklch metal, not mustard. Sheen drifts slowly.
+   Inside `.on-light` sections the gradient auto-swaps to the deep-bronze
+   variant so gold never washes out on white. */
 .gold-text-gradient {
-  background: linear-gradient(135deg, #FFF0B8 0%, #F5D061 35%, #D4AF37 70%, #AA771C 100%);
+  --gold-text-grad: var(--grad-gold-metallic);
+  background: var(--gold-text-grad);
+  background-size: 220% 100%;
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
   -webkit-text-fill-color: transparent;
+  animation: metal-sheen 9s ease-in-out infinite alternate;
+}
+
+.on-light {
+  --gold-text-grad: var(--grad-gold-deep);
+  background: var(--grad-light-section);
+}
+
+/* No sheen drift on light surfaces — a moving light band is what made words
+   land on pale stops and vanish. Static deep bronze, always readable. */
+.on-light .gold-text-gradient,
+.on-light .metal-text {
+  animation: none;
+  background-position: 35% 50%;
+}
+
+/* Premium variant for display headlines: adds lift shadow so gold stays
+   readable over video/imagery. */
+.metal-text {
+  background: var(--grad-gold-metallic);
+  background-size: 220% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 1px 0.5px rgba(0, 0, 0, 0.45)) drop-shadow(0 4px 14px rgba(0, 0, 0, 0.3));
+  animation: metal-sheen 9s ease-in-out infinite alternate;
+}
+
+@keyframes metal-sheen {
+  from { background-position: 0% 50%; }
+  to   { background-position: 100% 50%; }
+}
+
+/* ── Button system: metallic gold / ghost gold / WhatsApp green ── */
+.btn-gold {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.95rem 1.9rem;
+  border-radius: 12px;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 0.7rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #241703;
+  background: var(--grad-gold-metallic);
+  background-size: 220% 100%;
+  box-shadow:
+    var(--shadow-gold-inset),
+    var(--shadow-gold-dim),
+    var(--shadow-gold-inner);
+  transition: transform 0.2s var(--ease-snappy), filter 0.2s, box-shadow 0.2s;
+}
+.btn-gold:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.07);
+  box-shadow:
+    var(--shadow-gold-hover),
+    var(--shadow-gold-inner);
+}
+.btn-gold:active { transform: translateY(0); }
+
+.btn-ghost-gold {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.95rem 1.9rem;
+  border-radius: 12px;
+  border: 1px solid rgba(212, 175, 55, 0.38);
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 0.7rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #F5E6BA;
+  background: rgba(15, 12, 31, 0.55);
+  backdrop-filter: blur(10px);
+  box-shadow: inset 0 1px 0 rgba(255, 246, 217, 0.10);
+  transition: border-color 0.2s, background-color 0.2s, transform 0.2s var(--ease-snappy);
+}
+.btn-ghost-gold:hover {
+  border-color: rgba(212, 175, 55, 0.72);
+  background: rgba(212, 175, 55, 0.10);
+  transform: translateY(-1px);
+}
+
+.btn-wa {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.95rem 1.9rem;
+  border-radius: 12px;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 0.7rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #ffffff;
+  background: var(--grad-wa);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.28),
+    inset 0 -1px 0 rgba(0, 60, 50, 0.4),
+    0 12px 30px -10px rgba(18, 140, 126, 0.55);
+  transition: transform 0.2s var(--ease-snappy), filter 0.2s;
+}
+.btn-wa:hover { transform: translateY(-1px); filter: brightness(1.08); }
+.btn-wa:active { transform: translateY(0); }
+
+.gold-arch {
+  border: 1.5px solid rgba(212,175,55,0.58);
+  box-shadow: inset 0 0 0 1px rgba(255,246,217,0.14), 0 18px 60px rgba(88,33,199,0.22);
 }
 
 .purple-text-gradient {
@@ -220,4 +355,67 @@
 
 #hero p, #proof p, #services p, #states p, #estimator p, #faq p, #presence p, #start p {
   color: #E2E8F0;
+}
+
+/* ── Magnetic button — metallic gold, statutory palette ── */
+.magnetic {
+  position: relative;
+  border: none;
+  cursor: pointer;
+  isolation: isolate;
+  padding: 1.05rem 2.2rem;
+  border-radius: 12px;
+  font-family: var(--font-body), sans-serif;
+  font-weight: 700;
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #241703;
+  background: var(--grad-gold-metallic);
+  background-size: 220% 100%;
+  box-shadow:
+    var(--shadow-gold-inset),
+    var(--shadow-gold-dim),
+    0 14px 40px -10px rgba(200, 155, 60, 0.55);
+  min-height: 48px;
+}
+.magnetic-glow {
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  filter: blur(18px);
+  background: rgba(212, 175, 55, 0.4);
+  opacity: 0;
+  transition: opacity 0.3s var(--ease-snappy, cubic-bezier(0.16,1,0.3,1));
+  z-index: -1;
+}
+.magnetic-glow[data-on] { opacity: 0.75; }
+
+/* ── Cursor dot — refined ── */
+.cursor-dot {
+  position: fixed; top:0; left:0; z-index:9999; width:14px; height:14px; border-radius:50%; pointer-events:none;
+  background: rgba(212,175,55,0.14); border:1px solid var(--gold, #c89b3c);
+  transition: width 0.25s var(--ease-snappy), height 0.25s var(--ease-snappy), background-color 0.25s;
+}
+.cursor-dot.cursor-active { width:74px; height:74px; background: rgba(8,7,20,0.82); }
+.cursor-label {
+  position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+  font-size:0.62rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:#F5E6BA; opacity:0; white-space:nowrap; transition:opacity 0.25s;
+}
+
+/* ── Focus-Visible Enhancements — gold accent on interactive elements ── */
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--gold-bright) !important;
+  outline-offset: 2px;
+}
+
+@media (min-width: 640px) {
+  input:focus-visible,
+  select:focus-visible,
+  textarea:focus-visible {
+    outline: 2px solid var(--gold) !important;
+    outline-offset: 2px;
+  }
 }

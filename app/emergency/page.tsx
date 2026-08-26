@@ -22,7 +22,7 @@ export default function EmergencyPage() {
         crumbs={[{ label: "Emergency Desk" }]}
       />
 
-      <PageMain className="bg-[#050714] text-white">
+      <PageMain className="bg-[#080714] text-white">
         <div className="max-w-4xl mx-auto space-y-8">
           {/* Emergency Alert Box */}
           <div className="rounded-3xl border border-red-500/40 bg-red-950/30 p-6 md:p-8 flex items-start gap-4 shadow-xl">
@@ -39,13 +39,13 @@ export default function EmergencyPage() {
 
           {/* Rapid Interventions */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="rounded-2xl border border-white/10 bg-gradient-to-b from-[#0E1B33] to-[#081020] p-6 shadow-md space-y-2">
+            <div className="rounded-2xl border border-white/10 bg-gradient-to-b from-[#14102A] to-[#0F0C1F] p-6 shadow-md space-y-2">
               <Clock className="h-6 w-6 text-[#D4AF37] mb-2" />
               <h3 className="text-base font-bold text-white" style={{ fontFamily: "var(--font-display)" }}>Same-Day Renewal Refiling</h3>
               <p className="text-xs text-[#CBD5E1] leading-relaxed font-normal">Fast-track re-submission of Form-I renewal applications with temporary acknowledgement receipt generation.</p>
             </div>
 
-            <div className="rounded-2xl border border-white/10 bg-gradient-to-b from-[#0E1B33] to-[#081020] p-6 shadow-md space-y-2">
+            <div className="rounded-2xl border border-white/10 bg-gradient-to-b from-[#14102A] to-[#0F0C1F] p-6 shadow-md space-y-2">
               <ShieldCheck className="h-6 w-6 text-[#D4AF37] mb-2" />
               <h3 className="text-base font-bold text-white" style={{ fontFamily: "var(--font-display)" }}>Police Inspection Audit Prep</h3>
               <p className="text-xs text-[#CBD5E1] leading-relaxed font-normal">Immediate pre-audit of register entries, guard antecedent logs, and office proofs before physical SP/CP visits.</p>
@@ -53,7 +53,7 @@ export default function EmergencyPage() {
           </div>
 
           {/* Call & WhatsApp CTAs Card */}
-          <div className="rounded-3xl border border-[rgba(200,155,60,0.35)] bg-gradient-to-r from-[#0E1B33] via-[#0A1428] to-[#0E1B33] p-8 text-center shadow-2xl space-y-4">
+          <div className="rounded-3xl border border-[rgba(212,175,55,0.35)] bg-gradient-to-r from-[#14102A] via-[#0A1428] to-[#0E1B33] p-8 text-center shadow-2xl space-y-4">
             <span className="badge-metallic-gold mb-1">
               Immediate Statutory Intervention
             </span>

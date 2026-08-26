@@ -13,7 +13,7 @@ export default function StateGridHome() {
   return (
     <section
       id="states"
-      className="relative overflow-hidden bg-[#050714] text-white py-20 lg:py-28 border-b border-white/10"
+      className="relative overflow-hidden bg-[#080714] text-white py-20 lg:py-28 border-b border-white/10"
     >
       <div className="relative z-10 px-[var(--gutter)] max-w-7xl mx-auto space-y-12">
         {/* Header */}
@@ -27,7 +27,7 @@ export default function StateGridHome() {
               className="text-3xl sm:text-4xl md:text-5xl font-bold text-white leading-tight"
               style={{ fontFamily: "var(--font-display)" }}
             >
-              28 States <span className="gold-metallic-text">&amp; 8 UTs</span>
+              28 States <span className="gold-text-gradient">&amp; 8 UTs</span>
             </h2>
           </div>
           <span className="text-xs font-bold uppercase tracking-widest text-[#CBD5E1]" style={{ fontFamily: "var(--font-body)" }}>
@@ -41,7 +41,7 @@ export default function StateGridHome() {
             <Link
               key={s.slug}
               href={`/states/${s.slug}`}
-              className="group relative flex flex-col justify-between h-[146px] p-5 rounded-2xl border border-[rgba(200,155,60,0.22)] bg-gradient-to-b from-[#0E1B33] to-[#081020] shadow-lg transition-all duration-200 hover:-translate-y-1 hover:border-[#D4AF37] hover:from-[#14284D] hover:to-[#0A1428]"
+              className="group relative flex flex-col justify-between h-[146px] p-5 rounded-2xl border border-[rgba(212,175,55,0.22)] bg-gradient-to-b from-[#14102A] to-[#0F0C1F] shadow-lg transition-all duration-200 hover:-translate-y-1 hover:border-[#D4AF37] hover:from-[#1E1140] hover:to-[#14102A]"
             >
               <div className="flex items-center justify-between">
                 <span className="font-mono text-[10px] font-bold uppercase tracking-widest text-[#D4AF37]" style={{ fontFamily: "var(--font-body)" }}>
@@ -68,7 +68,7 @@ export default function StateGridHome() {
           <button
             type="button"
             onClick={() => setShowAll((prev) => !prev)}
-            className="inline-flex items-center gap-2 rounded-xl border border-[#D4AF37] bg-gradient-to-r from-[#FFF6D9]/15 to-[#D4AF37]/20 hover:from-[#D4AF37] hover:to-[#C89B3C] hover:text-[#050714] px-8 py-3.5 text-xs font-bold uppercase tracking-[0.12em] text-[#F5D061] transition-all duration-200 shadow-md"
+            className="inline-flex items-center gap-2 rounded-xl border border-[#D4AF37] bg-gradient-to-r from-[#FFF6D9]/15 to-[#D4AF37]/20 hover:from-[#D4AF37] hover:to-[#C89B3C] hover:text-[#080714] px-8 py-3.5 text-xs font-bold uppercase tracking-[0.12em] text-[#F5D061] transition-all duration-200 shadow-md"
             style={{ fontFamily: "var(--font-body)" }}
           >
             <span>{showAll ? "Show Fewer States" : "See More States (+6 More)"}</span>
@@ -77,7 +77,7 @@ export default function StateGridHome() {
 
           <Link
             href="/states"
-            className="inline-flex items-center gap-2 rounded-xl border border-white/20 bg-[#0A1224] hover:bg-white/10 px-6 py-3.5 text-xs font-bold uppercase tracking-[0.12em] text-white transition-all"
+            className="inline-flex items-center gap-2 rounded-xl border border-white/20 bg-[#0F0C1F] hover:bg-white/10 px-6 py-3.5 text-xs font-bold uppercase tracking-[0.12em] text-white transition-all"
             style={{ fontFamily: "var(--font-body)" }}
           >
             <span>All 28 State Dossiers</span>

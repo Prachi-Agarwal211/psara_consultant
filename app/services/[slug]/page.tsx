@@ -74,12 +74,12 @@ export default async function ServiceDetailPage({
         image={heroImage}
         meta={`( STATUTORY ADVISORY ) ( ${s.slug.toUpperCase()} )`}
       />
-      <PageMain className="bg-[#050714] text-white">
+      <PageMain className="bg-[#080714] text-white">
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-12">
           {/* Main Content Column */}
           <div className="space-y-12 lg:col-span-7">
             {/* Overview Card */}
-            <div className="rounded-3xl border border-[rgba(200,155,60,0.3)] bg-gradient-to-b from-[#0E1B33] via-[#0A1428] to-[#050714] p-6 sm:p-8 shadow-2xl">
+            <div className="rounded-3xl border border-[rgba(212,175,55,0.3)] bg-gradient-to-b from-[#14102A] via-[#0A1428] to-[#050714] p-6 sm:p-8 shadow-2xl">
               <span className="badge-metallic-gold mb-4">
                 <Sparkles className="h-3.5 w-3.5 text-[#D4AF37]" /> Service Overview
               </span>
@@ -95,7 +95,7 @@ export default async function ServiceDetailPage({
               </h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {s.bullets.map((b) => (
-                  <div key={b} className="flex items-start gap-3 rounded-2xl border border-white/10 bg-gradient-to-b from-[#0E1B33] to-[#081020] p-4 shadow-md transition-all hover:border-[#D4AF37]">
+                  <div key={b} className="flex items-start gap-3 rounded-2xl border border-white/10 bg-gradient-to-b from-[#14102A] to-[#0F0C1F] p-4 shadow-md transition-all hover:border-[#D4AF37]">
                     <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-[#D4AF37]" />
                     <span className="text-xs sm:text-sm font-bold text-white leading-relaxed">{b}</span>
                   </div>
@@ -105,7 +105,7 @@ export default async function ServiceDetailPage({
 
             {/* Detailed Sections */}
             {s.sections.map((sec, i) => (
-              <div key={sec.h} className="rounded-2xl border border-white/10 bg-gradient-to-b from-[#0E1B33] to-[#081020] p-6 shadow-md space-y-3">
+              <div key={sec.h} className="rounded-2xl border border-white/10 bg-gradient-to-b from-[#14102A] to-[#0F0C1F] p-6 shadow-md space-y-3">
                 <h3 className="text-xl font-bold text-white" style={{ fontFamily: "var(--font-display)" }}>{sec.h}</h3>
                 <p className="text-sm font-normal leading-relaxed text-[#E2E8F0]">{sec.p}</p>
               </div>
@@ -118,7 +118,7 @@ export default async function ServiceDetailPage({
               </h2>
               <div className="space-y-3">
                 {s.process.map((step, idx) => (
-                  <div key={step} className="flex items-start gap-4 rounded-2xl border border-white/10 bg-gradient-to-b from-[#0E1B33] to-[#081020] p-4 shadow-md transition-all hover:border-[#D4AF37]">
+                  <div key={step} className="flex items-start gap-4 rounded-2xl border border-white/10 bg-gradient-to-b from-[#14102A] to-[#0F0C1F] p-4 shadow-md transition-all hover:border-[#D4AF37]">
                     <span className="badge-metallic-gold shrink-0 text-[10px]">
                       Phase {idx + 1}
                     </span>
@@ -152,14 +152,14 @@ export default async function ServiceDetailPage({
             <div className="space-y-4 border-t border-white/10 pt-8">
               <h3 className="text-lg font-bold text-white">Related Statutory Desks</h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                <Link href="/calculator" className="p-4 rounded-xl border border-white/10 bg-[#0A1224] hover:border-[#D4AF37] transition-all flex items-center justify-between">
+                <Link href="/calculator" className="p-4 rounded-xl border border-white/10 bg-[#0F0C1F] hover:border-[#D4AF37] transition-all flex items-center justify-between">
                   <div>
                     <span className="text-xs font-bold text-white block">Statutory Fee Calculator</span>
                     <span className="text-[11px] text-[#94A3B8]">Calculate state and district fees</span>
                   </div>
                   <Calculator className="h-4 w-4 text-[#D4AF37]" />
                 </Link>
-                <Link href="/states" className="p-4 rounded-xl border border-white/10 bg-[#0A1224] hover:border-[#D4AF37] transition-all flex items-center justify-between">
+                <Link href="/states" className="p-4 rounded-xl border border-white/10 bg-[#0F0C1F] hover:border-[#D4AF37] transition-all flex items-center justify-between">
                   <div>
                     <span className="text-xs font-bold text-white block">All 28 State Dossiers</span>
                     <span className="text-[11px] text-[#94A3B8]">Controlling Authority portals &amp; rules</span>
@@ -172,7 +172,7 @@ export default async function ServiceDetailPage({
 
           {/* Sticky Sidebar Lead Capture Card */}
           <div className="lg:col-span-5 space-y-6">
-            <div className="sticky top-24 rounded-3xl border border-[rgba(200,155,60,0.35)] bg-gradient-to-b from-[#0E1B33] to-[#060B18] p-6 sm:p-8 shadow-2xl text-white space-y-6">
+            <div className="sticky top-24 rounded-3xl border border-[rgba(212,175,55,0.35)] bg-gradient-to-b from-[#14102A] to-[#060B18] p-6 sm:p-8 shadow-2xl text-white space-y-6">
               <div>
                 <span className="badge-metallic-gold mb-2">
                   Direct Statutory Desk

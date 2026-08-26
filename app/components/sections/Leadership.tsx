@@ -9,8 +9,8 @@ export default function Leadership() {
     <section className="relative py-20 px-4 md:px-8 border-t border-white/10 bg-[#0B0E14] text-white overflow-hidden my-12">
       <div className="relative mx-auto max-w-7xl">
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <span className="inline-flex items-center gap-2 rounded-xl border border-[#BF953F]/40 bg-[#8C1F32]/30 px-4 py-1.5 text-xs font-black uppercase tracking-widest text-[#BF953F] shadow-md">
-            <ShieldCheck className="h-4 w-4 text-[#BF953F]" /> Board of Leadership
+          <span className="inline-flex items-center gap-2 rounded-xl border border-[#BF953F]/40 bg-[#8C1F32]/30 px-4 py-1.5 text-xs font-black uppercase tracking-widest text-[#D4AF37] shadow-md">
+            <ShieldCheck className="h-4 w-4 text-[#D4AF37]" /> Board of Leadership
           </span>
           <h2 className="mt-4 text-3xl md:text-5xl font-black tracking-tight text-white leading-[0.95]" style={{ fontFamily: "var(--font-display)" }}>
             Pioneering Compliance &amp; Regulatory Leadership

@@ -40,7 +40,7 @@ export default function HomeFaq() {
   return (
     <section
       id="faq"
-      className="relative overflow-hidden bg-[#050714] text-white py-20 lg:py-28 border-b border-white/10"
+      className="relative overflow-hidden bg-[#080714] text-white py-20 lg:py-28 border-b border-white/10"
     >
       <div className="relative z-10 px-[var(--gutter)] max-w-7xl mx-auto space-y-12">
         {/* Header */}
@@ -86,7 +86,7 @@ export default function HomeFaq() {
                   <span
                     className={`shrink-0 flex h-9 w-9 items-center justify-center rounded-xl border transition-all duration-200 ${
                       isOpen
-                        ? "rotate-180 border-[#D4AF37] bg-[#5821C7] text-white"
+                        ? "rotate-180 border-[#D4AF37] bg-[#C89B3C] text-[#241703]"
                         : "border-white/20 bg-[#0A1022] text-[#F5D061] group-hover:border-[#D4AF37]"
                     }`}
                   >
@@ -114,7 +114,7 @@ export default function HomeFaq() {
           <button
             type="button"
             onClick={() => setShowAll((prev) => !prev)}
-            className="inline-flex items-center gap-2 rounded-xl border border-[#D4AF37] bg-[#D4AF37]/15 hover:bg-[#D4AF37] hover:text-[#050714] px-8 py-3.5 text-xs font-bold uppercase tracking-[0.12em] text-[#F5D061] transition-all duration-200 shadow-md"
+            className="inline-flex items-center gap-2 rounded-xl border border-[#D4AF37] bg-[#D4AF37]/15 hover:bg-[#D4AF37] hover:text-[#080714] px-8 py-3.5 text-xs font-bold uppercase tracking-[0.12em] text-[#F5D061] transition-all duration-200 shadow-md"
             style={{ fontFamily: "var(--font-body)" }}
           >
             <span>{showAll ? "Show Fewer Questions" : `See More Questions (+${faqs.length - 3} More)`}</span>

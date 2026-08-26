@@ -31,7 +31,7 @@ export default function StatePortalView() {
           </p>
         </div>
         <div className="flex shrink-0 items-center gap-3 text-xs font-bold uppercase tracking-[.08em] text-[#CBD5E1]">
-          <span className="grid h-10 w-10 place-items-center rounded-xl bg-[#5821C7] text-white font-mono font-bold">{STATES.length}</span>
+          <span className="grid h-10 w-10 place-items-center rounded-xl text-[#241703] font-mono font-bold" style={{ background: "var(--grad-gold-metallic)" }}>{STATES.length}</span>
           <span>State Desks<br />Indexed</span>
         </div>
       </div>
@@ -45,7 +45,7 @@ export default function StatePortalView() {
             placeholder="Search by State, Union Territory, or Capital city…"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full rounded-xl border border-white/15 bg-[#050714] pl-12 pr-4 py-3.5 text-sm font-medium text-white outline-none placeholder:text-white/40 transition-all focus:border-[#D4AF37] focus:ring-2 focus:ring-[#D4AF37]/20"
+            className="w-full rounded-xl border border-white/15 bg-[#080714] pl-12 pr-4 py-3.5 text-sm font-medium text-white outline-none placeholder:text-white/40 transition-all focus:border-[#D4AF37] focus:ring-2 focus:ring-[#D4AF37]/20"
           />
         </div>
       </div>

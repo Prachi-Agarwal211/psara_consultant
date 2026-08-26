@@ -7,16 +7,7 @@ import { ArrowUpRight, MessageSquare, Globe } from "lucide-react";
 import HorizontalTicker from "../../../app/components/ui/HorizontalTicker";
 import { OFFICES, CONTACT } from "../../../lib/config";
 import { DEFAULT_WA } from "../../../lib/whatsapp";
-import {
-  ensureGsap,
-  prefersReducedMotion,
-  initClipReveals,
-  initParallaxLayers,
-  initFloatDrift,
-  initStaggerChildren,
-  initVisualScrub,
-  initWordReveal,
-} from "../../../app/lib/motion";
+import { ensureGsap, prefersReducedMotion } from "../../../app/lib/motion";
 import ComplianceMarquee from "./ComplianceMarquee";
 import StatsBar from "./StatsBar";
 import AboutSection from "./AboutSection";
@@ -48,53 +39,20 @@ export default function HomeStory() {
   useEffect(() => {
     if (!rootRef.current || prefersReducedMotion()) return;
     const root = rootRef.current;
-    const { ScrollTrigger, gsap } = ensureGsap();
+    const { ScrollTrigger } = ensureGsap();
 
-    initClipReveals(root);
-    initParallaxLayers(root);
-    initFloatDrift(root);
-    initStaggerChildren(root);
-    initVisualScrub(root);
-
-    // Harden triggers after async layout settles
-    const raf = requestAnimationFrame(() => {
-      ScrollTrigger.refresh();
-    });
-
-    // ── Hero background parallax on scroll ──
-    const heroBg = root.querySelector("[data-hero-bg]");
-    if (heroBg) {
-      gsap.to(heroBg, {
-        yPercent: -20,
-        ease: "none",
-        scrollTrigger: {
-          trigger: root,
-          start: "top top",
-          end: "bottom top",
-          scrub: 1,
-        },
-      });
-    }
-
-    // ── Parallax numbers ──
-    root.querySelectorAll(".parallax-num").forEach((el) => {
-      gsap.to(el, {
-        yPercent: -15,
-        ease: "none",
-        scrollTrigger: {
-          trigger: el,
-          start: "top bottom",
-          end: "bottom top",
-          scrub: 0.8,
-        },
-      });
-    });
+    // One refresh after fonts/images settle — replaces scattered hacks.
+    // Each section now owns its own ScrollTrigger with correct scrub grammar.
+    const raf = requestAnimationFrame(() => ScrollTrigger.refresh());
+    const onLoad = () => ScrollTrigger.refresh();
+    const onFonts = () => ScrollTrigger.refresh();
+    window.addEventListener("load", onLoad);
+    if (document.fonts?.ready) document.fonts.ready.then(onFonts);
 
     return () => {
       cancelAnimationFrame(raf);
-      ScrollTrigger.getAll().forEach((st) => {
-        if (root.contains(st.trigger as Node)) st.kill();
-      });
+      window.removeEventListener("load", onLoad);
+      // don't kill all triggers — let per-section clean up (pin stability)
     };
   }, []);
 
@@ -138,30 +96,30 @@ export default function HomeStory() {
       {/* ── FAQ ── */}
       <HomeFaq />
 
-      {/* ── PRESENCE ── */}
-      <section id="presence" className="relative min-h-[85dvh] py-20 lg:py-28 bg-[#040917] border-t border-sky-500/20 overflow-hidden" data-parallax-root>
-        {/* Ambient glow behind right side map */}
-        <div className="pointer-events-none absolute top-1/2 right-0 -translate-y-1/2 w-[600px] h-[600px] rounded-full blur-[160px] opacity-25" style={{ background: "radial-gradient(circle, rgba(0,163,255,0.4) 0%, transparent 70%)" }} aria-hidden />
+      {/* ── PRESENCE — recolored to plum authority (was sky) ── */}
+      <section id="presence" className="relative min-h-[85dvh] py-20 lg:py-28 bg-[#080714] border-t border-white/10 overflow-hidden" data-parallax-root>
+        {/* Ambient glow behind right side map — plum */}
+        <div className="pointer-events-none absolute top-1/2 right-0 -translate-y-1/2 w-[600px] h-[600px] rounded-full blur-[160px] opacity-20" style={{ background: "radial-gradient(circle, rgba(88,33,199,0.38) 0%, transparent 70%)" }} aria-hidden />
 
         <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
             {/* Left Column: Office Grid & Info (6 Cols) */}
             <div className="lg:col-span-6 space-y-8">
               <div>
-                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-sky-400/40 bg-sky-950/70 text-sky-300 text-xs font-extrabold tracking-widest uppercase mb-4">
-                  <Globe className="w-3.5 h-3.5 text-sky-400" />
+                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-[rgba(212,175,55,0.32)] bg-[rgba(212,175,55,0.08)] text-[#F5E6BA] text-xs font-extrabold tracking-widest uppercase mb-4">
+                  <Globe className="w-3.5 h-3.5 text-[#D4AF37]" />
                   <span>Pan-India Presence</span>
                 </div>
 
                 <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold leading-tight text-white" style={{ fontFamily: "var(--font-display)" }}>
-                  Offices &amp; Filing Desks <span className="text-[var(--gold-bright)]">across India</span>
+                  Offices &amp; Filing Desks <span className="gold-text-gradient">across India</span>
                 </h2>
-                <p className="mt-4 text-base md:text-lg text-white/85 font-medium leading-relaxed">
+                <p className="mt-4 text-base md:text-lg text-white/82 font-medium leading-relaxed">
                   From our Headquarters in Jaipur to liaison desks in every major metro — local expertise with national reach.
                 </p>
               </div>
 
-              {/* City Grid */}
+              {/* City Grid — plum */}
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
                 {OFFICES.map((o) => (
                   <div
@@ -169,7 +127,7 @@ export default function HomeStory() {
                     className={`p-3.5 rounded-xl border transition-all duration-200 ${
                       o.isHQ
                         ? "border-[var(--gold)]/60 bg-[var(--gold)]/10 shadow-lg shadow-[var(--gold)]/10"
-                        : "border-white/15 bg-[#07132b] hover:border-sky-400/50"
+                        : "border-white/12 bg-[#14102A] hover:border-white/22 hover:bg-[#1E1140]"
                     }`}
                     style={{ fontFamily: "var(--font-display)" }}
                   >
@@ -180,28 +138,33 @@ export default function HomeStory() {
                           HQ
                         </span>
                       ) : (
-                        <span className="w-1.5 h-1.5 rounded-full bg-sky-400 opacity-60" />
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#C89B3C] opacity-60" />
                       )}
                     </div>
                   </div>
                 ))}
               </div>
 
-              {/* Action Buttons */}
+              {/* Action Buttons — plum */}
               <div className="flex flex-wrap gap-4 pt-2">
                 <Link
                   href="/states"
-                  className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-gradient-to-r from-sky-500 to-blue-600 hover:from-sky-400 hover:to-blue-500 text-white font-extrabold text-xs uppercase tracking-wider shadow-lg shadow-sky-500/25 transition-all"
+                  className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl text-[11px] font-bold uppercase tracking-[0.1em] text-[#241703] transition-all hover:-translate-y-0.5"
+                  style={{
+                    background: "var(--grad-gold-metallic)",
+                    backgroundSize: "220% 100%",
+                    boxShadow: "inset 0 1px 0 rgba(255,250,230,0.85), inset 0 -1px 0 rgba(88,58,8,0.5), 0 12px 30px -10px rgba(200,155,60,0.5)",
+                  }}
                 >
                   <span>States Directory</span>
                   <ArrowUpRight className="h-4 w-4" />
                 </Link>
                 <Link
                   href="/cities"
-                  className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl border border-white/20 bg-[#07132b] hover:bg-slate-800 text-white font-bold text-xs uppercase tracking-wider transition-colors"
+                  className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl border border-white/14 bg-[#14102A] hover:bg-[#1E1140] text-white font-bold text-xs uppercase tracking-wider transition-colors"
                 >
                   <span>All Cities</span>
-                  <ArrowUpRight className="h-3.5 w-3.5 text-sky-400" />
+                  <ArrowUpRight className="h-3.5 w-3.5 text-[#D4AF37]" />
                 </Link>
               </div>
             </div>
@@ -217,7 +180,7 @@ export default function HomeStory() {
                 />
 
                 {/* Floating Office HQ Pin Badge */}
-                <div className="absolute top-4 left-4 flex items-center gap-2.5 px-3.5 py-2 rounded-xl border border-[var(--gold)]/50 bg-[#040D21]/95 backdrop-blur-md shadow-xl z-10">
+                <div className="absolute top-4 left-4 flex items-center gap-2.5 px-3.5 py-2 rounded-xl border border-[var(--gold)]/50 bg-[#0F0C1F]/95 backdrop-blur-md shadow-xl z-10">
                   <div className="w-2.5 h-2.5 rounded-full bg-[var(--gold)] animate-ping" />
                   <span className="text-xs font-extrabold uppercase tracking-wider text-[var(--gold-bright)]">
                     Jaipur Headquarters
@@ -225,9 +188,9 @@ export default function HomeStory() {
                 </div>
 
                 {/* Floating Metro Desks Badge */}
-                <div className="absolute bottom-4 right-4 flex items-center gap-2.5 px-3.5 py-2 rounded-xl border border-sky-400/50 bg-[#040D21]/95 backdrop-blur-md shadow-xl z-10">
-                  <Globe className="w-4 h-4 text-sky-400" />
-                  <span className="text-xs font-extrabold uppercase tracking-wider text-sky-200">
+                <div className="absolute bottom-4 right-4 flex items-center gap-2.5 px-3.5 py-2 rounded-xl border border-white/14 bg-[#0F0C1F]/95 backdrop-blur-md shadow-xl z-10">
+                  <Globe className="w-4 h-4 text-[#C89B3C]" />
+                  <span className="text-xs font-extrabold uppercase tracking-wider text-white/85">
                     Desks in 28 States
                   </span>
                 </div>
@@ -240,10 +203,10 @@ export default function HomeStory() {
       {/* ── CONTACT — form + offices ── */}
       <HomeContact />
 
-      {/* ── CLOSING CTA ── */}
+      {/* ── CLOSING CTA — plum gold */}
       <section
         id="start"
-        className="relative flex min-h-[80dvh] flex-col items-center justify-center border-t border-sky-500/20 bg-[#040812] py-[var(--section-y)] pb-[calc(var(--section-y)+5rem)] md:pb-[var(--section-y)]"
+        className="relative flex min-h-[80dvh] flex-col items-center justify-center border-t border-white/10 bg-[#080714] py-[var(--section-y)] pb-[calc(var(--section-y)+5rem)] md:pb-[var(--section-y)]"
         data-parallax-root
       >
         <div className="pointer-events-none absolute inset-0 z-0" aria-hidden>
@@ -251,7 +214,7 @@ export default function HomeStory() {
             className="absolute inset-0"
             style={{
               background:
-                "radial-gradient(ellipse 60% 50% at 50% 50%, rgba(0,163,255,0.18) 0%, transparent 70%)",
+                "radial-gradient(ellipse 60% 50% at 50% 50%, rgba(88,33,199,0.16) 0%, transparent 70%), radial-gradient(ellipse 40% 32% at 50% 22%, rgba(212,175,55,0.08) 0%, transparent 60%)",
             }}
           />
         </div>
@@ -268,7 +231,7 @@ export default function HomeStory() {
             </span>
           </h2>
 
-          <p className="mx-auto mb-12 max-w-lg text-lg leading-relaxed text-slate-300 md:text-xl">
+          <p className="mx-auto mb-12 max-w-lg text-lg leading-relaxed text-white/70 md:text-xl">
             State + entity type on WhatsApp — we reply with next steps within hours.
           </p>
 
@@ -284,32 +247,32 @@ export default function HomeStory() {
             </a>
             <Link
               href="/contact"
-              className="inline-flex items-center gap-2 rounded-xl border border-slate-700 bg-slate-900/80 px-7 py-4 text-xs font-bold uppercase tracking-wider text-slate-200 transition-colors hover:border-sky-400 hover:text-sky-300"
+              className="inline-flex items-center gap-2 rounded-xl border border-white/14 bg-[#14102A] px-7 py-4 text-xs font-bold uppercase tracking-wider text-white/90 transition-colors hover:border-[#C89B3C] hover:text-[#F5D061]"
             >
               Contact Page <ArrowUpRight className="h-4 w-4" />
             </Link>
           </div>
 
-          <div className="flex flex-wrap justify-center gap-6 font-mono text-xs tracking-wider text-slate-400">
-            <a href={`tel:${CONTACT.phoneRaw}`} className="transition-colors hover:text-sky-400">
+          <div className="flex flex-wrap justify-center gap-6 font-mono text-xs tracking-wider text-white/55">
+            <a href={`tel:${CONTACT.phoneRaw}`} className="transition-colors hover:text-[#F5D061]">
               {CONTACT.phoneDisplay}
             </a>
-            <span className="h-1.5 w-1.5 self-center rounded-full bg-slate-700" />
-            <a href={`mailto:${CONTACT.email}`} className="transition-colors hover:text-sky-400">
+            <span className="h-1.5 w-1.5 self-center rounded-full bg-white/20" />
+            <a href={`mailto:${CONTACT.email}`} className="transition-colors hover:text-[#F5D061]">
               {CONTACT.email}
             </a>
-            <span className="h-1.5 w-1.5 self-center rounded-full bg-slate-700" />
+            <span className="h-1.5 w-1.5 self-center rounded-full bg-white/20" />
             <span>{CONTACT.hours}</span>
           </div>
         </div>
 
         {/* Desktop only — mobile has sticky CTA + FAB zone, so no collision */}
-        <div className="absolute bottom-10 left-1/2 z-10 hidden -translate-x-1/2 flex-col items-center gap-2 text-slate-500 md:flex">
+        <div className="absolute bottom-10 left-1/2 z-10 hidden -translate-x-1/2 flex-col items-center gap-2 text-white/45 md:flex">
           <span className="font-mono text-[0.65rem] uppercase tracking-widest">Scroll to top</span>
           <button
             type="button"
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-            className="flex h-8 w-8 items-center justify-center rounded-full border border-slate-700 transition-colors hover:border-sky-400 hover:text-sky-400"
+            className="flex h-8 w-8 items-center justify-center rounded-full border border-white/20 transition-colors hover:border-[#C89B3C] hover:text-[#F5D061]"
             aria-label="Scroll to top"
           >
             <svg width="10" height="6" viewBox="0 0 10 6" fill="none">

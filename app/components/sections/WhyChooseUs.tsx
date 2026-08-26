@@ -2,6 +2,8 @@
 
 import { ArrowRight, CheckCircle2, Sparkles, Shield } from "lucide-react";
 import { DEFAULT_WA } from "../../../lib/whatsapp";
+import { MaskReveal } from "../ui/MaskReveal";
+import { TiltCard } from "../ui/TiltCard";
 
 const ADVANTAGES = [
   {
@@ -38,39 +40,43 @@ export default function WhyChooseUs() {
   return (
     <section
       id="why"
-      className="relative overflow-hidden bg-[#FFFFFF] py-20 lg:py-28 text-[#0F172A] border-b border-slate-200"
+      className="on-light relative overflow-hidden py-20 lg:py-28 text-[#0F172A] border-b border-[#E5DDF3]"
     >
       <div className="relative z-10 px-[var(--gutter)] max-w-7xl mx-auto space-y-12">
-        {/* Section Heading */}
-        <div className="flex flex-col lg:flex-row lg:items-end justify-between border-b border-slate-200 pb-8 gap-6">
-          <div>
-            <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-[0.16em] text-[#C89B3C] mb-2" style={{ fontFamily: "var(--font-body)" }}>
-              <Sparkles className="h-3.5 w-3.5 text-[#C89B3C]" />
-              Why Choose PSARA Consultant
+        {/* Section Heading — alternating mask */}
+        <MaskReveal direction="left">
+          <div className="flex flex-col lg:flex-row lg:items-end justify-between border-b border-[#E5DDF3] pb-8 gap-6">
+            <div>
+              <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-[0.16em] text-[#8F681B] mb-2" style={{ fontFamily: "var(--font-body)" }}>
+                <Sparkles className="h-3.5 w-3.5 text-[#8F681B]" />
+                Why Choose PSARA Consultant
+              </div>
+              <h2
+                className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#0A213D] leading-tight mt-2"
+                style={{ fontFamily: "var(--font-display)" }}
+              >
+                Why Security Agencies Choose <span className="gold-text-gradient">Our Legal Desk</span>
+              </h2>
             </div>
-            <h2
-              className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#0A213D] leading-tight mt-2"
-              style={{ fontFamily: "var(--font-display)" }}
-            >
-              Why Security Agencies Choose <span className="text-[#C89B3C]">Our Legal Desk</span>
-            </h2>
+            <p className="text-sm md:text-base text-[#334155] max-w-md leading-relaxed font-normal">
+              We operate as an exclusive regulatory advisory practice. We prepare, audit, and clear your official Controlling Authority dossier from start to license grant.
+            </p>
           </div>
-          <p className="text-sm md:text-base text-[#334155] max-w-md leading-relaxed font-normal">
-            We operate as an exclusive regulatory advisory practice. We prepare, audit, and clear your official Controlling Authority dossier from start to license grant.
-          </p>
-        </div>
+        </MaskReveal>
 
         {/* Dossier Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
-          {/* Featured Deep Navy Dossier Card */}
-          <div className="lg:col-span-7 rounded-3xl border border-[rgba(200,155,60,0.3)] bg-gradient-to-b from-[#0E1B33] via-[#0A1428] to-[#080F1E] p-8 md:p-10 flex flex-col justify-between shadow-2xl text-white">
+          {/* Featured Deep Plum Dossier Card — tilt + mask */}
+          <MaskReveal direction="left" className="lg:col-span-7">
+            <TiltCard>
+              <div className="rounded-3xl border border-[rgba(212,175,55,0.32)] bg-gradient-to-b from-[#14102A] via-[#0F0C1F] to-[#080714] p-8 md:p-10 flex flex-col justify-between shadow-2xl text-white h-full" data-cursor="Dossier">
             <div className="space-y-6">
               <div className="flex items-center justify-between">
                 <span className="badge-metallic-gold">
-                  <Shield className="h-3 w-3 text-[#D4AF37]" />
+                  <Shield className="h-3 w-3 text-[#8F681B]" />
                   {ADVANTAGES[0].subtitle}
                 </span>
-                <span className="font-mono text-xs font-bold text-[#D4AF37]">
+                <span className="font-mono text-xs font-bold text-[#8F681B]">
                   {ADVANTAGES[0].meta}
                 </span>
               </div>
@@ -87,7 +93,7 @@ export default function WhyChooseUs() {
               <div className="space-y-3 pt-4 border-t border-white/10">
                 {ADVANTAGES[0].highlights.map((h) => (
                   <div key={h} className="flex items-center gap-3 text-sm text-white font-medium">
-                    <CheckCircle2 className="h-4 w-4 text-[#D4AF37] shrink-0" />
+                    <CheckCircle2 className="h-4 w-4 text-[#8F681B] shrink-0" />
                     <span>{h}</span>
                   </div>
                 ))}
@@ -100,23 +106,25 @@ export default function WhyChooseUs() {
                 href={DEFAULT_WA}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#F5D061] hover:underline"
+                className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#8F681B] hover:underline"
               >
                 <span>Discuss Filing Desk</span>
                 <ArrowRight className="h-4 w-4" />
               </a>
             </div>
-          </div>
+            </div>
+            </TiltCard>
+          </MaskReveal>
 
           {/* 3 Right Side Shaded Light Cards */}
           <div className="lg:col-span-5 space-y-4 flex flex-col justify-between">
             {ADVANTAGES.slice(1).map((item) => (
               <div
                 key={item.title}
-                className="rounded-2xl border border-slate-200 bg-gradient-to-br from-[#FFFFFF] to-[#F8F9FD] p-6 shadow-sm transition-all duration-200 hover:border-[#C89B3C] hover:shadow-md"
+                className="rounded-2xl border border-[#E5DDF3] bg-gradient-to-br from-[#FDFCFF] to-[#F3EEFB] p-6 shadow-sm transition-all duration-200 hover:border-[#C89B3C] hover:shadow-md"
               >
                 <div className="mb-2 flex items-center justify-between">
-                  <span className="text-xs font-bold uppercase tracking-wider text-[#C89B3C]">{item.subtitle}</span>
+                  <span className="text-xs font-bold uppercase tracking-wider text-[#8F681B]">{item.subtitle}</span>
                   <span className="font-mono text-xs font-bold text-[#64748B]">{item.meta}</span>
                 </div>
 

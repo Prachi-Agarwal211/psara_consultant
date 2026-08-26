@@ -23,13 +23,13 @@ export default function IndustriesPage() {
         crumbs={[{ label: "Industries" }]}
       />
 
-      <PageMain className="bg-[#050714] text-white">
+      <PageMain className="bg-[#080714] text-white">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {INDUSTRIES.map((ind) => (
             <Link
               key={ind.slug}
               href={`/industries/${ind.slug}`}
-              className="group rounded-3xl border border-[rgba(200,155,60,0.25)] bg-gradient-to-b from-[#0E1B33] to-[#081020] p-6 sm:p-8 transition-all duration-200 hover:-translate-y-1 hover:border-[#D4AF37] hover:from-[#14284D] hover:to-[#0A1428] flex flex-col justify-between shadow-xl"
+              className="group rounded-3xl border border-[rgba(212,175,55,0.25)] bg-gradient-to-b from-[#14102A] to-[#0F0C1F] p-6 sm:p-8 transition-all duration-200 hover:-translate-y-1 hover:border-[#D4AF37] hover:from-[#14284D] hover:to-[#0A1428] flex flex-col justify-between shadow-xl"
             >
               <div>
                 <div className="flex items-center justify-between mb-4">
@@ -59,7 +59,7 @@ export default function IndustriesPage() {
         </div>
 
         {/* Bottom Callout */}
-        <section className="mt-16 rounded-3xl border border-[rgba(200,155,60,0.35)] bg-gradient-to-r from-[#0E1B33] via-[#0A1224] to-[#0E1B33] p-8 md:p-12 text-center shadow-2xl space-y-4">
+        <section className="mt-16 rounded-3xl border border-[rgba(212,175,55,0.35)] bg-gradient-to-r from-[#14102A] via-[#0F0C1F] to-[#0E1B33] p-8 md:p-12 text-center shadow-2xl space-y-4">
           <div className="inline-flex p-3 rounded-2xl bg-[#060B18] border border-[#D4AF37]/40 text-[#D4AF37] mb-2">
             <ShieldCheck className="h-8 w-8" />
           </div>

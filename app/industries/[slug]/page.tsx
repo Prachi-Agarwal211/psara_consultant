@@ -32,10 +32,10 @@ export default async function IndustryDetailPage({ params }: { params: Promise<{
         crumbs={[{ label: "Industries", href: "/industries" }, { label: ind.title }]}
       />
 
-      <PageMain className="bg-[#050714] text-white">
+      <PageMain className="bg-[#080714] text-white">
         <div className="max-w-4xl mx-auto space-y-10">
           {/* Key Compliance Checklist */}
-          <div className="rounded-3xl border border-[rgba(200,155,60,0.35)] bg-gradient-to-b from-[#0E1B33] via-[#0A1428] to-[#050714] p-6 sm:p-8 shadow-2xl space-y-6">
+          <div className="rounded-3xl border border-[rgba(212,175,55,0.35)] bg-gradient-to-b from-[#14102A] via-[#0A1428] to-[#050714] p-6 sm:p-8 shadow-2xl space-y-6">
             <div>
               <span className="badge-metallic-gold mb-2">
                 <Sparkles className="h-3.5 w-3.5 text-[#D4AF37]" /> Statutory Blueprint

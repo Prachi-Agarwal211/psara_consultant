@@ -4,22 +4,26 @@
    ═══════════════════════════════════════════════════════════════ */
 
 :root {
-  /* ── 1. Canvas & Surface Foundations ── */
-  --canvas-void:       #050714;   /* Deepest Navy Void */
-  --void:              #050714;
-  --void-2:            #0A1224;   /* Elevated Deep Navy */
-  --surface-dark:      #0A1224;
-  --surface-card-dark: #0E1B33;   /* Solid Rich Navy Card */
-  --space:             #0E1B33;
-  --space-lift:        #132545;   /* Lifted Navy Surface */
+  /* ── 1. Canvas & Surface Foundations — 2026 Plum Authority (replaces cherry/navy) ── */
+  --canvas-void:       #080714;   /* Midnight Plum Void — OLED depth */
+  --void:              #080714;
+  --void-2:            #0F0C1F;   /* Elevated Plum */
+  --surface-dark:      #0F0C1F;
+  --surface-card-dark: #14102A;   /* Solid Plum Card */
+  --space:             #14102A;
+  --space-lift:        #1E1140;   /* Lifted Plum */
+  --plum-deep:         #1A0B2E;   /* Obsidian Grape */
+  --plum-mid:          #1E1140;
+  --plum-lift:         #27164F;
 
-  /* ── 2. Editorial Light Surfaces ── */
-  --canvas-cream:      #FBF7F0;   /* Warm Alabaster Cream */
-  --white:             #FFFFFF;   /* Pure White */
-  --white-bg:          #FFFFFF;
-  --surface-light:     #FFFFFF;
-  --surface-card-light:#F8F9FD;   /* Off-White Lead Card */
-  --paper:             #FFFFFF;
+  /* ── 2. Editorial Light Surfaces — violet-tinted, never flat white ── */
+  --canvas-cream:      #FAF7FE;   /* Violet-tinted Alabaster */
+  --white:             #FFFFFF;   /* Pure White (inputs only) */
+  --white-bg:          #FDFCFF;
+  --surface-light:     #FDFCFF;
+  --surface-card-light:#F4F0FA;   /* Lavender-tinted Card */
+  --light-border:      #E5DDF3;   /* Violet hairline for light sections */
+  --paper:             #FDFCFF;
   --paper-ink:         #0F172A;   /* Crisp Dark Slate */
   --ink:               #0F172A;
   --ink-soft:          #334155;   /* Secondary Slate */
@@ -36,12 +40,12 @@
   --gold-dim:          rgba(200, 155, 60, 0.75);
   --gold-soft:         rgba(200, 155, 60, 0.12);
 
-  /* ── 4. Primary Dark Navy Ramps ── */
-  --navy-deep:         #0A233F;   /* Classic Statutory Navy */
-  --navy-dark:         #0A1224;
-  --navy-surface:      #0E1B33;
-  --navy-lift:         #14284D;
-  --navy-border:       rgba(200, 155, 60, 0.22);
+  /* ── 4. Primary Dark Plum Ramps (2026 authority) ── */
+  --navy-deep:         #1A0B2E;   /* Obsidian Grape — legacy alias */
+  --navy-dark:         #0F0C1F;
+  --navy-surface:      #14102A;
+  --navy-lift:         #1E1140;
+  --navy-border:       rgba(212, 175, 55, 0.22);
 
   /* ── 5. Conversion Green (WhatsApp & Trust) ── */
   --whatsapp:          #25D366;
@@ -84,25 +88,61 @@
   --text-secondary:    #E2E8F0;
   --text-muted:        #94A3B8;
 
-  /* ── 8. Rich Same-Color Gradient Mixtures (Contrast Depth) ── */
-  --grad-gold-metallic: linear-gradient(135deg, #FFF6D9 0%, #F5E6BA 25%, #D4AF37 55%, #C89B3C 80%, #8F681B 100%);
-  --grad-gold-surface:  linear-gradient(145deg, rgba(200, 155, 60, 0.18) 0%, rgba(200, 155, 60, 0.05) 100%);
-  --grad-gold-border:   linear-gradient(90deg, #D4AF37 0%, rgba(200, 155, 60, 0.3) 50%, #8F681B 100%);
+  /* ── 8. Rich Same-Color Gradient Mixtures (Contrast Depth) — 2026 OKLCH tuned ──
+     Metallic gold: banded champagne → bronze → specular → gold. The double
+     light/dark banding is what makes it read as metal, not mustard. */
+  --grad-gold-metallic: linear-gradient(100deg in oklch,
+    oklch(0.97 0.045 95) 0%,
+    oklch(0.90 0.075 92) 10%,
+    oklch(0.81 0.115 88) 22%,
+    oklch(0.67 0.115 83) 37%,
+    oklch(0.55 0.09 78) 47%,
+    oklch(0.68 0.11 82) 57%,
+    oklch(0.86 0.095 89) 69%,
+    oklch(0.96 0.05 94) 79%,
+    oklch(0.85 0.09 90) 89%,
+    oklch(0.73 0.11 85) 100%);
+  --grad-gold-surface:  linear-gradient(145deg, rgba(212, 175, 55, 0.18) 0%, rgba(212, 175, 55, 0.05) 100%);
+  --grad-gold-border:   linear-gradient(90deg, #D4AF37 0%, rgba(212, 175, 55, 0.3) 50%, #8F681B 100%);
+  --grad-aurora-plum:   radial-gradient(ellipse 55% 45% at 18% 22%, oklch(0.72 0.14 310 / 0.22) 0%, transparent 55%), radial-gradient(ellipse 48% 42% at 82% 78%, oklch(0.78 0.12 85 / 0.16) 0%, transparent 50%);
+  --grad-void-plum:     radial-gradient(ellipse 70% 55% at 50% 38%, #1E1140 0%, #140E2A 35%, #080714 72%);
 
-  --grad-navy-card:     linear-gradient(160deg, #0E1B33 0%, #081020 100%);
-  --grad-navy-lift:     linear-gradient(160deg, #14284D 0%, #0A1428 100%);
-  --grad-navy-header:   linear-gradient(180deg, rgba(5, 7, 20, 0.96) 0%, rgba(10, 18, 36, 0.94) 100%);
-  --grad-cream-card:    linear-gradient(160deg, #FFFFFF 0%, #F8F9FD 100%);
-  --grad-purple-cta:    linear-gradient(135deg, #5821C7 0%, #6D4CC2 60%, #7638FA 100%);
+  --grad-navy-card:     linear-gradient(160deg, #14102A 0%, #0F0C1F 100%);
+  --grad-navy-lift:     linear-gradient(160deg, #1E1140 0%, #0F0C1F 100%);
+  --grad-navy-header:   linear-gradient(180deg, rgba(8, 7, 20, 0.96) 0%, rgba(15, 12, 31, 0.94) 100%);
+  --grad-cream-card:    linear-gradient(165deg, #FDFCFF 0%, #F1EBFA 100%);
+  --grad-light-section: linear-gradient(180deg, #FBF8FE 0%, #F1E9FA 45%, #E5D9F5 100%);
+
+  /* Gold for LIGHT backgrounds — all stops dark enough to hold contrast on white.
+     Bright champagne stops vanish on white; deep bronze metal does not. */
+  --grad-gold-deep: linear-gradient(105deg in oklch,
+    oklch(0.26 0.05 62) 0%,
+    oklch(0.38 0.10 72) 26%,
+    oklch(0.48 0.12 80) 50%,
+    oklch(0.34 0.09 70) 74%,
+    oklch(0.24 0.05 60) 100%);
+  --grad-wa:            linear-gradient(160deg, #1FAF5E 0%, #128C7E 100%);
+
+  /* ── 11. Gold Shadow Standards ──
+     Consistent gold shadow definitions using CSS vars,
+     eliminating duplicated inline RGBA values across globals.css */
+  --shadow-gold-inset:   inset 0 1px 0 rgba(255, 250, 230, 0.85);
+  --shadow-gold-inset-2: inset 0 1px 0 rgba(255, 250, 230, 0.9);
+  --shadow-gold-dim:     0 12px 32px -10px rgba(200, 155, 60, 0.5);
+  --shadow-gold-dim-2:   0 16px 40px -10px rgba(200, 155, 60, 0.6);
+  --shadow-gold-inner:   0 2px 6px rgba(0, 0, 0, 0.45);
+  --shadow-gold:         var(--shadow-gold-inset), var(--shadow-gold-dim), var(--shadow-gold-inner);
+  --shadow-gold-hover:   var(--shadow-gold-inset-2), var(--shadow-gold-dim-2), var(--shadow-gold-inner);
+  */
 
   /* ── 9. Typography Scale ── */
-  --font-display: "Forma DJR Display", "Helvetica Neue", system-ui, sans-serif;
+  --font-display: "EB Garamond", Georgia, "Times New Roman", serif;
   --font-body:    "Maison Neue Ext", system-ui, sans-serif;
   --font-accent:  "Maison Neue Ext", system-ui, sans-serif;
   --font-label:   "Maison Neue Ext", system-ui, sans-serif;
 
-  --h1-size: clamp(2.25rem, 5.5vw, 4.25rem);
-  --h2-size: clamp(1.75rem, 3.5vw, 2.5rem);
+  --h1-size: clamp(2.75rem, 6vw, 4.75rem);
+  --h2-size: clamp(1.9rem, 3.6vw, 2.9rem);
   --h3-size: clamp(1.25rem, 2.2vw, 1.65rem);
   --body-size: 1.0625rem;
   --body-line-height: 1.65;

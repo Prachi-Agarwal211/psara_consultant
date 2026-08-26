@@ -36,7 +36,7 @@ const TRUST_BADGES = [
 export default function SiteFooter() {
   return (
     <footer
-      className="psara-site-footer relative z-10 border-t border-white/15 bg-[#050714] text-white overflow-hidden pb-24 md:pb-12"
+      className="psara-site-footer relative z-10 border-t border-white/15 bg-[#080714] text-white overflow-hidden pb-24 md:pb-12"
     >
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16">
         {/* Marquee Banner */}

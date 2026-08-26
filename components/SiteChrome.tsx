@@ -112,10 +112,10 @@ export default function SiteChrome({ children }: { children: React.ReactNode }) 
                 <Link
                   key={l.href}
                   href={l.href}
-                  className={`text-xs font-bold uppercase tracking-[0.08em] transition-all duration-200 py-1.5 px-2 relative ${
+                  className={`text-[11px] font-bold uppercase tracking-[0.14em] transition-all duration-200 py-1.5 px-2 relative ${
                     active
                       ? "text-[#F5D061]"
-                      : "text-white/80 hover:text-white"
+                      : "text-white/75 hover:text-white"
                   }`}
                   style={{ fontFamily: "var(--font-body)" }}
                 >
@@ -145,8 +145,8 @@ export default function SiteChrome({ children }: { children: React.ReactNode }) 
               href={DEFAULT_WA}
               target="_blank"
               rel="noopener noreferrer"
-              className="hidden md:inline-flex items-center gap-2 rounded-xl bg-[#5821C7] hover:bg-[#7638FA] px-4 py-2 text-xs font-bold uppercase tracking-[.06em] text-white transition-all duration-200 shadow-md shadow-purple-900/40"
-              style={{ fontFamily: "var(--font-body)" }}
+              className="hidden md:inline-flex items-center gap-2 rounded-xl px-4 py-2 text-xs font-bold uppercase tracking-[.06em] text-white transition-all duration-200 hover:brightness-110"
+              style={{ background: "var(--grad-wa)", fontFamily: "var(--font-body)", boxShadow: "inset 0 1px 0 rgba(255,255,255,0.25), 0 8px 20px -8px rgba(18,140,126,0.6)" }}
             >
               <MessageSquare className="h-3.5 w-3.5 fill-white" />
               <span>WhatsApp Desk</span>
@@ -234,7 +234,8 @@ export default function SiteChrome({ children }: { children: React.ReactNode }) 
             href={DEFAULT_WA}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#5821C7] hover:bg-[#7638FA] px-5 py-3.5 text-xs font-bold uppercase tracking-wider text-white transition-all shadow-lg shadow-purple-900/40"
+            className="inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3.5 text-xs font-bold uppercase tracking-wider text-white transition-all hover:brightness-110"
+            style={{ background: "var(--grad-wa)", boxShadow: "inset 0 1px 0 rgba(255,255,255,0.25), 0 10px 26px -10px rgba(18,140,126,0.6)" }}
             onClick={() => setMenuOpen(false)}
           >
             <MessageSquare className="h-4 w-4 fill-white" />

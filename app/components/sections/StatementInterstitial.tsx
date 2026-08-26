@@ -63,16 +63,16 @@ export default function StatementInterstitial() {
   return (
     <section
       ref={rootRef}
-      className="relative min-h-[75dvh] flex flex-col items-center justify-center bg-[#050714] text-white overflow-hidden py-24 border-b border-white/10"
+      className="relative min-h-[75dvh] flex flex-col items-center justify-center bg-[#080714] text-white overflow-hidden py-24 border-y border-white/10"
       data-parallax-root
     >
-      {/* Ambient background glow */}
-      <div className="pointer-events-none absolute inset-0 z-0 opacity-25" aria-hidden>
+      {/* Ambient background glow — plum authority */}
+      <div className="pointer-events-none absolute inset-0 z-0 opacity-30" aria-hidden>
         <div
           className="absolute inset-0"
           style={{
             background:
-              "radial-gradient(circle at 50% 50%, rgba(88,33,199,0.35) 0%, rgba(212,175,55,0.12) 50%, transparent 70%)",
+              "radial-gradient(ellipse 60% 48% at 50% 42%, rgba(88,33,199,0.28) 0%, rgba(212,175,55,0.10) 45%, transparent 72%)",
           }}
         />
       </div>
@@ -129,9 +129,9 @@ export default function StatementInterstitial() {
           style={{ fontFamily: "var(--font-body)" }}
         >
           <span>500+ LICENSES GRANTED</span>
-          <span className="h-1.5 w-1.5 rounded-full bg-[#5821C7]" />
+          <span className="h-1.5 w-1.5 rounded-full bg-[#C89B3C]" />
           <span>28 STATES COVERED</span>
-          <span className="h-1.5 w-1.5 rounded-full bg-[#5821C7]" />
+          <span className="h-1.5 w-1.5 rounded-full bg-[#C89B3C]" />
           <span>10+ YEARS DISCIPLINE</span>
         </div>
       </div>

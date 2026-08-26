@@ -148,7 +148,7 @@ export default async function StatePage({
                   <span className="mt-1 block text-[11px] font-medium text-slate-400">Estimate 1 district, 5 districts or state fees</span>
                 </Link>
                 <Link href="/emergency" className="group rounded-2xl border-2 border-[#BF953F] bg-[#12161F] p-4 shadow-md transition-all hover:border-[#8C1F32]">
-                  <span className="block text-xs font-black text-[#BF953F] group-hover:text-white">Notice &amp; Expiry Emergency Desk</span>
+                  <span className="block text-xs font-black text-[#D4AF37] group-hover:text-white">Notice &amp; Expiry Emergency Desk</span>
                   <span className="mt-1 block text-[11px] font-bold text-slate-300">Urgent Controlling Authority notice response</span>
                 </Link>
                 <Link href="/case-studies" className="group rounded-2xl border border-white/10 bg-[#12161F] p-4 shadow-md transition-all hover:border-[#BF953F]">

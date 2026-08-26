@@ -25,7 +25,7 @@ export default function FaqPage() {
         lead="Eligibility criteria, director qualifications, training institute MOUs, police verification, and state fee slabs — clear answers for private security agency promoters."
         crumbs={[{ label: "FAQ" }]}
       />
-      <PageMain className="bg-[#050714] text-white">
+      <PageMain className="bg-[#080714] text-white">
         <div className="mx-auto max-w-4xl space-y-4">
           <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#F5D061] mb-6">
             <HelpCircle className="h-4 w-4 text-[#D4AF37]" />
@@ -43,7 +43,7 @@ export default function FaqPage() {
                   style={{ fontFamily: "var(--font-display)" }}
                 >
                   <span>{item.q}</span>
-                  <span className="shrink-0 flex h-8 w-8 items-center justify-center rounded-xl border border-white/20 bg-[#0A1022] text-[#F5D061] group-open:rotate-180 group-open:bg-[#5821C7] group-open:text-white transition-all">
+                  <span className="shrink-0 flex h-8 w-8 items-center justify-center rounded-xl border border-white/20 bg-[#0A1022] text-[#F5D061] group-open:rotate-180 group-open:bg-[#C89B3C] group-open:text-[#241703] transition-all">
                     <ChevronDown className="h-4 w-4" />
                   </span>
                 </summary>
@@ -70,7 +70,7 @@ export default function FaqPage() {
                 href={DEFAULT_WA}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 rounded-xl bg-[#5821C7] hover:bg-[#7638FA] px-8 py-4 text-xs font-bold uppercase tracking-wider text-white shadow-xl shadow-purple-950/50 transition-all"
+                className="btn-gold"
               >
                 <MessageSquare className="h-4 w-4 fill-white" />
                 <span>Ask a PSARA Specialist on WhatsApp</span>

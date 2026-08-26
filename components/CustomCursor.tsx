@@ -51,6 +51,7 @@ export default function CustomCursor() {
       setHovered((prev) => (prev !== nextHovered ? nextHovered : prev));
     };
 
+    document.body.style.cursor = "none";
     window.addEventListener("mousemove", onMouseMove);
 
     let animationFrameId: number;
@@ -75,6 +76,7 @@ export default function CustomCursor() {
     return () => {
       window.removeEventListener("mousemove", onMouseMove);
       cancelAnimationFrame(animationFrameId);
+      document.body.style.cursor = "";
     };
   }, [enabled]);
 

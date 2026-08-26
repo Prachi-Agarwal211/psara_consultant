@@ -59,7 +59,7 @@ export default function ContactForm({
 
   const inputBase = dark
     ? "w-full rounded-xl border border-white/20 bg-[#050714] px-4 py-3.5 text-sm font-medium text-white outline-none placeholder:text-white/40 focus:border-[#D4AF37] focus:ring-2 focus:ring-[#D4AF37]/20 transition-all"
-    : "w-full rounded-xl border border-slate-300 bg-white px-4 py-3.5 text-sm font-medium text-[#0F172A] outline-none placeholder:text-slate-400 focus:border-[#5821C7] focus:ring-2 focus:ring-[#5821C7]/20 transition-all shadow-sm";
+    : "w-full rounded-xl border border-slate-300 bg-white px-4 py-3.5 text-sm font-medium text-[#0F172A] outline-none placeholder:text-slate-400 focus:border-[#C89B3C] focus:ring-2 focus:ring-[#C89B3C]/25 transition-all shadow-sm";
 
   const labelCls = dark
     ? "mb-1.5 block text-xs font-bold uppercase tracking-[0.1em] text-[#CBD5E1]"
@@ -317,15 +317,19 @@ export default function ContactForm({
         />
       </div>
 
-      {/* 5. Submit Button (Consistent Saturated Purple Button) */}
+      {/* 5. Submit Button — metallic gold */}
       <div className="pt-2">
         <button
           type="submit"
           disabled={isSubmitting}
-          className="w-full inline-flex items-center justify-center gap-2.5 rounded-xl bg-[#5821C7] hover:bg-[#7638FA] px-8 py-4 text-xs font-bold uppercase tracking-[0.1em] text-white transition-all duration-200 shadow-xl shadow-purple-950/40 hover:-translate-y-0.5 active:scale-95 disabled:opacity-70"
-          style={{ fontFamily: "var(--font-body)" }}
+          className="w-full inline-flex items-center justify-center gap-2.5 rounded-xl px-8 py-4 text-xs font-bold uppercase tracking-[0.1em] text-[#241703] transition-all duration-200 hover:-translate-y-0.5 active:scale-95 disabled:opacity-70"
+          style={{
+            background: "var(--grad-gold-metallic)",
+            boxShadow: "inset 0 1px 0 rgba(255,250,230,0.85), inset 0 -1px 0 rgba(88,58,8,0.5), 0 14px 34px -10px rgba(200,155,60,0.55)",
+            fontFamily: "var(--font-body)",
+          }}
         >
-          <MessageSquare className="h-4 w-4 fill-white" />
+          <MessageSquare className="h-4 w-4 fill-current" />
           <span>{isSubmitting ? "Opening WhatsApp…" : "Get PSARA Statutory Advisory Support"}</span>
         </button>
       </div>

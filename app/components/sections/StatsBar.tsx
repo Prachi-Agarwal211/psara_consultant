@@ -76,7 +76,7 @@ export default function StatsBar() {
   }, []);
 
   return (
-    <section ref={rootRef} id="proof" className="relative isolate overflow-hidden bg-gradient-to-b from-[#050714] via-[#0A1224] to-[#050714] py-20 text-white sm:py-24 lg:py-28 border-b border-white/10" aria-label="PSARA proof and coverage">
+    <section ref={rootRef} id="proof" className="relative isolate overflow-hidden bg-gradient-to-b from-[#080714] via-[#0F0C1F] to-[#080714] py-20 text-white sm:py-24 lg:py-28 border-b border-white/10" aria-label="PSARA proof and coverage">
       <Image
         data-proof-watermark
         src="/apple-touch-icon.png"
@@ -94,7 +94,7 @@ export default function StatsBar() {
               <span className="h-px w-8 bg-[#D4AF37]" /> The PSARA Ledger
             </p>
             <h2 className="text-balance text-3xl sm:text-4xl md:text-5xl font-bold leading-[1.1] text-white" style={{ fontFamily: "var(--font-display)" }}>
-              Evidence that moves <br /><span className="gold-metallic-text">a file forward.</span>
+              Evidence that moves <br /><span className="gold-text-gradient">a file forward.</span>
             </h2>
           </div>
           <p className="max-w-xs text-sm font-normal leading-relaxed text-[#E2E8F0] md:pb-1" style={{ fontFamily: "var(--font-body)" }}>
@@ -127,10 +127,10 @@ export default function StatsBar() {
           {STATS.map(({ num, suffix, title, desc, icon: Icon }, index) => (
             <div key={title} data-proof-row className="group flex flex-col gap-5 border-b border-white/15 py-7 sm:flex-row sm:items-center sm:gap-8 sm:py-8 lg:gap-14">
               <div className="flex w-full items-center gap-5 sm:w-[44%] lg:w-[40%]">
-                <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-[rgba(200,155,60,0.4)] bg-gradient-to-br from-[#0E1B33] to-[#081020] text-[#D4AF37] transition-all group-hover:border-[#D4AF37] group-hover:text-white shadow-md">
+                <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-[rgba(212,175,55,0.38)] bg-gradient-to-br from-[#14102A] to-[#0F0C1F] text-[#D4AF37] transition-all group-hover:border-[#D4AF37] group-hover:text-white shadow-md">
                   <Icon className="h-5 w-5" strokeWidth={2} />
                 </span>
-                <div className="counter-num whitespace-nowrap text-4xl sm:text-5xl md:text-6xl font-bold leading-none gold-metallic-text" style={{ fontFamily: "var(--font-display)" }}>
+                <div className="counter-num whitespace-nowrap text-4xl sm:text-5xl md:text-6xl font-bold leading-none gold-text-gradient" style={{ fontFamily: "var(--font-display)" }}>
                   <span data-count={num} data-suffix={suffix}>{num}{suffix}</span>
                 </div>
                 {index === 0 && <span className="hidden text-xs font-bold uppercase tracking-[.14em] text-white/60 sm:block">Coverage</span>}

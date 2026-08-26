@@ -108,7 +108,7 @@ export default function StateDossierView({
       <meta itemProp="description" content={content.metaDescription} />
 
       {/* 1. EXECUTIVE DOSSIER HERO SUMMARY */}
-      <section className="relative overflow-hidden rounded-3xl border border-[rgba(200,155,60,0.3)] bg-gradient-to-b from-[#0E1B33] via-[#0A1428] to-[#050714] p-6 md:p-10 shadow-2xl">
+      <section className="relative overflow-hidden rounded-3xl border border-[rgba(212,175,55,0.28)] bg-gradient-to-b from-[#14102A] via-[#0A1428] to-[#080714] p-6 md:p-10 shadow-2xl">
         <div className="flex flex-wrap items-center justify-between gap-4 pb-6 border-b border-white/10">
           <div className="flex items-center gap-3">
             <span className="badge-metallic-gold">
@@ -144,15 +144,15 @@ export default function StateDossierView({
 
         {/* Key Framework Parameters */}
         <div className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-4 pt-6 border-t border-white/10">
-          <div className="rounded-2xl border border-white/10 bg-[#060B18] p-4 shadow-inner">
+          <div className="rounded-2xl border border-white/10 bg-[#0F0C1F] p-4 shadow-inner">
             <span className="block text-[0.65rem] font-bold uppercase tracking-widest text-[#D4AF37]">Application Mode</span>
             <span className="mt-1 block text-sm font-bold text-white">{state.applicationMode}</span>
           </div>
-          <div className="rounded-2xl border border-white/10 bg-[#060B18] p-4 shadow-inner">
+          <div className="rounded-2xl border border-white/10 bg-[#0F0C1F] p-4 shadow-inner">
             <span className="block text-[0.65rem] font-bold uppercase tracking-widest text-[#D4AF37]">Rules Framework</span>
             <span className="mt-1 block text-sm font-bold text-white">{state.rulesNote}</span>
           </div>
-          <div className="rounded-2xl border border-white/10 bg-[#060B18] p-4 shadow-inner">
+          <div className="rounded-2xl border border-white/10 bg-[#0F0C1F] p-4 shadow-inner">
             <span className="block text-[0.65rem] font-bold uppercase tracking-widest text-[#D4AF37]">Coverage Scale</span>
             <span className="mt-1 block text-sm font-bold text-white">{state.cities.length}+ Major Districts</span>
           </div>
@@ -163,27 +163,27 @@ export default function StateDossierView({
       <section className="space-y-6">
         <DossierTitle index="01">State at a Glance</DossierTitle>
         <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
-          <div className="rounded-2xl border border-[rgba(200,155,60,0.3)] bg-gradient-to-br from-[#0E1B33] to-[#081020] p-5 shadow-md">
+          <div className="rounded-2xl border border-[rgba(212,175,55,0.28)] bg-gradient-to-br from-[#14102A] to-[#0F0C1F] p-5 shadow-md">
             <span className="block text-[0.65rem] font-bold uppercase tracking-widest text-[#D4AF37]">Controlling Authority</span>
             <span className="mt-1.5 block text-xs font-bold text-white leading-snug">{state.authority}</span>
           </div>
-          <div className="rounded-2xl border border-white/10 bg-gradient-to-br from-[#0E1B33] to-[#081020] p-5 shadow-md">
+          <div className="rounded-2xl border border-white/10 bg-gradient-to-br from-[#14102A] to-[#0F0C1F] p-5 shadow-md">
             <span className="block text-[0.65rem] font-bold uppercase tracking-widest text-[#D4AF37]">Indicative Timeline</span>
             <span className="mt-1.5 block text-lg font-bold text-white font-mono">{state.timeline}</span>
           </div>
-          <div className="rounded-2xl border border-white/10 bg-gradient-to-br from-[#0E1B33] to-[#081020] p-5 shadow-md">
+          <div className="rounded-2xl border border-white/10 bg-gradient-to-br from-[#14102A] to-[#0F0C1F] p-5 shadow-md">
             <span className="block text-[0.65rem] font-bold uppercase tracking-widest text-[#D4AF37]">Application Mode</span>
             <span className="mt-1.5 block text-xs font-bold text-white leading-snug">{state.applicationMode}</span>
           </div>
-          <div className="rounded-2xl border border-white/10 bg-gradient-to-br from-[#0E1B33] to-[#081020] p-5 shadow-md">
+          <div className="rounded-2xl border border-white/10 bg-gradient-to-br from-[#14102A] to-[#0F0C1F] p-5 shadow-md">
             <span className="block text-[0.65rem] font-bold uppercase tracking-widest text-[#D4AF37]">Licence Validity</span>
             <span className="mt-1.5 block text-lg font-bold text-white font-mono">{state.validityYears} year{state.validityYears > 1 ? "s" : ""}</span>
           </div>
-          <div className="rounded-2xl border border-white/10 bg-gradient-to-br from-[#0E1B33] to-[#081020] p-5 shadow-md">
+          <div className="rounded-2xl border border-white/10 bg-gradient-to-br from-[#14102A] to-[#0F0C1F] p-5 shadow-md">
             <span className="block text-[0.65rem] font-bold uppercase tracking-widest text-[#D4AF37]">State Capital</span>
             <span className="mt-1.5 block text-sm font-bold text-white">{state.capital}</span>
           </div>
-          <div className="rounded-2xl border border-white/10 bg-gradient-to-br from-[#0E1B33] to-[#081020] p-5 shadow-md">
+          <div className="rounded-2xl border border-white/10 bg-gradient-to-br from-[#14102A] to-[#0F0C1F] p-5 shadow-md">
             <span className="block text-[0.65rem] font-bold uppercase tracking-widest text-[#D4AF37]">Fee Slabs (Govt)</span>
             <span className="mt-1.5 block text-xs font-bold text-white leading-snug">₹5,000 / ₹10,000 / ₹25,000</span>
           </div>
@@ -196,13 +196,13 @@ export default function StateDossierView({
           <DossierTitle index="02">{`Controlling Authority — Officer & Contact Details`}</DossierTitle>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-            <div className="rounded-2xl border border-white/10 bg-gradient-to-b from-[#0E1B33] to-[#081020] p-5 shadow-md">
+            <div className="rounded-2xl border border-white/10 bg-gradient-to-b from-[#14102A] to-[#0F0C1F] p-5 shadow-md">
               <BadgeCheck className="h-4 w-4 text-[#D4AF37] mb-2" />
               <span className="block text-[0.6rem] font-bold uppercase tracking-widest text-[#D4AF37]">Officer on Record</span>
               <span className="mt-1 block text-sm font-bold text-white leading-snug">{ca.name}</span>
             </div>
             {ca.phone && ca.phone !== "—" && (
-              <div className="rounded-2xl border border-white/10 bg-gradient-to-b from-[#0E1B33] to-[#081020] p-5 shadow-md">
+              <div className="rounded-2xl border border-white/10 bg-gradient-to-b from-[#14102A] to-[#0F0C1F] p-5 shadow-md">
                 <div className="flex items-center justify-between">
                   <Phone className="h-4 w-4 text-[#D4AF37] mb-2" />
                   <button
@@ -218,7 +218,7 @@ export default function StateDossierView({
               </div>
             )}
             {ca.email && ca.email !== "—" && (
-              <div className="rounded-2xl border border-white/10 bg-gradient-to-b from-[#0E1B33] to-[#081020] p-5 shadow-md">
+              <div className="rounded-2xl border border-white/10 bg-gradient-to-b from-[#14102A] to-[#0F0C1F] p-5 shadow-md">
                 <div className="flex items-center justify-between">
                   <Mail className="h-4 w-4 text-[#D4AF37] mb-2" />
                   <button
@@ -234,7 +234,7 @@ export default function StateDossierView({
               </div>
             )}
             {ca.portal && (
-              <div className="rounded-2xl border border-white/10 bg-gradient-to-b from-[#0E1B33] to-[#081020] p-5 shadow-md">
+              <div className="rounded-2xl border border-white/10 bg-gradient-to-b from-[#14102A] to-[#0F0C1F] p-5 shadow-md">
                 <Globe className="h-4 w-4 text-[#D4AF37] mb-2" />
                 <span className="block text-[0.6rem] font-bold uppercase tracking-widest text-[#D4AF37]">Portal</span>
                 <span className="mt-1 block text-xs font-bold text-white break-all">{ca.portal}</span>
@@ -249,7 +249,7 @@ export default function StateDossierView({
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-white/10 pb-4">
           <DossierTitle index={pad(processIdx)}>{`Compliance Toolkit for ${state.name}`}</DossierTitle>
 
-          <div className="flex gap-2 border border-white/10 bg-[#060B18] p-1.5 rounded-xl">
+          <div className="flex gap-2 border border-white/10 bg-[#0F0C1F] p-1.5 rounded-xl">
             {(["process", "documents", "calculator"] as const).map((tab) => (
               <button
                 key={tab}
@@ -257,7 +257,7 @@ export default function StateDossierView({
                 aria-pressed={activeTab === tab}
                 className={`px-4 py-2 text-xs font-bold uppercase tracking-wider rounded-lg transition-all ${
                   activeTab === tab
-                    ? "bg-gradient-to-r from-[#5821C7] to-[#6D4CC2] text-white shadow-md"
+                    ? "text-[#241703] shadow-md bg-[#C89B3C]"
                     : "text-[#CBD5E1] hover:text-white"
                 }`}
               >
@@ -278,7 +278,7 @@ export default function StateDossierView({
               return (
                 <div
                   key={idx}
-                  className="group relative overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-b from-[#0E1B33] to-[#081020] p-6 shadow-md transition-all duration-200 hover:border-[#D4AF37]"
+                  className="group relative overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-b from-[#14102A] to-[#0F0C1F] p-6 shadow-md transition-all duration-200 hover:border-[#D4AF37]"
                 >
                   <div className="flex items-center justify-between">
                     <span className="badge-metallic-gold text-[0.6rem]">
@@ -328,8 +328,8 @@ export default function StateDossierView({
                     onClick={() => toggleDoc(idx)}
                     className={`flex items-start gap-3 rounded-2xl border p-4 text-left transition-all ${
                       isChecked
-                        ? "border-[#25D366] bg-[#0E1B33]/80 shadow-md"
-                        : "border-white/10 bg-[#060B18] hover:border-white/30"
+                        ? "border-[#25D366] bg-[#14102A]/80 shadow-md"
+                        : "border-white/10 bg-[#0F0C1F] hover:border-white/30"
                     }`}
                   >
                     <span className="mt-0.5 shrink-0 text-[#D4AF37]">
@@ -356,7 +356,7 @@ export default function StateDossierView({
 
         {/* Tab 3: Interactive State Fee Calculator */}
         {activeTab === "calculator" && (
-          <div className="rounded-3xl border border-[rgba(200,155,60,0.35)] bg-gradient-to-b from-[#0E1B33] to-[#060B18] p-6 sm:p-8 space-y-6 shadow-2xl">
+          <div className="rounded-3xl border border-[rgba(212,175,55,0.35)] bg-gradient-to-b from-[#14102A] to-[#0F0C1F] p-6 sm:p-8 space-y-6 shadow-2xl">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/10 pb-4">
               <div>
                 <span className="badge-metallic-gold mb-2">
@@ -369,19 +369,19 @@ export default function StateDossierView({
               <div className="flex gap-2">
                 <button
                   onClick={() => setCalcScale("d1")}
-                  className={`px-3 py-1.5 text-xs font-bold rounded-lg border ${calcScale === "d1" ? "bg-[#5821C7] border-[#D4AF37] text-white" : "border-white/10 text-[#CBD5E1]"}`}
+                  className={`px-3 py-1.5 text-xs font-bold rounded-lg border ${calcScale === "d1" ? "bg-[#C89B3C] border-[#D4AF37] text-[#241703]" : "border-white/10 text-[#CBD5E1]"}`}
                 >
                   1 District
                 </button>
                 <button
                   onClick={() => setCalcScale("d5")}
-                  className={`px-3 py-1.5 text-xs font-bold rounded-lg border ${calcScale === "d5" ? "bg-[#5821C7] border-[#D4AF37] text-white" : "border-white/10 text-[#CBD5E1]"}`}
+                  className={`px-3 py-1.5 text-xs font-bold rounded-lg border ${calcScale === "d5" ? "bg-[#C89B3C] border-[#D4AF37] text-[#241703]" : "border-white/10 text-[#CBD5E1]"}`}
                 >
                   5 Districts
                 </button>
                 <button
                   onClick={() => setCalcScale("state")}
-                  className={`px-3 py-1.5 text-xs font-bold rounded-lg border ${calcScale === "state" ? "bg-[#5821C7] border-[#D4AF37] text-white" : "border-white/10 text-[#CBD5E1]"}`}
+                  className={`px-3 py-1.5 text-xs font-bold rounded-lg border ${calcScale === "state" ? "bg-[#C89B3C] border-[#D4AF37] text-[#241703]" : "border-white/10 text-[#CBD5E1]"}`}
                 >
                   Whole State
                 </button>
@@ -389,19 +389,19 @@ export default function StateDossierView({
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-xs">
-              <div className="p-4 rounded-xl bg-[#060B18] border border-white/10">
+              <div className="p-4 rounded-xl bg-[#0F0C1F] border border-white/10">
                 <span className="text-[#94A3B8] block">Statutory Govt Fee</span>
                 <span className="text-lg font-bold text-white font-mono mt-1 block">₹{govFee.toLocaleString("en-IN")}</span>
               </div>
-              <div className="p-4 rounded-xl bg-[#060B18] border border-white/10">
+              <div className="p-4 rounded-xl bg-[#0F0C1F] border border-white/10">
                 <span className="text-[#94A3B8] block">Training MOU Fee</span>
                 <span className="text-lg font-bold text-white font-mono mt-1 block">₹{mouFee.toLocaleString("en-IN")}</span>
               </div>
-              <div className="p-4 rounded-xl bg-[#060B18] border border-white/10">
+              <div className="p-4 rounded-xl bg-[#0F0C1F] border border-white/10">
                 <span className="text-[#94A3B8] block">Consultancy Fee</span>
                 <span className="text-lg font-bold text-white font-mono mt-1 block">₹{consultancyFee.toLocaleString("en-IN")}</span>
               </div>
-              <div className="p-4 rounded-xl bg-[#060B18] border border-white/10">
+              <div className="p-4 rounded-xl bg-[#0F0C1F] border border-white/10">
                 <span className="text-[#94A3B8] block">Documentation &amp; Affidavits</span>
                 <span className="text-lg font-bold text-white font-mono mt-1 block">₹{docFee.toLocaleString("en-IN")}</span>
               </div>
@@ -410,7 +410,7 @@ export default function StateDossierView({
             <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-[#D4AF37]/40">
               <div>
                 <span className="text-xs text-[#CBD5E1] font-bold">Total Estimated Budget:</span>
-                <span className="text-2xl font-bold gold-metallic-text font-mono block">₹{totalStateEst.toLocaleString("en-IN")}</span>
+                <span className="text-2xl font-bold gold-text-gradient font-mono block">₹{totalStateEst.toLocaleString("en-IN")}</span>
               </div>
 
               <a

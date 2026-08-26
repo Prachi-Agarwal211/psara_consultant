@@ -31,7 +31,7 @@ export default function ServicesHubPage() {
         crumbs={[{ label: "Services" }]}
       />
 
-      <PageMain className="bg-[#050714] text-white">
+      <PageMain className="bg-[#080714] text-white">
         {/* Service Pillars Grid */}
         <div className="mb-16">
           <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#F5D061] mb-2">
@@ -112,7 +112,11 @@ export default function ServicesHubPage() {
             </div>
             <Link
               href="/calculator"
-              className="shrink-0 inline-flex items-center gap-2 rounded-xl bg-[#5821C7] hover:bg-[#7638FA] px-7 py-4 text-xs font-bold uppercase tracking-wider text-white transition-all shadow-lg shadow-purple-900/40"
+              className="shrink-0 inline-flex items-center gap-2 rounded-xl px-7 py-4 text-xs font-bold uppercase tracking-wider text-[#241703] transition-all hover:brightness-105"
+              style={{
+                background: "var(--grad-gold-metallic)",
+                boxShadow: "inset 0 1px 0 rgba(255,250,230,0.85), inset 0 -1px 0 rgba(88,58,8,0.5), 0 12px 30px -10px rgba(200,155,60,0.5)",
+              }}
             >
               Launch Cost Calculator <ArrowRight className="h-4 w-4" />
             </Link>
@@ -136,7 +140,8 @@ export default function ServicesHubPage() {
                 href={DEFAULT_WA}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 rounded-xl bg-[#5821C7] hover:bg-[#7638FA] px-6 py-3.5 text-xs font-bold uppercase tracking-wider text-white transition-all shadow-md shadow-purple-900/40"
+                className="inline-flex items-center gap-2 rounded-xl px-6 py-3.5 text-xs font-bold uppercase tracking-wider text-white transition-all hover:brightness-110"
+                style={{ background: "var(--grad-wa)", boxShadow: "inset 0 1px 0 rgba(255,255,255,0.25), 0 10px 24px -10px rgba(18,140,126,0.55)" }}
               >
                 <MessageSquare className="h-4 w-4 fill-white" />
                 <span>WhatsApp Desk</span>

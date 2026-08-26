@@ -37,7 +37,7 @@ export default function ExitIntentPopup() {
       role="dialog"
       aria-modal="true"
       aria-labelledby="exit-modal-title"
-      className="fixed inset-0 z-[9999] flex items-center justify-center bg-[#050714]/85 p-4 backdrop-blur-md transition-opacity duration-300"
+      className="fixed inset-0 z-[9999] flex items-center justify-center bg-[#080714]/85 p-4 backdrop-blur-md transition-opacity duration-300"
     >
       <div className="relative w-full max-w-lg overflow-hidden rounded-3xl border-2 border-[#D4AF37] bg-[#0A1022] p-6 sm:p-8 text-white shadow-2xl">
         {/* Close Button */}
@@ -81,7 +81,7 @@ export default function ExitIntentPopup() {
           </p>
 
           {/* Key Checklist Highlights */}
-          <div className="space-y-3 rounded-2xl border border-white/12 bg-[#050714] p-4 text-xs">
+          <div className="space-y-3 rounded-2xl border border-white/12 bg-[#080714] p-4 text-xs">
             <div className="flex items-start gap-3">
               <FileCheck className="h-4 w-4 shrink-0 text-[#F5D061] mt-0.5" />
               <span className="font-bold text-[#F8FAFC]">
@@ -109,10 +109,14 @@ export default function ExitIntentPopup() {
               target="_blank"
               rel="noopener noreferrer"
               onClick={handleClose}
-              className="flex-1 inline-flex items-center justify-center gap-2 rounded-xl bg-[#5821C7] hover:bg-[#7638FA] px-6 py-3.5 text-xs font-bold uppercase tracking-wider text-white shadow-xl shadow-purple-950/50 transition-all active:scale-95"
-              style={{ fontFamily: "var(--font-body)" }}
+              className="flex-1 inline-flex items-center justify-center gap-2 rounded-xl px-6 py-3.5 text-xs font-bold uppercase tracking-wider text-[#241703] transition-all active:scale-95"
+              style={{
+                background: "var(--grad-gold-metallic)",
+                boxShadow: "inset 0 1px 0 rgba(255,250,230,0.85), inset 0 -1px 0 rgba(88,58,8,0.5), 0 12px 30px -10px rgba(200,155,60,0.5)",
+                fontFamily: "var(--font-body)",
+              }}
             >
-              <MessageSquare className="h-4 w-4 fill-white text-white" />
+              <MessageSquare className="h-4 w-4 fill-current" />
               <span>Chat with PSARA Specialist</span>
               <ArrowRight className="h-4 w-4" />
             </a>

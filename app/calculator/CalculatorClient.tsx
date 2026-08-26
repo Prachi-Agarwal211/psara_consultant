@@ -64,10 +64,10 @@ export default function CalculatorClient() {
         crumbs={[{ label: "Fee Calculator" }]}
       />
 
-      <PageMain className="bg-[#050714] text-white">
+      <PageMain className="bg-[#080714] text-white">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-10">
           {/* Controls */}
-          <div className="lg:col-span-7 rounded-3xl border border-[rgba(200,155,60,0.25)] bg-gradient-to-b from-[#0E1B33] to-[#081020] p-6 md:p-8 space-y-6 shadow-2xl">
+          <div className="lg:col-span-7 rounded-3xl border border-[rgba(212,175,55,0.25)] bg-gradient-to-b from-[#14102A] to-[#0F0C1F] p-6 md:p-8 space-y-6 shadow-2xl">
             <h2 className="text-xl font-bold text-white flex items-center gap-2" style={{ fontFamily: "var(--font-display)" }}>
               <Calculator className="h-5 w-5 text-[#D4AF37]" /> Configure License Parameters
             </h2>
@@ -175,7 +175,7 @@ export default function CalculatorClient() {
           </div>
 
           {/* Breakdown Table Card */}
-          <div className="lg:col-span-5 rounded-3xl border border-[rgba(200,155,60,0.35)] bg-gradient-to-b from-[#0E1B33] to-[#060B18] text-white p-6 md:p-8 flex flex-col justify-between shadow-2xl space-y-6">
+          <div className="lg:col-span-5 rounded-3xl border border-[rgba(212,175,55,0.35)] bg-gradient-to-b from-[#14102A] to-[#060B18] text-white p-6 md:p-8 flex flex-col justify-between shadow-2xl space-y-6">
             <div>
               <span className="text-xs font-bold uppercase tracking-widest text-[#D4AF37] block">
                 Structured Fee Schedule

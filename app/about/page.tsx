@@ -65,9 +65,9 @@ export default function AboutPage() {
       {/* Featured Hero About Section */}
       <AboutSection imageSrc="/about-3d-map.png" showHeaderBar={false} headingLevel="h1" className="pt-28 pb-16 border-b border-white/10" />
 
-      <PageMain className="bg-[#050714] text-white">
+      <PageMain className="bg-[#080714] text-white">
         {/* Stats Grid */}
-        <section className="mb-16 grid grid-cols-2 md:grid-cols-4 gap-4 border border-[rgba(200,155,60,0.3)] bg-gradient-to-b from-[#0E1B33] to-[#081020] p-6 text-center rounded-3xl shadow-2xl">
+        <section className="mb-16 grid grid-cols-2 md:grid-cols-4 gap-4 border border-[rgba(212,175,55,0.3)] bg-gradient-to-b from-[#14102A] to-[#0F0C1F] p-6 text-center rounded-3xl shadow-2xl">
           {STATS.map((s) => (
             <div key={s.label} className="p-3 relative">
               <span className="block font-bold text-3xl md:text-5xl gold-metallic-text font-mono" style={{ fontFamily: "var(--font-display)" }}>
@@ -95,7 +95,7 @@ export default function AboutPage() {
             </p>
             <div className="pt-4 grid grid-cols-1 sm:grid-cols-2 gap-4">
               {OFFICES.slice(0, 6).map((o) => (
-                <div key={o.city} className="flex items-start gap-2.5 border border-white/10 bg-[#0A1224] p-3.5 rounded-xl text-xs">
+                <div key={o.city} className="flex items-start gap-2.5 border border-white/10 bg-[#0F0C1F] p-3.5 rounded-xl text-xs">
                   <MapPin className="h-4 w-4 text-[#D4AF37] shrink-0 mt-0.5" />
                   <div>
                     <strong className="block text-white font-bold">{o.city} Desk ({o.badge})</strong>
@@ -107,7 +107,7 @@ export default function AboutPage() {
           </div>
 
           <div className="lg:col-span-5">
-            <div className="rounded-3xl border border-[rgba(200,155,60,0.35)] p-6 md:p-8 bg-gradient-to-b from-[#0E1B33] to-[#060B18] text-white shadow-2xl space-y-4">
+            <div className="rounded-3xl border border-[rgba(212,175,55,0.35)] p-6 md:p-8 bg-gradient-to-b from-[#14102A] to-[#060B18] text-white shadow-2xl space-y-4">
               <span className="badge-metallic-gold">
                 Immediate Consultation
               </span>
@@ -132,7 +132,7 @@ export default function AboutPage() {
           </h2>
           <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {TIMELINE.map((t) => (
-              <div key={t.year} className="relative rounded-2xl border border-white/10 bg-gradient-to-b from-[#0E1B33] to-[#081020] p-6 shadow-md transition-all hover:border-[#D4AF37]">
+              <div key={t.year} className="relative rounded-2xl border border-white/10 bg-gradient-to-b from-[#14102A] to-[#0F0C1F] p-6 shadow-md transition-all hover:border-[#D4AF37]">
                 <span className="text-xs font-mono font-bold uppercase text-[#D4AF37] block">{t.year}</span>
                 <h3 className="mt-2 text-base font-bold text-white" style={{ fontFamily: "var(--font-display)" }}>{t.title}</h3>
                 <p className="mt-2 text-xs text-[#E2E8F0] leading-relaxed font-normal">{t.desc}</p>
@@ -143,7 +143,7 @@ export default function AboutPage() {
 
         {/* Mission & Vision */}
         <section className="mb-20 grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div className="rounded-3xl border border-[rgba(200,155,60,0.3)] bg-gradient-to-b from-[#0E1B33] to-[#081020] p-8 shadow-xl space-y-3">
+          <div className="rounded-3xl border border-[rgba(212,175,55,0.3)] bg-gradient-to-b from-[#14102A] to-[#0F0C1F] p-8 shadow-xl space-y-3">
             <Target className="h-6 w-6 text-[#D4AF37]" />
             <h3 className="text-2xl font-bold text-white" style={{ fontFamily: "var(--font-display)" }}>Our Mission</h3>
             <p className="text-sm text-[#E2E8F0] leading-relaxed font-normal">
@@ -151,7 +151,7 @@ export default function AboutPage() {
             </p>
           </div>
 
-          <div className="rounded-3xl border border-[rgba(200,155,60,0.3)] bg-gradient-to-b from-[#0E1B33] to-[#081020] p-8 shadow-xl space-y-3">
+          <div className="rounded-3xl border border-[rgba(212,175,55,0.3)] bg-gradient-to-b from-[#14102A] to-[#0F0C1F] p-8 shadow-xl space-y-3">
             <Eye className="h-6 w-6 text-[#D4AF37]" />
             <h3 className="text-2xl font-bold text-white" style={{ fontFamily: "var(--font-display)" }}>Our Vision</h3>
             <p className="text-sm text-[#E2E8F0] leading-relaxed font-normal">
@@ -168,7 +168,7 @@ export default function AboutPage() {
           </h2>
           <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-6">
             {VALUES.map((v) => (
-              <div key={v.title} className="rounded-2xl border border-white/10 bg-gradient-to-b from-[#0E1B33] to-[#081020] p-6 flex items-start gap-4 shadow-md">
+              <div key={v.title} className="rounded-2xl border border-white/10 bg-gradient-to-b from-[#14102A] to-[#0F0C1F] p-6 flex items-start gap-4 shadow-md">
                 <CheckCircle2 className="h-5 w-5 text-[#D4AF37] shrink-0 mt-1" />
                 <div>
                   <h3 className="text-base font-bold text-white" style={{ fontFamily: "var(--font-display)" }}>{v.title}</h3>
@@ -194,7 +194,7 @@ export default function AboutPage() {
           </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {CERTIFICATIONS.map((c) => (
-              <div key={c.name} className="rounded-2xl border border-white/10 bg-gradient-to-b from-[#0E1B33] to-[#081020] p-4 text-center shadow-md">
+              <div key={c.name} className="rounded-2xl border border-white/10 bg-gradient-to-b from-[#14102A] to-[#0F0C1F] p-4 text-center shadow-md">
                 <Award className="h-6 w-6 text-[#D4AF37] mx-auto mb-2" />
                 <span className="block text-xs font-bold text-white">{c.name}</span>
                 <span className="block text-[10px] text-[#94A3B8] mt-0.5">{c.desc}</span>

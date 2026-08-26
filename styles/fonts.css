@@ -1,25 +1,18 @@
-/* Local fonts: Forma DJR Display, Maison Neue Ext, & Syne (accent) */
+/* Local fonts: EB Garamond (display serif), Maison Neue Ext (body) */
 
-/* ── Display Font: Forma DJR Display ── */
+/* ── Display Font: EB Garamond — statutory, editorial luxury ── */
 @font-face {
-  font-family: "Forma DJR Display";
-  src: url("/assets/fonts/display/FormaDJRDisplay-Regular.woff2") format("woff2");
+  font-family: "EB Garamond";
+  src: url("/assets/fonts/display/EBGaramond-Regular.woff2") format("woff2");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
-  font-family: "Forma DJR Display";
-  src: url("/assets/fonts/display/FormaDJRDisplay-Medium.woff2") format("woff2");
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Forma DJR Display";
-  src: url("/assets/fonts/display/FormaDJRDisplay-Bold.woff2") format("woff2");
-  font-weight: 700;
-  font-style: normal;
+  font-family: "EB Garamond";
+  src: url("/assets/fonts/display/EBGaramond-Italic.woff2") format("woff2");
+  font-weight: 400;
+  font-style: italic;
   font-display: swap;
 }
 
@@ -61,7 +54,7 @@
 }
 
 :root {
-  --font-display: "Forma DJR Display", "Helvetica Neue", system-ui, sans-serif;
+  --font-display: "EB Garamond", Georgia, "Times New Roman", serif;
   --font-body: "Maison Neue Ext", "Helvetica Neue", system-ui, sans-serif;
   --font-accent: "Maison Neue Ext", "Helvetica Neue", system-ui, sans-serif;
 }

@@ -18,6 +18,9 @@ import {
 } from "lucide-react";
 import { SERVICES } from "../../../data/services";
 import { DEFAULT_WA } from "../../../lib/whatsapp";
+import { MaskReveal } from "../ui/MaskReveal";
+import { TiltCard } from "../ui/TiltCard";
+import { ServicesPinnedHorizontal } from "./ServicesSection.pinned";
 
 const CATEGORIES = [
   { id: "all", label: "All Services" },
@@ -75,37 +78,42 @@ export default function ServicesSection() {
   };
 
   return (
-    <section id="services" className="relative py-20 lg:py-28 bg-[#050714] text-white border-b border-white/10">
-      <div className="relative z-10 px-[var(--gutter)] max-w-7xl mx-auto space-y-12">
-        {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-white/15 pb-8">
-          <div>
-            <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-[0.16em] text-[#D4AF37]" style={{ fontFamily: "var(--font-body)" }}>
-              <Sparkles className="h-3.5 w-3.5 text-[#D4AF37]" />
-              Statutory Advisory &amp; Licensing Services
-            </div>
-            <h2 className="mt-3 text-3xl sm:text-4xl md:text-5xl font-bold text-white leading-tight" style={{ fontFamily: "var(--font-display)" }}>
-              Services that secure your <span className="gold-metallic-text">security agency</span>
-            </h2>
-          </div>
+    <section id="services" className="relative bg-[#080714] text-white border-b border-white/10">
+      {/* Pinned horizontal showcase — statutory core, scroll to explore (lg only) */}
+      <ServicesPinnedHorizontal />
 
-          <p className="max-w-md text-sm md:text-base text-[#E2E8F0] leading-relaxed font-normal" style={{ fontFamily: "var(--font-body)" }}>
-            From company incorporation to Controlling Authority filing, recognized training MOUs, police verification, and multi-state compliance.
-          </p>
-        </div>
+      <div className="relative z-10 px-[var(--gutter)] max-w-7xl mx-auto space-y-12 py-20 lg:py-28">
+        {/* Section Header — MaskReveal */}
+        <MaskReveal direction="left">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-white/15 pb-8">
+            <div>
+              <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-[0.16em] text-[#D4AF37]" style={{ fontFamily: "var(--font-body)" }}>
+                <Sparkles className="h-3.5 w-3.5 text-[#D4AF37]" />
+                Statutory Advisory &amp; Licensing Services
+              </div>
+              <h2 className="mt-3 text-3xl sm:text-4xl md:text-5xl font-bold text-white leading-tight" style={{ fontFamily: "var(--font-display)" }}>
+                Services that secure your <span className="gold-text-gradient">security agency</span>
+              </h2>
+            </div>
+
+            <p className="max-w-md text-sm md:text-base text-[#E2E8F0] leading-relaxed font-normal" style={{ fontFamily: "var(--font-body)" }}>
+              From company incorporation to Controlling Authority filing, recognized training MOUs, police verification, and multi-state compliance.
+            </p>
+          </div>
+        </MaskReveal>
 
         {/* Category Navigation Tabs */}
-        <div className="flex flex-wrap items-center gap-2 border border-white/10 bg-[#0A1224] p-1.5 rounded-2xl shadow-inner">
+        <div className="flex flex-wrap items-center gap-2 border border-white/10 bg-[#0F0C1F] p-1.5 rounded-2xl shadow-inner">
           {CATEGORIES.map((cat) => (
             <button
               key={cat.id}
               onClick={() => handleCategoryChange(cat.id)}
               className={`px-5 py-2.5 text-xs font-bold uppercase tracking-[0.1em] rounded-xl transition-all duration-200 ${
                 activeCategory === cat.id
-                  ? "bg-gradient-to-r from-[#5821C7] to-[#6D4CC2] text-white shadow-lg shadow-purple-950/60"
+                  ? "text-[#241703] shadow-lg shadow-black/40 bg-[#C89B3C]"
                   : "text-[#CBD5E1] hover:text-white hover:bg-white/5"
               }`}
-              style={{ fontFamily: "var(--font-body)" }}
+              style={{ fontFamily: "var(--font-body)", ...(activeCategory === cat.id ? { boxShadow: "inset 0 1px 0 rgba(255,250,230,0.8)" } : {}) }}
             >
               {cat.label}
               {cat.id === "all" ? ` (${SERVICES.length})` : ""}
@@ -113,22 +121,24 @@ export default function ServicesSection() {
           ))}
         </div>
 
-        {/* Services Grid with Shaded Navy Cards */}
+        {/* Services Grid — TiltCard + staggered MaskReveal */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
           {visibleServices.map((service, idx) => {
             const IconComponent = getServiceIcon(service.slug);
             const num = String(idx + 1).padStart(2, "0");
 
             return (
-              <Link
-                key={service.slug}
-                href={`/services/${service.slug}`}
-                className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-[rgba(200,155,60,0.22)] bg-gradient-to-b from-[#0E1B33] to-[#081020] p-6 sm:p-8 shadow-xl transition-all duration-200 hover:-translate-y-1 hover:border-[#D4AF37] hover:from-[#14284D] hover:to-[#0A1428]"
-              >
+              <MaskReveal key={service.slug} direction={idx % 3 === 0 ? "left" : idx % 3 === 1 ? "up" : "right"}>
+                <TiltCard>
+                  <Link
+                    href={`/services/${service.slug}`}
+                    className="group relative flex h-full min-h-[280px] flex-col justify-between overflow-hidden rounded-2xl border border-[rgba(212,175,55,0.22)] bg-gradient-to-b from-[#14102A] to-[#0F0C1F] p-6 sm:p-8 shadow-xl transition-all duration-200 hover:-translate-y-1 hover:border-[#D4AF37] hover:from-[#1E1140] hover:to-[#14102A]"
+                    data-cursor="View"
+                  >
                 <div>
                   {/* Top Row: Icon + Badge */}
                   <div className="flex items-center justify-between gap-4 mb-6">
-                    <div className="flex items-center justify-center h-12 w-12 rounded-xl border border-[#D4AF37]/40 bg-[#0A1224] text-[#D4AF37] transition-all duration-200 group-hover:bg-[#5821C7] group-hover:text-white group-hover:border-[#5821C7] shadow-md">
+                    <div className="flex items-center justify-center h-12 w-12 rounded-xl border border-[#D4AF37]/40 bg-[#0F0C1F] text-[#D4AF37] transition-all duration-200 group-hover:bg-[#C89B3C] group-hover:text-[#241703] group-hover:border-[#C89B3C] shadow-md">
                       <IconComponent className="h-6 w-6" />
                     </div>
                     <span className="font-mono text-xs font-bold text-[#D4AF37]">
@@ -164,7 +174,9 @@ export default function ServicesSection() {
                   <span>View Requirements</span>
                   <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1 text-[#D4AF37]" />
                 </div>
-              </Link>
+                  </Link>
+                </TiltCard>
+              </MaskReveal>
             );
           })}
         </div>
@@ -175,7 +187,7 @@ export default function ServicesSection() {
             <button
               type="button"
               onClick={() => setShowAll((prev) => !prev)}
-              className="inline-flex items-center gap-2 rounded-xl border border-[#D4AF37] bg-gradient-to-r from-[#FFF6D9]/15 to-[#D4AF37]/20 hover:from-[#D4AF37] hover:to-[#C89B3C] hover:text-[#050714] px-8 py-3.5 text-xs font-bold uppercase tracking-[0.12em] text-[#F5D061] transition-all duration-200 shadow-md"
+              className="inline-flex items-center gap-2 rounded-xl border border-[#D4AF37] bg-gradient-to-r from-[#FFF6D9]/15 to-[#D4AF37]/20 hover:from-[#D4AF37] hover:to-[#C89B3C] hover:text-[#080714] px-8 py-3.5 text-xs font-bold uppercase tracking-[0.12em] text-[#F5D061] transition-all duration-200 shadow-md"
               style={{ fontFamily: "var(--font-body)" }}
             >
               <span>{showAll ? "Show Fewer Services" : `See More Services (${filteredServices.length - 6} More)`}</span>
@@ -184,7 +196,7 @@ export default function ServicesSection() {
 
             <Link
               href="/services"
-              className="inline-flex items-center gap-2 rounded-xl border border-white/20 bg-[#0A1224] hover:bg-white/10 px-6 py-3.5 text-xs font-bold uppercase tracking-[0.12em] text-white transition-all"
+              className="inline-flex items-center gap-2 rounded-xl border border-white/20 bg-[#0F0C1F] hover:bg-white/10 px-6 py-3.5 text-xs font-bold uppercase tracking-[0.12em] text-white transition-all"
               style={{ fontFamily: "var(--font-body)" }}
             >
               <span>All 26 Services Index</span>
@@ -194,7 +206,7 @@ export default function ServicesSection() {
         )}
 
         {/* Bottom Callout Box with Multi-Depth Shading */}
-        <div className="rounded-3xl border border-[rgba(200,155,60,0.3)] bg-gradient-to-r from-[#0E1B33] via-[#0A1428] to-[#0E1B33] p-8 md:p-10 flex flex-col md:flex-row md:items-center justify-between gap-8 shadow-2xl">
+        <div className="rounded-3xl border border-[rgba(212,175,55,0.28)] bg-gradient-to-r from-[#14102A] via-[#0A1428] to-[#14102A] p-8 md:p-10 flex flex-col md:flex-row md:items-center justify-between gap-8 shadow-2xl">
           <div className="space-y-2 max-w-2xl">
             <span className="text-xs font-bold uppercase tracking-[0.16em] text-[#D4AF37]" style={{ fontFamily: "var(--font-body)" }}>
               Multi-District &amp; State Bundles

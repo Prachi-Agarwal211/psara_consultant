@@ -32,10 +32,10 @@ export default async function CaseStudyDetailPage({ params }: { params: Promise<
         crumbs={[{ label: "Case Studies", href: "/case-studies" }, { label: cs.clientType }]}
       />
 
-      <PageMain className="bg-[#050714] text-white">
+      <PageMain className="bg-[#080714] text-white">
         <div className="max-w-4xl mx-auto space-y-10">
           {/* Key Metrics Banner */}
-          <div className="rounded-3xl border border-[rgba(200,155,60,0.35)] bg-gradient-to-r from-[#0E1B33] via-[#0A1428] to-[#0E1B33] p-6 sm:p-8 flex flex-col sm:flex-row items-center justify-between gap-6 shadow-2xl">
+          <div className="rounded-3xl border border-[rgba(212,175,55,0.35)] bg-gradient-to-r from-[#14102A] via-[#0A1428] to-[#0E1B33] p-6 sm:p-8 flex flex-col sm:flex-row items-center justify-between gap-6 shadow-2xl">
             <div className="space-y-1">
               <span className="text-xs font-bold uppercase tracking-widest text-[#D4AF37] block">Territory &amp; Sector</span>
               <p className="text-base font-bold text-white flex items-center gap-2">
@@ -50,21 +50,21 @@ export default async function CaseStudyDetailPage({ params }: { params: Promise<
 
           {/* Breakdown Sections */}
           <div className="space-y-6 text-sm text-[#E2E8F0] leading-relaxed">
-            <div className="rounded-2xl border border-white/10 bg-gradient-to-b from-[#0E1B33] to-[#081020] p-6 sm:p-8 shadow-md space-y-3">
+            <div className="rounded-2xl border border-white/10 bg-gradient-to-b from-[#14102A] to-[#0F0C1F] p-6 sm:p-8 shadow-md space-y-3">
               <h2 className="text-xl font-bold text-[#D4AF37] flex items-center gap-2" style={{ fontFamily: "var(--font-display)" }}>
                 <ShieldCheck className="h-5 w-5 text-[#D4AF37]" /> 1. The Regulatory Challenge
               </h2>
               <p className="font-normal text-base text-[#E2E8F0] leading-relaxed">{cs.challenge}</p>
             </div>
 
-            <div className="rounded-2xl border border-white/10 bg-gradient-to-b from-[#0E1B33] to-[#081020] p-6 sm:p-8 shadow-md space-y-3">
+            <div className="rounded-2xl border border-white/10 bg-gradient-to-b from-[#14102A] to-[#0F0C1F] p-6 sm:p-8 shadow-md space-y-3">
               <h2 className="text-xl font-bold text-[#D4AF37] flex items-center gap-2" style={{ fontFamily: "var(--font-display)" }}>
                 <Sparkles className="h-5 w-5 text-[#D4AF37]" /> 2. PSARA Advisory Solution &amp; Filing
               </h2>
               <p className="font-normal text-base text-[#E2E8F0] leading-relaxed">{cs.solution}</p>
             </div>
 
-            <div className="rounded-2xl border border-white/10 bg-gradient-to-b from-[#0E1B33] to-[#081020] p-6 sm:p-8 shadow-md space-y-3">
+            <div className="rounded-2xl border border-white/10 bg-gradient-to-b from-[#14102A] to-[#0F0C1F] p-6 sm:p-8 shadow-md space-y-3">
               <h2 className="text-xl font-bold text-[#D4AF37] flex items-center gap-2" style={{ fontFamily: "var(--font-display)" }}>
                 <Building2 className="h-5 w-5 text-[#D4AF37]" /> 3. Final Statutory Outcome
               </h2>
