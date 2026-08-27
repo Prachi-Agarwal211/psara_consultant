@@ -7,7 +7,6 @@ https://www.psaraconsultantindia.com/faq
 https://www.psaraconsultantindia.com/states
 https://www.psaraconsultantindia.com/cities
 https://www.psaraconsultantindia.com/franchise
-https://www.psaraconsultantindia.com/careers
 https://www.psaraconsultantindia.com/case-studies
 https://www.psaraconsultantindia.com/industries
 https://www.psaraconsultantindia.com/certification
@@ -722,11 +721,3 @@ https://www.psaraconsultantindia.com/industries/ports-cargo
 https://www.psaraconsultantindia.com/industries/event-security
 https://www.psaraconsultantindia.com/industries/government-psu
 https://www.psaraconsultantindia.com/industries/data-centres-tech-infra
-https://www.psaraconsultantindia.com/careers/senior-psara-legal-researcher
-https://www.psaraconsultantindia.com/careers/state-licensing-liaison-officer
-https://www.psaraconsultantindia.com/careers/security-agency-compliance-auditor
-https://www.psaraconsultantindia.com/careers/digital-marketing-seo-specialist
-https://www.psaraconsultantindia.com/careers/client-success-psara-advisor
-https://www.psaraconsultantindia.com/careers/react-nextjs-frontend-developer
-https://www.psaraconsultantindia.com/careers/training-mou-coordinator
-https://www.psaraconsultantindia.com/careers/content-writer-psara-guides

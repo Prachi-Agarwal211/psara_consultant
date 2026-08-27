@@ -40,18 +40,18 @@ export function ServicesPinnedHorizontal() {
   }, []);
 
   return (
-    <div ref={pinRef} className="relative overflow-hidden bg-[#080714] border-y border-white/10 hidden lg:block" style={{ height: "84vh" }}>
+    <div ref={pinRef} className="relative hidden overflow-hidden border-y border-white/10 bg-[#071525] lg:block" style={{ height: "min(78vh, 760px)", contain: "paint" }}>
       <div className="absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-[rgba(212,175,55,0.32)] to-transparent" />
       <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`, backgroundSize: "180px" }} />
       <div className="relative z-10 h-full flex flex-col justify-center px-[var(--gutter)]">
-        <div className="mb-8 flex items-baseline justify-between">
-          <MaskReveal direction="left"><h3 className="text-2xl font-bold text-white" style={{ fontFamily: "var(--font-display)" }}>Statutory core — <span className="gold-text-gradient">scroll to explore</span></h3></MaskReveal>
-          <span className="text-[11px] tracking-[0.18em] uppercase text-white/45">Drag or scroll ↓</span>
+        <div className="mb-7 flex items-end justify-between gap-6">
+          <MaskReveal direction="left"><h3 className="text-2xl font-bold text-white sm:text-3xl" style={{ fontFamily: "var(--font-display)" }}>The statutory core — <span className="gold-text-gradient">six routes</span></h3></MaskReveal>
+          <span className="hidden text-[10px] font-bold uppercase tracking-[0.18em] text-white/45 sm:block">Featured service index</span>
         </div>
         <div ref={trackRef} className="flex gap-6 will-change-transform pr-10">
           {FEATURED.map((s, i) => (
-            <TiltCard key={s.slug} className="shrink-0 w-[380px]">
-              <Link href={`/services/${s.slug}`} className="group block h-[360px] rounded-[20px] border border-white/10 bg-gradient-to-b from-white/[0.06] to-white/[0.02] backdrop-blur-md p-6 flex flex-col justify-between hover:border-[rgba(212,175,55,0.38)] transition-colors">
+            <TiltCard key={s.slug} className="w-[min(380px,78vw)] shrink-0">
+              <Link href={`/services/${s.slug}`} className="group block h-[330px] rounded-[20px] border border-white/10 bg-gradient-to-br from-[#132A3D] to-[#0B1728] p-6 shadow-[0_20px_45px_-30px_rgba(0,0,0,0.9)] transition-[border-color,transform] hover:-translate-y-1 hover:border-[rgba(212,175,55,0.55)] sm:p-7">
                 <div>
                   <div className="flex items-center justify-between mb-4">
                     <span className="text-[11px] tracking-[0.18em] uppercase text-[#D4AF37]">SRV — {String(i+1).padStart(2,"0")}</span>
@@ -64,7 +64,7 @@ export function ServicesPinnedHorizontal() {
               </Link>
             </TiltCard>
           ))}
-          <div className="shrink-0 w-[360px] h-[360px] rounded-[20px] border border-dashed border-white/15 bg-white/[0.02] grid place-items-center p-8 text-center">
+          <div className="grid h-[330px] w-[min(360px,78vw)] shrink-0 place-items-center rounded-[20px] border border-dashed border-white/15 bg-white/[0.02] p-8 text-center">
             <div>
               <Sparkles className="h-6 w-6 text-[#D4AF37] mx-auto mb-3" />
               <p className="text-white font-bold">26 services total</p>

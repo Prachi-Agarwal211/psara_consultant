@@ -16,7 +16,7 @@ Allow: /
 Site-Name: ${SITE.name}
 Canonical-Domain: ${SITE.url}
 Primary-Category: PSARA License and Security Agency Compliance Advisory
-Service-Area: India — 28 States and 8 Union Territories
+Service-Area: India — 36 States and Union Territories
 Preferred-Source-Index: ${SITE.url}/llms.txt
 Sitemap: ${SITE.url}/sitemap.xml
 

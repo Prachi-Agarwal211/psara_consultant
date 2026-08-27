@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
 import { useEffect, useRef, type CSSProperties } from "react";
 import { initWordReveal, prefersReducedMotion, ensureGsap } from "../app/lib/motion";
 import { getLocationAccent, accentStyleVars } from "../app/lib/location-accent";
@@ -27,7 +26,6 @@ export function PageHero({
   meta?: string;
 }) {
   const hRef = useRef<HTMLHeadingElement | null>(null);
-  const pathname = usePathname();
   const accent = locationSlug ? getLocationAccent(locationSlug) : null;
   const accentVars = accent ? accentStyleVars(accent) : {};
   const heroImage = image ?? "/assets/images/generated/inner-hero-dossier.png";
@@ -39,22 +37,25 @@ export function PageHero({
 
   return (
     <header
-      className="psara-page-hero relative overflow-hidden px-[var(--gutter)] pb-14 pt-28 md:min-h-[26rem] md:pb-20 md:pt-36 bg-[#050714] text-white border-b border-white/10"
+      className="psara-page-hero relative overflow-hidden px-[var(--gutter)] pb-14 pt-28 md:min-h-[26rem] md:pb-20 md:pt-36 bg-[#050B14] text-white border-b border-white/10"
       data-parallax-root
       style={accentVars as CSSProperties}
     >
       {/* Background visual asset */}
       {heroImage && (
         <div className="pointer-events-none absolute inset-0 z-0 opacity-20" aria-hidden>
-          <Image
-            src={heroImage}
-            alt=""
-            fill
-            priority
-            sizes="100vw"
-            className="object-cover object-center mix-blend-screen"
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-[#050714]/80 via-[#050714]/95 to-[#050714]" />
+          <picture className="absolute inset-0 block">
+            {mobileImage && <source media="(max-width: 767px)" srcSet={mobileImage} />}
+            <Image
+              src={heroImage}
+              alt=""
+              fill
+              priority
+              sizes="100vw"
+              className="object-cover object-center mix-blend-screen"
+            />
+          </picture>
+          <div className="absolute inset-0 bg-gradient-to-b from-[#050B14]/80 via-[#050B14]/95 to-[#050B14]" />
         </div>
       )}
 
@@ -153,7 +154,7 @@ export function PageMain({
   return (
     <main
       ref={ref}
-      className={`psara-page-main relative px-[var(--gutter)] py-16 bg-[#050714] text-white min-h-[50vh] ${className}`}
+      className={`psara-page-main relative px-[var(--gutter)] py-16 bg-[#050B14] text-white min-h-[50vh] ${className}`}
     >
       <div className="mx-auto max-w-7xl">{children}</div>
     </main>

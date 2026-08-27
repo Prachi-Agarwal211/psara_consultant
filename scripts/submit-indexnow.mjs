@@ -1,5 +1,6 @@
 const siteUrl = (process.env.SITE_URL || "https://www.psaraconsultantindia.com").replace(/\/$/, "");
-const key = process.env.INDEXNOW_KEY || "9c4d8b2e-5a71-4f3d-8e6a-1b7c2d9f4a55";
+const key = process.env.INDEXNOW_KEY;
+if (!key) throw new Error("INDEXNOW_KEY is required; refusing to submit with a fallback key.");
 const sitemapUrl = `${siteUrl}/sitemap.xml`;
 const indexNowEndpoint = process.env.INDEXNOW_ENDPOINT || "https://api.indexnow.org/indexnow";
 

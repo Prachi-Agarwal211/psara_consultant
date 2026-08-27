@@ -10,7 +10,7 @@ import { pageMeta } from "../../lib/metadata";
 
 export const metadata: Metadata = pageMeta(
   "About PSARA Consultant — Leadership, Mission & Statutory Excellence",
-  `About ${SITE.name} — PSARA licensing advisory led by Mr. Sonu Singh & Mr. Nakul Singh Jadaun. 500+ PSARA approvals across 28 states & 8 UTs.`,
+  `About ${SITE.name} — PSARA licensing advisory led by Mr. Sonu Singh & Mr. Nakul Singh Jadaun. 500+ PSARA approvals across 36 States & UTs.`,
   "/about",
   ["PSARA consultant about", "security agency licensing experts", "Sonu Singh PSARA", "Nakul Singh Jadaun"]
 );

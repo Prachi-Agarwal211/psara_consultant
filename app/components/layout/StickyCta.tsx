@@ -1,14 +1,43 @@
 "use client";
 
+import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 import { Phone, MessageCircle, ShieldCheck } from "lucide-react";
 import { DEFAULT_WA, TEL_HREF } from "../../../lib/whatsapp";
-import { CONTACT } from "../../../lib/config";
 
 export default function StickyCta() {
+  const pathname = usePathname();
+  const isHome = pathname === "/";
+  const [homeHeroPassed, setHomeHeroPassed] = useState(!isHome);
+
+  useEffect(() => {
+    if (!isHome) return;
+
+    let ticking = false;
+    const update = () => {
+      const hero = document.getElementById("hero");
+      const heroBottom = hero ? hero.getBoundingClientRect().bottom + window.scrollY : window.innerHeight;
+      setHomeHeroPassed(window.scrollY >= heroBottom);
+      ticking = false;
+    };
+    const onScroll = () => {
+      if (!ticking) {
+        requestAnimationFrame(update);
+        ticking = true;
+      }
+    };
+
+    requestAnimationFrame(update);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [isHome]);
+
+  const isVisible = !isHome || homeHeroPassed;
+
   return (
     <aside
       aria-label="Statutory Quick Contact Bar"
-      className="fixed bottom-0 left-0 right-0 z-[90] border-t border-[#D4AF37]/30 bg-[#080714]/95 px-3 sm:px-6 py-2.5 pb-[calc(0.65rem+env(safe-area-inset-bottom))] shadow-[0_-10px_35px_rgba(0,0,0,0.7)] backdrop-blur-md transition-all duration-300"
+      className={`fixed bottom-0 left-0 right-0 z-[90] border-t border-[#D4AF37]/30 bg-[#080714]/95 px-3 py-2.5 pb-[calc(0.65rem+env(safe-area-inset-bottom))] shadow-[0_-10px_35px_rgba(0,0,0,0.7)] backdrop-blur-md transition-all duration-300 sm:px-6 ${isVisible ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-full opacity-0"}`}
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-4">
         {/* Left desktop info */}
@@ -21,7 +50,7 @@ export default function StickyCta() {
               PSARA Statutory Advisory Desk
             </span>
             <span className="truncate text-xs font-bold text-white">
-              Instant Filing &amp; Regulatory Guidance Across 28 States
+              Instant Filing &amp; Regulatory Guidance Across 36 States &amp; UTs
             </span>
           </div>
         </div>

@@ -1,20 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import { Calculator, ShieldCheck, Info, MessageSquare, Sparkles } from "lucide-react";
+import { Calculator, ShieldCheck, Info, MessageSquare } from "lucide-react";
 import { PageHero, PageMain } from "../../components/PageShell";
 import StageShell from "../components/ui/StageShell";
-import { DEFAULT_WA } from "../../lib/whatsapp";
-
-const STATE_FEE_MAP: Record<string, { d1: number; d5: number; state: number }> = {
-  rajasthan: { d1: 5000, d5: 10000, state: 25000 },
-  delhi: { d1: 5000, d5: 10000, state: 25000 },
-  maharashtra: { d1: 5000, d5: 10000, state: 25000 },
-  karnataka: { d1: 5000, d5: 10000, state: 25000 },
-  haryana: { d1: 5000, d5: 10000, state: 25000 },
-  "uttar-pradesh": { d1: 5000, d5: 10000, state: 25000 },
-  other: { d1: 5000, d5: 10000, state: 25000 },
-};
+import { STATES } from "../../data/states";
+import { buildWhatsAppUrl, formatEnquiryWhatsAppMessage } from "../../lib/whatsapp";
 
 const CONSULTANCY_FEE = 30000;
 const MOU_TRAINING_FEE = 35000;
@@ -46,13 +37,31 @@ const OTHER_COSTS = [
 
 const formatINR = (n: number) => `₹${n.toLocaleString("en-IN")}`;
 
+function parseIndicativeFee(value: string | undefined): number | null {
+  const match = value?.match(/₹\s*([\d,]+)/);
+  return match ? Number(match[1]!.replace(/,/g, "")) : null;
+}
+
+const STATE_ALIASES: Record<string, string> = {
+  delhi: "delhi",
+  maharashtra: "maharashtra",
+  karnataka: "karnataka",
+  haryana: "haryana",
+  "uttar-pradesh": "uttar-pradesh",
+  rajasthan: "rajasthan",
+};
+
 export default function CalculatorClient() {
   const [selectedState, setSelectedState] = useState("rajasthan");
   const [scale, setScale] = useState<"d1" | "d5" | "state">("state");
   const [needArmed, setNeedArmed] = useState(false);
 
-  const baseGovFee = STATE_FEE_MAP[selectedState]?.[scale] || 25000;
-  const totalEst = baseGovFee + CONSULTANCY_FEE + MOU_TRAINING_FEE + DOCUMENTS_FEE + (needArmed ? ARMED_GUARD_FEE : 0);
+  const selectedStateInfo = STATES.find((state) => state.slug === STATE_ALIASES[selectedState]);
+  const feeField: "feeOneDistrict" | "feeMultiDistrict" | "feeEntireState" = scale === "d1" ? "feeOneDistrict" : scale === "d5" ? "feeMultiDistrict" : "feeEntireState";
+  const baseGovFee = parseIndicativeFee(selectedStateInfo?.[feeField]);
+  const totalEst = baseGovFee === null
+    ? null
+    : baseGovFee + CONSULTANCY_FEE + MOU_TRAINING_FEE + DOCUMENTS_FEE + (needArmed ? ARMED_GUARD_FEE : 0);
 
   const scaleLabel = scale === "d1" ? "Single-District Setup" : scale === "d5" ? "Up to 5 Districts" : "All-State PSARA Setup";
 
@@ -108,7 +117,7 @@ export default function CalculatorClient() {
                   }`}
                 >
                   <span className="block font-bold">Single-District</span>
-                  <span className="block font-mono text-sm mt-1 text-[#F5D061]">₹5,000</span>
+                  <span className="block font-mono text-sm mt-1 text-[#F5D061]">{parseIndicativeFee(selectedStateInfo?.feeOneDistrict) ? formatINR(parseIndicativeFee(selectedStateInfo?.feeOneDistrict)!) : "Verify"}</span>
                 </button>
 
                 <button
@@ -121,7 +130,7 @@ export default function CalculatorClient() {
                   }`}
                 >
                   <span className="block font-bold">Up to 5 Districts</span>
-                  <span className="block font-mono text-sm mt-1 text-[#F5D061]">₹10,000</span>
+                  <span className="block font-mono text-sm mt-1 text-[#F5D061]">{parseIndicativeFee(selectedStateInfo?.feeMultiDistrict) ? formatINR(parseIndicativeFee(selectedStateInfo?.feeMultiDistrict)!) : "Verify"}</span>
                 </button>
 
                 <button
@@ -134,7 +143,7 @@ export default function CalculatorClient() {
                   }`}
                 >
                   <span className="block font-bold">All-State PSARA</span>
-                  <span className="block font-mono text-sm mt-1 text-[#F5D061]">₹25,000</span>
+                  <span className="block font-mono text-sm mt-1 text-[#F5D061]">{parseIndicativeFee(selectedStateInfo?.feeEntireState) ? formatINR(parseIndicativeFee(selectedStateInfo?.feeEntireState)!) : "Verify"}</span>
                 </button>
               </div>
             </div>
@@ -207,7 +216,7 @@ export default function CalculatorClient() {
                     </tr>
                     <tr className="hover:bg-white/5 transition-colors">
                       <td className="py-2.5 font-medium">Statutory Govt Fee</td>
-                      <td className="py-2.5 font-mono font-bold text-white text-right">{formatINR(baseGovFee)}</td>
+                      <td className="py-2.5 font-mono font-bold text-white text-right">{baseGovFee === null ? "Verify" : formatINR(baseGovFee)}</td>
                       <td className="py-2.5 pl-4 text-[11px] text-[#94A3B8]">{scaleLabel}</td>
                     </tr>
                     <tr className="hover:bg-white/5 transition-colors">
@@ -229,24 +238,34 @@ export default function CalculatorClient() {
               {/* Total */}
               <div className="border-t-2 border-[#D4AF37]/50 mt-6 pt-4 flex justify-between items-center">
                 <span className="text-sm font-bold text-white">Total Estimated Cost:</span>
-                <span className="text-2xl font-bold gold-metallic-text font-mono">{formatINR(totalEst)}</span>
+                <span className="text-right text-2xl font-bold gold-metallic-text font-mono">{totalEst === null ? "Verify with desk" : formatINR(totalEst)}</span>
               </div>
 
               <div className="mt-6 p-4 bg-[#060B18] border border-white/10 rounded-2xl text-xs text-[#CBD5E1] space-y-1.5 shadow-inner">
                 <div className="flex items-center gap-2">
                   <ShieldCheck className="h-4 w-4 text-[#D4AF37] shrink-0" />
-                  <span><strong>Timeline:</strong> 30 to 45 Business Days</span>
+                  <span><strong>Timeline:</strong> {selectedStateInfo?.timeline || "Confirm with desk"}</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <ShieldCheck className="h-4 w-4 text-[#D4AF37] shrink-0" />
-                  <span><strong>Validity:</strong> 5 Years (Renewable nationwide)</span>
+                  <span><strong>Validity:</strong> {selectedStateInfo?.validityYears ? `${selectedStateInfo.validityYears} year${selectedStateInfo.validityYears === 1 ? "" : "s"}` : "Confirm with desk"}</span>
                 </div>
+                <p className="pt-1 text-[11px] leading-relaxed text-[#94A3B8]">{selectedStateInfo?.feeNote || "State notification and district scope determine the payable government fee."}</p>
               </div>
             </div>
 
             <div className="pt-2">
               <a
-                href={`${DEFAULT_WA}&text=Hi,%20I%20used%20the%20PSARA%20Fee%20Calculator.%20State:%20${selectedState},%20Scale:%20${scaleLabel},%20Total:%20${formatINR(totalEst)}.%20Please%20share%20detailed%20breakdown.`}
+                href={buildWhatsAppUrl(formatEnquiryWhatsAppMessage({
+                  formType: "PSARA Fee Calculator",
+                  state: selectedStateInfo?.name || selectedState,
+                  extra: {
+                    Coverage: scaleLabel,
+                    "Indicative statutory fee": baseGovFee === null ? "Verify with desk" : formatINR(baseGovFee),
+                    "Indicative total": totalEst === null ? "Verify with desk" : formatINR(totalEst),
+                  },
+                  message: "Please share the current state-wise government fee and detailed filing breakdown.",
+                }))}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-full flex items-center justify-center gap-2 rounded-xl py-4 text-xs font-bold uppercase tracking-wider bg-gradient-to-r from-[#25D366] to-[#1DA851] hover:from-[#1DA851] hover:to-[#128C7E] text-white transition-all shadow-xl shadow-green-950/40"

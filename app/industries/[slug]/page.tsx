@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { ArrowLeft, CheckCircle2, ShieldCheck, MessageSquare, Sparkles } from "lucide-react";
+import { ArrowLeft, CheckCircle2, MessageSquare, Sparkles } from "lucide-react";
 import { PageHero, PageMain } from "../../../components/PageShell";
 import StageShell from "../../components/ui/StageShell";
 import { pageMeta } from "../../../lib/metadata";

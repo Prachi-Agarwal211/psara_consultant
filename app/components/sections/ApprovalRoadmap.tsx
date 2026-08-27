@@ -142,7 +142,7 @@ export default function ApprovalRoadmap() {
   }, []);
 
   return (
-    <section ref={sectionRef} id="process" className="relative py-20 lg:py-28 bg-[#080714] text-white border-b border-white/10">
+    <section ref={sectionRef} id="process" className="relative py-20 lg:py-28 bg-[#050B14] text-white border-b border-white/10">
       <div className="relative z-10 px-[var(--gutter)] max-w-7xl mx-auto space-y-12">
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-white/15 pb-8">
@@ -175,8 +175,8 @@ export default function ApprovalRoadmap() {
                   onClick={() => setActiveStep(idx)}
                   className={`group relative flex flex-col justify-between p-5 text-left border rounded-2xl transition-all duration-200 ${
                     isActive
-                      ? "border-[#D4AF37] bg-gradient-to-b from-[#1E1140] to-[#0F0C1F] text-white shadow-xl shadow-black/60"
-                      : "border-white/12 bg-[#0F0C1F] text-[#CBD5E1] hover:border-white/30 hover:text-white"
+                      ? "border-[#D4AF37] bg-gradient-to-b from-[#163A54] to-[#0B1728] text-white shadow-xl shadow-black/60"
+                      : "border-white/12 bg-[#0B1728] text-[#CBD5E1] hover:border-white/30 hover:text-white"
                   }`}
                 >
                 <div className="flex items-center justify-between gap-2 mb-4">
@@ -186,7 +186,7 @@ export default function ApprovalRoadmap() {
                   <span
                     className={`inline-flex items-center gap-1 text-[0.625rem] font-bold uppercase tracking-wider px-2 py-0.5 rounded-lg border ${
                       isActive
-                        ? "border-[#D4AF37]/50 bg-[#080714] text-[#F5D061]"
+                        ? "border-[#D4AF37]/50 bg-[#050B14] text-[#F5D061]"
                         : "border-white/10 text-[#94A3B8]"
                     }`}
                   >
@@ -213,7 +213,7 @@ export default function ApprovalRoadmap() {
           const IconComp = p.icon;
 
           return (
-            <div className="rounded-3xl border border-[rgba(212,175,55,0.28)] bg-gradient-to-b from-[#14102A] via-[#0F0C1F] to-[#080714] p-8 md:p-12 shadow-2xl">
+            <div className="rounded-3xl border border-[rgba(212,175,55,0.28)] bg-gradient-to-b from-[#10243A] via-[#0B1728] to-[#050B14] p-8 md:p-12 shadow-2xl">
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
                 {/* Left Col: Details */}
                 <div className="lg:col-span-7 space-y-6">
@@ -242,7 +242,7 @@ export default function ApprovalRoadmap() {
                     </span>
                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                       {p.deliverables.map((d, dIdx) => (
-                        <div key={dIdx} className="flex items-center gap-2 rounded-xl border border-white/10 bg-[#0F0C1F] p-3 text-xs font-bold text-white shadow-inner">
+                        <div key={dIdx} className="flex items-center gap-2 rounded-xl border border-white/10 bg-[#0B1728] p-3 text-xs font-bold text-white shadow-inner">
                           <CheckCircle2 className="h-4 w-4 shrink-0 text-[#D4AF37]" />
                           <span>{d}</span>
                         </div>
@@ -252,9 +252,9 @@ export default function ApprovalRoadmap() {
                 </div>
 
                 {/* Right Col: Action Box */}
-                <div className="lg:col-span-5 flex flex-col justify-between space-y-6 rounded-2xl border border-[rgba(212,175,55,0.25)] bg-[#0F0C1F] p-6 sm:p-8 shadow-inner">
+                <div className="lg:col-span-5 flex flex-col justify-between space-y-6 rounded-2xl border border-[rgba(212,175,55,0.25)] bg-[#0B1728] p-6 sm:p-8 shadow-inner">
                   <div className="flex items-center gap-3 border-b border-white/10 pb-4">
-                    <div className="p-3 rounded-xl bg-gradient-to-br from-[#0A233F] to-[#1E1140] border border-[#D4AF37]/30 text-[#D4AF37]">
+                    <div className="p-3 rounded-xl bg-gradient-to-br from-[#163A54] to-[#0B1728] border border-[#D4AF37]/30 text-[#D4AF37]">
                       <IconComp className="h-6 w-6" />
                     </div>
                     <div>

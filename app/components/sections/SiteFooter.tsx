@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { ShieldCheck, MapPin, Phone, Mail, Share2, Globe, Sparkles } from "lucide-react";
+import { ShieldCheck, MapPin, Phone, Mail, Share2, Globe } from "lucide-react";
 import { CONTACT, SITE } from "@/lib/config";
 import { TEL_HREF } from "@/lib/whatsapp";
 import BrandMark from "../ui/BrandMark";
@@ -28,7 +28,7 @@ function LiveClock() {
 
 const TRUST_BADGES = [
   { label: "PSARA Specialist Practice", sub: "Dedicated Regulatory Filing" },
-  { label: "28 States & 8 UTs", sub: "Controlling Authority Network" },
+  { label: "36 States & UTs", sub: "Controlling Authority Network" },
   { label: "500+ Licenses Cleared", sub: "Pan-India Track Record" },
   { label: "Statutory Advisory", sub: "PSARA Act 2005 Compliant" },
 ];
@@ -36,17 +36,17 @@ const TRUST_BADGES = [
 export default function SiteFooter() {
   return (
     <footer
-      className="psara-site-footer relative z-10 border-t border-white/15 bg-[#080714] text-white overflow-hidden pb-24 md:pb-12"
+      className="psara-site-footer relative z-10 border-t border-white/15 bg-[#050B14] text-white overflow-hidden pb-24 md:pb-12"
     >
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16">
         {/* Marquee Banner */}
-        <div className="mb-12 overflow-hidden rounded-2xl border border-[#D4AF37]/30 py-3.5 bg-[#0A1022]">
+        <div className="mb-12 overflow-hidden rounded-2xl border border-[#D4AF37]/30 py-3.5 bg-[#10243A]">
           <div className="flex whitespace-nowrap animate-marquee">
             <span className="text-xs sm:text-sm font-bold uppercase tracking-[0.2em] text-[#F5D061] px-4">
-              START YOUR PSARA LICENSE APPLICATION &nbsp;&middot;&nbsp; 28 STATES &amp; 8 UTs COVERAGE &nbsp;&middot;&nbsp; ZERO REJECTION DISCIPLINE &nbsp;&middot;&nbsp;
+              START YOUR PSARA LICENSE APPLICATION &nbsp;&middot;&nbsp; 36 STATES &amp; UTs COVERAGE &nbsp;&middot;&nbsp; ZERO REJECTION DISCIPLINE &nbsp;&middot;&nbsp;
             </span>
             <span className="text-xs sm:text-sm font-bold uppercase tracking-[0.2em] text-[#F5D061] px-4">
-              START YOUR PSARA LICENSE APPLICATION &nbsp;&middot;&nbsp; 28 STATES &amp; 8 UTs COVERAGE &nbsp;&middot;&nbsp; ZERO REJECTION DISCIPLINE &nbsp;&middot;&nbsp;
+              START YOUR PSARA LICENSE APPLICATION &nbsp;&middot;&nbsp; 36 STATES &amp; UTs COVERAGE &nbsp;&middot;&nbsp; ZERO REJECTION DISCIPLINE &nbsp;&middot;&nbsp;
             </span>
           </div>
         </div>
@@ -54,7 +54,7 @@ export default function SiteFooter() {
         {/* Trust Badges */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12 border-b border-white/10 pb-8">
           {TRUST_BADGES.map((b) => (
-            <div key={b.label} className="flex items-center gap-3 p-3 rounded-xl bg-[#0A1022] border border-white/10">
+            <div key={b.label} className="flex items-center gap-3 p-3 rounded-xl bg-[#10243A] border border-white/10">
               <ShieldCheck className="h-5 w-5 text-[#F5D061] shrink-0" />
               <div>
                 <span className="block text-xs font-bold text-white uppercase">{b.label}</span>
@@ -114,7 +114,7 @@ export default function SiteFooter() {
               <li><Link href="/services/psara-training-mou" className="hover:text-white transition-colors">Training Institute MOUs</Link></li>
               <li><Link href="/services/police-verification-clearance" className="hover:text-white transition-colors">Police Verification Clearance</Link></li>
               <li><Link href="/services/security-agency-incorporation" className="hover:text-white transition-colors">Agency Incorporation</Link></li>
-              <li><Link href="/emergency" className="hover:text-[#F5D061] transition-colors font-bold text-[#CBB0FF]">Emergency Filing Desk</Link></li>
+              <li><Link href="/emergency" className="hover:text-[#F5D061] transition-colors font-bold text-[#6FB0B2]">Emergency Filing Desk</Link></li>
             </ul>
           </div>
 
@@ -130,7 +130,7 @@ export default function SiteFooter() {
               <li><Link href="/states/karnataka" className="hover:text-white transition-colors">Karnataka PSARA</Link></li>
               <li><Link href="/states/uttar-pradesh" className="hover:text-white transition-colors">Uttar Pradesh PSARA</Link></li>
               <li><Link href="/states/haryana" className="hover:text-white transition-colors">Haryana PSARA</Link></li>
-              <li><Link href="/states" className="hover:text-[#F5D061] font-bold transition-colors">View All 28 States &rarr;</Link></li>
+              <li><Link href="/states" className="hover:text-[#F5D061] font-bold transition-colors">View All 36 States &amp; UTs &rarr;</Link></li>
             </ul>
           </div>
 

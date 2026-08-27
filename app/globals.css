@@ -23,7 +23,7 @@
     font-optical-sizing: auto;
     font-synthesis: none;
     text-rendering: optimizeLegibility;
-    background-color: var(--canvas-void, #050714);
+    background-color: var(--canvas-void, #050B14);
     color: var(--white, #ffffff);
     min-height: 100%;
     overflow-x: hidden;
@@ -43,7 +43,7 @@
 
   ::selection {
     background-color: var(--gold-bright, #F5D061);
-    color: #050714;
+    color: #050B14;
   }
 
   a {
@@ -149,6 +149,43 @@
   from { transform: translateX(0); }
   to   { transform: translateX(-50%); }
 }
+
+/* Slow atmospheric light gives dark chapters a visual heartbeat. It is kept
+   below the content and uses the same teal/gold palette as the hero. */
+.section-atmosphere {
+  isolation: isolate;
+}
+
+.section-atmosphere::before,
+.section-atmosphere::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+  inset: -18%;
+  z-index: -1;
+  background-repeat: no-repeat;
+  will-change: transform, opacity;
+}
+
+.section-atmosphere::before {
+  background: radial-gradient(ellipse 36% 42% at 12% 26%, rgba(15, 96, 116, 0.22), transparent 72%);
+  animation: atmosphere-drift-left 18s ease-in-out infinite alternate;
+}
+
+.section-atmosphere::after {
+  background: radial-gradient(ellipse 32% 38% at 88% 74%, rgba(212, 175, 55, 0.14), transparent 70%);
+  animation: atmosphere-drift-right 22s ease-in-out infinite alternate;
+}
+
+@keyframes atmosphere-drift-left {
+  from { transform: translate3d(-2%, -1%, 0) scale(0.96); opacity: 0.55; }
+  to { transform: translate3d(7%, 4%, 0) scale(1.08); opacity: 1; }
+}
+
+@keyframes atmosphere-drift-right {
+  from { transform: translate3d(3%, 2%, 0) scale(1.04); opacity: 0.45; }
+  to { transform: translate3d(-6%, -4%, 0) scale(0.94); opacity: 0.95; }
+}
 .animate-marquee {
   animation: marquee 32s linear infinite;
 }
@@ -188,6 +225,8 @@
     transition-duration: 0.01ms !important;
   }
   .animate-marquee { animation: none; }
+  .section-atmosphere::before,
+  .section-atmosphere::after { animation: none; }
   ::view-transition-old(root),
   ::view-transition-new(root) {
     animation: none !important;
@@ -325,11 +364,11 @@
 
 .gold-arch {
   border: 1.5px solid rgba(212,175,55,0.58);
-  box-shadow: inset 0 0 0 1px rgba(255,246,217,0.14), 0 18px 60px rgba(88,33,199,0.22);
+  box-shadow: inset 0 0 0 1px rgba(255,246,217,0.14), 0 18px 60px rgba(22,94,122,0.22);
 }
 
 .purple-text-gradient {
-  background: linear-gradient(135deg, #CBB0FF 0%, #7638FA 50%, #5821C7 100%);
+  background: linear-gradient(135deg, #E8D5A3 0%, #6FB0B2 50%, #0F6074 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;

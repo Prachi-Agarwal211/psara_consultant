@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowUpRight, Award, Building2, MapPin, Sparkles, ShieldCheck, CheckCircle2, MessageSquare } from "lucide-react";
+import { ArrowUpRight, Award, Building2, MapPin, MessageSquare } from "lucide-react";
 import { PageHero, PageMain } from "../../components/PageShell";
 import StageShell from "../components/ui/StageShell";
 import { pageMeta } from "../../lib/metadata";

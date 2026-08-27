@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Phone, AlertTriangle, ShieldCheck, Clock, MessageSquare, Sparkles } from "lucide-react";
+import { Phone, AlertTriangle, ShieldCheck, Clock, MessageSquare } from "lucide-react";
 import { PageHero, PageMain } from "../../components/PageShell";
 import StageShell from "../components/ui/StageShell";
 import { pageMeta } from "../../lib/metadata";

@@ -87,7 +87,7 @@ export default function FranchisePage() {
               Statute-First Security Compliance Infrastructure
             </h2>
             <p className="mt-4 text-sm font-normal leading-relaxed text-[var(--white-70)]">
-              PSARA Consultant is India&apos;s leading legal consultancy focused exclusively on the Private Security Agencies (Regulation) Act, 2005. We have facilitated over 500+ PSARA licenses, training institute MOUs, and police clearances across 28 States &amp; 8 UTs.
+              PSARA Consultant is India&apos;s leading legal consultancy focused exclusively on the Private Security Agencies (Regulation) Act, 2005. We have facilitated over 500+ PSARA licenses, training institute MOUs, and police clearances across 36 States &amp; UTs.
             </p>
             <p className="mt-3 text-sm font-normal leading-relaxed text-[var(--white-70)]">
               As a State Master Partner, you use our national brand authority, back-office legal research team, and proven documentation frameworks to deliver end-to-end licensing to clients in your state.

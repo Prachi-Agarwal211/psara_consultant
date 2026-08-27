@@ -4,15 +4,10 @@ import { useState, type CSSProperties } from "react";
 import {
   Shield,
   FileCheck,
-  Building2,
-  Scale,
   CheckCircle2,
-  AlertTriangle,
   ArrowRight,
-  Sparkles,
   MapPin,
   Clock,
-  FileText,
   Phone,
   Mail,
   Globe,
@@ -28,7 +23,7 @@ import FormattedText from "../../../components/FormattedText";
 import { getCaContact } from "../../../data/ca-contacts";
 import type { StateInfo } from "../../../data/states";
 import type { generateStateContent } from "../../../lib/seo-content";
-import { getLocationAccent, accentStyleVars, hashSlug, type LocationAccent } from "../../lib/location-accent";
+import { getLocationAccent, accentStyleVars, type LocationAccent } from "../../lib/location-accent";
 import { DEFAULT_WA } from "../../../lib/whatsapp";
 
 type StateContent = ReturnType<typeof generateStateContent>;
@@ -70,13 +65,11 @@ export default function StateDossierView({
   const accVars = accentStyleVars(acc) as CSSProperties;
   const ca = getCaContact(state.slug);
 
-  const variant = hashSlug(state.slug) % 4;
   const hasCa = !!(ca && ca.name && ca.name !== "—");
   const variantIdx = hasCa ? 4 : 3;
   const processIdx = variantIdx + 1;
   const feesIdx = processIdx + 1;
   const marketIdx = feesIdx + 1;
-  const whyIdx = marketIdx + 1;
   const faqIdx = marketIdx + 2;
   const pad = (n: number) => String(n).padStart(2, "0");
 

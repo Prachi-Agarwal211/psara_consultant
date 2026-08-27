@@ -207,6 +207,11 @@ export function counterStampAnimation(
     const target = Number(el.dataset.count || 0);
     const suffix = el.dataset.suffix || "";
     const obj = { val: 0 };
+    const trigger = {
+      trigger: el,
+      start: "top 90%",
+      toggleActions: "play none none none",
+    };
 
     g.fromTo(
       el,
@@ -215,14 +220,7 @@ export function counterStampAnimation(
         scale: 1,
         duration: 1.2,
         ease: ease.expo,
-        scrollTrigger: {
-          trigger: el,
-          start: "top 90%",
-          toggleActions: "play none none none",
-        },
-        onUpdate: () => {
-          el.textContent = `${Math.round(obj.val)}${suffix}`;
-        },
+        scrollTrigger: trigger,
       }
     );
 
@@ -230,10 +228,12 @@ export function counterStampAnimation(
       val: target,
       duration: 1.2,
       ease: ease.expo,
-      scrollTrigger: {
-        trigger: el,
-        start: "top 90%",
-        toggleActions: "play none none none",
+      scrollTrigger: trigger,
+      onUpdate: () => {
+        el.textContent = `${Math.round(obj.val)}${suffix}`;
+      },
+      onComplete: () => {
+        el.textContent = `${target}${suffix}`;
       },
     });
   });

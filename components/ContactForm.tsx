@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useEffect, useRef, useState, type FormEvent } from "react";
 import { CheckCircle2, AlertCircle, MessageSquare, Phone } from "lucide-react";
 import { openWhatsApp, formatEnquiryWhatsAppMessage, TEL_HREF } from "../lib/whatsapp";
 import { CONTACT, GOOGLE_REVIEWS } from "../lib/config";
@@ -53,12 +53,17 @@ export default function ContactForm({
   const [districts, setDistricts] = useState(DISTRICT_OPTIONS[0]!);
   const [message, setMessage] = useState("");
   const [errors, setErrors] = useState<EnquiryErrors>({});
-  const [tried, setTried] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [submitError, setSubmitError] = useState("");
+  const startedAtRef = useRef<number | null>(null);
+
+  useEffect(() => {
+    startedAtRef.current = Date.now();
+  }, []);
 
   const inputBase = dark
-    ? "w-full rounded-xl border border-white/20 bg-[#050714] px-4 py-3.5 text-sm font-medium text-white outline-none placeholder:text-white/40 focus:border-[#D4AF37] focus:ring-2 focus:ring-[#D4AF37]/20 transition-all"
+    ? "w-full rounded-xl border border-white/20 bg-[#050B14] px-4 py-3.5 text-sm font-medium text-white outline-none placeholder:text-white/40 focus:border-[#D4AF37] focus:ring-2 focus:ring-[#D4AF37]/20 transition-all"
     : "w-full rounded-xl border border-slate-300 bg-white px-4 py-3.5 text-sm font-medium text-[#0F172A] outline-none placeholder:text-slate-400 focus:border-[#C89B3C] focus:ring-2 focus:ring-[#C89B3C]/25 transition-all shadow-sm";
 
   const labelCls = dark
@@ -83,17 +88,42 @@ export default function ContactForm({
     openWhatsApp(text);
   };
 
-  const onSubmit = (e: FormEvent) => {
+  const onSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    setTried(true);
+    setSubmitError("");
     const next = validateEnquiryFields({ name, phone, email, state });
     setErrors(next);
     if (Object.keys(next).length > 0) return;
 
     setIsSubmitting(true);
-    openWa();
-    setIsSubmitting(false);
-    setIsSuccess(true);
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name,
+          phone,
+          email,
+          state,
+          city,
+          districts,
+          message,
+          formType,
+          sourcePage: window.location.pathname,
+          startedAt: startedAtRef.current || 0,
+        }),
+      });
+      if (!response.ok) {
+        const payload = (await response.json().catch(() => null)) as { error?: string } | null;
+        throw new Error(payload?.error || "We could not submit the enquiry.");
+      }
+      openWa();
+      setIsSuccess(true);
+    } catch (error) {
+      setSubmitError(error instanceof Error ? error.message : "Please call or WhatsApp our desk directly.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   /* ── Success Screen ── */
@@ -102,7 +132,7 @@ export default function ContactForm({
       <div
         className={`space-y-6 rounded-2xl border p-8 text-center ${
           dark
-            ? "border-white/20 bg-[#0A1022] text-white"
+            ? "border-white/20 bg-[#10243A] text-white"
             : "border-slate-200 bg-white text-[#0F172A] shadow-xl"
         } ${className}`}
         role="status"
@@ -119,7 +149,7 @@ export default function ContactForm({
           </p>
         </div>
 
-        <div className={`rounded-xl p-4 text-left text-xs ${dark ? "bg-[#050714] text-[#CBD5E1]" : "bg-slate-50 text-[#334155]"}`}>
+        <div className={`rounded-xl p-4 text-left text-xs ${dark ? "bg-[#050B14] text-[#CBD5E1]" : "bg-slate-50 text-[#334155]"}`}>
           <span className="font-bold text-[#D4AF37] uppercase tracking-wider block mb-1.5">What to expect:</span>
           <ul className="list-disc pl-4 space-y-1">
             <li>Instant review of your operating state &amp; district coverage</li>
@@ -154,6 +184,7 @@ export default function ContactForm({
   /* ── Lead Form ── */
   return (
     <form onSubmit={onSubmit} noValidate className={`space-y-4 ${className}`}>
+      <input type="text" name="website" tabIndex={-1} autoComplete="off" className="absolute -left-[10000px] h-px w-px overflow-hidden" aria-hidden="true" />
       {/* 1. Name & Mobile */}
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <div>
@@ -333,6 +364,12 @@ export default function ContactForm({
           <span>{isSubmitting ? "Opening WhatsApp…" : "Get PSARA Statutory Advisory Support"}</span>
         </button>
       </div>
+
+      {submitError && (
+        <p role="alert" className="flex items-center justify-center gap-2 rounded-xl border border-rose-300 bg-rose-50 px-4 py-3 text-center text-xs font-semibold text-rose-700">
+          <AlertCircle className="h-4 w-4 shrink-0" /> {submitError}
+        </p>
+      )}
 
       {/* Privacy & Trust Footnote */}
       <div className={`pt-2 text-center text-xs ${dark ? "text-[#94A3B8]" : "text-slate-500"}`}>

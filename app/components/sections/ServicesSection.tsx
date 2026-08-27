@@ -78,16 +78,16 @@ export default function ServicesSection() {
   };
 
   return (
-    <section id="services" className="relative bg-[#080714] text-white border-b border-white/10">
+    <section id="services" className="section-atmosphere relative bg-[#050B14] text-white border-b border-white/10">
       {/* Pinned horizontal showcase — statutory core, scroll to explore (lg only) */}
       <ServicesPinnedHorizontal />
 
       <div className="relative z-10 px-[var(--gutter)] max-w-7xl mx-auto space-y-12 py-20 lg:py-28">
         {/* Section Header — MaskReveal */}
         <MaskReveal direction="left">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-white/15 pb-8">
+          <div className="flex flex-col items-center gap-6 border-b border-white/15 pb-8 text-center md:flex-row md:items-end md:justify-between md:text-left">
             <div>
-              <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-[0.16em] text-[#D4AF37]" style={{ fontFamily: "var(--font-body)" }}>
+              <div className="flex items-center justify-center gap-2 text-xs font-bold uppercase tracking-[0.16em] text-[#D4AF37] md:justify-start" style={{ fontFamily: "var(--font-body)" }}>
                 <Sparkles className="h-3.5 w-3.5 text-[#D4AF37]" />
                 Statutory Advisory &amp; Licensing Services
               </div>
@@ -96,14 +96,14 @@ export default function ServicesSection() {
               </h2>
             </div>
 
-            <p className="max-w-md text-sm md:text-base text-[#E2E8F0] leading-relaxed font-normal" style={{ fontFamily: "var(--font-body)" }}>
+            <p className="mx-auto max-w-md text-sm font-normal leading-relaxed text-[#E2E8F0] md:mx-0 md:text-base" style={{ fontFamily: "var(--font-body)" }}>
               From company incorporation to Controlling Authority filing, recognized training MOUs, police verification, and multi-state compliance.
             </p>
           </div>
         </MaskReveal>
 
         {/* Category Navigation Tabs */}
-        <div className="flex flex-wrap items-center gap-2 border border-white/10 bg-[#0F0C1F] p-1.5 rounded-2xl shadow-inner">
+        <div className="flex flex-wrap items-center justify-center gap-2 rounded-2xl border border-white/10 bg-[#0B1728] p-1.5 shadow-inner">
           {CATEGORIES.map((cat) => (
             <button
               key={cat.id}
@@ -132,13 +132,13 @@ export default function ServicesSection() {
                 <TiltCard>
                   <Link
                     href={`/services/${service.slug}`}
-                    className="group relative flex h-full min-h-[280px] flex-col justify-between overflow-hidden rounded-2xl border border-[rgba(212,175,55,0.22)] bg-gradient-to-b from-[#14102A] to-[#0F0C1F] p-6 sm:p-8 shadow-xl transition-all duration-200 hover:-translate-y-1 hover:border-[#D4AF37] hover:from-[#1E1140] hover:to-[#14102A]"
+                    className="group relative flex h-full min-h-[280px] flex-col justify-between overflow-hidden rounded-2xl border border-[rgba(212,175,55,0.22)] bg-gradient-to-b from-[#10243A] to-[#0B1728] p-6 sm:p-8 shadow-xl transition-all duration-200 hover:-translate-y-1 hover:border-[#D4AF37] hover:from-[#163A54] hover:to-[#10243A]"
                     data-cursor="View"
                   >
                 <div>
                   {/* Top Row: Icon + Badge */}
                   <div className="flex items-center justify-between gap-4 mb-6">
-                    <div className="flex items-center justify-center h-12 w-12 rounded-xl border border-[#D4AF37]/40 bg-[#0F0C1F] text-[#D4AF37] transition-all duration-200 group-hover:bg-[#C89B3C] group-hover:text-[#241703] group-hover:border-[#C89B3C] shadow-md">
+                    <div className="flex items-center justify-center h-12 w-12 rounded-xl border border-[#D4AF37]/40 bg-[#0B1728] text-[#D4AF37] transition-all duration-200 group-hover:bg-[#C89B3C] group-hover:text-[#241703] group-hover:border-[#C89B3C] shadow-md">
                       <IconComponent className="h-6 w-6" />
                     </div>
                     <span className="font-mono text-xs font-bold text-[#D4AF37]">
@@ -187,7 +187,7 @@ export default function ServicesSection() {
             <button
               type="button"
               onClick={() => setShowAll((prev) => !prev)}
-              className="inline-flex items-center gap-2 rounded-xl border border-[#D4AF37] bg-gradient-to-r from-[#FFF6D9]/15 to-[#D4AF37]/20 hover:from-[#D4AF37] hover:to-[#C89B3C] hover:text-[#080714] px-8 py-3.5 text-xs font-bold uppercase tracking-[0.12em] text-[#F5D061] transition-all duration-200 shadow-md"
+              className="inline-flex items-center gap-2 rounded-xl border border-[#D4AF37] bg-gradient-to-r from-[#FFF6D9]/15 to-[#D4AF37]/20 hover:from-[#D4AF37] hover:to-[#C89B3C] hover:text-[#050B14] px-8 py-3.5 text-xs font-bold uppercase tracking-[0.12em] text-[#F5D061] transition-all duration-200 shadow-md"
               style={{ fontFamily: "var(--font-body)" }}
             >
               <span>{showAll ? "Show Fewer Services" : `See More Services (${filteredServices.length - 6} More)`}</span>
@@ -196,7 +196,7 @@ export default function ServicesSection() {
 
             <Link
               href="/services"
-              className="inline-flex items-center gap-2 rounded-xl border border-white/20 bg-[#0F0C1F] hover:bg-white/10 px-6 py-3.5 text-xs font-bold uppercase tracking-[0.12em] text-white transition-all"
+              className="inline-flex items-center gap-2 rounded-xl border border-white/20 bg-[#0B1728] hover:bg-white/10 px-6 py-3.5 text-xs font-bold uppercase tracking-[0.12em] text-white transition-all"
               style={{ fontFamily: "var(--font-body)" }}
             >
               <span>All 26 Services Index</span>
@@ -206,7 +206,7 @@ export default function ServicesSection() {
         )}
 
         {/* Bottom Callout Box with Multi-Depth Shading */}
-        <div className="rounded-3xl border border-[rgba(212,175,55,0.28)] bg-gradient-to-r from-[#14102A] via-[#0A1428] to-[#14102A] p-8 md:p-10 flex flex-col md:flex-row md:items-center justify-between gap-8 shadow-2xl">
+        <div className="rounded-3xl border border-[rgba(212,175,55,0.28)] bg-gradient-to-r from-[#10243A] via-[#0B1728] to-[#10243A] p-8 md:p-10 flex flex-col md:flex-row md:items-center justify-between gap-8 shadow-2xl">
           <div className="space-y-2 max-w-2xl">
             <span className="text-xs font-bold uppercase tracking-[0.16em] text-[#D4AF37]" style={{ fontFamily: "var(--font-body)" }}>
               Multi-District &amp; State Bundles

@@ -12,7 +12,7 @@ export default function HomeContact() {
   return (
     <section
       id="contact"
-      className="relative overflow-hidden bg-[#080714] text-white py-20 lg:py-28 border-b border-white/10"
+      className="section-atmosphere relative overflow-hidden bg-[#050B14] text-white py-20 lg:py-28 border-b border-white/10"
     >
       <div className="relative z-10 px-[var(--gutter)] max-w-7xl mx-auto space-y-12">
         {/* Header */}
@@ -37,7 +37,7 @@ export default function HomeContact() {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <a
                 href={TEL_HREF}
-                className="inline-flex items-center justify-center gap-2 rounded-xl border border-[#D4AF37]/50 bg-gradient-to-br from-[#14102A] to-[#0F0C1F] hover:border-[#D4AF37] px-5 py-3.5 text-xs font-bold uppercase tracking-wider text-white transition-all shadow-md"
+                className="inline-flex items-center justify-center gap-2 rounded-xl border border-[#D4AF37]/50 bg-gradient-to-br from-[#10243A] to-[#0B1728] hover:border-[#D4AF37] px-5 py-3.5 text-xs font-bold uppercase tracking-wider text-white transition-all shadow-md"
                 style={{ fontFamily: "var(--font-body)" }}
               >
                 <Phone className="h-4 w-4 text-[#D4AF37]" />
@@ -56,7 +56,7 @@ export default function HomeContact() {
             </div>
 
             {/* HQ Information Card — plum */}
-            <div className="space-y-4 rounded-2xl border border-[rgba(212,175,55,0.25)] bg-gradient-to-b from-[#14102A] to-[#0F0C1F] p-6 text-sm shadow-xl">
+            <div className="space-y-4 rounded-2xl border border-[rgba(212,175,55,0.25)] bg-gradient-to-b from-[#10243A] to-[#0B1728] p-6 text-sm shadow-xl">
               <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#D4AF37] pb-2 border-b border-white/10">
                 <ShieldCheck className="h-4 w-4 text-[#D4AF37]" />
                 <span>Headquarters Contact</span>
@@ -100,7 +100,7 @@ export default function HomeContact() {
                 {OFFICES.filter((o) => !o.isHQ)
                   .slice(0, 4)
                   .map((o) => (
-                    <div key={o.city} className="p-3 rounded-xl border border-white/10 bg-[#14102A] text-xs">
+                    <div key={o.city} className="p-3 rounded-xl border border-white/10 bg-[#10243A] text-xs">
                       <strong className="font-bold text-white block">{o.city}</strong>
                       <span className="text-[10px] text-[#94A3B8]">{o.badge}</span>
                     </div>
@@ -111,7 +111,7 @@ export default function HomeContact() {
                 className="inline-flex items-center gap-1.5 pt-1 text-xs font-bold uppercase tracking-[0.12em] text-[#D4AF37] hover:underline"
                 style={{ fontFamily: "var(--font-body)" }}
               >
-                <span>View All 8+ Physical Desks</span>
+                <span>View All {OFFICES.length} Physical Desks</span>
                 <ArrowUpRight className="h-3.5 w-3.5" />
               </Link>
             </div>

@@ -2,25 +2,39 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { Cookie, ShieldCheck, X, Settings, Check, Lock } from "lucide-react";
+import { Cookie, ShieldCheck, X, Settings, Lock } from "lucide-react";
 
 export default function CookieBanner() {
-  const [mounted, setMounted] = useState(() => typeof window !== "undefined");
+  const [mounted] = useState(() => typeof window !== "undefined");
   const [isOpen, setIsOpen] = useState(false);
   const [showSettingsModal, setShowSettingsModal] = useState(false);
+  const [heroPassed, setHeroPassed] = useState(false);
 
   // Preference toggles
   const [analyticsCookies, setAnalyticsCookies] = useState(true);
   const [marketingCookies, setMarketingCookies] = useState(false);
 
   useEffect(() => {
+    const syncHeroBoundary = () => {
+      const hero = document.getElementById("hero");
+      const heroBottom = hero ? hero.getBoundingClientRect().bottom + window.scrollY : 0;
+      setHeroPassed(!hero || window.scrollY >= heroBottom);
+    };
+
+    syncHeroBoundary();
+    window.addEventListener("scroll", syncHeroBoundary, { passive: true });
+    return () => window.removeEventListener("scroll", syncHeroBoundary);
+  }, []);
+
+  useEffect(() => {
+    if (!heroPassed) return;
     const consent = localStorage.getItem("psara_cookie_consent");
     if (!consent) {
       // Delay entrance slightly for non-intrusive presentation
       const timer = setTimeout(() => setIsOpen(true), 1500);
       return () => clearTimeout(timer);
     }
-  }, []);
+  }, [heroPassed]);
 
   const handleAcceptAll = () => {
     const preferences = { essential: true, analytics: true, marketing: true, timestamp: new Date().toISOString() };
@@ -83,7 +97,7 @@ export default function CookieBanner() {
           </div>
 
           <p className="text-xs text-slate-200 leading-relaxed font-normal mb-4">
-            We use essential cookies to maintain statutory filing session state, security verification, and compliance analytics across 28 States &amp; 8 UTs.
+            We use essential cookies to maintain statutory filing session state, security verification, and compliance analytics across 36 States &amp; UTs.
           </p>
 
           <div className="flex flex-wrap items-center gap-2.5">

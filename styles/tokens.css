@@ -4,26 +4,26 @@
    ═══════════════════════════════════════════════════════════════ */
 
 :root {
-  /* ── 1. Canvas & Surface Foundations — 2026 Plum Authority (replaces cherry/navy) ── */
-  --canvas-void:       #080714;   /* Midnight Plum Void — OLED depth */
-  --void:              #080714;
-  --void-2:            #0F0C1F;   /* Elevated Plum */
-  --surface-dark:      #0F0C1F;
-  --surface-card-dark: #14102A;   /* Solid Plum Card */
-  --space:             #14102A;
-  --space-lift:        #1E1140;   /* Lifted Plum */
-  --plum-deep:         #1A0B2E;   /* Obsidian Grape */
-  --plum-mid:          #1E1140;
-  --plum-lift:         #27164F;
+  /* ── 1. Canvas & Surface Foundations — navy authority system ── */
+  --canvas-void:       #050B14;   /* Deep navy: video and dark canvas */
+  --void:              #050B14;
+  --void-2:            #0B1728;   /* Elevated navy */
+  --surface-dark:      #0B1728;
+  --surface-card-dark: #10243A;   /* Solid blue-black card */
+  --space:             #10243A;
+  --space-lift:        #163A54;   /* Lifted blue */
+  --plum-deep:         #071525;   /* Legacy alias retained for old surfaces */
+  --plum-mid:          #0B1728;
+  --plum-lift:         #163A54;
 
-  /* ── 2. Editorial Light Surfaces — violet-tinted, never flat white ── */
-  --canvas-cream:      #FAF7FE;   /* Violet-tinted Alabaster */
+  /* ── 2. Editorial Light Surfaces — warm ivory, never flat white ── */
+  --canvas-cream:      #F7F3EB;   /* Warm ivory */
   --white:             #FFFFFF;   /* Pure White (inputs only) */
-  --white-bg:          #FDFCFF;
-  --surface-light:     #FDFCFF;
-  --surface-card-light:#F4F0FA;   /* Lavender-tinted Card */
-  --light-border:      #E5DDF3;   /* Violet hairline for light sections */
-  --paper:             #FDFCFF;
+  --white-bg:          #FBFAF6;
+  --surface-light:     #FBFAF6;
+  --surface-card-light:#F4EFE5;   /* Warm ivory card */
+  --light-border:      #E5DED0;   /* Warm hairline for light sections */
+  --paper:             #FBFAF6;
   --paper-ink:         #0F172A;   /* Crisp Dark Slate */
   --ink:               #0F172A;
   --ink-soft:          #334155;   /* Secondary Slate */
@@ -40,11 +40,11 @@
   --gold-dim:          rgba(200, 155, 60, 0.75);
   --gold-soft:         rgba(200, 155, 60, 0.12);
 
-  /* ── 4. Primary Dark Plum Ramps (2026 authority) ── */
-  --navy-deep:         #1A0B2E;   /* Obsidian Grape — legacy alias */
-  --navy-dark:         #0F0C1F;
-  --navy-surface:      #14102A;
-  --navy-lift:         #1E1140;
+  /* ── 4. Primary Navy Ramps ── */
+  --navy-deep:         #071525;
+  --navy-dark:         #0B1728;
+  --navy-surface:      #10243A;
+  --navy-lift:         #163A54;
   --navy-border:       rgba(212, 175, 55, 0.22);
 
   /* ── 5. Conversion Green (WhatsApp & Trust) ── */
@@ -53,25 +53,30 @@
   --emerald:           #25D366;
   --emerald-deep:      #128C7E;
 
-  /* ── 6. Saturated CTA Accent ── */
-  --purple-cta:        #5821C7;
-  --purple-electric:   #6D4CC2;
-  --purple-light:      #8C64E8;
-  --purple-shimmer:    #CBB0FF;
+  /* ── 6. Secondary Signal Accent — blue-teal, never competing with gold ── */
+  --purple-cta:        #0F6074;   /* legacy name retained for compatibility */
+  --purple-electric:   #2A7991;
+  --purple-light:      #6FB0B2;
+  --purple-shimmer:    #E8D5A3;
 
   /* Aliases */
   --violet-deep:       #0A1224;
   --violet-base:       #0A233F;
-  --violet-primary:    #5821C7;
-  --violet-electric:   #6D4CC2;
-  --violet-light:      #8C64E8;
-  --violet-shimmer:    #CBB0FF;
-  --electric:          #5821C7;
-  --electric-2:        #6D4CC2;
+  --violet-primary:    #0F6074;
+  --violet-electric:   #2A7991;
+  --violet-light:      #6FB0B2;
+  --violet-shimmer:    #E8D5A3;
+  --electric:          #0F6074;
+  --electric-2:        #2A7991;
   --electric-3:        #0A1224;
-  --cherry:            #5821C7;
-  --cherry-bright:     #6D4CC2;
+  --cherry:            #0F6074;
+  --cherry-bright:     #2A7991;
   --cherry-deep:       #0A1224;
+  --electric-glow:     rgba(42, 121, 145, 0.42);
+  --electric-soft:     rgba(42, 121, 145, 0.14);
+  --saffron:           #E8D5A3;
+  --metal-1:           #F5E6BA;
+  --metal-3:           #8F681B;
 
   /* ── 7. Text Contrast Scale ── */
   --white-100:         #FFFFFF;
@@ -81,8 +86,12 @@
   --white-45:          #64748B;
   --white-25:          rgba(255, 255, 255, 0.25);
   --white-15:          rgba(255, 255, 255, 0.15);
+  --white-12:          rgba(255, 255, 255, 0.12);
   --white-10:          rgba(255, 255, 255, 0.10);
+  --white-06:          rgba(255, 255, 255, 0.06);
   --white-05:          rgba(255, 255, 255, 0.05);
+  --white-70:          rgba(255, 255, 255, 0.70);
+  --white-55:          rgba(255, 255, 255, 0.55);
 
   --text-primary:      #FFFFFF;
   --text-secondary:    #E2E8F0;
@@ -91,41 +100,35 @@
   /* ── 8. Rich Same-Color Gradient Mixtures (Contrast Depth) — 2026 OKLCH tuned ──
      Metallic gold: banded champagne → bronze → specular → gold. The double
      light/dark banding is what makes it read as metal, not mustard. */
-  --grad-gold-metallic: linear-gradient(100deg in oklch,
-    oklch(0.97 0.045 95) 0%,
-    oklch(0.90 0.075 92) 10%,
-    oklch(0.81 0.115 88) 22%,
-    oklch(0.67 0.115 83) 37%,
-    oklch(0.55 0.09 78) 47%,
-    oklch(0.68 0.11 82) 57%,
-    oklch(0.86 0.095 89) 69%,
-    oklch(0.96 0.05 94) 79%,
-    oklch(0.85 0.09 90) 89%,
-    oklch(0.73 0.11 85) 100%);
+  --grad-gold-metallic: linear-gradient(100deg,
+    #FFF2BA 0%, #E2C46F 10%, #C89B3C 22%, #A87524 37%,
+    #8F681B 47%, #C89B3C 57%, #F5D061 69%, #FFF2BA 79%,
+    #D4AF37 89%, #A87524 100%);
   --grad-gold-surface:  linear-gradient(145deg, rgba(212, 175, 55, 0.18) 0%, rgba(212, 175, 55, 0.05) 100%);
   --grad-gold-border:   linear-gradient(90deg, #D4AF37 0%, rgba(212, 175, 55, 0.3) 50%, #8F681B 100%);
-  --grad-aurora-plum:   radial-gradient(ellipse 55% 45% at 18% 22%, oklch(0.72 0.14 310 / 0.22) 0%, transparent 55%), radial-gradient(ellipse 48% 42% at 82% 78%, oklch(0.78 0.12 85 / 0.16) 0%, transparent 50%);
-  --grad-void-plum:     radial-gradient(ellipse 70% 55% at 50% 38%, #1E1140 0%, #140E2A 35%, #080714 72%);
+  --grad-aurora-plum:   radial-gradient(ellipse 55% 45% at 18% 22%, rgba(36, 102, 132, 0.20) 0%, transparent 55%), radial-gradient(ellipse 48% 42% at 82% 78%, rgba(245, 208, 97, 0.14) 0%, transparent 50%);
+  --grad-void-plum:     radial-gradient(ellipse 70% 55% at 50% 38%, #163A54 0%, #0B1728 35%, #050B14 72%);
 
-  --grad-navy-card:     linear-gradient(160deg, #14102A 0%, #0F0C1F 100%);
-  --grad-navy-lift:     linear-gradient(160deg, #1E1140 0%, #0F0C1F 100%);
-  --grad-navy-header:   linear-gradient(180deg, rgba(8, 7, 20, 0.96) 0%, rgba(15, 12, 31, 0.94) 100%);
-  --grad-cream-card:    linear-gradient(165deg, #FDFCFF 0%, #F1EBFA 100%);
-  --grad-light-section: linear-gradient(180deg, #FBF8FE 0%, #F1E9FA 45%, #E5D9F5 100%);
+  --grad-navy-card:     linear-gradient(160deg, #10243A 0%, #0B1728 100%);
+  --grad-navy-lift:     linear-gradient(160deg, #163A54 0%, #0B1728 100%);
+  --grad-navy-header:   linear-gradient(180deg, rgba(5, 11, 20, 0.96) 0%, rgba(11, 23, 40, 0.94) 100%);
+  --grad-cream-card:    linear-gradient(165deg, #FBFAF6 0%, #F4EFE5 100%);
+  --grad-light-section: linear-gradient(180deg, #FBFAF6 0%, #F4EFE5 48%, #E5DED0 100%);
+
+  /* Semantic gradient aliases used by legacy components. Keeping these
+     centralized prevents invisible buttons and inconsistent card surfaces. */
+  --grad-metal:         var(--grad-gold-metallic);
+  --grad-gold-cta:      var(--grad-gold-metallic);
+  --grad-gold-vertical: linear-gradient(180deg, rgba(212, 175, 55, 0.18), rgba(212, 175, 55, 0.04));
+  --grad-gold-radial:   radial-gradient(circle at 50% 0%, rgba(212, 175, 55, 0.18), transparent 70%);
 
   /* Gold for LIGHT backgrounds — all stops dark enough to hold contrast on white.
      Bright champagne stops vanish on white; deep bronze metal does not. */
-  --grad-gold-deep: linear-gradient(105deg in oklch,
-    oklch(0.26 0.05 62) 0%,
-    oklch(0.38 0.10 72) 26%,
-    oklch(0.48 0.12 80) 50%,
-    oklch(0.34 0.09 70) 74%,
-    oklch(0.24 0.05 60) 100%);
+  --grad-gold-deep: linear-gradient(105deg,
+    #3C2A0D 0%, #6C4A16 26%, #8F681B 50%, #5A3D13 74%, #322309 100%);
   --grad-wa:            linear-gradient(160deg, #1FAF5E 0%, #128C7E 100%);
 
-  /* ── 11. Gold Shadow Standards ──
-     Consistent gold shadow definitions using CSS vars,
-     eliminating duplicated inline RGBA values across globals.css */
+  /* ── 11. Gold Shadow Standards ── */
   --shadow-gold-inset:   inset 0 1px 0 rgba(255, 250, 230, 0.85);
   --shadow-gold-inset-2: inset 0 1px 0 rgba(255, 250, 230, 0.9);
   --shadow-gold-dim:     0 12px 32px -10px rgba(200, 155, 60, 0.5);
@@ -133,7 +136,6 @@
   --shadow-gold-inner:   0 2px 6px rgba(0, 0, 0, 0.45);
   --shadow-gold:         var(--shadow-gold-inset), var(--shadow-gold-dim), var(--shadow-gold-inner);
   --shadow-gold-hover:   var(--shadow-gold-inset-2), var(--shadow-gold-dim-2), var(--shadow-gold-inner);
-  */
 
   /* ── 9. Typography Scale ── */
   --font-display: "EB Garamond", Georgia, "Times New Roman", serif;

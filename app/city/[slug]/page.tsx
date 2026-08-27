@@ -17,7 +17,7 @@ import {
   faqJsonLd,
   howToJsonLd,
 } from "../../../lib/seo-content";
-import { SITE, getOfficesForCityPage } from "../../../lib/config";
+import { SITE, getOfficeForCitySlug, getOfficesForCityPage } from "../../../lib/config";
 import { GEO_COORDINATES } from "../../../lib/geo-coordinates";
 import GbpOfficeSection from "../../components/sections/GbpOfficeSection";
 import CityDossierView from "../../components/sections/CityDossierView";
@@ -67,10 +67,10 @@ export default async function CityPage({
     .filter((x) => x.slug !== c.slug)
     .slice(0, 12);
 
-  const gbpOffice = getOfficesForCityPage(c.slug, c.stateSlug)[0]
-  const geoCoords = gbpOffice?.lat && gbpOffice?.lng
-    ? { lat: gbpOffice.lat, lng: gbpOffice.lng }
-    : GEO_COORDINATES[c.slug]
+  const localOffice = getOfficeForCitySlug(c.slug);
+  const geoCoords = localOffice?.lat && localOffice?.lng
+    ? { lat: localOffice.lat, lng: localOffice.lng }
+    : GEO_COORDINATES[c.slug];
   const accent = getLocationAccent(c.slug);
   const heroImage = cityHeroImage(c.slug);
   const accentStyle = accentStyleVars(accent) as CSSProperties;
@@ -87,8 +87,9 @@ export default async function CityPage({
           state: c.stateName,
           lat: geoCoords?.lat,
           lng: geoCoords?.lng,
-          address: gbpOffice?.address,
-          pin: gbpOffice?.pin,
+          address: localOffice?.address,
+          pin: localOffice?.pin,
+          localOffice: Boolean(localOffice),
           nearbyCities: siblings.map((s) => s.name),
           services: SERVICES,
         })}
@@ -213,7 +214,7 @@ export default async function CityPage({
             <GbpOfficeSection
               placeLabel={c.name}
               offices={getOfficesForCityPage(c.slug, c.stateSlug)}
-              isLocalOffice={['jaipur','new-delhi','delhi','gurugram','noida','ahmedabad','lucknow','bhopal','indore','raipur','chandigarh','ludhiana'].includes(c.slug)}
+              isLocalOffice={Boolean(localOffice)}
             />
           </div>
         </div>

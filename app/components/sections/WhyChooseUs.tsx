@@ -9,7 +9,7 @@ const ADVANTAGES = [
   {
     title: "Direct Controlling Authority Filing",
     subtitle: "Jaipur HQ & Regional Desks",
-    desc: "Physical dossier submission and manual verification with State Home Department Controlling Officers across 28 states.",
+    desc: "Physical dossier submission and manual verification with State Home Department Controlling Officers across 36 States & UTs.",
     highlights: ["No brokers or third-party intermediaries", "Direct officer-level tracking", "Official acknowledgement receipt within 48h"],
     meta: "FILE-01",
   },
@@ -45,7 +45,7 @@ export default function WhyChooseUs() {
       <div className="relative z-10 px-[var(--gutter)] max-w-7xl mx-auto space-y-12">
         {/* Section Heading — alternating mask */}
         <MaskReveal direction="left">
-          <div className="flex flex-col lg:flex-row lg:items-end justify-between border-b border-[#E5DDF3] pb-8 gap-6">
+          <div className="flex flex-col items-center gap-6 border-b border-[#E5DDF3] pb-8 text-center lg:flex-row lg:items-end lg:justify-between lg:text-left">
             <div>
               <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-[0.16em] text-[#8F681B] mb-2" style={{ fontFamily: "var(--font-body)" }}>
                 <Sparkles className="h-3.5 w-3.5 text-[#8F681B]" />
@@ -58,7 +58,7 @@ export default function WhyChooseUs() {
                 Why Security Agencies Choose <span className="gold-text-gradient">Our Legal Desk</span>
               </h2>
             </div>
-            <p className="text-sm md:text-base text-[#334155] max-w-md leading-relaxed font-normal">
+            <p className="mx-auto max-w-md text-sm font-normal leading-relaxed text-[#334155] md:text-base lg:mx-0">
               We operate as an exclusive regulatory advisory practice. We prepare, audit, and clear your official Controlling Authority dossier from start to license grant.
             </p>
           </div>
@@ -69,7 +69,7 @@ export default function WhyChooseUs() {
           {/* Featured Deep Plum Dossier Card — tilt + mask */}
           <MaskReveal direction="left" className="lg:col-span-7">
             <TiltCard>
-              <div className="rounded-3xl border border-[rgba(212,175,55,0.32)] bg-gradient-to-b from-[#14102A] via-[#0F0C1F] to-[#080714] p-8 md:p-10 flex flex-col justify-between shadow-2xl text-white h-full" data-cursor="Dossier">
+              <div className="flex h-full flex-col justify-between rounded-3xl border border-[rgba(212,175,55,0.32)] bg-gradient-to-b from-[#10243A] via-[#0B1728] to-[#050B14] p-8 text-center text-white shadow-2xl md:p-10 lg:text-left" data-cursor="Dossier">
             <div className="space-y-6">
               <div className="flex items-center justify-between">
                 <span className="badge-metallic-gold">

@@ -63,7 +63,7 @@ export default function StatementInterstitial() {
   return (
     <section
       ref={rootRef}
-      className="relative min-h-[75dvh] flex flex-col items-center justify-center bg-[#080714] text-white overflow-hidden py-24 border-y border-white/10"
+      className="relative min-h-[75dvh] flex flex-col items-center justify-center bg-[#050B14] text-white overflow-hidden py-24 border-y border-white/10"
       data-parallax-root
     >
       {/* Ambient background glow — plum authority */}
@@ -130,7 +130,7 @@ export default function StatementInterstitial() {
         >
           <span>500+ LICENSES GRANTED</span>
           <span className="h-1.5 w-1.5 rounded-full bg-[#C89B3C]" />
-          <span>28 STATES COVERED</span>
+          <span>36 STATES &amp; UTs COVERED</span>
           <span className="h-1.5 w-1.5 rounded-full bg-[#C89B3C]" />
           <span>10+ YEARS DISCIPLINE</span>
         </div>

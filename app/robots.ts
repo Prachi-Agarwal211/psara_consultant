@@ -43,10 +43,12 @@ export default function robots(): MetadataRoute.Robots {
         allow: "/",
         disallow: ["/api/", "/_next/", "/admin/", "/metrics/"],
       },
-      // Explicit allow for all AI crawlers — permits LLM training + retrieval
+      // Explicit AI rules repeat the private-path exclusions. A specific
+      // user-agent rule can otherwise override the wildcard rule above.
       ...AI_CRAWLERS.map((ua) => ({
         userAgent: ua,
         allow: "/",
+        disallow: ["/api/", "/_next/", "/admin/", "/metrics/"],
       })),
     ],
     sitemap: `${SITE.url}/sitemap.xml`,

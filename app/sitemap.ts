@@ -7,7 +7,6 @@ import { GUIDES } from "../data/guides";
 import { BLOG_POSTS } from "../data/blog";
 import { CASE_STUDIES } from "../data/case-studies";
 import { INDUSTRIES } from "../data/industries";
-import { CAREERS } from "../data/careers";
 
 /**
  * Stable sitemap date. Google distrusts <lastmod> that changes on every
@@ -20,7 +19,7 @@ const SITE_LAUNCH_DATE = new Date("2026-07-01T00:00:00.000Z");
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = SITE.url;
-  const stable = new Date("2026-08-11T00:00:00.000Z");
+  const stable = new Date("2026-08-27T00:00:00.000Z");
 
   const staticRoutes: MetadataRoute.Sitemap = [
     "",
@@ -32,7 +31,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/states",
     "/cities",
     "/franchise",
-    "/careers",
     "/case-studies",
     "/industries",
     "/certification",
@@ -97,13 +95,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.75,
   }));
 
-  const careerRoutes: MetadataRoute.Sitemap = CAREERS.map((c) => ({
-    url: `${base}/careers/${c.slug}`,
-    lastModified: SITE_LAUNCH_DATE,
-    changeFrequency: "monthly",
-    priority: 0.7,
-  }));
-
   return [
     ...staticRoutes,
     ...services,
@@ -113,6 +104,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...blogPosts,
     ...caseStudyRoutes,
     ...industryRoutes,
-    ...careerRoutes,
   ];
 }

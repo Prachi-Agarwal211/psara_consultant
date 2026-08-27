@@ -121,7 +121,7 @@ function generateOGSVG(title, category) {
   <!-- Bottom section with brand info -->
   <rect x="50" y="400" width="1100" height="1" fill="url(#line)"/>
 
-  <!-- Pillar stat: 300+ Agencies | 28 States | 5.0 Rating -->
+  <!-- Pillar stat: 300+ Agencies | 36 States & UTs | 5.0 Rating -->
   <g transform="translate(75, 430)">
     <text font-family="system-ui, sans-serif" font-size="24" font-weight="700" fill="${colors.accent}">300+</text>
     <text font-family="system-ui, sans-serif" font-size="10" fill="#f6fafd" opacity="0.4" x="0" y="16" letter-spacing="1">AGENCIES SERVED</text>

@@ -40,7 +40,7 @@ export default function HomeFaq() {
   return (
     <section
       id="faq"
-      className="relative overflow-hidden bg-[#080714] text-white py-20 lg:py-28 border-b border-white/10"
+      className="relative overflow-hidden bg-[#050B14] text-white py-20 lg:py-28 border-b border-white/10"
     >
       <div className="relative z-10 px-[var(--gutter)] max-w-7xl mx-auto space-y-12">
         {/* Header */}
@@ -114,7 +114,7 @@ export default function HomeFaq() {
           <button
             type="button"
             onClick={() => setShowAll((prev) => !prev)}
-            className="inline-flex items-center gap-2 rounded-xl border border-[#D4AF37] bg-[#D4AF37]/15 hover:bg-[#D4AF37] hover:text-[#080714] px-8 py-3.5 text-xs font-bold uppercase tracking-[0.12em] text-[#F5D061] transition-all duration-200 shadow-md"
+            className="inline-flex items-center gap-2 rounded-xl border border-[#D4AF37] bg-[#D4AF37]/15 hover:bg-[#D4AF37] hover:text-[#050B14] px-8 py-3.5 text-xs font-bold uppercase tracking-[0.12em] text-[#F5D061] transition-all duration-200 shadow-md"
             style={{ fontFamily: "var(--font-body)" }}
           >
             <span>{showAll ? "Show Fewer Questions" : `See More Questions (+${faqs.length - 3} More)`}</span>

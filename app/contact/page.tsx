@@ -5,7 +5,7 @@ import ContactForm from "../../components/ContactForm";
 import { pageMeta } from "../../lib/metadata";
 import { CONTACT, OFFICES, SITE } from "../../lib/config";
 import { TEL_HREF, DEFAULT_WA } from "../../lib/whatsapp";
-import { Phone, MessageSquare, Mail, MapPin, ShieldCheck, Sparkles } from "lucide-react";
+import { Phone, MessageSquare, Mail, MapPin, ShieldCheck } from "lucide-react";
 import JsonLd from "../../components/JsonLd";
 import { localBusinessJsonLd } from "../../lib/seo-content";
 

@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import {
   FileText,
   ShieldCheck,
@@ -26,7 +27,7 @@ interface AboutSectionProps {
 const FEATURES = [
   {
     title: "License Filing",
-    desc: "Direct Controlling Authority filing and liaison across 28 States & 8 UTs.",
+    desc: "Direct Controlling Authority filing and liaison across 36 States & UTs.",
     icon: FileText,
   },
   {
@@ -62,8 +63,8 @@ export default function AboutSection({
       <div className="relative z-10 mx-auto max-w-7xl space-y-12 px-6 lg:px-8">
         {/* Optional Header Row */}
         {showHeaderBar && (
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 pb-6 border-b border-[#E5DDF3]">
-            <div className="flex flex-wrap items-center gap-4">
+          <div className="flex flex-col items-center gap-6 border-b border-[#E5DDF3] pb-6 text-center md:flex-row md:items-center md:justify-between md:text-left">
+            <div className="flex flex-wrap items-center justify-center gap-4 md:justify-start">
               <div className="p-2 rounded-xl bg-[#F4F0FA] border border-[#E5DDF3] shadow-sm">
                 <BrandMark variant="dark" compact />
               </div>
@@ -83,7 +84,7 @@ export default function AboutSection({
         {/* Main 2-Column About Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
           {/* Left Column: Text & 2x2 Feature Grid */}
-          <div className="lg:col-span-6 space-y-6 z-10">
+          <div className="z-10 space-y-6 text-center lg:col-span-6 lg:text-left">
             <MaskReveal direction="left">
               <div>
                 <span className="mb-3 block text-xs font-bold uppercase tracking-[0.16em] text-[#8F681B]">
@@ -97,7 +98,7 @@ export default function AboutSection({
                   <span className="gold-text-gradient">Every State.</span>
                 </Heading>
                 <p className="mt-4 max-w-xl text-base font-normal leading-relaxed text-[#334155]">
-                  PSARA Consultant India empowers private security agencies with seamless licensing, recognized training institute MOUs, police verification tracking, and statutory compliance across 28 States &amp; 8 UTs.
+                  PSARA Consultant India empowers private security agencies with seamless licensing, recognized training institute MOUs, police verification tracking, and statutory compliance across 36 States &amp; UTs.
                 </p>
               </div>
             </MaskReveal>
@@ -111,7 +112,7 @@ export default function AboutSection({
                     key={feature.title}
                     className="p-5 rounded-2xl border border-[#E5DDF3] bg-gradient-to-br from-[#FDFCFF] to-[#F3EEFB] space-y-2.5 transition-all duration-200 hover:border-[#C89B3C] hover:shadow-md"
                   >
-                    <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#0A233F] to-[#14102A] text-[#8F681B] flex items-center justify-center shadow-md">
+                    <div className="mx-auto flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-[#0A233F] to-[#14102A] text-[#8F681B] shadow-md lg:mx-0">
                       <IconComp className="w-5 h-5" />
                     </div>
                     <h3
@@ -129,7 +130,7 @@ export default function AboutSection({
             </div>
 
             {/* Action Buttons */}
-            <div className="flex flex-wrap items-center gap-4 pt-2">
+            <div className="flex flex-wrap items-center justify-center gap-4 pt-2 lg:justify-start">
               <Link
                 href="/about"
                 className="btn-gold-editorial"
@@ -151,15 +152,29 @@ export default function AboutSection({
             </div>
           </div>
 
-          {/* Right Column: Clean 3D India Map — parallax depth */}
+          {/* Right Column: layered India map + PSARA dossier artifact */}
           <Parallax amount={10} className="lg:col-span-6 flex items-center justify-center relative">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={imageSrc}
-              alt="PSARA India 3D Statutory Map Artwork"
-              className="relative z-10 w-full max-w-[560px] h-auto transition-transform duration-300 hover:scale-[1.02] drop-shadow-xl"
-              data-cursor="Pan-India"
-            />
+            <div className="relative mx-auto aspect-square w-full max-w-[570px]" data-cursor="Pan-India file">
+              <div className="pointer-events-none absolute inset-[18%] rounded-full bg-[#D4AF37]/20 blur-[80px]" aria-hidden="true" />
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={imageSrc}
+                alt="PSARA India 3D Statutory Map Artwork"
+                className="absolute inset-0 h-full w-full object-contain opacity-75 drop-shadow-xl transition-transform duration-500 hover:scale-[1.02]"
+              />
+              <Image
+                src="/assets/images/generated/psara-dossier-book-cutout.png"
+                alt="PSARA Consultant India regulatory dossier book"
+                width={1031}
+                height={1007}
+                sizes="(max-width: 1023px) 78vw, 430px"
+                className="absolute left-[3%] top-[2%] z-10 h-auto w-[78%] object-contain drop-shadow-[0_28px_30px_rgba(10,18,38,0.32)] transition-transform duration-500 hover:-translate-y-2"
+              />
+              <div className="absolute bottom-[7%] right-0 z-20 max-w-[13rem] rounded-2xl border border-[#D4AF37]/45 bg-[#0A213D]/95 px-4 py-3 text-white shadow-xl">
+                <span className="block text-[10px] font-bold uppercase tracking-[0.18em] text-[#F5D061]">Field file · 01</span>
+                <span className="mt-1 block text-xs font-medium leading-relaxed text-white/75">Evidence-led filing, opened state by state.</span>
+              </div>
+            </div>
           </Parallax>
         </div>
       </div>

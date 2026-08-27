@@ -2,9 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { ArrowUpRight, MessageSquare, Globe } from "lucide-react";
-import HorizontalTicker from "../../../app/components/ui/HorizontalTicker";
 import { OFFICES, CONTACT } from "../../../lib/config";
 import { DEFAULT_WA } from "../../../lib/whatsapp";
 import { ensureGsap, prefersReducedMotion } from "../../../app/lib/motion";
@@ -22,23 +20,11 @@ import ServicesSection from "./ServicesSection";
 import ApprovalRoadmap from "./ApprovalRoadmap";
 import FloatProps, { PROPS } from "../ui/FloatProps";
 
-const TICKER = [
-  "PSARA LICENSE",
-  "TRAINING MOU",
-  "POLICE VERIFICATION",
-  "MULTI-STATE",
-  "COMPANY SETUP",
-  "GST · MSME",
-  "ROC COMPLIANCE",
-  "28 STATES",
-];
-
 export default function HomeStory() {
   const rootRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     if (!rootRef.current || prefersReducedMotion()) return;
-    const root = rootRef.current;
     const { ScrollTrigger } = ensureGsap();
 
     // One refresh after fonts/images settle — replaces scattered hacks.
@@ -58,8 +44,6 @@ export default function HomeStory() {
 
   return (
     <div ref={rootRef} className="relative z-10 bg-transparent text-white">
-      {/* Ticker band */}
-      <HorizontalTicker items={TICKER} className="border-y border-white/10" />
       <ComplianceMarquee />
 
       {/* ── METRICS — count-up proof ── */}
@@ -97,7 +81,7 @@ export default function HomeStory() {
       <HomeFaq />
 
       {/* ── PRESENCE — recolored to plum authority (was sky) ── */}
-      <section id="presence" className="relative min-h-[85dvh] py-20 lg:py-28 bg-[#080714] border-t border-white/10 overflow-hidden" data-parallax-root>
+      <section id="presence" className="section-atmosphere relative min-h-[85dvh] py-20 lg:py-28 bg-[#050B14] border-t border-white/10 overflow-hidden" data-parallax-root>
         {/* Ambient glow behind right side map — plum */}
         <div className="pointer-events-none absolute top-1/2 right-0 -translate-y-1/2 w-[600px] h-[600px] rounded-full blur-[160px] opacity-20" style={{ background: "radial-gradient(circle, rgba(88,33,199,0.38) 0%, transparent 70%)" }} aria-hidden />
 
@@ -127,7 +111,7 @@ export default function HomeStory() {
                     className={`p-3.5 rounded-xl border transition-all duration-200 ${
                       o.isHQ
                         ? "border-[var(--gold)]/60 bg-[var(--gold)]/10 shadow-lg shadow-[var(--gold)]/10"
-                        : "border-white/12 bg-[#14102A] hover:border-white/22 hover:bg-[#1E1140]"
+                        : "border-white/12 bg-[#10243A] hover:border-white/22 hover:bg-[#163A54]"
                     }`}
                     style={{ fontFamily: "var(--font-display)" }}
                   >
@@ -161,7 +145,7 @@ export default function HomeStory() {
                 </Link>
                 <Link
                   href="/cities"
-                  className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl border border-white/14 bg-[#14102A] hover:bg-[#1E1140] text-white font-bold text-xs uppercase tracking-wider transition-colors"
+                  className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl border border-white/14 bg-[#10243A] hover:bg-[#163A54] text-white font-bold text-xs uppercase tracking-wider transition-colors"
                 >
                   <span>All Cities</span>
                   <ArrowUpRight className="h-3.5 w-3.5 text-[#D4AF37]" />
@@ -180,7 +164,7 @@ export default function HomeStory() {
                 />
 
                 {/* Floating Office HQ Pin Badge */}
-                <div className="absolute top-4 left-4 flex items-center gap-2.5 px-3.5 py-2 rounded-xl border border-[var(--gold)]/50 bg-[#0F0C1F]/95 backdrop-blur-md shadow-xl z-10">
+                <div className="absolute top-4 left-4 flex items-center gap-2.5 px-3.5 py-2 rounded-xl border border-[var(--gold)]/50 bg-[#0B1728]/95 backdrop-blur-md shadow-xl z-10">
                   <div className="w-2.5 h-2.5 rounded-full bg-[var(--gold)] animate-ping" />
                   <span className="text-xs font-extrabold uppercase tracking-wider text-[var(--gold-bright)]">
                     Jaipur Headquarters
@@ -188,10 +172,10 @@ export default function HomeStory() {
                 </div>
 
                 {/* Floating Metro Desks Badge */}
-                <div className="absolute bottom-4 right-4 flex items-center gap-2.5 px-3.5 py-2 rounded-xl border border-white/14 bg-[#0F0C1F]/95 backdrop-blur-md shadow-xl z-10">
+                <div className="absolute bottom-4 right-4 flex items-center gap-2.5 px-3.5 py-2 rounded-xl border border-white/14 bg-[#0B1728]/95 backdrop-blur-md shadow-xl z-10">
                   <Globe className="w-4 h-4 text-[#C89B3C]" />
                   <span className="text-xs font-extrabold uppercase tracking-wider text-white/85">
-                    Desks in 28 States
+                    Desks in 36 States & UTs
                   </span>
                 </div>
               </div>
@@ -206,7 +190,7 @@ export default function HomeStory() {
       {/* ── CLOSING CTA — plum gold */}
       <section
         id="start"
-        className="relative flex min-h-[80dvh] flex-col items-center justify-center border-t border-white/10 bg-[#080714] py-[var(--section-y)] pb-[calc(var(--section-y)+5rem)] md:pb-[var(--section-y)]"
+        className="relative flex min-h-[80dvh] flex-col items-center justify-center border-t border-white/10 bg-[#050B14] py-[var(--section-y)] pb-[calc(var(--section-y)+5rem)] md:pb-[var(--section-y)]"
         data-parallax-root
       >
         <div className="pointer-events-none absolute inset-0 z-0" aria-hidden>
@@ -247,7 +231,7 @@ export default function HomeStory() {
             </a>
             <Link
               href="/contact"
-              className="inline-flex items-center gap-2 rounded-xl border border-white/14 bg-[#14102A] px-7 py-4 text-xs font-bold uppercase tracking-wider text-white/90 transition-colors hover:border-[#C89B3C] hover:text-[#F5D061]"
+              className="inline-flex items-center gap-2 rounded-xl border border-white/14 bg-[#10243A] px-7 py-4 text-xs font-bold uppercase tracking-wider text-white/90 transition-colors hover:border-[#C89B3C] hover:text-[#F5D061]"
             >
               Contact Page <ArrowUpRight className="h-4 w-4" />
             </Link>

@@ -16,7 +16,7 @@ const CERTS = [
   {
     name: "PSARA Statutory Compliance Advisory",
     org: "Ministry of Home Affairs / State Controlling Authorities",
-    desc: "Statute-aligned filing advisory under the Private Security Agencies (Regulation) Act, 2005 across all 28 States & 8 UTs, per each State Controlling Authority's published rules.",
+    desc: "Statute-aligned filing advisory under the Private Security Agencies (Regulation) Act, 2005 across all 36 States & UTs, per each State Controlling Authority's published rules.",
   },
   {
     name: "ISO 9001:2015 Quality Management",

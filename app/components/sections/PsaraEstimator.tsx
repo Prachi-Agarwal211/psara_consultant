@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Calculator, CheckCircle2, Shield, MessageSquare, Info, Sparkles } from "lucide-react";
+import { CheckCircle2, Shield, MessageSquare, Info, Sparkles } from "lucide-react";
 import { formatEnquiryWhatsAppMessage, openWhatsApp } from "../../../lib/whatsapp";
 
 const COVERAGE_OPTIONS = [
@@ -70,7 +70,7 @@ export default function PsaraEstimator() {
   };
 
   return (
-    <section className="relative w-full my-12 rounded-3xl border border-[rgba(212,175,55,0.28)] p-6 md:p-10 bg-gradient-to-b from-[#14102A] via-[#0F0C1F] to-[#080714] text-white shadow-2xl overflow-hidden">
+    <section className="relative w-full my-12 rounded-3xl border border-[rgba(212,175,55,0.28)] p-6 md:p-10 bg-gradient-to-b from-[#10243A] via-[#0B1728] to-[#050B14] text-white shadow-2xl overflow-hidden">
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-white/15 pb-6">
         <div>
@@ -103,7 +103,7 @@ export default function PsaraEstimator() {
             <select
               value={selectedState}
               onChange={(e) => setSelectedState(e.target.value)}
-              className="w-full rounded-xl border border-white/20 bg-[#0F0C1F] p-3.5 text-sm font-bold text-white focus:border-[#D4AF37] outline-none shadow-inner"
+              className="w-full rounded-xl border border-white/20 bg-[#0B1728] p-3.5 text-sm font-bold text-white focus:border-[#D4AF37] outline-none shadow-inner"
             >
               <option>Rajasthan</option>
               <option>Delhi NCR</option>
@@ -137,8 +137,8 @@ export default function PsaraEstimator() {
                     onClick={() => setCoverageId(c.id)}
                     className={`text-left p-4 rounded-xl border transition-all duration-200 ${
                       active
-                        ? "border-[#D4AF37] bg-gradient-to-br from-[#1E1140] to-[#0A162B] text-white shadow-xl shadow-black/60"
-                        : "border-white/12 bg-[#0F0C1F] text-[#CBD5E1] hover:border-white/30"
+                        ? "border-[#D4AF37] bg-gradient-to-br from-[#163A54] to-[#0A162B] text-white shadow-xl shadow-black/60"
+                        : "border-white/12 bg-[#0B1728] text-[#CBD5E1] hover:border-white/30"
                     }`}
                   >
                     <span className="font-bold text-xs block leading-snug text-white">{c.label}</span>
@@ -153,7 +153,7 @@ export default function PsaraEstimator() {
           </div>
 
           {/* Armed Endorsement */}
-          <div className="rounded-xl border border-white/12 bg-[#0F0C1F] p-4">
+          <div className="rounded-xl border border-white/12 bg-[#0B1728] p-4">
             <label className="flex items-center gap-3 cursor-pointer text-sm font-bold text-white">
               <input
                 type="checkbox"
@@ -169,7 +169,7 @@ export default function PsaraEstimator() {
           </div>
 
           {/* Additional / Other Costs Section */}
-          <div className="rounded-2xl border border-white/12 bg-[#0F0C1F] p-5 space-y-3 shadow-inner">
+          <div className="rounded-2xl border border-white/12 bg-[#0B1728] p-5 space-y-3 shadow-inner">
             <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#D4AF37]">
               <Info className="h-4 w-4" /> Other Third-Party / Statutory Expenses
             </div>
@@ -191,7 +191,7 @@ export default function PsaraEstimator() {
         </div>
 
         {/* Right Structured Fee Grid Table & Total */}
-        <div className="lg:col-span-5 rounded-2xl border border-[rgba(212,175,55,0.35)] p-6 bg-gradient-to-b from-[#14102A] to-[#0F0C1F] space-y-6 shadow-2xl">
+        <div className="lg:col-span-5 rounded-2xl border border-[rgba(212,175,55,0.35)] p-6 bg-gradient-to-b from-[#10243A] to-[#0B1728] space-y-6 shadow-2xl">
           <div>
             <span className="text-xs font-bold uppercase tracking-wider text-[#D4AF37] block">
               Structured Cost Breakdown

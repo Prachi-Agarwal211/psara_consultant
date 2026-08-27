@@ -1,4 +1,4 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { submitToIndexNow } from "@/lib/indexnow";
 import { STATES } from "@/data/states";
 import { CITIES } from "@/data/cities";
@@ -7,7 +7,6 @@ import { GUIDES } from "@/data/guides";
 import { BLOG_POSTS } from "@/data/blog";
 import { CASE_STUDIES } from "@/data/case-studies";
 import { INDUSTRIES } from "@/data/industries";
-import { CAREERS } from "@/data/careers";
 
 /**
  * POST /api/indexnow — submits the entire site URL set to IndexNow
@@ -15,11 +14,19 @@ import { CAREERS } from "@/data/careers";
  *
  * Usage: curl -X POST https://psaraconsultantindia.com/api/indexnow
  */
-export async function POST() {
+export async function POST(request: NextRequest) {
+  const submitToken = process.env.INDEXNOW_SUBMIT_TOKEN || process.env.CRON_SECRET;
+  if (!submitToken) {
+    return NextResponse.json({ error: "IndexNow submission is not configured." }, { status: 503 });
+  }
+  if (request.headers.get("authorization") !== `Bearer ${submitToken}`) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
   const statics = [
     "/", "/about", "/blog", "/contact", "/services", "/faq", "/states", "/cities",
     "/google", "/privacy-policy", "/terms", "/disclaimer", "/franchise",
-    "/careers", "/case-studies", "/industries", "/certification",
+    "/case-studies", "/industries", "/certification",
     "/calculator", "/csr", "/gallery", "/emergency", "/security-services",
   ];
 
@@ -34,7 +41,6 @@ export async function POST() {
     ...BLOG_POSTS.map((p) => `/blog/${p.slug}`),
     ...CASE_STUDIES.map((cs) => `/case-studies/${cs.slug}`),
     ...INDUSTRIES.map((ind) => `/industries/${ind.slug}`),
-    ...CAREERS.map((c) => `/careers/${c.slug}`),
   ];
 
   const result = await submitToIndexNow({ urls });

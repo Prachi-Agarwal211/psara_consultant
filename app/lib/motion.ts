@@ -40,13 +40,18 @@ export function initClipReveals(scope: HTMLElement, selector = "[data-clip]") {
   scope.querySelectorAll<HTMLElement>(selector).forEach((el) => {
     gsap.fromTo(
       el,
-      { clipPath: "inset(0% 0 0 0)", opacity: 1, y: 0 },
+      { clipPath: "inset(0 0 100% 0)", opacity: 0, y: 18 },
       {
         clipPath: "inset(0% 0 0 0)",
         opacity: 1,
         y: 0,
-        duration: 0.6,
+        duration: 0.8,
         ease: ease.expo,
+        scrollTrigger: {
+          trigger: el,
+          start: "top 88%",
+          toggleActions: "play none none none",
+        },
       }
     );
   });
@@ -55,7 +60,23 @@ export function initClipReveals(scope: HTMLElement, selector = "[data-clip]") {
 /** Word-by-word rise (manual split — no Club plugin) */
 export function initWordReveal(el: HTMLElement, start = "top 85%") {
   if (!el || prefersReducedMotion()) return;
-  // Keep text immediately visible without hidden split spans
+  const { gsap } = ensureGsap();
+  gsap.fromTo(
+    el,
+    { opacity: 0, y: 18, filter: "blur(6px)" },
+    {
+      opacity: 1,
+      y: 0,
+      filter: "blur(0px)",
+      duration: 0.75,
+      ease: ease.expo,
+      scrollTrigger: {
+        trigger: el,
+        start,
+        toggleActions: "play none none none",
+      },
+    }
+  );
 }
 
 /** Horizontal infinite ticker */
@@ -166,13 +187,21 @@ export function initStaggerChildren(scope: HTMLElement) {
   const { gsap } = ensureGsap();
   scope.querySelectorAll<HTMLElement>("[data-stagger]").forEach((parent) => {
     const kids = parent.children;
+    if (!kids.length) return;
     gsap.fromTo(
       kids,
-      { opacity: 1, y: 0 },
+      { opacity: 0, y: 20 },
       {
         opacity: 1,
         y: 0,
-        duration: 0.4,
+        duration: 0.55,
+        stagger: 0.08,
+        ease: ease.expo,
+        scrollTrigger: {
+          trigger: parent,
+          start: "top 86%",
+          toggleActions: "play none none none",
+        },
       }
     );
   });

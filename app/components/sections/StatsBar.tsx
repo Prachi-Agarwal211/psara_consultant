@@ -3,9 +3,7 @@
 import { useEffect, useRef } from "react";
 import Image from "next/image";
 import {
-  Award,
   Building2,
-  CalendarDays,
   FileText,
   MapPin,
   PenLine,
@@ -22,16 +20,9 @@ const CATEGORIES = [
   { label: "Company Support", icon: UsersRound },
 ];
 
-const RIBBON_ITEMS = [
-  { label: "Quick 30–45 day processing", icon: CalendarDays },
-  { label: "Jaipur HQ · Delhi · Gurugram · Noida desks", icon: Building2 },
-  { label: "500+ PSARA licenses granted", icon: Award },
-  { label: "28 states & UTs covered", icon: MapPin },
-];
-
 const STATS = [
-  { num: "28", suffix: "", title: "States & UTs covered", desc: "Controlling Authority filing desks across India.", icon: MapPin },
-  { num: "570", suffix: "+", title: "City desks", desc: "One desk per district HQ for seamless coordination.", icon: Building2 },
+  { num: "36", suffix: "", title: "States & UTs covered", desc: "Controlling Authority filing desks across India.", icon: MapPin },
+  { num: "587", suffix: "+", title: "City coverage", desc: "City-specific filing guidance and coordination across India.", icon: Building2 },
   { num: "500", suffix: "+", title: "Licenses cleared", desc: "Agencies served with end-to-end support.", icon: ShieldCheck },
   { num: "10", suffix: " Yrs", title: "Statutory practice", desc: "PSARA Act, 2005 specialists with a decade of expertise.", icon: PenLine },
 ];
@@ -76,7 +67,7 @@ export default function StatsBar() {
   }, []);
 
   return (
-    <section ref={rootRef} id="proof" className="relative isolate overflow-hidden bg-gradient-to-b from-[#080714] via-[#0F0C1F] to-[#080714] py-20 text-white sm:py-24 lg:py-28 border-b border-white/10" aria-label="PSARA proof and coverage">
+    <section ref={rootRef} id="proof" className="section-atmosphere relative isolate overflow-hidden border-b border-white/10 bg-gradient-to-b from-[#050B14] via-[#0B1728] to-[#050B14] py-16 text-white sm:py-20 lg:py-24" aria-label="PSARA proof and coverage">
       <Image
         data-proof-watermark
         src="/apple-touch-icon.png"
@@ -88,22 +79,22 @@ export default function StatsBar() {
       />
 
       <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-12">
-        <div className="flex flex-col gap-7 border-b border-white/15 pb-8 md:flex-row md:items-end md:justify-between md:gap-10">
-          <div className="max-w-xl">
-            <p className="mb-4 flex items-center gap-2 text-xs font-bold uppercase tracking-[.2em] text-[#D4AF37]">
+        <div className="flex flex-col gap-6 border-b border-white/15 pb-7 text-center md:flex-row md:items-end md:justify-between md:gap-10 md:text-left">
+          <div className="mx-auto max-w-xl md:mx-0">
+            <p className="mb-4 flex items-center justify-center gap-2 text-xs font-bold uppercase tracking-[.2em] text-[#D4AF37] md:justify-start">
               <span className="h-px w-8 bg-[#D4AF37]" /> The PSARA Ledger
             </p>
             <h2 className="text-balance text-3xl sm:text-4xl md:text-5xl font-bold leading-[1.1] text-white" style={{ fontFamily: "var(--font-display)" }}>
               Evidence that moves <br /><span className="gold-text-gradient">a file forward.</span>
             </h2>
           </div>
-          <p className="max-w-xs text-sm font-normal leading-relaxed text-[#E2E8F0] md:pb-1" style={{ fontFamily: "var(--font-body)" }}>
+          <p className="mx-auto max-w-xs text-sm font-normal leading-relaxed text-[#E2E8F0] md:mx-0 md:pb-1" style={{ fontFamily: "var(--font-body)" }}>
             Statute-first guidance, verification-ready dossiers, and filing support across India&apos;s controlling authorities.
           </p>
         </div>
 
         {/* Categories Bar */}
-        <div className="flex flex-wrap items-center gap-x-7 gap-y-4 border-b border-white/15 py-6" aria-label="Core capabilities">
+        <div className="flex flex-wrap items-center justify-center gap-x-7 gap-y-3 border-b border-white/15 py-5 text-center md:justify-start md:text-left" aria-label="Core capabilities">
           {CATEGORIES.map(({ label, icon: Icon }) => (
             <div key={label} data-proof-category className="flex items-center gap-2.5 text-xs font-bold uppercase tracking-[.14em] text-white">
               <Icon className="h-4 w-4 text-[#D4AF37]" strokeWidth={2} />
@@ -112,41 +103,31 @@ export default function StatsBar() {
           ))}
         </div>
 
-        {/* Ribbon Items */}
-        <div className="flex flex-wrap items-center gap-x-8 gap-y-3 border-b border-[#D4AF37]/30 py-5 text-xs font-bold uppercase tracking-[.12em] text-[#F5D061]">
-          {RIBBON_ITEMS.map(({ label, icon: Icon }) => (
-            <div key={label} className="flex items-center gap-2.5">
-              <Icon className="h-4 w-4 text-[#D4AF37]" strokeWidth={2} />
-              <span>{label}</span>
-            </div>
-          ))}
-        </div>
-
         {/* Stats Row List */}
-        <div data-proof-list className="mt-8 border-t border-white/15">
+        <div data-proof-list className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
           {STATS.map(({ num, suffix, title, desc, icon: Icon }, index) => (
-            <div key={title} data-proof-row className="group flex flex-col gap-5 border-b border-white/15 py-7 sm:flex-row sm:items-center sm:gap-8 sm:py-8 lg:gap-14">
-              <div className="flex w-full items-center gap-5 sm:w-[44%] lg:w-[40%]">
-                <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-[rgba(212,175,55,0.38)] bg-gradient-to-br from-[#14102A] to-[#0F0C1F] text-[#D4AF37] transition-all group-hover:border-[#D4AF37] group-hover:text-white shadow-md">
+            <div key={title} data-proof-row className="group relative flex min-h-[184px] flex-col justify-between overflow-hidden rounded-2xl border border-white/12 bg-gradient-to-br from-[#132A3D] to-[#0B1728] p-5 text-left shadow-[0_18px_36px_-28px_rgba(0,0,0,0.9)] transition-[border-color,transform] duration-300 hover:-translate-y-1 hover:border-[rgba(212,175,55,0.55)] sm:p-6">
+              <div className="flex items-start justify-between gap-4">
+                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-[rgba(212,175,55,0.38)] bg-[#0B1728] text-[#D4AF37] transition-colors duration-300 group-hover:border-[#D4AF37] group-hover:text-white">
                   <Icon className="h-5 w-5" strokeWidth={2} />
                 </span>
-                <div className="counter-num whitespace-nowrap text-4xl sm:text-5xl md:text-6xl font-bold leading-none gold-text-gradient" style={{ fontFamily: "var(--font-display)" }}>
-                  <span data-count={num} data-suffix={suffix}>{num}{suffix}</span>
-                </div>
-                {index === 0 && <span className="hidden text-xs font-bold uppercase tracking-[.14em] text-white/60 sm:block">Coverage</span>}
+                <span className="font-mono text-[10px] font-bold tracking-[.2em] text-[#D4AF37]">0{index + 1}</span>
               </div>
-              <div className="flex max-w-xl flex-1 items-baseline justify-between gap-6">
+              <div className="mt-7 flex items-end justify-between gap-4">
                 <div>
-                  <h3 className="text-sm font-bold uppercase tracking-[.14em] text-white sm:text-base" style={{ fontFamily: "var(--font-display)" }}>{title}</h3>
-                  <p className="mt-1.5 max-w-md text-sm leading-relaxed text-[#CBD5E1] font-normal">{desc}</p>
+                  <div className="counter-num whitespace-nowrap text-4xl font-bold leading-none gold-text-gradient sm:text-5xl" style={{ fontFamily: "var(--font-display)" }}>
+                    <span data-count={num} data-suffix={suffix}>{num}{suffix}</span>
+                  </div>
+                  <h3 className="mt-3 text-sm font-bold uppercase tracking-[.12em] text-white sm:text-base" style={{ fontFamily: "var(--font-display)" }}>{title}</h3>
+                  <p className="mt-1.5 max-w-md text-xs leading-relaxed text-[#CBD5E1] sm:text-sm">{desc}</p>
                 </div>
-                <span className="hidden text-xs font-mono font-bold tracking-[.2em] text-[#D4AF37] sm:block">0{index + 1}</span>
+                {index === 0 && <span className="hidden text-right text-[10px] font-bold uppercase tracking-[.14em] text-white/55 sm:block">Pan-India<br />coverage</span>}
               </div>
             </div>
           ))}
         </div>
 
-        <div className="flex items-center justify-between pt-7 text-xs font-bold uppercase tracking-[.16em] text-white/60">
+        <div className="flex items-center justify-between pt-6 text-xs font-bold uppercase tracking-[.16em] text-white/60">
           <span>PSARA Act · 2005</span>
           <span className="flex items-center gap-2"><span className="h-2 w-2 rounded-full bg-[#D4AF37]" /> Verification-ready practice</span>
         </div>

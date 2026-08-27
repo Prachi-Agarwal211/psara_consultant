@@ -58,7 +58,7 @@ export const BLOG_POSTS: BlogPost[] = [
       <h2>Validity and Renewal</h2>
       <p>PSARA licenses are typically valid for five years from the date of grant, though some states like Madhya Pradesh, Chhattisgarh, and Uttarakhand are widely noted for one-year validity regimes. Renewal must be applied for before expiry with updated documentation, proof of continued compliance, and payment of prescribed fees.</p>
 
-      <p><strong>Contact PSARA Consultant India</strong> at <strong>+91 99831 69555</strong> or WhatsApp for a state-specific checklist and filing support. Our team has assisted 300+ agencies across 28 states and UTs.</p>
+      <p><strong>Contact PSARA Consultant India</strong> at <strong>+91 99831 69555</strong> or WhatsApp for a state-specific checklist and filing support. Our team has assisted 300+ agencies across 36 States &amp; UTs.</p>
     `,
     coverImage: '/assets/images/blog/what-is-psara-license-complete-guide-cover.svg',
     author: 'PSARA Consultant India Team',
@@ -497,7 +497,7 @@ export const BLOG_POSTS: BlogPost[] = [
       <p>A critical fact that many new agencies discover too late: there is no single 'All India PSARA License' that replaces individual State licenses. Each State has its own Controlling Authority, application process, fee structure, and verification culture. If you want to operate in multiple States, you must obtain a separate license for each State.</p>
 
       <h2>The Right Expansion Sequence</h2>
-      <p>Based on our experience assisting agencies across 28+ States, we recommend the following expansion strategy:</p>
+      <p>Based on our experience assisting agencies across 36 States &amp; UTs, we recommend the following expansion strategy:</p>
       <ol>
         <li><strong>Home State First:</strong> Stabilise your home State license first. Build your office, training MOU, police verification, and compliance systems in one State before expanding.</li>
         <li><strong>Neighbouring States Next:</strong> Expand to 1–2 neighbouring States with similar regulatory cultures. For example, after Rajasthan, consider Delhi or Gujarat.</li>
@@ -626,7 +626,7 @@ export const BLOG_POSTS: BlogPost[] = [
       <p>PSARA Consultant India has:</p>
       <ul>
         <li>12+ operational desks across India with real office addresses</li>
-        <li>300+ agencies supported across 28+ States and UTs</li>
+        <li>300+ agencies supported across 36 States and UTs</li>
         <li>128+ verified Google reviews with a 5.0 rating</li>
         <li>Transparent fee structure with no hidden charges</li>
         <li>Dossier-first methodology documented on every service page</li>

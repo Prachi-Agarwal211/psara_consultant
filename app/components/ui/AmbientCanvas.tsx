@@ -56,22 +56,23 @@ export default function AmbientCanvas() {
     };
     const onVis = () => {
       visible = !document.hidden;
+      if (visible && !raf) raf = requestAnimationFrame(frame);
     };
 
     const n2 = (x: number, y: number, time: number) =>
       Math.sin(x * 1.55 + time * 0.38) * Math.sin(y * 1.18 + time * 0.44);
 
     const frame = () => {
+      raf = 0;
       if (!visible) {
-        raf = requestAnimationFrame(frame);
         return;
       }
       t += 0.0075;
       mouse.x += (mouse.tx - mouse.x) * 0.035;
       mouse.y += (mouse.ty - mouse.y) * 0.035;
 
-      // Plum authority void base — 2026 metallic system
-      ctx.fillStyle = "#080714";
+      // Deep navy authority void base — 2026 metallic system
+      ctx.fillStyle = "#050B14";
       ctx.fillRect(0, 0, w, h);
 
       // Plum fluid pockets — OKLCH tuned, replaces cherry
@@ -87,8 +88,8 @@ export default function AmbientCanvas() {
           // Plum authority carries visual identity — desaturated, not cherry
           g.addColorStop(0, `rgba(88, 33, 199, ${0.06 + intensity * 0.12})`);
           g.addColorStop(0.35, `rgba(107, 70, 200, ${0.03 + intensity * 0.06})`);
-          g.addColorStop(0.7, `rgba(30, 17, 64, 0.14)`);
-          g.addColorStop(1, "rgba(8, 7, 20, 0)");
+          g.addColorStop(0.7, `rgba(22, 58, 84, 0.14)`);
+          g.addColorStop(1, "rgba(5, 11, 20, 0)");
           ctx.fillStyle = g;
           ctx.beginPath();
           ctx.arc(px, py, r, 0, Math.PI * 2);
@@ -96,7 +97,7 @@ export default function AmbientCanvas() {
         }
       }
 
-      // Hero-right plum glow (portal)
+      // Hero-right blue glow (portal)
       const hero = ctx.createRadialGradient(
         w * 0.72 + (mouse.x - 0.5) * 60,
         h * 0.38 + (mouse.y - 0.5) * 40,
@@ -105,8 +106,8 @@ export default function AmbientCanvas() {
         h * 0.4,
         w * 0.42
       );
-      hero.addColorStop(0, "rgba(88, 33, 199, 0.20)");
-      hero.addColorStop(0.4, "rgba(107, 70, 200, 0.07)");
+      hero.addColorStop(0, "rgba(22, 94, 122, 0.20)");
+      hero.addColorStop(0.4, "rgba(42, 121, 145, 0.07)");
       hero.addColorStop(1, "transparent");
       ctx.fillStyle = hero;
       ctx.fillRect(0, 0, w, h);
@@ -124,7 +125,7 @@ export default function AmbientCanvas() {
       ctx.fillStyle = lowerGold;
       ctx.fillRect(0, 0, w, h);
 
-      // Metallic dust — plum+gold, not cherry
+      // Metallic dust — navy+gold, not purple
       ctx.save();
       for (let i = 0; i < 56; i++) {
         const px = ((Math.sin(i * 13.7 + t * 0.28) + 1) * 0.5) * w;
@@ -132,16 +133,16 @@ export default function AmbientCanvas() {
         const s = 0.5 + (i % 4) * 0.35;
         ctx.beginPath();
         ctx.fillStyle =
-          i % 4 === 0 ? "rgba(232, 213, 163, 0.50)" : "rgba(107, 70, 200, 0.30)";
+          i % 4 === 0 ? "rgba(232, 213, 163, 0.50)" : "rgba(42, 121, 145, 0.30)";
         ctx.arc(px, py, s, 0, Math.PI * 2);
         ctx.fill();
       }
       ctx.restore();
 
-      // Soft plum vignette — OLED depth
+      // Soft navy vignette — OLED depth
       const vig = ctx.createRadialGradient(w * 0.5, h * 0.45, h * 0.15, w * 0.5, h * 0.5, h * 0.9);
-      vig.addColorStop(0, "rgba(8,7,20,0)");
-      vig.addColorStop(1, "rgba(8,7,20,0.55)");
+      vig.addColorStop(0, "rgba(5,11,20,0)");
+      vig.addColorStop(1, "rgba(5,11,20,0.55)");
       ctx.fillStyle = vig;
       ctx.fillRect(0, 0, w, h);
 
@@ -164,16 +165,16 @@ export default function AmbientCanvas() {
 
   return (
     <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden" aria-hidden>
-      {/* CSS base always (mobile + reduced motion) — plum authority */}
+      {/* CSS base always (mobile + reduced motion) — navy authority */}
       <div
         className="absolute inset-0"
         style={{
           background: `
-            radial-gradient(ellipse 70% 55% at 72% 32%, rgba(88,33,199,0.24) 0%, transparent 55%),
+            radial-gradient(ellipse 70% 55% at 72% 32%, rgba(22,94,122,0.24) 0%, transparent 55%),
             radial-gradient(ellipse 45% 40% at 92% 18%, rgba(212,175,55,0.13) 0%, transparent 50%),
             radial-gradient(ellipse 40% 38% at 88% 78%, rgba(212,175,55,0.08) 0%, transparent 50%),
-            radial-gradient(ellipse 60% 50% at 20% 70%, rgba(30,17,64,0.12) 0%, transparent 55%),
-            linear-gradient(165deg, #080714 0%, #120E2A 45%, #080714 100%)
+            radial-gradient(ellipse 60% 50% at 20% 70%, rgba(22,58,84,0.12) 0%, transparent 55%),
+            linear-gradient(165deg, #050B14 0%, #0B1728 45%, #050B14 100%)
           `,
         }}
       />

@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { ShieldCheck, CheckCircle2 } from "lucide-react";
 import { LEADERS } from "../../../data/team";
+import { SITE } from "../../../lib/config";
 
 export default function Leadership() {
   return (
@@ -86,7 +87,7 @@ export default function Leadership() {
                       "@type": "Organization",
                       name: "PSARA License Consultant India",
                     },
-                    image: `https://www.psara-consultant.com${leader.photo}`,
+                    image: `${SITE.url}${leader.photo}`,
                     description: leader.bio,
                   }),
                 }}

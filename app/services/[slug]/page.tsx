@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { SERVICES, getService } from "../../../data/services";
-import { PageHero, PageMain, Prose } from "../../../components/PageShell";
+import { PageHero, PageMain } from "../../../components/PageShell";
 import StageShell from "../../components/ui/StageShell";
 import WhatsAppForm from "../../../components/WhatsAppForm";
 import JsonLd from "../../../components/JsonLd";
@@ -104,7 +104,7 @@ export default async function ServiceDetailPage({
             </div>
 
             {/* Detailed Sections */}
-            {s.sections.map((sec, i) => (
+            {s.sections.map((sec) => (
               <div key={sec.h} className="rounded-2xl border border-white/10 bg-gradient-to-b from-[#14102A] to-[#0F0C1F] p-6 shadow-md space-y-3">
                 <h3 className="text-xl font-bold text-white" style={{ fontFamily: "var(--font-display)" }}>{sec.h}</h3>
                 <p className="text-sm font-normal leading-relaxed text-[#E2E8F0]">{sec.p}</p>
@@ -161,7 +161,7 @@ export default async function ServiceDetailPage({
                 </Link>
                 <Link href="/states" className="p-4 rounded-xl border border-white/10 bg-[#0F0C1F] hover:border-[#D4AF37] transition-all flex items-center justify-between">
                   <div>
-                    <span className="text-xs font-bold text-white block">All 28 State Dossiers</span>
+                    <span className="text-xs font-bold text-white block">All 36 State &amp; UT Dossiers</span>
                     <span className="text-[11px] text-[#94A3B8]">Controlling Authority portals &amp; rules</span>
                   </div>
                   <ArrowRight className="h-4 w-4 text-[#D4AF37]" />

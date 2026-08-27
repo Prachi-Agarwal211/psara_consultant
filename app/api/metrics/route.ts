@@ -33,6 +33,10 @@ interface LeadData {
   }>;
 }
 
+function stringField(value: unknown, fallback = ""): string {
+  return typeof value === "string" ? value.trim().slice(0, 2000) : fallback;
+}
+
 function ensureDataDir() {
   const dir = path.dirname(DATA_FILE);
   if (!fs.existsSync(dir)) {
@@ -81,7 +85,7 @@ function checkRateLimit(ip: string): boolean {
   const oneHourAgo = new Date(Date.now() - 60 * 60 * 1000).toISOString();
   
   const recentRequests = data.accessLog.filter(
-    log => log.ip === ip && log.timestamp > oneHourAgo && log.action === "POST"
+    log => log.ip === ip && log.timestamp > oneHourAgo && ["LEAD_CREATED", "METRIC_TRACKED"].includes(log.action)
   );
   
   return recentRequests.length < MAX_LEADS_PER_HOUR;
@@ -91,6 +95,8 @@ function authenticate(request: NextRequest): { authenticated: boolean; ip: strin
   const authHeader = request.headers.get("authorization");
   const ip = getIP(request);
   
+  if (!METRICS_PASSWORD) return { authenticated: false, ip };
+
   // Check for password in header
   if (authHeader === `Bearer ${METRICS_PASSWORD}`) {
     logAccess(ip, "AUTH_SUCCESS", true);
@@ -108,7 +114,8 @@ function authenticate(request: NextRequest): { authenticated: boolean; ip: strin
 }
 
 export async function GET(request: NextRequest) {
-  const { authenticated, ip } = authenticate(request);
+  if (!METRICS_PASSWORD) return NextResponse.json({ error: "Metrics are not configured." }, { status: 503 });
+  const { authenticated } = authenticate(request);
   
   if (!authenticated) {
     return NextResponse.json(
@@ -119,23 +126,15 @@ export async function GET(request: NextRequest) {
   
   const data = loadData();
   // Don't expose access logs to client
-  const { accessLog, ...safeData } = data;
+  const safeData = { leads: data.leads, metrics: data.metrics };
   
   return NextResponse.json(safeData);
 }
 
 export async function POST(request: NextRequest) {
   const ip = getIP(request);
-  
-  // Check rate limit
-  if (!checkRateLimit(ip)) {
-    logAccess(ip, "RATE_LIMIT", false);
-    return NextResponse.json(
-      { error: "Rate limit exceeded. Try again later." },
-      { status: 429 }
-    );
-  }
-  
+  if (!METRICS_PASSWORD) return NextResponse.json({ error: "Metrics are not configured." }, { status: 503 });
+
   // Require authentication
   const authHeader = request.headers.get("authorization");
   if (authHeader !== `Bearer ${METRICS_PASSWORD}`) {
@@ -145,19 +144,29 @@ export async function POST(request: NextRequest) {
       { status: 401 }
     );
   }
-  
-  const body = await request.json();
+
+  if (!checkRateLimit(ip)) {
+    logAccess(ip, "RATE_LIMIT", false);
+    return NextResponse.json({ error: "Rate limit exceeded. Try again later." }, { status: 429 });
+  }
+
+  let body: { type?: string; id?: string; name?: string; [key: string]: unknown };
+  try {
+    body = await request.json();
+  } catch {
+    return NextResponse.json({ error: "Invalid request body." }, { status: 400 });
+  }
   const data = loadData();
   
   if (body.type === "lead") {
     const lead = {
       id: `lead-${Date.now()}`,
-      name: body.name || "Anonymous",
-      phone: body.phone || "",
-      email: body.email || "",
-      product: body.product || "",
-      message: body.message || "",
-      sourcePage: body.sourcePage || "/",
+      name: stringField(body.name, "Anonymous"),
+      phone: stringField(body.phone),
+      email: stringField(body.email),
+      product: stringField(body.product),
+      message: stringField(body.message),
+      sourcePage: stringField(body.sourcePage, "/"),
       timestamp: new Date().toISOString(),
       ip: ip // Track IP for security
     };
@@ -170,8 +179,8 @@ export async function POST(request: NextRequest) {
       data.metrics[idx].lastActive = "Just now";
     } else {
       data.metrics.push({
-        id: body.id,
-        name: body.name || "Unknown",
+        id: stringField(body.id, "unknown"),
+        name: stringField(body.name, "Unknown"),
         views: 0,
         clicks: 1,
         lastActive: "Just now"
@@ -181,6 +190,9 @@ export async function POST(request: NextRequest) {
   } else if (body.type === "audit") {
     // Return access logs (only for admin)
     return NextResponse.json({ accessLog: data.accessLog.slice(0, 100) });
+  } else {
+    logAccess(ip, "INVALID_REQUEST", false);
+    return NextResponse.json({ error: "Unknown metrics event." }, { status: 400 });
   }
   
   saveData(data);
@@ -188,6 +200,7 @@ export async function POST(request: NextRequest) {
 }
 
 export async function DELETE(request: NextRequest) {
+  if (!METRICS_PASSWORD) return NextResponse.json({ error: "Metrics are not configured." }, { status: 503 });
   const { authenticated, ip } = authenticate(request);
   
   if (!authenticated) {

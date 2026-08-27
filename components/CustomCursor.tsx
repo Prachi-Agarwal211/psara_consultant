@@ -87,7 +87,7 @@ export default function CustomCursor() {
       {/* Outer Spring Ring */}
       <div
         ref={cursorRef}
-        className={`fixed top-0 left-0 pointer-events-none z-[9999] rounded-full border border-[var(--gold)] flex items-center justify-center transition-[width,height,background-color,border-color] duration-300 ${
+        className={`fixed top-0 left-0 pointer-events-none z-[10001] rounded-full border border-[var(--gold)] flex items-center justify-center transition-[width,height,background-color,border-color] duration-300 ${
           hovered
             ? cursorText
               ? "w-24 h-24 bg-[var(--gold)]/20 backdrop-blur-xs border-[var(--gold)] text-[var(--gold)]"
@@ -106,7 +106,7 @@ export default function CustomCursor() {
       {/* Inner Precision Dot */}
       <div
         ref={dotRef}
-        className="fixed top-0 left-0 pointer-events-none z-[9999] w-1.5 h-1.5 rounded-full bg-[var(--gold)]"
+        className="fixed top-0 left-0 pointer-events-none z-[10001] w-1.5 h-1.5 rounded-full bg-[var(--gold)]"
         style={{ willChange: "transform" }}
       />
     </>

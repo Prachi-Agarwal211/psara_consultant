@@ -11,7 +11,7 @@ export default function MetricsDashboardPage() {
   const [searchTerm, setSearchTerm] = useState("");
   const [activeTab, setActiveTab] = useState<"leads" | "heatmap" | "traffic">("leads");
   const [password, setPassword] = useState("");
-  const [isAuthenticated, setIsAuthenticated] = useState(() => typeof window !== "undefined" && sessionStorage.getItem("metrics_auth") === "true");
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [authError, setAuthError] = useState("");
 
   const handleLogin = async () => {
@@ -25,8 +25,7 @@ export default function MetricsDashboardPage() {
       
       if (response.ok) {
         setIsAuthenticated(true);
-        sessionStorage.setItem("metrics_auth", "true");
-        loadData();
+        loadData(password);
       } else {
         setAuthError("Incorrect password");
       }
@@ -35,11 +34,11 @@ export default function MetricsDashboardPage() {
     }
   };
 
-  const loadData = async () => {
+  const loadData = async (token: string) => {
     try {
       const [leadsData, metricsData] = await Promise.all([
-        getStoredLeads(),
-        getStoredMetrics()
+        getStoredLeads(token),
+        getStoredMetrics(token)
       ]);
       setLeads(leadsData);
       setMetrics(metricsData.length > 0 ? metricsData : [
@@ -55,7 +54,6 @@ export default function MetricsDashboardPage() {
 
   const handleLogout = () => {
     setIsAuthenticated(false);
-    sessionStorage.removeItem("metrics_auth");
     setPassword("");
     setAuthError("");
   };
@@ -71,16 +69,10 @@ export default function MetricsDashboardPage() {
     const headers = ["ID", "Name", "Phone", "Email", "Requirement", "Source Page", "Timestamp", "IP Address"];
     const rows = leads.map((l) => [
       l.id,
-      `"${l.name}"`,
-      `"${l.phone}"`,
-      `"${l.email || ""}"`,
-      `"${l.product || ""}"`,
-      `"${l.sourcePage}"`,
-      `"${l.timestamp}"`,
-      `"${l.ip || "N/A"}"`
+      ...[l.name, l.phone, l.email || "", l.product || "", l.sourcePage, l.timestamp, l.ip || "N/A"].map((value) => `"${String(value).replace(/"/g, '""')}"`),
     ]);
     const csvContent = "data:text/csv;charset=utf-8," + [headers.join(","), ...rows.map((e) => e.join(","))].join("\n");
-    const encodedUri = encodeURI(csvContent);
+    const encodedUri = `data:text/csv;charset=utf-8,${encodeURIComponent(csvContent)}`;
     const link = document.createElement("a");
     link.setAttribute("href", encodedUri);
     link.setAttribute("download", `leads_${new Date().toISOString().slice(0, 10)}.csv`);

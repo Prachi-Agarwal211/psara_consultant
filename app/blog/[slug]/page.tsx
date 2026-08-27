@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { existsSync } from "node:fs";
+import path from "node:path";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -24,12 +26,16 @@ export async function generateMetadata({
   const { slug } = await params;
   const post = BLOG_POSTS.find((p) => p.slug === slug);
   if (!post) return {};
+  const ogPath = `/assets/images/og/${slug}-og.svg`;
+  const resolvedOgPath = existsSync(path.join(process.cwd(), "public", ogPath.slice(1)))
+    ? ogPath
+    : "/assets/images/og/default-og.svg";
   return pageMeta(
     post.title,
     post.excerpt,
     `/blog/${slug}`,
     post.tags,
-    `/assets/images/og/${slug}-og.svg`
+    resolvedOgPath
   );
 }
 
@@ -45,6 +51,9 @@ export default async function BlogPostPage({
   const related = BLOG_POSTS.filter(
     (p) => p.slug !== slug && (p.category === post.category || p.tags.some((t) => post.tags.includes(t)))
   ).slice(0, 3);
+  const coverImage = existsSync(path.join(process.cwd(), "public", post.coverImage.slice(1)))
+    ? post.coverImage
+    : "/assets/images/generated/hero-poster.webp";
 
   // BlogPosting JSON-LD
   const blogPostingSchema = {
@@ -53,7 +62,7 @@ export default async function BlogPostPage({
     "@id": `${SITE.url}/blog/${slug}`,
     headline: post.title,
     description: post.excerpt,
-    image: `${SITE.url}${post.coverImage}`,
+    image: `${SITE.url}${coverImage}`,
     datePublished: post.publishedAt,
     dateModified: post.modifiedAt,
     author: {
@@ -112,7 +121,7 @@ export default async function BlogPostPage({
         {/* Featured cover image */}
         <div className="psara-article-cover relative mb-10 aspect-[21/9] overflow-hidden rounded-[var(--radius)] border border-[var(--line)] bg-[var(--obsidian)]">
           <Image
-            src={post.coverImage}
+            src={coverImage}
             alt={`${post.title} — PSARA Consultant India blog cover`}
             fill
             priority
@@ -266,7 +275,7 @@ export default async function BlogPostPage({
                   Get PSARA License Help
                 </h3>
                 <p className="mt-2 text-xs text-[var(--white-55)]">
-                  500+ agencies across 28 states trust us. Call or WhatsApp for a free consultation.
+                  500+ agencies across 36 States &amp; UTs trust us. Call or WhatsApp for a free consultation.
                 </p>
                 <div className="mt-4 space-y-2">
                   <a

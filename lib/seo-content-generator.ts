@@ -452,6 +452,8 @@ export function localBusinessJsonLd(opts: {
   lng?: number;
   address?: string;
   pin?: string;
+  /** Set false when the page is served by a regional desk but has no verified local office. */
+  localOffice?: boolean;
   /** Nearby city names for areaServed on city pages */
   nearbyCities?: string[];
   /** Service names for hasOfferCatalog (use Service.title) */
@@ -472,7 +474,7 @@ export function localBusinessJsonLd(opts: {
 
   return {
     "@context": "https://schema.org",
-    "@type": "LocalBusiness",
+    "@type": opts.localOffice === false ? "ProfessionalService" : "LocalBusiness",
     '@id': opts.url,
     name: opts.name,
     description: opts.description,
@@ -480,15 +482,19 @@ export function localBusinessJsonLd(opts: {
     telephone: CONTACT.phone,
     email: CONTACT.email,
     image: `${SITE.url}/logo.png`,
-    address: {
-      '@type': 'PostalAddress',
-      streetAddress: opts.address || 'C-36, Third Floor, Capital Galleria, Sirsi Road, Kanakpura',
-      addressLocality: opts.city || 'Jaipur',
-      addressRegion: opts.state || 'Rajasthan',
-      postalCode: opts.pin || '302034',
-      addressCountry: 'IN',
-    },
-    ...(opts.lat && opts.lng
+    ...(opts.localOffice === false || !opts.address
+      ? {}
+      : {
+          address: {
+            '@type': 'PostalAddress',
+            streetAddress: opts.address,
+            addressLocality: opts.city || 'Jaipur',
+            addressRegion: opts.state || 'Rajasthan',
+            postalCode: opts.pin || '302034',
+            addressCountry: 'IN',
+          },
+        }),
+    ...(opts.localOffice !== false && opts.lat && opts.lng
       ? {
           geo: {
             '@type': 'GeoCoordinates',
@@ -497,13 +503,17 @@ export function localBusinessJsonLd(opts: {
           },
         }
       : {}),
-    aggregateRating: {
-      '@type': 'AggregateRating',
-      ratingValue: AGGREGATE_RATING.ratingValue,
-      reviewCount: AGGREGATE_RATING.reviewCount,
-      bestRating: AGGREGATE_RATING.bestRating,
-      worstRating: AGGREGATE_RATING.worstRating,
-    },
+    ...(opts.localOffice === false
+      ? {}
+      : {
+          aggregateRating: {
+            '@type': 'AggregateRating',
+            ratingValue: AGGREGATE_RATING.ratingValue,
+            reviewCount: AGGREGATE_RATING.reviewCount,
+            bestRating: AGGREGATE_RATING.bestRating,
+            worstRating: AGGREGATE_RATING.worstRating,
+          },
+        }),
     openingHoursSpecification: {
       '@type': 'OpeningHoursSpecification',
       dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],

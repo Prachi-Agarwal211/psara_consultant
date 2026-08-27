@@ -1,7 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import SmoothScroll from "./components/providers/SmoothScroll";
 import SiteChrome from "../components/SiteChrome";
-import ScrollProgress from "./components/ScrollProgress";
 import CustomCursor from "../components/CustomCursor";
 import { SITE, CONTACT, AGGREGATE_RATING, OFFICES } from "../lib/config";
 import DynamicBreadcrumbSchema from "../components/DynamicBreadcrumbSchema";
@@ -13,7 +12,7 @@ export const viewport: Viewport = {
   initialScale: 1,
   maximumScale: 5,
   viewportFit: "cover",
-  themeColor: "#30266F",
+  themeColor: "#071525",
 };
 
 export const metadata: Metadata = {
@@ -45,7 +44,7 @@ export const metadata: Metadata = {
         url: "/assets/images/og/default-og.jpg",
         width: 1200,
         height: 630,
-        alt: "PSARA Consultant India — PSARA License Clearance Across 28 States",
+        alt: "PSARA Consultant India — PSARA License Clearance Across 36 States & UTs",
       },
     ],
     locale: "en_IN",
@@ -70,9 +69,9 @@ export const metadata: Metadata = {
     apple: [{ url: "/apple-icon.png", sizes: "180x180", type: "image/png" }],
   },
   other: {
-    "theme-color": "#30266F",
-    "msapplication-navbutton-color": "#30266F",
-    "apple-mobile-web-app-status-bar-style": "#30266F",
+    "theme-color": "#071525",
+    "msapplication-navbutton-color": "#071525",
+    "apple-mobile-web-app-status-bar-style": "#071525",
     "geo.region": "IN-DL",
     "geo.placename": "New Delhi, Delhi",
     "geo.position": "28.6304;77.2177",
@@ -244,7 +243,6 @@ export default function RootLayout({
         {/* Dynamic per-page breadcrumb — rendered in body to avoid head hydration mismatch */}
         <DynamicBreadcrumbSchema />
         <CustomCursor />
-        <ScrollProgress />
         <SmoothScroll>
           <PageTransition>
             <SiteChrome>{children}</SiteChrome>

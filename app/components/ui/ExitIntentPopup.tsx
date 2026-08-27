@@ -15,7 +15,10 @@ export default function ExitIntentPopup() {
     if (dismissed) return;
 
     const handleMouseLeave = (e: MouseEvent) => {
-      if (e.clientY <= 10 && !hasTriggered) {
+      const hero = document.getElementById("hero");
+      const heroBottom = hero ? hero.getBoundingClientRect().bottom + window.scrollY : 0;
+      const heroPassed = !hero || window.scrollY >= heroBottom;
+      if (e.clientY <= 10 && heroPassed && !hasTriggered) {
         setIsOpen(true);
         setHasTriggered(true);
       }

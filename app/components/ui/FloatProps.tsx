@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import Image from "next/image";
 import { ensureGsap, prefersReducedMotion } from "../../lib/motion";
 
 type PropName =
@@ -33,6 +34,20 @@ type Slot = {
 };
 
 const SRC = (name: PropName) => `/assets/images/props/${name}.webp`;
+
+const INTRINSIC_DIMENSIONS: Record<PropName, readonly [number, number]> = {
+  "shield-gold": [512, 600],
+  "wax-seal": [420, 420],
+  gavel: [560, 360],
+  "document-scroll": [420, 520],
+  laurel: [520, 520],
+  "ribbon-banner": [640, 200],
+  "ink-pen": [480, 120],
+  "corner-ornament": [280, 280],
+  "portfolio-binder": [1024, 1024],
+  "seal-and-pen": [1024, 1024],
+  "statutory-compass": [1254, 1254],
+};
 
 /**
  * Decorative transparent props for section atmosphere.
@@ -73,29 +88,35 @@ export default function FloatProps({
       className={`pointer-events-none absolute inset-0 z-[1] overflow-hidden ${className}`}
       aria-hidden
     >
-      {slots.map((s) => (
-        <img
-          key={`${s.name}-${s.className}`}
-          data-float-prop
-          data-drift={s.drift ?? 12}
-          src={SRC(s.name)}
-          alt=""
-          width={s.size ?? 120}
-          height={s.size ?? 120}
-          draggable={false}
-          className={[
-            "absolute select-none will-change-transform",
-            s.desktopOnly ? "hidden md:block" : "block",
-            s.className,
-          ].join(" ")}
-          style={{
-            width: s.size ?? 120,
-            height: "auto",
-            opacity: s.opacity ?? 0.55,
-            transform: s.rotate ? `rotate(${s.rotate}deg)` : undefined,
-          }}
-        />
-      ))}
+      {slots.map((s) => {
+        const width = s.size ?? 120;
+        const [sourceWidth, sourceHeight] = INTRINSIC_DIMENSIONS[s.name];
+        const height = Math.round(width * (sourceHeight / sourceWidth));
+
+        return (
+          <Image
+            key={`${s.name}-${s.className}`}
+            data-float-prop
+            data-drift={s.drift ?? 12}
+            src={SRC(s.name)}
+            alt=""
+            width={width}
+            height={height}
+            draggable={false}
+            className={[
+              "absolute select-none will-change-transform",
+              s.desktopOnly ? "hidden md:block" : "block",
+              s.className,
+            ].join(" ")}
+            style={{
+              width,
+              height,
+              opacity: s.opacity ?? 0.55,
+              transform: s.rotate ? `rotate(${s.rotate}deg)` : undefined,
+            }}
+          />
+        );
+      })}
     </div>
   );
 }
