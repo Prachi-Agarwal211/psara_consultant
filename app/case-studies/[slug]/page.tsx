@@ -35,7 +35,7 @@ export default async function CaseStudyDetailPage({ params }: { params: Promise<
       <PageMain className="bg-[#080714] text-white">
         <div className="max-w-4xl mx-auto space-y-10">
           {/* Key Metrics Banner */}
-          <div className="rounded-3xl border border-[rgba(212,175,55,0.35)] bg-gradient-to-r from-[#14102A] via-[#0A1428] to-[#0E1B33] p-6 sm:p-8 flex flex-col sm:flex-row items-center justify-between gap-6 shadow-2xl">
+          <div className="flex flex-col items-center justify-between gap-6 rounded-3xl border border-[rgba(212,175,55,0.35)] bg-gradient-to-r from-[#332066] via-[#180D36] to-[#24104B] p-6 shadow-2xl sm:flex-row sm:p-8">
             <div className="space-y-1">
               <span className="text-xs font-bold uppercase tracking-widest text-[#D4AF37] block">Territory &amp; Sector</span>
               <p className="text-base font-bold text-white flex items-center gap-2">

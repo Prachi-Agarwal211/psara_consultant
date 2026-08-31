@@ -13,7 +13,7 @@ export default function StateGridHome() {
   return (
     <section
       id="states"
-      className="section-atmosphere relative overflow-hidden bg-[#050B14] text-white py-20 lg:py-28 border-b border-white/10"
+      className="section-atmosphere mood-states relative overflow-hidden bg-[#080611] text-white py-20 lg:py-28 border-b border-white/10"
     >
       <div className="relative z-10 px-[var(--gutter)] max-w-7xl mx-auto space-y-12">
         {/* Header */}
@@ -41,7 +41,8 @@ export default function StateGridHome() {
             <Link
               key={s.slug}
               href={`/states/${s.slug}`}
-              className="group relative flex flex-col justify-between h-[146px] p-5 rounded-2xl border border-[rgba(212,175,55,0.22)] bg-gradient-to-b from-[#10243A] to-[#0B1728] shadow-lg transition-all duration-200 hover:-translate-y-1 hover:border-[#D4AF37] hover:from-[#163A54] hover:to-[#10243A]"
+              data-cursor="Open dossier"
+              className="cursor-surface group relative flex h-[146px] flex-col justify-between rounded-2xl border border-[rgba(196,181,253,0.24)] bg-gradient-to-br from-[#2A1853] via-[#1A1236] to-[#0E0821] p-5 shadow-lg transition-[border-color,background,transform,box-shadow] duration-200 hover:-translate-y-1 hover:border-[#D4AF37] hover:from-[#3B2374] hover:to-[#1A1236]"
             >
               <div className="flex items-center justify-between">
                 <span className="font-mono text-[10px] font-bold uppercase tracking-widest text-[#D4AF37]" style={{ fontFamily: "var(--font-body)" }}>
@@ -68,7 +69,8 @@ export default function StateGridHome() {
           <button
             type="button"
             onClick={() => setShowAll((prev) => !prev)}
-            className="inline-flex items-center gap-2 rounded-xl border border-[#D4AF37] bg-gradient-to-r from-[#FFF6D9]/15 to-[#D4AF37]/20 hover:from-[#D4AF37] hover:to-[#C89B3C] hover:text-[#050B14] px-8 py-3.5 text-xs font-bold uppercase tracking-[0.12em] text-[#F5D061] transition-all duration-200 shadow-md"
+            data-cursor="Explore states"
+            className="inline-flex items-center gap-2 rounded-xl border border-[#D4AF37] bg-gradient-to-r from-[#2A1853]/50 via-[#D4AF37]/15 to-[#D4AF37]/25 hover:from-[#D4AF37] hover:to-[#C89B3C] hover:text-[#080611] px-8 py-3.5 text-xs font-bold uppercase tracking-[0.12em] text-[#F5D061] transition-[border-color,box-shadow,transform,filter] duration-200 shadow-md"
             style={{ fontFamily: "var(--font-body)" }}
           >
             <span>{showAll ? "Show Fewer States" : "See More States (+6 More)"}</span>
@@ -77,7 +79,7 @@ export default function StateGridHome() {
 
           <Link
             href="/states"
-            className="inline-flex items-center gap-2 rounded-xl border border-white/20 bg-[#0B1728] hover:bg-white/10 px-6 py-3.5 text-xs font-bold uppercase tracking-[0.12em] text-white transition-all"
+            className="inline-flex items-center gap-2 rounded-xl border border-violet-200/25 bg-[#180D36] hover:bg-[#2A1853] px-6 py-3.5 text-xs font-bold uppercase tracking-[0.12em] text-white transition-[border-color,box-shadow,transform]"
             style={{ fontFamily: "var(--font-body)" }}
           >
             <span>All 36 State &amp; UT Dossiers</span>

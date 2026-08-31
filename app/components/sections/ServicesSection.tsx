@@ -78,7 +78,7 @@ export default function ServicesSection() {
   };
 
   return (
-    <section id="services" className="section-atmosphere relative bg-[#050B14] text-white border-b border-white/10">
+    <section id="services" className="section-atmosphere mood-services relative bg-[#080611] text-white border-b border-white/10">
       {/* Pinned horizontal showcase — statutory core, scroll to explore (lg only) */}
       <ServicesPinnedHorizontal />
 
@@ -103,14 +103,14 @@ export default function ServicesSection() {
         </MaskReveal>
 
         {/* Category Navigation Tabs */}
-        <div className="flex flex-wrap items-center justify-center gap-2 rounded-2xl border border-white/10 bg-[#0B1728] p-1.5 shadow-inner">
+        <div className="flex flex-wrap items-center justify-center gap-2 rounded-2xl border border-violet-300/20 bg-[#180D36]/85 p-1.5 shadow-[0_18px_45px_-28px_rgba(139,92,246,0.8)]">
           {CATEGORIES.map((cat) => (
             <button
               key={cat.id}
               onClick={() => handleCategoryChange(cat.id)}
-              className={`px-5 py-2.5 text-xs font-bold uppercase tracking-[0.1em] rounded-xl transition-all duration-200 ${
+              className={`px-5 py-2.5 text-xs font-bold uppercase tracking-[0.1em] rounded-xl transition-[border-color,box-shadow,transform,filter] duration-200 ${
                 activeCategory === cat.id
-                  ? "text-[#241703] shadow-lg shadow-black/40 bg-[#C89B3C]"
+                  ? "text-[#241703] shadow-lg shadow-[0_16px_32px_-20px_rgba(8,6,17,0.55)] bg-gradient-to-r from-[#F5D061] via-[#D4AF37] to-[#A87524]"
                   : "text-[#CBD5E1] hover:text-white hover:bg-white/5"
               }`}
               style={{ fontFamily: "var(--font-body)", ...(activeCategory === cat.id ? { boxShadow: "inset 0 1px 0 rgba(255,250,230,0.8)" } : {}) }}
@@ -132,13 +132,13 @@ export default function ServicesSection() {
                 <TiltCard>
                   <Link
                     href={`/services/${service.slug}`}
-                    className="group relative flex h-full min-h-[280px] flex-col justify-between overflow-hidden rounded-2xl border border-[rgba(212,175,55,0.22)] bg-gradient-to-b from-[#10243A] to-[#0B1728] p-6 sm:p-8 shadow-xl transition-all duration-200 hover:-translate-y-1 hover:border-[#D4AF37] hover:from-[#163A54] hover:to-[#10243A]"
-                    data-cursor="View"
+                    className="cursor-surface group relative flex h-full min-h-[280px] flex-col justify-between overflow-hidden rounded-2xl border border-[rgba(196,181,253,0.22)] bg-gradient-to-br from-[#2A1853] via-[#1A1236] to-[#0E0821] p-6 shadow-xl transition-[border-color,background,box-shadow,transform] duration-200 hover:-translate-y-1 hover:border-[#D4AF37] hover:from-[#3B2374] hover:to-[#1A1236] sm:p-8"
+                    data-cursor="View service"
                   >
                 <div>
                   {/* Top Row: Icon + Badge */}
                   <div className="flex items-center justify-between gap-4 mb-6">
-                    <div className="flex items-center justify-center h-12 w-12 rounded-xl border border-[#D4AF37]/40 bg-[#0B1728] text-[#D4AF37] transition-all duration-200 group-hover:bg-[#C89B3C] group-hover:text-[#241703] group-hover:border-[#C89B3C] shadow-md">
+                    <div className="flex items-center justify-center h-12 w-12 rounded-xl border border-[#C4B5FD]/40 bg-[#120C27] text-[#F5D061] transition-[border-color,box-shadow,transform,filter] duration-200 group-hover:bg-[#D4AF37] group-hover:text-[#241703] group-hover:border-[#D4AF37] shadow-md">
                       <IconComponent className="h-6 w-6" />
                     </div>
                     <span className="font-mono text-xs font-bold text-[#D4AF37]">
@@ -187,7 +187,7 @@ export default function ServicesSection() {
             <button
               type="button"
               onClick={() => setShowAll((prev) => !prev)}
-              className="inline-flex items-center gap-2 rounded-xl border border-[#D4AF37] bg-gradient-to-r from-[#FFF6D9]/15 to-[#D4AF37]/20 hover:from-[#D4AF37] hover:to-[#C89B3C] hover:text-[#050B14] px-8 py-3.5 text-xs font-bold uppercase tracking-[0.12em] text-[#F5D061] transition-all duration-200 shadow-md"
+              className="inline-flex items-center gap-2 rounded-xl border border-[#D4AF37] bg-gradient-to-r from-[#2A1853]/50 via-[#D4AF37]/15 to-[#D4AF37]/25 hover:from-[#D4AF37] hover:to-[#C89B3C] hover:text-[#080611] px-8 py-3.5 text-xs font-bold uppercase tracking-[0.12em] text-[#F5D061] transition-[border-color,box-shadow,transform,filter] duration-200 shadow-md"
               style={{ fontFamily: "var(--font-body)" }}
             >
               <span>{showAll ? "Show Fewer Services" : `See More Services (${filteredServices.length - 6} More)`}</span>
@@ -196,7 +196,7 @@ export default function ServicesSection() {
 
             <Link
               href="/services"
-              className="inline-flex items-center gap-2 rounded-xl border border-white/20 bg-[#0B1728] hover:bg-white/10 px-6 py-3.5 text-xs font-bold uppercase tracking-[0.12em] text-white transition-all"
+              className="inline-flex items-center gap-2 rounded-xl border border-violet-200/25 bg-[#180D36] hover:bg-[#2A1853] px-6 py-3.5 text-xs font-bold uppercase tracking-[0.12em] text-white transition-[border-color,box-shadow,transform]"
               style={{ fontFamily: "var(--font-body)" }}
             >
               <span>All 26 Services Index</span>
@@ -206,7 +206,7 @@ export default function ServicesSection() {
         )}
 
         {/* Bottom Callout Box with Multi-Depth Shading */}
-        <div className="rounded-3xl border border-[rgba(212,175,55,0.28)] bg-gradient-to-r from-[#10243A] via-[#0B1728] to-[#10243A] p-8 md:p-10 flex flex-col md:flex-row md:items-center justify-between gap-8 shadow-2xl">
+        <div className="rounded-3xl border border-[rgba(212,175,55,0.32)] bg-gradient-to-r from-[#2A1853] via-[#180D36] to-[#0E0821] p-8 md:p-10 flex flex-col md:flex-row md:items-center justify-between gap-8 shadow-2xl">
           <div className="space-y-2 max-w-2xl">
             <span className="text-xs font-bold uppercase tracking-[0.16em] text-[#D4AF37]" style={{ fontFamily: "var(--font-body)" }}>
               Multi-District &amp; State Bundles
@@ -222,7 +222,7 @@ export default function ServicesSection() {
           <div className="flex flex-wrap items-center gap-3 shrink-0">
             <Link
               href="/calculator"
-              className="inline-flex items-center gap-2 rounded-xl border border-white/20 bg-white/5 hover:bg-white/10 px-6 py-3.5 text-xs font-bold uppercase tracking-[0.1em] text-white transition-all"
+              className="inline-flex items-center gap-2 rounded-xl border border-white/20 bg-white/5 hover:bg-white/10 px-6 py-3.5 text-xs font-bold uppercase tracking-[0.1em] text-white transition-[border-color,box-shadow,transform]"
               style={{ fontFamily: "var(--font-body)" }}
             >
               <Calculator className="h-4 w-4 text-[#D4AF37]" />

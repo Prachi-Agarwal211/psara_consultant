@@ -63,7 +63,7 @@ export default function StatementInterstitial() {
   return (
     <section
       ref={rootRef}
-      className="relative min-h-[75dvh] flex flex-col items-center justify-center bg-[#050B14] text-white overflow-hidden py-24 border-y border-white/10"
+      className="relative min-h-[75dvh] flex flex-col items-center justify-center bg-[#100728] text-white overflow-hidden py-24 border-y border-white/10"
       data-parallax-root
     >
       {/* Ambient background glow — plum authority */}
@@ -72,7 +72,7 @@ export default function StatementInterstitial() {
           className="absolute inset-0"
           style={{
             background:
-              "radial-gradient(ellipse 60% 48% at 50% 42%, rgba(88,33,199,0.28) 0%, rgba(212,175,55,0.10) 45%, transparent 72%)",
+              "radial-gradient(ellipse 60% 48% at 50% 42%, rgba(139,92,246,0.38) 0%, rgba(212,175,55,0.16) 45%, transparent 72%), linear-gradient(145deg, rgba(8,6,17,0.8), rgba(42,24,83,0.72))",
           }}
         />
       </div>

@@ -63,7 +63,7 @@ export default function ContactForm({
   }, []);
 
   const inputBase = dark
-    ? "w-full rounded-xl border border-white/20 bg-[#050B14] px-4 py-3.5 text-sm font-medium text-white outline-none placeholder:text-white/40 focus:border-[#D4AF37] focus:ring-2 focus:ring-[#D4AF37]/20 transition-all"
+    ? "w-full rounded-xl border border-violet-200/25 bg-[#080611] px-4 py-3.5 text-sm font-medium text-white outline-none placeholder:text-white/40 focus:border-[#D4AF37] focus:ring-2 focus:ring-[#D4AF37]/20 transition-all"
     : "w-full rounded-xl border border-slate-300 bg-white px-4 py-3.5 text-sm font-medium text-[#0F172A] outline-none placeholder:text-slate-400 focus:border-[#C89B3C] focus:ring-2 focus:ring-[#C89B3C]/25 transition-all shadow-sm";
 
   const labelCls = dark
@@ -132,7 +132,7 @@ export default function ContactForm({
       <div
         className={`space-y-6 rounded-2xl border p-8 text-center ${
           dark
-            ? "border-white/20 bg-[#10243A] text-white"
+            ? "border-violet-200/20 bg-gradient-to-br from-[#2A1853] to-[#120C27] text-white"
             : "border-slate-200 bg-white text-[#0F172A] shadow-xl"
         } ${className}`}
         role="status"
@@ -149,7 +149,7 @@ export default function ContactForm({
           </p>
         </div>
 
-        <div className={`rounded-xl p-4 text-left text-xs ${dark ? "bg-[#050B14] text-[#CBD5E1]" : "bg-slate-50 text-[#334155]"}`}>
+        <div className={`rounded-xl p-4 text-left text-xs ${dark ? "bg-[#080611] text-[#CBD5E1]" : "bg-slate-50 text-[#334155]"}`}>
           <span className="font-bold text-[#D4AF37] uppercase tracking-wider block mb-1.5">What to expect:</span>
           <ul className="list-disc pl-4 space-y-1">
             <li>Instant review of your operating state &amp; district coverage</li>

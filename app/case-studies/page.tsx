@@ -28,7 +28,7 @@ export default function CaseStudiesPage() {
           {CASE_STUDIES.map((cs) => (
             <div
               key={cs.slug}
-              className="rounded-3xl border border-[rgba(212,175,55,0.3)] bg-gradient-to-b from-[#14102A] via-[#0A1428] to-[#0F0C1F] p-6 md:p-8 shadow-2xl space-y-6 transition-all duration-200 hover:border-[#D4AF37]"
+              className="space-y-6 rounded-3xl border border-[rgba(212,175,55,0.3)] bg-gradient-to-br from-[#332066] via-[#1A1236] to-[#120C27] p-6 shadow-2xl transition-all duration-200 hover:border-[#D4AF37] md:p-8"
             >
               {/* Header */}
               <div className="flex flex-wrap items-center justify-between gap-4 pb-4 border-b border-white/10">
@@ -52,15 +52,15 @@ export default function CaseStudiesPage() {
 
               {/* 3-Column Challenge / Solution / Outcome */}
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4 border-t border-white/10 pt-6">
-                <div className="p-4 rounded-2xl bg-[#060B18] border border-white/10 space-y-1">
+                <div className="space-y-1 rounded-2xl border border-white/10 bg-[#120C27] p-4">
                   <strong className="block text-[#D4AF37] uppercase tracking-wider text-[11px] font-bold">1. Challenge</strong>
                   <p className="text-xs text-[#CBD5E1] leading-relaxed font-normal">{cs.challenge}</p>
                 </div>
-                <div className="p-4 rounded-2xl bg-[#060B18] border border-white/10 space-y-1">
+                <div className="space-y-1 rounded-2xl border border-white/10 bg-[#120C27] p-4">
                   <strong className="block text-[#D4AF37] uppercase tracking-wider text-[11px] font-bold">2. Statutory Strategy</strong>
                   <p className="text-xs text-[#CBD5E1] leading-relaxed font-normal">{cs.solution}</p>
                 </div>
-                <div className="p-4 rounded-2xl bg-[#060B18] border border-white/10 space-y-1">
+                <div className="space-y-1 rounded-2xl border border-white/10 bg-[#120C27] p-4">
                   <strong className="block text-[#D4AF37] uppercase tracking-wider text-[11px] font-bold">3. Official Outcome</strong>
                   <p className="text-xs text-[#CBD5E1] leading-relaxed font-normal">{cs.outcome}</p>
                 </div>
@@ -84,8 +84,8 @@ export default function CaseStudiesPage() {
         </div>
 
         {/* Bottom CTA Box */}
-        <section className="mt-16 rounded-3xl border border-[rgba(212,175,55,0.35)] bg-gradient-to-r from-[#14102A] via-[#0F0C1F] to-[#0E1B33] p-8 md:p-12 text-center shadow-2xl space-y-4">
-          <div className="inline-flex p-3 rounded-2xl bg-[#060B18] border border-[#D4AF37]/40 text-[#D4AF37] mb-2">
+        <section className="mt-16 space-y-4 rounded-3xl border border-[rgba(212,175,55,0.35)] bg-gradient-to-r from-[#332066] via-[#180D36] to-[#24104B] p-8 text-center shadow-2xl md:p-12">
+          <div className="mb-2 inline-flex rounded-2xl border border-[#D4AF37]/40 bg-[#120C27] p-3 text-[#D4AF37]">
             <Award className="h-8 w-8" />
           </div>
           <h2 className="text-2xl md:text-4xl font-bold text-white" style={{ fontFamily: "var(--font-display)" }}>

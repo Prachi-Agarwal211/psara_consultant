@@ -12,7 +12,7 @@ export const viewport: Viewport = {
   initialScale: 1,
   maximumScale: 5,
   viewportFit: "cover",
-  themeColor: "#071525",
+  themeColor: "#080611",
 };
 
 export const metadata: Metadata = {
@@ -69,9 +69,9 @@ export const metadata: Metadata = {
     apple: [{ url: "/apple-icon.png", sizes: "180x180", type: "image/png" }],
   },
   other: {
-    "theme-color": "#071525",
-    "msapplication-navbutton-color": "#071525",
-    "apple-mobile-web-app-status-bar-style": "#071525",
+    "theme-color": "#080611",
+    "msapplication-navbutton-color": "#080611",
+    "apple-mobile-web-app-status-bar-style": "#080611",
     "geo.region": "IN-DL",
     "geo.placename": "New Delhi, Delhi",
     "geo.position": "28.6304;77.2177",

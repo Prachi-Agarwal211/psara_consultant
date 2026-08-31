@@ -4,30 +4,30 @@
    ═══════════════════════════════════════════════════════════════ */
 
 :root {
-  /* ── 1. Canvas & Surface Foundations — navy authority system ── */
-  --canvas-void:       #050B14;   /* Deep navy: video and dark canvas */
-  --void:              #050B14;
-  --void-2:            #0B1728;   /* Elevated navy */
-  --surface-dark:      #0B1728;
-  --surface-card-dark: #10243A;   /* Solid blue-black card */
-  --space:             #10243A;
-  --space-lift:        #163A54;   /* Lifted blue */
-  --plum-deep:         #071525;   /* Legacy alias retained for old surfaces */
-  --plum-mid:          #0B1728;
-  --plum-lift:         #163A54;
+  /* ── 1. Canvas & Surface Foundations — violet authority system ── */
+  --canvas-void:       #080611;   /* Deep ink: video and dark canvas */
+  --void:              #080611;
+  --void-2:            #120C27;   /* Elevated violet-black */
+  --surface-dark:      #120C27;
+  --surface-card-dark: #1A1236;   /* Violet-black card */
+  --space:             #1A1236;
+  --space-lift:        #2A1853;   /* Lifted violet */
+  --plum-deep:         #0E0821;   /* Legacy alias retained for old surfaces */
+  --plum-mid:          #180D36;
+  --plum-lift:         #2B1756;
 
-  /* ── 2. Editorial Light Surfaces — warm ivory, never flat white ── */
-  --canvas-cream:      #F7F3EB;   /* Warm ivory */
+  /* ── 2. Editorial Light Surfaces — lavender-white, never flat white ── */
+  --canvas-cream:      #F7F3FF;   /* Lavender-white */
   --white:             #FFFFFF;   /* Pure White (inputs only) */
-  --white-bg:          #FBFAF6;
-  --surface-light:     #FBFAF6;
-  --surface-card-light:#F4EFE5;   /* Warm ivory card */
-  --light-border:      #E5DED0;   /* Warm hairline for light sections */
-  --paper:             #FBFAF6;
-  --paper-ink:         #0F172A;   /* Crisp Dark Slate */
-  --ink:               #0F172A;
-  --ink-soft:          #334155;   /* Secondary Slate */
-  --ink-muted:         #64748B;
+  --white-bg:          #FBFAFF;
+  --surface-light:     #FBFAFF;
+  --surface-card-light:#F2EDFB;   /* Lavender card */
+  --light-border:      #E2D7F1;   /* Violet hairline for light sections */
+  --paper:             #FBFAFF;
+  --paper-ink:         #151126;   /* Crisp violet ink */
+  --ink:               #151126;
+  --ink-soft:          #443A61;   /* Secondary violet slate */
+  --ink-muted:         #766D90;
 
   /* ── 3. Primary Statutory Accent: Antique & Metallic Gold ── */
   --gold-root:         #C89B3C;
@@ -40,11 +40,19 @@
   --gold-dim:          rgba(200, 155, 60, 0.75);
   --gold-soft:         rgba(200, 155, 60, 0.12);
 
-  /* ── 4. Primary Navy Ramps ── */
-  --navy-deep:         #071525;
-  --navy-dark:         #0B1728;
-  --navy-surface:      #10243A;
-  --navy-lift:         #163A54;
+  /* ── 3b. Signal palette — used sparingly for hierarchy and wayfinding ── */
+  --signal-orange:     #FB5607;   /* High-energy filing / action signal */
+  --signal-orange-hot: #FF7A18;
+  --graphite:          #212529;   /* Neutral authority surface */
+  --cloud:             #E9ECEF;   /* Clean breathing-space surface */
+  --sage:              #4E8F82;   /* Calm support / trust accent */
+  --sage-soft:         rgba(78, 143, 130, 0.16);
+
+  /* ── 4. Violet Night Ramps ── */
+  --navy-deep:         #0E0821;
+  --navy-dark:         #120C27;
+  --navy-surface:      #1A1236;
+  --navy-lift:         #2A1853;
   --navy-border:       rgba(212, 175, 55, 0.22);
 
   /* ── 5. Conversion Green (WhatsApp & Trust) ── */
@@ -53,28 +61,28 @@
   --emerald:           #25D366;
   --emerald-deep:      #128C7E;
 
-  /* ── 6. Secondary Signal Accent — blue-teal, never competing with gold ── */
-  --purple-cta:        #0F6074;   /* legacy name retained for compatibility */
-  --purple-electric:   #2A7991;
-  --purple-light:      #6FB0B2;
-  --purple-shimmer:    #E8D5A3;
+  /* ── 6. Secondary Signal Accent — true violet, balanced with gold ── */
+  --purple-cta:        #6D28D9;   /* legacy name retained for compatibility */
+  --purple-electric:   #8B5CF6;
+  --purple-light:      #C4B5FD;
+  --purple-shimmer:    #F0E9FF;
 
   /* Aliases */
-  --violet-deep:       #0A1224;
-  --violet-base:       #0A233F;
-  --violet-primary:    #0F6074;
-  --violet-electric:   #2A7991;
-  --violet-light:      #6FB0B2;
-  --violet-shimmer:    #E8D5A3;
-  --electric:          #0F6074;
-  --electric-2:        #2A7991;
-  --electric-3:        #0A1224;
-  --cherry:            #0F6074;
-  --cherry-bright:     #2A7991;
-  --cherry-deep:       #0A1224;
-  --electric-glow:     rgba(42, 121, 145, 0.42);
-  --electric-soft:     rgba(42, 121, 145, 0.14);
-  --saffron:           #E8D5A3;
+  --violet-deep:       #100728;
+  --violet-base:       #25104D;
+  --violet-primary:    #6D28D9;
+  --violet-electric:   #8B5CF6;
+  --violet-light:      #C4B5FD;
+  --violet-shimmer:    #F0E9FF;
+  --electric:          #6D28D9;
+  --electric-2:        #8B5CF6;
+  --electric-3:        #100728;
+  --cherry:            #6D28D9;
+  --cherry-bright:     #8B5CF6;
+  --cherry-deep:       #100728;
+  --electric-glow:     rgba(139, 92, 246, 0.48);
+  --electric-soft:     rgba(139, 92, 246, 0.18);
+  --saffron:           #F5D061;
   --metal-1:           #F5E6BA;
   --metal-3:           #8F681B;
 
@@ -106,14 +114,22 @@
     #D4AF37 89%, #A87524 100%);
   --grad-gold-surface:  linear-gradient(145deg, rgba(212, 175, 55, 0.18) 0%, rgba(212, 175, 55, 0.05) 100%);
   --grad-gold-border:   linear-gradient(90deg, #D4AF37 0%, rgba(212, 175, 55, 0.3) 50%, #8F681B 100%);
-  --grad-aurora-plum:   radial-gradient(ellipse 55% 45% at 18% 22%, rgba(36, 102, 132, 0.20) 0%, transparent 55%), radial-gradient(ellipse 48% 42% at 82% 78%, rgba(245, 208, 97, 0.14) 0%, transparent 50%);
-  --grad-void-plum:     radial-gradient(ellipse 70% 55% at 50% 38%, #163A54 0%, #0B1728 35%, #050B14 72%);
+  /* Modern aurora recipe: two soft light sources over an ink-to-violet field.
+     The glows stay broad and low-contrast so content remains the focal point. */
+  --grad-aurora-plum:   radial-gradient(ellipse 42% 38% at 14% 18%, rgba(139, 92, 246, 0.24) 0%, transparent 68%), radial-gradient(ellipse 36% 34% at 86% 78%, rgba(212, 175, 55, 0.14) 0%, transparent 70%), linear-gradient(135deg, #080611 0%, #120C27 48%, #24104B 100%);
+  --grad-void-plum:     radial-gradient(ellipse 72% 58% at 50% 32%, rgba(109, 40, 217, 0.34) 0%, transparent 62%), radial-gradient(ellipse 40% 34% at 88% 78%, rgba(212, 175, 55, 0.12) 0%, transparent 72%), linear-gradient(135deg, #080611 0%, #120C27 46%, #24104B 100%);
 
-  --grad-navy-card:     linear-gradient(160deg, #10243A 0%, #0B1728 100%);
-  --grad-navy-lift:     linear-gradient(160deg, #163A54 0%, #0B1728 100%);
-  --grad-navy-header:   linear-gradient(180deg, rgba(5, 11, 20, 0.96) 0%, rgba(11, 23, 40, 0.94) 100%);
-  --grad-cream-card:    linear-gradient(165deg, #FBFAF6 0%, #F4EFE5 100%);
-  --grad-light-section: linear-gradient(180deg, #FBFAF6 0%, #F4EFE5 48%, #E5DED0 100%);
+  --grad-navy-card:     radial-gradient(circle at 86% 0%, rgba(139, 92, 246, 0.18), transparent 42%), linear-gradient(160deg, #1F1642 0%, #120C27 100%);
+  --grad-navy-lift:     radial-gradient(circle at 12% 0%, rgba(245, 208, 97, 0.09), transparent 38%), linear-gradient(160deg, #332066 0%, #180D36 100%);
+  --grad-navy-header:   radial-gradient(circle at 78% 0%, rgba(109, 40, 217, 0.22), transparent 36%), linear-gradient(180deg, rgba(8, 6, 17, 0.98) 0%, rgba(24, 13, 54, 0.94) 100%);
+  --grad-cream-card:    linear-gradient(165deg, #FFFDFF 0%, #F2EDFB 100%);
+  --grad-light-section: linear-gradient(145deg, #FFFDFF 0%, #F7F3FF 48%, #E8DDF6 100%);
+  --grad-violet-canvas: radial-gradient(ellipse 38% 42% at 8% 12%, rgba(139, 92, 246, 0.20), transparent 70%), radial-gradient(ellipse 34% 38% at 92% 84%, rgba(212, 175, 55, 0.12), transparent 72%), linear-gradient(135deg, #080611 0%, #120C27 44%, #24104B 100%);
+  --grad-violet-card:   radial-gradient(circle at 88% 0%, rgba(139, 92, 246, 0.22), transparent 44%), linear-gradient(145deg, rgba(67, 35, 126, 0.76) 0%, rgba(25, 14, 57, 0.98) 48%, rgba(8, 6, 17, 0.98) 100%);
+  --grad-violet-gold:   linear-gradient(115deg, #5B21B6 0%, #8B5CF6 44%, #D4AF37 100%);
+  --grad-violet-orange: linear-gradient(118deg, #5420B7 0%, #8338EC 52%, #FB5607 100%);
+  --grad-graphite-gold: linear-gradient(120deg, #212529 0%, #343A40 55%, #C89B3C 145%);
+  --grad-paper-ink:     linear-gradient(145deg, #FFFFFF 0%, #E9ECEF 52%, #D9D2E8 100%);
 
   /* Semantic gradient aliases used by legacy components. Keeping these
      centralized prevents invisible buttons and inconsistent card surfaces. */
@@ -157,4 +173,40 @@
   --radius-md: 12px;
   --radius-lg: 16px;
   --radius-xl: 24px;
+  --radius: var(--radius-md);
+  --section-y: clamp(3.5rem, 8vh, 7rem);
+
+  /* ── 11. Legacy aliases — MUST resolve or hero/components paint broken ── */
+  --cream:             var(--canvas-cream);
+  --cream-dim:         #EDE6F8;
+  --obsidian:          var(--canvas-void);
+  --obsidian-2:        var(--void-2);
+  --line:              rgba(212, 175, 55, 0.28);
+  --line-gold:         rgba(212, 175, 55, 0.42);
+  --line-amber:        rgba(245, 208, 97, 0.38);
+  --white-40:          rgba(255, 255, 255, 0.40);
+  --white-30:          rgba(255, 255, 255, 0.30);
+  --text:              var(--text-primary);
+  --text-dim:          var(--text-muted);
+  --text-hero:         #FFFFFF;
+  --text-sm:           0.875rem;
+  --text-lg:           1.125rem;
+  --text-xl:           1.25rem;
+  --ink-warm:          #2A2144;
+  --signal-red:        #DC2626;   /* errors only */
+  --sapphire:          var(--violet-electric); /* focus rings — NOT blue neon */
+  --acc:               var(--gold);
+  --acc-bright:        var(--gold-bright);
+  --acc-soft:          rgba(212, 175, 55, 0.12);
+  --acc-strong:        rgba(212, 175, 55, 0.22);
+  --acc-line:          var(--line-gold);
+  --dur-fast:          160ms;
+  --ease-smooth:       cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-spring:       cubic-bezier(0.22, 1.2, 0.36, 1);
+  --ease-expo:         cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-snappy:       cubic-bezier(0.2, 0.8, 0.2, 1);
+  --context:           var(--ink-soft);
+  --pointer-x:         50%;
+  --pointer-y:         50%;
+  --grad-border-shimmer: linear-gradient(90deg, transparent, rgba(212,175,55,.55), transparent);
 }

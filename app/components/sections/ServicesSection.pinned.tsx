@@ -6,71 +6,84 @@ import { SERVICES } from "../../../data/services";
 import { ensureGsap, prefersReducedMotion } from "../../lib/gsap";
 import { TiltCard } from "../ui/TiltCard";
 import { MaskReveal } from "../ui/MaskReveal";
-import { ArrowRight, Sparkles } from "lucide-react";
+import { ArrowRight, ShieldCheck } from "lucide-react";
 
-// quick stub for pinned horizontal showcase — uses first 6 services as featured
+// The six most important routes get a calm editorial introduction before the full index.
+// Keep this separate from the filterable service grid below so the homepage does not
+// duplicate a clipped horizontal carousel and a second set of cards.
 const FEATURED = SERVICES.slice(0, 6);
 
 export function ServicesPinnedHorizontal() {
-  const pinRef = useRef<HTMLDivElement>(null);
-  const trackRef = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (!pinRef.current || !trackRef.current || prefersReducedMotion()) return;
+    if (!sectionRef.current || prefersReducedMotion()) return;
     const { gsap } = ensureGsap();
-    const pin = pinRef.current;
-    const track = trackRef.current;
+    const section = sectionRef.current;
+    const cards = section.querySelectorAll<HTMLElement>("[data-featured-card]");
     const ctx = gsap.context(() => {
-      const getX = () => -(track.scrollWidth - pin.clientWidth + 32);
-      gsap.to(track, {
-        x: getX,
-        ease: "none",
+      gsap.fromTo(cards, { opacity: 0, y: 28 }, {
+        opacity: 1,
+        y: 0,
+        duration: 0.7,
+        stagger: 0.08,
+        ease: "power3.out",
         scrollTrigger: {
-          trigger: pin,
-          start: "top top",
-          end: () => `+=${track.scrollWidth - pin.clientWidth + 240}`,
-          pin: true,
-          scrub: 1.1,
-          anticipatePin: 1,
-          invalidateOnRefresh: true,
+          trigger: section,
+          start: "top 78%",
+          once: true,
         },
       });
-    }, pin);
+    }, section);
     return () => ctx.revert();
   }, []);
 
   return (
-    <div ref={pinRef} className="relative hidden overflow-hidden border-y border-white/10 bg-[#071525] lg:block" style={{ height: "min(78vh, 760px)", contain: "paint" }}>
+    <div ref={sectionRef} className="relative overflow-hidden border-y border-white/10 bg-gradient-to-br from-[#080611] via-[#180D36] to-[#332066]" style={{ contain: "paint" }}>
       <div className="absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-[rgba(212,175,55,0.32)] to-transparent" />
-      <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`, backgroundSize: "180px" }} />
-      <div className="relative z-10 h-full flex flex-col justify-center px-[var(--gutter)]">
-        <div className="mb-7 flex items-end justify-between gap-6">
-          <MaskReveal direction="left"><h3 className="text-2xl font-bold text-white sm:text-3xl" style={{ fontFamily: "var(--font-display)" }}>The statutory core — <span className="gold-text-gradient">six routes</span></h3></MaskReveal>
-          <span className="hidden text-[10px] font-bold uppercase tracking-[0.18em] text-white/45 sm:block">Featured service index</span>
+      <div className="absolute -right-32 top-16 h-72 w-72 rounded-full bg-violet-500/10 blur-3xl" aria-hidden="true" />
+      <div className="relative z-10 mx-auto max-w-7xl px-[var(--gutter)] py-14 sm:py-16 lg:py-20">
+        <div className="mb-8 flex flex-col gap-4 border-b border-white/10 pb-7 sm:mb-10 sm:flex-row sm:items-end sm:justify-between">
+          <MaskReveal direction="left">
+            <div>
+              <div className="mb-3 flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.2em] text-[#D4AF37]">
+                <ShieldCheck className="h-3.5 w-3.5" aria-hidden="true" />
+                Statutory advisory desk
+              </div>
+              <h3 className="text-2xl font-bold leading-tight text-white sm:text-3xl lg:text-4xl" style={{ fontFamily: "var(--font-display)" }}>
+                The statutory core — <span className="gold-text-gradient">six routes</span>
+              </h3>
+            </div>
+          </MaskReveal>
+          <p className="max-w-sm text-sm leading-relaxed text-white/60 sm:text-right">
+            Start with the route that matches your agency. Open the full index below for every filing and compliance service.
+          </p>
         </div>
-        <div ref={trackRef} className="flex gap-6 will-change-transform pr-10">
+
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {FEATURED.map((s, i) => (
-            <TiltCard key={s.slug} className="w-[min(380px,78vw)] shrink-0">
-              <Link href={`/services/${s.slug}`} className="group block h-[330px] rounded-[20px] border border-white/10 bg-gradient-to-br from-[#132A3D] to-[#0B1728] p-6 shadow-[0_20px_45px_-30px_rgba(0,0,0,0.9)] transition-[border-color,transform] hover:-translate-y-1 hover:border-[rgba(212,175,55,0.55)] sm:p-7">
+            <TiltCard key={s.slug}>
+              <Link
+                href={`/services/${s.slug}`}
+                data-featured-card
+                data-cursor="View service"
+                className="cursor-surface group flex min-h-[238px] flex-col justify-between rounded-2xl border border-violet-200/15 bg-gradient-to-br from-[#2A1853] via-[#1A1236] to-[#0E0821] p-5 shadow-[0_18px_40px_-30px_rgba(0,0,0,0.95)] transition-[border-color,background,box-shadow,transform] hover:-translate-y-1 hover:border-[rgba(212,175,55,0.6)] hover:from-[#3B2374] hover:to-[#1A1236] sm:p-6"
+              >
                 <div>
-                  <div className="flex items-center justify-between mb-4">
-                    <span className="text-[11px] tracking-[0.18em] uppercase text-[#D4AF37]">SRV — {String(i+1).padStart(2,"0")}</span>
-                    <span className="h-1.5 w-1.5 rounded-full bg-[#D4AF37]/70" />
+                  <div className="mb-5 flex items-center justify-between">
+                    <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#D4AF37]">SRV — {String(i + 1).padStart(2, "0")}</span>
+                    <span className="h-1.5 w-1.5 rounded-full bg-[#D4AF37]" aria-hidden="true" />
                   </div>
-                  <h4 className="text-xl font-bold text-white leading-tight" style={{ fontFamily: "var(--font-display)" }}>{s.title}</h4>
-                  <p className="mt-3 text-sm leading-relaxed text-white/70 line-clamp-3">{s.short}</p>
+                  <h4 className="text-xl font-bold leading-snug text-white transition-colors group-hover:text-[#F5D061]" style={{ fontFamily: "var(--font-display)" }}>{s.title}</h4>
+                  <p className="mt-3 line-clamp-3 text-sm leading-relaxed text-white/65">{s.short}</p>
                 </div>
-                <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-[0.14em] text-white/80 group-hover:text-[#F5D061]">View requirements <ArrowRight className="h-4 w-4 text-[#D4AF37] group-hover:translate-x-1 transition-transform" /></div>
+                <div className="mt-7 flex items-center justify-between border-t border-white/10 pt-4 text-[10px] font-bold uppercase tracking-[0.16em] text-white/75 transition-colors group-hover:text-[#F5D061]">
+                  <span>View requirements</span>
+                  <ArrowRight className="h-4 w-4 text-[#D4AF37] transition-transform group-hover:translate-x-1" aria-hidden="true" />
+                </div>
               </Link>
             </TiltCard>
           ))}
-          <div className="grid h-[330px] w-[min(360px,78vw)] shrink-0 place-items-center rounded-[20px] border border-dashed border-white/15 bg-white/[0.02] p-8 text-center">
-            <div>
-              <Sparkles className="h-6 w-6 text-[#D4AF37] mx-auto mb-3" />
-              <p className="text-white font-bold">26 services total</p>
-              <Link href="/services" className="mt-3 inline-flex text-xs tracking-[0.14em] uppercase text-[#D4AF37] underline">Full index →</Link>
-            </div>
-          </div>
         </div>
       </div>
     </div>

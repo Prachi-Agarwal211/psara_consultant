@@ -44,7 +44,7 @@ export default function ContactPage() {
         <div className="mb-16 grid grid-cols-1 md:grid-cols-3 gap-6">
           <a
             href={TEL_HREF}
-            className="flex items-center gap-4 rounded-2xl border border-white/12 bg-[#0A1022] p-6 shadow-md transition-all duration-200 hover:border-[#D4AF37]"
+            className="flex items-center gap-4 rounded-2xl border border-white/12 bg-gradient-to-br from-[#2A1853] to-[#120C27] p-6 shadow-md transition-all duration-200 hover:border-[#D4AF37]"
           >
             <div className="p-3.5 rounded-xl text-[#241703]" style={{ background: "var(--grad-gold-metallic)", boxShadow: "inset 0 1px 0 rgba(255,250,230,0.8)" }}>
               <Phone className="h-6 w-6" />
@@ -62,7 +62,7 @@ export default function ContactPage() {
             href={DEFAULT_WA}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-4 rounded-2xl border border-white/12 bg-[#0A1022] p-6 shadow-md transition-all duration-200 hover:border-[#25D366]"
+            className="flex items-center gap-4 rounded-2xl border border-white/12 bg-gradient-to-br from-[#2A1853] to-[#120C27] p-6 shadow-md transition-all duration-200 hover:border-[#25D366]"
           >
             <div className="p-3.5 rounded-xl bg-[#25D366] text-white">
               <MessageSquare className="h-6 w-6 fill-white" />
@@ -78,7 +78,7 @@ export default function ContactPage() {
 
           <a
             href={`mailto:${CONTACT.email}`}
-            className="flex items-center gap-4 rounded-2xl border border-white/12 bg-[#0A1022] p-6 shadow-md transition-all duration-200 hover:border-[#D4AF37]"
+            className="flex items-center gap-4 rounded-2xl border border-white/12 bg-gradient-to-br from-[#2A1853] to-[#120C27] p-6 shadow-md transition-all duration-200 hover:border-[#D4AF37]"
           >
             <div className="p-3.5 rounded-xl text-[#241703]" style={{ background: "var(--grad-gold-metallic)", boxShadow: "inset 0 1px 0 rgba(255,250,230,0.8)" }}>
               <Mail className="h-6 w-6" />
@@ -131,7 +131,7 @@ export default function ContactPage() {
             </div>
 
             {OFFICES.map((o) => (
-              <div key={o.city} className="rounded-2xl border border-white/12 bg-[#0A1022] p-5 shadow-md">
+              <div key={o.city} className="rounded-2xl border border-white/12 bg-gradient-to-br from-[#2A1853] to-[#120C27] p-5 shadow-md">
                 <div className="flex items-center justify-between">
                   <h3 className="text-base font-bold text-white flex items-center gap-2" style={{ fontFamily: "var(--font-display)" }}>
                     <MapPin className="h-4 w-4 text-[#D4AF37]" />

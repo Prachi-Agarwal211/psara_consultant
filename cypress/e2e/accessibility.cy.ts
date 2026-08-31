@@ -22,11 +22,13 @@
  *   9. presence  — HomeStory offices
  *  10. contact   — HomeContact (form + offices)
  *
- * Run with: CYPRESS_BASE_URL=http://localhost:3001 npm run test:a11y
+ * Run with: npm run test:a11y (defaults to http://localhost:3000)
  */
 
 const SECTION_IDS = [
   "hero",
+  "hero-actions",
+  "proof",
   "about",
   "services",
   "why",
@@ -74,7 +76,7 @@ describe("PSARA homepage — axe-core automated a11y audit", () => {
 
   it("has exactly one <h1> element", () => {
     cy.get("h1").should("have.length", 1);
-    cy.get("h1").should("contain.text", "PSARA License");
+    cy.get("h1").should("contain.text", "PSARA CONSULTANT INDIA");
   });
 
   it("has logical heading order (no skipped levels)", () => {
@@ -204,8 +206,9 @@ describe("PSARA homepage — keyboard navigation & focus", () => {
   it("key interactive elements are keyboard-reachable", () => {
     const keySelectors = [
       '#hero a[href="#about"]',
-      '#hero a[href*="wa.me"]',
-      '#hero a[href*="tel:"]',
+      '#hero-actions a[href="#contact"]',
+      '#hero-actions a[href*="wa.me"]',
+      '#hero-actions a[href*="tel:"]',
       '#contact a[href*="wa.me"]',
       '#contact a[href*="tel:"]',
       '#contact button[type="submit"]',
@@ -255,7 +258,7 @@ describe("PSARA homepage — reduced motion support", () => {
 
     // Core content should still render
     cy.get("#hero").should("exist");
-    cy.get("h1").should("contain.text", "PSARA License");
+    cy.get("h1").should("contain.text", "PSARA CONSULTANT INDIA");
     cy.get('a[href="#about"]').should("be.visible");
   });
 });

@@ -63,7 +63,7 @@ export default function AboutPage() {
   return (
     <StageShell>
       {/* Featured Hero About Section */}
-      <AboutSection imageSrc="/about-3d-map.png" showHeaderBar={false} headingLevel="h1" className="pt-28 pb-16 border-b border-white/10" />
+      <AboutSection showHeaderBar={false} headingLevel="h1" className="pt-28 pb-16 border-b border-white/10" />
 
       <PageMain className="bg-[#080714] text-white">
         {/* Stats Grid */}
@@ -107,7 +107,7 @@ export default function AboutPage() {
           </div>
 
           <div className="lg:col-span-5">
-            <div className="rounded-3xl border border-[rgba(212,175,55,0.35)] p-6 md:p-8 bg-gradient-to-b from-[#14102A] to-[#060B18] text-white shadow-2xl space-y-4">
+            <div className="space-y-4 rounded-3xl border border-[rgba(212,175,55,0.35)] bg-gradient-to-b from-[#14102A] to-[#120C27] p-6 text-white shadow-2xl md:p-8">
               <span className="badge-metallic-gold">
                 Immediate Consultation
               </span>

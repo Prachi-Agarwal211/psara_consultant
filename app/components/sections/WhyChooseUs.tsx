@@ -52,13 +52,13 @@ export default function WhyChooseUs() {
                 Why Choose PSARA Consultant
               </div>
               <h2
-                className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#0A213D] leading-tight mt-2"
+                className="text-3xl sm:text-4xl md:text-5xl font-bold text-[var(--paper-ink,#151126)] leading-tight mt-2"
                 style={{ fontFamily: "var(--font-display)" }}
               >
                 Why Security Agencies Choose <span className="gold-text-gradient">Our Legal Desk</span>
               </h2>
             </div>
-            <p className="mx-auto max-w-md text-sm font-normal leading-relaxed text-[#334155] md:text-base lg:mx-0">
+            <p className="mx-auto max-w-md text-sm font-normal leading-relaxed text-[var(--ink-soft,#443A61)] md:text-base lg:mx-0">
               We operate as an exclusive regulatory advisory practice. We prepare, audit, and clear your official Controlling Authority dossier from start to license grant.
             </p>
           </div>
@@ -69,7 +69,7 @@ export default function WhyChooseUs() {
           {/* Featured Deep Plum Dossier Card — tilt + mask */}
           <MaskReveal direction="left" className="lg:col-span-7">
             <TiltCard>
-              <div className="flex h-full flex-col justify-between rounded-3xl border border-[rgba(212,175,55,0.32)] bg-gradient-to-b from-[#10243A] via-[#0B1728] to-[#050B14] p-8 text-center text-white shadow-2xl md:p-10 lg:text-left" data-cursor="Dossier">
+              <div className="cursor-surface flex h-full flex-col justify-between rounded-3xl border border-[rgba(196,181,253,0.32)] bg-gradient-to-br from-[#332066] via-[#1A1236] to-[#080611] p-8 text-center text-white shadow-2xl md:p-10 lg:text-left" data-cursor="Dossier">
             <div className="space-y-6">
               <div className="flex items-center justify-between">
                 <span className="badge-metallic-gold">
@@ -121,18 +121,18 @@ export default function WhyChooseUs() {
             {ADVANTAGES.slice(1).map((item) => (
               <div
                 key={item.title}
-                className="rounded-2xl border border-[#E5DDF3] bg-gradient-to-br from-[#FDFCFF] to-[#F3EEFB] p-6 shadow-sm transition-all duration-200 hover:border-[#C89B3C] hover:shadow-md"
+                className="rounded-2xl border border-[#E5DDF3] bg-gradient-to-br from-[#FDFCFF] to-[#F3EEFB] p-6 shadow-sm transition-[border-color,box-shadow,transform,filter] duration-200 hover:border-[#C89B3C] hover:shadow-md"
               >
                 <div className="mb-2 flex items-center justify-between">
                   <span className="text-xs font-bold uppercase tracking-wider text-[#8F681B]">{item.subtitle}</span>
                   <span className="font-mono text-xs font-bold text-[#64748B]">{item.meta}</span>
                 </div>
 
-                <h4 className="text-base sm:text-lg font-bold text-[#0A213D]" style={{ fontFamily: "var(--font-display)" }}>
+                <h4 className="text-base sm:text-lg font-bold text-[var(--paper-ink,#151126)]" style={{ fontFamily: "var(--font-display)" }}>
                   {item.title}
                 </h4>
 
-                <p className="mt-2 text-xs sm:text-sm text-[#475569] leading-relaxed font-normal">
+                <p className="mt-2 text-xs sm:text-sm text-[var(--ink-muted,#766D90)] leading-relaxed font-normal">
                   {item.desc}
                 </p>
               </div>

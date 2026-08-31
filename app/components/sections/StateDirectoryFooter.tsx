@@ -23,9 +23,9 @@ const REGION_GROUPS = [
 
 export default function StateDirectoryFooter() {
   return (
-    <div className="border border-white/10 bg-[#12161F] py-8 sm:py-10 px-4 sm:px-6 text-white rounded-3xl my-8 shadow-xl">
+    <div className="my-8 rounded-3xl border border-violet-200/15 bg-gradient-to-br from-[#2A1853] via-[#180D36] to-[#100A22] px-4 py-8 text-white shadow-xl sm:px-6 sm:py-10">
       <div className="max-w-7xl mx-auto">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-white/10 pb-4 mb-6 gap-3">
+        <div className="mb-6 flex flex-col justify-between gap-3 border-b border-white/10 pb-4 sm:flex-row sm:items-center">
           <div>
             <span className="text-xs font-black uppercase tracking-widest text-[#D4AF37] flex items-center gap-1.5">
               <MapPin className="h-4 w-4 text-[#D4AF37]" /> Pan-India Statutory Directory
@@ -42,8 +42,8 @@ export default function StateDirectoryFooter() {
           </Link>
         </div>
 
-        {/* 4 Region Grid Columns */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
+        {/* Region directory stays readable on phones and resolves into four columns only when there is room. */}
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-8 lg:grid-cols-4">
           {REGION_GROUPS.map((group) => {
             const groupStates = STATES.filter((s) => group.slugs.includes(s.slug));
 

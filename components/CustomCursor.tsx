@@ -41,6 +41,9 @@ export default function CustomCursor() {
       if (targetEl) {
         nextText = targetEl.getAttribute("data-cursor") || "";
         nextHovered = true;
+        const rect = targetEl.getBoundingClientRect();
+        targetEl.style.setProperty("--pointer-x", `${e.clientX - rect.left}px`);
+        targetEl.style.setProperty("--pointer-y", `${e.clientY - rect.top}px`);
       } else {
         nextHovered = Boolean(
           (e.target as HTMLElement)?.closest("a, button, input, textarea, [role='button']")
@@ -87,7 +90,8 @@ export default function CustomCursor() {
       {/* Outer Spring Ring */}
       <div
         ref={cursorRef}
-        className={`fixed top-0 left-0 pointer-events-none z-[10001] rounded-full border border-[var(--gold)] flex items-center justify-center transition-[width,height,background-color,border-color] duration-300 ${
+        aria-hidden="true"
+        className={`psara-cursor-ring fixed top-0 left-0 pointer-events-none z-[10001] rounded-full border border-[var(--gold)] flex items-center justify-center transition-[width,height,background-color,border-color] duration-300 ${
           hovered
             ? cursorText
               ? "w-24 h-24 bg-[var(--gold)]/20 backdrop-blur-xs border-[var(--gold)] text-[var(--gold)]"
@@ -106,6 +110,7 @@ export default function CustomCursor() {
       {/* Inner Precision Dot */}
       <div
         ref={dotRef}
+        aria-hidden="true"
         className="fixed top-0 left-0 pointer-events-none z-[10001] w-1.5 h-1.5 rounded-full bg-[var(--gold)]"
         style={{ willChange: "transform" }}
       />

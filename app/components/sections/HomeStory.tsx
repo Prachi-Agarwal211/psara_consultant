@@ -49,7 +49,7 @@ export default function HomeStory() {
       {/* ── METRICS — count-up proof ── */}
       <StatsBar />
 
-      {/* ── ABOUT — Redesigned with 3D India Map Graphic & Pan-India Pillars ── */}
+      {/* ── ABOUT — Single dossier artwork & Pan-India pillars ── */}
       <AboutSection />
 
       {/* ── SERVICES ── */}
@@ -71,7 +71,7 @@ export default function HomeStory() {
       <StateGridHome />
 
       {/* ── ESTIMATOR ── */}
-      <div id="estimator" className="relative bg-[#060A12]" data-parallax-root>
+      <div id="estimator" className="mood-estimator relative bg-[#080611]" data-parallax-root>
         <div className="relative z-10 px-[var(--gutter)]">
           <PsaraEstimator />
         </div>
@@ -81,16 +81,16 @@ export default function HomeStory() {
       <HomeFaq />
 
       {/* ── PRESENCE — recolored to plum authority (was sky) ── */}
-      <section id="presence" className="section-atmosphere relative min-h-[85dvh] py-20 lg:py-28 bg-[#050B14] border-t border-white/10 overflow-hidden" data-parallax-root>
+      <section id="presence" className="section-atmosphere mood-presence relative min-h-[85dvh] py-20 lg:py-28 bg-[#080611] border-t border-white/10 overflow-hidden" data-parallax-root>
         {/* Ambient glow behind right side map — plum */}
-        <div className="pointer-events-none absolute top-1/2 right-0 -translate-y-1/2 w-[600px] h-[600px] rounded-full blur-[160px] opacity-20" style={{ background: "radial-gradient(circle, rgba(88,33,199,0.38) 0%, transparent 70%)" }} aria-hidden />
+        <div className="pointer-events-none absolute top-1/2 right-0 -translate-y-1/2 w-[600px] h-[600px] rounded-full blur-[160px] opacity-35" style={{ background: "radial-gradient(circle, rgba(139,92,246,0.48) 0%, rgba(212,175,55,0.10) 42%, transparent 70%)" }} aria-hidden />
 
         <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
             {/* Left Column: Office Grid & Info (6 Cols) */}
             <div className="lg:col-span-6 space-y-8">
               <div>
-                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-[rgba(212,175,55,0.32)] bg-[rgba(212,175,55,0.08)] text-[#F5E6BA] text-xs font-extrabold tracking-widest uppercase mb-4">
+                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-[rgba(196,181,253,0.38)] bg-gradient-to-r from-[#6D28D9]/25 to-[#D4AF37]/10 text-[#F5E6BA] text-xs font-extrabold tracking-widest uppercase mb-4">
                   <Globe className="w-3.5 h-3.5 text-[#D4AF37]" />
                   <span>Pan-India Presence</span>
                 </div>
@@ -108,10 +108,10 @@ export default function HomeStory() {
                 {OFFICES.map((o) => (
                   <div
                     key={o.city}
-                    className={`p-3.5 rounded-xl border transition-all duration-200 ${
+                    className={`p-3.5 rounded-xl border transition-[border-color,box-shadow,transform,filter] duration-200 ${
                       o.isHQ
                         ? "border-[var(--gold)]/60 bg-[var(--gold)]/10 shadow-lg shadow-[var(--gold)]/10"
-                        : "border-white/12 bg-[#10243A] hover:border-white/22 hover:bg-[#163A54]"
+                        : "border-violet-200/15 bg-gradient-to-br from-[#1A1236] to-[#120C27] hover:border-violet-300/40 hover:from-[#2A1853] hover:to-[#1A1236]"
                     }`}
                     style={{ fontFamily: "var(--font-display)" }}
                   >
@@ -133,7 +133,8 @@ export default function HomeStory() {
               <div className="flex flex-wrap gap-4 pt-2">
                 <Link
                   href="/states"
-                  className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl text-[11px] font-bold uppercase tracking-[0.1em] text-[#241703] transition-all hover:-translate-y-0.5"
+                  data-cursor="Explore states"
+                  className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl text-[11px] font-bold uppercase tracking-[0.1em] text-[#241703] transition-[transform,filter] hover:-translate-y-0.5"
                   style={{
                     background: "var(--grad-gold-metallic)",
                     backgroundSize: "220% 100%",
@@ -145,7 +146,8 @@ export default function HomeStory() {
                 </Link>
                 <Link
                   href="/cities"
-                  className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl border border-white/14 bg-[#10243A] hover:bg-[#163A54] text-white font-bold text-xs uppercase tracking-wider transition-colors"
+                  data-cursor="Explore cities"
+                  className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl border border-violet-200/25 bg-gradient-to-br from-[#2A1853] to-[#120C27] hover:from-[#3B2374] hover:to-[#1A1236] text-white font-bold text-xs uppercase tracking-wider transition-colors"
                 >
                   <span>All Cities</span>
                   <ArrowUpRight className="h-3.5 w-3.5 text-[#D4AF37]" />
@@ -164,7 +166,7 @@ export default function HomeStory() {
                 />
 
                 {/* Floating Office HQ Pin Badge */}
-                <div className="absolute top-4 left-4 flex items-center gap-2.5 px-3.5 py-2 rounded-xl border border-[var(--gold)]/50 bg-[#0B1728]/95 backdrop-blur-md shadow-xl z-10">
+                <div className="absolute top-4 left-4 flex items-center gap-2.5 px-3.5 py-2 rounded-xl border border-[var(--gold)]/50 bg-[#120C27]/95 backdrop-blur-md shadow-xl z-10">
                   <div className="w-2.5 h-2.5 rounded-full bg-[var(--gold)] animate-ping" />
                   <span className="text-xs font-extrabold uppercase tracking-wider text-[var(--gold-bright)]">
                     Jaipur Headquarters
@@ -172,7 +174,7 @@ export default function HomeStory() {
                 </div>
 
                 {/* Floating Metro Desks Badge */}
-                <div className="absolute bottom-4 right-4 flex items-center gap-2.5 px-3.5 py-2 rounded-xl border border-white/14 bg-[#0B1728]/95 backdrop-blur-md shadow-xl z-10">
+                <div className="absolute bottom-4 right-4 flex items-center gap-2.5 px-3.5 py-2 rounded-xl border border-violet-200/25 bg-[#120C27]/95 backdrop-blur-md shadow-xl z-10">
                   <Globe className="w-4 h-4 text-[#C89B3C]" />
                   <span className="text-xs font-extrabold uppercase tracking-wider text-white/85">
                     Desks in 36 States & UTs
@@ -190,7 +192,7 @@ export default function HomeStory() {
       {/* ── CLOSING CTA — plum gold */}
       <section
         id="start"
-        className="relative flex min-h-[80dvh] flex-col items-center justify-center border-t border-white/10 bg-[#050B14] py-[var(--section-y)] pb-[calc(var(--section-y)+5rem)] md:pb-[var(--section-y)]"
+        className="section-atmosphere mood-start relative flex min-h-[80dvh] flex-col items-center justify-center border-t border-white/10 bg-[#080611] py-[var(--section-y)] pb-[calc(var(--section-y)+5rem)] md:pb-[var(--section-y)]"
         data-parallax-root
       >
         <div className="pointer-events-none absolute inset-0 z-0" aria-hidden>
@@ -198,7 +200,7 @@ export default function HomeStory() {
             className="absolute inset-0"
             style={{
               background:
-                "radial-gradient(ellipse 60% 50% at 50% 50%, rgba(88,33,199,0.16) 0%, transparent 70%), radial-gradient(ellipse 40% 32% at 50% 22%, rgba(212,175,55,0.08) 0%, transparent 60%)",
+                "radial-gradient(ellipse 60% 50% at 50% 50%, rgba(109,40,217,0.32) 0%, transparent 70%), radial-gradient(ellipse 40% 32% at 50% 22%, rgba(212,175,55,0.14) 0%, transparent 60%)",
             }}
           />
         </div>
@@ -222,16 +224,18 @@ export default function HomeStory() {
           <div className="mb-12 flex flex-wrap justify-center gap-4">
             <a
               href={DEFAULT_WA}
+              data-cursor="Chat desk"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2.5 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-600 px-8 py-4 text-sm font-bold uppercase tracking-wider text-white shadow-xl shadow-emerald-500/20 transition-all duration-200 hover:from-emerald-400 hover:to-teal-500"
+              className="inline-flex items-center gap-2.5 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-600 px-8 py-4 text-sm font-bold uppercase tracking-wider text-white shadow-xl shadow-emerald-500/20 transition-[border-color,box-shadow,transform,filter] duration-200 hover:from-emerald-400 hover:to-teal-500"
             >
               <MessageSquare className="h-5 w-5" />
               <span>WhatsApp Now</span>
             </a>
             <Link
               href="/contact"
-              className="inline-flex items-center gap-2 rounded-xl border border-white/14 bg-[#10243A] px-7 py-4 text-xs font-bold uppercase tracking-wider text-white/90 transition-colors hover:border-[#C89B3C] hover:text-[#F5D061]"
+              data-cursor="Contact desk"
+              className="inline-flex items-center gap-2 rounded-xl border border-violet-200/25 bg-gradient-to-br from-[#2A1853] to-[#120C27] px-7 py-4 text-xs font-bold uppercase tracking-wider text-white/90 transition-colors hover:border-[#C89B3C] hover:text-[#F5D061]"
             >
               Contact Page <ArrowUpRight className="h-4 w-4" />
             </Link>

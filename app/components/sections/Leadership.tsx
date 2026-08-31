@@ -7,7 +7,7 @@ import { SITE } from "../../../lib/config";
 
 export default function Leadership() {
   return (
-    <section className="relative py-20 px-4 md:px-8 border-t border-white/10 bg-[#0B0E14] text-white overflow-hidden my-12">
+    <section className="relative my-12 overflow-hidden border-t border-white/10 bg-gradient-to-br from-[#080611] via-[#180D36] to-[#2A1853] px-4 py-20 text-white md:px-8">
       <div className="relative mx-auto max-w-7xl">
         <div className="text-center max-w-3xl mx-auto mb-16">
           <span className="inline-flex items-center gap-2 rounded-xl border border-[#BF953F]/40 bg-[#8C1F32]/30 px-4 py-1.5 text-xs font-black uppercase tracking-widest text-[#D4AF37] shadow-md">
@@ -25,7 +25,7 @@ export default function Leadership() {
           {LEADERS.map((leader) => (
             <div
               key={leader.id}
-              className="relative flex flex-col md:flex-row gap-6 rounded-3xl border-2 border-[#C89B3C]/40 bg-gradient-to-br from-[#0A233F] via-[#0F3C65] to-[#07192C] text-white p-6 md:p-8 shadow-2xl transition-all duration-300 hover:border-[#C89B3C]"
+              className="relative flex flex-col md:flex-row gap-6 rounded-3xl border-2 border-[#C89B3C]/40 bg-gradient-to-br from-[#332066] via-[#1A1236] to-[#0E0821] text-white p-6 md:p-8 shadow-2xl transition-[border-color,box-shadow,transform] duration-200 hover:border-[#C89B3C]"
             >
               {/* Leader Photo */}
               <div className="relative w-36 h-36 md:w-44 md:h-44 shrink-0 overflow-hidden rounded-2xl border-2 border-[#C89B3C] self-center md:self-start shadow-xl">

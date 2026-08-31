@@ -43,7 +43,7 @@ export default function FaqPage() {
                   style={{ fontFamily: "var(--font-display)" }}
                 >
                   <span>{item.q}</span>
-                  <span className="shrink-0 flex h-8 w-8 items-center justify-center rounded-xl border border-white/20 bg-[#0A1022] text-[#F5D061] group-open:rotate-180 group-open:bg-[#C89B3C] group-open:text-[#241703] transition-all">
+                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl border border-white/20 bg-[#180D36] text-[#F5D061] transition-all group-open:rotate-180 group-open:bg-[#C89B3C] group-open:text-[#241703]">
                     <ChevronDown className="h-4 w-4" />
                   </span>
                 </summary>
@@ -58,7 +58,7 @@ export default function FaqPage() {
           </div>
 
           {/* Bottom WhatsApp CTA */}
-          <div className="mt-12 rounded-2xl border border-white/15 bg-[#0A1022] p-8 text-center space-y-4">
+          <div className="mt-12 space-y-4 rounded-2xl border border-white/15 bg-gradient-to-br from-[#2A1853] to-[#120C27] p-8 text-center">
             <h3 className="text-xl font-bold text-white" style={{ fontFamily: "var(--font-display)" }}>
               Have a Specific State or Director Query?
             </h3>

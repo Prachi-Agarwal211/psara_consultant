@@ -17,45 +17,55 @@
 
 /* Void section — primary light ivory (#FFFEF9) */
 .section-void {
-  background: #FFFEF9;
+  background: var(--grad-light-section);
   position: relative;
   overflow: hidden;
 }
 
-/* Electric section — soft light cream background */
+/* Keep section-* aligned with styles/sections.css + tokens — do NOT flip dark→cream. */
 .section-electric {
-  background: #FBF7F0;
-  position: relative;
-  overflow: hidden;
-}
-
-/* Metal section — warm cream background */
-.section-metal {
-  background: #F8F3EA;
-  position: relative;
-  overflow: hidden;
-}
-
-/* Night section — executive black/cherry section callout */
-.section-night {
-  background: #0B0E14;
+  background: radial-gradient(ellipse 44% 42% at 82% 18%, rgba(139,92,246,.20), transparent 70%), linear-gradient(145deg, #100728 0%, #24104B 60%, #6D28D9 180%);
   color: #FFFFFF;
   position: relative;
   overflow: hidden;
 }
 
-/* Warm section — warm ivory background */
-.section-warm {
-  background: #FBF7F0;
+.section-metal {
+  background: radial-gradient(ellipse 42% 38% at 12% 24%, rgba(212,175,55,.12), transparent 70%), linear-gradient(145deg, #1A1236 0%, #2A1853 58%, #100728 100%);
+  color: #FFFFFF;
   position: relative;
   overflow: hidden;
 }
 
-/* Surface section — soft parchment surface */
-.section-surface {
-  background: #F4EFE6;
+.section-night {
+  background: var(--grad-violet-canvas);
+  color: #FFFFFF;
   position: relative;
   overflow: hidden;
+}
+
+.section-warm {
+  background: var(--grad-light-section);
+  color: var(--paper-ink);
+  position: relative;
+  overflow: hidden;
+}
+
+.section-surface {
+  background: radial-gradient(ellipse 38% 42% at 86% 12%, rgba(139,92,246,.16), transparent 70%), linear-gradient(145deg, #1A1236 0%, #332066 100%);
+  color: #FFFFFF;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Hero metallic wordmark — was referenced but never defined (broken gold title) */
+.metal-text {
+  background: var(--grad-gold-metallic);
+  background-size: 220% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
 }
 
 /* ═══════════════════════════════════════════════════════════════
@@ -209,13 +219,52 @@
 /* Pink accent line — horeca energy */
 .glow-line-pink {
   height: 2px;
-  background: linear-gradient(90deg, transparent, var(--electric), transparent);
+  background: linear-gradient(90deg, transparent, var(--violet-electric), var(--gold-bright), transparent);
   box-shadow: 0 0 16px var(--electric-glow);
 }
 
 /* ═══════════════════════════════════════════════════════════════
    CARDS — Horizontal scroll, 3D tilt, service cards
    ═══════════════════════════════════════════════════════════════ */
+
+/* Shared interaction surface: a quiet glass highlight follows the pointer,
+   while the card keeps its existing violet/gold surface underneath. */
+.cursor-surface {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.10),
+              inset 0 -1px 0 rgba(8, 6, 17, 0.42),
+              0 18px 50px -32px rgba(139, 92, 246, 0.72);
+}
+.cursor-surface::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: radial-gradient(circle 170px at var(--pointer-x, 50%) var(--pointer-y, 50%), rgba(196, 181, 253, 0.17), transparent 72%);
+  opacity: 0;
+  transition: opacity 260ms var(--ease-snappy);
+}
+.cursor-surface:hover::after,
+.cursor-surface:focus-within::after { opacity: 1; }
+.cursor-surface > * { position: relative; z-index: 1; }
+
+/* Violet glass for utility panels: tactile depth without creating another
+   competing color family. */
+.surface-glass {
+  background: linear-gradient(145deg, rgba(58, 31, 108, 0.62), rgba(18, 12, 39, 0.82));
+  border: 1px solid rgba(196, 181, 253, 0.20);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.10),
+              0 20px 52px -34px rgba(8, 6, 17, 0.95);
+  backdrop-filter: blur(16px);
+}
+.surface-glass:hover {
+  border-color: rgba(245, 208, 97, 0.50);
+  box-shadow: inset 0 1px 0 rgba(255, 246, 217, 0.16),
+              0 24px 62px -34px rgba(139, 92, 246, 0.80);
+}
 
 /* Horizontal scroll track — meech213 spatial feel */
 .scroll-track {
@@ -233,7 +282,7 @@
 .service-card {
   width: 100%;
   border: 1px solid var(--white-12);
-  background: var(--white-06);
+  background: var(--grad-violet-card);
   padding: 2.25rem 1.75rem;
   transition: border-color 0.4s ease, background 0.4s ease, transform 0.4s ease;
   position: relative;

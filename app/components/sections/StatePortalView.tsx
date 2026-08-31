@@ -37,7 +37,7 @@ export default function StatePortalView() {
       </div>
 
       {/* Search Bar */}
-      <div className="rounded-2xl border border-white/15 bg-[#0A1022] p-3 shadow-lg">
+      <div className="rounded-2xl border border-white/15 bg-gradient-to-br from-[#2A1853] to-[#120C27] p-3 shadow-lg">
         <div className="relative">
           <Search className="absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-[#F5D061]" />
           <input
@@ -45,7 +45,7 @@ export default function StatePortalView() {
             placeholder="Search by State, Union Territory, or Capital city…"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full rounded-xl border border-white/15 bg-[#080714] pl-12 pr-4 py-3.5 text-sm font-medium text-white outline-none placeholder:text-white/40 transition-all focus:border-[#D4AF37] focus:ring-2 focus:ring-[#D4AF37]/20"
+            className="w-full rounded-xl border border-white/15 bg-[#080714] pl-12 pr-4 py-3.5 text-sm font-medium text-white outline-none placeholder:text-white/40 transition-[border-color,box-shadow,transform] focus:border-[#D4AF37] focus:ring-2 focus:ring-[#D4AF37]/20"
           />
         </div>
       </div>
@@ -56,7 +56,7 @@ export default function StatePortalView() {
           <Link
             key={s.slug}
             href={`/states/${s.slug}`}
-            className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-white/12 bg-[#0A1022] p-6 shadow-md transition-all duration-200 hover:-translate-y-1 hover:border-[#D4AF37] hover:bg-[#0D162C]"
+            className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-white/12 bg-gradient-to-br from-[#2A1853] to-[#120C27] p-6 shadow-md transition-[border-color,box-shadow,transform,filter] duration-200 hover:-translate-y-1 hover:border-[#D4AF37] hover:from-[#332066] hover:to-[#180D36]"
           >
             <div>
               <div className="flex items-center justify-between mb-3">
@@ -84,7 +84,7 @@ export default function StatePortalView() {
       </div>
 
       {filteredStates.length === 0 && (
-        <div className="rounded-2xl border border-white/15 bg-[#0A1022] py-12 text-center">
+        <div className="rounded-2xl border border-white/15 bg-gradient-to-br from-[#2A1853] to-[#120C27] py-12 text-center">
           <p className="text-sm text-[#CBD5E1]">No States found matching &quot;{search}&quot;.</p>
         </div>
       )}

@@ -35,7 +35,7 @@ export default async function IndustryDetailPage({ params }: { params: Promise<{
       <PageMain className="bg-[#080714] text-white">
         <div className="max-w-4xl mx-auto space-y-10">
           {/* Key Compliance Checklist */}
-          <div className="rounded-3xl border border-[rgba(212,175,55,0.35)] bg-gradient-to-b from-[#14102A] via-[#0A1428] to-[#050714] p-6 sm:p-8 shadow-2xl space-y-6">
+          <div className="space-y-6 rounded-3xl border border-[rgba(212,175,55,0.35)] bg-gradient-to-br from-[#332066] via-[#1A1236] to-[#080611] p-6 shadow-2xl sm:p-8">
             <div>
               <span className="badge-metallic-gold mb-2">
                 <Sparkles className="h-3.5 w-3.5 text-[#D4AF37]" /> Statutory Blueprint
@@ -47,7 +47,7 @@ export default async function IndustryDetailPage({ params }: { params: Promise<{
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
               {ind.keyCompliance.map((item) => (
-                <div key={item} className="flex items-start gap-3 rounded-2xl border border-white/10 bg-[#060B18] p-4 text-xs sm:text-sm text-[#E2E8F0] shadow-inner font-medium">
+                <div key={item} className="flex items-start gap-3 rounded-2xl border border-white/10 bg-[#120C27] p-4 text-xs font-medium text-[#E2E8F0] shadow-inner sm:text-sm">
                   <CheckCircle2 className="h-4 w-4 text-[#D4AF37] shrink-0 mt-0.5" />
                   <span>{item}</span>
                 </div>

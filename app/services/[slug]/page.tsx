@@ -79,7 +79,7 @@ export default async function ServiceDetailPage({
           {/* Main Content Column */}
           <div className="space-y-12 lg:col-span-7">
             {/* Overview Card */}
-            <div className="rounded-3xl border border-[rgba(212,175,55,0.3)] bg-gradient-to-b from-[#14102A] via-[#0A1428] to-[#050714] p-6 sm:p-8 shadow-2xl">
+            <div className="rounded-3xl border border-[rgba(212,175,55,0.3)] bg-gradient-to-br from-[#332066] via-[#1A1236] to-[#080611] p-6 shadow-2xl sm:p-8">
               <span className="badge-metallic-gold mb-4">
                 <Sparkles className="h-3.5 w-3.5 text-[#D4AF37]" /> Service Overview
               </span>
@@ -172,7 +172,7 @@ export default async function ServiceDetailPage({
 
           {/* Sticky Sidebar Lead Capture Card */}
           <div className="lg:col-span-5 space-y-6">
-            <div className="sticky top-24 rounded-3xl border border-[rgba(212,175,55,0.35)] bg-gradient-to-b from-[#14102A] to-[#060B18] p-6 sm:p-8 shadow-2xl text-white space-y-6">
+            <div className="sticky top-24 space-y-6 rounded-3xl border border-[rgba(212,175,55,0.35)] bg-gradient-to-br from-[#332066] to-[#120C27] p-6 text-white shadow-2xl sm:p-8">
               <div>
                 <span className="badge-metallic-gold mb-2">
                   Direct Statutory Desk
@@ -186,7 +186,7 @@ export default async function ServiceDetailPage({
               </div>
 
               {/* Sidebar Lead Form */}
-              <div className="rounded-2xl bg-[#060B18] p-4 border border-white/10 shadow-inner">
+              <div className="rounded-2xl border border-white/10 bg-[#120C27] p-4 shadow-inner">
                 <WhatsAppForm formType={`Service: ${s.title}`} service={s.title} />
               </div>
 

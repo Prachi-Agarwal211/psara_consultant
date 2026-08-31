@@ -70,7 +70,7 @@ export default function PsaraEstimator() {
   };
 
   return (
-    <section className="relative w-full my-12 rounded-3xl border border-[rgba(212,175,55,0.28)] p-6 md:p-10 bg-gradient-to-b from-[#10243A] via-[#0B1728] to-[#050B14] text-white shadow-2xl overflow-hidden">
+    <section className="relative w-full my-12 rounded-3xl border border-[rgba(196,181,253,0.28)] p-6 md:p-10 bg-gradient-to-br from-[#2A1853] via-[#180D36] to-[#080611] text-white shadow-2xl overflow-hidden">
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-white/15 pb-6">
         <div>
@@ -103,7 +103,7 @@ export default function PsaraEstimator() {
             <select
               value={selectedState}
               onChange={(e) => setSelectedState(e.target.value)}
-              className="w-full rounded-xl border border-white/20 bg-[#0B1728] p-3.5 text-sm font-bold text-white focus:border-[#D4AF37] outline-none shadow-inner"
+              className="w-full rounded-xl border border-violet-200/25 bg-[#120C27] p-3.5 text-sm font-bold text-white focus:border-[#D4AF37] outline-none shadow-inner"
             >
               <option>Rajasthan</option>
               <option>Delhi NCR</option>
@@ -134,11 +134,12 @@ export default function PsaraEstimator() {
                   <button
                     key={c.id}
                     type="button"
+                    data-cursor="Set scope"
                     onClick={() => setCoverageId(c.id)}
-                    className={`text-left p-4 rounded-xl border transition-all duration-200 ${
+                    className={`text-left p-4 rounded-xl border transition-[border-color,box-shadow,transform,filter] duration-200 ${
                       active
-                        ? "border-[#D4AF37] bg-gradient-to-br from-[#163A54] to-[#0A162B] text-white shadow-xl shadow-black/60"
-                        : "border-white/12 bg-[#0B1728] text-[#CBD5E1] hover:border-white/30"
+                        ? "border-[#D4AF37] bg-gradient-to-br from-[#3B2374] to-[#180D36] text-white shadow-xl shadow-[0_20px_40px_-24px_rgba(8,6,17,0.65)]"
+                        : "border-white/12 bg-[#180D36] text-[#CBD5E1] hover:border-violet-300/50"
                     }`}
                   >
                     <span className="font-bold text-xs block leading-snug text-white">{c.label}</span>
@@ -153,7 +154,7 @@ export default function PsaraEstimator() {
           </div>
 
           {/* Armed Endorsement */}
-          <div className="rounded-xl border border-white/12 bg-[#0B1728] p-4">
+          <div className="rounded-xl border border-violet-200/15 bg-[#180D36] p-4">
             <label className="flex items-center gap-3 cursor-pointer text-sm font-bold text-white">
               <input
                 type="checkbox"
@@ -169,7 +170,7 @@ export default function PsaraEstimator() {
           </div>
 
           {/* Additional / Other Costs Section */}
-          <div className="rounded-2xl border border-white/12 bg-[#0B1728] p-5 space-y-3 shadow-inner">
+          <div className="rounded-2xl border border-violet-200/15 bg-gradient-to-br from-[#1A1236] to-[#120C27] p-5 space-y-3 shadow-inner">
             <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#D4AF37]">
               <Info className="h-4 w-4" /> Other Third-Party / Statutory Expenses
             </div>
@@ -191,7 +192,7 @@ export default function PsaraEstimator() {
         </div>
 
         {/* Right Structured Fee Grid Table & Total */}
-        <div className="lg:col-span-5 rounded-2xl border border-[rgba(212,175,55,0.35)] p-6 bg-gradient-to-b from-[#10243A] to-[#0B1728] space-y-6 shadow-2xl">
+        <div className="lg:col-span-5 rounded-2xl border border-[rgba(212,175,55,0.35)] p-6 bg-gradient-to-br from-[#3B2374] via-[#1A1236] to-[#120C27] space-y-6 shadow-2xl">
           <div>
             <span className="text-xs font-bold uppercase tracking-wider text-[#D4AF37] block">
               Structured Cost Breakdown
@@ -271,7 +272,8 @@ export default function PsaraEstimator() {
           <button
             type="button"
             onClick={handleWhatsAppConsultation}
-            className="w-full inline-flex items-center justify-center gap-2 rounded-xl px-6 py-4 text-xs font-bold uppercase tracking-wider bg-gradient-to-r from-[#25D366] to-[#1DA851] hover:from-[#1DA851] hover:to-[#128C7E] text-white transition-all shadow-xl shadow-green-950/40"
+            data-cursor="Get estimate"
+            className="w-full inline-flex items-center justify-center gap-2 rounded-xl px-6 py-4 text-xs font-bold uppercase tracking-wider bg-gradient-to-r from-[#25D366] to-[#1DA851] hover:from-[#1DA851] hover:to-[#128C7E] text-white transition-[border-color,box-shadow,transform] shadow-xl shadow-green-950/40"
           >
             <MessageSquare className="h-4 w-4 fill-white" />
             <span>Get Official Fee Breakdown on WhatsApp</span>

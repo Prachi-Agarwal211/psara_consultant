@@ -89,7 +89,7 @@ export default function CalculatorClient() {
               <select
                 value={selectedState}
                 onChange={(e) => setSelectedState(e.target.value)}
-                className="w-full rounded-xl border border-white/20 bg-[#060B18] p-3.5 text-sm font-bold text-white focus:border-[#D4AF37] outline-none shadow-inner"
+                className="w-full rounded-xl border border-white/20 bg-[#120C27] p-3.5 text-sm font-bold text-white focus:border-[#D4AF37] outline-none shadow-inner"
               >
                 <option value="rajasthan">Rajasthan</option>
                 <option value="delhi">Delhi NCR</option>
@@ -112,8 +112,8 @@ export default function CalculatorClient() {
                   onClick={() => setScale("d1")}
                   className={`p-4 rounded-xl border text-xs font-bold transition-all text-left ${
                     scale === "d1"
-                      ? "border-[#D4AF37] bg-gradient-to-br from-[#14284D] to-[#0A162B] text-white shadow-lg"
-                      : "border-white/12 bg-[#060B18] text-[#CBD5E1] hover:border-white/30"
+                      ? "border-[#D4AF37] bg-gradient-to-br from-[#332066] to-[#180D36] text-white shadow-lg"
+                      : "border-white/12 bg-[#120C27] text-[#CBD5E1] hover:border-white/30"
                   }`}
                 >
                   <span className="block font-bold">Single-District</span>
@@ -125,8 +125,8 @@ export default function CalculatorClient() {
                   onClick={() => setScale("d5")}
                   className={`p-4 rounded-xl border text-xs font-bold transition-all text-left ${
                     scale === "d5"
-                      ? "border-[#D4AF37] bg-gradient-to-br from-[#14284D] to-[#0A162B] text-white shadow-lg"
-                      : "border-white/12 bg-[#060B18] text-[#CBD5E1] hover:border-white/30"
+                      ? "border-[#D4AF37] bg-gradient-to-br from-[#332066] to-[#180D36] text-white shadow-lg"
+                      : "border-white/12 bg-[#120C27] text-[#CBD5E1] hover:border-white/30"
                   }`}
                 >
                   <span className="block font-bold">Up to 5 Districts</span>
@@ -138,8 +138,8 @@ export default function CalculatorClient() {
                   onClick={() => setScale("state")}
                   className={`p-4 rounded-xl border text-xs font-bold transition-all text-left ${
                     scale === "state"
-                      ? "border-[#D4AF37] bg-gradient-to-br from-[#14284D] to-[#0A162B] text-white shadow-lg"
-                      : "border-white/12 bg-[#060B18] text-[#CBD5E1] hover:border-white/30"
+                      ? "border-[#D4AF37] bg-gradient-to-br from-[#332066] to-[#180D36] text-white shadow-lg"
+                      : "border-white/12 bg-[#120C27] text-[#CBD5E1] hover:border-white/30"
                   }`}
                 >
                   <span className="block font-bold">All-State PSARA</span>
@@ -149,7 +149,7 @@ export default function CalculatorClient() {
             </div>
 
             {/* Armed Guard Option */}
-            <div className="rounded-xl border border-white/12 bg-[#060B18] p-4">
+            <div className="rounded-xl border border-white/12 bg-[#120C27] p-4">
               <label className="flex items-center gap-3 cursor-pointer text-sm font-bold text-white">
                 <input
                   type="checkbox"
@@ -165,7 +165,7 @@ export default function CalculatorClient() {
             </div>
 
             {/* Other Costs List */}
-            <div className="rounded-2xl border border-white/12 bg-[#060B18] p-5 space-y-3 shadow-inner">
+            <div className="rounded-2xl border border-white/12 bg-[#120C27] p-5 space-y-3 shadow-inner">
               <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#D4AF37]">
                 <Info className="h-4 w-4" /> Other Statutory &amp; Third-Party Costs
               </div>
@@ -184,7 +184,7 @@ export default function CalculatorClient() {
           </div>
 
           {/* Breakdown Table Card */}
-          <div className="lg:col-span-5 rounded-3xl border border-[rgba(212,175,55,0.35)] bg-gradient-to-b from-[#14102A] to-[#060B18] text-white p-6 md:p-8 flex flex-col justify-between shadow-2xl space-y-6">
+          <div className="lg:col-span-5 rounded-3xl border border-[rgba(212,175,55,0.35)] bg-gradient-to-b from-[#332066] to-[#120C27] text-white p-6 md:p-8 flex flex-col justify-between shadow-2xl space-y-6">
             <div>
               <span className="text-xs font-bold uppercase tracking-widest text-[#D4AF37] block">
                 Structured Fee Schedule
@@ -241,7 +241,7 @@ export default function CalculatorClient() {
                 <span className="text-right text-2xl font-bold gold-metallic-text font-mono">{totalEst === null ? "Verify with desk" : formatINR(totalEst)}</span>
               </div>
 
-              <div className="mt-6 p-4 bg-[#060B18] border border-white/10 rounded-2xl text-xs text-[#CBD5E1] space-y-1.5 shadow-inner">
+              <div className="mt-6 p-4 bg-[#120C27] border border-white/10 rounded-2xl text-xs text-[#CBD5E1] space-y-1.5 shadow-inner">
                 <div className="flex items-center gap-2">
                   <ShieldCheck className="h-4 w-4 text-[#D4AF37] shrink-0" />
                   <span><strong>Timeline:</strong> {selectedStateInfo?.timeline || "Confirm with desk"}</span>

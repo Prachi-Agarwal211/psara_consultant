@@ -12,7 +12,7 @@ export default function CtaBar({
   return (
     <div
       className="relative mt-14 border border-white/10 p-6 md:p-8"
-      style={{ background: "rgba(140,31,50,0.08)" }}
+      style={{ background: "linear-gradient(115deg, rgba(109,40,217,0.22), rgba(24,13,54,0.72) 58%, rgba(212,175,55,0.12))" }}
       data-clip
     >
       <div className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-center">

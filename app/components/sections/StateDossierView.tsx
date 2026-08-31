@@ -36,15 +36,15 @@ interface StateDossierViewProps {
 
 function DossierTitle({ index, children }: { index: string; children: React.ReactNode }) {
   return (
-    <div className="flex items-center gap-4">
+    <div className="flex min-w-0 items-start gap-3 sm:items-center sm:gap-4">
       <span
         aria-hidden
-        className="font-mono text-xs font-bold tracking-widest text-[#D4AF37]"
+        className="shrink-0 pt-1 font-mono text-xs font-bold tracking-widest text-[#D4AF37] sm:pt-0"
       >
         {index}
       </span>
-      <div className="h-px w-10 bg-[#D4AF37]" aria-hidden />
-      <h2 className="text-2xl font-bold tracking-tight text-white" style={{ fontFamily: "var(--font-display)" }}>
+      <div className="mt-3 h-px w-5 shrink-0 bg-[#D4AF37] sm:mt-0 sm:w-10" aria-hidden />
+      <h2 className="min-w-0 text-xl font-bold leading-tight tracking-tight text-white sm:text-2xl" style={{ fontFamily: "var(--font-display)" }}>
         {children}
       </h2>
     </div>
@@ -92,7 +92,7 @@ export default function StateDossierView({
 
   return (
     <div
-      className="space-y-16 py-4 text-white"
+      className="min-w-0 space-y-16 py-4 text-white"
       itemScope
       itemType="https://schema.org/HowTo"
       style={accVars}
@@ -101,9 +101,9 @@ export default function StateDossierView({
       <meta itemProp="description" content={content.metaDescription} />
 
       {/* 1. EXECUTIVE DOSSIER HERO SUMMARY */}
-      <section className="relative overflow-hidden rounded-3xl border border-[rgba(212,175,55,0.28)] bg-gradient-to-b from-[#14102A] via-[#0A1428] to-[#080714] p-6 md:p-10 shadow-2xl">
-        <div className="flex flex-wrap items-center justify-between gap-4 pb-6 border-b border-white/10">
-          <div className="flex items-center gap-3">
+      <section className="relative overflow-hidden rounded-3xl border border-[rgba(212,175,55,0.28)] bg-gradient-to-br from-[#332066] via-[#17102F] to-[#080611] p-6 shadow-2xl sm:p-8 md:p-10">
+        <div className="flex flex-col items-start justify-between gap-4 border-b border-white/10 pb-6 sm:flex-row sm:items-center">
+          <div className="flex min-w-0 flex-wrap items-center gap-3">
             <span className="badge-metallic-gold">
               <Shield className="h-3.5 w-3.5 text-[#D4AF37]" />
               State Statutory Framework
@@ -112,11 +112,11 @@ export default function StateDossierView({
               Ref: PSARA-{state.slug.toUpperCase()}
             </span>
           </div>
-          <div className="flex items-center gap-3 text-xs font-bold text-[#E2E8F0] uppercase tracking-wider">
+          <div className="flex flex-wrap items-center gap-x-3 gap-y-2 text-xs font-bold uppercase tracking-wider text-[#E2E8F0]">
             <span className="flex items-center gap-1">
               <MapPin className="h-3.5 w-3.5 text-[#D4AF37]" /> Capital: <strong className="text-white font-bold">{state.capital}</strong>
             </span>
-            <span>•</span>
+            <span className="hidden sm:inline">•</span>
             <span className="flex items-center gap-1">
               <Clock className="h-3.5 w-3.5 text-[#D4AF37]" /> Validity: <strong className="text-white font-bold">{state.validityYears} Years</strong>
             </span>
@@ -137,15 +137,15 @@ export default function StateDossierView({
 
         {/* Key Framework Parameters */}
         <div className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-4 pt-6 border-t border-white/10">
-          <div className="rounded-2xl border border-white/10 bg-[#0F0C1F] p-4 shadow-inner">
+          <div className="rounded-2xl border border-violet-200/10 bg-[#120C27] p-4 shadow-inner">
             <span className="block text-[0.65rem] font-bold uppercase tracking-widest text-[#D4AF37]">Application Mode</span>
             <span className="mt-1 block text-sm font-bold text-white">{state.applicationMode}</span>
           </div>
-          <div className="rounded-2xl border border-white/10 bg-[#0F0C1F] p-4 shadow-inner">
+          <div className="rounded-2xl border border-violet-200/10 bg-[#120C27] p-4 shadow-inner">
             <span className="block text-[0.65rem] font-bold uppercase tracking-widest text-[#D4AF37]">Rules Framework</span>
             <span className="mt-1 block text-sm font-bold text-white">{state.rulesNote}</span>
           </div>
-          <div className="rounded-2xl border border-white/10 bg-[#0F0C1F] p-4 shadow-inner">
+          <div className="rounded-2xl border border-violet-200/10 bg-[#120C27] p-4 shadow-inner">
             <span className="block text-[0.65rem] font-bold uppercase tracking-widest text-[#D4AF37]">Coverage Scale</span>
             <span className="mt-1 block text-sm font-bold text-white">{state.cities.length}+ Major Districts</span>
           </div>
@@ -155,7 +155,7 @@ export default function StateDossierView({
       {/* 2. STATE AT A GLANCE */}
       <section className="space-y-6">
         <DossierTitle index="01">State at a Glance</DossierTitle>
-        <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
           <div className="rounded-2xl border border-[rgba(212,175,55,0.28)] bg-gradient-to-br from-[#14102A] to-[#0F0C1F] p-5 shadow-md">
             <span className="block text-[0.65rem] font-bold uppercase tracking-widest text-[#D4AF37]">Controlling Authority</span>
             <span className="mt-1.5 block text-xs font-bold text-white leading-snug">{state.authority}</span>
@@ -242,13 +242,13 @@ export default function StateDossierView({
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-white/10 pb-4">
           <DossierTitle index={pad(processIdx)}>{`Compliance Toolkit for ${state.name}`}</DossierTitle>
 
-          <div className="flex gap-2 border border-white/10 bg-[#0F0C1F] p-1.5 rounded-xl">
+          <div className="flex w-full flex-wrap gap-2 rounded-xl border border-white/10 bg-[#120C27] p-1.5 sm:w-auto sm:flex-nowrap">
             {(["process", "documents", "calculator"] as const).map((tab) => (
               <button
                 key={tab}
                 onClick={() => setActiveTab(tab)}
                 aria-pressed={activeTab === tab}
-                className={`px-4 py-2 text-xs font-bold uppercase tracking-wider rounded-lg transition-all ${
+                className={`flex-1 whitespace-nowrap rounded-lg px-3 py-2 text-xs font-bold uppercase tracking-wider transition-[border-color,box-shadow,transform] sm:flex-none sm:px-4 ${
                   activeTab === tab
                     ? "text-[#241703] shadow-md bg-[#C89B3C]"
                     : "text-[#CBD5E1] hover:text-white"
@@ -271,7 +271,7 @@ export default function StateDossierView({
               return (
                 <div
                   key={idx}
-                  className="group relative overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-b from-[#14102A] to-[#0F0C1F] p-6 shadow-md transition-all duration-200 hover:border-[#D4AF37]"
+                  className="group relative overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-b from-[#14102A] to-[#0F0C1F] p-6 shadow-md transition-[border-color,box-shadow,transform,filter] duration-200 hover:border-[#D4AF37]"
                 >
                   <div className="flex items-center justify-between">
                     <span className="badge-metallic-gold text-[0.6rem]">
@@ -302,8 +302,8 @@ export default function StateDossierView({
         {/* Tab 2: Interactive Document Verification Checklist */}
         {activeTab === "documents" && (
           <div className="space-y-6">
-            <div className="flex items-center justify-between">
-              <h3 className="flex items-center gap-2 text-lg font-bold text-white">
+            <div className="flex flex-col items-start justify-between gap-2 sm:flex-row sm:items-center">
+              <h3 className="flex min-w-0 items-start gap-2 text-lg font-bold leading-tight text-white">
                 <FileCheck className="h-5 w-5 text-[#D4AF37]" /> Mandatory Document Checklist ({state.name})
               </h3>
               <span className="text-xs text-[#F5D061] font-mono font-bold">
@@ -319,7 +319,7 @@ export default function StateDossierView({
                     key={idx}
                     type="button"
                     onClick={() => toggleDoc(idx)}
-                    className={`flex items-start gap-3 rounded-2xl border p-4 text-left transition-all ${
+                    className={`flex items-start gap-3 rounded-2xl border p-4 text-left transition-[border-color,box-shadow,transform] ${
                       isChecked
                         ? "border-[#25D366] bg-[#14102A]/80 shadow-md"
                         : "border-white/10 bg-[#0F0C1F] hover:border-white/30"
@@ -359,22 +359,22 @@ export default function StateDossierView({
                   {state.name} Cost Breakdown
                 </h3>
               </div>
-              <div className="flex gap-2">
+              <div className="flex w-full flex-wrap gap-2 sm:w-auto sm:flex-nowrap">
                 <button
                   onClick={() => setCalcScale("d1")}
-                  className={`px-3 py-1.5 text-xs font-bold rounded-lg border ${calcScale === "d1" ? "bg-[#C89B3C] border-[#D4AF37] text-[#241703]" : "border-white/10 text-[#CBD5E1]"}`}
+                  className={`flex-1 whitespace-nowrap rounded-lg border px-3 py-1.5 text-xs font-bold sm:flex-none ${calcScale === "d1" ? "bg-[#C89B3C] border-[#D4AF37] text-[#241703]" : "border-white/10 text-[#CBD5E1]"}`}
                 >
                   1 District
                 </button>
                 <button
                   onClick={() => setCalcScale("d5")}
-                  className={`px-3 py-1.5 text-xs font-bold rounded-lg border ${calcScale === "d5" ? "bg-[#C89B3C] border-[#D4AF37] text-[#241703]" : "border-white/10 text-[#CBD5E1]"}`}
+                  className={`flex-1 whitespace-nowrap rounded-lg border px-3 py-1.5 text-xs font-bold sm:flex-none ${calcScale === "d5" ? "bg-[#C89B3C] border-[#D4AF37] text-[#241703]" : "border-white/10 text-[#CBD5E1]"}`}
                 >
                   5 Districts
                 </button>
                 <button
                   onClick={() => setCalcScale("state")}
-                  className={`px-3 py-1.5 text-xs font-bold rounded-lg border ${calcScale === "state" ? "bg-[#C89B3C] border-[#D4AF37] text-[#241703]" : "border-white/10 text-[#CBD5E1]"}`}
+                  className={`flex-1 whitespace-nowrap rounded-lg border px-3 py-1.5 text-xs font-bold sm:flex-none ${calcScale === "state" ? "bg-[#C89B3C] border-[#D4AF37] text-[#241703]" : "border-white/10 text-[#CBD5E1]"}`}
                 >
                   Whole State
                 </button>
@@ -427,12 +427,12 @@ export default function StateDossierView({
         <div className="divide-y divide-white/10 border-y border-white/10">
           {content.faqs.map((faq, idx) => (
             <details key={idx} className="group py-5 transition-colors">
-              <summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-2 font-[family-name:var(--font-display)] text-base font-bold text-white hover:text-[#F5D061]">
-                <span className="flex items-center gap-2">
-                  <span aria-hidden className="font-mono text-xs text-[#D4AF37]">{String(idx + 1).padStart(2, "0")}</span>
+              <summary className="flex cursor-pointer list-none items-start justify-between gap-4 px-2 font-[family-name:var(--font-display)] text-base font-bold text-white hover:text-[#F5D061]">
+                <span className="flex min-w-0 items-start gap-2">
+                  <span aria-hidden className="shrink-0 pt-0.5 font-mono text-xs text-[#D4AF37]">{String(idx + 1).padStart(2, "0")}</span>
                   {faq.q}
                 </span>
-                <span className="text-[#D4AF37] text-sm transition-transform group-open:rotate-180">↓</span>
+                <span className="shrink-0 pt-0.5 text-sm text-[#D4AF37] transition-transform group-open:rotate-180">↓</span>
               </summary>
               <p className="mt-3 max-w-3xl px-2 text-sm font-normal leading-relaxed text-[#E2E8F0]">
                 {faq.a}

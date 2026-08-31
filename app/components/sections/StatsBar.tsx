@@ -39,6 +39,7 @@ export default function StatsBar() {
 
     const { gsap } = ensureGsap();
     const ctx = gsap.context(() => {
+      const compactViewport = window.matchMedia("(max-width: 639px)").matches;
       gsap.from("[data-proof-category]", {
         opacity: 0,
         y: 18,
@@ -49,7 +50,8 @@ export default function StatsBar() {
       });
       gsap.from("[data-proof-row]", {
         opacity: 0,
-        x: -30,
+        x: compactViewport ? 0 : -30,
+        y: compactViewport ? 14 : 0,
         stagger: 0.12,
         duration: 0.85,
         ease: "power3.out",
@@ -67,7 +69,7 @@ export default function StatsBar() {
   }, []);
 
   return (
-    <section ref={rootRef} id="proof" className="section-atmosphere relative isolate overflow-hidden border-b border-white/10 bg-gradient-to-b from-[#050B14] via-[#0B1728] to-[#050B14] py-16 text-white sm:py-20 lg:py-24" aria-label="PSARA proof and coverage">
+    <section ref={rootRef} id="proof" className="section-atmosphere mood-proof relative isolate overflow-hidden border-b border-white/10 bg-gradient-to-br from-[#080611] via-[#1A1236] to-[#080611] py-16 text-white sm:py-20 lg:py-24" aria-label="PSARA proof and coverage">
       <Image
         data-proof-watermark
         src="/apple-touch-icon.png"
@@ -104,11 +106,11 @@ export default function StatsBar() {
         </div>
 
         {/* Stats Row List */}
-        <div data-proof-list className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
+        <div data-proof-list className="mt-6 grid grid-cols-1 justify-items-center gap-3 sm:grid-cols-2">
           {STATS.map(({ num, suffix, title, desc, icon: Icon }, index) => (
-            <div key={title} data-proof-row className="group relative flex min-h-[184px] flex-col justify-between overflow-hidden rounded-2xl border border-white/12 bg-gradient-to-br from-[#132A3D] to-[#0B1728] p-5 text-left shadow-[0_18px_36px_-28px_rgba(0,0,0,0.9)] transition-[border-color,transform] duration-300 hover:-translate-y-1 hover:border-[rgba(212,175,55,0.55)] sm:p-6">
+            <div key={title} data-proof-row className="group relative flex min-h-[184px] w-full flex-col justify-between overflow-hidden rounded-2xl border border-white/12 bg-gradient-to-br from-[#2A1853] via-[#1A1236] to-[#0E0821] p-5 text-left shadow-[0_18px_36px_-28px_rgba(0,0,0,0.9)] transition-[border-color,transform] duration-300 hover:-translate-y-1 hover:border-[rgba(212,175,55,0.55)] sm:p-6">
               <div className="flex items-start justify-between gap-4">
-                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-[rgba(212,175,55,0.38)] bg-[#0B1728] text-[#D4AF37] transition-colors duration-300 group-hover:border-[#D4AF37] group-hover:text-white">
+                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-[rgba(196,181,253,0.38)] bg-[#120C27] text-[#F5D061] transition-colors duration-300 group-hover:border-[#D4AF37] group-hover:text-white">
                   <Icon className="h-5 w-5" strokeWidth={2} />
                 </span>
                 <span className="font-mono text-[10px] font-bold tracking-[.2em] text-[#D4AF37]">0{index + 1}</span>

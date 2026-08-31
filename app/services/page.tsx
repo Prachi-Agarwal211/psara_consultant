@@ -46,7 +46,7 @@ export default function ServicesHubPage() {
               <Link
                 key={s.slug}
                 href={`/services/${s.slug}`}
-                className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-white/12 bg-[#0A1022] p-6 sm:p-8 shadow-md transition-all duration-200 hover:-translate-y-1 hover:border-[#D4AF37] hover:bg-[#0D162C]"
+                className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-white/12 bg-gradient-to-br from-[#2A1853] to-[#120C27] p-6 shadow-md transition-all duration-200 hover:-translate-y-1 hover:border-[#D4AF37] hover:from-[#332066] hover:to-[#180D36] sm:p-8"
               >
                 <div>
                   <div className="flex items-center justify-between mb-4">
@@ -87,7 +87,7 @@ export default function ServicesHubPage() {
 
           <div className="mt-10 grid grid-cols-1 md:grid-cols-5 gap-4">
             {PROCESS_STEPS.map((ps) => (
-              <div key={ps.step} className="rounded-2xl border border-white/10 bg-[#0A1022] p-5 shadow-md">
+              <div key={ps.step} className="rounded-2xl border border-white/10 bg-gradient-to-br from-[#2A1853] to-[#120C27] p-5 shadow-md">
                 <span className="mb-2 block font-mono text-2xl font-bold text-[#F5D061]">{ps.step}</span>
                 <h3 className="mb-2 text-sm font-bold text-white" style={{ fontFamily: "var(--font-display)" }}>{ps.title}</h3>
                 <p className="text-xs text-[#CBD5E1] font-normal leading-relaxed">{ps.desc}</p>
@@ -97,7 +97,7 @@ export default function ServicesHubPage() {
         </section>
 
         {/* Fee Calculator CTA Banner */}
-        <section className="mb-20 rounded-3xl border border-white/15 bg-[#0A1022] text-white p-8 md:p-12 shadow-2xl">
+        <section className="mb-20 rounded-3xl border border-white/15 bg-gradient-to-br from-[#332066] to-[#120C27] p-8 text-white shadow-2xl md:p-12">
           <div className="flex flex-col lg:flex-row items-center justify-between gap-8">
             <div>
               <div className="flex items-center gap-2 text-[#F5D061] text-xs font-bold uppercase tracking-widest">
@@ -124,7 +124,7 @@ export default function ServicesHubPage() {
         </section>
 
         {/* Direct Advisory CTA Section Bar */}
-        <section className="rounded-3xl border border-[#D4AF37]/40 p-8 md:p-12 text-white bg-[#0A1022] shadow-xl">
+        <section className="rounded-3xl border border-[#D4AF37]/40 bg-gradient-to-br from-[#332066] to-[#120C27] p-8 text-white shadow-xl md:p-12">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
             <div>
               <span className="text-xs font-bold uppercase tracking-widest text-[#F5D061]">Direct Advisory</span>

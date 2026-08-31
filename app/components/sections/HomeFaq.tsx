@@ -40,7 +40,7 @@ export default function HomeFaq() {
   return (
     <section
       id="faq"
-      className="relative overflow-hidden bg-[#050B14] text-white py-20 lg:py-28 border-b border-white/10"
+      className="section-atmosphere mood-faq relative overflow-hidden bg-[#100728] py-20 text-white lg:py-28 border-b border-white/10"
     >
       <div className="relative z-10 px-[var(--gutter)] max-w-7xl mx-auto space-y-12">
         {/* Header */}
@@ -75,6 +75,7 @@ export default function HomeFaq() {
                   type="button"
                   onClick={() => toggle(idx)}
                   aria-expanded={isOpen}
+                  data-cursor="Read answer"
                   className="group w-full flex items-center justify-between gap-6 text-left focus:outline-none"
                 >
                   <span
@@ -84,10 +85,10 @@ export default function HomeFaq() {
                     {item.q}
                   </span>
                   <span
-                    className={`shrink-0 flex h-9 w-9 items-center justify-center rounded-xl border transition-all duration-200 ${
+                    className={`shrink-0 flex h-9 w-9 items-center justify-center rounded-xl border transition-[border-color,box-shadow,transform,filter] duration-200 ${
                       isOpen
                         ? "rotate-180 border-[#D4AF37] bg-[#C89B3C] text-[#241703]"
-                        : "border-white/20 bg-[#0A1022] text-[#F5D061] group-hover:border-[#D4AF37]"
+                        : "border-violet-200/25 bg-[#180D36] text-[#F5D061] group-hover:border-[#D4AF37]"
                     }`}
                   >
                     <ChevronDown className="h-4 w-4" />
@@ -114,7 +115,8 @@ export default function HomeFaq() {
           <button
             type="button"
             onClick={() => setShowAll((prev) => !prev)}
-            className="inline-flex items-center gap-2 rounded-xl border border-[#D4AF37] bg-[#D4AF37]/15 hover:bg-[#D4AF37] hover:text-[#050B14] px-8 py-3.5 text-xs font-bold uppercase tracking-[0.12em] text-[#F5D061] transition-all duration-200 shadow-md"
+            data-cursor="More FAQs"
+            className="inline-flex items-center gap-2 rounded-xl border border-[#D4AF37] bg-gradient-to-r from-[#2A1853]/50 to-[#D4AF37]/20 hover:bg-[#D4AF37] hover:text-[#080611] px-8 py-3.5 text-xs font-bold uppercase tracking-[0.12em] text-[#F5D061] transition-[border-color,box-shadow,transform,filter] duration-200 shadow-md"
             style={{ fontFamily: "var(--font-body)" }}
           >
             <span>{showAll ? "Show Fewer Questions" : `See More Questions (+${faqs.length - 3} More)`}</span>
@@ -123,7 +125,7 @@ export default function HomeFaq() {
 
           <Link
             href="/faq"
-            className="inline-flex items-center gap-2 rounded-xl border border-white/20 bg-[#0A1022] hover:bg-white/10 px-6 py-3.5 text-xs font-bold uppercase tracking-[0.12em] text-white transition-all"
+            className="inline-flex items-center gap-2 rounded-xl border border-violet-200/25 bg-[#180D36] hover:bg-[#2A1853] px-6 py-3.5 text-xs font-bold uppercase tracking-[0.12em] text-white transition-[border-color,box-shadow,transform]"
             style={{ fontFamily: "var(--font-body)" }}
           >
             <span>All 100+ Statutory FAQs</span>

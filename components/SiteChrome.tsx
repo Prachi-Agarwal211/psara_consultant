@@ -91,10 +91,10 @@ export function SiteHeader({ pathname, homePlacement = false }: { pathname: stri
         <div
           className={`flex items-center justify-between gap-4 px-[var(--gutter)] transition-all duration-300 ${
             homePlacement && !scrolled
-              ? "border-b border-white/10 bg-gradient-to-b from-[#050B14]/90 via-[#050B14]/55 to-transparent text-white"
+              ? "border-b border-white/10 bg-gradient-to-b from-[#080611]/90 via-[#100728]/55 to-transparent text-white"
               : scrolled
-                ? "bg-[#050B14]/95 backdrop-blur-md border-b border-[#D4AF37]/30 shadow-2xl shadow-black/60 text-white"
-                : "bg-[#050B14]/80 backdrop-blur-sm border-b border-white/10 text-white"
+                ? "bg-[#080611]/95 backdrop-blur-md border-b border-[#D4AF37]/30 shadow-2xl shadow-violet-950/60 text-white"
+                : "bg-[#080611]/80 backdrop-blur-sm border-b border-white/10 text-white"
           }`}
           style={{ height: "4.5rem" }}
         >
@@ -115,7 +115,7 @@ export function SiteHeader({ pathname, homePlacement = false }: { pathname: stri
                 <Link
                   key={l.href}
                   href={l.href}
-                  className={`text-[11px] font-bold uppercase tracking-[0.14em] transition-all duration-200 py-1.5 px-2 relative after:ml-4 after:text-[#D4AF37] after:content-['·'] last:after:hidden ${
+                  className={`text-[11px] font-bold uppercase tracking-[0.14em] transition-all duration-200 py-1.5 px-2 relative ${
                     active ? "text-[#E8D5A3]" : "text-white/75 hover:text-white"
                   }`}
                   style={{ fontFamily: "var(--font-body)" }}
@@ -134,7 +134,7 @@ export function SiteHeader({ pathname, homePlacement = false }: { pathname: stri
             {/* Quick Call */}
             <a
               href={TEL_HREF}
-              className="hidden sm:inline-flex items-center gap-2 rounded-full border border-[#D4AF37]/75 bg-[#071525]/45 px-4 py-2.5 text-xs font-bold uppercase tracking-[.06em] text-[#E8D5A3] transition-all duration-200 hover:bg-[#D4AF37] hover:text-[#050B14]"
+              className="hidden sm:inline-flex items-center gap-2 rounded-full border border-[#D4AF37]/75 bg-[#180D36]/55 px-4 py-2.5 text-xs font-bold uppercase tracking-[.06em] text-[#E8D5A3] transition-all duration-200 hover:bg-[#D4AF37] hover:text-[#080611]"
               style={{ fontFamily: "var(--font-body)" }}
             >
               <Phone className="h-3.5 w-3.5" />
@@ -144,7 +144,7 @@ export function SiteHeader({ pathname, homePlacement = false }: { pathname: stri
             {/* Universal Menu Button */}
             <button
               type="button"
-              className="flex h-11 w-11 items-center justify-center rounded-full border border-[#D4AF37]/70 bg-[#071525]/60 p-0 text-xs font-bold uppercase tracking-[.08em] text-white shadow-md transition-all duration-200 hover:border-[#E8D5A3] hover:text-[#E8D5A3] active:scale-95"
+              className="flex h-11 w-11 items-center justify-center rounded-full border border-[#D4AF37]/70 bg-[#180D36]/70 p-0 text-xs font-bold uppercase tracking-[.08em] text-white shadow-md transition-all duration-200 hover:border-[#E8D5A3] hover:text-[#E8D5A3] active:scale-95"
               onClick={() => setMenuOpen(true)}
               aria-label="Open navigation menu"
               aria-expanded={menuOpen}
@@ -164,7 +164,7 @@ export function SiteHeader({ pathname, homePlacement = false }: { pathname: stri
           menuOpen ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"
         }`}
         style={{
-          backgroundColor: "#050B14",
+          backgroundColor: "#080611",
           color: "#FFFFFF",
           paddingTop: "env(safe-area-inset-top, 0px)",
           paddingBottom: "env(safe-area-inset-bottom, 0px)",
@@ -207,7 +207,7 @@ export function SiteHeader({ pathname, homePlacement = false }: { pathname: stri
         </nav>
 
         {/* Drawer Footer Actions */}
-        <div className="flex flex-col gap-3 px-[var(--gutter)] pb-8 pt-4 border-t border-white/15 bg-[#10243A]">
+        <div className="flex flex-col gap-3 px-[var(--gutter)] pb-8 pt-4 border-t border-white/15 bg-gradient-to-br from-[#2A1853] to-[#120C27]">
           <div className="flex items-center gap-2 text-xs text-white/70">
             <ShieldCheck className="h-4 w-4 text-[#D4AF37]" />
             <span>Pan-India Statutory PSARA Advisory Desk</span>

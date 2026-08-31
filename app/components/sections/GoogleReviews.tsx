@@ -84,13 +84,13 @@ export default function GoogleReviews() {
           {/* Stacked Reviews */}
           <div className="lg:col-span-5 space-y-4 flex flex-col justify-between">
             {rest.map((r) => (
-              <figure key={r.name} className="rounded-2xl border border-[#E5DDF3] bg-[#F4F0FA] p-6 flex flex-col justify-between shadow-sm transition-all hover:border-[#C89B3C]">
+              <figure key={r.name} className="rounded-2xl border border-[#E5DDF3] bg-[#F4F0FA] p-6 flex flex-col justify-between shadow-sm transition-[border-color,box-shadow,transform] hover:border-[#C89B3C]">
                 <div>
                   <div className="flex items-center justify-between mb-3">
                     <Stars count={r.rating} />
                     <span className="text-xs font-bold uppercase tracking-wider text-[#8F681B]">{r.service}</span>
                   </div>
-                  <blockquote className="text-sm font-normal leading-relaxed text-[#334155] italic">
+                  <blockquote className="text-sm font-normal leading-relaxed text-[var(--ink-soft,#443A61)] italic">
                     &ldquo;{r.quote.slice(0, 150)}{r.quote.length > 150 ? "…" : ""}&rdquo;
                   </blockquote>
                 </div>
@@ -112,7 +112,7 @@ export default function GoogleReviews() {
             href={GOOGLE_REVIEWS.profileUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 rounded-xl bg-[#0F172A] hover:bg-[#1E293B] px-7 py-3.5 text-xs font-bold uppercase tracking-wider text-white transition-all shadow-md"
+            className="inline-flex items-center gap-2 rounded-xl bg-[var(--canvas-void,#080611)] hover:bg-[#180D36] px-7 py-3.5 text-xs font-bold uppercase tracking-wider text-white transition-[border-color,box-shadow,transform] shadow-md"
             style={{ fontFamily: "var(--font-body)" }}
           >
             <span>Read All Reviews on Google Business Profile</span>

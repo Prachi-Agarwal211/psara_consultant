@@ -36,11 +36,11 @@ const TRUST_BADGES = [
 export default function SiteFooter() {
   return (
     <footer
-      className="psara-site-footer relative z-10 border-t border-white/15 bg-[#050B14] text-white overflow-hidden pb-24 md:pb-12"
+      className="psara-site-footer footer-mosaic relative z-10 border-t border-white/15 bg-gradient-to-br from-[#080611] via-[#15151A] to-[#21172F] text-white overflow-hidden pb-24 md:pb-12"
     >
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16">
         {/* Marquee Banner */}
-        <div className="mb-12 overflow-hidden rounded-2xl border border-[#D4AF37]/30 py-3.5 bg-[#10243A]">
+        <div className="mb-12 overflow-hidden rounded-2xl border border-[#D4AF37]/30 py-3.5 bg-gradient-to-r from-[#2A1853] via-[#180D36] to-[#2A1853]">
           <div className="flex whitespace-nowrap animate-marquee">
             <span className="text-xs sm:text-sm font-bold uppercase tracking-[0.2em] text-[#F5D061] px-4">
               START YOUR PSARA LICENSE APPLICATION &nbsp;&middot;&nbsp; 36 STATES &amp; UTs COVERAGE &nbsp;&middot;&nbsp; ZERO REJECTION DISCIPLINE &nbsp;&middot;&nbsp;
@@ -52,9 +52,9 @@ export default function SiteFooter() {
         </div>
 
         {/* Trust Badges */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12 border-b border-white/10 pb-8">
+        <div className="footer-trust-grid grid grid-cols-2 md:grid-cols-4 gap-4 mb-12 border-b border-white/10 pb-8">
           {TRUST_BADGES.map((b) => (
-            <div key={b.label} className="flex items-center gap-3 p-3 rounded-xl bg-[#10243A] border border-white/10">
+            <div key={b.label} className="footer-trust-card flex items-center gap-3 p-3 rounded-xl border border-white/10">
               <ShieldCheck className="h-5 w-5 text-[#F5D061] shrink-0" />
               <div>
                 <span className="block text-xs font-bold text-white uppercase">{b.label}</span>
@@ -64,110 +64,87 @@ export default function SiteFooter() {
           ))}
         </div>
 
-        {/* 5-Column Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8 mb-12">
-          {/* Column 1: Brand & Contact */}
-          <div className="sm:col-span-2 lg:col-span-1 space-y-4">
+        {/* Two-column footer: brand/contact stays aligned left while all navigation stays in one responsive rail. */}
+        <div className="mb-12 grid grid-cols-1 gap-10 border-b border-white/10 pb-12 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,1.95fr)] lg:gap-16">
+          <div className="min-w-0 space-y-6">
             <BrandMark variant="light" />
-            <p className="text-xs font-normal leading-relaxed text-[#CBD5E1]">
+            <p className="max-w-md text-sm font-normal leading-relaxed text-[#CBD5E1]">
               India&apos;s statutory consultancy specialized exclusively in PSARA License registration, Security Agency setup, Police Verification, Director MOUs, and Security Training Institute affiliations across all 36 States &amp; UTs.
             </p>
-            <div className="space-y-2 text-xs pt-2">
-              <a href={TEL_HREF} className="flex items-center gap-2 text-white hover:text-[#F5D061] transition-colors font-bold">
-                <Phone className="h-3.5 w-3.5 text-[#F5D061]" />
-                <span>{CONTACT.phoneDisplay}</span>
+            <div className="grid gap-3 text-sm sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
+              <a href={TEL_HREF} className="flex min-w-0 items-center gap-2 text-white transition-colors hover:text-[#F5D061]">
+                <Phone className="h-4 w-4 shrink-0 text-[#F5D061]" />
+                <span className="break-words font-bold">{CONTACT.phoneDisplay}</span>
               </a>
-              <a href={`mailto:${CONTACT.email}`} className="flex items-center gap-2 text-[#CBD5E1] hover:text-white transition-colors">
-                <Mail className="h-3.5 w-3.5 text-[#F5D061]" />
-                <span>{CONTACT.email}</span>
+              <a href={`mailto:${CONTACT.email}`} className="flex min-w-0 items-center gap-2 text-[#CBD5E1] transition-colors hover:text-white">
+                <Mail className="h-4 w-4 shrink-0 text-[#F5D061]" />
+                <span className="break-all">{CONTACT.email}</span>
               </a>
             </div>
-          </div>
 
-          {/* Column 2: Navigation */}
-          <div>
-            <span className="block text-xs font-bold uppercase tracking-widest text-[#F5D061] mb-3">
-              Explore
-            </span>
-            <ul className="space-y-2 text-xs text-[#CBD5E1]">
-              <li><Link href="/" className="hover:text-white transition-colors">Home</Link></li>
-              <li><Link href="/about" className="hover:text-white transition-colors">About Us</Link></li>
-              <li><Link href="/services" className="hover:text-white transition-colors">Services</Link></li>
-              <li><Link href="/states" className="hover:text-white transition-colors">States Directory</Link></li>
-              <li><Link href="/calculator" className="hover:text-white transition-colors">Fee Calculator</Link></li>
-              <li><Link href="/case-studies" className="hover:text-white transition-colors">Case Studies</Link></li>
-              <li><Link href="/industries" className="hover:text-white transition-colors">Industries</Link></li>
-              <li><Link href="/certification" className="hover:text-white transition-colors">Certifications</Link></li>
-              <li><Link href="/contact" className="hover:text-white transition-colors">Contact Us</Link></li>
-            </ul>
-          </div>
-
-          {/* Column 3: PSARA Services */}
-          <div>
-            <span className="block text-xs font-bold uppercase tracking-widest text-[#F5D061] mb-3">
-              Core Services
-            </span>
-            <ul className="space-y-2 text-xs text-[#CBD5E1]">
-              <li><Link href="/services/psara-license" className="hover:text-white transition-colors">Fresh PSARA License</Link></li>
-              <li><Link href="/services/psara-license-renewal" className="hover:text-white transition-colors">PSARA Renewal</Link></li>
-              <li><Link href="/services/multi-state-psara-license" className="hover:text-white transition-colors">Multi-State Licensing</Link></li>
-              <li><Link href="/services/psara-training-mou" className="hover:text-white transition-colors">Training Institute MOUs</Link></li>
-              <li><Link href="/services/police-verification-clearance" className="hover:text-white transition-colors">Police Verification Clearance</Link></li>
-              <li><Link href="/services/security-agency-incorporation" className="hover:text-white transition-colors">Agency Incorporation</Link></li>
-              <li><Link href="/emergency" className="hover:text-[#F5D061] transition-colors font-bold text-[#6FB0B2]">Emergency Filing Desk</Link></li>
-            </ul>
-          </div>
-
-          {/* Column 4: Top States Directory */}
-          <div>
-            <span className="block text-xs font-bold uppercase tracking-widest text-[#F5D061] mb-3">
-              State Coverage
-            </span>
-            <ul className="space-y-2 text-xs text-[#CBD5E1]">
-              <li><Link href="/states/rajasthan" className="hover:text-white transition-colors">Rajasthan PSARA</Link></li>
-              <li><Link href="/states/delhi" className="hover:text-white transition-colors">Delhi NCR PSARA</Link></li>
-              <li><Link href="/states/maharashtra" className="hover:text-white transition-colors">Maharashtra PSARA</Link></li>
-              <li><Link href="/states/karnataka" className="hover:text-white transition-colors">Karnataka PSARA</Link></li>
-              <li><Link href="/states/uttar-pradesh" className="hover:text-white transition-colors">Uttar Pradesh PSARA</Link></li>
-              <li><Link href="/states/haryana" className="hover:text-white transition-colors">Haryana PSARA</Link></li>
-              <li><Link href="/states" className="hover:text-[#F5D061] font-bold transition-colors">View All 36 States &amp; UTs &rarr;</Link></li>
-            </ul>
-          </div>
-
-          {/* Column 5: Headquarters */}
-          <div>
-            <span className="block text-xs font-bold uppercase tracking-widest text-[#F5D061] mb-3">
-              Headquarters
-            </span>
-            <div className="text-xs text-[#CBD5E1] space-y-2">
-              <p className="flex items-start gap-2">
-                <MapPin className="h-4 w-4 text-[#D4AF37] shrink-0 mt-0.5" />
+            <div className="max-w-md border-t border-white/10 pt-5">
+              <span className="mb-3 block text-xs font-bold uppercase tracking-widest text-[#F5D061]">Headquarters</span>
+              <p className="flex items-start gap-2 text-sm leading-relaxed text-[#CBD5E1]">
+                <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-[#D4AF37]" />
                 <span>C-36, Capital Galleria, Sirsi Road, Kanakpura, Jaipur, Rajasthan 302034</span>
               </p>
-              <div className="pt-2 border-t border-white/10 flex items-center gap-2 text-xs">
+              <div className="mt-3 flex flex-wrap items-center gap-2 border-t border-white/10 pt-3 text-xs text-[#CBD5E1]">
                 <span>Jaipur Time:</span>
-                <span className="text-[#F5D061] font-mono font-bold"><LiveClock /></span>
+                <span className="font-mono font-bold text-[#F5D061]"><LiveClock /></span>
+              </div>
+
+              <div className="mt-4">
+                <span className="mb-2 block text-xs font-bold uppercase tracking-widest text-[#F5D061]">Official Handles</span>
+                <div className="flex items-center gap-2">
+                  <a href={CONTACT.social.linkedin || "#"} target="_blank" rel="noopener noreferrer" className="footer-social footer-social-linkedin rounded-xl border border-white/15 bg-white/5 p-2 text-white transition-colors hover:border-[#D4AF37] hover:text-[#F5D061]" aria-label="LinkedIn"><Share2 className="h-4 w-4" /></a>
+                  <a href={CONTACT.social.facebook || "#"} target="_blank" rel="noopener noreferrer" className="footer-social footer-social-facebook rounded-xl border border-white/15 bg-white/5 p-2 text-white transition-colors hover:border-[#D4AF37] hover:text-[#F5D061]" aria-label="Facebook"><Share2 className="h-4 w-4" /></a>
+                  <a href={CONTACT.social.instagram || "#"} target="_blank" rel="noopener noreferrer" className="footer-social footer-social-instagram rounded-xl border border-white/15 bg-white/5 p-2 text-white transition-colors hover:border-[#D4AF37] hover:text-[#F5D061]" aria-label="Instagram"><Share2 className="h-4 w-4" /></a>
+                  <Link href="/google" className="rounded-xl border border-white/15 bg-white/5 p-2 text-white transition-colors hover:border-[#D4AF37] hover:text-[#F5D061]" aria-label="Google Profile"><Globe className="h-4 w-4" /></Link>
+                </div>
               </div>
             </div>
+          </div>
 
-            <div className="mt-4 pt-3 border-t border-white/10">
-              <span className="block text-xs font-bold uppercase tracking-widest text-[#F5D061] mb-2">
-                Official Handles
-              </span>
-              <div className="flex items-center gap-2">
-                <a href={CONTACT.social.linkedin || "#"} target="_blank" rel="noopener noreferrer" className="p-2 rounded-xl bg-white/5 border border-white/15 text-white hover:border-[#D4AF37] hover:text-[#F5D061] transition-colors" aria-label="LinkedIn">
-                  <Share2 className="h-4 w-4" />
-                </a>
-                <a href={CONTACT.social.facebook || "#"} target="_blank" rel="noopener noreferrer" className="p-2 rounded-xl bg-white/5 border border-white/15 text-white hover:border-[#D4AF37] hover:text-[#F5D061] transition-colors" aria-label="Facebook">
-                  <Share2 className="h-4 w-4" />
-                </a>
-                <a href={CONTACT.social.instagram || "#"} target="_blank" rel="noopener noreferrer" className="p-2 rounded-xl bg-white/5 border border-white/15 text-white hover:border-[#D4AF37] hover:text-[#F5D061] transition-colors" aria-label="Instagram">
-                  <Share2 className="h-4 w-4" />
-                </a>
-                <Link href="/google" className="p-2 rounded-xl bg-white/5 border border-white/15 text-white hover:border-[#D4AF37] hover:text-[#F5D061] transition-colors" aria-label="Google Profile">
-                  <Globe className="h-4 w-4" />
-                </Link>
-              </div>
+          <div className="footer-nav-rail grid min-w-0 grid-cols-2 gap-x-5 gap-y-10 sm:grid-cols-2 xl:grid-cols-3">
+            <div className="footer-nav-column footer-nav-column--explore min-w-0">
+              <span className="mb-3 block text-xs font-bold uppercase tracking-widest text-[#F5D061]">Explore</span>
+              <ul className="space-y-2 text-sm text-[#DCE4E4]">
+                <li><Link href="/" className="footer-link transition-colors hover:text-white">Home</Link></li>
+                <li><Link href="/about" className="footer-link transition-colors hover:text-white">About Us</Link></li>
+                <li><Link href="/services" className="footer-link transition-colors hover:text-white">Services</Link></li>
+                <li><Link href="/states" className="footer-link transition-colors hover:text-white">States Directory</Link></li>
+                <li><Link href="/calculator" className="footer-link transition-colors hover:text-white">Fee Calculator</Link></li>
+                <li><Link href="/case-studies" className="footer-link transition-colors hover:text-white">Case Studies</Link></li>
+                <li><Link href="/industries" className="footer-link transition-colors hover:text-white">Industries</Link></li>
+                <li><Link href="/certification" className="footer-link transition-colors hover:text-white">Certifications</Link></li>
+                <li><Link href="/contact" className="footer-link transition-colors hover:text-white">Contact Us</Link></li>
+              </ul>
+            </div>
+
+            <div className="footer-nav-column footer-nav-column--services min-w-0">
+              <span className="mb-3 block text-xs font-bold uppercase tracking-widest text-[#F5D061]">Core Services</span>
+              <ul className="space-y-2 text-sm text-[#DCE4E4]">
+                <li><Link href="/services/psara-license" className="footer-link transition-colors hover:text-white">Fresh PSARA License</Link></li>
+                <li><Link href="/services/psara-license-renewal" className="footer-link transition-colors hover:text-white">PSARA Renewal</Link></li>
+                <li><Link href="/services/multi-state-psara-license" className="footer-link transition-colors hover:text-white">Multi-State Licensing</Link></li>
+                <li><Link href="/services/psara-training-mou" className="footer-link transition-colors hover:text-white">Training Institute MOUs</Link></li>
+                <li><Link href="/services/police-verification-clearance" className="footer-link transition-colors hover:text-white">Police Verification Clearance</Link></li>
+                <li><Link href="/services/security-agency-incorporation" className="footer-link transition-colors hover:text-white">Agency Incorporation</Link></li>
+                <li><Link href="/emergency" className="font-bold text-[#C4B5FD] transition-colors hover:text-[#F5D061]">Emergency Filing Desk</Link></li>
+              </ul>
+            </div>
+
+            <div className="footer-nav-column footer-nav-column--states col-span-2 min-w-0 xl:col-span-1">
+              <span className="mb-3 block text-xs font-bold uppercase tracking-widest text-[#F5D061]">State Coverage</span>
+              <ul className="grid grid-cols-2 gap-x-5 gap-y-2 text-sm text-[#DCE4E4] xl:grid-cols-1">
+                <li><Link href="/states/rajasthan" className="footer-link transition-colors hover:text-white">Rajasthan PSARA</Link></li>
+                <li><Link href="/states/delhi" className="footer-link transition-colors hover:text-white">Delhi NCR PSARA</Link></li>
+                <li><Link href="/states/maharashtra" className="footer-link transition-colors hover:text-white">Maharashtra PSARA</Link></li>
+                <li><Link href="/states/karnataka" className="footer-link transition-colors hover:text-white">Karnataka PSARA</Link></li>
+                <li><Link href="/states/uttar-pradesh" className="footer-link transition-colors hover:text-white">Uttar Pradesh PSARA</Link></li>
+                <li><Link href="/states/haryana" className="footer-link transition-colors hover:text-white">Haryana PSARA</Link></li>
+                <li className="col-span-2 xl:col-span-1"><Link href="/states" className="font-bold text-[#F5D061] transition-colors hover:text-white">View All 36 States &amp; UTs &rarr;</Link></li>
+              </ul>
             </div>
           </div>
         </div>

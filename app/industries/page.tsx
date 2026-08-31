@@ -29,7 +29,7 @@ export default function IndustriesPage() {
             <Link
               key={ind.slug}
               href={`/industries/${ind.slug}`}
-              className="group rounded-3xl border border-[rgba(212,175,55,0.25)] bg-gradient-to-b from-[#14102A] to-[#0F0C1F] p-6 sm:p-8 transition-all duration-200 hover:-translate-y-1 hover:border-[#D4AF37] hover:from-[#14284D] hover:to-[#0A1428] flex flex-col justify-between shadow-xl"
+              className="group flex flex-col justify-between rounded-3xl border border-[rgba(212,175,55,0.25)] bg-gradient-to-br from-[#2A1853] to-[#120C27] p-6 shadow-xl transition-all duration-200 hover:-translate-y-1 hover:border-[#D4AF37] hover:from-[#332066] hover:to-[#180D36] sm:p-8"
             >
               <div>
                 <div className="flex items-center justify-between mb-4">
@@ -59,8 +59,8 @@ export default function IndustriesPage() {
         </div>
 
         {/* Bottom Callout */}
-        <section className="mt-16 rounded-3xl border border-[rgba(212,175,55,0.35)] bg-gradient-to-r from-[#14102A] via-[#0F0C1F] to-[#0E1B33] p-8 md:p-12 text-center shadow-2xl space-y-4">
-          <div className="inline-flex p-3 rounded-2xl bg-[#060B18] border border-[#D4AF37]/40 text-[#D4AF37] mb-2">
+        <section className="mt-16 space-y-4 rounded-3xl border border-[rgba(212,175,55,0.35)] bg-gradient-to-r from-[#332066] via-[#180D36] to-[#24104B] p-8 text-center shadow-2xl md:p-12">
+          <div className="mb-2 inline-flex rounded-2xl border border-[#D4AF37]/40 bg-[#120C27] p-3 text-[#D4AF37]">
             <ShieldCheck className="h-8 w-8" />
           </div>
           <h2 className="text-2xl md:text-4xl font-bold text-white" style={{ fontFamily: "var(--font-display)" }}>

@@ -18,7 +18,6 @@ import { MaskReveal } from "../ui/MaskReveal";
 import { Parallax } from "../ui/Parallax";
 
 interface AboutSectionProps {
-  imageSrc?: string;
   showHeaderBar?: boolean;
   className?: string;
   headingLevel?: "h1" | "h2";
@@ -48,7 +47,6 @@ const FEATURES = [
 ];
 
 export default function AboutSection({
-  imageSrc = "/about-3d-map.png",
   showHeaderBar = true,
   className = "",
   headingLevel = "h2",
@@ -69,15 +67,15 @@ export default function AboutSection({
                 <BrandMark variant="dark" compact />
               </div>
               <div className="badge-navy">
-                <Sparkles className="w-3.5 h-3.5 text-[#0A233F]" />
+                <Sparkles className="w-3.5 h-3.5 text-[#6D28D9]" />
                 <span>Pan-India Statutory Advisory</span>
               </div>
             </div>
 
-            <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#334155]">
-              <CheckCircle2 className="w-4 h-4 text-[#8F681B]" />
-              <span>100% Controlling Authority Compliance</span>
-            </div>
+            <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[var(--ink-soft,#443A61)]">
+                          <CheckCircle2 className="w-4 h-4 text-[#8F681B]" />
+                          <span>100% Controlling Authority Compliance</span>
+                        </div>
           </div>
         )}
 
@@ -91,13 +89,13 @@ export default function AboutSection({
                   About Our Practice
                 </span>
                 <Heading
-                  className="text-4xl sm:text-5xl font-bold leading-[1.12] tracking-tight text-[#0A213D]"
-                  style={{ fontFamily: "var(--font-display)" }}
-                >
-                  One Desk. <br />
-                  <span className="gold-text-gradient">Every State.</span>
-                </Heading>
-                <p className="mt-4 max-w-xl text-base font-normal leading-relaxed text-[#334155]">
+                  className="text-4xl sm:text-5xl font-bold leading-[1.12] tracking-tight text-[var(--paper-ink,#151126)]"
+                                    style={{ fontFamily: "var(--font-display)" }}
+                                  >
+                                    One Desk. <br />
+                                    <span className="gold-text-gradient">Every State.</span>
+                                  </Heading>
+                                  <p className="mt-4 max-w-xl text-base font-normal leading-relaxed text-[var(--ink-soft,#443A61)]">
                   PSARA Consultant India empowers private security agencies with seamless licensing, recognized training institute MOUs, police verification tracking, and statutory compliance across 36 States &amp; UTs.
                 </p>
               </div>
@@ -110,18 +108,18 @@ export default function AboutSection({
                 return (
                   <div
                     key={feature.title}
-                    className="p-5 rounded-2xl border border-[#E5DDF3] bg-gradient-to-br from-[#FDFCFF] to-[#F3EEFB] space-y-2.5 transition-all duration-200 hover:border-[#C89B3C] hover:shadow-md"
+                    className="p-5 rounded-2xl border border-[#E5DDF3] bg-[var(--canvas-cream,#F7F3FF)] space-y-2.5 transition-[border-color,box-shadow,transform] duration-200 hover:border-[#C89B3C] hover:shadow-md"
                   >
-                    <div className="mx-auto flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-[#0A233F] to-[#14102A] text-[#8F681B] shadow-md lg:mx-0">
+                    <div className="mx-auto flex h-10 w-10 items-center justify-center rounded-xl bg-[var(--canvas-void,#080611)] text-[#F5D061] shadow-md ring-1 ring-[#D4AF37]/40 lg:mx-0">
                       <IconComp className="w-5 h-5" />
                     </div>
                     <h3
-                      className="text-sm font-bold tracking-wider text-[#0A213D] uppercase pt-1"
+                      className="text-sm font-bold tracking-wider text-[var(--paper-ink,#151126)] uppercase pt-1"
                       style={{ fontFamily: "var(--font-display)" }}
                     >
                       {feature.title}
                     </h3>
-                    <p className="text-xs leading-relaxed text-[#475569] font-medium">
+                    <p className="text-xs leading-relaxed text-[var(--ink-muted,#766D90)] font-medium">
                       {feature.desc}
                     </p>
                   </div>
@@ -129,12 +127,12 @@ export default function AboutSection({
               })}
             </div>
 
-            {/* Action Buttons */}
             <div className="flex flex-wrap items-center justify-center gap-4 pt-2 lg:justify-start">
               <Link
                 href="/about"
-                className="btn-gold-editorial"
-                style={{ fontFamily: "var(--font-body)" }}
+                data-cursor="Read practice"
+                className="inline-flex min-h-12 items-center justify-center gap-3 rounded-xl px-6 py-3 text-xs font-bold uppercase tracking-[0.14em] text-[#1F1707] shadow-[0_14px_28px_-16px_rgba(133,93,14,0.8)] transition-[transform,filter] duration-200 hover:-translate-y-0.5 hover:brightness-105"
+                style={{ fontFamily: "var(--font-body)", background: "var(--grad-gold-metallic)", backgroundSize: "220% 100%" }}
               >
                 <span>Firm Profile</span>
                 <ArrowRight className="h-4 w-4 text-[#1F1707]" />
@@ -143,7 +141,7 @@ export default function AboutSection({
                 href={DEFAULT_WA}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn-whatsapp"
+                className="inline-flex min-h-12 items-center justify-center gap-3 rounded-xl bg-[var(--whatsapp-hover,#128C7E)] px-6 py-3 text-xs font-bold uppercase tracking-[0.14em] text-white shadow-[0_14px_28px_-16px_rgba(18,140,126,0.8)] transition-[transform,filter] duration-200 hover:-translate-y-0.5 hover:brightness-95"
                 style={{ fontFamily: "var(--font-body)" }}
               >
                 <MessageSquare className="h-4 w-4 fill-white" />
@@ -152,28 +150,18 @@ export default function AboutSection({
             </div>
           </div>
 
-          {/* Right Column: layered India map + PSARA dossier artifact */}
+          {/* Right Column: one controlled PSARA dossier artifact */}
           <Parallax amount={10} className="lg:col-span-6 flex items-center justify-center relative">
             <div className="relative mx-auto aspect-square w-full max-w-[570px]" data-cursor="Pan-India file">
-              <div className="pointer-events-none absolute inset-[18%] rounded-full bg-[#D4AF37]/20 blur-[80px]" aria-hidden="true" />
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={imageSrc}
-                alt="PSARA India 3D Statutory Map Artwork"
-                className="absolute inset-0 h-full w-full object-contain opacity-75 drop-shadow-xl transition-transform duration-500 hover:scale-[1.02]"
-              />
+              <div className="pointer-events-none absolute inset-[22%] rounded-full bg-[#D4AF37]/15 blur-[80px]" aria-hidden="true" />
               <Image
                 src="/assets/images/generated/psara-dossier-book-cutout.png"
                 alt="PSARA Consultant India regulatory dossier book"
                 width={1031}
                 height={1007}
                 sizes="(max-width: 1023px) 78vw, 430px"
-                className="absolute left-[3%] top-[2%] z-10 h-auto w-[78%] object-contain drop-shadow-[0_28px_30px_rgba(10,18,38,0.32)] transition-transform duration-500 hover:-translate-y-2"
+                className="absolute left-[8%] top-[8%] z-10 h-auto w-[84%] object-contain drop-shadow-[0_28px_30px_rgba(10,18,38,0.32)] transition-transform duration-500 hover:-translate-y-2"
               />
-              <div className="absolute bottom-[7%] right-0 z-20 max-w-[13rem] rounded-2xl border border-[#D4AF37]/45 bg-[#0A213D]/95 px-4 py-3 text-white shadow-xl">
-                <span className="block text-[10px] font-bold uppercase tracking-[0.18em] text-[#F5D061]">Field file · 01</span>
-                <span className="mt-1 block text-xs font-medium leading-relaxed text-white/75">Evidence-led filing, opened state by state.</span>
-              </div>
             </div>
           </Parallax>
         </div>

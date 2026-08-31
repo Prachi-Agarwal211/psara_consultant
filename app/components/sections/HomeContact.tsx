@@ -12,7 +12,7 @@ export default function HomeContact() {
   return (
     <section
       id="contact"
-      className="section-atmosphere relative overflow-hidden bg-[#050B14] text-white py-20 lg:py-28 border-b border-white/10"
+      className="section-atmosphere mood-contact relative overflow-hidden bg-[#080611] text-white py-20 lg:py-28 border-b border-white/10"
     >
       <div className="relative z-10 px-[var(--gutter)] max-w-7xl mx-auto space-y-12">
         {/* Header */}
@@ -37,7 +37,8 @@ export default function HomeContact() {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <a
                 href={TEL_HREF}
-                className="inline-flex items-center justify-center gap-2 rounded-xl border border-[#D4AF37]/50 bg-gradient-to-br from-[#10243A] to-[#0B1728] hover:border-[#D4AF37] px-5 py-3.5 text-xs font-bold uppercase tracking-wider text-white transition-all shadow-md"
+                data-cursor="Call desk"
+                className="inline-flex items-center justify-center gap-2 rounded-xl border border-[#D4AF37]/50 bg-gradient-to-br from-[#2A1853] to-[#120C27] hover:border-[#D4AF37] px-5 py-3.5 text-xs font-bold uppercase tracking-wider text-white transition-[border-color,box-shadow,transform] shadow-md"
                 style={{ fontFamily: "var(--font-body)" }}
               >
                 <Phone className="h-4 w-4 text-[#D4AF37]" />
@@ -45,6 +46,7 @@ export default function HomeContact() {
               </a>
               <a
                 href={DEFAULT_WA}
+                data-cursor="Chat desk"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn-whatsapp"
@@ -56,7 +58,7 @@ export default function HomeContact() {
             </div>
 
             {/* HQ Information Card — plum */}
-            <div className="space-y-4 rounded-2xl border border-[rgba(212,175,55,0.25)] bg-gradient-to-b from-[#10243A] to-[#0B1728] p-6 text-sm shadow-xl">
+            <div data-cursor="Find headquarters" className="cursor-surface space-y-4 rounded-2xl border border-[rgba(196,181,253,0.25)] bg-gradient-to-br from-[#2A1853] to-[#120C27] p-6 text-sm shadow-xl">
               <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#D4AF37] pb-2 border-b border-white/10">
                 <ShieldCheck className="h-4 w-4 text-[#D4AF37]" />
                 <span>Headquarters Contact</span>
@@ -81,7 +83,7 @@ export default function HomeContact() {
             </div>
 
             {/* Map Preview Box */}
-              <div className="overflow-hidden rounded-2xl border border-[rgba(212,175,55,0.25)] shadow-md">
+              <div data-cursor="View map" className="cursor-surface overflow-hidden rounded-2xl border border-[rgba(212,175,55,0.25)] shadow-md">
               <iframe
                 title={`PSARA Consultant India ${hq.city} Location`}
                 src={hq.mapEmbed}
@@ -100,7 +102,7 @@ export default function HomeContact() {
                 {OFFICES.filter((o) => !o.isHQ)
                   .slice(0, 4)
                   .map((o) => (
-                    <div key={o.city} className="p-3 rounded-xl border border-white/10 bg-[#10243A] text-xs">
+                    <div key={o.city} data-cursor="Regional desk" className="cursor-surface rounded-xl border border-violet-200/15 bg-[#1A1236] p-3 text-xs">
                       <strong className="font-bold text-white block">{o.city}</strong>
                       <span className="text-[10px] text-[#94A3B8]">{o.badge}</span>
                     </div>
@@ -108,6 +110,7 @@ export default function HomeContact() {
               </div>
               <Link
                 href="/contact"
+                data-cursor="View desks"
                 className="inline-flex items-center gap-1.5 pt-1 text-xs font-bold uppercase tracking-[0.12em] text-[#D4AF37] hover:underline"
                 style={{ fontFamily: "var(--font-body)" }}
               >
@@ -118,13 +121,13 @@ export default function HomeContact() {
           </div>
 
           {/* Right Column: Highlighted Light Form Card */}
-          <div className="lg:col-span-7 rounded-3xl border border-[#E5DDF3] bg-gradient-to-b from-[#FDFCFF] to-[#F3EEFB] p-7 md:p-10 shadow-2xl text-[#0F172A]">
+          <div className="lg:col-span-7 rounded-3xl border border-[#E2D7F1] bg-gradient-to-br from-[#FFFDFF] via-[#F7F3FF] to-[#E8DDF6] p-7 md:p-10 shadow-2xl text-[#151126]">
             <div className="flex items-center justify-between pb-5 border-b border-[#E5DDF3] mb-6">
               <div>
                 <span className="badge-navy mb-2">
                   Direct Statutory Advisory Support
                 </span>
-                <h3 className="text-2xl md:text-3xl font-bold text-[#0A213D]" style={{ fontFamily: "var(--font-display)" }}>
+                <h3 className="text-2xl md:text-3xl font-bold text-[var(--paper-ink,#151126)]" style={{ fontFamily: "var(--font-display)" }}>
                   Get PSARA Statutory Advisory Support
                 </h3>
               </div>
@@ -133,7 +136,7 @@ export default function HomeContact() {
               </span>
             </div>
 
-            <p className="mb-6 text-sm font-normal leading-relaxed text-[#334155]">
+            <p className="mb-6 text-sm font-normal leading-relaxed text-[var(--ink-soft,#443A61)]">
               Submit your company details for immediate state checklist generation, training MOU format review, and transparent statutory fee calculations.
             </p>
 

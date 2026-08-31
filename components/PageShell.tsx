@@ -37,7 +37,7 @@ export function PageHero({
 
   return (
     <header
-      className="psara-page-hero relative overflow-hidden px-[var(--gutter)] pb-14 pt-28 md:min-h-[26rem] md:pb-20 md:pt-36 bg-[#050B14] text-white border-b border-white/10"
+      className="psara-page-hero relative overflow-hidden px-[var(--gutter)] pb-14 pt-28 md:min-h-[26rem] md:pb-20 md:pt-36 bg-[#080611] text-white border-b border-white/10"
       data-parallax-root
       style={accentVars as CSSProperties}
     >
@@ -55,7 +55,7 @@ export function PageHero({
               className="object-cover object-center mix-blend-screen"
             />
           </picture>
-          <div className="absolute inset-0 bg-gradient-to-b from-[#050B14]/80 via-[#050B14]/95 to-[#050B14]" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#080611]/70 via-[#100728]/92 to-[#080611]" />
         </div>
       )}
 
@@ -154,7 +154,7 @@ export function PageMain({
   return (
     <main
       ref={ref}
-      className={`psara-page-main relative px-[var(--gutter)] py-16 bg-[#050B14] text-white min-h-[50vh] ${className}`}
+      className={`psara-page-main relative px-[var(--gutter)] py-16 bg-gradient-to-br from-[#080611] via-[#120C27] to-[#24104B] text-white min-h-[50vh] ${className}`}
     >
       <div className="mx-auto max-w-7xl">{children}</div>
     </main>

@@ -53,7 +53,7 @@ export default function EmergencyPage() {
           </div>
 
           {/* Call & WhatsApp CTAs Card */}
-          <div className="rounded-3xl border border-[rgba(212,175,55,0.35)] bg-gradient-to-r from-[#14102A] via-[#0A1428] to-[#0E1B33] p-8 text-center shadow-2xl space-y-4">
+          <div className="space-y-4 rounded-3xl border border-[rgba(212,175,55,0.35)] bg-gradient-to-r from-[#14102A] via-[#24104B] to-[#332066] p-8 text-center shadow-2xl">
             <span className="badge-metallic-gold mb-1">
               Immediate Statutory Intervention
             </span>
