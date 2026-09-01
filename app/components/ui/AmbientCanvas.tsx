@@ -2,7 +2,7 @@
 
 /**
  * Continuous ambient field — MAAC DynamicBackground approach,
- * recolored to midnight black + cherry red + warm gold atmosphere.
+ * recolored to midnight black + plum + warm gold atmosphere.
  * Fixed behind ALL content. Sections stay transparent.
  */
 

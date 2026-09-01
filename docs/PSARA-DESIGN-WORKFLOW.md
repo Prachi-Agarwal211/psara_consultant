@@ -2,7 +2,7 @@
 
 ## Direction
 
-PSARA uses a flat editorial system: black and deep violet surfaces, white copy, and metallic gold for actions, rules, and verified information. Gradients are not part of the system. Images provide depth; CSS provides hierarchy.
+PSARA uses a flat editorial system: black and deep violet surfaces, white copy, and metallic gold for actions, rules, and verified information. **Metallic gradients are reserved for brand moments only** (logo, primary CTA, seal of authority, festive badges). All other surfaces, cards, dividers, and section backgrounds stay flat. Images provide depth; CSS provides hierarchy.
 
 ## Build Order
 

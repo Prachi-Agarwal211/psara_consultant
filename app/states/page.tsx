@@ -3,14 +3,13 @@ import { STATES } from "../../data/states";
 import { PageHero, PageMain } from "../../components/PageShell";
 import StageShell from "../components/ui/StageShell";
 import { pageMeta } from "../../lib/metadata";
+import StatePortalView from "../components/sections/StatePortalView";
 
 export const metadata: Metadata = pageMeta(
   "PSARA License by State",
   "State-wise PSARA License guides for all major States & UTs — Controlling Authority, process, training MOU and local cities.",
   "/states"
 );
-
-import StatePortalView from "../components/sections/StatePortalView";
 
 export default function StatesHubPage() {
   return (

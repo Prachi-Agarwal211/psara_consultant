@@ -77,7 +77,10 @@ export default function HeroStage() {
     const stage = stageRef.current;
     const { gsap } = ensureGsap();
 
-    const ctx = gsap.context(() => {
+    const ctx = gsap.context(async () => {
+      if (typeof document !== "undefined" && (document as Document).fonts) {
+        await (document as Document).fonts.ready;
+      }
       const mm = gsap.matchMedia();
 
       // Intro — all viewports
