@@ -40,7 +40,7 @@ export default function HomeFaq() {
   return (
     <section
       id="faq"
-      className="section-atmosphere mood-faq relative overflow-hidden bg-[#100728] py-20 text-white lg:py-28 border-b border-white/10"
+      className="relative overflow-hidden bg-[var(--canvas-void)] py-20 text-white lg:py-28 border-b border-white/10"
     >
       <div className="relative z-10 px-[var(--gutter)] max-w-7xl mx-auto space-y-12">
         {/* Header */}

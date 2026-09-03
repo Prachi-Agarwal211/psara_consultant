@@ -40,7 +40,7 @@ export default function AmbientCanvas() {
     let visible = true;
 
     const resize = () => {
-      const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+      const dpr = Math.min(window.devicePixelRatio || 1, 1);
       w = window.innerWidth;
       h = window.innerHeight;
       canvas.width = Math.floor(w * dpr);

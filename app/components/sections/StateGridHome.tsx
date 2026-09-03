@@ -13,7 +13,7 @@ export default function StateGridHome() {
   return (
     <section
       id="states"
-      className="section-atmosphere mood-states relative overflow-hidden bg-[#080611] text-white py-20 lg:py-28 border-b border-white/10"
+      className="relative overflow-hidden bg-[var(--canvas-void)] text-white py-20 lg:py-28 border-b border-white/10"
     >
       <div className="relative z-10 px-[var(--gutter)] max-w-7xl mx-auto space-y-12">
         {/* Header */}
@@ -42,7 +42,7 @@ export default function StateGridHome() {
               key={s.slug}
               href={`/states/${s.slug}`}
               data-cursor="Open dossier"
-              className="cursor-surface group relative flex h-[146px] flex-col justify-between rounded-2xl border border-[rgba(196,181,253,0.24)] bg-gradient-to-br from-[#2A1853] via-[#1A1236] to-[#0E0821] p-5 shadow-lg transition-[border-color,background,transform,box-shadow] duration-200 hover:-translate-y-1 hover:border-[#D4AF37] hover:from-[#3B2374] hover:to-[#1A1236]"
+              className="group relative flex h-[146px] flex-col justify-between rounded-xl border border-white/10 bg-[var(--surface-card-dark)] p-5 shadow-[var(--shadow-card)] transition-[border-color,transform] duration-200 hover:-translate-y-1 hover:border-[var(--line-gold)]"
             >
               <div className="flex items-center justify-between">
                 <span className="font-mono text-[10px] font-bold uppercase tracking-widest text-[#D4AF37]" style={{ fontFamily: "var(--font-body)" }}>

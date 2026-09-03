@@ -23,6 +23,7 @@ import type { CityInfo } from "../../../data/cities";
 import type { StateInfo } from "../../../data/states";
 import type { generateCityContent } from "../../../lib/seo-content";
 import { getLocationAccent, accentStyleVars, hashSlug, type LocationAccent } from "../../lib/location-accent";
+import { FEES, formatINR } from "../../../lib/config";
 import { getCaContact } from "../../../data/ca-contacts";
 
 type CityContent = ReturnType<typeof generateCityContent>;
@@ -549,10 +550,10 @@ function FeeSnapshot({ city, state, index }: { city: CityInfo; state?: StateInfo
       {/* Complete cost breakdown — consultancy + MOU + govt fee + documents */}
       <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {[
-          { label: "Consultancy / Professional Fees", value: "₹30,000" },
-          { label: "Training Institute MOU Tie-up", value: "₹25,000" },
-          { label: "Documents, Affidavits & Notarization", value: "₹5,000" },
-          { label: "Armed Guard Endorsement (Optional)", value: "₹15,000" },
+          { label: "Consultancy / Professional Fees", value: formatINR(FEES.consultancy) },
+          { label: "Training Institute MOU Tie-up", value: formatINR(FEES.mouTraining) },
+          { label: "Documents, Affidavits & Notarization", value: formatINR(FEES.documents) },
+          { label: "Armed Guard Endorsement (Optional)", value: formatINR(FEES.armedGuard) },
         ].map((c) => (
           <div key={c.label} className="relative overflow-hidden border border-acc bg-acc-soft p-5">
             <span aria-hidden className="pointer-events-none absolute -right-2 -top-4 font-mono text-5xl font-bold text-acc opacity-[0.12]">₹</span>

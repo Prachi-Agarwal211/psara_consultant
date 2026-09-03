@@ -40,7 +40,7 @@ export default function WhyChooseUs() {
   return (
     <section
       id="why"
-      className="on-light relative overflow-hidden py-20 lg:py-28 text-[#0F172A] border-b border-[#E5DDF3]"
+      className="on-light relative overflow-hidden py-20 lg:py-28 text-[#0F172A] border-b border-[var(--line-light)]"
     >
       <div className="relative z-10 px-[var(--gutter)] max-w-7xl mx-auto space-y-12">
         {/* Section Heading — alternating mask */}
@@ -69,7 +69,7 @@ export default function WhyChooseUs() {
           {/* Featured Deep Plum Dossier Card — tilt + mask */}
           <MaskReveal direction="left" className="lg:col-span-7">
             <TiltCard>
-              <div className="cursor-surface flex h-full flex-col justify-between rounded-3xl border border-[rgba(196,181,253,0.32)] bg-gradient-to-br from-[#332066] via-[#1A1236] to-[#080611] p-8 text-center text-white shadow-2xl md:p-10 lg:text-left" data-cursor="Dossier">
+              <div className="flex h-full flex-col justify-between rounded-xl border border-white/10 bg-[var(--canvas-void)] p-8 text-center text-white shadow-[var(--shadow-card)] md:p-10 lg:text-left" data-cursor="Dossier">
             <div className="space-y-6">
               <div className="flex items-center justify-between">
                 <span className="badge-metallic-gold">
@@ -121,7 +121,7 @@ export default function WhyChooseUs() {
             {ADVANTAGES.slice(1).map((item) => (
               <div
                 key={item.title}
-                className="rounded-2xl border border-[#E5DDF3] bg-gradient-to-br from-[#FDFCFF] to-[#F3EEFB] p-6 shadow-sm transition-[border-color,box-shadow,transform,filter] duration-200 hover:border-[#C89B3C] hover:shadow-md"
+                className="rounded-xl border border-[var(--line-light)] bg-white p-6 shadow-sm transition-[border-color,transform] duration-200 hover:border-[var(--gold)]"
               >
                 <div className="mb-2 flex items-center justify-between">
                   <span className="text-xs font-bold uppercase tracking-wider text-[#8F681B]">{item.subtitle}</span>

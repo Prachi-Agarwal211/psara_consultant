@@ -21,7 +21,7 @@ export default function GoogleReviews() {
   return (
     <section
       id="reviews"
-      className="on-light relative overflow-hidden text-[#0F172A] py-20 lg:py-28 border-b border-[#E5DDF3]"
+      className="on-light relative overflow-hidden text-[#0F172A] py-20 lg:py-28 border-b border-[var(--line-light)]"
     >
       <div className="relative z-10 px-[var(--gutter)] max-w-7xl mx-auto space-y-12">
         {/* Header */}
@@ -59,7 +59,7 @@ export default function GoogleReviews() {
         {/* Review Layout */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
           {/* Featured Review */}
-          <figure className="relative lg:col-span-7 rounded-3xl border border-[#E5DDF3] bg-[#F4F0FA] p-8 md:p-10 flex flex-col justify-between shadow-lg">
+          <figure className="relative lg:col-span-7 rounded-xl border border-[var(--line-light)] bg-white p-8 md:p-10 flex flex-col justify-between shadow-sm">
             <div>
               <div className="flex items-center justify-between mb-6">
                 <Stars count={featured.rating} />
@@ -84,7 +84,7 @@ export default function GoogleReviews() {
           {/* Stacked Reviews */}
           <div className="lg:col-span-5 space-y-4 flex flex-col justify-between">
             {rest.map((r) => (
-              <figure key={r.name} className="rounded-2xl border border-[#E5DDF3] bg-[#F4F0FA] p-6 flex flex-col justify-between shadow-sm transition-[border-color,box-shadow,transform] hover:border-[#C89B3C]">
+              <figure key={r.name} className="rounded-xl border border-[var(--line-light)] bg-white p-6 flex flex-col justify-between shadow-sm transition-[border-color] hover:border-[var(--gold)]">
                 <div>
                   <div className="flex items-center justify-between mb-3">
                     <Stars count={r.rating} />

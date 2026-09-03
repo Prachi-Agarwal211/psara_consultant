@@ -41,21 +41,21 @@ export function PageHero({
       data-parallax-root
       style={accentVars as CSSProperties}
     >
-      {/* Background visual asset */}
+      {/* Background visual asset — low opacity, no blend overload */}
       {heroImage && (
-        <div className="pointer-events-none absolute inset-0 z-0 opacity-20" aria-hidden>
+        <div className="pointer-events-none absolute inset-0 z-0 opacity-[0.12]" aria-hidden>
           <picture className="absolute inset-0 block">
             {mobileImage && <source media="(max-width: 767px)" srcSet={mobileImage} />}
             <Image
               src={heroImage}
               alt=""
               fill
-              priority
+              priority={false}
               sizes="100vw"
-              className="object-cover object-center mix-blend-screen"
+              className="object-cover object-center"
             />
           </picture>
-          <div className="absolute inset-0 bg-gradient-to-b from-[#080611]/70 via-[#100728]/92 to-[#080611]" />
+          <div className="absolute inset-0 bg-[var(--canvas-void)]/80" />
         </div>
       )}
 
@@ -135,26 +135,18 @@ export function PageMain({
   const ref = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
+    // ponytail: clash — StageShell already animates via ScrollTrigger; keep PageMain static to avoid double stagger on 1373 pages
     if (!ref.current || prefersReducedMotion()) return;
     const { gsap } = ensureGsap();
-    gsap.fromTo(
-      ref.current.querySelectorAll(":scope > *"),
-      { opacity: 0, y: 18 },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 0.7,
-        stagger: 0.05,
-        ease: "power3.out",
-        delay: 0.05,
-      }
-    );
+    const kids = ref.current.querySelectorAll(":scope > *");
+    if (!kids.length) return;
+    gsap.set(kids, { opacity: 1, y: 0 });
   }, []);
 
   return (
     <main
       ref={ref}
-      className={`psara-page-main relative px-[var(--gutter)] py-16 bg-gradient-to-br from-[#080611] via-[#120C27] to-[#24104B] text-white min-h-[50vh] ${className}`}
+      className={`psara-page-main relative px-[var(--gutter)] py-16 bg-[var(--canvas-void)] text-white min-h-[50vh] ${className}`}
     >
       <div className="mx-auto max-w-7xl">{children}</div>
     </main>

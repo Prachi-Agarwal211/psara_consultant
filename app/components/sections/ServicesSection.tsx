@@ -78,8 +78,7 @@ export default function ServicesSection() {
   };
 
   return (
-    <section id="services" className="section-atmosphere mood-services relative bg-[#080611] text-white border-b border-white/10">
-      {/* Pinned horizontal showcase — statutory core, scroll to explore (lg only) */}
+    <section id="services" className="relative bg-[var(--canvas-void)] text-white border-b border-white/10">
       <ServicesPinnedHorizontal />
 
       <div className="relative z-10 px-[var(--gutter)] max-w-7xl mx-auto space-y-12 py-20 lg:py-28">
@@ -103,7 +102,7 @@ export default function ServicesSection() {
         </MaskReveal>
 
         {/* Category Navigation Tabs */}
-        <div className="flex flex-wrap items-center justify-center gap-2 rounded-2xl border border-violet-300/20 bg-[#180D36]/85 p-1.5 shadow-[0_18px_45px_-28px_rgba(139,92,246,0.8)]">
+        <div className="flex flex-wrap items-center justify-center gap-2 rounded-xl border border-white/10 bg-[var(--canvas-void-2)] p-1.5">
           {CATEGORIES.map((cat) => (
             <button
               key={cat.id}
@@ -132,7 +131,7 @@ export default function ServicesSection() {
                 <TiltCard>
                   <Link
                     href={`/services/${service.slug}`}
-                    className="cursor-surface group relative flex h-full min-h-[280px] flex-col justify-between overflow-hidden rounded-2xl border border-[rgba(196,181,253,0.22)] bg-gradient-to-br from-[#2A1853] via-[#1A1236] to-[#0E0821] p-6 shadow-xl transition-[border-color,background,box-shadow,transform] duration-200 hover:-translate-y-1 hover:border-[#D4AF37] hover:from-[#3B2374] hover:to-[#1A1236] sm:p-8"
+                    className="group relative flex h-full min-h-[280px] flex-col justify-between overflow-hidden rounded-xl border border-white/10 bg-[var(--surface-card-dark)] p-6 shadow-[var(--shadow-card)] transition-[border-color,transform] duration-200 hover:-translate-y-1 hover:border-[var(--line-gold)] sm:p-8"
                     data-cursor="View service"
                   >
                 <div>
@@ -205,8 +204,8 @@ export default function ServicesSection() {
           </div>
         )}
 
-        {/* Bottom Callout Box with Multi-Depth Shading */}
-        <div className="rounded-3xl border border-[rgba(212,175,55,0.32)] bg-gradient-to-r from-[#2A1853] via-[#180D36] to-[#0E0821] p-8 md:p-10 flex flex-col md:flex-row md:items-center justify-between gap-8 shadow-2xl">
+        {/* Bottom Callout */}
+        <div className="rounded-xl border border-[var(--line-gold)] bg-[var(--surface-card-dark)] p-8 md:p-10 flex flex-col md:flex-row md:items-center justify-between gap-8">
           <div className="space-y-2 max-w-2xl">
             <span className="text-xs font-bold uppercase tracking-[0.16em] text-[#D4AF37]" style={{ fontFamily: "var(--font-body)" }}>
               Multi-District &amp; State Bundles

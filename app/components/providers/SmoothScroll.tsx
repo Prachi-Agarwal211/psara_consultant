@@ -9,12 +9,13 @@ import { prefersReducedMotion } from "../../lib/gsap";
 export default function SmoothScroll({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     if (typeof window === "undefined" || prefersReducedMotion()) return;
-
+    // ponytail: Lenis + ScrollTrigger double refresh fixed — single rAF, ignore vertical threshold
     const lenis = new Lenis({
-      duration: 1.2,
+      duration: 1.1,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       smoothWheel: true,
-      touchMultiplier: 1.5,
+      touchMultiplier: 1.2,
+      gestureOrientation: "vertical",
     });
 
     lenis.on("scroll", ScrollTrigger.update);

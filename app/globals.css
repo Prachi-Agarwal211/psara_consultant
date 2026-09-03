@@ -7,15 +7,9 @@
 
 @layer base {
   html {
-    scrollbar-width: none;
-    -ms-overflow-style: none;
     overflow-x: hidden;
-  }
-
-  html::-webkit-scrollbar {
-    display: none;
-    width: 0;
-    height: 0;
+    scrollbar-width: thin;
+    scrollbar-color: var(--line-gold) transparent;
   }
 
   body {
@@ -23,8 +17,8 @@
     font-optical-sizing: auto;
     font-synthesis: none;
     text-rendering: optimizeLegibility;
-    background-color: var(--canvas-void, #080611);
-    background-image: var(--grad-aurora-plum);
+    background-color: var(--canvas-void);
+    /* ponytail: flat base, no aurora gradient - paper grain only via .grain-overlay */
     color: var(--white, #ffffff);
     min-height: 100%;
     overflow-x: hidden;
@@ -32,14 +26,9 @@
     line-height: 1.65;
     letter-spacing: 0;
     font-weight: 400;
-    scrollbar-width: none;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     -webkit-text-size-adjust: 100%;
-  }
-
-  body::-webkit-scrollbar {
-    display: none;
   }
 
   ::selection {
@@ -151,56 +140,22 @@
   to   { transform: translateX(-50%); }
 }
 
-/* Slow atmospheric light gives dark chapters a visual heartbeat. It is kept
-   below the content and uses the same violet/gold palette as the hero. */
-.section-atmosphere {
-  isolation: isolate;
-}
-
-.section-atmosphere::before,
-.section-atmosphere::after {
-  content: "";
-  position: absolute;
-  pointer-events: none;
-  inset: -18%;
-  z-index: -1;
-  background-repeat: no-repeat;
-  will-change: transform, opacity;
-}
-
-.section-atmosphere::before {
-  background: radial-gradient(ellipse 36% 42% at 12% 26%, rgba(139, 92, 246, 0.28), transparent 72%);
-  animation: atmosphere-drift-left 18s ease-in-out infinite alternate;
-}
-
-.section-atmosphere::after {
-  background: radial-gradient(ellipse 32% 38% at 88% 74%, rgba(245, 208, 97, 0.18), transparent 70%);
-  animation: atmosphere-drift-right 22s ease-in-out infinite alternate;
-}
-
-@keyframes atmosphere-drift-left {
-  from { transform: translate3d(-2%, -1%, 0) scale(0.96); opacity: 0.55; }
-  to { transform: translate3d(7%, 4%, 0) scale(1.08); opacity: 1; }
-}
-
-@keyframes atmosphere-drift-right {
-  from { transform: translate3d(3%, 2%, 0) scale(1.04); opacity: 0.45; }
-  to { transform: translate3d(-6%, -4%, 0) scale(0.94); opacity: 0.95; }
-}
+/* ponytail: removed section-atmosphere double glow (24 anim layers) - flat + grain only */
+.section-atmosphere { isolation: isolate; }
 .animate-marquee {
   animation: marquee 32s linear infinite;
 }
 
-/* ── Subtle grain overlay ── */
+/* ── Paper grain — single subtle overlay (3.8% max) ── */
 .grain-overlay {
   position: fixed;
   inset: 0;
   pointer-events: none;
-  z-index: 9999;
-  opacity: 0.018;
+  z-index: 1;
+  opacity: 0.035;
   mix-blend-mode: overlay;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  background-size: 140px 140px;
+  background-size: 180px 180px;
 }
 
 /* ── 2026 motion easings — from psara-redesign — */
@@ -376,56 +331,38 @@
   -webkit-text-fill-color: transparent;
 }
 
-/* Homepage chapter canvases — each section keeps a distinct violet depth
-   while sharing the same ink/gold visual language. */
-#proof,
-#services,
-#process,
-#states,
-#faq,
-#contact,
-#presence,
-#start,
-#estimator {
-  background-image: var(--grad-aurora-plum);
+/* Standard section backgrounds — flat only, texture via .grain-overlay */
+#proof, #services, #process, #states, #faq, #contact, #presence, #start, #estimator {
   background-color: var(--canvas-void);
 }
+/* Light sections override where needed */
+#why, #reviews, .on-light {
+  background-color: var(--canvas-paper);
+  color: var(--paper-ink);
+}
 
-#proof { background-image: radial-gradient(ellipse 32% 80% at 2% 46%, rgba(196,181,253,.18), transparent 70%), radial-gradient(ellipse 24% 54% at 96% 4%, rgba(251,86,7,.15), transparent 72%), linear-gradient(112deg, #080611 0%, #18102F 48%, #332066 100%); }
-#services { background-image: radial-gradient(ellipse 50% 42% at 78% 2%, rgba(131,56,236,.30), transparent 72%), radial-gradient(ellipse 32% 44% at 12% 86%, rgba(251,86,7,.12), transparent 70%), linear-gradient(148deg, #080611 0%, #1D103D 54%, #332066 100%); }
-#process { background-image: radial-gradient(ellipse 46% 36% at 14% 10%, rgba(245,208,97,.14), transparent 72%), radial-gradient(ellipse 34% 52% at 88% 88%, rgba(78,143,130,.18), transparent 70%), linear-gradient(156deg, #212529 0%, #160D30 52%, #080611 100%); }
-#states { background-image: radial-gradient(circle at 82% 42%, rgba(131,56,236,.30), transparent 34%), radial-gradient(ellipse 34% 42% at 4% 92%, rgba(251,86,7,.13), transparent 72%), linear-gradient(132deg, #080611 0%, #120C27 54%, #24104B 100%); }
-#faq { background-image: radial-gradient(ellipse 50% 28% at 50% 0%, rgba(212,175,55,.15), transparent 75%), radial-gradient(ellipse 30% 60% at 0% 100%, rgba(33,37,41,.46), transparent 72%), linear-gradient(180deg, #080611 0%, #100728 62%, #080611 100%); }
-#contact { background-image: radial-gradient(ellipse 32% 58% at 2% 50%, rgba(131,56,236,.25), transparent 72%), radial-gradient(ellipse 26% 42% at 96% 92%, rgba(251,86,7,.14), transparent 72%), linear-gradient(120deg, #100728 0%, #24104B 58%, #120C27 100%); }
-#presence { background-image: radial-gradient(circle at 72% 44%, rgba(131,56,236,.32), transparent 36%), radial-gradient(ellipse 34% 44% at 8% 88%, rgba(78,143,130,.15), transparent 72%), linear-gradient(160deg, #080611 0%, #1A1236 58%, #332066 100%); }
-#start { background-image: radial-gradient(ellipse 58% 52% at 50% 42%, rgba(131,56,236,.34), transparent 70%), radial-gradient(ellipse 34% 32% at 84% 82%, rgba(251,86,7,.16), transparent 72%), linear-gradient(135deg, #080611 0%, #24104B 60%, #8338EC 145%); }
-#estimator { background-image: radial-gradient(ellipse 42% 45% at 16% 18%, rgba(212,175,55,.14), transparent 72%), radial-gradient(ellipse 34% 45% at 86% 80%, rgba(251,86,7,.16), transparent 72%), linear-gradient(140deg, #212529 0%, #2A1853 54%, #100728 100%); }
+/* Shared page surfaces — flat */
+.psara-page-main { background-color: var(--canvas-void) !important; }
+.psara-page-hero { background-color: var(--canvas-void); }
+.psara-site-footer { background-color: #0A0A12; }
 
-/* Shared page surfaces: modern glow depth without adding decorative panels. */
-.psara-page-main { background-image: var(--grad-violet-canvas) !important; }
-.psara-page-hero { background-image: var(--grad-navy-header); }
-.psara-site-footer { background-image: var(--grad-violet-canvas); }
-
-/* Mobile tap target & accessibility */
+/* Mobile tap target & accessibility — scrollbar restored above */
 @media (max-width: 768px) {
   body {
     font-size: 16px;
     padding-bottom: calc(4.5rem + env(safe-area-inset-bottom, 0px));
   }
-
   a, button, input, select, textarea {
     min-height: 44px;
   }
 }
 
-/* Dark on Dark Correction Guardrails: Ensure no dark text inside dark sections */
-#hero, #proof, #why, #services, #states, #estimator, #faq, #presence, #contact, #start, footer, .psara-site-footer {
+/* Theme contrast — dark sections white text, light sections ink */
+#hero, #proof, #services, #states, #faq, #presence, #contact, #start, footer, .psara-site-footer {
   color: #FFFFFF;
 }
-
-#hero p, #proof p, #services p, #states p, #estimator p, #faq p, #presence p, #start p {
-  color: #E2E8F0;
-}
+#why, #reviews, .on-light { color: var(--paper-ink); }
+#why p, #reviews p, .on-light p { color: var(--ink-soft); }
 
 /* ── Magnetic button — metallic gold, statutory palette ── */
 .magnetic {

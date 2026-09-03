@@ -451,3 +451,21 @@ export const OFFICES: OfficeLocation[] = [
 export function getOfficesForState(stateSlug: string) {
   return OFFICES.filter((o) => o.stateSlug === stateSlug);
 }
+
+/** Single source of truth for PSARA filing fee slabs.
+ *  Government statutory fees per scale, plus our professional + ancillary charges. */
+export const FEES = {
+  consultancy: 30000,
+  mouTraining: 35000,
+  documents: 5000,
+  armedGuard: 15000,
+  govt: {
+    singleDistrict: 5000,
+    upToFiveDistricts: 10000,
+    entireState: 25000,
+  },
+} as const;
+
+export function formatINR(n: number): string {
+  return `₹${n.toLocaleString("en-IN")}`;
+}

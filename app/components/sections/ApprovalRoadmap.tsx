@@ -142,7 +142,7 @@ export default function ApprovalRoadmap() {
   }, []);
 
   return (
-    <section ref={sectionRef} id="process" className="section-atmosphere mood-process relative border-b border-white/10 bg-[#100728] py-20 text-white lg:py-28">
+    <section ref={sectionRef} id="process" className="relative border-b border-white/10 bg-[var(--canvas-void)] py-20 text-white lg:py-28">
       <div className="relative z-10 px-[var(--gutter)] max-w-7xl mx-auto space-y-12">
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-white/15 pb-8">
@@ -174,10 +174,10 @@ export default function ApprovalRoadmap() {
                   data-roadmap-tab
                   data-cursor="Select phase"
                   onClick={() => setActiveStep(idx)}
-                    className={`cursor-surface group relative flex flex-col justify-between rounded-2xl border p-5 text-left transition-[border-color,background,box-shadow,transform] duration-200 ${
+                    className={`group relative flex flex-col justify-between rounded-xl border p-5 text-left transition-[border-color,background,transform] duration-200 ${
                     isActive
-                      ? "border-[#D4AF37] bg-gradient-to-b from-[#3B2374] via-[#2A1853] to-[#120C27] text-white shadow-xl shadow-[0_20px_40px_-24px_rgba(8,6,17,0.65)]"
-                      : "border-white/12 bg-[#180D36] text-[#CBD5E1] hover:border-violet-300/50 hover:text-white"
+                      ? "border-[var(--line-gold)] bg-[var(--surface-card-dark)] text-white shadow-[var(--shadow-card)]"
+                      : "border-white/10 bg-[var(--canvas-void-2)] text-[#CBD5E1] hover:border-white/15 hover:text-white"
                   }`}
                 >
                 <div className="flex items-center justify-between gap-2 mb-4">
@@ -214,7 +214,7 @@ export default function ApprovalRoadmap() {
           const IconComp = p.icon;
 
           return (
-            <div className="rounded-3xl border border-[rgba(196,181,253,0.28)] bg-gradient-to-br from-[#332066] via-[#1A1236] to-[#080611] p-8 md:p-12 shadow-2xl">
+            <div className="rounded-xl border border-white/10 bg-[var(--surface-card-dark)] p-8 md:p-12 shadow-[var(--shadow-card)]">
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
                 {/* Left Col: Details */}
                 <div className="lg:col-span-7 space-y-6">
@@ -253,7 +253,7 @@ export default function ApprovalRoadmap() {
                 </div>
 
                 {/* Right Col: Action Box */}
-                <div className="lg:col-span-5 flex flex-col justify-between space-y-6 rounded-2xl border border-[rgba(196,181,253,0.24)] bg-gradient-to-br from-[#2A1853] to-[#120C27] p-6 sm:p-8 shadow-inner">
+                <div className="lg:col-span-5 flex flex-col justify-between space-y-6 rounded-xl border border-white/10 bg-[var(--canvas-void-2)] p-6 sm:p-8">
                   <div className="flex items-center gap-3 border-b border-white/10 pb-4">
                     <div className="p-3 rounded-xl bg-[var(--canvas-void,#080611)] ring-1 ring-[#D4AF37]/35 border border-[#D4AF37]/30 text-[#F5D061]">
                       <IconComp className="h-6 w-6" />
