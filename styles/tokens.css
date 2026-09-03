@@ -1,212 +1,167 @@
 /* ═══════════════════════════════════════════════════════════════
-   PSARA Consultant India · Master Design Tokens & DNA
-   Statutory Authority · Multi-Shade Contrast Mixing · Rich Depth
+   PSARA Consultant India · Standard Theme Tokens
+   Philosophy: 2 surfaces + 1 accent + 1 signal. No gradients as atmosphere.
+   Flat backgrounds, paper grain only. Everything else derives from these.
    ═══════════════════════════════════════════════════════════════ */
 
 :root {
-  /* ── 1. Canvas & Surface Foundations — violet authority system ── */
-  --canvas-void:       #080611;   /* Deep ink: video and dark canvas */
-  --void:              #080611;
-  --void-2:            #120C27;   /* Elevated violet-black */
-  --surface-dark:      #120C27;
-  --surface-card-dark: #1A1236;   /* Violet-black card */
-  --space:             #1A1236;
-  --space-lift:        #2A1853;   /* Lifted violet */
-  --plum-deep:         #0E0821;   /* Legacy alias retained for old surfaces */
-  --plum-mid:          #180D36;
-  --plum-lift:         #2B1756;
+  /* ── 1. Surfaces — ONLY 2 + 1 lifted ── */
+  --canvas-void:       #080611;   /* Primary dark - all dark sections */
+  --canvas-void-2:     #120C27;   /* Elevated dark - cards on dark */
+  --canvas-paper:      #F7F3FF;   /* Primary light - light sections */
+  --canvas-paper-2:    #FFFFFF;   /* Elevated light - cards on light */
+  --surface-card-dark: #1A1236;   /* Card on dark */
+  --surface-card-light:#F2EDFB;   /* Card on light */
 
-  /* ── 2. Editorial Light Surfaces — lavender-white, never flat white ── */
-  --canvas-cream:      #F7F3FF;   /* Lavender-white */
-  --white:             #FFFFFF;   /* Pure White (inputs only) */
-  --white-bg:          #FBFAFF;
-  --surface-light:     #FBFAFF;
-  --surface-card-light:#F2EDFB;   /* Lavender card */
-  --light-border:      #E2D7F1;   /* Violet hairline for light sections */
-  --paper:             #FBFAFF;
-  --paper-ink:         #151126;   /* Crisp violet ink */
-  --ink:               #151126;
-  --ink-soft:          #443A61;   /* Secondary violet slate */
-  --ink-muted:         #766D90;
+  /* ── 2. Text — 4 steps only ── */
+  --text-primary:      #FFFFFF;   /* On dark */
+  --text-secondary:    #E2E8F0;   /* On dark - body */
+  --text-muted:        #94A3B8;   /* On dark - meta */
+  --paper-ink:         #151126;   /* On light - headings */
+  --ink-soft:          #443A61;   /* On light - body */
+  --ink-muted:         #766D90;   /* On light - meta */
 
-  /* ── 3. Primary Statutory Accent: Antique & Metallic Gold ── */
-  --gold-root:         #C89B3C;
-  --gold:              #C89B3C;   /* Antique Statutory Gold */
-  --gold-primary:      #C89B3C;
-  --gold-bright:       #D4AF37;   /* Polished Gold */
-  --gold-light:        #F5E6BA;   /* Pale Champagne Gold */
-  --gold-cream:        #FFF6D9;   /* High-Contrast Cream Gold */
-  --gold-deep:         #8F681B;   /* Deep Bronze Gold */
-  --gold-dim:          rgba(200, 155, 60, 0.75);
-  --gold-soft:         rgba(200, 155, 60, 0.12);
+  /* ── 3. Accent — Gold only (single family) ── */
+  --gold:              #C89B3C;   /* Primary gold */
+  --gold-bright:       #D4AF37;   /* Hover / highlight */
+  --gold-light:        #F5E6BA;   /* Pale - chips */
+  --gold-deep:         #8F681B;   /* Deep - on-light text */
+  --gold-soft:         rgba(200,155,60,0.12);
+  --gold-line:         rgba(212,175,55,0.22);
+  --line-gold:         rgba(212,175,55,0.28);
 
-  /* ── 3b. Signal palette — used sparingly for hierarchy and wayfinding ── */
-  --signal-orange:     #FB5607;   /* High-energy filing / action signal */
-  --signal-orange-hot: #FF7A18;
-  --graphite:          #212529;   /* Neutral authority surface */
-  --cloud:             #E9ECEF;   /* Clean breathing-space surface */
-  --sage:              #4E8F82;   /* Calm support / trust accent */
-  --sage-soft:         rgba(78, 143, 130, 0.16);
+  /* ── 4. Signal — 2 only ── */
+  --signal-green:      #25D366;   /* WhatsApp / success */
+  --signal-green-deep: #128C7E;
+  --signal-teal:       #4E8F82;   /* Calm alternative */
+  --signal-orange:     #FB5607;   /* Alert only */
 
-  /* ── 4. Violet Night Ramps ── */
-  --navy-deep:         #0E0821;
-  --navy-dark:         #120C27;
-  --navy-surface:      #1A1236;
-  --navy-lift:         #2A1853;
-  --navy-border:       rgba(212, 175, 55, 0.22);
-
-  /* ── 5. Conversion Green (WhatsApp & Trust) ── */
-  --whatsapp:          #25D366;
-  --whatsapp-hover:    #128C7E;
-  --emerald:           #25D366;
-  --emerald-deep:      #128C7E;
-
-  /* ── 6. Secondary Signal Accent — true violet, balanced with gold ── */
-  --purple-cta:        #6D28D9;   /* legacy name retained for compatibility */
-  --purple-electric:   #8B5CF6;
-  --purple-light:      #C4B5FD;
-  --purple-shimmer:    #F0E9FF;
-
-  /* Aliases */
+  /* ── 5. Violet — single ramp (not 6 aliases) ── */
   --violet-deep:       #100728;
-  --violet-base:       #25104D;
-  --violet-primary:    #6D28D9;
+  --violet-base:       #6D28D9;
   --violet-electric:   #8B5CF6;
   --violet-light:      #C4B5FD;
-  --violet-shimmer:    #F0E9FF;
-  --electric:          #6D28D9;
-  --electric-2:        #8B5CF6;
-  --electric-3:        #100728;
-  --cherry:            #6D28D9;
-  --cherry-bright:     #8B5CF6;
-  --cherry-deep:       #100728;
-  --electric-glow:     rgba(139, 92, 246, 0.48);
-  --electric-soft:     rgba(139, 92, 246, 0.18);
-  --saffron:           #F5D061;
-  --metal-1:           #F5E6BA;
-  --metal-3:           #8F681B;
 
-  /* ── 7. Text Contrast Scale ── */
-  --white-100:         #FFFFFF;
-  --white-90:          #F1F5F9;   /* High-Contrast Body */
-  --white-75:          #E2E8F0;
-  --white-60:          #94A3B8;
-  --white-45:          #64748B;
-  --white-25:          rgba(255, 255, 255, 0.25);
-  --white-15:          rgba(255, 255, 255, 0.15);
-  --white-12:          rgba(255, 255, 255, 0.12);
-  --white-10:          rgba(255, 255, 255, 0.10);
-  --white-06:          rgba(255, 255, 255, 0.06);
-  --white-05:          rgba(255, 255, 255, 0.05);
-  --white-70:          rgba(255, 255, 255, 0.70);
-  --white-55:          rgba(255, 255, 255, 0.55);
+  /* ── 6. Lines & borders ── */
+  --line:              rgba(255,255,255,0.10);
+  --line-strong:       rgba(255,255,255,0.14);
+  --line-light:        #E2D7F1;   /* For light sections */
+  --white-10:          rgba(255,255,255,0.10);
+  --white-15:          rgba(255,255,255,0.15);
 
-  --text-primary:      #FFFFFF;
-  --text-secondary:    #E2E8F0;
-  --text-muted:        #94A3B8;
+  /* ── 7. Shadows — 2 only ── */
+  --shadow-card:       0 18px 50px -28px rgba(8,6,17,0.70);
+  --shadow-gold:       0 12px 32px -10px rgba(200,155,60,0.45);
 
-  /* ── 8. Rich Same-Color Gradient Mixtures (Contrast Depth) — 2026 OKLCH tuned ──
-     Metallic gold: banded champagne → bronze → specular → gold. The double
-     light/dark banding is what makes it read as metal, not mustard. */
-  --grad-gold-metallic: linear-gradient(100deg,
-    #FFF2BA 0%, #E2C46F 10%, #C89B3C 22%, #A87524 37%,
-    #8F681B 47%, #C89B3C 57%, #F5D061 69%, #FFF2BA 79%,
-    #D4AF37 89%, #A87524 100%);
-  --grad-gold-surface:  linear-gradient(145deg, rgba(212, 175, 55, 0.18) 0%, rgba(212, 175, 55, 0.05) 100%);
-  --grad-gold-border:   linear-gradient(90deg, #D4AF37 0%, rgba(212, 175, 55, 0.3) 50%, #8F681B 100%);
-  /* Modern aurora recipe: two soft light sources over an ink-to-violet field.
-     The glows stay broad and low-contrast so content remains the focal point. */
-  --grad-aurora-plum:   radial-gradient(ellipse 42% 38% at 14% 18%, rgba(139, 92, 246, 0.24) 0%, transparent 68%), radial-gradient(ellipse 36% 34% at 86% 78%, rgba(212, 175, 55, 0.14) 0%, transparent 70%), linear-gradient(135deg, #080611 0%, #120C27 48%, #24104B 100%);
-  --grad-void-plum:     radial-gradient(ellipse 72% 58% at 50% 32%, rgba(109, 40, 217, 0.34) 0%, transparent 62%), radial-gradient(ellipse 40% 34% at 88% 78%, rgba(212, 175, 55, 0.12) 0%, transparent 72%), linear-gradient(135deg, #080611 0%, #120C27 46%, #24104B 100%);
+  /* ── 8. Gradients — ONLY for buttons/metallic text (not backgrounds) ── */
+  --grad-gold-metallic: linear-gradient(100deg, #FFF2BA 0%, #E2C46F 10%, #C89B3C 22%, #A87524 37%, #8F681B 47%, #C89B3C 57%, #F5D061 69%, #FFF2BA 79%, #D4AF37 89%, #A87524 100%);
+  --grad-gold-deep: linear-gradient(105deg, #3C2A0D 0%, #6C4A16 26%, #8F681B 50%, #5A3D13 74%, #322309 100%);
+  --grad-wa: linear-gradient(160deg, #1FAF5E 0%, #128C7E 100%);
 
-  --grad-navy-card:     radial-gradient(circle at 86% 0%, rgba(139, 92, 246, 0.18), transparent 42%), linear-gradient(160deg, #1F1642 0%, #120C27 100%);
-  --grad-navy-lift:     radial-gradient(circle at 12% 0%, rgba(245, 208, 97, 0.09), transparent 38%), linear-gradient(160deg, #332066 0%, #180D36 100%);
-  --grad-navy-header:   radial-gradient(circle at 78% 0%, rgba(109, 40, 217, 0.22), transparent 36%), linear-gradient(180deg, rgba(8, 6, 17, 0.98) 0%, rgba(24, 13, 54, 0.94) 100%);
-  --grad-cream-card:    linear-gradient(165deg, #FFFDFF 0%, #F2EDFB 100%);
-  --grad-light-section: linear-gradient(145deg, #FFFDFF 0%, #F7F3FF 48%, #E8DDF6 100%);
-  --grad-violet-canvas: radial-gradient(ellipse 38% 42% at 8% 12%, rgba(139, 92, 246, 0.20), transparent 70%), radial-gradient(ellipse 34% 38% at 92% 84%, rgba(212, 175, 55, 0.12), transparent 72%), linear-gradient(135deg, #080611 0%, #120C27 44%, #24104B 100%);
-  --grad-violet-card:   radial-gradient(circle at 88% 0%, rgba(139, 92, 246, 0.22), transparent 44%), linear-gradient(145deg, rgba(67, 35, 126, 0.76) 0%, rgba(25, 14, 57, 0.98) 48%, rgba(8, 6, 17, 0.98) 100%);
-  --grad-violet-gold:   linear-gradient(115deg, #5B21B6 0%, #8B5CF6 44%, #D4AF37 100%);
-  --grad-violet-orange: linear-gradient(118deg, #5420B7 0%, #8338EC 52%, #FB5607 100%);
-  --grad-graphite-gold: linear-gradient(120deg, #212529 0%, #343A40 55%, #C89B3C 145%);
-  --grad-paper-ink:     linear-gradient(145deg, #FFFFFF 0%, #E9ECEF 52%, #D9D2E8 100%);
-
-  /* Semantic gradient aliases used by legacy components. Keeping these
-     centralized prevents invisible buttons and inconsistent card surfaces. */
-  --grad-metal:         var(--grad-gold-metallic);
-  --grad-gold-cta:      var(--grad-gold-metallic);
-  --grad-gold-vertical: linear-gradient(180deg, rgba(212, 175, 55, 0.18), rgba(212, 175, 55, 0.04));
-  --grad-gold-radial:   radial-gradient(circle at 50% 0%, rgba(212, 175, 55, 0.18), transparent 70%);
-
-  /* Gold for LIGHT backgrounds — all stops dark enough to hold contrast on white.
-     Bright champagne stops vanish on white; deep bronze metal does not. */
-  --grad-gold-deep: linear-gradient(105deg,
-    #3C2A0D 0%, #6C4A16 26%, #8F681B 50%, #5A3D13 74%, #322309 100%);
-  --grad-wa:            linear-gradient(160deg, #1FAF5E 0%, #128C7E 100%);
-
-  /* ── 11. Gold Shadow Standards ── */
-  --shadow-gold-inset:   inset 0 1px 0 rgba(255, 250, 230, 0.85);
-  --shadow-gold-inset-2: inset 0 1px 0 rgba(255, 250, 230, 0.9);
-  --shadow-gold-dim:     0 12px 32px -10px rgba(200, 155, 60, 0.5);
-  --shadow-gold-dim-2:   0 16px 40px -10px rgba(200, 155, 60, 0.6);
-  --shadow-gold-inner:   0 2px 6px rgba(0, 0, 0, 0.45);
-  --shadow-gold:         var(--shadow-gold-inset), var(--shadow-gold-dim), var(--shadow-gold-inner);
-  --shadow-gold-hover:   var(--shadow-gold-inset-2), var(--shadow-gold-dim-2), var(--shadow-gold-inner);
-
-  /* ── 9. Typography Scale ── */
-  --font-display: "EB Garamond", Georgia, "Times New Roman", serif;
+  /* ── 9. Typography ── */
+  --font-display: "EB Garamond", Georgia, serif;
   --font-body:    "Maison Neue Ext", system-ui, sans-serif;
-  --font-accent:  "Maison Neue Ext", system-ui, sans-serif;
-  --font-label:   "Maison Neue Ext", system-ui, sans-serif;
-
-  --h1-size: clamp(2.75rem, 6vw, 4.75rem);
+  --h1-size: clamp(2.75rem, 6vw, 5.5rem);
   --h2-size: clamp(1.9rem, 3.6vw, 2.9rem);
   --h3-size: clamp(1.25rem, 2.2vw, 1.65rem);
-  --body-size: 1.0625rem;
-  --body-line-height: 1.65;
 
-  /* ── 10. Layout & Spacing ── */
+  /* ── 10. Layout ── */
   --gutter: clamp(1.25rem, 4vw, 3.5rem);
-  --page-max: 82rem;
-  --radius-xs: 4px;
+  --page-max: 85rem;
+  --bp-sm: 480px;
+  --bp-md: 768px;
+  --bp-lg: 1024px;
+  --bp-xl: 1440px;
+  --bp-2xl: 1728px;
+  --radius: 12px;
   --radius-sm: 8px;
-  --radius-md: 12px;
   --radius-lg: 16px;
-  --radius-xl: 24px;
-  --radius: var(--radius-md);
   --section-y: clamp(3.5rem, 8vh, 7rem);
 
-  /* ── 11. Legacy aliases — MUST resolve or hero/components paint broken ── */
-  --cream:             var(--canvas-cream);
-  --cream-dim:         #EDE6F8;
-  --obsidian:          var(--canvas-void);
-  --obsidian-2:        var(--void-2);
-  --line:              rgba(212, 175, 55, 0.28);
-  --line-gold:         rgba(212, 175, 55, 0.42);
-  --line-amber:        rgba(245, 208, 97, 0.38);
-  --white-40:          rgba(255, 255, 255, 0.40);
-  --white-30:          rgba(255, 255, 255, 0.30);
-  --text:              var(--text-primary);
-  --text-dim:          var(--text-muted);
-  --text-hero:         #FFFFFF;
-  --text-sm:           0.875rem;
-  --text-lg:           1.125rem;
-  --text-xl:           1.25rem;
-  --ink-warm:          #2A2144;
-  --signal-red:        #DC2626;   /* errors only */
-  --sapphire:          var(--violet-electric); /* focus rings — NOT blue neon */
-  --acc:               var(--gold);
-  --acc-bright:        var(--gold-bright);
-  --acc-soft:          rgba(212, 175, 55, 0.12);
-  --acc-strong:        rgba(212, 175, 55, 0.22);
-  --acc-line:          var(--line-gold);
-  --dur-fast:          160ms;
-  --ease-smooth:       cubic-bezier(0.16, 1, 0.3, 1);
-  --ease-spring:       cubic-bezier(0.22, 1.2, 0.36, 1);
-  --ease-expo:         cubic-bezier(0.16, 1, 0.3, 1);
-  --ease-snappy:       cubic-bezier(0.2, 0.8, 0.2, 1);
-  --context:           var(--ink-soft);
-  --pointer-x:         50%;
-  --pointer-y:         50%;
+  /* ── 11. Motion ── */
+  --ease-snappy: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-smooth: cubic-bezier(0.25, 1, 0.5, 1);
+  --dur-fast: 200ms;
+  --pointer-x: 50%;
+  --pointer-y: 50%;
+
+  /* ── Legacy aliases — keep so old components don't break ── */
+  --void: var(--canvas-void);
+  --void-2: var(--canvas-void-2);
+  --cream: var(--canvas-paper);
+  --white: #FFFFFF;
+  --white-100:#FFFFFF;
+  --white-90:#F1F5F9;
+  --white-75:#E2E8F0;
+  --white-60:#94A3B8;
+  --white-55:rgba(255,255,255,0.55);
+  --white-45:#64748B;
+  --white-40:rgba(255,255,255,0.40);
+  --white-30:rgba(255,255,255,0.30);
+  --white-25:rgba(255,255,255,0.25);
+  --white-12:rgba(255,255,255,0.12);
+  --white-06:rgba(255,255,255,0.06);
+  --white-05:rgba(255,255,255,0.05);
+  --white-70:rgba(255,255,255,0.70);
+  --obsidian: var(--canvas-void);
+  --obsidian-2: var(--canvas-void-2);
+  --space: var(--surface-card-dark);
+  --space-lift:#2A1853;
+  --plum-deep:#0E0821;
+  --plum-mid:#180D36;
+  --plum-lift:#2B1756;
+  --navy-deep:#0E0821;
+  --navy-dark:#120C27;
+  --navy-surface:#1A1236;
+  --cloud:#E9ECEF;
+  --sage:#4E8F82;
+  --emerald: var(--signal-green);
+  --emerald-deep: var(--signal-green-deep);
+  --whatsapp: var(--signal-green);
+  --whatsapp-hover: var(--signal-green-deep);
+  --purple-cta: var(--violet-base);
+  --purple-electric: var(--violet-electric);
+  --purple-light: var(--violet-light);
+  --violet-primary: var(--violet-base);
+  --violet-shimmer:#F0E9FF;
+  --electric: var(--violet-base);
+  --electric-2: var(--violet-electric);
+  --electric-3: var(--violet-deep);
+  --cherry: var(--violet-base);
+  --cherry-bright: var(--violet-electric);
+  --cherry-deep: var(--violet-deep);
+  --saffron:#F5D061;
+  --gold-root: var(--gold);
+  --gold-primary: var(--gold);
+  --gold-cream:#FFF6D9;
+  --gold-dim: rgba(200,155,60,0.75);
+  --signal-red:#DC2626;
+  --graphite:#212529;
+  --cream-dim:#EDE6F8;
+  --ink: var(--paper-ink);
+  --ink-warm:#2A2144;
+  --text: var(--text-primary);
+  --text-dim: var(--text-muted);
+  --text-hero:#FFFFFF;
+  --acc: var(--gold);
+  --acc-bright: var(--gold-bright);
+  --acc-soft: var(--gold-soft);
+  --acc-line: var(--line-gold);
+  --sapphire: var(--violet-electric);
+  --line-amber: rgba(245,208,97,0.38);
+  --context: var(--ink-soft);
+  --shadow-gold-inset: inset 0 1px 0 rgba(255,250,230,0.85);
+  --shadow-gold-dim: var(--shadow-gold);
+  --shadow-gold-inner: 0 2px 6px rgba(0,0,0,0.45);
+  --grad-violet-canvas: var(--canvas-void);
+  --grad-aurora-plum: var(--canvas-void);
+  --grad-violet-card: var(--surface-card-dark);
+  --grad-light-section: var(--canvas-paper);
+  --grad-navy-header: var(--canvas-void);
+  --grad-cream-card: var(--canvas-paper-2);
   --grad-border-shimmer: linear-gradient(90deg, transparent, rgba(212,175,55,.55), transparent);
+  --grad-gold-surface: var(--gold-soft);
+  --grad-gold-border: var(--line-gold);
+  --grad-metal: var(--grad-gold-metallic);
+  --grad-gold-cta: var(--grad-gold-metallic);
 }

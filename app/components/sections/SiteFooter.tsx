@@ -36,11 +36,11 @@ const TRUST_BADGES = [
 export default function SiteFooter() {
   return (
     <footer
-      className="psara-site-footer footer-mosaic relative z-10 border-t border-white/15 bg-gradient-to-br from-[#080611] via-[#15151A] to-[#21172F] text-white overflow-hidden pb-24 md:pb-12"
+      className="psara-site-footer footer-mosaic relative z-10 border-t border-white/15 bg-[#080611] text-white overflow-hidden pb-24 md:pb-12"
     >
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16">
-        {/* Marquee Banner */}
-        <div className="mb-12 overflow-hidden rounded-2xl border border-[#D4AF37]/30 py-3.5 bg-gradient-to-r from-[#2A1853] via-[#180D36] to-[#2A1853]">
+        {/* Marquee Banner — flat */}
+        <div className="mb-12 overflow-hidden rounded-xl border border-white/10 bg-[var(--surface-card-dark)] py-3.5">
           <div className="flex whitespace-nowrap animate-marquee">
             <span className="text-xs sm:text-sm font-bold uppercase tracking-[0.2em] text-[#F5D061] px-4">
               START YOUR PSARA LICENSE APPLICATION &nbsp;&middot;&nbsp; 36 STATES &amp; UTs COVERAGE &nbsp;&middot;&nbsp; ZERO REJECTION DISCIPLINE &nbsp;&middot;&nbsp;

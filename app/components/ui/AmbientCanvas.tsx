@@ -2,7 +2,7 @@
 
 /**
  * Continuous ambient field — MAAC DynamicBackground approach,
- * recolored to midnight black + cherry red + warm gold atmosphere.
+ * recolored to midnight black + plum + warm gold atmosphere.
  * Fixed behind ALL content. Sections stay transparent.
  */
 
@@ -40,7 +40,7 @@ export default function AmbientCanvas() {
     let visible = true;
 
     const resize = () => {
-      const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+      const dpr = Math.min(window.devicePixelRatio || 1, 1);
       w = window.innerWidth;
       h = window.innerHeight;
       canvas.width = Math.floor(w * dpr);

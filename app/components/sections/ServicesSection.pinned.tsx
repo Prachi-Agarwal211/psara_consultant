@@ -39,9 +39,8 @@ export function ServicesPinnedHorizontal() {
   }, []);
 
   return (
-    <div ref={sectionRef} className="relative overflow-hidden border-y border-white/10 bg-gradient-to-br from-[#080611] via-[#180D36] to-[#332066]" style={{ contain: "paint" }}>
-      <div className="absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-[rgba(212,175,55,0.32)] to-transparent" />
-      <div className="absolute -right-32 top-16 h-72 w-72 rounded-full bg-violet-500/10 blur-3xl" aria-hidden="true" />
+    <div ref={sectionRef} className="relative overflow-hidden border-y border-white/10 bg-[var(--canvas-void-2)]" style={{ contain: "paint" }}>
+      <div className="absolute inset-x-0 top-0 h-[1px] bg-[var(--line-gold)]" />
       <div className="relative z-10 mx-auto max-w-7xl px-[var(--gutter)] py-14 sm:py-16 lg:py-20">
         <div className="mb-8 flex flex-col gap-4 border-b border-white/10 pb-7 sm:mb-10 sm:flex-row sm:items-end sm:justify-between">
           <MaskReveal direction="left">
@@ -67,7 +66,7 @@ export function ServicesPinnedHorizontal() {
                 href={`/services/${s.slug}`}
                 data-featured-card
                 data-cursor="View service"
-                className="cursor-surface group flex min-h-[238px] flex-col justify-between rounded-2xl border border-violet-200/15 bg-gradient-to-br from-[#2A1853] via-[#1A1236] to-[#0E0821] p-5 shadow-[0_18px_40px_-30px_rgba(0,0,0,0.95)] transition-[border-color,background,box-shadow,transform] hover:-translate-y-1 hover:border-[rgba(212,175,55,0.6)] hover:from-[#3B2374] hover:to-[#1A1236] sm:p-6"
+                className="group flex min-h-[238px] flex-col justify-between rounded-xl border border-white/10 bg-[var(--surface-card-dark)] p-5 shadow-[var(--shadow-card)] transition-[border-color,transform] hover:-translate-y-1 hover:border-[var(--line-gold)] sm:p-6"
               >
                 <div>
                   <div className="mb-5 flex items-center justify-between">

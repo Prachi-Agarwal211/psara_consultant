@@ -6,11 +6,7 @@ import { PageHero, PageMain } from "../../components/PageShell";
 import StageShell from "../components/ui/StageShell";
 import { STATES } from "../../data/states";
 import { buildWhatsAppUrl, formatEnquiryWhatsAppMessage } from "../../lib/whatsapp";
-
-const CONSULTANCY_FEE = 30000;
-const MOU_TRAINING_FEE = 35000;
-const DOCUMENTS_FEE = 5000;
-const ARMED_GUARD_FEE = 15000;
+import { FEES, formatINR } from "../../lib/config";
 
 const OTHER_COSTS = [
   {
@@ -34,8 +30,6 @@ const OTHER_COSTS = [
     desc: "Armed license vetting, weapon custodian protocols, and specialized armor/training documentation.",
   },
 ];
-
-const formatINR = (n: number) => `₹${n.toLocaleString("en-IN")}`;
 
 function parseIndicativeFee(value: string | undefined): number | null {
   const match = value?.match(/₹\s*([\d,]+)/);
@@ -61,7 +55,7 @@ export default function CalculatorClient() {
   const baseGovFee = parseIndicativeFee(selectedStateInfo?.[feeField]);
   const totalEst = baseGovFee === null
     ? null
-    : baseGovFee + CONSULTANCY_FEE + MOU_TRAINING_FEE + DOCUMENTS_FEE + (needArmed ? ARMED_GUARD_FEE : 0);
+    : baseGovFee + FEES.consultancy + FEES.mouTraining + FEES.documents + (needArmed ? FEES.armedGuard : 0);
 
   const scaleLabel = scale === "d1" ? "Single-District Setup" : scale === "d5" ? "Up to 5 Districts" : "All-State PSARA Setup";
 
@@ -206,12 +200,12 @@ export default function CalculatorClient() {
                   <tbody className="divide-y divide-white/10 text-[#E2E8F0]">
                     <tr className="hover:bg-white/5 transition-colors">
                       <td className="py-2.5 font-medium">Consultancy &amp; Professional</td>
-                      <td className="py-2.5 font-mono font-bold text-white text-right">{formatINR(CONSULTANCY_FEE)}</td>
+                      <td className="py-2.5 font-mono font-bold text-white text-right">{formatINR(FEES.consultancy)}</td>
                       <td className="py-2.5 pl-4 text-[11px] text-[#94A3B8]">Dossier &amp; liaison</td>
                     </tr>
                     <tr className="hover:bg-white/5 transition-colors">
                       <td className="py-2.5 font-medium">Training MOU Fee</td>
-                      <td className="py-2.5 font-mono font-bold text-white text-right">{formatINR(MOU_TRAINING_FEE)}</td>
+                      <td className="py-2.5 font-mono font-bold text-white text-right">{formatINR(FEES.mouTraining)}</td>
                       <td className="py-2.5 pl-4 text-[11px] text-[#94A3B8]">Recognized institute</td>
                     </tr>
                     <tr className="hover:bg-white/5 transition-colors">
@@ -221,13 +215,13 @@ export default function CalculatorClient() {
                     </tr>
                     <tr className="hover:bg-white/5 transition-colors">
                       <td className="py-2.5 font-medium">Documentation &amp; Affidavits</td>
-                      <td className="py-2.5 font-mono font-bold text-white text-right">{formatINR(DOCUMENTS_FEE)}</td>
+                      <td className="py-2.5 font-mono font-bold text-white text-right">{formatINR(FEES.documents)}</td>
                       <td className="py-2.5 pl-4 text-[11px] text-[#94A3B8]">Legal paperwork</td>
                     </tr>
                     {needArmed && (
                       <tr className="hover:bg-white/5 transition-colors">
                         <td className="py-2.5 font-medium">Armed Guard Endorsement</td>
-                        <td className="py-2.5 font-mono font-bold text-white text-right">{formatINR(ARMED_GUARD_FEE)}</td>
+                        <td className="py-2.5 font-mono font-bold text-white text-right">{formatINR(FEES.armedGuard)}</td>
                         <td className="py-2.5 pl-4 text-[11px] text-[#94A3B8]">Weapons vetting</td>
                       </tr>
                     )}

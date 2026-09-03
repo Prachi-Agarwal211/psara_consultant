@@ -1,318 +1,176 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import { prefersReducedMotion, ensureGsap } from "../../../app/lib/gsap";
-import BrandMark from "../ui/BrandMark";
+import { useEffect, useRef, useState } from "react";
+import CaseyMenu from "./CaseyMenu";
+import { CONTACT } from "../../../lib/config";
 
 /**
- * HeroStage — Khemji sticky cover + MAAC responsive settle.
- * Media must always fill the sticky viewport (object-cover). Desk/laptop art
- * live INSIDE the sticky stage so scroll does not expose raw layer edges.
+ * HeroStage — Standard flat theme.
+ * Single scrim, solid gold accent, no teal, no double header.
+ * H1 with keyword in first paint, 2 CTAs, minimal layers.
  */
 export default function HeroStage() {
-  const shellRef = useRef<HTMLElement | null>(null);
-  const stageRef = useRef<HTMLDivElement | null>(null);
   const videoRef = useRef<HTMLVideoElement | null>(null);
-  const [showVideo, setShowVideo] = useState(false);
   const [videoReady, setVideoReady] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
-    const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const syncMotionPreference = () => {
-      setShowVideo(!motionQuery.matches);
-      if (motionQuery.matches) setVideoReady(false);
-    };
-    syncMotionPreference();
-    motionQuery.addEventListener?.("change", syncMotionPreference);
-    return () => motionQuery.removeEventListener?.("change", syncMotionPreference);
-  }, []);
+    const v = videoRef.current;
+    if (!v) return;
 
-  useEffect(() => {
-    const video = videoRef.current;
-    if (!video || !showVideo) return;
+    const tryPlay = () => {
+      v.play()
+        .then(() => setVideoReady(true))
+        .catch(() => setVideoReady(false));
+    };
+    const onCanPlay = () => tryPlay();
 
-    let disposed = false;
-    const playVideo = () => {
-      if (disposed) return;
-      video.muted = true;
-      video.defaultMuted = true;
-      video.playsInline = true;
-      void video
-        .play()
-        .then(() => {
-          if (!disposed) setVideoReady(true);
-        })
-        .catch(() => {
-          if (!disposed) setVideoReady(false);
-        });
+    // MAAC strategy: poster is LCP, video is a progressive enhancement.
+    // Don't preload metadata at mount — wait for idle so hero text + poster render first.
+    v.preload = "none";
+    const start = () => {
+      v.preload = "auto";
+      v.load();
+      v.addEventListener("canplay", onCanPlay);
+      v.addEventListener("loadeddata", onCanPlay);
+      v.muted = true;
     };
-    const handleVisibility = () => {
-      if (document.visibilityState === "visible") playVideo();
-      else video.pause();
-    };
-    const handleVideoError = () => {
-      if (!disposed) setVideoReady(false);
-    };
-
-    video.addEventListener("loadeddata", playVideo);
-    video.addEventListener("canplay", playVideo);
-    video.addEventListener("error", handleVideoError);
-    document.addEventListener("visibilitychange", handleVisibility);
-    playVideo();
+    const ric = (window as any).requestIdleCallback as
+      | ((cb: () => void, opts?: { timeout?: number }) => number)
+      | undefined;
+    let idleId = 0;
+    if (ric) idleId = ric(start, { timeout: 1500 });
+    else start();
 
     return () => {
-      disposed = true;
-      video.pause();
-      video.removeEventListener("loadeddata", playVideo);
-      video.removeEventListener("canplay", playVideo);
-      video.removeEventListener("error", handleVideoError);
-      document.removeEventListener("visibilitychange", handleVisibility);
+      if (idleId && (window as any).cancelIdleCallback) (window as any).cancelIdleCallback(idleId);
+      v.removeEventListener("canplay", onCanPlay);
+      v.removeEventListener("loadeddata", onCanPlay);
     };
-  }, [showVideo]);
-
-  useEffect(() => {
-    if (!shellRef.current || !stageRef.current || prefersReducedMotion()) return;
-    const shell = shellRef.current;
-    const stage = stageRef.current;
-    const { gsap } = ensureGsap();
-
-    const ctx = gsap.context(() => {
-      const mm = gsap.matchMedia();
-
-      // Intro — all viewports
-      gsap.fromTo(
-        stage.querySelectorAll<HTMLElement>("[data-hero-intro]"),
-        { opacity: 0, y: 22 },
-        { opacity: 1, y: 0, duration: 0.9, stagger: 0.08, ease: "power3.out", delay: 0.12 },
-      );
-      gsap.fromTo(
-        stage.querySelectorAll<HTMLElement>("[data-hero-word]"),
-        { opacity: 0, yPercent: 110 },
-        { opacity: 1, yPercent: 0, duration: 1, stagger: 0.1, ease: "power4.out", delay: 0.22 },
-      );
-      gsap.fromTo(
-        stage.querySelectorAll<HTMLElement>("[data-hero-rail-item]"),
-        { opacity: 0, x: -12 },
-        { opacity: 1, x: 0, duration: 0.65, stagger: 0.07, ease: "power3.out", delay: 0.55 },
-      );
-
-      // Desktop/tablet: sticky scrub — content lifts out, media scales, desk stays clipped
-      mm.add("(min-width: 768px)", () => {
-        const media = stage.querySelector<HTMLElement>("[data-hero-media]");
-        const content = stage.querySelector<HTMLElement>("[data-hero-content]");
-        const veil = stage.querySelector<HTMLElement>("[data-hero-scroll-veil]");
-
-        const tl = gsap.timeline({
-          scrollTrigger: {
-            trigger: shell,
-            start: "top top",
-            end: "bottom top",
-            scrub: 1.1,
-            invalidateOnRefresh: true,
-          },
-        });
-
-        if (content) {
-          tl.to(content, { opacity: 0, y: -36, ease: "none" }, 0);
-        }
-        if (media) {
-          tl.to(media, { scale: 1.1, ease: "none" }, 0);
-        }
-        if (veil) {
-          tl.fromTo(veil, { opacity: 0 }, { opacity: 0.72, ease: "none" }, 0.15);
-        }
-      });
-
-      // Mobile: lighter scrub — no aggressive scale (CPU), just fade content + darken
-      mm.add("(max-width: 767px)", () => {
-        const content = stage.querySelector<HTMLElement>("[data-hero-content]");
-        const veil = stage.querySelector<HTMLElement>("[data-hero-scroll-veil]");
-        const tl = gsap.timeline({
-          scrollTrigger: {
-            trigger: shell,
-            start: "top top",
-            end: "bottom top",
-            scrub: 0.8,
-            invalidateOnRefresh: true,
-          },
-        });
-        if (content) tl.to(content, { opacity: 0, y: -18, ease: "none" }, 0);
-        if (veil) tl.fromTo(veil, { opacity: 0 }, { opacity: 0.8, ease: "none" }, 0.1);
-      });
-    }, shell);
-
-    return () => ctx.revert();
   }, []);
 
   return (
-    <section
-      ref={shellRef}
-      id="hero"
-      className="relative isolate h-[132svh] bg-[var(--canvas-void,#080611)] text-white sm:h-[140svh] lg:h-[150svh]"
-      aria-label="PSARA License Consultant India"
-    >
-      {/* Sticky viewport = always covered; scroll only reveals HeroActions below */}
-      <div ref={stageRef} className="sticky top-0 h-[100svh] w-full overflow-hidden">
-        {/* MEDIA — full cover, never letterboxed */}
-        <div data-hero-media className="absolute inset-0 z-0 origin-center will-change-transform">
-          <Image
-            src="/assets/images/generated/hero-poster.webp"
-            alt=""
-            fill
-            priority
-            sizes="100vw"
-            className="object-cover object-center"
-          />
-          {showVideo && (
-            <video
-              ref={videoRef}
-              className={`absolute inset-0 h-full w-full object-cover object-[54%_38%] contrast-[1.08] saturate-[0.95] transition-opacity duration-700 ${
-                videoReady ? "opacity-100" : "opacity-0"
-              }`}
-              autoPlay
-              muted
-              loop
-              playsInline
-              preload="metadata"
-              poster="/assets/images/generated/hero-poster.webp"
-              disablePictureInPicture
-              disableRemotePlayback
-              aria-hidden
-            >
-              <source src="/assets/videos/hero-loop.mp4" type="video/mp4" />
-              <source src="/assets/videos/hero-loop.webm" type="video/webm" />
-            </video>
-          )}
-        </div>
-
-        {/* Brand veil — void/violet/gold only */}
-        <div
-          className="pointer-events-none absolute inset-0 z-[1]"
-          style={{
-            background:
-              "linear-gradient(90deg, rgba(8,6,17,0.92) 0%, rgba(16,7,40,0.78) 38%, rgba(36,16,75,0.42) 72%, rgba(8,6,17,0.32) 100%), radial-gradient(ellipse 58% 62% at 58% 40%, rgba(109,40,217,0.26), transparent 70%), radial-gradient(ellipse 34% 40% at 78% 72%, rgba(212,175,55,0.10), transparent 72%), linear-gradient(180deg, rgba(8,6,17,0.35) 0%, rgba(8,6,17,0.08) 42%, rgba(8,6,17,0.88) 100%)",
-          }}
+    <section id="hero" className="relative h-[100svh] w-full overflow-hidden bg-[var(--canvas-void)] isolate">
+      {/* Media: poster + video with single flat scrim */}
+      <div className="absolute inset-0">
+        <Image
+          src="/assets/images/generated/hero-poster.webp"
+          alt=""
+          fill
+          priority
+          fetchPriority="high"
+          sizes="100vw"
+          className="object-cover object-center"
         />
-
-        {/* Scroll darken (scrubbed) */}
-        <div
-          data-hero-scroll-veil
-          className="pointer-events-none absolute inset-0 z-[2] bg-[var(--canvas-void,#080611)] opacity-0"
-          aria-hidden
-        />
-
-        {/* Bottom desk prop — clipped inside sticky stage */}
-        <div
-          className="pointer-events-none absolute inset-x-0 bottom-0 z-[3] h-[18%] sm:h-[20%] lg:h-[26%]"
-          aria-hidden
+        <video
+          ref={videoRef}
+          className={`absolute inset-0 h-full w-full object-cover object-center transition-opacity duration-700 ${videoReady ? "opacity-100" : "opacity-0"}`}
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="none"
+          poster="/assets/images/generated/hero-poster.webp"
         >
-          <Image
-            src="/assets/images/generated/psara-hero-desk-cutout.png"
-            alt=""
-            fill
-            sizes="100vw"
-            className="object-cover object-bottom"
-            priority
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-[var(--canvas-void,#080611)] via-[var(--canvas-void,#080611)]/35 to-transparent" />
-        </div>
+          <source src="/assets/videos/hero-loop.webm" type="video/webm" />
+          <source src="/assets/videos/hero-loop.mp4" type="video/mp4" />
+        </video>
+        {/* Single flat scrim — no teal, matches violet/gold theme */}
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(8,6,17,0.72)_0%,rgba(8,6,17,0.45)_38%,rgba(8,6,17,0.18)_58%,rgba(8,6,17,0.88)_100%)]" />
+        <div className="absolute inset-x-0 bottom-0 h-[36%] bg-gradient-to-t from-[var(--canvas-void)] to-transparent" />
+      </div>
 
-        {/* Laptop side art — desktop only, clipped */}
-        <div
-          className="pointer-events-none absolute bottom-0 right-0 z-[3] hidden h-[28%] w-[48%] overflow-hidden opacity-80 lg:block"
-          aria-hidden
+      {/* Header — single source of truth (SiteHeader handles scrolled state, this is hero header) */}
+      <header className="absolute inset-x-0 top-0 z-30 flex items-center justify-between px-6 py-5 lg:px-8">
+        <button
+          aria-label={menuOpen ? "Close menu" : "Open menu"}
+          onClick={() => setMenuOpen((v) => !v)}
+          className="group flex items-center gap-3 text-white"
         >
-          <Image
-            src="/assets/images/generated/landing-hero-violet.png"
-            alt=""
-            fill
-            sizes="48vw"
-            className="object-cover object-[78%_72%]"
-            style={{ filter: "saturate(0.78) hue-rotate(-18deg) contrast(1.06) brightness(0.86)" }}
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-[var(--canvas-void,#080611)] via-[var(--canvas-void,#080611)]/25 to-transparent" />
-          <div className="absolute inset-0 bg-gradient-to-t from-[var(--canvas-void,#080611)]/50 via-transparent to-[var(--violet-deep,#100728)]/40" />
-        </div>
-
-        {/* Left rail — large screens only */}
-        <aside
-          className="pointer-events-auto absolute left-5 top-1/2 z-20 hidden -translate-y-1/2 flex-col items-center gap-4 lg:flex xl:left-[max(1.25rem,calc((100vw-1440px)/2+1.25rem))]"
-          aria-label="Hero section index"
-        >
-          <span data-hero-rail-item className="h-12 w-px bg-gradient-to-b from-transparent via-[var(--gold-bright,#D4AF37)] to-white/20" aria-hidden />
-          <span data-hero-rail-item className="[writing-mode:vertical-rl] rotate-180 text-[9px] font-bold uppercase tracking-[0.28em] text-white/60">
-            Desk index
+          <span className="flex h-9 w-9 items-center justify-center">
+            <span className="flex flex-col gap-1.5">
+              <span className="h-px w-6 bg-white transition-all group-hover:w-7" />
+              <span className="h-px w-6 bg-white" />
+              <span className="h-px w-4 bg-white transition-all group-hover:w-6" />
+            </span>
           </span>
-          <nav className="flex flex-col items-center gap-2.5" aria-label="Homepage sections">
-            {[
-              { number: "01", label: "Proof", href: "#proof" },
-              { number: "02", label: "About", href: "#about" },
-              { number: "03", label: "Services", href: "#services" },
-              { number: "04", label: "States", href: "#states" },
-            ].map((item) => (
-              <a
-                key={item.href}
-                data-hero-rail-item
-                href={item.href}
-                className="group flex flex-col items-center gap-0.5 px-1 py-1.5 text-[9px] font-bold uppercase tracking-[0.12em] text-white/60 transition-[color,transform] duration-200 hover:-translate-x-0.5 hover:text-[var(--gold-light,#F5E6BA)]"
-              >
-                <span className="text-[var(--gold-bright,#D4AF37)]">{item.number}</span>
-                <span className="hidden text-center xl:inline">{item.label}</span>
-                <span className="sr-only">Go to {item.label}</span>
-              </a>
-            ))}
-          </nav>
-          <span data-hero-rail-item className="h-12 w-px bg-gradient-to-t from-transparent via-white/25 to-[var(--gold-bright,#D4AF37)]" aria-hidden />
-        </aside>
+          <span className="text-[11px] font-bold uppercase tracking-[0.18em] text-white/90">{menuOpen ? "Close" : "Menu"}</span>
+        </button>
 
-        {/* CENTER content — big logo + H1 (SEO kept on single H1) */}
-        <div
-          data-hero-content
-          className="relative z-10 mx-auto flex h-full w-full max-w-[1440px] flex-col items-center justify-center px-[var(--gutter)] pb-[14%] pt-[max(4.5rem,env(safe-area-inset-top))] text-center sm:pb-[12%] lg:pb-[10%]"
+        <nav className="hidden items-center gap-7 text-[11px] font-bold uppercase tracking-[0.14em] text-white/75 lg:flex">
+          <a href="/" className="relative pb-1 text-white">
+            Home
+            <span className="absolute inset-x-0 -bottom-1 h-px bg-[var(--gold)]" />
+          </a>
+          <a href="/about" className="transition-colors hover:text-white">About Us</a>
+          <a href="/services" className="transition-colors hover:text-white">Services</a>
+          <a href="/states" className="transition-colors hover:text-white">States</a>
+          <a href="/contact" className="transition-colors hover:text-white">Contact</a>
+        </nav>
+
+        <a
+          href="/contact"
+          className="inline-flex items-center gap-2 rounded-full border border-[var(--gold)]/40 bg-[var(--canvas-void)]/40 px-5 py-2.5 text-[11px] font-bold uppercase tracking-[0.14em] text-white backdrop-blur-md transition-colors hover:border-[var(--gold)] hover:bg-[var(--gold)] hover:text-[var(--canvas-void)]"
         >
-          <div data-hero-intro className="mb-5 flex flex-col items-center sm:mb-7">
-            <BrandMark variant="light" className="h-20 w-20 sm:h-24 sm:w-24 md:h-28 md:w-28 lg:h-32 lg:w-32" />
-            <p className="mt-3 text-[10px] font-bold uppercase tracking-[0.28em] text-[var(--gold-light,#F5E6BA)] sm:text-[11px]">
-              Statutory desk · Pan-India
-            </p>
-          </div>
+          Get in Touch
+          <span className="text-sm leading-none">→</span>
+        </a>
+      </header>
+      <CaseyMenu open={menuOpen} onClose={() => setMenuOpen(false)} />
 
-          <h1
-            className="w-full max-w-5xl text-[clamp(3.4rem,11vw,10.5rem)] font-medium leading-[0.78] tracking-[-0.06em] text-white"
-            style={{ fontFamily: "var(--font-display)" }}
-          >
-            <span className="block overflow-hidden pb-[0.06em]">
-              <span data-hero-word className="inline-block">
-                PSARA
-              </span>
-            </span>
-            <span className="block overflow-hidden pb-[0.06em]">
-              <span
-                data-hero-word
-                className="metal-text inline-block font-[family-name:var(--font-body)] text-[clamp(1.55rem,4.6vw,4.4rem)] font-semibold not-italic uppercase tracking-[0.02em]"
-              >
-                CONSULTANT INDIA
-              </span>
-            </span>
-          </h1>
+      {/* Center: brand + H1 + CTAs */}
+      <div className="relative z-10 mx-auto flex h-full max-w-6xl flex-col items-center justify-center px-6 pb-16 pt-20 text-center">
+        <Image
+          src="/logo.png"
+          alt="PSARA Consultant India"
+          width={320}
+          height={320}
+          priority
+          className="h-[220px] w-auto object-contain drop-shadow-[0_18px_42px_rgba(0,0,0,0.62)] sm:h-[260px] lg:h-[300px]"
+        />
 
-          <p
-            data-hero-intro
-            className="mt-5 flex max-w-xl items-center justify-center gap-3 text-[10px] font-bold uppercase tracking-[0.24em] text-[var(--gold-light,#F5E6BA)] sm:mt-7 sm:text-[11px]"
-          >
-            <span className="hidden h-px w-10 bg-[var(--gold-bright,#D4AF37)] sm:inline-block sm:w-14" aria-hidden />
-            Regulatory clarity before submission
-            <span className="hidden h-px w-10 bg-[var(--gold-bright,#D4AF37)] sm:inline-block sm:w-14" aria-hidden />
-          </p>
+        <h1 className="mt-8 max-w-3xl text-balance text-3xl font-bold leading-[1.05] tracking-tight text-white sm:text-4xl lg:text-5xl" style={{ fontFamily: "var(--font-display)" }}>
+          PSARA License <span className="text-[var(--gold)]">clearance across India.</span>
+        </h1>
+        <p className="mt-4 max-w-2xl text-sm leading-relaxed text-white/75 sm:text-base">
+          Statutory filing across 36 States &amp; UTs — training MOU, police verification, and Controlling Authority liaison from Jaipur HQ.
+        </p>
 
-          <p
-            data-hero-intro
-            className="mx-auto mt-4 max-w-xl text-sm leading-relaxed text-white/85 sm:mt-5 sm:text-base md:max-w-2xl md:text-lg"
-          >
-            State-specific filing strategy, training MOU coordination, police verification, and post-grant compliance for security agencies across India.
-          </p>
+        <div className="mt-8 flex flex-col items-center gap-3 sm:flex-row">
+          <a href="/contact" className="inline-flex items-center gap-2 rounded-full bg-[var(--gold)] px-7 py-3.5 text-xs font-bold uppercase tracking-[0.14em] text-[var(--canvas-void)] shadow-[0_8px_28px_rgba(200,155,60,0.35)] transition-[transform,filter] hover:brightness-110">
+            Start a Statutory File
+            <span>→</span>
+          </a>
+          <a href={`https://wa.me/${CONTACT.whatsapp.number}?text=${encodeURIComponent("Hello PSARA Consultant India — I need help with PSARA License registration.")}`} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-7 py-3.5 text-xs font-bold uppercase tracking-[0.14em] text-white backdrop-blur-md transition-colors hover:border-white/40 hover:bg-white/15">
+            WhatsApp Desk
+          </a>
         </div>
+
+        <p className="mt-6 text-[11px] font-bold uppercase tracking-[0.28em] text-white/60">500+ Licenses · 36 States · 10 Years</p>
+      </div>
+
+      {/* Bottom bar — minimal, gold accents only */}
+      <div className="absolute inset-x-0 bottom-0 z-20 flex items-end justify-between gap-3 px-4 pb-5 lg:px-6">
+        <a href={`tel:+${CONTACT.phoneRaw}`} className="hidden items-center gap-3 rounded-full border border-white/10 bg-[var(--canvas-void)]/65 px-4 py-2.5 backdrop-blur-md sm:flex">
+          <span className="flex h-7 w-7 items-center justify-center rounded-full bg-white text-[var(--canvas-void)]">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
+              <path d="M6.62 10.79a15.15 15.15 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24 11.36 11.36 0 0 0 3.56.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11.36 11.36 0 0 0 .57 3.56 1 1 0 0 1-.24 1.01l-2.21 2.22z" />
+            </svg>
+          </span>
+          <span className="pr-1 text-left leading-none">
+            <span className="block text-[9px] uppercase tracking-[0.14em] text-white/58">Call Us</span>
+            <span className="block text-xs font-bold tracking-wide text-white">{CONTACT.phoneDisplay}</span>
+          </span>
+        </a>
+        <div className="flex-1" aria-hidden />
+        <a href={CONTACT.whatsapp.url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-full border border-[var(--gold)]/40 bg-[var(--canvas-void)]/65 px-4 py-2.5 text-xs font-bold tracking-wide text-white backdrop-blur-md transition-colors hover:border-[var(--gold)] sm:px-5">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" className="text-[var(--gold)]">
+            <path d="M19.05 4.91A9.9 9.9 0 0 0 12.04 2C6.58 2 2.14 6.42 2.14 10.86c0 1.56.41 3.08 1.19 4.42L2 22l6.87-1.8a9.87 9.87 0 0 0 4.68 1.19h.01c5.46 0 9.9-4.42 9.9-9.86 0-2.64-1.03-5.11-2.91-6.97l.4.35zm-7.01 15.24h-.01a8.17 8.17 0 0 1-4.17-1.14l-.3-.18-4.08 1.07 1.09-3.97-.2-.31a8.2 8.2 0 0 1-1.26-4.36c0-4.54 3.71-8.23 8.28-8.23 2.21 0 4.29.86 5.85 2.42A8.19 8.19 0 0 1 19.4 11.53c0 4.54-3.71 8.23-8.27 8.23l.91.39zm6.91-11.5a6.56 6.56 0 0 0-4.68-1.94c-3.64 0-6.6 2.95-6.6 6.58 0 1.15.3 2.28.87 3.27l.12.21-.73 2.65 2.73-.71.2.12a6.6 6.6 0 0 0 3.16.8h.01c3.64 0 6.6-2.95 6.6-6.58a6.54 6.54 0 0 0-1.96-4.67l.28.27z" />
+          </svg>
+          <span className="hidden sm:inline uppercase text-[11px] tracking-wide">Whatsapp Us</span>
+          <span className="sm:hidden text-[11px]">WA</span>
+        </a>
       </div>
     </section>
   );

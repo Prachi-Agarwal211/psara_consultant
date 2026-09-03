@@ -24,6 +24,7 @@ import { getCaContact } from "../../../data/ca-contacts";
 import type { StateInfo } from "../../../data/states";
 import type { generateStateContent } from "../../../lib/seo-content";
 import { getLocationAccent, accentStyleVars, type LocationAccent } from "../../lib/location-accent";
+import { FEES } from "../../../lib/config";
 import { DEFAULT_WA } from "../../../lib/whatsapp";
 
 type StateContent = ReturnType<typeof generateStateContent>;
@@ -83,11 +84,11 @@ export default function StateDossierView({
     setTimeout(() => setCopiedField(null), 2000);
   };
 
-  // Fee calculation numbers
-  const govFee = calcScale === "d1" ? 5000 : calcScale === "d5" ? 10000 : 25000;
-  const consultancyFee = 30000;
-  const mouFee = 35000;
-  const docFee = 5000;
+  // Fee calculation numbers (single source of truth: lib/config.ts FEES)
+  const govFee = calcScale === "d1" ? FEES.govt.singleDistrict : calcScale === "d5" ? FEES.govt.upToFiveDistricts : FEES.govt.entireState;
+  const consultancyFee = FEES.consultancy;
+  const mouFee = FEES.mouTraining;
+  const docFee = FEES.documents;
   const totalStateEst = govFee + consultancyFee + mouFee + docFee;
 
   return (
@@ -100,8 +101,8 @@ export default function StateDossierView({
       <meta itemProp="name" content={`How to apply for PSARA License in ${state.name}`} />
       <meta itemProp="description" content={content.metaDescription} />
 
-      {/* 1. EXECUTIVE DOSSIER HERO SUMMARY */}
-      <section className="relative overflow-hidden rounded-3xl border border-[rgba(212,175,55,0.28)] bg-gradient-to-br from-[#332066] via-[#17102F] to-[#080611] p-6 shadow-2xl sm:p-8 md:p-10">
+      {/* 1. EXECUTIVE DOSSIER HERO SUMMARY — flat */}
+      <section className="relative overflow-hidden rounded-xl border border-white/10 bg-[var(--surface-card-dark)] p-6 shadow-[var(--shadow-card)] sm:p-8 md:p-10">
         <div className="flex flex-col items-start justify-between gap-4 border-b border-white/10 pb-6 sm:flex-row sm:items-center">
           <div className="flex min-w-0 flex-wrap items-center gap-3">
             <span className="badge-metallic-gold">
@@ -136,16 +137,16 @@ export default function StateDossierView({
         </div>
 
         {/* Key Framework Parameters */}
-        <div className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-4 pt-6 border-t border-white/10">
-          <div className="rounded-2xl border border-violet-200/10 bg-[#120C27] p-4 shadow-inner">
+          <div className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-4 pt-6 border-t border-white/10">
+          <div className="rounded-xl border border-white/10 bg-[var(--canvas-void-2)] p-4">
             <span className="block text-[0.65rem] font-bold uppercase tracking-widest text-[#D4AF37]">Application Mode</span>
             <span className="mt-1 block text-sm font-bold text-white">{state.applicationMode}</span>
           </div>
-          <div className="rounded-2xl border border-violet-200/10 bg-[#120C27] p-4 shadow-inner">
+          <div className="rounded-xl border border-white/10 bg-[var(--canvas-void-2)] p-4">
             <span className="block text-[0.65rem] font-bold uppercase tracking-widest text-[#D4AF37]">Rules Framework</span>
             <span className="mt-1 block text-sm font-bold text-white">{state.rulesNote}</span>
           </div>
-          <div className="rounded-2xl border border-violet-200/10 bg-[#120C27] p-4 shadow-inner">
+          <div className="rounded-xl border border-white/10 bg-[var(--canvas-void-2)] p-4">
             <span className="block text-[0.65rem] font-bold uppercase tracking-widest text-[#D4AF37]">Coverage Scale</span>
             <span className="mt-1 block text-sm font-bold text-white">{state.cities.length}+ Major Districts</span>
           </div>

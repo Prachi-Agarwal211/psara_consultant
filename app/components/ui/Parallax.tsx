@@ -16,6 +16,7 @@ export function Parallax({
 
   useEffect(() => {
     if (!ref.current || prefersReducedMotion()) return;
+    if (typeof window !== "undefined" && window.innerWidth < 768) return; // ponytail: no parallax on mobile viewport
     const { gsap } = ensureGsap();
     const el = ref.current;
     const ctx = gsap.context(() => {
@@ -26,10 +27,11 @@ export function Parallax({
           yPercent: amount / 2,
           ease: "none",
           scrollTrigger: {
-            trigger: el,
+            trigger: el.closest("[data-parallax-root]") || el,
             start: "top bottom",
             end: "bottom top",
-            scrub: 0.5,
+            scrub: 0.8,
+            invalidateOnRefresh: true,
           },
         }
       );

@@ -3,17 +3,13 @@
 import { useState } from "react";
 import { CheckCircle2, Shield, MessageSquare, Info, Sparkles } from "lucide-react";
 import { formatEnquiryWhatsAppMessage, openWhatsApp } from "../../../lib/whatsapp";
+import { FEES, formatINR } from "../../../lib/config";
 
 const COVERAGE_OPTIONS = [
-  { id: "district", label: "Single-District Setup", govtFee: 5000, desc: "Single District operations within State" },
-  { id: "multi-district", label: "Up to 5 Districts", govtFee: 10000, desc: "Multi-district regional coverage" },
-  { id: "statewide", label: "All-State PSARA Setup", govtFee: 25000, desc: "Full State-wide licensing & deployment" },
+  { id: "district", label: "Single-District Setup", govtFee: FEES.govt.singleDistrict, desc: "Single District operations within State" },
+  { id: "multi-district", label: "Up to 5 Districts", govtFee: FEES.govt.upToFiveDistricts, desc: "Multi-district regional coverage" },
+  { id: "statewide", label: "All-State PSARA Setup", govtFee: FEES.govt.entireState, desc: "Full State-wide licensing & deployment" },
 ];
-
-const CONSULTANCY_FEE = 30000;
-const MOU_TRAINING_FEE = 35000;
-const DOCUMENTS_FEE = 5000;
-const ARMED_GUARD_FEE = 15000;
 
 const OTHER_COSTS = [
   {
@@ -38,8 +34,6 @@ const OTHER_COSTS = [
   },
 ];
 
-const formatINR = (n: number) => `₹${n.toLocaleString("en-IN")}`;
-
 export default function PsaraEstimator() {
   const [selectedState, setSelectedState] = useState("Rajasthan");
   const [coverageId, setCoverageId] = useState("statewide");
@@ -47,7 +41,7 @@ export default function PsaraEstimator() {
 
   const selectedCoverage = COVERAGE_OPTIONS.find((c) => c.id === coverageId) || COVERAGE_OPTIONS[2];
   const govtFee = selectedCoverage.govtFee;
-  const totalEst = govtFee + CONSULTANCY_FEE + MOU_TRAINING_FEE + DOCUMENTS_FEE + (needArmed ? ARMED_GUARD_FEE : 0);
+  const totalEst = govtFee + FEES.consultancy + FEES.mouTraining + FEES.documents + (needArmed ? FEES.armedGuard : 0);
 
   const handleWhatsAppConsultation = () => {
     const text = formatEnquiryWhatsAppMessage({
@@ -58,11 +52,11 @@ export default function PsaraEstimator() {
       formType: "PSARA Fee Estimator",
       extra: {
         "Coverage Scope": selectedCoverage.label,
-        "Consultancy & Professional": formatINR(CONSULTANCY_FEE),
-        "Training MOU Fee": formatINR(MOU_TRAINING_FEE),
+        "Consultancy & Professional": formatINR(FEES.consultancy),
+        "Training MOU Fee": formatINR(FEES.mouTraining),
         "Statutory Govt Fee": formatINR(govtFee),
-        "Documentation & Affidavits": formatINR(DOCUMENTS_FEE),
-        "Armed Endorsement": needArmed ? formatINR(ARMED_GUARD_FEE) : "Not Selected",
+        "Documentation & Affidavits": formatINR(FEES.documents),
+        "Armed Endorsement": needArmed ? formatINR(FEES.armedGuard) : "Not Selected",
         "Total Estimate": formatINR(totalEst),
       },
     });
@@ -70,7 +64,7 @@ export default function PsaraEstimator() {
   };
 
   return (
-    <section className="relative w-full my-12 rounded-3xl border border-[rgba(196,181,253,0.28)] p-6 md:p-10 bg-gradient-to-br from-[#2A1853] via-[#180D36] to-[#080611] text-white shadow-2xl overflow-hidden">
+    <section className="relative w-full my-12 rounded-xl border border-white/10 p-6 md:p-10 bg-[var(--surface-card-dark)] text-white shadow-[var(--shadow-card)] overflow-hidden">
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-white/15 pb-6">
         <div>
@@ -169,8 +163,8 @@ export default function PsaraEstimator() {
             </p>
           </div>
 
-          {/* Additional / Other Costs Section */}
-          <div className="rounded-2xl border border-violet-200/15 bg-gradient-to-br from-[#1A1236] to-[#120C27] p-5 space-y-3 shadow-inner">
+          {/* Additional / Other Costs Section — flat */}
+          <div className="rounded-xl border border-white/10 bg-[var(--canvas-void-2)] p-5 space-y-3">
             <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#D4AF37]">
               <Info className="h-4 w-4" /> Other Third-Party / Statutory Expenses
             </div>
@@ -191,8 +185,8 @@ export default function PsaraEstimator() {
           </div>
         </div>
 
-        {/* Right Structured Fee Grid Table & Total */}
-        <div className="lg:col-span-5 rounded-2xl border border-[rgba(212,175,55,0.35)] p-6 bg-gradient-to-br from-[#3B2374] via-[#1A1236] to-[#120C27] space-y-6 shadow-2xl">
+        {/* Right Fee Grid — flat */}
+        <div className="lg:col-span-5 rounded-xl border border-white/10 p-6 bg-[var(--canvas-void-2)] space-y-6 shadow-[var(--shadow-card)]">
           <div>
             <span className="text-xs font-bold uppercase tracking-wider text-[#D4AF37] block">
               Structured Cost Breakdown
@@ -215,12 +209,12 @@ export default function PsaraEstimator() {
               <tbody className="divide-y divide-white/10 text-[#E2E8F0]">
                 <tr className="hover:bg-white/5 transition-colors">
                   <td className="py-2.5 font-medium">Consultancy &amp; Professional</td>
-                  <td className="py-2.5 font-mono font-bold text-white text-right">{formatINR(CONSULTANCY_FEE)}</td>
+                  <td className="py-2.5 font-mono font-bold text-white text-right">{formatINR(FEES.consultancy)}</td>
                   <td className="py-2.5 pl-4 text-[11px] text-[#94A3B8]">Dossier &amp; follow-up</td>
                 </tr>
                 <tr className="hover:bg-white/5 transition-colors">
                   <td className="py-2.5 font-medium">Training MOU Fee</td>
-                  <td className="py-2.5 font-mono font-bold text-white text-right">{formatINR(MOU_TRAINING_FEE)}</td>
+                  <td className="py-2.5 font-mono font-bold text-white text-right">{formatINR(FEES.mouTraining)}</td>
                   <td className="py-2.5 pl-4 text-[11px] text-[#94A3B8]">Institute affiliation</td>
                 </tr>
                 <tr className="hover:bg-white/5 transition-colors">
@@ -230,13 +224,13 @@ export default function PsaraEstimator() {
                 </tr>
                 <tr className="hover:bg-white/5 transition-colors">
                   <td className="py-2.5 font-medium">Documentation &amp; Affidavits</td>
-                  <td className="py-2.5 font-mono font-bold text-white text-right">{formatINR(DOCUMENTS_FEE)}</td>
+                  <td className="py-2.5 font-mono font-bold text-white text-right">{formatINR(FEES.documents)}</td>
                   <td className="py-2.5 pl-4 text-[11px] text-[#94A3B8]">Legal drafting</td>
                 </tr>
                 {needArmed && (
                   <tr className="hover:bg-white/5 transition-colors">
                     <td className="py-2.5 font-medium">Armed Guard Endorsement</td>
-                    <td className="py-2.5 font-mono font-bold text-white text-right">{formatINR(ARMED_GUARD_FEE)}</td>
+                    <td className="py-2.5 font-mono font-bold text-white text-right">{formatINR(FEES.armedGuard)}</td>
                     <td className="py-2.5 pl-4 text-[11px] text-[#94A3B8]">Weapons vetting</td>
                   </tr>
                 )}

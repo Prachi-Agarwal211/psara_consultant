@@ -72,23 +72,20 @@
    TYPGRAPHY — Ultra-condensed display, scattered kinetic
    ═══════════════════════════════════════════════════════════════ */
 
-/* Ultra-condensed headline — horeca-social style */
+/* Headline — standard condensed */
 .headline-condensed {
-  font-size: clamp(4rem, 15vw, 12rem);
-  line-height: 0.82;
-  letter-spacing: -0.04em;
-  font-weight: 900;
+  font-size: clamp(3rem, 8vw, 7rem);
+  line-height: 0.9;
+  letter-spacing: -0.03em;
+  font-weight: 700;
   font-family: var(--font-display);
   text-transform: uppercase;
 }
 
-/* Diagonal rotated text — meech213 style */
 .text-diagonal {
-  transform: rotate(-12deg) skewX(-8deg);
   display: inline-block;
-  font-size: clamp(1.5rem, 4vw, 3rem);
-  font-weight: 800;
-  letter-spacing: 0.05em;
+  font-size: clamp(1.25rem, 3vw, 2rem);
+  font-weight: 700;
 }
 
 /* Scattered letters — horeca "NOTHING BUT THE TRUTH" energy */
@@ -101,34 +98,12 @@
 .scatter-text .letter {
   display: inline-block;
   font-size: clamp(2rem, 6vw, 5rem);
-  font-weight: 900;
+  font-weight: 700;
   line-height: 1;
   font-family: var(--font-display);
   text-transform: uppercase;
-  animation: letter-dance 3s ease-in-out infinite;
 }
-.scatter-text .letter:nth-child(odd) {
-  animation-delay: 0.3s;
-  transform: translateY(-8px);
-}
-.scatter-text .letter:nth-child(even) {
-  animation-delay: 0.6s;
-  animation: letter-dance-b 3s ease-in-out infinite;
-}
-.scatter-text .letter.space {
-  width: 0.4em;
-  animation: none;
-  transform: none;
-}
-
-@keyframes letter-dance {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-12px); }
-}
-@keyframes letter-dance-b {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(12px); }
-}
+/* ponytail: removed infinite letter-dance — no conversion value, CLS risk */
 
 /* Bracket metadata — nudot style */
 .meta-bracket {
@@ -227,44 +202,21 @@
    CARDS — Horizontal scroll, 3D tilt, service cards
    ═══════════════════════════════════════════════════════════════ */
 
-/* Shared interaction surface: a quiet glass highlight follows the pointer,
-   while the card keeps its existing violet/gold surface underneath. */
+/* Standard surface — flat, no glass, no pointer glow */
 .cursor-surface {
   position: relative;
   isolation: isolate;
   overflow: hidden;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.10),
-              inset 0 -1px 0 rgba(8, 6, 17, 0.42),
-              0 18px 50px -32px rgba(139, 92, 246, 0.72);
+  box-shadow: var(--shadow-card);
 }
-.cursor-surface::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  background: radial-gradient(circle 170px at var(--pointer-x, 50%) var(--pointer-y, 50%), rgba(196, 181, 253, 0.17), transparent 72%);
-  opacity: 0;
-  transition: opacity 260ms var(--ease-snappy);
-}
-.cursor-surface:hover::after,
-.cursor-surface:focus-within::after { opacity: 1; }
 .cursor-surface > * { position: relative; z-index: 1; }
 
-/* Violet glass for utility panels: tactile depth without creating another
-   competing color family. */
 .surface-glass {
-  background: linear-gradient(145deg, rgba(58, 31, 108, 0.62), rgba(18, 12, 39, 0.82));
-  border: 1px solid rgba(196, 181, 253, 0.20);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.10),
-              0 20px 52px -34px rgba(8, 6, 17, 0.95);
-  backdrop-filter: blur(16px);
+  background: var(--surface-card-dark);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-card);
 }
-.surface-glass:hover {
-  border-color: rgba(245, 208, 97, 0.50);
-  box-shadow: inset 0 1px 0 rgba(255, 246, 217, 0.16),
-              0 24px 62px -34px rgba(139, 92, 246, 0.80);
-}
+.surface-glass:hover { border-color: var(--line-gold); }
 
 /* Horizontal scroll track — meech213 spatial feel */
 .scroll-track {
@@ -379,14 +331,7 @@
    ANIMATIONS — Kinetic, scroll-triggered, float
    ═══════════════════════════════════════════════════════════════ */
 
-/* Float animation */
-@keyframes float {
-  0%, 100% { transform: translateY(0) rotate(0deg); }
-  50% { transform: translateY(-16px) rotate(2deg); }
-}
-.float-anim {
-  animation: float 4s ease-in-out infinite;
-}
+/* ponytail: removed infinite float — decorative only */
 
 /* Diagonal slide-in */
 @keyframes diag-slide {

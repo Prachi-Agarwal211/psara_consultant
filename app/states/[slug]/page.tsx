@@ -84,8 +84,8 @@ export default async function StatePage({
         image={heroImage}
         meta={`( PSARA CONSULTANCY ) ( ${s.capital} )`}
       />
-      {/* Stats strip */}
-      <section className="border-b border-violet-200/10 bg-gradient-to-r from-[#100A22] via-[#291653] to-[#100A22]">
+      {/* Stats strip — flat */}
+      <section className="border-b border-white/10 bg-[var(--surface-card-dark)]">
         <div className="mx-auto grid max-w-6xl grid-cols-2 gap-y-4 px-[var(--gutter)] py-5 text-center text-xs font-black uppercase tracking-wider sm:flex sm:flex-wrap sm:items-center sm:justify-center sm:gap-6 md:gap-10">
           <div>
             <span className="block text-sm text-white font-black">{s.name}</span>
@@ -109,7 +109,7 @@ export default async function StatePage({
         </div>
       </section>
 
-      <PageMain className="overflow-x-clip bg-gradient-to-br from-[#080611] via-[#160D30] to-[#2A1453] text-white">
+      <PageMain className="overflow-x-clip bg-[var(--canvas-void)] text-white">
         <div style={accentStyle} className="grid min-w-0 grid-cols-1 items-start gap-8 pb-16 sm:gap-12 lg:grid-cols-12">
           <div className="order-last min-w-0 space-y-12 lg:order-first lg:col-span-7">
             <StateDossierView

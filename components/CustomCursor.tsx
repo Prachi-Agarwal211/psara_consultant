@@ -17,10 +17,10 @@ export default function CustomCursor() {
   const cursorRef = useRef<HTMLDivElement | null>(null);
   const dotRef = useRef<HTMLDivElement | null>(null);
 
-  // Enable only on capable desktop devices — SSR-safe (false during hydration).
+  // Enable only on pointer-fine desktop — hidden on touch, reduced-motion, and modal open
   const enabled = useSyncExternalStore(
     noopSubscribe,
-    () => !isMobile() && !prefersReducedMotion(),
+    () => !isMobile() && !prefersReducedMotion() && window.matchMedia("(pointer: fine)").matches,
     () => false
   );
 
@@ -54,15 +54,21 @@ export default function CustomCursor() {
       setHovered((prev) => (prev !== nextHovered ? nextHovered : prev));
     };
 
-    document.body.style.cursor = "none";
+    // ponytail: don't hide cursor when a modal/dialog is open — a11y trap
+    const shouldHideNative = () => !document.querySelector('[role="dialog"]');
+    if (shouldHideNative()) document.body.style.cursor = "none";
     window.addEventListener("mousemove", onMouseMove);
 
     let animationFrameId: number;
 
     const render = () => {
-      // Smooth lerp / spring physics
-      pos.current.x += (target.current.x - pos.current.x) * 0.18;
-      pos.current.y += (target.current.y - pos.current.y) * 0.18;
+      // pause when tab hidden or dialog open
+      if (document.hidden || document.querySelector('[role="dialog"]')) {
+        animationFrameId = requestAnimationFrame(render);
+        return;
+      }
+      pos.current.x += (target.current.x - pos.current.x) * 0.15;
+      pos.current.y += (target.current.y - pos.current.y) * 0.15;
 
       if (cursorRef.current) {
         cursorRef.current.style.transform = `translate3d(${pos.current.x}px, ${pos.current.y}px, 0px) translate(-50%, -50%)`;
@@ -87,11 +93,11 @@ export default function CustomCursor() {
 
   return (
     <>
-      {/* Outer Spring Ring */}
+      {/* Outer Spring Ring — z 9998 so exit modal z 9999 stays on top */}
       <div
         ref={cursorRef}
         aria-hidden="true"
-        className={`psara-cursor-ring fixed top-0 left-0 pointer-events-none z-[10001] rounded-full border border-[var(--gold)] flex items-center justify-center transition-[width,height,background-color,border-color] duration-300 ${
+        className={`psara-cursor-ring fixed top-0 left-0 pointer-events-none z-[9998] rounded-full border border-[var(--gold)] flex items-center justify-center transition-[width,height,background-color,border-color] duration-300 ${
           hovered
             ? cursorText
               ? "w-24 h-24 bg-[var(--gold)]/20 backdrop-blur-xs border-[var(--gold)] text-[var(--gold)]"
@@ -111,7 +117,7 @@ export default function CustomCursor() {
       <div
         ref={dotRef}
         aria-hidden="true"
-        className="fixed top-0 left-0 pointer-events-none z-[10001] w-1.5 h-1.5 rounded-full bg-[var(--gold)]"
+        className="fixed top-0 left-0 pointer-events-none z-[9998] w-1.5 h-1.5 rounded-full bg-[var(--gold)]"
         style={{ willChange: "transform" }}
       />
     </>

@@ -32,12 +32,13 @@ export function MaskReveal({
     const ctx = gsap.context(() => {
       gsap.fromTo(
         el,
-        { clipPath: insets.from },
+        { clipPath: insets.from, opacity: 0.98 },
         {
           clipPath: insets.to,
-          duration: 1.1,
-          ease: "power3.inOut",
-          scrollTrigger: { trigger: el, start: "top 85%", toggleActions: "play none none none" },
+          opacity: 1,
+          duration: 0.85,
+          ease: "power3.out",
+          scrollTrigger: { trigger: el, start: "top 88%", once: true, toggleActions: "play none none none" },
         }
       );
     }, el);
@@ -45,7 +46,7 @@ export function MaskReveal({
   }, [direction]);
 
   return (
-    <div ref={ref} className={className} style={{ willChange: "clip-path" }}>
+    <div ref={ref} className={className} style={{ willChange: "clip-path, opacity" }}>
       {children}
     </div>
   );

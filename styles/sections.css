@@ -1,241 +1,45 @@
-/* Section theme backgrounds for scroll storytelling — inspired by meech213 / horeca-social */
+/* Standard Section Themes — flat, no per-section aura */
 
-/* ── Section Themes ── */
-.section-void     { background: var(--grad-light-section); }
-.section-electric { background: radial-gradient(ellipse 44% 42% at 82% 18%, rgba(139,92,246,.20), transparent 70%), linear-gradient(145deg, #100728 0%, #24104B 60%, #6D28D9 180%); }
-.section-metal    { background: radial-gradient(ellipse 42% 38% at 12% 24%, rgba(212,175,55,.12), transparent 70%), linear-gradient(145deg, #1A1236 0%, #2A1853 58%, #100728 100%); }
-.section-warm     { background: var(--grad-light-section); }
-.section-night    { background: var(--grad-violet-canvas); }
-.section-surface  { background: radial-gradient(ellipse 38% 42% at 86% 12%, rgba(139,92,246,.16), transparent 70%), linear-gradient(145deg, #1A1236 0%, #332066 100%); }
+.section-void     { background: var(--canvas-paper); color: var(--paper-ink); }
+.section-electric { background: var(--canvas-void); color: #FFFFFF; }
+.section-metal    { background: var(--canvas-void); color: #FFFFFF; }
+.section-warm     { background: var(--canvas-paper); color: var(--paper-ink); }
+.section-night    { background: var(--canvas-void); color: #FFFFFF; }
+.section-surface  { background: var(--canvas-void); color: #FFFFFF; }
 
-/* ── Homepage moods — one PSARA palette, distinct editorial atmospheres ── */
-.mood-proof {
-  background-image:
-    radial-gradient(ellipse 32% 80% at 2% 46%, rgba(196,181,253,.18), transparent 70%),
-    radial-gradient(ellipse 26% 60% at 96% 4%, rgba(212,175,55,.12), transparent 72%),
-    linear-gradient(112deg, #080611 0%, #18102f 48%, #332066 100%);
-}
-.mood-proof::before,
-.mood-presence::before {
-  content: "";
-  position: absolute;
-  width: min(44vw, 620px);
-  aspect-ratio: 1;
-  border: 1px solid rgba(196,181,253,.12);
-  border-radius: 50%;
-  top: 12%;
-  right: -12%;
-  box-shadow: 0 0 0 34px rgba(139,92,246,.035), 0 0 0 68px rgba(212,175,55,.025);
-  pointer-events: none;
-}
-
-.mood-services {
-  background-image:
-    radial-gradient(ellipse 50% 42% at 78% 2%, rgba(139,92,246,.28), transparent 72%),
-    radial-gradient(ellipse 34% 44% at 12% 86%, rgba(212,175,55,.11), transparent 70%),
-    linear-gradient(148deg, #080611 0%, #1d103d 54%, #332066 100%);
-}
-.mood-services::after {
-  content: "";
-  position: absolute;
-  inset: 7rem 0 auto;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(196,181,253,.22), rgba(212,175,55,.34), transparent);
-  pointer-events: none;
-}
-
-.mood-process {
-  background-image:
-    radial-gradient(ellipse 46% 36% at 14% 10%, rgba(245,208,97,.14), transparent 72%),
-    radial-gradient(ellipse 34% 52% at 88% 88%, rgba(109,40,217,.22), transparent 70%),
-    linear-gradient(156deg, #24104b 0%, #160d30 52%, #080611 100%);
-}
-.mood-process::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(90deg, transparent 0 11%, rgba(245,208,97,.08) 11.1%, transparent 11.2% 88%, rgba(196,181,253,.06) 88.1%, transparent 88.2%);
-  opacity: .7;
-  pointer-events: none;
-}
-
-.mood-states {
-  background-image:
-    radial-gradient(circle at 82% 42%, rgba(139,92,246,.30), transparent 34%),
-    radial-gradient(ellipse 35% 42% at 4% 92%, rgba(196,181,253,.15), transparent 72%),
-    linear-gradient(132deg, #080611 0%, #120c27 54%, #24104b 100%);
-}
-.mood-states::after {
-  content: "";
-  position: absolute;
-  width: min(54vw, 720px);
-  aspect-ratio: 1;
-  right: -22%;
-  top: 24%;
-  border-radius: 50%;
-  border: 1px solid rgba(196,181,253,.12);
-  box-shadow: 0 0 0 40px rgba(139,92,246,.035), 0 0 0 80px rgba(212,175,55,.025);
-  pointer-events: none;
-}
-
-.mood-faq {
-  background-image:
-    radial-gradient(ellipse 50% 28% at 50% 0%, rgba(212,175,55,.15), transparent 75%),
-    radial-gradient(ellipse 30% 60% at 0% 100%, rgba(109,40,217,.18), transparent 72%),
-    linear-gradient(180deg, #080611 0%, #100728 62%, #080611 100%);
-}
-.mood-faq::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 50%;
-  width: min(70vw, 920px);
-  height: 1px;
-  transform: translateX(-50%);
-  background: linear-gradient(90deg, transparent, rgba(245,208,97,.7), transparent);
-  box-shadow: 0 0 28px rgba(212,175,55,.22);
-  pointer-events: none;
-}
-
-.mood-contact {
-  background-image:
-    radial-gradient(ellipse 32% 58% at 2% 50%, rgba(139,92,246,.25), transparent 72%),
-    radial-gradient(ellipse 28% 42% at 96% 92%, rgba(212,175,55,.13), transparent 72%),
-    linear-gradient(120deg, #100728 0%, #24104b 58%, #120c27 100%);
-}
-.mood-contact::after {
-  content: "";
-  position: absolute;
-  width: 26rem;
-  height: 26rem;
-  left: -13rem;
-  top: 28%;
-  border: 1px solid rgba(196,181,253,.15);
-  border-radius: 50%;
-  box-shadow: 0 0 0 28px rgba(139,92,246,.035);
-  pointer-events: none;
-}
-
-.mood-estimator {
-  background-image:
-    radial-gradient(ellipse 42% 45% at 16% 18%, rgba(212,175,55,.14), transparent 72%),
-    radial-gradient(ellipse 34% 45% at 86% 80%, rgba(139,92,246,.22), transparent 72%),
-    linear-gradient(140deg, #120c27 0%, #2a1853 54%, #100728 100%);
-}
-.mood-presence {
-  background-image:
-    radial-gradient(circle at 72% 44%, rgba(139,92,246,.32), transparent 36%),
-    radial-gradient(ellipse 34% 44% at 8% 88%, rgba(212,175,55,.12), transparent 72%),
-    linear-gradient(160deg, #080611 0%, #1a1236 58%, #332066 100%);
-}
-.mood-start {
-  background-image:
-    radial-gradient(ellipse 58% 52% at 50% 42%, rgba(139,92,246,.34), transparent 70%),
-    radial-gradient(ellipse 34% 32% at 84% 82%, rgba(245,208,97,.17), transparent 72%),
-    linear-gradient(135deg, #080611 0%, #24104b 60%, #6d28d9 145%);
-}
-.mood-start::before {
-  content: "";
-  position: absolute;
-  inset: 12% 18%;
-  border: 1px solid rgba(196,181,253,.13);
-  border-radius: 50% 50% 45% 55%;
-  transform: rotate(-7deg);
-  pointer-events: none;
-}
-
-/* Give each interactive surface a different accent while retaining the same system. */
-.mood-services .cursor-surface:hover { box-shadow: 0 18px 44px -24px rgba(139,92,246,.85); }
-.mood-states .cursor-surface:hover { box-shadow: 0 18px 44px -24px rgba(212,175,55,.7); }
-.mood-faq [data-cursor] { transition: border-color .25s ease, background-color .25s ease, transform .25s ease; }
-.mood-faq [data-cursor]:hover { border-color: rgba(245,208,97,.45); background-color: rgba(212,175,55,.06); }
-
-/* Controlled contrast shifts: accents change by function, never at random. */
-.mood-proof [data-proof-row]:nth-child(2) {
-  background: linear-gradient(145deg, #163A36 0%, #102622 56%, #0B1717 100%);
-  border-color: rgba(184,216,204,.30);
-}
-.mood-proof [data-proof-row]:nth-child(3) {
-  background: linear-gradient(145deg, rgba(251,86,7,.27) 0%, #321B16 54%, #120D0A 100%);
-  border-color: rgba(251,122,24,.44);
-}
-.mood-proof [data-proof-row]:nth-child(4) {
-  background: linear-gradient(145deg, #261A3E 0%, #171126 56%, #0B0812 100%);
-}
-.mood-services [data-featured-card]:nth-child(2) {
-  background: linear-gradient(145deg, #173A3A 0%, #102726 52%, #0B1517 100%);
-  border-color: rgba(184,216,204,.24);
-}
-.mood-services [data-featured-card]:nth-child(3) {
-  background: linear-gradient(145deg, rgba(251,86,7,.23) 0%, #2E1A18 56%, #100C0B 100%);
-  border-color: rgba(251,122,24,.38);
-}
-.mood-process [data-roadmap-tab]:nth-child(2n) {
-  background: linear-gradient(145deg, rgba(69,126,108,.15), rgba(24,13,54,.86));
-  border-color: rgba(184,216,204,.22);
-}
-.mood-process [data-roadmap-tab]:nth-child(3n) {
-  background: linear-gradient(145deg, rgba(212,175,55,.15), rgba(24,13,54,.86));
-  border-color: rgba(245,208,97,.22);
-}
-.mood-states .cursor-surface:nth-child(3n) {
-  background: linear-gradient(145deg, rgba(251,86,7,.24) 0%, #2E1B17 54%, #110D0B 100%);
-  border-color: rgba(251,122,24,.38);
-}
-.mood-states .cursor-surface:nth-child(4n) {
-  background: linear-gradient(145deg, #173A36 0%, #102623 54%, #0B1717 100%);
-  border-color: rgba(184,216,204,.22);
-}
-
-@media (max-width: 640px) {
-  .mood-proof::before,
-  .mood-presence::before,
-  .mood-states::after { right: -48%; width: 95vw; }
-  .mood-process::before { background: linear-gradient(90deg, transparent 0 8%, rgba(245,208,97,.07) 8.1%, transparent 8.2% 92%, rgba(196,181,253,.05) 92.1%, transparent 92.2%); }
-  .mood-start::before { inset: 10% 5%; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .mood-start::before { transform: none; }
-}
-
-/* ── Section transition curtain ── */
-.section-curtain {
+/* Homepage sections — flat base, subtle top hairline only */
+.mood-proof, .mood-services, .mood-process, .mood-states, .mood-faq, .mood-contact, .mood-estimator, .mood-presence, .mood-start {
+  background: var(--canvas-void);
   position: relative;
 }
-.section-curtain::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 120px;
-  pointer-events: none;
-  z-index: 5;
-}
-.section-void .section-curtain::after,
-.section-night .section-curtain::after {
-  background: rgba(5,11,20,0.95);
-}
-.section-metal .section-curtain::after,
-.section-warm .section-curtain::after {
-  background: rgba(24,13,54,0.95);
-}
-.section-electric .section-curtain::after {
-  background: rgba(109,40,217,0.95);
+
+.mood-proof::before, .mood-presence::before, .mood-states::after,
+.mood-services::after, .mood-process::before, .mood-faq::before,
+.mood-contact::after, .mood-start::before { content: none; }
+
+/* Light moods */
+.on-light, #why, #reviews { background: var(--canvas-paper); }
+
+/* Legacy overrides neutralized — keep selectors so existing JSX doesn't break */
+.mood-proof [data-proof-row]:nth-child(2),
+.mood-proof [data-proof-row]:nth-child(3),
+.mood-proof [data-proof-row]:nth-child(4),
+.mood-services [data-featured-card]:nth-child(2),
+.mood-services [data-featured-card]:nth-child(3),
+.mood-process [data-roadmap-tab]:nth-child(2n),
+.mood-process [data-roadmap-tab]:nth-child(3n),
+.mood-states .cursor-surface:nth-child(3n),
+.mood-states .cursor-surface:nth-child(4n) {
+  /* ponytail: removed per-card color overrides — standard card handles it */
+  background: var(--surface-card-dark);
+  border-color: var(--line);
 }
 
-/* ── Section entry animations ── */
-@keyframes section-reveal {
-  from { clip-path: inset(0 0 100% 0); opacity: 0.3; }
-  to   { clip-path: inset(0 0 0 0); opacity: 1; }
-}
+/* Section curtain — flat separator */
+.section-curtain { position: relative; }
+.section-curtain::after { content: none; }
 
-.section-reveal-enter {
-  animation: section-reveal 1.2s var(--ease-expo) forwards;
-}
-
-/* ── Large display typography ── */
+/* Display typography — kept */
 .display-hero {
   font-size: clamp(3rem, 10vw, 9rem);
   line-height: 0.88;
@@ -243,7 +47,6 @@
   font-weight: 700;
   font-family: var(--font-display);
 }
-
 .display-mega {
   font-size: clamp(2.2rem, 7vw, 6.5rem);
   line-height: 0.92;
@@ -251,28 +54,14 @@
   font-weight: 700;
   font-family: var(--font-display);
 }
-
 .display-large {
   font-size: clamp(1.6rem, 4vw, 3.2rem);
   line-height: 1.05;
   font-weight: 600;
   font-family: var(--font-display);
 }
-
-/* ── Thin accent line with glow ── */
-.accent-line {
-  height: 1px;
-  background: var(--gold);
-  box-shadow: 0 0 8px var(--electric-glow);
-}
-
-.accent-line-gold {
-  height: 1px;
-  background: var(--gold-bright);
-  box-shadow: 0 0 12px rgba(232,213,163,0.5);
-}
-
-/* ── Number counter style ── */
+.accent-line { height: 1px; background: var(--gold); }
+.accent-line-gold { height: 1px; background: var(--gold-bright); }
 .counter-num {
   font-size: clamp(3.5rem, 8vw, 7rem);
   font-weight: 700;
@@ -281,20 +70,8 @@
   font-family: var(--font-display);
   color: var(--gold-bright);
 }
-
-/* ── Service card horizontal scroll (kept in design-system.css only) ── */
-.services-track {
-  display: flex;
-  gap: 1.5rem;
-  padding: 1rem 0;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
-}
+.services-track { display: flex; gap: 1.5rem; padding: 1rem 0; overflow-x: auto; scrollbar-width: none; }
 .services-track::-webkit-scrollbar { display: none; }
-
-/* ── Sticky number for process ── */
 .process-num {
   font-size: clamp(5rem, 15vw, 12rem);
   font-weight: 700;
@@ -303,97 +80,16 @@
   font-family: var(--font-display);
   color: transparent;
   -webkit-text-stroke: 1px var(--white-25);
-  transition: -webkit-text-stroke-color 0.5s ease;
 }
-.process-num.active {
-  -webkit-text-stroke-color: var(--gold-bright);
-  text-shadow: 0 0 60px rgba(232,213,163,0.3);
-}
-
-/* ── Presence city grid ── */
-.presence-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-  gap: 1px;
-  background: var(--white-12);
-  border: 1px solid var(--white-12);
-}
-.presence-cell {
-  background: var(--void);
-  padding: 1.25rem 1rem;
-  text-align: center;
-  transition: background 0.3s ease, color 0.3s ease;
-  cursor: default;
-}
-.presence-cell:hover {
-  background: var(--white-12);
-  color: var(--gold-bright);
-}
-.presence-cell.hq {
-  background: rgba(201,163,78,0.15);
-  color: var(--gold-bright);
-}
-
-/* ── Quote block ── */
-.quote-large {
-  font-size: clamp(1.4rem, 3vw, 2.4rem);
-  line-height: 1.35;
-  font-family: var(--font-display);
-  font-weight: 300;
-  font-style: italic;
-  color: var(--white-90);
-  max-width: 800px;
-}
-.quote-large::before {
-  content: "\201C";
-  font-size: 6rem;
-  line-height: 0.6;
-  vertical-align: -0.3em;
-  margin-right: 0.1em;
-  color: var(--gold);
-  font-family: Georgia, serif;
-}
-
-/* ── CTA Magnetic Button ── */
-.cta-magnetic {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.75rem;
-  padding: 1rem 2.25rem;
-  border: 1px solid var(--gold);
-  background: transparent;
-  color: var(--gold-bright);
-  font-size: 0.7rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.2em;
-  cursor: pointer;
-  overflow: hidden;
-  transition: color 0.4s ease;
-}
-.cta-magnetic::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, var(--metal-1) 0%, var(--metal-3) 100%);
-  transform: translateY(101%);
-  transition: transform 0.5s var(--ease-expo);
-}
-.cta-magnetic:hover::before {
-  transform: translateY(0);
-}
-.cta-magnetic:hover {
-  color: var(--void);
-}
-.cta-magnetic span,
-.cta-magnetic svg {
-  position: relative;
-  z-index: 1;
-}
-
-/* ── Reduced motion ── */
-@media (prefers-reduced-motion: reduce) {
-  .section-reveal-enter { animation: none; opacity: 1; }
-  .process-num { -webkit-text-stroke-color: var(--white-40); }
-}
+.process-num.active { -webkit-text-stroke-color: var(--gold-bright); }
+.presence-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 1px; background: var(--white-12); border: 1px solid var(--white-12); }
+.presence-cell { background: var(--canvas-void); padding: 1.25rem 1rem; text-align: center; }
+.presence-cell:hover { background: var(--white-12); color: var(--gold-bright); }
+.presence-cell.hq { background: rgba(201,163,78,0.15); color: var(--gold-bright); }
+.quote-large { font-size: clamp(1.4rem, 3vw, 2.4rem); line-height: 1.35; font-family: var(--font-display); font-weight: 300; font-style: italic; color: var(--white-90); max-width: 800px; }
+.quote-large::before { content: "\201C"; font-size: 6rem; line-height: 0.6; vertical-align: -0.3em; margin-right: 0.1em; color: var(--gold); font-family: Georgia, serif; }
+.cta-magnetic { position: relative; display: inline-flex; align-items: center; gap: 0.75rem; padding: 1rem 2.25rem; border: 1px solid var(--gold); background: transparent; color: var(--gold-bright); font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.2em; cursor: pointer; overflow: hidden; }
+.cta-magnetic::before { content: ""; position: absolute; inset: 0; background: var(--grad-gold-metallic); transform: translateY(101%); transition: transform 0.5s var(--ease-snappy); }
+.cta-magnetic:hover::before { transform: translateY(0); }
+.cta-magnetic:hover { color: var(--canvas-void); }
+.cta-magnetic span, .cta-magnetic svg { position: relative; z-index: 1; }
