@@ -127,6 +127,7 @@ export default function HeroStage() {
           width={320}
           height={320}
           priority
+          unoptimized
           className="h-[220px] w-auto object-contain drop-shadow-[0_18px_42px_rgba(0,0,0,0.62)] sm:h-[260px] lg:h-[300px]"
         />
 
