@@ -71,18 +71,18 @@ export default function CookieBanner() {
         <div
           role="dialog"
           aria-label="Cookie consent banner"
-          className="fixed bottom-[calc(4.75rem+env(safe-area-inset-bottom,0px))] left-4 right-4 z-[999] rounded-2xl border-2 border-[#C89B3C]/45 bg-[#0D0A18]/95 p-5 text-white shadow-2xl backdrop-blur-xl transition-all duration-300 animate-in fade-in slide-in-from-bottom-5 md:bottom-4 md:right-auto md:max-w-md"
+          className="fixed bottom-[calc(4.75rem+env(safe-area-inset-bottom,0px))] left-4 right-4 z-[999] rounded-2xl border-2 border-[#E76F00]/45 bg-[#0B1E3B]/95 p-5 text-white shadow-2xl backdrop-blur-xl transition-all duration-300 animate-in fade-in slide-in-from-bottom-5 md:bottom-4 md:right-auto md:max-w-md"
         >
           <div className="flex items-start justify-between gap-3 mb-3">
             <div className="flex items-center gap-2.5">
-              <div className="w-9 h-9 rounded-xl bg-[#C89B3C]/12 border border-[#C89B3C]/45 flex items-center justify-center text-[#F5E6BA] shrink-0">
-                <Cookie className="w-5 h-5 text-[#D4AF37]" />
+              <div className="w-9 h-9 rounded-xl bg-[#E76F00]/12 border border-[#E76F00]/45 flex items-center justify-center text-[#FFE8D1] shrink-0">
+                <Cookie className="w-5 h-5 text-[#FF7A00]" />
               </div>
               <div>
                 <h3 className="text-sm font-extrabold text-white tracking-wide uppercase" style={{ fontFamily: "var(--font-display)" }}>
                   Cookie Privacy &amp; Security
                 </h3>
-                <span className="text-[0.62rem] font-bold text-[#F5E6BA] uppercase tracking-wider">
+                <span className="text-[0.62rem] font-bold text-[#FFE8D1] uppercase tracking-wider">
                   PSARA Act Compliance
                 </span>
               </div>
@@ -110,7 +110,7 @@ export default function CookieBanner() {
             </button>
             <button
               onClick={handleAcceptNecessary}
-              className="py-2.5 px-3.5 rounded-xl border border-[#C89B3C]/45 bg-[#1A1408]/70 text-[#F5E6BA] hover:bg-[#2A2010] font-bold text-xs uppercase tracking-wider transition-colors"
+              className="py-2.5 px-3.5 rounded-xl border border-[#E76F00]/45 bg-[#132E57]/70 text-[#FFE8D1] hover:bg-[#1A3A6B] font-bold text-xs uppercase tracking-wider transition-colors"
             >
               Necessary Only
             </button>
@@ -129,7 +129,7 @@ export default function CookieBanner() {
               <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
               100% Data Protection
             </span>
-            <Link href="/privacy-policy" className="hover:text-[#F5E6BA] transition-colors underline">
+            <Link href="/privacy-policy" className="hover:text-[#FFE8D1] transition-colors underline">
               Privacy Policy
             </Link>
           </div>
@@ -139,17 +139,17 @@ export default function CookieBanner() {
       {/* ── COOKIE PREFERENCES MODAL ── */}
       {showSettingsModal && (
         <div className="fixed inset-0 z-[1000] flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-in fade-in">
-          <div className="relative w-full max-w-lg rounded-2xl border-2 border-[#C89B3C]/45 bg-[#0D0A18] p-6 text-white shadow-2xl space-y-6">
+          <div className="relative w-full max-w-lg rounded-2xl border-2 border-[#E76F00]/45 bg-[#0D0A18] p-6 text-white shadow-2xl space-y-6">
             <div className="flex items-center justify-between border-b border-white/10 pb-4">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-[#C89B3C]/12 border border-[#C89B3C]/45 flex items-center justify-center text-[#F5E6BA]">
+                <div className="w-10 h-10 rounded-xl bg-[#E76F00]/12 border border-[#E76F00]/45 flex items-center justify-center text-[#FFE8D1]">
                   <Settings className="w-5 h-5" />
                 </div>
                 <div>
                   <h3 className="text-base font-extrabold text-white tracking-wide uppercase" style={{ fontFamily: "var(--font-display)" }}>
                     Cookie Preferences
                   </h3>
-                  <p className="text-xs text-[#F5E6BA] font-medium">
+                  <p className="text-xs text-[#FFE8D1] font-medium">
                     Manage statutory &amp; analytics tracking permissions
                   </p>
                 </div>
@@ -192,7 +192,7 @@ export default function CookieBanner() {
                       onChange={(e) => setAnalyticsCookies(e.target.checked)}
                       className="sr-only peer"
                     />
-                    <div className="w-11 h-6 bg-slate-800 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#C89B3C]"></div>
+                    <div className="w-11 h-6 bg-slate-800 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#E76F00]"></div>
                   </label>
                 </div>
                 <p className="text-xs text-slate-300 leading-relaxed">
@@ -211,7 +211,7 @@ export default function CookieBanner() {
                       onChange={(e) => setMarketingCookies(e.target.checked)}
                       className="sr-only peer"
                     />
-                    <div className="w-11 h-6 bg-slate-800 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#C89B3C]"></div>
+                    <div className="w-11 h-6 bg-slate-800 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#E76F00]"></div>
                   </label>
                 </div>
                 <p className="text-xs text-slate-300 leading-relaxed">
@@ -224,7 +224,7 @@ export default function CookieBanner() {
             <div className="flex items-center justify-end gap-3 border-t border-white/10 pt-4">
               <button
                 onClick={handleAcceptAll}
-                className="px-4 py-2.5 rounded-xl border border-[#C89B3C]/45 bg-[#1A1408]/80 text-[#F5E6BA] font-bold text-xs uppercase tracking-wider hover:bg-[#2A2010] transition-colors"
+                className="px-4 py-2.5 rounded-xl border border-[#E76F00]/45 bg-[#1A1408]/80 text-[#FFE8D1] font-bold text-xs uppercase tracking-wider hover:bg-[#2A2010] transition-colors"
               >
                 Accept All
               </button>

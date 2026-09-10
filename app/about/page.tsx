@@ -65,12 +65,12 @@ export default function AboutPage() {
       {/* Featured Hero About Section */}
       <AboutSection showHeaderBar={false} headingLevel="h1" className="pt-28 pb-16 border-b border-white/10" />
 
-      <PageMain className="bg-[#080714] text-white">
+      <PageMain className="bg-[#0B1E3B] text-white">
         {/* Stats Grid — flat standard */}
         <section className="mb-16 grid grid-cols-2 md:grid-cols-4 gap-4 border border-white/10 bg-[var(--surface-card-dark)] p-6 text-center rounded-xl shadow-[var(--shadow-card)]">
           {STATS.map((s) => (
             <div key={s.label} className="p-3 relative">
-              <span className="block font-bold text-3xl md:text-5xl gold-metallic-text font-mono" style={{ fontFamily: "var(--font-display)" }}>
+              <span className="block font-bold text-3xl md:text-5xl gold-text-gradient font-mono" style={{ fontFamily: "var(--font-display)" }}>
                 {s.number}
               </span>
               <span className="mt-2 block text-xs font-bold uppercase tracking-wider text-[#CBD5E1]">{s.label}</span>
@@ -82,10 +82,10 @@ export default function AboutPage() {
         <section className="mb-16 grid grid-cols-1 gap-12 lg:grid-cols-12 items-center">
           <div className="lg:col-span-7 space-y-4">
             <span className="badge-metallic-gold">
-              <Sparkles className="h-3.5 w-3.5 text-[#D4AF37]" /> Our Practice
+              <Sparkles className="h-3.5 w-3.5 text-[#FF7A00]" /> Our Practice
             </span>
             <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-white leading-tight" style={{ fontFamily: "var(--font-display)" }}>
-              A Practice Built on <span className="gold-metallic-text">Statutory Discipline</span>
+              A Practice Built on <span className="gold-text-gradient">Statutory Discipline</span>
             </h2>
             <p className="text-base text-[#E2E8F0] leading-relaxed font-normal">
               Founded in Jaipur, Rajasthan, PSARA Consultant was built on a singular premise: private security licensing requires legal precision, transparent statutory execution, and zero procedural shortcuts.
@@ -95,8 +95,8 @@ export default function AboutPage() {
             </p>
             <div className="pt-4 grid grid-cols-1 sm:grid-cols-2 gap-4">
               {OFFICES.slice(0, 6).map((o) => (
-                <div key={o.city} className="flex items-start gap-2.5 border border-white/10 bg-[#0F0C1F] p-3.5 rounded-xl text-xs">
-                  <MapPin className="h-4 w-4 text-[#D4AF37] shrink-0 mt-0.5" />
+                <div key={o.city} className="flex items-start gap-2.5 border border-white/10 bg-[#0B1E3B] p-3.5 rounded-xl text-xs">
+                  <MapPin className="h-4 w-4 text-[#FF7A00] shrink-0 mt-0.5" />
                   <div>
                     <strong className="block text-white font-bold">{o.city} Desk ({o.badge})</strong>
                     <span className="text-[#94A3B8] font-normal">{o.address}</span>
@@ -126,14 +126,14 @@ export default function AboutPage() {
 
         {/* Timeline */}
         <section className="mb-20">
-          <span className="text-xs font-bold uppercase tracking-[0.16em] text-[#D4AF37] block mb-2">Milestones</span>
+          <span className="text-xs font-bold uppercase tracking-[0.16em] text-[#FF7A00] block mb-2">Milestones</span>
           <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-white" style={{ fontFamily: "var(--font-display)" }}>
             How We Scaled Across India
           </h2>
           <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {TIMELINE.map((t) => (
               <div key={t.year} className="relative rounded-xl border border-white/10 bg-[var(--surface-card-dark)] p-6 shadow-[var(--shadow-card)] transition-[border-color,transform] hover:border-[var(--line-gold)] hover:-translate-y-0.5">
-                <span className="text-xs font-mono font-bold uppercase text-[#D4AF37] block">{t.year}</span>
+                <span className="text-xs font-mono font-bold uppercase text-[#FF7A00] block">{t.year}</span>
                 <h3 className="mt-2 text-base font-bold text-white" style={{ fontFamily: "var(--font-display)" }}>{t.title}</h3>
                 <p className="mt-2 text-xs text-[#E2E8F0] leading-relaxed font-normal">{t.desc}</p>
               </div>
@@ -144,7 +144,7 @@ export default function AboutPage() {
         {/* Mission & Vision — flat */}
         <section className="mb-20 grid grid-cols-1 md:grid-cols-2 gap-8">
           <div className="rounded-xl border border-white/10 bg-[var(--surface-card-dark)] p-8 shadow-[var(--shadow-card)] space-y-3">
-            <Target className="h-6 w-6 text-[#D4AF37]" />
+            <Target className="h-6 w-6 text-[#FF7A00]" />
             <h3 className="text-2xl font-bold text-white" style={{ fontFamily: "var(--font-display)" }}>Our Mission</h3>
             <p className="text-sm text-[#E2E8F0] leading-relaxed font-normal">
               To provide fast, reliable, statute-aligned PSARA licensing advisory for security agency promoters across India through clause-by-clause documentation, recognized training institute affiliations, and disciplined police clearance liaisoning.
@@ -152,7 +152,7 @@ export default function AboutPage() {
           </div>
 
           <div className="rounded-xl border border-white/10 bg-[var(--surface-card-dark)] p-8 shadow-[var(--shadow-card)] space-y-3">
-            <Eye className="h-6 w-6 text-[#D4AF37]" />
+            <Eye className="h-6 w-6 text-[#FF7A00]" />
             <h3 className="text-2xl font-bold text-white" style={{ fontFamily: "var(--font-display)" }}>Our Vision</h3>
             <p className="text-sm text-[#E2E8F0] leading-relaxed font-normal">
               To remain India&apos;s most trusted regulatory authority in private security compliance, setting new national benchmarks for speed, accuracy, promoter protection, and post-grant statutory discipline.
@@ -162,14 +162,14 @@ export default function AboutPage() {
 
         {/* Core Values */}
         <section className="mb-20">
-          <span className="text-xs font-bold uppercase tracking-[0.16em] text-[#D4AF37] block mb-2">Guiding Principles</span>
+          <span className="text-xs font-bold uppercase tracking-[0.16em] text-[#FF7A00] block mb-2">Guiding Principles</span>
           <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-white" style={{ fontFamily: "var(--font-display)" }}>
             Principles That Drive Every License Filing
           </h2>
           <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-6">
             {VALUES.map((v) => (
               <div key={v.title} className="rounded-xl border border-white/10 bg-[var(--surface-card-dark)] p-6 flex items-start gap-4 shadow-[var(--shadow-card)]">
-                <CheckCircle2 className="h-5 w-5 text-[#D4AF37] shrink-0 mt-1" />
+                <CheckCircle2 className="h-5 w-5 text-[#FF7A00] shrink-0 mt-1" />
                 <div>
                   <h3 className="text-base font-bold text-white" style={{ fontFamily: "var(--font-display)" }}>{v.title}</h3>
                   <p className="mt-1 text-xs text-[#E2E8F0] leading-relaxed font-normal">{v.desc}</p>
@@ -195,7 +195,7 @@ export default function AboutPage() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {CERTIFICATIONS.map((c) => (
               <div key={c.name} className="rounded-xl border border-white/10 bg-[var(--surface-card-dark)] p-4 text-center shadow-[var(--shadow-card)]">
-                <Award className="h-6 w-6 text-[#D4AF37] mx-auto mb-2" />
+                <Award className="h-6 w-6 text-[#FF7A00] mx-auto mb-2" />
                 <span className="block text-xs font-bold text-white">{c.name}</span>
                 <span className="block text-[10px] text-[#94A3B8] mt-0.5">{c.desc}</span>
               </div>

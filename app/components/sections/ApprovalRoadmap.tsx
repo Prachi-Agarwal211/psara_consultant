@@ -1,309 +1,72 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import {
-  FileCheck,
-  Building2,
-  ShieldCheck,
-  Scale,
-  Award,
-  Clock,
-  CheckCircle2,
-  Sparkles,
-  ChevronRight,
-  MessageSquare,
-} from "lucide-react";
+import { useState } from "react";
+import Image from "next/image";
+import { Building2, FileCheck, ShieldCheck, Scale, Award, Clock, CheckCircle2, ChevronRight, MessageSquare } from "lucide-react";
 import { DEFAULT_WA } from "../../../lib/whatsapp";
-import { ensureGsap, prefersReducedMotion } from "../../lib/gsap";
+import Reveal from "../ui/Reveal";
 
 const PHASES = [
-  {
-    num: "01",
-    phase: "Phase 01",
-    title: "Entity Hygiene & Scope Strategy",
-    window: "Days 1–3",
-    tagline: "Corporate structure alignment & district coverage mapping",
-    icon: Building2,
-    desc: "We examine your incorporation documents (MOA/LLP agreement) to ensure main object clauses explicitly permit private security agency operations. We audit registered office proof against State inspection norms and map whether single-district, multi-district, or whole-state coverage suits your commercial roadmap.",
-    deliverables: [
-      "ROC Object Clause & MOA Audit",
-      "Commercial Premises Proof Verification",
-      "District Scope & Fee Slab Mapping",
-    ],
-    statusTag: "Initial Hygiene",
-  },
-  {
-    num: "02",
-    phase: "Phase 02",
-    title: "Training MOU & Dossier Compilation",
-    window: "Days 4–10",
-    tagline: "State-recognized institute empanelment & affidavit drafting",
-    icon: FileCheck,
-    desc: "A mandatory requirement in every State is a live MOU with a recognized security guard training institute. We facilitate MOU execution, draft promoter affidavits in prescribed State formats, and assemble director KYC, photos, and legal declarations into an inspection-ready dossier.",
-    deliverables: [
-      "Recognized Training Institute MOU",
-      "Director Affidavits & Character Declarations",
-      "Form-I Application Dossier Assembly",
-    ],
-    statusTag: "Document Pack",
-  },
-  {
-    num: "03",
-    phase: "Phase 03",
-    title: "Police Antecedent & Verification Track",
-    window: "Days 11–30",
-    tagline: "Director police clearance & CCTNS background checks",
-    icon: ShieldCheck,
-    desc: "Police character verification is the core gating item in PSARA licensing. We coordinate filings with District SP / Police Commissionerate desks, monitor CCTNS database checks, and ensure promoter background clearances move smoothly without administrative bottlenecks.",
-    deliverables: [
-      "District SP Office Clearance Track",
-      "CCTNS Database Verification",
-      "Local Police Station Antecedent Report",
-    ],
-    statusTag: "Police Track",
-  },
-  {
-    num: "04",
-    phase: "Phase 04",
-    title: "Controlling Authority Filing & Inspection",
-    window: "Days 31–55",
-    tagline: "State Home Department filing & premises readiness",
-    icon: Scale,
-    desc: "We submit the complete application pack to the State Controlling Authority along with Treasury fee proof. We prepare your team for physical office inspection, uniform pattern review, and handle any statutory queries raised by the authority.",
-    deliverables: [
-      "Controlling Authority Official Filing",
-      "Treasury Challan / Fee Payment Receipt",
-      "Premises Inspection & Uniform Pattern Prep",
-    ],
-    statusTag: "Authority Filing",
-  },
-  {
-    num: "05",
-    phase: "Phase 05",
-    title: "Licence Grant & Compliance Handover",
-    window: "Post-Grant",
-    tagline: "Official licence delivery & post-grant statutory setup",
-    icon: Award,
-    desc: "Upon grant by the Controlling Authority, we deliver your official PSARA Licence grant letter. We brief your management on statutory guard registers, ESIC/PF threshold compliance, and empanel your agency into our automated 5-year renewal monitoring system.",
-    deliverables: [
-      "Official PSARA Licence Grant Letter",
-      "Statutory Guard Registers & Compliance Brief",
-      "5-Year Renewal Calendar Integration",
-    ],
-    statusTag: "Licence Issued",
-  },
+  { num: "01", title: "Company Setup & Scope", window: "Days 1–3", icon: Building2, desc: "MOA me security object, office proof aur district scope lock — 1 district, 5 districts ya entire state.", points: ["MOA Object Audit", "Office Proof Check", "Fee Slab Mapping"], img: "/assets/images/cinematic/process-path.jpg" },
+  { num: "02", title: "Training MOU + File Ready", window: "Days 4–10", icon: FileCheck, desc: "State-recognized institute se MOU, affidavits aur Form-I dossier ready.", points: ["Training MOU", "Affidavits", "Dossier Assembly"], img: "/assets/images/generated/certificate-mockup.jpg" },
+  { num: "03", title: "Police Verification", window: "Days 11–30", icon: ShieldCheck, desc: "Director antecedent + CCTNS check — SP office tracking daily.", points: ["SP Office Track", "CCTNS Check", "Station Report"], img: "/assets/images/generated/theme-guard-patrol.jpg" },
+  { num: "04", title: "Authority Filing", window: "Days 31–55", icon: Scale, desc: "Controlling Authority filing + fee challan + inspection prep.", points: ["Official Filing", "Fee Receipt", "Inspection Prep"], img: "/assets/images/generated/theme-govt-corridor.jpg" },
+  { num: "05", title: "License + 5-Yr Cover", window: "Grant Ke Baad", icon: Award, desc: "Grant letter delivery + registers + renewal calendar.", points: ["Grant Letter", "Registers Brief", "Renewal Alerts"], img: "/assets/images/cinematic/hero-stage.jpg" },
 ];
 
 export default function ApprovalRoadmap() {
-  const [activeStep, setActiveStep] = useState<number>(0);
-  const sectionRef = useRef<HTMLElement>(null);
-  const lineRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (!sectionRef.current || prefersReducedMotion() || typeof window === "undefined" || window.innerWidth < 900) return;
-    const { gsap } = ensureGsap();
-    const section = sectionRef.current;
-    const line = lineRef.current;
-    const tabs = section.querySelectorAll<HTMLElement>("[data-roadmap-tab]");
-    const setActive = (i: number) => setActiveStep(i);
-
-    gsap.set(tabs, { opacity: 0.45 });
-    if (tabs[0]) gsap.set(tabs[0], { opacity: 1 });
-
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: section,
-        start: "top top",
-        end: "+=140%",
-        pin: true,
-        scrub: 1,
-        anticipatePin: 1,
-      },
-    });
-
-    if (line) {
-      gsap.set(line, { scaleY: 0, transformOrigin: "top" });
-      tl.to(line, { scaleY: 1, ease: "none" }, 0);
-    }
-
-    tabs.forEach((_, i) => {
-      if (i === 0) return;
-      const t = i / (tabs.length - 1);
-      tl.to(tabs[i - 1], { opacity: 0.45, duration: 0.01 }, t - 0.02);
-      tl.to(tabs[i], { opacity: 1, duration: 0.01 }, t - 0.02);
-      tl.call(setActive, [i], t - 0.02);
-    });
-    tl.call(setActive, [0], 0);
-
-    return () => {
-      tl.scrollTrigger?.kill();
-      tl.kill();
-    };
-  }, []);
+  const [active, setActive] = useState(0);
+  const p = PHASES[active]!;
+  const Icon = p.icon;
 
   return (
-    <section ref={sectionRef} id="process" className="relative border-b border-white/10 bg-[var(--canvas-void)] py-20 text-white lg:py-28">
-      <div className="relative z-10 px-[var(--gutter)] max-w-7xl mx-auto space-y-12">
-        {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-white/15 pb-8">
+    <section id="process" className="grad-navy relative overflow-hidden py-16 text-white sm:py-20 lg:py-24">
+      <div className="orb orb-saffron right-[8%] top-[-120px] h-[320px] w-[320px] opacity-50" aria-hidden />
+      <div className="relative mx-auto max-w-7xl px-5 sm:px-8 lg:px-12">
+        <Reveal>
+        <div className="flex flex-col justify-between gap-4 border-b border-white/15 pb-7 md:flex-row md:items-end">
           <div>
-            <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-[0.16em] text-[#D4AF37]" style={{ fontFamily: "var(--font-body)" }}>
-              <Sparkles className="h-3.5 w-3.5 text-[#D4AF37]" />
-              Proven Licensing Methodology
-            </div>
-            <h2 className="mt-3 text-3xl sm:text-4xl md:text-5xl font-bold text-white leading-tight" style={{ fontFamily: "var(--font-display)" }}>
-              From First Call <span className="gold-text-gradient">to PSARA Licence Grant</span>
-            </h2>
+            <p className="text-xs font-black uppercase tracking-[0.2em] text-[#FF7A00]">5-Step Roadmap · No Pin, No Jhatka</p>
+            <h2 className="mt-2 font-black leading-[1.02]" style={{ fontSize: "clamp(1.9rem,4vw,3rem)", fontFamily: "var(--font-display)" }}>First call se <span className="text-[#FF7A00]">license</span> tak.</h2>
           </div>
-
-          <p className="max-w-md text-sm md:text-base text-[#E2E8F0] leading-relaxed font-normal" style={{ fontFamily: "var(--font-body)" }}>
-            Our 5-phase structured roadmap eliminates documentation errors, prepares your premises for inspection, and tracks police verifications daily.
-          </p>
+          <p className="max-w-sm text-sm text-white/70">Tap karo phase, photo + kaam dekho. Mobile par bhi smooth.</p>
         </div>
+        </Reveal>
 
-        {/* Phase Stepper — pinned scrub line (desktop) + click fallback */}
-        <div className="relative">
-          <div ref={lineRef} className="pointer-events-none absolute left-0 right-0 top-0 h-[2px] origin-left bg-gradient-to-r from-[#D4AF37] to-[#8F681B] hidden lg:block" style={{ transform: "scaleX(0)" }} aria-hidden />
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
-            {PHASES.map((p, idx) => {
-              const isActive = activeStep === idx;
-
-              return (
-                <button
-                  key={p.num}
-                  data-roadmap-tab
-                  data-cursor="Select phase"
-                  onClick={() => setActiveStep(idx)}
-                    className={`group relative flex flex-col justify-between rounded-xl border p-5 text-left transition-[border-color,background,transform] duration-200 ${
-                    isActive
-                      ? "border-[var(--line-gold)] bg-[var(--surface-card-dark)] text-white shadow-[var(--shadow-card)]"
-                      : "border-white/10 bg-[var(--canvas-void-2)] text-[#CBD5E1] hover:border-white/15 hover:text-white"
-                  }`}
-                >
-                <div className="flex items-center justify-between gap-2 mb-4">
-                  <span className={`font-mono text-xs font-bold ${isActive ? "text-[#F5D061]" : "text-[#D4AF37]"}`}>
-                    {p.num}
-                  </span>
-                  <span
-                    className={`inline-flex items-center gap-1 text-[0.625rem] font-bold uppercase tracking-wider px-2 py-0.5 rounded-lg border ${
-                      isActive
-                        ? "border-[#D4AF37]/50 bg-[#080611] text-[#F5D061]"
-                        : "border-white/10 text-[#94A3B8]"
-                    }`}
-                  >
-                    <Clock className="h-2.5 w-2.5" />
-                    {p.window}
-                  </span>
-                </div>
-
-                <span
-                  className="text-sm font-bold leading-snug block text-white"
-                  style={{ fontFamily: "var(--font-display)" }}
-                >
-                  {p.title}
-                </span>
-              </button>
-            );
-          })}
-          </div>
+        <Reveal delay={100}>
+        <div className="mt-6 grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-5">
+          {PHASES.map((s, i) => (
+            <button key={s.num} onClick={() => setActive(i)} className={`card-lift rounded-xl border p-4 text-left ${active === i ? "border-[#FF7A00] bg-white text-[#0B1E3B] shadow-lg shadow-orange-500/20" : "border-white/15 bg-white/5 text-white hover:border-white/40"}`}>
+              <div className="flex items-center justify-between"><span className={`font-mono text-xs font-black ${active === i ? "text-[#B35400]" : "text-[#FF7A00]"}`}>{s.num}</span><span className="flex items-center gap-1 text-[10px] font-bold uppercase text-current opacity-70"><Clock className="h-3 w-3" />{s.window}</span></div>
+              <div className="mt-3 text-sm font-black leading-snug">{s.title}</div>
+            </button>
+          ))}
         </div>
+        {/* progress dots */}
+        <div className="mt-4 flex items-center justify-center gap-2" aria-hidden>
+          {PHASES.map((s, i) => (
+            <span key={s.num} className={`road-dot h-2 rounded-full ${i === active ? "active w-8 grad-saffron" : i < active ? "w-2 bg-[#046A38]" : "w-2 bg-white/25"}`} />
+          ))}
+        </div>
+        </Reveal>
 
-        {/* Selected Phase Detail Showcase Card with Deep Gradient Surface — camera-move: detail fades as next phase scrubs */}
-        {(() => {
-          const p = PHASES[activeStep]!;
-          const IconComp = p.icon;
-
-          return (
-            <div className="rounded-xl border border-white/10 bg-[var(--surface-card-dark)] p-8 md:p-12 shadow-[var(--shadow-card)]">
-              <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-                {/* Left Col: Details */}
-                <div className="lg:col-span-7 space-y-6">
-                  <div className="flex flex-wrap items-center gap-3">
-                    <span className="badge-metallic-gold">
-                      {p.phase} • {p.statusTag}
-                    </span>
-                    <span className="flex items-center gap-1.5 text-xs text-[#CBD5E1] font-mono">
-                      <Clock className="h-3.5 w-3.5 text-[#D4AF37]" />
-                      Estimated Window: {p.window}
-                    </span>
-                  </div>
-
-                  <h3 className="text-2xl md:text-3xl font-bold text-white leading-snug" style={{ fontFamily: "var(--font-display)" }}>
-                    {p.title}
-                  </h3>
-
-                  <p className="text-base text-[#E2E8F0] leading-relaxed font-normal" style={{ fontFamily: "var(--font-body)" }}>
-                    {p.desc}
-                  </p>
-
-                  {/* Deliverables List */}
-                  <div className="space-y-3 border-t border-white/10 pt-6">
-                    <span className="block text-xs font-bold uppercase tracking-wider text-[#D4AF37]">
-                      Phase Key Deliverables:
-                    </span>
-                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                      {p.deliverables.map((d, dIdx) => (
-                        <div key={dIdx} className="flex items-center gap-2 rounded-xl border border-white/10 bg-[#180D36] p-3 text-xs font-bold text-white shadow-inner">
-                          <CheckCircle2 className="h-4 w-4 shrink-0 text-[#D4AF37]" />
-                          <span>{d}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-
-                {/* Right Col: Action Box */}
-                <div className="lg:col-span-5 flex flex-col justify-between space-y-6 rounded-xl border border-white/10 bg-[var(--canvas-void-2)] p-6 sm:p-8">
-                  <div className="flex items-center gap-3 border-b border-white/10 pb-4">
-                    <div className="p-3 rounded-xl bg-[var(--canvas-void,#080611)] ring-1 ring-[#D4AF37]/35 border border-[#D4AF37]/30 text-[#F5D061]">
-                      <IconComp className="h-6 w-6" />
-                    </div>
-                    <div>
-                      <span className="block text-xs text-[#D4AF37] uppercase font-mono font-bold">Step {p.num} of 05</span>
-                      <span className="text-sm font-bold text-white">{p.tagline}</span>
-                    </div>
-                  </div>
-
-                  <div className="space-y-4">
-                    <p className="text-xs text-[#CBD5E1] leading-relaxed">
-                      Have questions about this phase for your specific State or office city? Speak directly with our regulatory liaison desk.
-                    </p>
-
-                    <a
-                      href={DEFAULT_WA}
-                      data-cursor="Chat desk"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="btn-whatsapp w-full"
-                    >
-                      <MessageSquare className="h-4 w-4 fill-white" />
-                      <span>Discuss {p.phase} Requirements</span>
-                    </a>
-                  </div>
-
-                  {/* Step Switcher Navigation */}
-                  <div className="flex items-center justify-between border-t border-white/10 pt-4 text-xs font-bold text-[#CBD5E1]">
-                    <button
-                      disabled={activeStep === 0}
-                      onClick={() => setActiveStep((prev) => Math.max(0, prev - 1))}
-                      className="hover:text-white disabled:opacity-30 transition-colors"
-                    >
-                      ← Previous Phase
-                    </button>
-                    <span>{activeStep + 1} / 5</span>
-                    <button
-                      disabled={activeStep === PHASES.length - 1}
-                      onClick={() => setActiveStep((prev) => Math.min(PHASES.length - 1, prev + 1))}
-                      className="hover:text-white disabled:opacity-30 transition-colors flex items-center gap-1"
-                    >
-                      Next Phase <ChevronRight className="h-3.5 w-3.5" />
-                    </button>
-                  </div>
-                </div>
-              </div>
+        <Reveal delay={140} variant="scale">
+        <div className="mt-4 grid grid-cols-1 gap-4 overflow-hidden rounded-2xl bg-white text-[#0B1E3B] lg:grid-cols-2">
+          <div className="p-6 sm:p-8">
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-[#E76F00] px-3 py-1 text-[10px] font-black uppercase tracking-[0.14em] text-[#0B1E3B]"><Icon className="h-3.5 w-3.5" /> Phase {p.num} · {p.window}</span>
+            <h3 className="mt-3 text-2xl font-black">{p.title}</h3>
+            <p className="mt-2 text-sm leading-relaxed text-[#33465F]">{p.desc}</p>
+            <div className="mt-4 space-y-2">
+              {p.points.map((d) => (<div key={d} className="flex items-center gap-2 rounded-lg border border-[#E8DFC8] bg-[#FFFDF5] px-3 py-2.5 text-xs font-bold"><CheckCircle2 className="h-4 w-4 text-[#046A38]" />{d}</div>))}
             </div>
-          );
-        })()}
+            <div className="mt-5 flex flex-wrap gap-2">
+              <a href={DEFAULT_WA} target="_blank" rel="noopener noreferrer" className="btn-shine inline-flex items-center gap-2 rounded-xl bg-[#046A38] px-5 py-3 text-[11px] font-black uppercase tracking-[0.12em] text-white hover:bg-[#03522B]"><MessageSquare className="h-4 w-4" /> Discuss Phase {p.num}</a>
+              <div className="flex items-center gap-2 text-xs font-black text-[#33465F]"><button disabled={active === 0} onClick={() => setActive((v) => Math.max(0, v - 1))} className="underline disabled:opacity-30">← Prev</button><span>{active + 1}/5</span><button disabled={active === 4} onClick={() => setActive((v) => Math.min(4, v + 1))} className="flex items-center gap-1 underline disabled:opacity-30">Next <ChevronRight className="h-3 w-3" /></button></div>
+            </div>
+          </div>
+          <div className="group relative min-h-64 overflow-hidden lg:min-h-full"><Image src={p.img} alt={p.title} fill className="zoom-slow object-cover" sizes="(max-width:1024px) 100vw, 40vw" /><div className="absolute inset-0 bg-gradient-to-t from-[#0B1E3B]/45 via-transparent to-transparent" /></div>
+        </div>
+        </Reveal>
       </div>
     </section>
   );

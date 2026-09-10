@@ -1,177 +1,158 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
+import { Phone, MessageSquare, ShieldCheck, MapPin, ArrowRight, BadgeCheck } from "lucide-react";
 import CaseyMenu from "./CaseyMenu";
+import VideoTile from "../ui/VideoTile";
 import { CONTACT } from "../../../lib/config";
 
 /**
- * HeroStage — Standard flat theme.
- * Single scrim, solid gold accent, no teal, no double header.
- * H1 with keyword in first paint, 2 CTAs, minimal layers.
+ * HeroStage v2 — Tricolor Authority + 2026 bento.
+ * No video. Paper left + navy image bento right. Real photos only.
  */
 export default function HeroStage() {
-  const videoRef = useRef<HTMLVideoElement | null>(null);
-  const [videoReady, setVideoReady] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-
-  useEffect(() => {
-    const v = videoRef.current;
-    if (!v) return;
-
-    const tryPlay = () => {
-      v.play()
-        .then(() => setVideoReady(true))
-        .catch(() => setVideoReady(false));
-    };
-    const onCanPlay = () => tryPlay();
-
-    // MAAC strategy: poster is LCP, video is a progressive enhancement.
-    // Don't preload metadata at mount — wait for idle so hero text + poster render first.
-    v.preload = "none";
-    const start = () => {
-      v.preload = "auto";
-      v.load();
-      v.addEventListener("canplay", onCanPlay);
-      v.addEventListener("loadeddata", onCanPlay);
-      v.muted = true;
-    };
-    const ric = (window as any).requestIdleCallback as
-      | ((cb: () => void, opts?: { timeout?: number }) => number)
-      | undefined;
-    let idleId = 0;
-    if (ric) idleId = ric(start, { timeout: 1500 });
-    else start();
-
-    return () => {
-      if (idleId && (window as any).cancelIdleCallback) (window as any).cancelIdleCallback(idleId);
-      v.removeEventListener("canplay", onCanPlay);
-      v.removeEventListener("loadeddata", onCanPlay);
-    };
-  }, []);
+  const wa = `https://wa.me/${CONTACT.whatsapp.number}?text=${encodeURIComponent("Hello PSARA Consultant India — I need PSARA License help.")}`;
 
   return (
-    <section id="hero" className="relative h-[100svh] w-full overflow-hidden bg-[var(--canvas-void)] isolate">
-      {/* Media: poster + video with single flat scrim */}
-      <div className="absolute inset-0">
-        <Image
-          src="/assets/images/generated/hero-poster.webp"
-          alt=""
-          fill
-          priority
-          fetchPriority="high"
-          sizes="100vw"
-          className="object-cover object-center"
-        />
-        <video
-          ref={videoRef}
-          className={`absolute inset-0 h-full w-full object-cover object-center transition-opacity duration-700 ${videoReady ? "opacity-100" : "opacity-0"}`}
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="none"
-          poster="/assets/images/generated/hero-poster.webp"
-        >
-          <source src="/assets/videos/hero-loop.webm" type="video/webm" />
-          <source src="/assets/videos/hero-loop.mp4" type="video/mp4" />
-        </video>
-        {/* Single flat scrim — no teal, matches violet/gold theme */}
-        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(8,6,17,0.72)_0%,rgba(8,6,17,0.45)_38%,rgba(8,6,17,0.18)_58%,rgba(8,6,17,0.88)_100%)]" />
-        <div className="absolute inset-x-0 bottom-0 h-[36%] bg-gradient-to-t from-[var(--canvas-void)] to-transparent" />
+    <section id="hero" className="relative w-full overflow-hidden bg-[#FFFDF5] text-[#0B1E3B]">
+      {/* ambient gradient wash + orbs */}
+      <div className="pointer-events-none absolute inset-0" aria-hidden>
+        <div className="absolute inset-0 bg-gradient-to-b from-[#FFE8D1]/60 via-transparent to-transparent" />
+        <div className="orb orb-saffron left-[-120px] top-[-120px] h-[380px] w-[380px] opacity-70" />
+        <div className="orb orb-navy right-[-140px] top-[30%] h-[420px] w-[420px] opacity-40" />
+      </div>
+      {/* top hairline tricolor */}
+      <div className="flex h-1.5 w-full" aria-hidden>
+        <div className="flex-1 bg-[#E76F00]" />
+        <div className="flex-1 bg-[#0B1E3B]" />
+        <div className="flex-1 bg-[#046A38]" />
       </div>
 
-      {/* Header — single source of truth (SiteHeader handles scrolled state, this is hero header) */}
-      <header className="absolute inset-x-0 top-0 z-30 flex items-center justify-between px-6 py-5 lg:px-8">
-        <button
-          aria-label={menuOpen ? "Close menu" : "Open menu"}
-          onClick={() => setMenuOpen((v) => !v)}
-          className="group flex items-center gap-3 text-white"
-        >
-          <span className="flex h-9 w-9 items-center justify-center">
-            <span className="flex flex-col gap-1.5">
-              <span className="h-px w-6 bg-white transition-all group-hover:w-7" />
-              <span className="h-px w-6 bg-white" />
-              <span className="h-px w-4 bg-white transition-all group-hover:w-6" />
-            </span>
+      {/* mini header — logo left, menu right */}
+      <header className="relative z-10 border-b border-[#0B1E3B]/10 bg-[#FFFDF5]">
+        <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-5 py-3.5 lg:px-8">
+        {/* LEFT — logo + company name */}
+        <a href="/" className="flex shrink-0 items-center gap-2.5" aria-label="PSARA Consultant India home">
+          {/* ponytail: navy disc restores the logo's dark base — gold mark washes out on bare cream */}
+          <span className="flex h-11 w-11 items-center justify-center overflow-hidden rounded-full bg-[#0B1E3B] p-1 shadow-md">
+            <Image src="/assets/images/brand/psara-consultant-india-mark-transparent.png" alt="PSARA Consultant India logo" width={48} height={48} className="h-full w-full object-contain" />
           </span>
-          <span className="text-[11px] font-bold uppercase tracking-[0.18em] text-white/90">{menuOpen ? "Close" : "Menu"}</span>
-        </button>
-
-        <nav className="hidden items-center gap-7 text-[11px] font-bold uppercase tracking-[0.14em] text-white/75 lg:flex">
-          <a href="/" className="relative pb-1 text-white">
-            Home
-            <span className="absolute inset-x-0 -bottom-1 h-px bg-[var(--gold)]" />
-          </a>
-          <a href="/about" className="transition-colors hover:text-white">About Us</a>
-          <a href="/services" className="transition-colors hover:text-white">Services</a>
-          <a href="/states" className="transition-colors hover:text-white">States</a>
-          <a href="/contact" className="transition-colors hover:text-white">Contact</a>
-        </nav>
-
-        <a
-          href="/contact"
-          className="inline-flex items-center gap-2 rounded-full border border-[var(--gold)]/40 bg-[var(--canvas-void)]/40 px-5 py-2.5 text-[11px] font-bold uppercase tracking-[0.14em] text-white backdrop-blur-md transition-colors hover:border-[var(--gold)] hover:bg-[var(--gold)] hover:text-[var(--canvas-void)]"
-        >
-          Get in Touch
-          <span className="text-sm leading-none">→</span>
+          <span className="flex flex-col justify-center leading-none">
+            <span className="text-[0.95rem] font-black uppercase tracking-[0.16em] text-[#0B1E3B]">PSARA</span>
+            <span className="mt-1 hidden text-[0.52rem] font-black uppercase tracking-[0.2em] text-[#B35400] sm:block">Consultant India</span>
+          </span>
         </a>
+        <nav className="hidden items-center gap-7 text-[13px] font-black uppercase tracking-[0.14em] text-[#0B1E3B] lg:flex">
+          <a href="/" className="text-[#B35400]">Home</a>
+          <a href="/about" className="hover:text-[#B35400]">About</a>
+          <a href="/services" className="hover:text-[#B35400]">Services</a>
+          <a href="/states" className="hover:text-[#B35400]">States</a>
+          <a href="/calculator" className="rounded-full bg-[#0B1E3B] px-5 py-2.5 text-[12px] text-white shadow-md hover:bg-[#B35400]">Fee Calculator</a>
+        </nav>
+        {/* RIGHT — CTA + menu */}
+        <div className="flex shrink-0 items-center gap-3">
+          <a href="/contact" className="inline-flex items-center gap-2 rounded-full bg-[#E76F00] px-6 py-3 text-[12px] font-black uppercase tracking-[0.14em] text-[#0B1E3B] shadow-lg shadow-orange-600/30 hover:bg-[#B35400] hover:text-white">
+            Get License <ArrowRight className="h-4 w-4" strokeWidth={3} />
+          </a>
+          <button aria-label={menuOpen ? "Close menu" : "Open menu"} onClick={() => setMenuOpen((v) => !v)} className="group flex items-center gap-3">
+            <span className="hidden text-[12px] font-black uppercase tracking-[0.2em] text-[#0B1E3B] sm:block">{menuOpen ? "Close" : "Menu"}</span>
+            <span className="flex h-11 w-11 items-center justify-center rounded-full bg-[#0B1E3B] text-white shadow-md">
+              <span className="flex flex-col gap-1.5">
+                <span className="h-[2.5px] w-5 bg-white" />
+                <span className="h-[2.5px] w-5 bg-white" />
+                <span className="h-[2.5px] w-3 bg-[#FF7A00]" />
+              </span>
+            </span>
+          </button>
+        </div>
+        </div>
       </header>
       <CaseyMenu open={menuOpen} onClose={() => setMenuOpen(false)} />
 
-      {/* Center: brand + H1 + CTAs */}
-      <div className="relative z-10 mx-auto flex h-full max-w-6xl flex-col items-center justify-center px-6 pb-16 pt-20 text-center">
-        <Image
-          src="/logo.png"
-          alt="PSARA Consultant India"
-          width={320}
-          height={320}
-          priority
-          unoptimized
-          className="h-[220px] w-auto object-contain drop-shadow-[0_18px_42px_rgba(0,0,0,0.62)] sm:h-[260px] lg:h-[300px]"
-        />
+      <div className="relative mx-auto grid max-w-7xl grid-cols-1 gap-8 px-5 pb-10 pt-4 lg:grid-cols-12 lg:gap-6 lg:px-8 lg:pt-8">
+        {/* LEFT — bold type */}
+        <div className="flex flex-col justify-center lg:col-span-7">
+          <div className="hero-enter flex flex-wrap items-center gap-2" style={{ ["--enter-delay" as string]: "0ms" }}>
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-[#0B1E3B] px-3 py-1.5 text-[10px] font-extrabold uppercase tracking-[0.16em] text-white">
+              <ShieldCheck className="h-3.5 w-3.5 text-[#FF7A00]" /> PSARA Act 2005 Specialist
+            </span>
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-[#046A38]/30 bg-green-50 px-3 py-1.5 text-[10px] font-extrabold uppercase tracking-[0.16em] text-[#046A38]">
+              <BadgeCheck className="h-3.5 w-3.5" /> 500+ Licenses Cleared
+            </span>
+          </div>
 
-        <h1 className="mt-8 max-w-3xl text-balance text-3xl font-bold leading-[1.05] tracking-tight text-white sm:text-4xl lg:text-5xl" style={{ fontFamily: "var(--font-display)" }}>
-          PSARA License <span className="text-[var(--gold)]">clearance across India.</span>
-        </h1>
-        <p className="mt-4 max-w-2xl text-sm leading-relaxed text-white/75 sm:text-base">
-          Statutory filing across 36 States &amp; UTs — training MOU, police verification, and Controlling Authority liaison from Jaipur HQ.
-        </p>
+          <h1 className="hero-enter mt-5 text-balance font-black leading-[0.95] tracking-tight" style={{ fontSize: "clamp(2.6rem,6vw,5rem)", fontFamily: "var(--font-display)", ["--enter-delay" as string]: "90ms" }}>
+            PSARA License in <span className="text-[#B35400]">30–45 Days.</span>
+            <br />Across India.
+          </h1>
+          <p className="hero-enter mt-4 max-w-xl text-base leading-relaxed text-[#33465F] sm:text-lg" style={{ ["--enter-delay" as string]: "180ms" }}>
+            Training MOU, police verification aur Controlling Authority filing — Jaipur HQ se 36 States & UTs tak. Fees seedha, kaam pakka.
+          </p>
 
-        <div className="mt-8 flex flex-col items-center gap-3 sm:flex-row">
-          <a href="/contact" className="inline-flex items-center gap-2 rounded-full bg-[var(--gold)] px-7 py-3.5 text-xs font-bold uppercase tracking-[0.14em] text-[var(--canvas-void)] shadow-[0_8px_28px_rgba(200,155,60,0.35)] transition-[transform,filter] hover:brightness-110">
-            Start a Statutory File
-            <span>→</span>
-          </a>
-          <a href={`https://wa.me/${CONTACT.whatsapp.number}?text=${encodeURIComponent("Hello PSARA Consultant India — I need help with PSARA License registration.")}`} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-7 py-3.5 text-xs font-bold uppercase tracking-[0.14em] text-white backdrop-blur-md transition-colors hover:border-white/40 hover:bg-white/15">
-            WhatsApp Desk
-          </a>
+          <div className="hero-enter mt-6 flex flex-col gap-3 sm:flex-row" style={{ ["--enter-delay" as string]: "260ms" }}>
+            <a href={`tel:${CONTACT.phoneRaw}`} className="btn-shine inline-flex items-center justify-center gap-2 rounded-xl grad-saffron px-7 py-4 text-xs font-extrabold uppercase tracking-[0.14em] text-[#0B1E3B] shadow-xl shadow-orange-500/25 hover:brightness-105">
+              <Phone className="h-4 w-4" /> {CONTACT.phoneDisplay}
+            </a>
+            <a href={wa} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 rounded-xl border-2 border-[#046A38] bg-white px-7 py-4 text-xs font-extrabold uppercase tracking-[0.14em] text-[#046A38] hover:bg-[#046A38] hover:text-white">
+              <MessageSquare className="h-4 w-4" /> WhatsApp Desk
+            </a>
+          </div>
+
+          {/* fee bento strip */}
+          <div className="hero-enter mt-6 grid grid-cols-3 gap-2 sm:gap-3" style={{ ["--enter-delay" as string]: "340ms" }}>
+            {[
+              { fee: "₹5,000", scope: "1 District" },
+              { fee: "₹10,000", scope: "2–5 Districts" },
+              { fee: "₹25,000", scope: "Entire State" },
+            ].map((f) => (
+              <a key={f.scope} href="/calculator" className="card-lift group rounded-xl border border-[#E8DFC8] bg-white p-3 text-center shadow-sm hover:border-[#E76F00] sm:p-4">
+                <div className="font-black text-[#0B1E3B] group-hover:text-[#E76F00]" style={{ fontSize: "clamp(1rem,2.4vw,1.4rem)" }}>{f.fee}</div>
+                <div className="mt-1 text-[10px] font-extrabold uppercase tracking-[0.12em] text-[#475569]">{f.scope}</div>
+              </a>
+            ))}
+          </div>
         </div>
 
-        <p className="mt-6 text-[11px] font-bold uppercase tracking-[0.28em] text-white/60">500+ Licenses · 36 States · 10 Years</p>
-      </div>
-
-      {/* Bottom bar — minimal, gold accents only */}
-      <div className="absolute inset-x-0 bottom-0 z-20 flex items-end justify-between gap-3 px-4 pb-5 lg:px-6">
-        <a href={`tel:+${CONTACT.phoneRaw}`} className="hidden items-center gap-3 rounded-full border border-white/10 bg-[var(--canvas-void)]/65 px-4 py-2.5 backdrop-blur-md sm:flex">
-          <span className="flex h-7 w-7 items-center justify-center rounded-full bg-white text-[var(--canvas-void)]">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
-              <path d="M6.62 10.79a15.15 15.15 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24 11.36 11.36 0 0 0 3.56.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11.36 11.36 0 0 0 .57 3.56 1 1 0 0 1-.24 1.01l-2.21 2.22z" />
-            </svg>
-          </span>
-          <span className="pr-1 text-left leading-none">
-            <span className="block text-[9px] uppercase tracking-[0.14em] text-white/58">Call Us</span>
-            <span className="block text-xs font-bold tracking-wide text-white">{CONTACT.phoneDisplay}</span>
-          </span>
-        </a>
-        <div className="flex-1" aria-hidden />
-        <a href={CONTACT.whatsapp.url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-full border border-[var(--gold)]/40 bg-[var(--canvas-void)]/65 px-4 py-2.5 text-xs font-bold tracking-wide text-white backdrop-blur-md transition-colors hover:border-[var(--gold)] sm:px-5">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" className="text-[var(--gold)]">
-            <path d="M19.05 4.91A9.9 9.9 0 0 0 12.04 2C6.58 2 2.14 6.42 2.14 10.86c0 1.56.41 3.08 1.19 4.42L2 22l6.87-1.8a9.87 9.87 0 0 0 4.68 1.19h.01c5.46 0 9.9-4.42 9.9-9.86 0-2.64-1.03-5.11-2.91-6.97l.4.35zm-7.01 15.24h-.01a8.17 8.17 0 0 1-4.17-1.14l-.3-.18-4.08 1.07 1.09-3.97-.2-.31a8.2 8.2 0 0 1-1.26-4.36c0-4.54 3.71-8.23 8.28-8.23 2.21 0 4.29.86 5.85 2.42A8.19 8.19 0 0 1 19.4 11.53c0 4.54-3.71 8.23-8.27 8.23l.91.39zm6.91-11.5a6.56 6.56 0 0 0-4.68-1.94c-3.64 0-6.6 2.95-6.6 6.58 0 1.15.3 2.28.87 3.27l.12.21-.73 2.65 2.73-.71.2.12a6.6 6.6 0 0 0 3.16.8h.01c3.64 0 6.6-2.95 6.6-6.58a6.54 6.54 0 0 0-1.96-4.67l.28.27z" />
-          </svg>
-          <span className="hidden sm:inline uppercase text-[11px] tracking-wide">Whatsapp Us</span>
-          <span className="sm:hidden text-[11px]">WA</span>
-        </a>
+        {/* RIGHT — image bento */}
+        <div className="hero-enter lg:col-span-5" style={{ ["--enter-delay" as string]: "200ms" }}>
+          <div className="grid grid-cols-2 gap-3">
+            <div className="group relative col-span-2 h-56 overflow-hidden rounded-2xl sm:h-64">
+              {/* ponytail: lobby loop as live bg — poster paints first, no LCP hole */}
+              <video className="absolute inset-0 h-full w-full object-cover" autoPlay muted loop playsInline preload="metadata" poster="/assets/images/hero-filing-desk.jpg" aria-hidden="true">
+                <source src="/assets/videos/hero-loop.webm" type="video/webm" />
+                <source src="/assets/videos/hero-loop.mp4" type="video/mp4" />
+              </video>
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0B1E3B]/55 via-transparent to-transparent" />
+              <span className="absolute left-3 top-3 rounded-full bg-[#0B1E3B]/90 px-3 py-1.5 text-[10px] font-extrabold uppercase tracking-[0.14em] text-white backdrop-blur">Controlling Authority Filing</span>
+              {/* proper eagle mark — ponytail: navy disc, transparent gold needs its dark base */}
+              <span className="absolute right-3 top-3 flex h-20 w-20 items-center justify-center overflow-hidden rounded-full bg-[#0B1E3B]/95 p-1.5 shadow-lg sm:h-24 sm:w-24">
+                <Image src="/assets/images/brand/psara-consultant-india-mark-transparent.png" alt="PSARA Consultant India" width={112} height={112} className="h-full w-full object-contain" />
+              </span>
+              <span className="animate-drift absolute bottom-3 right-3 flex items-center gap-1.5 rounded-full grad-saffron px-3 py-1.5 text-[10px] font-extrabold uppercase tracking-[0.12em] text-[#0B1E3B]"><MapPin className="h-3 w-3" /> 36 States</span>
+            </div>
+            <VideoTile className="h-40 rounded-2xl sm:h-44" label="Live · Field Desk" poster="/assets/images/field-desk-guard.jpg" />
+            <div className="group relative h-40 overflow-hidden rounded-2xl sm:h-44">
+              <Image src="/assets/images/hq-desk-reception.jpg" alt="Jaipur HQ reception desk" fill className="zoom-slow object-cover" sizes="20vw" />
+              <span className="absolute bottom-2 left-2 rounded-full bg-white/95 px-2.5 py-1 text-[10px] font-extrabold uppercase tracking-[0.1em] text-[#0B1E3B]">Jaipur HQ Desk</span>
+            </div>
+            <div className="col-span-2 grid grid-cols-2 gap-3">
+              <div className="card-glow relative flex items-center gap-3 overflow-hidden rounded-2xl grad-navy p-4 text-white">
+                <div className="orb orb-saffron right-[-40px] top-[-40px] h-[120px] w-[120px] opacity-60" aria-hidden />
+                <Image src="/assets/images/float/shield-gold.svg" alt="Security shield icon" width={36} height={36} className="animate-drift-soft h-9 w-9 shrink-0" />
+                <div><div className="text-xl font-black leading-none">500+</div><div className="mt-1 text-[10px] font-bold uppercase tracking-[0.14em] text-white/70">Licenses Granted</div></div>
+              </div>
+              <div className="flex items-center gap-3 rounded-2xl border border-[#E8DFC8] bg-white p-4">
+                {/* ponytail: navy tile — transparent gold washes out on bare white */}
+                <span className="flex h-11 w-11 shrink-0 items-center justify-center overflow-hidden rounded-xl bg-[#0B1E3B] p-1">
+                  <Image src="/assets/images/brand/psara-consultant-india-mark-transparent.png" alt="PSARA Consultant India logo" width={36} height={36} className="h-full w-full object-contain" />
+                </span>
+                <div><div className="text-xl font-black leading-none text-[#0B1E3B]">30–45</div><div className="mt-1 text-[10px] font-bold uppercase tracking-[0.14em] text-[#475569]">Days Fast-Track</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );

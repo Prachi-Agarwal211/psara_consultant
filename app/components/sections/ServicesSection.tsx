@@ -2,242 +2,88 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import {
-  ShieldCheck,
-  BadgeCheck,
-  Globe,
-  Building2,
-  Scale,
-  Award,
-  BookOpen,
-  CheckCircle2,
-  ArrowRight,
-  Sparkles,
-  Calculator,
-  MessageSquare,
-} from "lucide-react";
+import Image from "next/image";
+import { ArrowRight, CheckCircle2 } from "lucide-react";
 import { SERVICES } from "../../../data/services";
 import { DEFAULT_WA } from "../../../lib/whatsapp";
-import { MaskReveal } from "../ui/MaskReveal";
-import { TiltCard } from "../ui/TiltCard";
-import { ServicesPinnedHorizontal } from "./ServicesSection.pinned";
+import Reveal from "../ui/Reveal";
 
-const CATEGORIES = [
-  { id: "all", label: "All Services" },
-  { id: "licensing", label: "Licensing & Grants" },
-  { id: "training", label: "Training & Verification" },
-  { id: "compliance", label: "Compliance & Audits" },
-] as const;
+const ICONS: Record<string, string> = {
+  "psara-license": "/assets/icons/psara-license.svg",
+  "company-registration": "/assets/icons/company-registration.svg",
+  "gst-registration": "/assets/icons/gst-registration.svg",
+  "msme-registration": "/assets/icons/msme-registration.svg",
+  "training-mou": "/assets/icons/training-mou.svg",
+  "police-verification": "/assets/icons/police-verification.svg",
+};
 
-type CategoryId = (typeof CATEGORIES)[number]["id"];
-
-function getServiceIcon(slug: string) {
-  switch (slug) {
-    case "psara-license":
-      return ShieldCheck;
-    case "psara-training-mou":
-      return BookOpen;
-    case "police-verification-clearance":
-      return BadgeCheck;
-    case "multi-state-psara-license":
-      return Globe;
-    case "psara-license-renewal":
-      return Scale;
-    case "security-agency-incorporation":
-      return Building2;
-    default:
-      return Award;
-  }
-}
-
-function getCategory(slug: string): CategoryId {
-  if (slug.includes("training") || slug.includes("verification") || slug.includes("police")) {
-    return "training";
-  }
-  if (slug.includes("incorporation") || slug.includes("renewal") || slug.includes("multi-state") || slug.includes("license")) {
-    return "licensing";
-  }
-  return "compliance";
+function iconFor(slug: string) {
+  if (slug.includes("psara-license")) return ICONS["psara-license"];
+  if (slug.includes("company")) return ICONS["company-registration"];
+  if (slug.includes("gst")) return ICONS["gst-registration"];
+  if (slug.includes("msme") || slug.includes("udyam")) return ICONS["msme-registration"];
+  if (slug.includes("training") || slug.includes("mou")) return ICONS["training-mou"];
+  if (slug.includes("police") || slug.includes("verification")) return ICONS["police-verification"];
+  return "/assets/icons/shield-check.svg";
 }
 
 export default function ServicesSection() {
-  const [activeCategory, setActiveCategory] = useState<CategoryId>("all");
   const [showAll, setShowAll] = useState(false);
-
-  const filteredServices = SERVICES.filter((s) => {
-    if (activeCategory === "all") return true;
-    return getCategory(s.slug) === activeCategory;
-  });
-
-  const visibleServices = showAll ? filteredServices : filteredServices.slice(0, 6);
-  const hasMore = filteredServices.length > 6;
-
-  const handleCategoryChange = (catId: CategoryId) => {
-    setActiveCategory(catId);
-    setShowAll(false);
-  };
+  const visible = showAll ? SERVICES.slice(0, 9) : SERVICES.slice(0, 6);
 
   return (
-    <section id="services" className="relative bg-[var(--canvas-void)] text-white border-b border-white/10">
-      <ServicesPinnedHorizontal />
-
-      <div className="relative z-10 px-[var(--gutter)] max-w-7xl mx-auto space-y-12 py-20 lg:py-28">
-        {/* Section Header — MaskReveal */}
-        <MaskReveal direction="left">
-          <div className="flex flex-col items-center gap-6 border-b border-white/15 pb-8 text-center md:flex-row md:items-end md:justify-between md:text-left">
-            <div>
-              <div className="flex items-center justify-center gap-2 text-xs font-bold uppercase tracking-[0.16em] text-[#D4AF37] md:justify-start" style={{ fontFamily: "var(--font-body)" }}>
-                <Sparkles className="h-3.5 w-3.5 text-[#D4AF37]" />
-                Statutory Advisory &amp; Licensing Services
-              </div>
-              <h2 className="mt-3 text-3xl sm:text-4xl md:text-5xl font-bold text-white leading-tight" style={{ fontFamily: "var(--font-display)" }}>
-                Services that secure your <span className="gold-text-gradient">security agency</span>
+    <section id="services" className="relative bg-white py-16 text-[#0B1E3B] sm:py-20 lg:py-24">
+      <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-12">
+        <Reveal variant="scale">
+        <div className="relative overflow-hidden rounded-3xl grad-navy text-white">
+          <div className="orb orb-saffron right-[-100px] top-[-100px] h-[300px] w-[300px] opacity-60" aria-hidden />
+          <div className="relative grid grid-cols-1 lg:grid-cols-2">
+            <div className="p-7 sm:p-10">
+              <p className="text-xs font-black uppercase tracking-[0.2em] text-[#FF7A00]">6 Core Routes · 26 Services</p>
+              <h2 className="mt-3 font-black leading-[1.02]" style={{ fontSize: "clamp(1.9rem,4vw,3rem)", fontFamily: "var(--font-display)" }}>
+                License se lekar <span className="text-[#E76F00]">guard deployment</span> tak.
               </h2>
+              <p className="mt-3 max-w-md text-sm leading-relaxed text-white/75">Company setup, MOU, verification, filing — sab ek desk par. Card kholo, requirements dekho, WhatsApp par bhejo.</p>
+              <div className="mt-5 flex flex-wrap gap-2">
+                <a href="/calculator" className="btn-shine rounded-full grad-saffron px-5 py-2.5 text-[11px] font-black uppercase tracking-[0.12em] text-[#0B1E3B] hover:brightness-105">Fee Calculator</a>
+                <a href={DEFAULT_WA} target="_blank" rel="noopener noreferrer" className="rounded-full border border-white/25 px-5 py-2.5 text-[11px] font-black uppercase tracking-[0.12em] text-white hover:bg-white hover:text-[#0B1E3B]">WhatsApp Desk</a>
+              </div>
             </div>
-
-            <p className="mx-auto max-w-md text-sm font-normal leading-relaxed text-[#E2E8F0] md:mx-0 md:text-base" style={{ fontFamily: "var(--font-body)" }}>
-              From company incorporation to Controlling Authority filing, recognized training MOUs, police verification, and multi-state compliance.
-            </p>
+            <div className="group relative min-h-56 overflow-hidden lg:min-h-full">
+              <Image src="/assets/images/cinematic/services-atmosphere.jpg" alt="PSARA dossier desk" fill className="zoom-slow object-cover" sizes="(max-width:1024px) 100vw, 40vw" />
+              <div className="absolute inset-0 bg-gradient-to-r from-[#0B1E3B] via-[#0B1E3B]/30 to-transparent" />
+            </div>
           </div>
-        </MaskReveal>
+        </div>
+        </Reveal>
 
-        {/* Category Navigation Tabs */}
-        <div className="flex flex-wrap items-center justify-center gap-2 rounded-xl border border-white/10 bg-[var(--canvas-void-2)] p-1.5">
-          {CATEGORIES.map((cat) => (
-            <button
-              key={cat.id}
-              onClick={() => handleCategoryChange(cat.id)}
-              className={`px-5 py-2.5 text-xs font-bold uppercase tracking-[0.1em] rounded-xl transition-[border-color,box-shadow,transform,filter] duration-200 ${
-                activeCategory === cat.id
-                  ? "text-[#241703] shadow-lg shadow-[0_16px_32px_-20px_rgba(8,6,17,0.55)] bg-gradient-to-r from-[#F5D061] via-[#D4AF37] to-[#A87524]"
-                  : "text-[#CBD5E1] hover:text-white hover:bg-white/5"
-              }`}
-              style={{ fontFamily: "var(--font-body)", ...(activeCategory === cat.id ? { boxShadow: "inset 0 1px 0 rgba(255,250,230,0.8)" } : {}) }}
-            >
-              {cat.label}
-              {cat.id === "all" ? ` (${SERVICES.length})` : ""}
-            </button>
+        <Reveal delay={110} variant="scale">
+        <div className="mt-6 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+          {visible.map((s, i) => (
+            <Link key={s.slug} href={`/services/${s.slug}`} className="card-lift card-glow group flex min-h-60 flex-col justify-between rounded-2xl border border-[#E8DFC8] bg-[#FFFDF5] p-6 shadow-sm">
+              <div>
+                <div className="flex items-center justify-between">
+                  <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#0B1E3B] p-2.5"><Image src={iconFor(s.slug)} alt={`${s.title} service icon`} width={28} height={28} className="h-7 w-7 brightness-0 invert" /></span>
+                  <span className="font-mono text-xs font-black text-[#B35400]">0{i + 1}</span>
+                </div>
+                <h3 className="mt-4 text-lg font-black leading-snug">{s.title}</h3>
+                <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-[#33465F]">{s.short}</p>
+                {s.bullets?.slice(0, 2).map((b) => (
+                  <div key={b} className="mt-2 flex items-start gap-2 text-xs text-[#33465F]"><CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-[#046A38]" /><span className="line-clamp-1">{b}</span></div>
+                ))}
+              </div>
+              <div className="mt-5 flex items-center justify-between border-t border-[#E8DFC8] pt-4 text-[11px] font-black uppercase tracking-[0.14em] text-[#0B1E3B] group-hover:text-[#B35400]">
+                <span>View Requirements</span><ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
+              </div>
+            </Link>
           ))}
         </div>
+        </Reveal>
 
-        {/* Services Grid — TiltCard + staggered MaskReveal */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-          {visibleServices.map((service, idx) => {
-            const IconComponent = getServiceIcon(service.slug);
-            const num = String(idx + 1).padStart(2, "0");
-
-            return (
-              <MaskReveal key={service.slug} direction={idx % 3 === 0 ? "left" : idx % 3 === 1 ? "up" : "right"}>
-                <TiltCard>
-                  <Link
-                    href={`/services/${service.slug}`}
-                    className="group relative flex h-full min-h-[280px] flex-col justify-between overflow-hidden rounded-xl border border-white/10 bg-[var(--surface-card-dark)] p-6 shadow-[var(--shadow-card)] transition-[border-color,transform] duration-200 hover:-translate-y-1 hover:border-[var(--line-gold)] sm:p-8"
-                    data-cursor="View service"
-                  >
-                <div>
-                  {/* Top Row: Icon + Badge */}
-                  <div className="flex items-center justify-between gap-4 mb-6">
-                    <div className="flex items-center justify-center h-12 w-12 rounded-xl border border-[#C4B5FD]/40 bg-[#120C27] text-[#F5D061] transition-[border-color,box-shadow,transform,filter] duration-200 group-hover:bg-[#D4AF37] group-hover:text-[#241703] group-hover:border-[#D4AF37] shadow-md">
-                      <IconComponent className="h-6 w-6" />
-                    </div>
-                    <span className="font-mono text-xs font-bold text-[#D4AF37]">
-                      SRV-{num}
-                    </span>
-                  </div>
-
-                  {/* Title */}
-                  <h3 className="text-xl font-bold text-white transition-colors duration-200 group-hover:text-[#F5D061] mb-3 leading-snug" style={{ fontFamily: "var(--font-display)" }}>
-                    {service.title}
-                  </h3>
-
-                  {/* Description */}
-                  <p className="text-sm leading-relaxed text-[#E2E8F0] mb-6 font-normal" style={{ fontFamily: "var(--font-body)" }}>
-                    {service.short}
-                  </p>
-
-                  {/* Bullets */}
-                  {service.bullets && service.bullets.length > 0 && (
-                    <div className="space-y-2 border-t border-white/10 pt-4 mb-6">
-                      {service.bullets.slice(0, 2).map((b, bIdx) => (
-                        <div key={bIdx} className="flex items-start gap-2 text-xs text-[#CBD5E1]">
-                          <CheckCircle2 className="h-4 w-4 shrink-0 text-[#D4AF37] mt-0.5" />
-                          <span className="line-clamp-1">{b}</span>
-                        </div>
-                      ))}
-                    </div>
-                  )}
-                </div>
-
-                {/* Footer Link */}
-                <div className="flex items-center justify-between border-t border-white/10 pt-4 text-xs font-bold uppercase tracking-[0.14em] text-white/80 transition-colors duration-200 group-hover:text-[#F5D061]" style={{ fontFamily: "var(--font-body)" }}>
-                  <span>View Requirements</span>
-                  <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1 text-[#D4AF37]" />
-                </div>
-                  </Link>
-                </TiltCard>
-              </MaskReveal>
-            );
-          })}
-        </div>
-
-        {/* See More Toggle */}
-        {hasMore && (
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
-            <button
-              type="button"
-              onClick={() => setShowAll((prev) => !prev)}
-              className="inline-flex items-center gap-2 rounded-xl border border-[#D4AF37] bg-gradient-to-r from-[#2A1853]/50 via-[#D4AF37]/15 to-[#D4AF37]/25 hover:from-[#D4AF37] hover:to-[#C89B3C] hover:text-[#080611] px-8 py-3.5 text-xs font-bold uppercase tracking-[0.12em] text-[#F5D061] transition-[border-color,box-shadow,transform,filter] duration-200 shadow-md"
-              style={{ fontFamily: "var(--font-body)" }}
-            >
-              <span>{showAll ? "Show Fewer Services" : `See More Services (${filteredServices.length - 6} More)`}</span>
-              <ArrowRight className={`h-4 w-4 transition-transform duration-200 ${showAll ? "-rotate-90" : "rotate-90"}`} />
-            </button>
-
-            <Link
-              href="/services"
-              className="inline-flex items-center gap-2 rounded-xl border border-violet-200/25 bg-[#180D36] hover:bg-[#2A1853] px-6 py-3.5 text-xs font-bold uppercase tracking-[0.12em] text-white transition-[border-color,box-shadow,transform]"
-              style={{ fontFamily: "var(--font-body)" }}
-            >
-              <span>All 26 Services Index</span>
-              <ArrowRight className="h-4 w-4" />
-            </Link>
-          </div>
-        )}
-
-        {/* Bottom Callout */}
-        <div className="rounded-xl border border-[var(--line-gold)] bg-[var(--surface-card-dark)] p-8 md:p-10 flex flex-col md:flex-row md:items-center justify-between gap-8">
-          <div className="space-y-2 max-w-2xl">
-            <span className="text-xs font-bold uppercase tracking-[0.16em] text-[#D4AF37]" style={{ fontFamily: "var(--font-body)" }}>
-              Multi-District &amp; State Bundles
-            </span>
-            <h3 className="text-2xl font-bold text-white" style={{ fontFamily: "var(--font-display)" }}>
-              Need multi-district licensing or training MOU support in a specific State?
-            </h3>
-            <p className="text-sm text-[#E2E8F0] leading-relaxed font-normal" style={{ fontFamily: "var(--font-body)" }}>
-              Our regulatory desk provides instant clarity on State fee slabs, Controlling Authority checklists, and police clearance timelines.
-            </p>
-          </div>
-
-          <div className="flex flex-wrap items-center gap-3 shrink-0">
-            <Link
-              href="/calculator"
-              className="inline-flex items-center gap-2 rounded-xl border border-white/20 bg-white/5 hover:bg-white/10 px-6 py-3.5 text-xs font-bold uppercase tracking-[0.1em] text-white transition-[border-color,box-shadow,transform]"
-              style={{ fontFamily: "var(--font-body)" }}
-            >
-              <Calculator className="h-4 w-4 text-[#D4AF37]" />
-              <span>Fee Calculator</span>
-            </Link>
-
-            <a
-              href={DEFAULT_WA}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-whatsapp"
-            >
-              <MessageSquare className="h-4 w-4 fill-white" />
-              <span>WhatsApp Desk</span>
-            </a>
-          </div>
+        <div className="mt-6 text-center">
+          <button onClick={() => setShowAll((v) => !v)} className="rounded-xl border-2 border-[#0B1E3B] px-7 py-3 text-xs font-black uppercase tracking-[0.12em] hover:bg-[#0B1E3B] hover:text-white">
+            {showAll ? "Show Less" : `See More (${SERVICES.length - 6} More)`}
+          </button>
         </div>
       </div>
     </section>

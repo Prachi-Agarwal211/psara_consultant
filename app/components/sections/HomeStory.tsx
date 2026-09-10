@@ -71,7 +71,7 @@ export default function HomeStory() {
       <StateGridHome />
 
       {/* ── ESTIMATOR ── */}
-      <div id="estimator" className="mood-estimator relative bg-[#080611]" data-parallax-root>
+      <div id="estimator" className="mood-estimator relative bg-[#0B1E3B]" data-parallax-root>
         <div className="relative z-10 px-[var(--gutter)]">
           <PsaraEstimator />
         </div>
@@ -81,17 +81,17 @@ export default function HomeStory() {
       <HomeFaq />
 
       {/* ── PRESENCE — recolored to plum authority (was sky) ── */}
-      <section id="presence" className="section-atmosphere mood-presence relative min-h-[85dvh] py-20 lg:py-28 bg-[#080611] border-t border-white/10 overflow-hidden" data-parallax-root>
+      <section id="presence" className="section-atmosphere mood-presence relative min-h-[85dvh] py-20 lg:py-28 bg-[#0B1E3B] border-t border-white/10 overflow-hidden" data-parallax-root>
         {/* Ambient glow behind right side map — plum */}
-        <div className="pointer-events-none absolute top-1/2 right-0 -translate-y-1/2 w-[600px] h-[600px] rounded-full blur-[160px] opacity-35" style={{ background: "radial-gradient(circle, rgba(139,92,246,0.48) 0%, rgba(212,175,55,0.10) 42%, transparent 70%)" }} aria-hidden />
+        <div className="pointer-events-none absolute top-1/2 right-0 -translate-y-1/2 w-[600px] h-[600px] rounded-full blur-[160px] opacity-35" style={{ background: "radial-gradient(circle, rgba(231,111,0,0.48) 0%, rgba(231,111,0,0.10) 42%, transparent 70%)" }} aria-hidden />
 
         <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
             {/* Left Column: Office Grid & Info (6 Cols) */}
             <div className="lg:col-span-6 space-y-8">
               <div>
-                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-[rgba(196,181,253,0.38)] bg-gradient-to-r from-[#6D28D9]/25 to-[#D4AF37]/10 text-[#F5E6BA] text-xs font-extrabold tracking-widest uppercase mb-4">
-                  <Globe className="w-3.5 h-3.5 text-[#D4AF37]" />
+                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-[rgba(255,178,94,0.38)] bg-gradient-to-r from-[#14305E]/25 to-[#FF7A00]/10 text-[#FFE8D1] text-xs font-extrabold tracking-widest uppercase mb-4">
+                  <Globe className="w-3.5 h-3.5 text-[#FF7A00]" />
                   <span>Pan-India Presence</span>
                 </div>
 
@@ -111,7 +111,7 @@ export default function HomeStory() {
                     className={`p-3.5 rounded-xl border transition-[border-color,box-shadow,transform,filter] duration-200 ${
                       o.isHQ
                         ? "border-[var(--gold)]/60 bg-[var(--gold)]/10 shadow-lg shadow-[var(--gold)]/10"
-                        : "border-violet-200/15 bg-gradient-to-br from-[#1A1236] to-[#120C27] hover:border-violet-300/40 hover:from-[#2A1853] hover:to-[#1A1236]"
+                        : "border-orange-200/15 bg-gradient-to-br from-[#132E57] to-[#132E57] hover:border-orange-300/40 hover:from-[#1A3A6B] hover:to-[#132E57]"
                     }`}
                     style={{ fontFamily: "var(--font-display)" }}
                   >
@@ -122,7 +122,7 @@ export default function HomeStory() {
                           HQ
                         </span>
                       ) : (
-                        <span className="w-1.5 h-1.5 rounded-full bg-[#C89B3C] opacity-60" />
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#E76F00] opacity-60" />
                       )}
                     </div>
                   </div>
@@ -134,11 +134,11 @@ export default function HomeStory() {
                 <Link
                   href="/states"
                   data-cursor="Explore states"
-                  className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl text-[11px] font-bold uppercase tracking-[0.1em] text-[#241703] transition-[transform,filter] hover:-translate-y-0.5"
+                  className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl text-[11px] font-bold uppercase tracking-[0.1em] text-[#FFFFFF] transition-[transform,filter] hover:-translate-y-0.5"
                   style={{
                     background: "var(--grad-gold-metallic)",
                     backgroundSize: "220% 100%",
-                    boxShadow: "inset 0 1px 0 rgba(255,250,230,0.85), inset 0 -1px 0 rgba(88,58,8,0.5), 0 12px 30px -10px rgba(200,155,60,0.5)",
+                    boxShadow: "inset 0 1px 0 rgba(255,250,230,0.85), inset 0 -1px 0 rgba(88,58,8,0.5), 0 12px 30px -10px rgba(231,111,0,0.5)",
                   }}
                 >
                   <span>States Directory</span>
@@ -147,10 +147,10 @@ export default function HomeStory() {
                 <Link
                   href="/cities"
                   data-cursor="Explore cities"
-                  className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl border border-violet-200/25 bg-gradient-to-br from-[#2A1853] to-[#120C27] hover:from-[#3B2374] hover:to-[#1A1236] text-white font-bold text-xs uppercase tracking-wider transition-colors"
+                  className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl border border-orange-200/25 bg-gradient-to-br from-[#1A3A6B] to-[#132E57] hover:from-[#1A3A6B] hover:to-[#132E57] text-white font-bold text-xs uppercase tracking-wider transition-colors"
                 >
                   <span>All Cities</span>
-                  <ArrowUpRight className="h-3.5 w-3.5 text-[#D4AF37]" />
+                  <ArrowUpRight className="h-3.5 w-3.5 text-[#FF7A00]" />
                 </Link>
               </div>
             </div>
@@ -166,7 +166,7 @@ export default function HomeStory() {
                 />
 
                 {/* Floating Office HQ Pin Badge */}
-                <div className="absolute top-4 left-4 flex items-center gap-2.5 px-3.5 py-2 rounded-xl border border-[var(--gold)]/50 bg-[#120C27]/95 backdrop-blur-md shadow-xl z-10">
+                <div className="absolute top-4 left-4 flex items-center gap-2.5 px-3.5 py-2 rounded-xl border border-[var(--gold)]/50 bg-[#132E57]/95 backdrop-blur-md shadow-xl z-10">
                   <div className="w-2.5 h-2.5 rounded-full bg-[var(--gold)] animate-ping" />
                   <span className="text-xs font-extrabold uppercase tracking-wider text-[var(--gold-bright)]">
                     Jaipur Headquarters
@@ -174,8 +174,8 @@ export default function HomeStory() {
                 </div>
 
                 {/* Floating Metro Desks Badge */}
-                <div className="absolute bottom-4 right-4 flex items-center gap-2.5 px-3.5 py-2 rounded-xl border border-violet-200/25 bg-[#120C27]/95 backdrop-blur-md shadow-xl z-10">
-                  <Globe className="w-4 h-4 text-[#C89B3C]" />
+                <div className="absolute bottom-4 right-4 flex items-center gap-2.5 px-3.5 py-2 rounded-xl border border-orange-200/25 bg-[#132E57]/95 backdrop-blur-md shadow-xl z-10">
+                  <Globe className="w-4 h-4 text-[#E76F00]" />
                   <span className="text-xs font-extrabold uppercase tracking-wider text-white/85">
                     Desks in 36 States & UTs
                   </span>
@@ -192,7 +192,7 @@ export default function HomeStory() {
       {/* ── CLOSING CTA — plum gold */}
       <section
         id="start"
-        className="section-atmosphere mood-start relative flex min-h-[80dvh] flex-col items-center justify-center border-t border-white/10 bg-[#080611] py-[var(--section-y)] pb-[calc(var(--section-y)+5rem)] md:pb-[var(--section-y)]"
+        className="section-atmosphere mood-start relative flex min-h-[80dvh] flex-col items-center justify-center border-t border-white/10 bg-[#0B1E3B] py-[var(--section-y)] pb-[calc(var(--section-y)+5rem)] md:pb-[var(--section-y)]"
         data-parallax-root
       >
         <div className="pointer-events-none absolute inset-0 z-0" aria-hidden>
@@ -200,7 +200,7 @@ export default function HomeStory() {
             className="absolute inset-0"
             style={{
               background:
-                "radial-gradient(ellipse 60% 50% at 50% 50%, rgba(109,40,217,0.32) 0%, transparent 70%), radial-gradient(ellipse 40% 32% at 50% 22%, rgba(212,175,55,0.14) 0%, transparent 60%)",
+                "radial-gradient(ellipse 60% 50% at 50% 50%, rgba(11,30,59,0.32) 0%, transparent 70%), radial-gradient(ellipse 40% 32% at 50% 22%, rgba(231,111,0,0.14) 0%, transparent 60%)",
             }}
           />
         </div>
@@ -212,7 +212,7 @@ export default function HomeStory() {
             style={{ fontFamily: "var(--font-display)" }}
           >
             Let&apos;s move{" "}
-            <span className="bg-gradient-to-r from-[#FFF2BA] via-[#C89B3C] to-[#FFF2BA] bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-[#FFE8D1] via-[#E76F00] to-[#FFE8D1] bg-clip-text text-transparent">
               your PSARA file
             </span>
           </h2>
@@ -235,18 +235,18 @@ export default function HomeStory() {
             <Link
               href="/contact"
               data-cursor="Contact desk"
-              className="inline-flex items-center gap-2 rounded-xl border border-violet-200/25 bg-gradient-to-br from-[#2A1853] to-[#120C27] px-7 py-4 text-xs font-bold uppercase tracking-wider text-white/90 transition-colors hover:border-[#C89B3C] hover:text-[#F5D061]"
+              className="inline-flex items-center gap-2 rounded-xl border border-orange-200/25 bg-gradient-to-br from-[#1A3A6B] to-[#132E57] px-7 py-4 text-xs font-bold uppercase tracking-wider text-white/90 transition-colors hover:border-[#E76F00] hover:text-[#FFB25E]"
             >
               Contact Page <ArrowUpRight className="h-4 w-4" />
             </Link>
           </div>
 
           <div className="flex flex-wrap justify-center gap-6 font-mono text-xs tracking-wider text-white/55">
-            <a href={`tel:${CONTACT.phoneRaw}`} className="transition-colors hover:text-[#F5D061]">
+            <a href={`tel:${CONTACT.phoneRaw}`} className="transition-colors hover:text-[#FFB25E]">
               {CONTACT.phoneDisplay}
             </a>
             <span className="h-1.5 w-1.5 self-center rounded-full bg-white/20" />
-            <a href={`mailto:${CONTACT.email}`} className="transition-colors hover:text-[#F5D061]">
+            <a href={`mailto:${CONTACT.email}`} className="transition-colors hover:text-[#FFB25E]">
               {CONTACT.email}
             </a>
             <span className="h-1.5 w-1.5 self-center rounded-full bg-white/20" />
@@ -260,7 +260,7 @@ export default function HomeStory() {
           <button
             type="button"
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-            className="flex h-8 w-8 items-center justify-center rounded-full border border-white/20 transition-colors hover:border-[#C89B3C] hover:text-[#F5D061]"
+            className="flex h-8 w-8 items-center justify-center rounded-full border border-white/20 transition-colors hover:border-[#E76F00] hover:text-[#FFB25E]"
             aria-label="Scroll to top"
           >
             <svg width="10" height="6" viewBox="0 0 10 6" fill="none">

@@ -143,9 +143,9 @@
 /* --- Editorial blog system --- */
 .psara-blog-main {
   background:
-    radial-gradient(circle at 82% 4%, rgba(139, 92, 246, 0.34), transparent 30rem),
-    radial-gradient(circle at 6% 42%, rgba(212, 175, 55, 0.12), transparent 24rem),
-    linear-gradient(180deg, #080611 0%, #180D36 52%, #080611 100%);
+    radial-gradient(circle at 82% 4%, rgba(231,111,0, 0.34), transparent 30rem),
+    radial-gradient(circle at 6% 42%, rgba(231,111,0, 0.12), transparent 24rem),
+    linear-gradient(180deg, #0B1E3B 0%, #132E57 52%, #0B1E3B 100%);
 }
 
 .psara-blog-intro {
@@ -184,7 +184,7 @@
 .psara-blog-card-copy .psara-blog-read { margin-top: auto; padding-top: 1.15rem; }
 @media (max-width: 760px) { .psara-blog-intro { align-items: start; flex-direction: column; } .psara-blog-count { text-align: left; } .psara-blog-feature { grid-template-columns: 1fr; } .psara-blog-feature-image { min-height: 15rem; } .psara-blog-grid { grid-template-columns: 1fr; } .psara-blog-card { min-height: 0; } }
 
-.psara-article-main { background: radial-gradient(circle at 78% 8%, rgba(139, 92, 246, .28), transparent 28rem), linear-gradient(180deg, #080611, #180D36 58%, #080611); }
+.psara-article-main { background: radial-gradient(circle at 78% 8%, rgba(231,111,0, .28), transparent 28rem), linear-gradient(180deg, #0B1E3B, #132E57 58%, #0B1E3B); }
 .psara-article-cover { box-shadow: 0 1.5rem 5rem rgba(0,0,0,.32); }
 .psara-article-body { border-radius: 1.25rem; border: 1px solid rgba(255,255,255,.1); background: rgba(255,255,255,.035); padding: clamp(1.25rem, 3vw, 2.5rem); }
 .psara-article-body .prose-stage { max-width: none; }
@@ -286,7 +286,7 @@ strong {
 }
 .btn-gold:hover {
   transform: translateY(-1px);
-  box-shadow: 0 8px 28px rgba(139, 92, 246, 0.28);
+  box-shadow: 0 8px 28px rgba(231,111,0, 0.28);
 }
 
 .btn-gold-cta {
@@ -560,11 +560,11 @@ strong {
   transition: border-color .25s ease, background-color .25s ease, transform .25s ease;
 }
 .footer-trust-card:nth-child(2) { background: rgba(69, 126, 108, .12); }
-.footer-trust-card:nth-child(3) { background: rgba(212, 175, 55, .09); }
-.footer-trust-card:nth-child(4) { background: rgba(109, 40, 217, .15); }
+.footer-trust-card:nth-child(3) { background: rgba(231,111,0, .09); }
+.footer-trust-card:nth-child(4) { background: rgba(11,30,59, .15); }
 .footer-trust-card:hover {
   transform: translateY(-2px);
-  border-color: rgba(245, 208, 97, .48);
+  border-color: rgba(231,111,0, .48);
 }
 .footer-nav-rail {
   position: relative;
@@ -573,8 +573,8 @@ strong {
   border-left: 1px solid rgba(255, 255, 255, .12);
   padding-left: 1.25rem;
 }
-.footer-nav-column--explore { border-left-color: rgba(245, 208, 97, .48); }
-.footer-nav-column--services { border-left-color: rgba(139, 92, 246, .55); }
+.footer-nav-column--explore { border-left-color: rgba(231,111,0, .48); }
+.footer-nav-column--services { border-left-color: rgba(231,111,0, .55); }
 .footer-nav-column--states { border-left-color: rgba(184, 216, 204, .44); }
 .footer-link {
   display: inline-block;
@@ -602,8 +602,8 @@ strong {
 .footer-social { transition: border-color .2s ease, background-color .2s ease, color .2s ease, transform .2s ease; }
 .footer-social:hover { transform: translateY(-2px); }
 .footer-social-linkedin:hover { background-color: rgba(184, 216, 204, .14); }
-.footer-social-facebook:hover { background-color: rgba(245, 208, 97, .12); }
-.footer-social-instagram:hover { background-color: rgba(139, 92, 246, .18); }
+.footer-social-facebook:hover { background-color: rgba(231,111,0, .12); }
+.footer-social-instagram:hover { background-color: rgba(231,111,0, .18); }
 
 @media (max-width: 639px) {
   .footer-nav-column { padding-left: .9rem; }
@@ -670,7 +670,7 @@ strong {
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 .form-field option {
-  background-color: #080611;
+  background-color: #0B1E3B;
   color: #ffffff;
 }
 .form-field::placeholder {
@@ -732,8 +732,8 @@ textarea.form-field {
 }
 
 .psara-cursor-ring {
-  box-shadow: 0 0 0 1px rgba(196, 181, 253, 0.18),
-              0 0 26px rgba(139, 92, 246, 0.28);
+  box-shadow: 0 0 0 1px rgba(255,178,94, 0.18),
+              0 0 26px rgba(231,111,0, 0.28);
   mix-blend-mode: screen;
 }
 

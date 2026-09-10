@@ -63,7 +63,7 @@ export default function StatementInterstitial() {
   return (
     <section
       ref={rootRef}
-      className="relative min-h-[75dvh] flex flex-col items-center justify-center bg-[#100728] text-white overflow-hidden py-24 border-y border-white/10"
+      className="relative min-h-[75dvh] flex flex-col items-center justify-center bg-[#0B1E3B] text-white overflow-hidden py-24 border-y border-white/10"
       data-parallax-root
     >
       {/* Ambient background glow — plum authority */}
@@ -72,7 +72,7 @@ export default function StatementInterstitial() {
           className="absolute inset-0"
           style={{
             background:
-              "radial-gradient(ellipse 60% 48% at 50% 42%, rgba(139,92,246,0.38) 0%, rgba(212,175,55,0.16) 45%, transparent 72%), linear-gradient(145deg, rgba(8,6,17,0.8), rgba(42,24,83,0.72))",
+              "radial-gradient(ellipse 60% 48% at 50% 42%, rgba(231,111,0,0.38) 0%, rgba(231,111,0,0.16) 45%, transparent 72%), linear-gradient(145deg, rgba(11,30,59,0.8), rgba(42,24,83,0.72))",
           }}
         />
       </div>
@@ -83,7 +83,7 @@ export default function StatementInterstitial() {
       <div className="relative z-10 max-w-5xl mx-auto px-6 md:px-14 text-center">
         <div data-statement-line className="overflow-hidden mb-3">
           <p
-            className="text-xs font-bold uppercase tracking-[0.25em] text-[#F5D061]"
+            className="text-xs font-bold uppercase tracking-[0.25em] text-[#FFB25E]"
             style={{ fontFamily: "var(--font-body)" }}
           >
             The Statutory Reality
@@ -114,24 +114,24 @@ export default function StatementInterstitial() {
         </h2>
 
         <div className="mt-8 flex flex-col items-center gap-4 md:flex-row md:justify-center md:gap-6">
-          <span className="hidden h-0.5 w-16 shrink-0 bg-[#D4AF37]" />
+          <span className="hidden h-0.5 w-16 shrink-0 bg-[#FF7A00]" />
           <p
             className="max-w-md text-sm font-normal leading-relaxed text-[#E2E8F0] md:text-base"
             style={{ fontFamily: "var(--font-body)" }}
           >
             Operating a security agency without PSARA registration is a cognizable statutory offence under the Private Security Agencies (Regulation) Act, 2005.
           </p>
-          <span className="hidden h-0.5 w-16 shrink-0 bg-[#D4AF37]" />
+          <span className="hidden h-0.5 w-16 shrink-0 bg-[#FF7A00]" />
         </div>
 
         <div
-          className="mt-10 flex flex-wrap items-center justify-center gap-x-3 gap-y-2 text-xs font-bold uppercase tracking-[0.16em] text-[#F5D061]"
+          className="mt-10 flex flex-wrap items-center justify-center gap-x-3 gap-y-2 text-xs font-bold uppercase tracking-[0.16em] text-[#FFB25E]"
           style={{ fontFamily: "var(--font-body)" }}
         >
           <span>500+ LICENSES GRANTED</span>
-          <span className="h-1.5 w-1.5 rounded-full bg-[#C89B3C]" />
+          <span className="h-1.5 w-1.5 rounded-full bg-[#E76F00]" />
           <span>36 STATES &amp; UTs COVERED</span>
-          <span className="h-1.5 w-1.5 rounded-full bg-[#C89B3C]" />
+          <span className="h-1.5 w-1.5 rounded-full bg-[#E76F00]" />
           <span>10+ YEARS DISCIPLINE</span>
         </div>
       </div>

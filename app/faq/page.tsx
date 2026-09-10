@@ -25,10 +25,10 @@ export default function FaqPage() {
         lead="Eligibility criteria, director qualifications, training institute MOUs, police verification, and state fee slabs — clear answers for private security agency promoters."
         crumbs={[{ label: "FAQ" }]}
       />
-      <PageMain className="bg-[#080714] text-white">
+      <PageMain className="bg-[#0B1E3B] text-white">
         <div className="mx-auto max-w-4xl space-y-4">
-          <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#F5D061] mb-6">
-            <HelpCircle className="h-4 w-4 text-[#D4AF37]" />
+          <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#FFB25E] mb-6">
+            <HelpCircle className="h-4 w-4 text-[#FF7A00]" />
             <span>Comprehensive Statutory Answers</span>
           </div>
 
@@ -39,11 +39,11 @@ export default function FaqPage() {
                 className="group py-6 transition-colors"
               >
                 <summary
-                  className="cursor-pointer list-none text-lg font-bold text-white leading-snug marker:content-none flex items-center justify-between gap-4 group-hover:text-[#F5D061]"
+                  className="cursor-pointer list-none text-lg font-bold text-white leading-snug marker:content-none flex items-center justify-between gap-4 group-hover:text-[#FFB25E]"
                   style={{ fontFamily: "var(--font-display)" }}
                 >
                   <span>{item.q}</span>
-                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl border border-white/20 bg-[#180D36] text-[#F5D061] transition-all group-open:rotate-180 group-open:bg-[#C89B3C] group-open:text-[#241703]">
+                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl border border-white/20 bg-[#132E57] text-[#FFB25E] transition-all group-open:rotate-180 group-open:bg-[#E76F00] group-open:text-[#FFFFFF]">
                     <ChevronDown className="h-4 w-4" />
                   </span>
                 </summary>
@@ -58,7 +58,7 @@ export default function FaqPage() {
           </div>
 
           {/* Bottom WhatsApp CTA */}
-          <div className="mt-12 space-y-4 rounded-2xl border border-white/15 bg-gradient-to-br from-[#2A1853] to-[#120C27] p-8 text-center">
+          <div className="mt-12 space-y-4 rounded-2xl border border-white/15 bg-gradient-to-br from-[#1A3A6B] to-[#132E57] p-8 text-center">
             <h3 className="text-xl font-bold text-white" style={{ fontFamily: "var(--font-display)" }}>
               Have a Specific State or Director Query?
             </h3>

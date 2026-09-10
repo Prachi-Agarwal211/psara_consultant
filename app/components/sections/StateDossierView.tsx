@@ -40,11 +40,11 @@ function DossierTitle({ index, children }: { index: string; children: React.Reac
     <div className="flex min-w-0 items-start gap-3 sm:items-center sm:gap-4">
       <span
         aria-hidden
-        className="shrink-0 pt-1 font-mono text-xs font-bold tracking-widest text-[#D4AF37] sm:pt-0"
+        className="shrink-0 pt-1 font-mono text-xs font-bold tracking-widest text-[#FF7A00] sm:pt-0"
       >
         {index}
       </span>
-      <div className="mt-3 h-px w-5 shrink-0 bg-[#D4AF37] sm:mt-0 sm:w-10" aria-hidden />
+      <div className="mt-3 h-px w-5 shrink-0 bg-[#FF7A00] sm:mt-0 sm:w-10" aria-hidden />
       <h2 className="min-w-0 text-xl font-bold leading-tight tracking-tight text-white sm:text-2xl" style={{ fontFamily: "var(--font-display)" }}>
         {children}
       </h2>
@@ -106,20 +106,20 @@ export default function StateDossierView({
         <div className="flex flex-col items-start justify-between gap-4 border-b border-white/10 pb-6 sm:flex-row sm:items-center">
           <div className="flex min-w-0 flex-wrap items-center gap-3">
             <span className="badge-metallic-gold">
-              <Shield className="h-3.5 w-3.5 text-[#D4AF37]" />
+              <Shield className="h-3.5 w-3.5 text-[#FF7A00]" />
               State Statutory Framework
             </span>
-            <span className="text-xs font-mono font-bold tracking-widest uppercase text-[#D4AF37]">
+            <span className="text-xs font-mono font-bold tracking-widest uppercase text-[#FF7A00]">
               Ref: PSARA-{state.slug.toUpperCase()}
             </span>
           </div>
           <div className="flex flex-wrap items-center gap-x-3 gap-y-2 text-xs font-bold uppercase tracking-wider text-[#E2E8F0]">
             <span className="flex items-center gap-1">
-              <MapPin className="h-3.5 w-3.5 text-[#D4AF37]" /> Capital: <strong className="text-white font-bold">{state.capital}</strong>
+              <MapPin className="h-3.5 w-3.5 text-[#FF7A00]" /> Capital: <strong className="text-white font-bold">{state.capital}</strong>
             </span>
             <span className="hidden sm:inline">•</span>
             <span className="flex items-center gap-1">
-              <Clock className="h-3.5 w-3.5 text-[#D4AF37]" /> Validity: <strong className="text-white font-bold">{state.validityYears} Years</strong>
+              <Clock className="h-3.5 w-3.5 text-[#FF7A00]" /> Validity: <strong className="text-white font-bold">{state.validityYears} Years</strong>
             </span>
           </div>
         </div>
@@ -139,15 +139,15 @@ export default function StateDossierView({
         {/* Key Framework Parameters */}
           <div className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-4 pt-6 border-t border-white/10">
           <div className="rounded-xl border border-white/10 bg-[var(--canvas-void-2)] p-4">
-            <span className="block text-[0.65rem] font-bold uppercase tracking-widest text-[#D4AF37]">Application Mode</span>
+            <span className="block text-[0.65rem] font-bold uppercase tracking-widest text-[#FF7A00]">Application Mode</span>
             <span className="mt-1 block text-sm font-bold text-white">{state.applicationMode}</span>
           </div>
           <div className="rounded-xl border border-white/10 bg-[var(--canvas-void-2)] p-4">
-            <span className="block text-[0.65rem] font-bold uppercase tracking-widest text-[#D4AF37]">Rules Framework</span>
+            <span className="block text-[0.65rem] font-bold uppercase tracking-widest text-[#FF7A00]">Rules Framework</span>
             <span className="mt-1 block text-sm font-bold text-white">{state.rulesNote}</span>
           </div>
           <div className="rounded-xl border border-white/10 bg-[var(--canvas-void-2)] p-4">
-            <span className="block text-[0.65rem] font-bold uppercase tracking-widest text-[#D4AF37]">Coverage Scale</span>
+            <span className="block text-[0.65rem] font-bold uppercase tracking-widest text-[#FF7A00]">Coverage Scale</span>
             <span className="mt-1 block text-sm font-bold text-white">{state.cities.length}+ Major Districts</span>
           </div>
         </div>
@@ -157,28 +157,28 @@ export default function StateDossierView({
       <section className="space-y-6">
         <DossierTitle index="01">State at a Glance</DossierTitle>
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          <div className="rounded-2xl border border-[rgba(212,175,55,0.28)] bg-gradient-to-br from-[#14102A] to-[#0F0C1F] p-5 shadow-md">
-            <span className="block text-[0.65rem] font-bold uppercase tracking-widest text-[#D4AF37]">Controlling Authority</span>
+          <div className="rounded-2xl border border-[rgba(231,111,0,0.28)] bg-[#0B1E3B] p-5 shadow-md">
+            <span className="block text-[0.65rem] font-bold uppercase tracking-widest text-[#FF7A00]">Controlling Authority</span>
             <span className="mt-1.5 block text-xs font-bold text-white leading-snug">{state.authority}</span>
           </div>
-          <div className="rounded-2xl border border-white/10 bg-gradient-to-br from-[#14102A] to-[#0F0C1F] p-5 shadow-md">
-            <span className="block text-[0.65rem] font-bold uppercase tracking-widest text-[#D4AF37]">Indicative Timeline</span>
+          <div className="rounded-2xl border border-white/10 bg-[#0B1E3B] p-5 shadow-md">
+            <span className="block text-[0.65rem] font-bold uppercase tracking-widest text-[#FF7A00]">Indicative Timeline</span>
             <span className="mt-1.5 block text-lg font-bold text-white font-mono">{state.timeline}</span>
           </div>
-          <div className="rounded-2xl border border-white/10 bg-gradient-to-br from-[#14102A] to-[#0F0C1F] p-5 shadow-md">
-            <span className="block text-[0.65rem] font-bold uppercase tracking-widest text-[#D4AF37]">Application Mode</span>
+          <div className="rounded-2xl border border-white/10 bg-[#0B1E3B] p-5 shadow-md">
+            <span className="block text-[0.65rem] font-bold uppercase tracking-widest text-[#FF7A00]">Application Mode</span>
             <span className="mt-1.5 block text-xs font-bold text-white leading-snug">{state.applicationMode}</span>
           </div>
-          <div className="rounded-2xl border border-white/10 bg-gradient-to-br from-[#14102A] to-[#0F0C1F] p-5 shadow-md">
-            <span className="block text-[0.65rem] font-bold uppercase tracking-widest text-[#D4AF37]">Licence Validity</span>
+          <div className="rounded-2xl border border-white/10 bg-[#0B1E3B] p-5 shadow-md">
+            <span className="block text-[0.65rem] font-bold uppercase tracking-widest text-[#FF7A00]">Licence Validity</span>
             <span className="mt-1.5 block text-lg font-bold text-white font-mono">{state.validityYears} year{state.validityYears > 1 ? "s" : ""}</span>
           </div>
-          <div className="rounded-2xl border border-white/10 bg-gradient-to-br from-[#14102A] to-[#0F0C1F] p-5 shadow-md">
-            <span className="block text-[0.65rem] font-bold uppercase tracking-widest text-[#D4AF37]">State Capital</span>
+          <div className="rounded-2xl border border-white/10 bg-[#0B1E3B] p-5 shadow-md">
+            <span className="block text-[0.65rem] font-bold uppercase tracking-widest text-[#FF7A00]">State Capital</span>
             <span className="mt-1.5 block text-sm font-bold text-white">{state.capital}</span>
           </div>
-          <div className="rounded-2xl border border-white/10 bg-gradient-to-br from-[#14102A] to-[#0F0C1F] p-5 shadow-md">
-            <span className="block text-[0.65rem] font-bold uppercase tracking-widest text-[#D4AF37]">Fee Slabs (Govt)</span>
+          <div className="rounded-2xl border border-white/10 bg-[#0B1E3B] p-5 shadow-md">
+            <span className="block text-[0.65rem] font-bold uppercase tracking-widest text-[#FF7A00]">Fee Slabs (Govt)</span>
             <span className="mt-1.5 block text-xs font-bold text-white leading-snug">₹5,000 / ₹10,000 / ₹25,000</span>
           </div>
         </div>
@@ -190,47 +190,47 @@ export default function StateDossierView({
           <DossierTitle index="02">{`Controlling Authority — Officer & Contact Details`}</DossierTitle>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-            <div className="rounded-2xl border border-white/10 bg-gradient-to-b from-[#14102A] to-[#0F0C1F] p-5 shadow-md">
-              <BadgeCheck className="h-4 w-4 text-[#D4AF37] mb-2" />
-              <span className="block text-[0.6rem] font-bold uppercase tracking-widest text-[#D4AF37]">Officer on Record</span>
+            <div className="rounded-2xl border border-white/10 bg-[#0B1E3B] p-5 shadow-md">
+              <BadgeCheck className="h-4 w-4 text-[#FF7A00] mb-2" />
+              <span className="block text-[0.6rem] font-bold uppercase tracking-widest text-[#FF7A00]">Officer on Record</span>
               <span className="mt-1 block text-sm font-bold text-white leading-snug">{ca.name}</span>
             </div>
             {ca.phone && ca.phone !== "—" && (
-              <div className="rounded-2xl border border-white/10 bg-gradient-to-b from-[#14102A] to-[#0F0C1F] p-5 shadow-md">
+              <div className="rounded-2xl border border-white/10 bg-[#0B1E3B] p-5 shadow-md">
                 <div className="flex items-center justify-between">
-                  <Phone className="h-4 w-4 text-[#D4AF37] mb-2" />
+                  <Phone className="h-4 w-4 text-[#FF7A00] mb-2" />
                   <button
                     onClick={() => copyToClipboard(ca.phone, "phone")}
-                    className="text-[10px] text-[#D4AF37] font-bold flex items-center gap-1 hover:underline"
+                    className="text-[10px] text-[#FF7A00] font-bold flex items-center gap-1 hover:underline"
                   >
                     {copiedField === "phone" ? <Check className="h-3 w-3" /> : <Copy className="h-3 w-3" />}
                     {copiedField === "phone" ? "Copied" : "Copy"}
                   </button>
                 </div>
-                <span className="block text-[0.6rem] font-bold uppercase tracking-widest text-[#D4AF37]">Phone</span>
-                <a href={`tel:${ca.phone}`} className="mt-1 block text-sm font-bold text-white hover:text-[#F5D061] break-all">{ca.phone}</a>
+                <span className="block text-[0.6rem] font-bold uppercase tracking-widest text-[#FF7A00]">Phone</span>
+                <a href={`tel:${ca.phone}`} className="mt-1 block text-sm font-bold text-white hover:text-[#FFB25E] break-all">{ca.phone}</a>
               </div>
             )}
             {ca.email && ca.email !== "—" && (
-              <div className="rounded-2xl border border-white/10 bg-gradient-to-b from-[#14102A] to-[#0F0C1F] p-5 shadow-md">
+              <div className="rounded-2xl border border-white/10 bg-[#0B1E3B] p-5 shadow-md">
                 <div className="flex items-center justify-between">
-                  <Mail className="h-4 w-4 text-[#D4AF37] mb-2" />
+                  <Mail className="h-4 w-4 text-[#FF7A00] mb-2" />
                   <button
                     onClick={() => copyToClipboard(ca.email, "email")}
-                    className="text-[10px] text-[#D4AF37] font-bold flex items-center gap-1 hover:underline"
+                    className="text-[10px] text-[#FF7A00] font-bold flex items-center gap-1 hover:underline"
                   >
                     {copiedField === "email" ? <Check className="h-3 w-3" /> : <Copy className="h-3 w-3" />}
                     {copiedField === "email" ? "Copied" : "Copy"}
                   </button>
                 </div>
-                <span className="block text-[0.6rem] font-bold uppercase tracking-widest text-[#D4AF37]">Email</span>
-                <a href={`mailto:${ca.email}`} className="mt-1 block text-sm font-bold text-white hover:text-[#F5D061] break-all">{ca.email}</a>
+                <span className="block text-[0.6rem] font-bold uppercase tracking-widest text-[#FF7A00]">Email</span>
+                <a href={`mailto:${ca.email}`} className="mt-1 block text-sm font-bold text-white hover:text-[#FFB25E] break-all">{ca.email}</a>
               </div>
             )}
             {ca.portal && (
-              <div className="rounded-2xl border border-white/10 bg-gradient-to-b from-[#14102A] to-[#0F0C1F] p-5 shadow-md">
-                <Globe className="h-4 w-4 text-[#D4AF37] mb-2" />
-                <span className="block text-[0.6rem] font-bold uppercase tracking-widest text-[#D4AF37]">Portal</span>
+              <div className="rounded-2xl border border-white/10 bg-[#0B1E3B] p-5 shadow-md">
+                <Globe className="h-4 w-4 text-[#FF7A00] mb-2" />
+                <span className="block text-[0.6rem] font-bold uppercase tracking-widest text-[#FF7A00]">Portal</span>
                 <span className="mt-1 block text-xs font-bold text-white break-all">{ca.portal}</span>
               </div>
             )}
@@ -243,7 +243,7 @@ export default function StateDossierView({
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-white/10 pb-4">
           <DossierTitle index={pad(processIdx)}>{`Compliance Toolkit for ${state.name}`}</DossierTitle>
 
-          <div className="flex w-full flex-wrap gap-2 rounded-xl border border-white/10 bg-[#120C27] p-1.5 sm:w-auto sm:flex-nowrap">
+          <div className="flex w-full flex-wrap gap-2 rounded-xl border border-white/10 bg-[#132E57] p-1.5 sm:w-auto sm:flex-nowrap">
             {(["process", "documents", "calculator"] as const).map((tab) => (
               <button
                 key={tab}
@@ -251,7 +251,7 @@ export default function StateDossierView({
                 aria-pressed={activeTab === tab}
                 className={`flex-1 whitespace-nowrap rounded-lg px-3 py-2 text-xs font-bold uppercase tracking-wider transition-[border-color,box-shadow,transform] sm:flex-none sm:px-4 ${
                   activeTab === tab
-                    ? "text-[#241703] shadow-md bg-[#C89B3C]"
+                    ? "text-[#0B1E3B] shadow-md bg-[#E76F00]"
                     : "text-[#CBD5E1] hover:text-white"
                 }`}
               >
@@ -272,7 +272,7 @@ export default function StateDossierView({
               return (
                 <div
                   key={idx}
-                  className="group relative overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-b from-[#14102A] to-[#0F0C1F] p-6 shadow-md transition-[border-color,box-shadow,transform,filter] duration-200 hover:border-[#D4AF37]"
+                  className="group relative overflow-hidden rounded-2xl border border-white/10 bg-[#0B1E3B] p-6 shadow-md transition-[border-color,box-shadow,transform,filter] duration-200 hover:border-[#FF7A00]"
                 >
                   <div className="flex items-center justify-between">
                     <span className="badge-metallic-gold text-[0.6rem]">
@@ -290,9 +290,9 @@ export default function StateDossierView({
 
                   <div className="mt-4 flex items-center justify-between border-t border-white/10 pt-4 text-xs font-bold text-[#94A3B8]">
                     <span className="flex items-center gap-1.5">
-                      <CheckCircle2 className="h-3.5 w-3.5 text-[#D4AF37]" /> Verified Track
+                      <CheckCircle2 className="h-3.5 w-3.5 text-[#FF7A00]" /> Verified Track
                     </span>
-                    <ArrowRight className="h-3.5 w-3.5 text-[#D4AF37] transition-transform group-hover:translate-x-1" />
+                    <ArrowRight className="h-3.5 w-3.5 text-[#FF7A00] transition-transform group-hover:translate-x-1" />
                   </div>
                 </div>
               );
@@ -305,9 +305,9 @@ export default function StateDossierView({
           <div className="space-y-6">
             <div className="flex flex-col items-start justify-between gap-2 sm:flex-row sm:items-center">
               <h3 className="flex min-w-0 items-start gap-2 text-lg font-bold leading-tight text-white">
-                <FileCheck className="h-5 w-5 text-[#D4AF37]" /> Mandatory Document Checklist ({state.name})
+                <FileCheck className="h-5 w-5 text-[#FF7A00]" /> Mandatory Document Checklist ({state.name})
               </h3>
-              <span className="text-xs text-[#F5D061] font-mono font-bold">
+              <span className="text-xs text-[#FFB25E] font-mono font-bold">
                 {Object.values(checkedDocs).filter(Boolean).length} of {content.documents.length} Checked
               </span>
             </div>
@@ -322,13 +322,13 @@ export default function StateDossierView({
                     onClick={() => toggleDoc(idx)}
                     className={`flex items-start gap-3 rounded-2xl border p-4 text-left transition-[border-color,box-shadow,transform] ${
                       isChecked
-                        ? "border-[#25D366] bg-[#14102A]/80 shadow-md"
-                        : "border-white/10 bg-[#0F0C1F] hover:border-white/30"
+                        ? "border-[#046A38] bg-[#0B1E3B]/80 shadow-md"
+                        : "border-white/10 bg-[#0B1E3B] hover:border-white/30"
                     }`}
                   >
-                    <span className="mt-0.5 shrink-0 text-[#D4AF37]">
+                    <span className="mt-0.5 shrink-0 text-[#FF7A00]">
                       {isChecked ? (
-                        <CheckSquare className="h-5 w-5 text-[#25D366]" />
+                        <CheckSquare className="h-5 w-5 text-[#046A38]" />
                       ) : (
                         <Square className="h-5 w-5 text-white/40" />
                       )}
@@ -350,11 +350,11 @@ export default function StateDossierView({
 
         {/* Tab 3: Interactive State Fee Calculator */}
         {activeTab === "calculator" && (
-          <div className="rounded-3xl border border-[rgba(212,175,55,0.35)] bg-gradient-to-b from-[#14102A] to-[#0F0C1F] p-6 sm:p-8 space-y-6 shadow-2xl">
+          <div className="rounded-3xl border border-[rgba(231,111,0,0.35)] bg-[#0B1E3B] p-6 sm:p-8 space-y-6 shadow-2xl">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/10 pb-4">
               <div>
                 <span className="badge-metallic-gold mb-2">
-                  <Calculator className="h-3.5 w-3.5 text-[#D4AF37]" /> State Fee Calculator
+                  <Calculator className="h-3.5 w-3.5 text-[#FF7A00]" /> State Fee Calculator
                 </span>
                 <h3 className="text-xl font-bold text-white" style={{ fontFamily: "var(--font-display)" }}>
                   {state.name} Cost Breakdown
@@ -363,19 +363,19 @@ export default function StateDossierView({
               <div className="flex w-full flex-wrap gap-2 sm:w-auto sm:flex-nowrap">
                 <button
                   onClick={() => setCalcScale("d1")}
-                  className={`flex-1 whitespace-nowrap rounded-lg border px-3 py-1.5 text-xs font-bold sm:flex-none ${calcScale === "d1" ? "bg-[#C89B3C] border-[#D4AF37] text-[#241703]" : "border-white/10 text-[#CBD5E1]"}`}
+                  className={`flex-1 whitespace-nowrap rounded-lg border px-3 py-1.5 text-xs font-bold sm:flex-none ${calcScale === "d1" ? "bg-[#E76F00] border-[#FF7A00] text-[#0B1E3B]" : "border-white/10 text-[#CBD5E1]"}`}
                 >
                   1 District
                 </button>
                 <button
                   onClick={() => setCalcScale("d5")}
-                  className={`flex-1 whitespace-nowrap rounded-lg border px-3 py-1.5 text-xs font-bold sm:flex-none ${calcScale === "d5" ? "bg-[#C89B3C] border-[#D4AF37] text-[#241703]" : "border-white/10 text-[#CBD5E1]"}`}
+                  className={`flex-1 whitespace-nowrap rounded-lg border px-3 py-1.5 text-xs font-bold sm:flex-none ${calcScale === "d5" ? "bg-[#E76F00] border-[#FF7A00] text-[#0B1E3B]" : "border-white/10 text-[#CBD5E1]"}`}
                 >
                   5 Districts
                 </button>
                 <button
                   onClick={() => setCalcScale("state")}
-                  className={`flex-1 whitespace-nowrap rounded-lg border px-3 py-1.5 text-xs font-bold sm:flex-none ${calcScale === "state" ? "bg-[#C89B3C] border-[#D4AF37] text-[#241703]" : "border-white/10 text-[#CBD5E1]"}`}
+                  className={`flex-1 whitespace-nowrap rounded-lg border px-3 py-1.5 text-xs font-bold sm:flex-none ${calcScale === "state" ? "bg-[#E76F00] border-[#FF7A00] text-[#0B1E3B]" : "border-white/10 text-[#CBD5E1]"}`}
                 >
                   Whole State
                 </button>
@@ -383,25 +383,25 @@ export default function StateDossierView({
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-xs">
-              <div className="p-4 rounded-xl bg-[#0F0C1F] border border-white/10">
+              <div className="p-4 rounded-xl bg-[#0B1E3B] border border-white/10">
                 <span className="text-[#94A3B8] block">Statutory Govt Fee</span>
                 <span className="text-lg font-bold text-white font-mono mt-1 block">₹{govFee.toLocaleString("en-IN")}</span>
               </div>
-              <div className="p-4 rounded-xl bg-[#0F0C1F] border border-white/10">
+              <div className="p-4 rounded-xl bg-[#0B1E3B] border border-white/10">
                 <span className="text-[#94A3B8] block">Training MOU Fee</span>
                 <span className="text-lg font-bold text-white font-mono mt-1 block">₹{mouFee.toLocaleString("en-IN")}</span>
               </div>
-              <div className="p-4 rounded-xl bg-[#0F0C1F] border border-white/10">
+              <div className="p-4 rounded-xl bg-[#0B1E3B] border border-white/10">
                 <span className="text-[#94A3B8] block">Consultancy Fee</span>
                 <span className="text-lg font-bold text-white font-mono mt-1 block">₹{consultancyFee.toLocaleString("en-IN")}</span>
               </div>
-              <div className="p-4 rounded-xl bg-[#0F0C1F] border border-white/10">
+              <div className="p-4 rounded-xl bg-[#0B1E3B] border border-white/10">
                 <span className="text-[#94A3B8] block">Documentation &amp; Affidavits</span>
                 <span className="text-lg font-bold text-white font-mono mt-1 block">₹{docFee.toLocaleString("en-IN")}</span>
               </div>
             </div>
 
-            <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-[#D4AF37]/40">
+            <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-[#FF7A00]/40">
               <div>
                 <span className="text-xs text-[#CBD5E1] font-bold">Total Estimated Budget:</span>
                 <span className="text-2xl font-bold gold-text-gradient font-mono block">₹{totalStateEst.toLocaleString("en-IN")}</span>
@@ -428,12 +428,12 @@ export default function StateDossierView({
         <div className="divide-y divide-white/10 border-y border-white/10">
           {content.faqs.map((faq, idx) => (
             <details key={idx} className="group py-5 transition-colors">
-              <summary className="flex cursor-pointer list-none items-start justify-between gap-4 px-2 font-[family-name:var(--font-display)] text-base font-bold text-white hover:text-[#F5D061]">
+              <summary className="flex cursor-pointer list-none items-start justify-between gap-4 px-2 font-[family-name:var(--font-display)] text-base font-bold text-white hover:text-[#FFB25E]">
                 <span className="flex min-w-0 items-start gap-2">
-                  <span aria-hidden className="shrink-0 pt-0.5 font-mono text-xs text-[#D4AF37]">{String(idx + 1).padStart(2, "0")}</span>
+                  <span aria-hidden className="shrink-0 pt-0.5 font-mono text-xs text-[#FF7A00]">{String(idx + 1).padStart(2, "0")}</span>
                   {faq.q}
                 </span>
-                <span className="shrink-0 pt-0.5 text-sm text-[#D4AF37] transition-transform group-open:rotate-180">↓</span>
+                <span className="shrink-0 pt-0.5 text-sm text-[#FF7A00] transition-transform group-open:rotate-180">↓</span>
               </summary>
               <p className="mt-3 max-w-3xl px-2 text-sm font-normal leading-relaxed text-[#E2E8F0]">
                 {faq.a}

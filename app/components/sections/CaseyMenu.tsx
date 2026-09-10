@@ -138,10 +138,19 @@ export default function CaseyMenu({
   return (
     <div
       ref={rootRef}
-      className={`fixed inset-0 z-[60] flex flex-col items-start justify-center gap-1 px-6 py-16 lg:px-10 ${open ? "pointer-events-auto" : "pointer-events-none"}`}
+      className={`fixed inset-0 z-[60] flex flex-col items-start justify-center gap-1 px-6 py-16 transition-opacity duration-300 lg:px-10 ${open ? "pointer-events-auto visible opacity-100" : "pointer-events-none invisible opacity-0"}`}
       aria-hidden={!open}
     >
-      <div ref={bgRef} className="absolute inset-0 bg-black/20 backdrop-blur-[30px] -z-10" />
+      <div ref={bgRef} className="absolute inset-0 grad-navy -z-10" />
+      <div className="orb orb-saffron right-[-80px] top-[-80px] h-[280px] w-[280px] opacity-50 -z-10" aria-hidden />
+      <button
+        type="button"
+        aria-label="Close menu"
+        onClick={onClose}
+        className="absolute right-5 top-5 flex h-11 w-11 items-center justify-center rounded-full border border-white/25 text-xl font-black text-white transition hover:border-[#FF7A00] hover:text-[#FFB25E] lg:right-8"
+      >
+        ✕
+      </button>
       <button aria-label="Close menu" onClick={onClose} className={`absolute inset-0 -z-10 ${open ? "pointer-events-auto" : "pointer-events-none"}`} />
       <nav className="flex w-full max-w-6xl flex-col items-start gap-1">
         {ITEMS.map((it, idx) => (
@@ -149,18 +158,18 @@ export default function CaseyMenu({
             key={it.n}
             href={it.href}
             onClick={onClose}
-            className={`casey-item group inline-flex items-center whitespace-nowrap text-[#eed0ca] no-underline ${idx % 2 === 0 ? "font-serif" : "font-sans font-semibold"} text-[11vw] leading-none tracking-tight lg:text-[5.2vw]`}
+            className={`casey-item group inline-flex items-center whitespace-nowrap text-white no-underline ${idx % 2 === 0 ? "font-serif" : "font-sans font-semibold"} text-[11vw] leading-none tracking-tight transition-colors hover:text-[#FFB25E] lg:text-[5.2vw]`}
             style={{ fontFamily: idx % 2 === 0 ? `"DM Serif Display", ui-serif` : `"DM Sans", ui-sans-serif` }}
           >
-            <span className="casey-index mr-2 self-start mt-2 font-mono text-[11px] font-medium tracking-wide">{it.n}</span>
+            <span className="casey-index mr-2 self-start mt-2 font-mono text-[11px] font-medium tracking-wide text-[#FF7A00]">{it.n}</span>
             <span className="casey-label inline-flex items-center" />
-            <span className="casey-divider ml-3 inline-block h-[0.9em] w-[2px] bg-[#eed0ca] origin-center rotate-[20deg] will-change-transform" />
+            <span className="casey-divider ml-3 inline-block h-[0.9em] w-[2px] bg-[#FF7A00] origin-center rotate-[20deg] will-change-transform" />
           </a>
         ))}
       </nav>
-      <div className="pointer-events-none absolute bottom-6 left-6 right-6 flex justify-between text-[10px] uppercase tracking-widest text-[#eed0ca]/70">
+      <div className="pointer-events-none absolute bottom-6 left-6 right-6 flex justify-between text-[10px] uppercase tracking-widest text-white/60">
         <span>PSARA Consultant India</span>
-        <span>Strategy • Growth • Impact</span>
+        <span>36 States · Jaipur HQ · Since 2016</span>
       </div>
     </div>
   );

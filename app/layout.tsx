@@ -1,7 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import SmoothScroll from "./components/providers/SmoothScroll";
 import SiteChrome from "../components/SiteChrome";
-import CustomCursor from "../components/CustomCursor";
 import { SITE, CONTACT, AGGREGATE_RATING, OFFICES } from "../lib/config";
 import DynamicBreadcrumbSchema from "../components/DynamicBreadcrumbSchema";
 import Analytics from "./components/Analytics";
@@ -12,7 +11,7 @@ export const viewport: Viewport = {
   initialScale: 1,
   maximumScale: 5,
   viewportFit: "cover",
-  themeColor: "#080611",
+  themeColor: "#0B1E3B",
 };
 
 export const metadata: Metadata = {
@@ -66,12 +65,12 @@ export const metadata: Metadata = {
       { url: "/favicon-192x192.png", sizes: "192x192", type: "image/png" },
       { url: "/favicon-512x512.png", sizes: "512x512", type: "image/png" },
     ],
-    apple: [{ url: "/apple-icon.png", sizes: "180x180", type: "image/png" }],
+    apple: [{ url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" }],
   },
   other: {
-    "theme-color": "#080611",
-    "msapplication-navbutton-color": "#080611",
-    "apple-mobile-web-app-status-bar-style": "#080611",
+    "theme-color": "#0B1E3B",
+    "msapplication-navbutton-color": "#0B1E3B",
+    "apple-mobile-web-app-status-bar-style": "#0B1E3B",
     "geo.region": "IN-DL",
     "geo.placename": "New Delhi, Delhi",
     "geo.position": "28.6304;77.2177",
@@ -102,7 +101,6 @@ export const metadata: Metadata = {
 };
 
 import StickyCta from "./components/layout/StickyCta";
-import ExitIntentPopup from "./components/ui/ExitIntentPopup";
 import PageTransition from "./components/layout/PageTransition";
 
 /**
@@ -242,14 +240,12 @@ export default function RootLayout({
         />
         {/* Dynamic per-page breadcrumb — rendered in body to avoid head hydration mismatch */}
         <DynamicBreadcrumbSchema />
-        <CustomCursor />
         <SmoothScroll>
           <PageTransition>
             <SiteChrome>{children}</SiteChrome>
           </PageTransition>
         </SmoothScroll>
         <StickyCta />
-        <ExitIntentPopup />
         <CookieBanner />
       </body>
     </html>

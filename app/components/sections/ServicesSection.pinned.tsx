@@ -45,7 +45,7 @@ export function ServicesPinnedHorizontal() {
         <div className="mb-8 flex flex-col gap-4 border-b border-white/10 pb-7 sm:mb-10 sm:flex-row sm:items-end sm:justify-between">
           <MaskReveal direction="left">
             <div>
-              <div className="mb-3 flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.2em] text-[#D4AF37]">
+              <div className="mb-3 flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.2em] text-[#FF7A00]">
                 <ShieldCheck className="h-3.5 w-3.5" aria-hidden="true" />
                 Statutory advisory desk
               </div>
@@ -70,15 +70,15 @@ export function ServicesPinnedHorizontal() {
               >
                 <div>
                   <div className="mb-5 flex items-center justify-between">
-                    <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#D4AF37]">SRV — {String(i + 1).padStart(2, "0")}</span>
-                    <span className="h-1.5 w-1.5 rounded-full bg-[#D4AF37]" aria-hidden="true" />
+                    <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#FF7A00]">SRV — {String(i + 1).padStart(2, "0")}</span>
+                    <span className="h-1.5 w-1.5 rounded-full bg-[#FF7A00]" aria-hidden="true" />
                   </div>
-                  <h4 className="text-xl font-bold leading-snug text-white transition-colors group-hover:text-[#F5D061]" style={{ fontFamily: "var(--font-display)" }}>{s.title}</h4>
+                  <h4 className="text-xl font-bold leading-snug text-white transition-colors group-hover:text-[#FFB25E]" style={{ fontFamily: "var(--font-display)" }}>{s.title}</h4>
                   <p className="mt-3 line-clamp-3 text-sm leading-relaxed text-white/65">{s.short}</p>
                 </div>
-                <div className="mt-7 flex items-center justify-between border-t border-white/10 pt-4 text-[10px] font-bold uppercase tracking-[0.16em] text-white/75 transition-colors group-hover:text-[#F5D061]">
+                <div className="mt-7 flex items-center justify-between border-t border-white/10 pt-4 text-[10px] font-bold uppercase tracking-[0.16em] text-white/75 transition-colors group-hover:text-[#FFB25E]">
                   <span>View requirements</span>
-                  <ArrowRight className="h-4 w-4 text-[#D4AF37] transition-transform group-hover:translate-x-1" aria-hidden="true" />
+                  <ArrowRight className="h-4 w-4 text-[#FF7A00] transition-transform group-hover:translate-x-1" aria-hidden="true" />
                 </div>
               </Link>
             </TiltCard>

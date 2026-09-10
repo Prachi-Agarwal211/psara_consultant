@@ -6,6 +6,7 @@ import HeroStage from "./components/sections/HeroStage";
 import ComplianceMarquee from "./components/sections/ComplianceMarquee";
 import StatsBar from "./components/sections/StatsBar";
 import ServicesSection from "./components/sections/ServicesSection";
+import FieldBand from "./components/sections/FieldBand";
 import ApprovalRoadmap from "./components/sections/ApprovalRoadmap";
 import GoogleReviews from "./components/sections/GoogleReviews";
 import HomeFaq from "./components/sections/HomeFaq";
@@ -26,11 +27,12 @@ export default function Home() {
       <HeroStage />
       <ComplianceMarquee />
       <StatsBar />
+      <StateGridHome />
       <ServicesSection />
+      <FieldBand />
       <ApprovalRoadmap />
       <GoogleReviews />
       <WhyChooseUs />
-      <StateGridHome />
       <HomeFaq />
       <HomeContact />
       <GbpOfficeSection placeLabel={HQ_OFFICES[0]?.city ?? "Jaipur"} offices={HQ_OFFICES} />

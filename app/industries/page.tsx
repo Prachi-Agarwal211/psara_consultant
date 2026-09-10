@@ -23,23 +23,23 @@ export default function IndustriesPage() {
         crumbs={[{ label: "Industries" }]}
       />
 
-      <PageMain className="bg-[#080714] text-white">
+      <PageMain className="bg-[#0B1E3B] text-white">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {INDUSTRIES.map((ind) => (
             <Link
               key={ind.slug}
               href={`/industries/${ind.slug}`}
-              className="group flex flex-col justify-between rounded-3xl border border-[rgba(212,175,55,0.25)] bg-gradient-to-br from-[#2A1853] to-[#120C27] p-6 shadow-xl transition-all duration-200 hover:-translate-y-1 hover:border-[#D4AF37] hover:from-[#332066] hover:to-[#180D36] sm:p-8"
+              className="group flex flex-col justify-between rounded-3xl border border-[rgba(231,111,0,0.25)] bg-gradient-to-br from-[#1A3A6B] to-[#132E57] p-6 shadow-xl transition-all duration-200 hover:-translate-y-1 hover:border-[#FF7A00] hover:from-[#1A3A6B] hover:to-[#132E57] sm:p-8"
             >
               <div>
                 <div className="flex items-center justify-between mb-4">
                   <span className="badge-metallic-gold text-[10px]">
                     Sector Standard
                   </span>
-                  <ArrowUpRight className="h-4 w-4 text-[#D4AF37] transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                  <ArrowUpRight className="h-4 w-4 text-[#FF7A00] transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                 </div>
 
-                <h2 className="text-2xl font-bold text-white group-hover:text-[#F5D061] transition-colors" style={{ fontFamily: "var(--font-display)" }}>
+                <h2 className="text-2xl font-bold text-white group-hover:text-[#FFB25E] transition-colors" style={{ fontFamily: "var(--font-display)" }}>
                   {ind.title}
                 </h2>
 
@@ -50,7 +50,7 @@ export default function IndustriesPage() {
 
               <div className="mt-8 pt-4 border-t border-white/10 flex items-center justify-between text-xs font-bold uppercase tracking-wider text-[#94A3B8]">
                 <span>Custom Regulatory Rules</span>
-                <span className="text-[#F5D061] group-hover:underline flex items-center gap-1">
+                <span className="text-[#FFB25E] group-hover:underline flex items-center gap-1">
                   Explore Rules &rarr;
                 </span>
               </div>
@@ -59,8 +59,8 @@ export default function IndustriesPage() {
         </div>
 
         {/* Bottom Callout */}
-        <section className="mt-16 space-y-4 rounded-3xl border border-[rgba(212,175,55,0.35)] bg-gradient-to-r from-[#332066] via-[#180D36] to-[#24104B] p-8 text-center shadow-2xl md:p-12">
-          <div className="mb-2 inline-flex rounded-2xl border border-[#D4AF37]/40 bg-[#120C27] p-3 text-[#D4AF37]">
+        <section className="mt-16 space-y-4 rounded-3xl border border-[rgba(231,111,0,0.35)] bg-gradient-to-r from-[#1A3A6B] via-[#132E57] to-[#14305E] p-8 text-center shadow-2xl md:p-12">
+          <div className="mb-2 inline-flex rounded-2xl border border-[#FF7A00]/40 bg-[#132E57] p-3 text-[#FF7A00]">
             <ShieldCheck className="h-8 w-8" />
           </div>
           <h2 className="text-2xl md:text-4xl font-bold text-white" style={{ fontFamily: "var(--font-display)" }}>

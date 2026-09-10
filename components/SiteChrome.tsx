@@ -91,20 +91,16 @@ export function SiteHeader({ pathname, homePlacement = false }: { pathname: stri
         <div
           className={`flex items-center justify-between gap-4 px-[var(--gutter)] transition-all duration-300 ${
             homePlacement && !scrolled
-              ? "border-b border-white/10 bg-gradient-to-b from-[#080611]/90 via-[#100728]/55 to-transparent text-white"
+              ? "border-b border-[#0B1E3B]/10 bg-[#FFFDF5]/90 text-[#0B1E3B] backdrop-blur"
               : scrolled
-                ? "bg-[#080611]/95 backdrop-blur-md border-b border-[#D4AF37]/30 shadow-2xl shadow-violet-950/60 text-white"
-                : "bg-[#080611]/80 backdrop-blur-sm border-b border-white/10 text-white"
+                ? "bg-[#0B1E3B]/95 backdrop-blur-md border-b border-[#E76F00]/40 shadow-xl text-white"
+                : "bg-[#0B1E3B]/90 backdrop-blur-sm border-b border-white/10 text-white"
           }`}
           style={{ height: "4.5rem" }}
         >
-          {/* Brand Logo */}
+          {/* Brand Logo — ponytail: lockup PNG carries the name, no duplicate text (was invisible white-on-cream on home header) */}
           <Link href="/" className="shrink-0 flex items-center gap-2.5" aria-label="PSARA Consultant India home">
             <BrandMark variant="light" compact />
-            <span className="flex flex-col justify-center leading-none text-white">
-              <span className="text-[0.95rem] font-bold uppercase tracking-[0.16em]">PSARA</span>
-              <span className="mt-1 hidden text-[0.52rem] font-bold uppercase tracking-[0.2em] text-[#E8D5A3] sm:block">Consultant India</span>
-            </span>
           </Link>
 
           {/* Center: Main Primary Desktop Nav */}
@@ -116,13 +112,13 @@ export function SiteHeader({ pathname, homePlacement = false }: { pathname: stri
                   key={l.href}
                   href={l.href}
                   className={`text-[11px] font-bold uppercase tracking-[0.14em] transition-all duration-200 py-1.5 px-2 relative ${
-                    active ? "text-[#E8D5A3]" : "text-white/75 hover:text-white"
+                    active ? "text-[#FFB25E]" : "text-white/75 hover:text-white"
                   }`}
                   style={{ fontFamily: "var(--font-body)" }}
                 >
                   <span>{l.label}</span>
                   {active && (
-                    <span className="absolute bottom-0 inset-x-2 h-[2px] bg-[#D4AF37] rounded-full" />
+                    <span className="absolute bottom-0 inset-x-2 h-[2px] bg-[#E76F00] rounded-full" />
                   )}
                 </Link>
               );
@@ -134,7 +130,7 @@ export function SiteHeader({ pathname, homePlacement = false }: { pathname: stri
             {/* Quick Call */}
             <a
               href={TEL_HREF}
-              className="hidden sm:inline-flex items-center gap-2 rounded-full border border-[#D4AF37]/75 bg-[#180D36]/55 px-4 py-2.5 text-xs font-bold uppercase tracking-[.06em] text-[#E8D5A3] transition-all duration-200 hover:bg-[#D4AF37] hover:text-[#080611]"
+              className="hidden sm:inline-flex items-center gap-2 rounded-full border border-[#E76F00]/75 bg-[#0B1E3B]/55 px-4 py-2.5 text-xs font-bold uppercase tracking-[.06em] text-[#FFB25E] transition-all duration-200 hover:bg-[#E76F00] hover:text-[#0B1E3B]"
               style={{ fontFamily: "var(--font-body)" }}
             >
               <Phone className="h-3.5 w-3.5" />
@@ -144,14 +140,14 @@ export function SiteHeader({ pathname, homePlacement = false }: { pathname: stri
             {/* Universal Menu Button */}
             <button
               type="button"
-              className="flex h-11 w-11 items-center justify-center rounded-full border border-[#D4AF37]/70 bg-[#180D36]/70 p-0 text-xs font-bold uppercase tracking-[.08em] text-white shadow-md transition-all duration-200 hover:border-[#E8D5A3] hover:text-[#E8D5A3] active:scale-95"
+              className="flex h-11 w-11 items-center justify-center rounded-full border border-[#E76F00]/70 bg-[#0B1E3B]/70 p-0 text-xs font-bold uppercase tracking-[.08em] text-white shadow-md transition-all duration-200 hover:border-[#FFB25E] hover:text-[#FFB25E] active:scale-95"
               onClick={() => setMenuOpen(true)}
               aria-label="Open navigation menu"
               aria-expanded={menuOpen}
               aria-controls="site-navigation-drawer"
               style={{ fontFamily: "var(--font-body)" }}
             >
-              <Menu className="h-4 w-4 text-[#D4AF37]" />
+              <Menu className="h-4 w-4 text-[#E76F00]" />
             </button>
           </div>
         </div>
@@ -164,7 +160,7 @@ export function SiteHeader({ pathname, homePlacement = false }: { pathname: stri
           menuOpen ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"
         }`}
         style={{
-          backgroundColor: "#080611",
+          backgroundColor: "#0B1E3B",
           color: "#FFFFFF",
           paddingTop: "env(safe-area-inset-top, 0px)",
           paddingBottom: "env(safe-area-inset-bottom, 0px)",
@@ -175,7 +171,7 @@ export function SiteHeader({ pathname, homePlacement = false }: { pathname: stri
           <BrandMark variant="light" />
           <button
             type="button"
-            className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/20 text-white hover:border-[#D4AF37] hover:text-[#F5D061] transition-colors"
+            className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/20 text-white hover:border-[#E76F00] hover:text-[#FFB25E] transition-colors"
             onClick={() => setMenuOpen(false)}
             aria-label="Close navigation"
           >
@@ -188,7 +184,7 @@ export function SiteHeader({ pathname, homePlacement = false }: { pathname: stri
           <Link
             href="/"
             onClick={() => setMenuOpen(false)}
-            className="flex items-center justify-between border-b border-white/10 py-3.5 font-bold text-lg text-white hover:text-[#F5D061] transition-colors"
+            className="flex items-center justify-between border-b border-white/10 py-3.5 font-bold text-lg text-white hover:text-[#FFB25E] transition-colors"
           >
             <span>Home</span>
             <ArrowRight className="h-4 w-4 text-white/40" />
@@ -198,18 +194,18 @@ export function SiteHeader({ pathname, homePlacement = false }: { pathname: stri
               key={l.href}
               href={l.href}
               onClick={() => setMenuOpen(false)}
-              className="flex items-center justify-between border-b border-white/10 py-3.5 font-bold text-lg text-white hover:text-[#F5D061] transition-colors"
+              className="flex items-center justify-between border-b border-white/10 py-3.5 font-bold text-lg text-white hover:text-[#FFB25E] transition-colors"
             >
               <span>{l.label}</span>
-              <ArrowRight className="h-4 w-4 text-[#D4AF37]" />
+              <ArrowRight className="h-4 w-4 text-[#E76F00]" />
             </Link>
           ))}
         </nav>
 
         {/* Drawer Footer Actions */}
-        <div className="flex flex-col gap-3 px-[var(--gutter)] pb-8 pt-4 border-t border-white/15 bg-gradient-to-br from-[#2A1853] to-[#120C27]">
+        <div className="flex flex-col gap-3 px-[var(--gutter)] pb-8 pt-4 border-t border-white/15 bg-gradient-to-br from-[#1A3A6B] to-[#132E57]">
           <div className="flex items-center gap-2 text-xs text-white/70">
-            <ShieldCheck className="h-4 w-4 text-[#D4AF37]" />
+            <ShieldCheck className="h-4 w-4 text-[#E76F00]" />
             <span>Pan-India Statutory PSARA Advisory Desk</span>
           </div>
           <a
@@ -217,7 +213,7 @@ export function SiteHeader({ pathname, homePlacement = false }: { pathname: stri
             className="inline-flex items-center justify-center gap-2 rounded-xl border border-white/20 bg-white/10 px-5 py-3.5 text-xs font-bold uppercase tracking-wider text-white hover:bg-white/20 transition-all"
             onClick={() => setMenuOpen(false)}
           >
-            <Phone className="h-4 w-4 text-[#F5D061]" />
+            <Phone className="h-4 w-4 text-[#FFB25E]" />
             Call {CONTACT.phoneDisplay}
           </a>
           <a
@@ -225,7 +221,7 @@ export function SiteHeader({ pathname, homePlacement = false }: { pathname: stri
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3.5 text-xs font-bold uppercase tracking-wider text-white transition-all hover:brightness-110"
-            style={{ background: "var(--grad-wa)", boxShadow: "inset 0 1px 0 rgba(255,255,255,0.25), 0 10px 26px -10px rgba(18,140,126,0.6)" }}
+            style={{ background: "var(--grad-wa)", boxShadow: "inset 0 1px 0 rgba(255,255,255,0.25), 0 10px 26px -10px rgba(4,106,56,0.6)" }}
             onClick={() => setMenuOpen(false)}
           >
             <MessageSquare className="h-4 w-4 fill-white" />

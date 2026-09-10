@@ -63,8 +63,8 @@ export default function ContactForm({
   }, []);
 
   const inputBase = dark
-    ? "w-full rounded-xl border border-violet-200/25 bg-[#080611] px-4 py-3.5 text-sm font-medium text-white outline-none placeholder:text-white/40 focus:border-[#D4AF37] focus:ring-2 focus:ring-[#D4AF37]/20 transition-all"
-    : "w-full rounded-xl border border-slate-300 bg-white px-4 py-3.5 text-sm font-medium text-[#0F172A] outline-none placeholder:text-slate-400 focus:border-[#C89B3C] focus:ring-2 focus:ring-[#C89B3C]/25 transition-all shadow-sm";
+    ? "w-full rounded-xl border border-orange-200/25 bg-[#0B1E3B] px-4 py-3.5 text-sm font-medium text-white outline-none placeholder:text-white/40 focus:border-[#FF7A00] focus:ring-2 focus:ring-[#FF7A00]/20 transition-all"
+    : "w-full rounded-xl border border-slate-300 bg-white px-4 py-3.5 text-sm font-medium text-[#0F172A] outline-none placeholder:text-slate-400 focus:border-[#E76F00] focus:ring-2 focus:ring-[#E76F00]/25 transition-all shadow-sm";
 
   const labelCls = dark
     ? "mb-1.5 block text-xs font-bold uppercase tracking-[0.1em] text-[#CBD5E1]"
@@ -132,12 +132,12 @@ export default function ContactForm({
       <div
         className={`space-y-6 rounded-2xl border p-8 text-center ${
           dark
-            ? "border-violet-200/20 bg-gradient-to-br from-[#2A1853] to-[#120C27] text-white"
+            ? "border-orange-200/20 bg-gradient-to-br from-[#1A3A6B] to-[#132E57] text-white"
             : "border-slate-200 bg-white text-[#0F172A] shadow-xl"
         } ${className}`}
         role="status"
       >
-        <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-[#25D366]/20 text-[#25D366]">
+        <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-[#046A38]/20 text-[#046A38]">
           <CheckCircle2 className="h-10 w-10" />
         </div>
         <div>
@@ -149,8 +149,8 @@ export default function ContactForm({
           </p>
         </div>
 
-        <div className={`rounded-xl p-4 text-left text-xs ${dark ? "bg-[#080611] text-[#CBD5E1]" : "bg-slate-50 text-[#334155]"}`}>
-          <span className="font-bold text-[#D4AF37] uppercase tracking-wider block mb-1.5">What to expect:</span>
+        <div className={`rounded-xl p-4 text-left text-xs ${dark ? "bg-[#0B1E3B] text-[#CBD5E1]" : "bg-slate-50 text-[#334155]"}`}>
+          <span className={`font-bold uppercase tracking-wider block mb-1.5 ${dark ? "text-[#FF7A00]" : "text-[#B35400]"}`}>What to expect:</span>
           <ul className="list-disc pl-4 space-y-1">
             <li>Instant review of your operating state &amp; district coverage</li>
             <li>State-specific Controlling Authority document checklist</li>
@@ -162,7 +162,7 @@ export default function ContactForm({
           <button
             type="button"
             onClick={openWa}
-            className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#25D366] hover:bg-[#128C7E] px-6 py-3.5 text-xs font-bold uppercase tracking-wider text-white shadow-lg transition-all"
+            className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#046A38] hover:bg-[#03522B] px-6 py-3.5 text-xs font-bold uppercase tracking-wider text-white shadow-lg transition-all"
           >
             <MessageSquare className="h-4 w-4 fill-white" />
             Open WhatsApp Again
@@ -353,10 +353,10 @@ export default function ContactForm({
         <button
           type="submit"
           disabled={isSubmitting}
-          className="w-full inline-flex items-center justify-center gap-2.5 rounded-xl px-8 py-4 text-xs font-bold uppercase tracking-[0.1em] text-[#241703] transition-all duration-200 hover:-translate-y-0.5 active:scale-95 disabled:opacity-70"
+          className="w-full inline-flex items-center justify-center gap-2.5 rounded-xl px-8 py-4 text-xs font-bold uppercase tracking-[0.1em] text-[#0B1E3B] transition-all duration-200 hover:-translate-y-0.5 active:scale-95 disabled:opacity-70"
           style={{
             background: "var(--grad-gold-metallic)",
-            boxShadow: "inset 0 1px 0 rgba(255,250,230,0.85), inset 0 -1px 0 rgba(88,58,8,0.5), 0 14px 34px -10px rgba(200,155,60,0.55)",
+            boxShadow: "inset 0 1px 0 rgba(255,250,230,0.85), inset 0 -1px 0 rgba(88,58,8,0.5), 0 14px 34px -10px rgba(231,111,0,0.55)",
             fontFamily: "var(--font-body)",
           }}
         >
@@ -374,7 +374,7 @@ export default function ContactForm({
       {/* Privacy & Trust Footnote */}
       <div className={`pt-2 text-center text-xs ${dark ? "text-[#94A3B8]" : "text-slate-500"}`}>
         <span>Opens a structured consultation with our Jaipur HQ &amp; Regional Desks.</span>
-        <div className="mt-1 flex items-center justify-center gap-3 font-semibold text-[#D4AF37]">
+        <div className={`mt-1 flex items-center justify-center gap-3 font-semibold ${dark ? "text-[#FF7A00]" : "text-[#B35400]"}`}>
           <span>★ {GOOGLE_REVIEWS.ratingLabel} Rating</span>
           <span>•</span>
           <span>{GOOGLE_REVIEWS.reviewCount} Reviews</span>

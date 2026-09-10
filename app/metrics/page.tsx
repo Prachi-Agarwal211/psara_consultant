@@ -186,8 +186,8 @@ export default function MetricsDashboardPage() {
 
               <div className="bg-[#161b22] border border-white/10 rounded-xl p-5 shadow-lg">
                 <span className="text-xs uppercase tracking-wider text-gray-400 font-semibold">Total Section Clicks</span>
-                <div className="text-3xl font-extrabold text-[#D4AF37] mt-2">{totalClicks}</div>
-                <span className="text-[11px] text-[#D4AF37] mt-1 block">Active user interactions</span>
+                <div className="text-3xl font-extrabold text-[#FF7A00] mt-2">{totalClicks}</div>
+                <span className="text-[11px] text-[#FF7A00] mt-1 block">Active user interactions</span>
               </div>
 
               <div className="bg-[#161b22] border border-white/10 rounded-xl p-5 shadow-lg">
@@ -202,8 +202,8 @@ export default function MetricsDashboardPage() {
 
               <div className="bg-[#161b22] border border-white/10 rounded-xl p-5 shadow-lg">
                 <span className="text-xs uppercase tracking-wider text-gray-400 font-semibold">Trackable Sections</span>
-                <div className="text-3xl font-extrabold text-purple-400 mt-2">{metrics.length}</div>
-                <span className="text-[11px] text-purple-400 mt-1 block">Analytics endpoints active</span>
+                <div className="text-3xl font-extrabold text-orange-400 mt-2">{metrics.length}</div>
+                <span className="text-[11px] text-orange-400 mt-1 block">Analytics endpoints active</span>
               </div>
             </div>
 
@@ -297,7 +297,7 @@ export default function MetricsDashboardPage() {
                         </div>
                         <div className="w-full bg-[#0d1117] h-3 rounded-full overflow-hidden border border-white/5">
                           <div
-                            className="bg-gradient-to-r from-[#F5E6BA] to-[#C89B3C] h-full rounded-full transition-all duration-500"
+                            className="bg-gradient-to-r from-[#FFE8D1] to-[#E76F00] h-full rounded-full transition-all duration-500"
                             style={{ width: `${Math.max(percentage, 2)}%` }}
                           />
                         </div>
@@ -319,11 +319,11 @@ export default function MetricsDashboardPage() {
                     </div>
                     <div className="flex justify-between">
                       <span className="text-gray-400">Total Clicks:</span>
-                      <span className="font-semibold text-[#D4AF37]">{totalClicks}</span>
+                      <span className="font-semibold text-[#FF7A00]">{totalClicks}</span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-gray-400">Active Sections:</span>
-                      <span className="font-semibold text-purple-400">{metrics.length}</span>
+                      <span className="font-semibold text-orange-400">{metrics.length}</span>
                     </div>
                   </div>
                 </div>

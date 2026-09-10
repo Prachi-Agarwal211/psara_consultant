@@ -7,11 +7,11 @@ import { SITE } from "../../../lib/config";
 
 export default function Leadership() {
   return (
-    <section className="relative my-12 overflow-hidden border-t border-white/10 bg-gradient-to-br from-[#080611] via-[#180D36] to-[#2A1853] px-4 py-20 text-white md:px-8">
+    <section className="relative my-12 overflow-hidden border-t border-white/10 bg-gradient-to-br from-[#0B1E3B] via-[#132E57] to-[#1A3A6B] px-4 py-20 text-white md:px-8">
       <div className="relative mx-auto max-w-7xl">
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <span className="inline-flex items-center gap-2 rounded-xl border border-[#BF953F]/40 bg-[#8C1F32]/30 px-4 py-1.5 text-xs font-black uppercase tracking-widest text-[#D4AF37] shadow-md">
-            <ShieldCheck className="h-4 w-4 text-[#D4AF37]" /> Board of Leadership
+          <span className="inline-flex items-center gap-2 rounded-xl border border-[#BF953F]/40 bg-[#8C1F32]/30 px-4 py-1.5 text-xs font-black uppercase tracking-widest text-[#FF7A00] shadow-md">
+            <ShieldCheck className="h-4 w-4 text-[#FF7A00]" /> Board of Leadership
           </span>
           <h2 className="mt-4 text-3xl md:text-5xl font-black tracking-tight text-white leading-[0.95]" style={{ fontFamily: "var(--font-display)" }}>
             Pioneering Compliance &amp; Regulatory Leadership
@@ -25,13 +25,13 @@ export default function Leadership() {
           {LEADERS.map((leader) => (
             <div
               key={leader.id}
-              className="relative flex flex-col md:flex-row gap-6 rounded-3xl border-2 border-[#C89B3C]/40 bg-gradient-to-br from-[#332066] via-[#1A1236] to-[#0E0821] text-white p-6 md:p-8 shadow-2xl transition-[border-color,box-shadow,transform] duration-200 hover:border-[#C89B3C]"
+              className="relative flex flex-col md:flex-row gap-6 rounded-3xl border-2 border-[#E76F00]/40 bg-gradient-to-br from-[#1A3A6B] via-[#132E57] to-[#0B1E3B] text-white p-6 md:p-8 shadow-2xl transition-[border-color,box-shadow,transform] duration-200 hover:border-[#E76F00]"
             >
               {/* Leader Photo */}
-              <div className="relative w-36 h-36 md:w-44 md:h-44 shrink-0 overflow-hidden rounded-2xl border-2 border-[#C89B3C] self-center md:self-start shadow-xl">
+              <div className="relative w-36 h-36 md:w-44 md:h-44 shrink-0 overflow-hidden rounded-2xl border-2 border-[#E76F00] self-center md:self-start shadow-xl">
                 <Image
                   src={leader.photo}
-                  alt={leader.name}
+                  alt={`${leader.name} — ${leader.role}`}
                   fill
                   sizes="176px"
                   className="object-cover"
@@ -45,7 +45,7 @@ export default function Leadership() {
                     <h3 className="text-2xl font-black text-white" style={{ fontFamily: "var(--font-display)" }}>
                       {leader.name}
                     </h3>
-                    <span className="bg-[#FFF2BA] px-3 py-1 text-[10px] font-black uppercase tracking-wider text-[#0F3C65] rounded-lg shadow-sm">
+                    <span className="bg-[#FFE8D1] px-3 py-1 text-[10px] font-black uppercase tracking-wider text-[#0F3C65] rounded-lg shadow-sm">
                       {leader.role}
                     </span>
                   </div>
@@ -57,7 +57,7 @@ export default function Leadership() {
 
                 {/* Key Track Record Tags */}
                 <div className="mt-6 border-t border-white/15 pt-4">
-                  <span className="text-[10px] font-black uppercase tracking-widest text-[#FFF2BA] mb-2 block">
+                  <span className="text-[10px] font-black uppercase tracking-widest text-[#FFE8D1] mb-2 block">
                     Proven Experience
                   </span>
                   <div className="flex flex-wrap gap-1.5">
@@ -66,7 +66,7 @@ export default function Leadership() {
                         key={cred}
                         className="inline-flex items-center gap-1 rounded-lg border border-white/20 bg-white/10 px-2.5 py-1 text-[11px] font-bold text-white shadow-sm"
                       >
-                        <CheckCircle2 className="h-3 w-3 text-[#C89B3C]" />
+                        <CheckCircle2 className="h-3 w-3 text-[#E76F00]" />
                         {cred}
                       </span>
                     ))}

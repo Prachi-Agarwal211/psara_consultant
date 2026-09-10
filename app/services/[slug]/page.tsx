@@ -74,14 +74,14 @@ export default async function ServiceDetailPage({
         image={heroImage}
         meta={`( STATUTORY ADVISORY ) ( ${s.slug.toUpperCase()} )`}
       />
-      <PageMain className="bg-[#080714] text-white">
+      <PageMain className="bg-[#0B1E3B] text-white">
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-12">
           {/* Main Content Column */}
           <div className="space-y-12 lg:col-span-7">
             {/* Overview Card */}
-            <div className="rounded-3xl border border-[rgba(212,175,55,0.3)] bg-gradient-to-br from-[#332066] via-[#1A1236] to-[#080611] p-6 shadow-2xl sm:p-8">
+            <div className="rounded-3xl border border-[rgba(231,111,0,0.3)] bg-gradient-to-br from-[#1A3A6B] via-[#132E57] to-[#0B1E3B] p-6 shadow-2xl sm:p-8">
               <span className="badge-metallic-gold mb-4">
-                <Sparkles className="h-3.5 w-3.5 text-[#D4AF37]" /> Service Overview
+                <Sparkles className="h-3.5 w-3.5 text-[#FF7A00]" /> Service Overview
               </span>
               <p className="text-base sm:text-lg font-normal leading-relaxed text-[#E2E8F0] mt-2">
                 {s.description}
@@ -90,13 +90,13 @@ export default async function ServiceDetailPage({
 
             {/* Key Deliverables */}
             <div className="space-y-4">
-              <h2 className="text-xs font-bold uppercase tracking-[0.2em] text-[#D4AF37] flex items-center gap-2">
-                <ShieldCheck className="h-4 w-4 text-[#D4AF37]" /> Core Deliverables &amp; Outcomes
+              <h2 className="text-xs font-bold uppercase tracking-[0.2em] text-[#FF7A00] flex items-center gap-2">
+                <ShieldCheck className="h-4 w-4 text-[#FF7A00]" /> Core Deliverables &amp; Outcomes
               </h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {s.bullets.map((b) => (
-                  <div key={b} className="flex items-start gap-3 rounded-2xl border border-white/10 bg-gradient-to-b from-[#14102A] to-[#0F0C1F] p-4 shadow-md transition-all hover:border-[#D4AF37]">
-                    <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-[#D4AF37]" />
+                  <div key={b} className="flex items-start gap-3 rounded-2xl border border-white/10 bg-[#0B1E3B] p-4 shadow-md transition-all hover:border-[#FF7A00]">
+                    <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-[#FF7A00]" />
                     <span className="text-xs sm:text-sm font-bold text-white leading-relaxed">{b}</span>
                   </div>
                 ))}
@@ -105,7 +105,7 @@ export default async function ServiceDetailPage({
 
             {/* Detailed Sections */}
             {s.sections.map((sec) => (
-              <div key={sec.h} className="rounded-2xl border border-white/10 bg-gradient-to-b from-[#14102A] to-[#0F0C1F] p-6 shadow-md space-y-3">
+              <div key={sec.h} className="rounded-2xl border border-white/10 bg-[#0B1E3B] p-6 shadow-md space-y-3">
                 <h3 className="text-xl font-bold text-white" style={{ fontFamily: "var(--font-display)" }}>{sec.h}</h3>
                 <p className="text-sm font-normal leading-relaxed text-[#E2E8F0]">{sec.p}</p>
               </div>
@@ -114,11 +114,11 @@ export default async function ServiceDetailPage({
             {/* Engagement Roadmap */}
             <div className="space-y-4">
               <h2 className="text-xl font-bold text-white flex items-center gap-2" style={{ fontFamily: "var(--font-display)" }}>
-                <Clock className="h-5 w-5 text-[#D4AF37]" /> Engagement Roadmap
+                <Clock className="h-5 w-5 text-[#FF7A00]" /> Engagement Roadmap
               </h2>
               <div className="space-y-3">
                 {s.process.map((step, idx) => (
-                  <div key={step} className="flex items-start gap-4 rounded-2xl border border-white/10 bg-gradient-to-b from-[#14102A] to-[#0F0C1F] p-4 shadow-md transition-all hover:border-[#D4AF37]">
+                  <div key={step} className="flex items-start gap-4 rounded-2xl border border-white/10 bg-[#0B1E3B] p-4 shadow-md transition-all hover:border-[#FF7A00]">
                     <span className="badge-metallic-gold shrink-0 text-[10px]">
                       Phase {idx + 1}
                     </span>
@@ -135,9 +135,9 @@ export default async function ServiceDetailPage({
                 <div className="divide-y divide-white/10 border-y border-white/10">
                   {s.faqs.map((f, idx) => (
                     <details key={idx} className="group py-4">
-                      <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-bold text-white hover:text-[#F5D061] text-sm sm:text-base">
+                      <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-bold text-white hover:text-[#FFB25E] text-sm sm:text-base">
                         <span>{f.q}</span>
-                        <span className="text-[#D4AF37] text-sm transition-transform group-open:rotate-180">↓</span>
+                        <span className="text-[#FF7A00] text-sm transition-transform group-open:rotate-180">↓</span>
                       </summary>
                       <p className="mt-2.5 text-xs sm:text-sm font-normal leading-relaxed text-[#E2E8F0]">
                         {f.a}
@@ -152,19 +152,19 @@ export default async function ServiceDetailPage({
             <div className="space-y-4 border-t border-white/10 pt-8">
               <h3 className="text-lg font-bold text-white">Related Statutory Desks</h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                <Link href="/calculator" className="p-4 rounded-xl border border-white/10 bg-[#0F0C1F] hover:border-[#D4AF37] transition-all flex items-center justify-between">
+                <Link href="/calculator" className="p-4 rounded-xl border border-white/10 bg-[#0B1E3B] hover:border-[#FF7A00] transition-all flex items-center justify-between">
                   <div>
                     <span className="text-xs font-bold text-white block">Statutory Fee Calculator</span>
                     <span className="text-[11px] text-[#94A3B8]">Calculate state and district fees</span>
                   </div>
-                  <Calculator className="h-4 w-4 text-[#D4AF37]" />
+                  <Calculator className="h-4 w-4 text-[#FF7A00]" />
                 </Link>
-                <Link href="/states" className="p-4 rounded-xl border border-white/10 bg-[#0F0C1F] hover:border-[#D4AF37] transition-all flex items-center justify-between">
+                <Link href="/states" className="p-4 rounded-xl border border-white/10 bg-[#0B1E3B] hover:border-[#FF7A00] transition-all flex items-center justify-between">
                   <div>
                     <span className="text-xs font-bold text-white block">All 36 State &amp; UT Dossiers</span>
                     <span className="text-[11px] text-[#94A3B8]">Controlling Authority portals &amp; rules</span>
                   </div>
-                  <ArrowRight className="h-4 w-4 text-[#D4AF37]" />
+                  <ArrowRight className="h-4 w-4 text-[#FF7A00]" />
                 </Link>
               </div>
             </div>
@@ -172,7 +172,7 @@ export default async function ServiceDetailPage({
 
           {/* Sticky Sidebar Lead Capture Card */}
           <div className="lg:col-span-5 space-y-6">
-            <div className="sticky top-24 space-y-6 rounded-3xl border border-[rgba(212,175,55,0.35)] bg-gradient-to-br from-[#332066] to-[#120C27] p-6 text-white shadow-2xl sm:p-8">
+            <div className="sticky top-24 space-y-6 rounded-3xl border border-[rgba(231,111,0,0.35)] bg-gradient-to-br from-[#1A3A6B] to-[#132E57] p-6 text-white shadow-2xl sm:p-8">
               <div>
                 <span className="badge-metallic-gold mb-2">
                   Direct Statutory Desk
@@ -186,7 +186,7 @@ export default async function ServiceDetailPage({
               </div>
 
               {/* Sidebar Lead Form */}
-              <div className="rounded-2xl border border-white/10 bg-[#120C27] p-4 shadow-inner">
+              <div className="rounded-2xl border border-white/10 bg-[#132E57] p-4 shadow-inner">
                 <WhatsAppForm formType={`Service: ${s.title}`} service={s.title} />
               </div>
 

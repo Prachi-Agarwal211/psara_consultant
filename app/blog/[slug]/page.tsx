@@ -29,7 +29,7 @@ export async function generateMetadata({
   const ogPath = `/assets/images/og/${slug}-og.svg`;
   const resolvedOgPath = existsSync(path.join(process.cwd(), "public", ogPath.slice(1)))
     ? ogPath
-    : "/assets/images/og/default-og.svg";
+    : "/assets/images/og/default-og.jpg";
   return pageMeta(
     post.title,
     post.excerpt,

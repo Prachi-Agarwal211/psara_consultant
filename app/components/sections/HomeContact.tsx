@@ -5,6 +5,7 @@ import { Phone, MessageSquare, Mail, MapPin, Clock, ArrowUpRight, ShieldCheck, S
 import ContactForm from "../../../components/ContactForm";
 import { CONTACT, OFFICES } from "../../../lib/config";
 import { DEFAULT_WA, TEL_HREF } from "../../../lib/whatsapp";
+import Reveal from "../ui/Reveal";
 
 export default function HomeContact() {
   const hq = OFFICES.find((o) => o.isHQ) || OFFICES[0]!;
@@ -12,24 +13,24 @@ export default function HomeContact() {
   return (
     <section
       id="contact"
-      className="relative overflow-hidden bg-[var(--canvas-void)] text-white py-20 lg:py-28 border-b border-white/10"
+      className="relative overflow-hidden bg-[#0B1E3B] py-16 text-white sm:py-20 lg:py-24"
     >
-      <div className="relative z-10 px-[var(--gutter)] max-w-7xl mx-auto space-y-12">
+      <div className="relative z-10 mx-auto max-w-7xl space-y-10 px-5 sm:px-8 lg:px-12">
+        <Reveal>
         {/* Header */}
-        <div className="max-w-3xl space-y-3">
-          <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-[0.16em] text-[#D4AF37]" style={{ fontFamily: "var(--font-body)" }}>
-            <Sparkles className="h-3.5 w-3.5 text-[#D4AF37]" />
-            Direct Statutory Advisory
-          </div>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-white leading-tight" style={{ fontFamily: "var(--font-display)" }}>
-            Start a File <span className="gold-text-gradient">With Us</span>
+        <div className="max-w-3xl">
+          <p className="text-xs font-black uppercase tracking-[0.2em] text-[#FF7A00]">Direct Line · Jaipur HQ</p>
+            <h2 className="mt-2 font-black tracking-tight leading-[1.02]" style={{ fontSize: "clamp(1.9rem,4vw,3rem)", fontFamily: "var(--font-display)" }}>
+            File start karo <span className="text-[#FF7A00]">aaj hi.</span>
           </h2>
-          <p className="text-base text-[#E2E8F0] leading-relaxed font-normal" style={{ fontFamily: "var(--font-body)" }}>
-            Connect directly with our senior statutory advisors. Submit your agency parameters below to receive a customized state regulatory roadmap, training MOU checklist, and fee structure.
+          <p className="mt-3 text-sm leading-relaxed text-white/75 sm:text-base">
+            Form bharo — state checklist, MOU format aur exact fees WhatsApp par pao. Ya seedha call karo.
           </p>
         </div>
+        </Reveal>
 
         {/* 2-Column Layout */}
+        <Reveal delay={110} variant="scale">
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 items-start">
           {/* Left Column: Direct Helpline & Desks */}
           <div className="space-y-6 lg:col-span-5">
@@ -41,7 +42,7 @@ export default function HomeContact() {
                 className="inline-flex items-center justify-center gap-2 rounded-xl border border-[var(--line-gold)] bg-[var(--surface-card-dark)] hover:border-[var(--gold)] px-5 py-3.5 text-xs font-bold uppercase tracking-wider text-white transition-[border-color] shadow-[var(--shadow-card)]"
                 style={{ fontFamily: "var(--font-body)" }}
               >
-                <Phone className="h-4 w-4 text-[#D4AF37]" />
+                <Phone className="h-4 w-4 text-[#FF7A00]" />
                 <span>{CONTACT.phoneDisplay}</span>
               </a>
               <a
@@ -59,22 +60,22 @@ export default function HomeContact() {
 
             {/* HQ Information Card */}
             <div data-cursor="Find headquarters" className="space-y-4 rounded-xl border border-white/10 bg-[var(--surface-card-dark)] p-6 text-sm shadow-[var(--shadow-card)]">
-              <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#D4AF37] pb-2 border-b border-white/10">
-                <ShieldCheck className="h-4 w-4 text-[#D4AF37]" />
+              <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#FF7A00] pb-2 border-b border-white/10">
+                <ShieldCheck className="h-4 w-4 text-[#FF7A00]" />
                 <span>Headquarters Contact</span>
               </div>
               <p className="flex items-center gap-3 text-white font-medium">
-                <Mail className="h-4 w-4 shrink-0 text-[#D4AF37]" />
-                <a href={`mailto:${CONTACT.email}`} className="hover:text-[#F5D061] font-bold transition-colors">
+                <Mail className="h-4 w-4 shrink-0 text-[#FF7A00]" />
+                <a href={`mailto:${CONTACT.email}`} className="hover:text-[#FFB25E] font-bold transition-colors">
                   {CONTACT.email}
                 </a>
               </p>
               <p className="flex items-start gap-3 text-[#CBD5E1] font-normal">
-                <Clock className="mt-0.5 h-4 w-4 shrink-0 text-[#D4AF37]" />
+                <Clock className="mt-0.5 h-4 w-4 shrink-0 text-[#FF7A00]" />
                 <span>{CONTACT.hours}</span>
               </p>
               <p className="flex items-start gap-3 text-[#CBD5E1] font-normal">
-                <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-[#D4AF37]" />
+                <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-[#FF7A00]" />
                 <span>
                   <strong className="text-white font-bold block">Jaipur Headquarters</strong>
                   <span className="text-xs text-[#94A3B8]">{hq.address}, {hq.pin}</span>
@@ -95,14 +96,14 @@ export default function HomeContact() {
 
             {/* Other Regional Desks */}
             <div className="pt-2 space-y-3">
-              <span className="text-xs font-bold uppercase tracking-[0.16em] text-[#D4AF37] block" style={{ fontFamily: "var(--font-body)" }}>
+              <span className="text-xs font-bold uppercase tracking-[0.16em] text-[#FF7A00] block" style={{ fontFamily: "var(--font-body)" }}>
                 Key Regional Desks
               </span>
               <div className="grid grid-cols-2 gap-2">
                 {OFFICES.filter((o) => !o.isHQ)
                   .slice(0, 4)
                   .map((o) => (
-                    <div key={o.city} data-cursor="Regional desk" className="cursor-surface rounded-xl border border-violet-200/15 bg-[#1A1236] p-3 text-xs">
+                    <div key={o.city} data-cursor="Regional desk" className="cursor-surface rounded-xl border border-orange-200/15 bg-[#132E57] p-3 text-xs">
                       <strong className="font-bold text-white block">{o.city}</strong>
                       <span className="text-[10px] text-[#94A3B8]">{o.badge}</span>
                     </div>
@@ -111,7 +112,7 @@ export default function HomeContact() {
               <Link
                 href="/contact"
                 data-cursor="View desks"
-                className="inline-flex items-center gap-1.5 pt-1 text-xs font-bold uppercase tracking-[0.12em] text-[#D4AF37] hover:underline"
+                className="inline-flex items-center gap-1.5 pt-1 text-xs font-bold uppercase tracking-[0.12em] text-[#FF7A00] hover:underline"
                 style={{ fontFamily: "var(--font-body)" }}
               >
                 <span>View All {OFFICES.length} Physical Desks</span>
@@ -121,13 +122,13 @@ export default function HomeContact() {
           </div>
 
           {/* Right Column: Light Form Card — standard */}
-          <div className="lg:col-span-7 rounded-xl border border-[var(--line-light)] bg-white p-7 md:p-10 shadow-sm text-[#151126]">
-            <div className="flex items-center justify-between pb-5 border-b border-[#E5DDF3] mb-6">
+          <div className="lg:col-span-7 rounded-xl border border-[var(--line-light)] bg-white p-7 md:p-10 shadow-sm text-[#0B1E3B]">
+            <div className="flex items-center justify-between pb-5 border-b border-[#E8DFC8] mb-6">
               <div>
                 <span className="badge-navy mb-2">
                   Direct Statutory Advisory Support
                 </span>
-                <h3 className="text-2xl md:text-3xl font-bold text-[var(--paper-ink,#151126)]" style={{ fontFamily: "var(--font-display)" }}>
+                <h3 className="text-2xl md:text-3xl font-bold text-[var(--paper-ink,#0B1E3B)]" style={{ fontFamily: "var(--font-display)" }}>
                   Get PSARA Statutory Advisory Support
                 </h3>
               </div>
@@ -136,7 +137,7 @@ export default function HomeContact() {
               </span>
             </div>
 
-            <p className="mb-6 text-sm font-normal leading-relaxed text-[var(--ink-soft,#443A61)]">
+            <p className="mb-6 text-sm font-normal leading-relaxed text-[var(--ink-soft,#33465F)]">
               Submit your company details for immediate state checklist generation, training MOU format review, and transparent statutory fee calculations.
             </p>
 
@@ -144,6 +145,7 @@ export default function HomeContact() {
             <ContactForm formType="Homepage Advisory Lead" variant="light" />
           </div>
         </div>
+        </Reveal>
       </div>
     </section>
   );

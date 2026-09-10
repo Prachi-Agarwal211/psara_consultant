@@ -63,10 +63,11 @@ export default function StatsBar() {
   }, []);
 
   return (
-    <section ref={rootRef} id="proof" className="relative isolate overflow-hidden border-b border-white/10 bg-[var(--canvas-void)] py-16 text-white sm:py-20 lg:py-24" aria-label="PSARA proof and coverage">
+    <section ref={rootRef} id="proof" className="grad-navy relative isolate overflow-hidden border-b border-white/10 py-16 text-white sm:py-20 lg:py-24" aria-label="PSARA proof and coverage">
+      <div className="orb orb-saffron left-[10%] top-[-140px] h-[340px] w-[340px] opacity-50" aria-hidden />
       <Image
         data-proof-watermark
-        src="/apple-touch-icon.png"
+        src="/assets/images/brand/psara-consultant-india-mark-transparent.png"
         alt=""
         width={640}
         height={640}
@@ -77,11 +78,11 @@ export default function StatsBar() {
       <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-12">
         <div className="flex flex-col gap-6 border-b border-white/15 pb-7 text-center md:flex-row md:items-end md:justify-between md:gap-10 md:text-left">
           <div className="mx-auto max-w-xl md:mx-0">
-            <p className="mb-4 flex items-center justify-center gap-2 text-xs font-bold uppercase tracking-[.2em] text-[#D4AF37] md:justify-start">
-              <span className="h-px w-8 bg-[#D4AF37]" /> The PSARA Ledger
+            <p className="mb-4 flex items-center justify-center gap-2 text-xs font-bold uppercase tracking-[.2em] text-[#FF7A00] md:justify-start">
+              <span className="h-px w-8 bg-[#FF7A00]" /> The PSARA Ledger
             </p>
             <h2 className="text-balance text-3xl sm:text-4xl md:text-5xl font-bold leading-[1.1] text-white" style={{ fontFamily: "var(--font-display)" }}>
-              Evidence that moves <br /><span className="gold-text-gradient">a file forward.</span>
+              Evidence that moves <br /><span className="text-grad-saffron">a file forward.</span>
             </h2>
           </div>
           <p className="mx-auto max-w-xs text-sm font-normal leading-relaxed text-[#E2E8F0] md:mx-0 md:pb-1" style={{ fontFamily: "var(--font-body)" }}>
@@ -93,7 +94,7 @@ export default function StatsBar() {
         <div className="flex flex-wrap items-center justify-center gap-x-7 gap-y-3 border-b border-white/15 py-5 text-center md:justify-start md:text-left" aria-label="Core capabilities">
           {CATEGORIES.map(({ label, icon: Icon }) => (
             <div key={label} data-proof-category className="flex items-center gap-2.5 text-xs font-bold uppercase tracking-[.14em] text-white">
-              <Icon className="h-4 w-4 text-[#D4AF37]" strokeWidth={2} />
+              <Icon className="h-4 w-4 text-[#FF7A00]" strokeWidth={2} />
               <span>{label}</span>
             </div>
           ))}
@@ -104,10 +105,10 @@ export default function StatsBar() {
           {STATS.map(({ num, suffix, title, desc, icon: Icon }, index) => (
             <div key={title} data-proof-row className="group relative flex min-h-[184px] w-full flex-col justify-between overflow-hidden rounded-xl border border-white/10 bg-[var(--surface-card-dark)] p-5 text-left shadow-[var(--shadow-card)] transition-[border-color,transform] duration-300 hover:-translate-y-1 hover:border-[var(--line-gold)] sm:p-6">
               <div className="flex items-start justify-between gap-4">
-                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-[rgba(196,181,253,0.38)] bg-[#120C27] text-[#F5D061] transition-colors duration-300 group-hover:border-[#D4AF37] group-hover:text-white">
+                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-[rgba(255,178,94,0.38)] bg-[#132E57] text-[#FFB25E] transition-colors duration-300 group-hover:border-[#FF7A00] group-hover:text-white">
                   <Icon className="h-5 w-5" strokeWidth={2} />
                 </span>
-                <span className="font-mono text-[10px] font-bold tracking-[.2em] text-[#D4AF37]">0{index + 1}</span>
+                <span className="font-mono text-[10px] font-bold tracking-[.2em] text-[#FF7A00]">0{index + 1}</span>
               </div>
               <div className="mt-7 flex items-end justify-between gap-4">
                 <div>
@@ -125,7 +126,7 @@ export default function StatsBar() {
 
         <div className="flex items-center justify-between pt-6 text-xs font-bold uppercase tracking-[.16em] text-white/60">
           <span>PSARA Act · 2005</span>
-          <span className="flex items-center gap-2"><span className="h-2 w-2 rounded-full bg-[#D4AF37]" /> Verification-ready practice</span>
+          <span className="flex items-center gap-2"><span className="h-2 w-2 rounded-full bg-[#FF7A00]" /> Verification-ready practice</span>
         </div>
       </div>
     </section>

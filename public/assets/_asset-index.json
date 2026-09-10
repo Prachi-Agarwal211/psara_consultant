@@ -29,20 +29,14 @@
   ],
   "images": [
     "abstract-security-bg.jpg",
-    "business-meeting.jpg",
     "consultation-meeting.jpg",
     "cyber-security-shield.jpg",
-    "government-building.jpg",
     "handshake-deal.jpg",
     "hero-security-guard.jpg",
     "india-flag.jpg",
     "india-map.svg",
     "legal-documents.jpg",
-    "modern-office-building.jpg",
-    "office-team-working.jpg",
-    "psara-badge.svg",
-    "security-guard-building.jpg",
-    "surveillance-camera.jpg"
+    "psara-badge.svg"
   ],
   "animations": [
     "_lottie-references.json"

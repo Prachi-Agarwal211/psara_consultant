@@ -1,25 +1,26 @@
 "use client";
 
-import { ShieldCheck, Award, Building2, Scale, Clock, MapPin } from "lucide-react";
+import { ShieldCheck, Calculator, BadgeCheck, Clock, MapPin, Phone } from "lucide-react";
+import { CONTACT } from "../../../lib/config";
 
 const ITEMS = [
-  { icon: ShieldCheck, text: "500+ PSARA LICENSES GRANTED" },
-  { icon: MapPin, text: "36 STATES & UTs COVERED" },
-  { icon: Award, text: "RECOGNIZED TRAINING MOU NETWORK" },
-  { icon: Scale, text: "100% POLICE VERIFICATION SUPPORT" },
-  { icon: Clock, text: "FAST-TRACK 30–45 DAY PROCESSING" },
-  { icon: Building2, text: "JAIPUR HQ • DELHI • GURUGRAM • NOIDA DESKS" },
+  { icon: Calculator, text: "GOVT FEE ₹5,000 / ₹10,000 / ₹25,000" },
+  { icon: ShieldCheck, text: "500+ LICENSES GRANTED" },
+  { icon: MapPin, text: "36 STATES & UTS" },
+  { icon: BadgeCheck, text: "TRAINING MOU INCLUDED" },
+  { icon: Clock, text: "30–45 DAY FAST-TRACK" },
+  { icon: Phone, text: CONTACT.phoneDisplay },
 ];
 
 export default function ComplianceMarquee() {
   return (
-    <section className="relative w-full overflow-hidden border-y border-[var(--line-gold)] bg-[var(--canvas-void-2)] py-3.5" aria-label="Trust Signals">
-      <div className="flex w-max animate-marquee gap-8">
+    <section className="relative w-full overflow-hidden grad-saffron py-3" aria-label="Fees and trust">
+      <div className="marquee-mask flex w-max animate-marquee gap-8">
         {[...ITEMS, ...ITEMS, ...ITEMS].map((item, i) => (
-          <div key={i} className="flex items-center gap-3.5 whitespace-nowrap text-xs font-black uppercase tracking-[0.18em] text-[#D4AF37]">
-            <item.icon className="h-4 w-4 shrink-0 text-[#D4AF37]" />
+          <div key={i} className="flex items-center gap-3 whitespace-nowrap text-xs font-black uppercase tracking-[0.16em] text-[#0B1E3B]">
+            <item.icon className="h-4 w-4 shrink-0" />
             <span>{item.text}</span>
-            <span className="h-1.5 w-1.5 rounded-full bg-[#C89B3C]" />
+            <span className="h-1.5 w-1.5 rounded-full bg-[#0B1E3B]/60" />
           </div>
         ))}
       </div>

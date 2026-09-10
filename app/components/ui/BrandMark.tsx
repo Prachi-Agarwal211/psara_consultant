@@ -26,9 +26,10 @@ export default function BrandMark({ compact = false, className = "" }: BrandMark
       data-cursor="PSARA Desk"
       className={`group relative shrink-0 transition-transform duration-200 ${sizeClass}`}
     >
+      {/* ponytail: proper eagle mark (transparent) — single brand logo everywhere */}
       <Image
-        src="/apple-touch-icon.png"
-        alt="PSARA Consultant India"
+        src="/assets/images/brand/psara-consultant-india-mark-transparent.png"
+        alt="PSARA Consultant India logo"
         fill
         className="object-contain transition-transform duration-200 group-hover:scale-[1.03]"
         sizes={sizesAttr}

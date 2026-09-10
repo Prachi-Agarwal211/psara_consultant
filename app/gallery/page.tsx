@@ -14,9 +14,9 @@ export const metadata: Metadata = pageMeta(
 );
 
 const IMAGES = [
-  { src: "/assets/images/office-team-working.jpg", title: "PSARA Board Review & Strategy Desk", caption: "Senior leadership reviewing state Form-I dossiers" },
-  { src: "/assets/images/government-building.jpg", title: "Controlling Authority Coordination", caption: "Liaison with State Controlling Authority offices across India" },
-  { src: "/assets/images/business-meeting.jpg", title: "Client Advisory Session", caption: "Promoter consultation on PSARA filing strategy and compliance" },
+  { src: "/assets/images/cinematic/services-atmosphere.jpg", title: "PSARA Board Review & Strategy Desk", caption: "Senior leadership reviewing state Form-I dossiers" },
+  { src: "/assets/images/cinematic/hero-stage.jpg", title: "Controlling Authority Coordination", caption: "Liaison with State Controlling Authority offices across India" },
+  { src: "/assets/images/cinematic/process-path.jpg", title: "Client Advisory Session", caption: "Promoter consultation on PSARA filing strategy and compliance" },
 ];
 
 export default function GalleryPage() {

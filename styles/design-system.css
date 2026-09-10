@@ -24,14 +24,14 @@
 
 /* Keep section-* aligned with styles/sections.css + tokens — do NOT flip dark→cream. */
 .section-electric {
-  background: radial-gradient(ellipse 44% 42% at 82% 18%, rgba(139,92,246,.20), transparent 70%), linear-gradient(145deg, #100728 0%, #24104B 60%, #6D28D9 180%);
+  background: radial-gradient(ellipse 44% 42% at 82% 18%, rgba(231,111,0,.20), transparent 70%), linear-gradient(145deg, #0B1E3B 0%, #14305E 60%, #14305E 180%);
   color: #FFFFFF;
   position: relative;
   overflow: hidden;
 }
 
 .section-metal {
-  background: radial-gradient(ellipse 42% 38% at 12% 24%, rgba(212,175,55,.12), transparent 70%), linear-gradient(145deg, #1A1236 0%, #2A1853 58%, #100728 100%);
+  background: radial-gradient(ellipse 42% 38% at 12% 24%, rgba(231,111,0,.12), transparent 70%), linear-gradient(145deg, #132E57 0%, #1A3A6B 58%, #0B1E3B 100%);
   color: #FFFFFF;
   position: relative;
   overflow: hidden;
@@ -52,7 +52,7 @@
 }
 
 .section-surface {
-  background: radial-gradient(ellipse 38% 42% at 86% 12%, rgba(139,92,246,.16), transparent 70%), linear-gradient(145deg, #1A1236 0%, #332066 100%);
+  background: radial-gradient(ellipse 38% 42% at 86% 12%, rgba(231,111,0,.16), transparent 70%), linear-gradient(145deg, #132E57 0%, #1A3A6B 100%);
   color: #FFFFFF;
   position: relative;
   overflow: hidden;

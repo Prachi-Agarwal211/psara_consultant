@@ -15,6 +15,7 @@ import {
   initStaggerChildren,
   initFloatDrift,
   initVisualScrub,
+  initSectionTransitions,
   prefersReducedMotion,
   ensureGsap,
 } from "../../lib/motion";
@@ -40,6 +41,7 @@ export default function StageShell({
     initStaggerChildren(root);
     initFloatDrift(root);
     initVisualScrub(root);
+    initSectionTransitions(root);
 
     // Re-measure trigger positions once async layout settles (hero images,
     // Google Business Profile iframes). Stale triggers make section reveals

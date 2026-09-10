@@ -56,24 +56,24 @@ export default function AboutSection({
   return (
     <section
       id="about"
-      className={`on-light relative min-h-[85vh] overflow-hidden py-20 lg:py-28 text-[#0F172A] border-b border-[#E5DDF3] ${className}`}
+      className={`on-light relative min-h-[85vh] overflow-hidden py-20 lg:py-28 text-[#0F172A] border-b border-[#E8DFC8] ${className}`}
     >
       <div className="relative z-10 mx-auto max-w-7xl space-y-12 px-6 lg:px-8">
         {/* Optional Header Row */}
         {showHeaderBar && (
-          <div className="flex flex-col items-center gap-6 border-b border-[#E5DDF3] pb-6 text-center md:flex-row md:items-center md:justify-between md:text-left">
+          <div className="flex flex-col items-center gap-6 border-b border-[#E8DFC8] pb-6 text-center md:flex-row md:items-center md:justify-between md:text-left">
             <div className="flex flex-wrap items-center justify-center gap-4 md:justify-start">
-              <div className="p-2 rounded-xl bg-[#F4F0FA] border border-[#E5DDF3] shadow-sm">
+              <div className="p-1.5 rounded-xl bg-[#0B1E3B] border border-[#E8DFC8] shadow-sm">
                 <BrandMark variant="dark" compact />
               </div>
               <div className="badge-navy">
-                <Sparkles className="w-3.5 h-3.5 text-[#6D28D9]" />
+                <Sparkles className="w-3.5 h-3.5 text-[#14305E]" />
                 <span>Pan-India Statutory Advisory</span>
               </div>
             </div>
 
-            <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[var(--ink-soft,#443A61)]">
-                          <CheckCircle2 className="w-4 h-4 text-[#8F681B]" />
+            <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[var(--ink-soft,#33465F)]">
+                          <CheckCircle2 className="w-4 h-4 text-[#B35400]" />
                           <span>100% Controlling Authority Compliance</span>
                         </div>
           </div>
@@ -85,17 +85,17 @@ export default function AboutSection({
           <div className="z-10 space-y-6 text-center lg:col-span-6 lg:text-left">
             <MaskReveal direction="left">
               <div>
-                <span className="mb-3 block text-xs font-bold uppercase tracking-[0.16em] text-[#8F681B]">
+                <span className="mb-3 block text-xs font-bold uppercase tracking-[0.16em] text-[#B35400]">
                   About Our Practice
                 </span>
                 <Heading
-                  className="text-4xl sm:text-5xl font-bold leading-[1.12] tracking-tight text-[var(--paper-ink,#151126)]"
+                  className="text-4xl sm:text-5xl font-bold leading-[1.12] tracking-tight text-[var(--paper-ink,#0B1E3B)]"
                                     style={{ fontFamily: "var(--font-display)" }}
                                   >
                                     One Desk. <br />
                                     <span className="gold-text-gradient">Every State.</span>
                                   </Heading>
-                                  <p className="mt-4 max-w-xl text-base font-normal leading-relaxed text-[var(--ink-soft,#443A61)]">
+                                  <p className="mt-4 max-w-xl text-base font-normal leading-relaxed text-[var(--ink-soft,#33465F)]">
                   PSARA Consultant India empowers private security agencies with seamless licensing, recognized training institute MOUs, police verification tracking, and statutory compliance across 36 States &amp; UTs.
                 </p>
               </div>
@@ -108,18 +108,18 @@ export default function AboutSection({
                 return (
                   <div
                     key={feature.title}
-                    className="p-5 rounded-2xl border border-[#E5DDF3] bg-[var(--canvas-cream,#F7F3FF)] space-y-2.5 transition-[border-color,box-shadow,transform] duration-200 hover:border-[#C89B3C] hover:shadow-md"
+                    className="p-5 rounded-2xl border border-[#E8DFC8] bg-[var(--canvas-cream,#FFFDF5)] space-y-2.5 transition-[border-color,box-shadow,transform] duration-200 hover:border-[#E76F00] hover:shadow-md"
                   >
-                    <div className="mx-auto flex h-10 w-10 items-center justify-center rounded-xl bg-[var(--canvas-void,#080611)] text-[#F5D061] shadow-md ring-1 ring-[#D4AF37]/40 lg:mx-0">
+                    <div className="mx-auto flex h-10 w-10 items-center justify-center rounded-xl bg-[var(--canvas-void,#0B1E3B)] text-[#FFB25E] shadow-md ring-1 ring-[#FF7A00]/40 lg:mx-0">
                       <IconComp className="w-5 h-5" />
                     </div>
                     <h3
-                      className="text-sm font-bold tracking-wider text-[var(--paper-ink,#151126)] uppercase pt-1"
+                      className="text-sm font-bold tracking-wider text-[var(--paper-ink,#0B1E3B)] uppercase pt-1"
                       style={{ fontFamily: "var(--font-display)" }}
                     >
                       {feature.title}
                     </h3>
-                    <p className="text-xs leading-relaxed text-[var(--ink-muted,#766D90)] font-medium">
+                    <p className="text-xs leading-relaxed text-[var(--ink-muted,#475569)] font-medium">
                       {feature.desc}
                     </p>
                   </div>
@@ -141,7 +141,7 @@ export default function AboutSection({
                 href={DEFAULT_WA}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex min-h-12 items-center justify-center gap-3 rounded-xl bg-[var(--whatsapp-hover,#128C7E)] px-6 py-3 text-xs font-bold uppercase tracking-[0.14em] text-white shadow-[0_14px_28px_-16px_rgba(18,140,126,0.8)] transition-[transform,filter] duration-200 hover:-translate-y-0.5 hover:brightness-95"
+                className="inline-flex min-h-12 items-center justify-center gap-3 rounded-xl bg-[var(--whatsapp-hover,#046A38)] px-6 py-3 text-xs font-bold uppercase tracking-[0.14em] text-white shadow-[0_14px_28px_-16px_rgba(4,106,56,0.8)] transition-[transform,filter] duration-200 hover:-translate-y-0.5 hover:brightness-95"
                 style={{ fontFamily: "var(--font-body)" }}
               >
                 <MessageSquare className="h-4 w-4 fill-white" />
@@ -153,7 +153,7 @@ export default function AboutSection({
           {/* Right Column: one controlled PSARA dossier artifact */}
           <Parallax amount={10} className="lg:col-span-6 flex items-center justify-center relative">
             <div className="relative mx-auto aspect-square w-full max-w-[570px]" data-cursor="Pan-India file">
-              <div className="pointer-events-none absolute inset-[22%] rounded-full bg-[#D4AF37]/15 blur-[80px]" aria-hidden="true" />
+              <div className="pointer-events-none absolute inset-[22%] rounded-full bg-[#FF7A00]/15 blur-[80px]" aria-hidden="true" />
               <Image
                 src="/assets/images/generated/psara-dossier-book-cutout.png"
                 alt="PSARA Consultant India regulatory dossier book"

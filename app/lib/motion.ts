@@ -145,3 +145,43 @@ export function initVisualScrub(scope: HTMLElement) {
     );
   });
 }
+
+/**
+ * Section transitions for dossier views — CityDossierView / StateDossierView
+ * already render `data-section-transition[data-transition]` attributes but
+ * nothing ever wired them, so 600+ location pages scrolled dead-still.
+ * ponytail: one function, maps variant -> fromTo, no new deps.
+ */
+export function initSectionTransitions(scope: HTMLElement) {
+  if (prefersReducedMotion()) return;
+  const { gsap } = ensureGsap();
+  scope.querySelectorAll<HTMLElement>("[data-section-transition]").forEach((el) => {
+    const kind = el.dataset.transition || "fade";
+    const from: Record<string, number | string> =
+      kind === "clip-up"
+        ? { clipPath: "inset(100% 0% 0% 0%)", opacity: 0.98, y: 14 }
+        : kind === "clip-left"
+          ? { clipPath: "inset(0% 100% 0% 0%)", opacity: 0.98, y: 10 }
+          : kind === "clip-right"
+            ? { clipPath: "inset(0% 0% 0% 100%)", opacity: 0.98, y: 10 }
+            : kind === "blur"
+              ? { opacity: 0, y: 22 }
+              : { opacity: 0, y: 24 };
+    gsap.fromTo(
+      el,
+      from,
+      {
+        clipPath: "inset(0% 0% 0% 0%)",
+        opacity: 1,
+        y: 0,
+        duration: 0.75,
+        ease: ease.expo,
+        scrollTrigger: {
+          trigger: el,
+          start: "top 88%",
+          toggleActions: "play none none none",
+        },
+      }
+    );
+  });
+}

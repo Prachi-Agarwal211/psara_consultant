@@ -68,8 +68,8 @@ export default function PsaraEstimator() {
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-white/15 pb-6">
         <div>
-          <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#D4AF37] mb-2">
-            <Sparkles className="h-4 w-4 text-[#D4AF37]" /> Statutory Cost Transparency
+          <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#FF7A00] mb-2">
+            <Sparkles className="h-4 w-4 text-[#FF7A00]" /> Statutory Cost Transparency
           </div>
             <h3 className="font-bold text-2xl md:text-4xl text-white" style={{ fontFamily: "var(--font-display)" }}>
             Complete Cost of <span className="gold-text-gradient">PSARA License</span>
@@ -80,7 +80,7 @@ export default function PsaraEstimator() {
         </div>
         <div className="shrink-0">
           <span className="badge-metallic-gold">
-            <Shield className="h-3.5 w-3.5 text-[#D4AF37]" /> PSARA Act 2005
+            <Shield className="h-3.5 w-3.5 text-[#FF7A00]" /> PSARA Act 2005
           </span>
         </div>
       </div>
@@ -97,7 +97,7 @@ export default function PsaraEstimator() {
             <select
               value={selectedState}
               onChange={(e) => setSelectedState(e.target.value)}
-              className="w-full rounded-xl border border-violet-200/25 bg-[#120C27] p-3.5 text-sm font-bold text-white focus:border-[#D4AF37] outline-none shadow-inner"
+              className="w-full rounded-xl border border-orange-200/25 bg-[#132E57] p-3.5 text-sm font-bold text-white focus:border-[#FF7A00] outline-none shadow-inner"
             >
               <option>Rajasthan</option>
               <option>Delhi NCR</option>
@@ -132,12 +132,12 @@ export default function PsaraEstimator() {
                     onClick={() => setCoverageId(c.id)}
                     className={`text-left p-4 rounded-xl border transition-[border-color,box-shadow,transform,filter] duration-200 ${
                       active
-                        ? "border-[#D4AF37] bg-gradient-to-br from-[#3B2374] to-[#180D36] text-white shadow-xl shadow-[0_20px_40px_-24px_rgba(8,6,17,0.65)]"
-                        : "border-white/12 bg-[#180D36] text-[#CBD5E1] hover:border-violet-300/50"
+                        ? "border-[#FF7A00] bg-gradient-to-br from-[#1A3A6B] to-[#132E57] text-white shadow-xl shadow-[0_20px_40px_-24px_rgba(11,30,59,0.65)]"
+                        : "border-white/12 bg-[#132E57] text-[#CBD5E1] hover:border-orange-300/50"
                     }`}
                   >
                     <span className="font-bold text-xs block leading-snug text-white">{c.label}</span>
-                    <span className={`text-base font-bold font-mono mt-1 block ${active ? "text-[#F5D061]" : "text-[#D4AF37]"}`}>
+                    <span className={`text-base font-bold font-mono mt-1 block ${active ? "text-[#FFB25E]" : "text-[#FF7A00]"}`}>
                       {formatINR(c.govtFee)}
                     </span>
                     <p className="mt-1 text-[11px] text-[#94A3B8] line-clamp-1">{c.desc}</p>
@@ -148,13 +148,13 @@ export default function PsaraEstimator() {
           </div>
 
           {/* Armed Endorsement */}
-          <div className="rounded-xl border border-violet-200/15 bg-[#180D36] p-4">
+          <div className="rounded-xl border border-orange-200/15 bg-[#132E57] p-4">
             <label className="flex items-center gap-3 cursor-pointer text-sm font-bold text-white">
               <input
                 type="checkbox"
                 checked={needArmed}
                 onChange={(e) => setNeedArmed(e.target.checked)}
-                className="h-4 w-4 accent-[#D4AF37] rounded"
+                className="h-4 w-4 accent-[#FF7A00] rounded"
               />
               <span>Include Armed Guard Endorsement Preparation (+₹15,000)</span>
             </label>
@@ -165,7 +165,7 @@ export default function PsaraEstimator() {
 
           {/* Additional / Other Costs Section — flat */}
           <div className="rounded-xl border border-white/10 bg-[var(--canvas-void-2)] p-5 space-y-3">
-            <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#D4AF37]">
+            <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#FF7A00]">
               <Info className="h-4 w-4" /> Other Third-Party / Statutory Expenses
             </div>
             <p className="text-xs text-[#CBD5E1]">
@@ -176,7 +176,7 @@ export default function PsaraEstimator() {
                 <div key={oc.title} className="text-xs border-b border-white/5 pb-2.5 last:border-0 last:pb-0">
                   <div className="flex items-center justify-between">
                     <strong className="text-white font-bold">{oc.title}</strong>
-                    <span className="font-mono font-bold text-[#F5D061]">{oc.range}</span>
+                    <span className="font-mono font-bold text-[#FFB25E]">{oc.range}</span>
                   </div>
                   <p className="text-[11px] text-[#94A3B8] mt-0.5">{oc.desc}</p>
                 </div>
@@ -188,7 +188,7 @@ export default function PsaraEstimator() {
         {/* Right Fee Grid — flat */}
         <div className="lg:col-span-5 rounded-xl border border-white/10 p-6 bg-[var(--canvas-void-2)] space-y-6 shadow-[var(--shadow-card)]">
           <div>
-            <span className="text-xs font-bold uppercase tracking-wider text-[#D4AF37] block">
+            <span className="text-xs font-bold uppercase tracking-wider text-[#FF7A00] block">
               Structured Cost Breakdown
             </span>
             <h4 className="text-lg font-bold text-white mt-1">
@@ -200,7 +200,7 @@ export default function PsaraEstimator() {
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs border-collapse">
               <thead>
-                <tr className="border-b border-white/15 text-[#D4AF37] uppercase tracking-wider text-[10px]">
+                <tr className="border-b border-white/15 text-[#FF7A00] uppercase tracking-wider text-[10px]">
                   <th className="pb-2.5 font-bold">Fee Type</th>
                   <th className="pb-2.5 font-bold text-right">Amount (₹)</th>
                   <th className="pb-2.5 font-bold pl-4">Notes</th>
@@ -239,7 +239,7 @@ export default function PsaraEstimator() {
           </div>
 
           {/* Total Row */}
-          <div className="border-t-2 border-[#D4AF37]/40 pt-4 flex items-center justify-between">
+          <div className="border-t-2 border-[#FF7A00]/40 pt-4 flex items-center justify-between">
             <span className="text-sm font-bold text-white">Total Estimated Cost</span>
             <span className="text-2xl font-bold gold-text-gradient font-mono">
               {formatINR(totalEst)}
@@ -256,7 +256,7 @@ export default function PsaraEstimator() {
               "Direct liaison till official license issuance",
             ].map((f) => (
               <div key={f} className="flex items-start gap-2">
-                <CheckCircle2 className="h-4 w-4 text-[#D4AF37] shrink-0 mt-0.5" />
+                <CheckCircle2 className="h-4 w-4 text-[#FF7A00] shrink-0 mt-0.5" />
                 <span>{f}</span>
               </div>
             ))}
@@ -267,7 +267,7 @@ export default function PsaraEstimator() {
             type="button"
             onClick={handleWhatsAppConsultation}
             data-cursor="Get estimate"
-            className="w-full inline-flex items-center justify-center gap-2 rounded-xl px-6 py-4 text-xs font-bold uppercase tracking-wider bg-gradient-to-r from-[#25D366] to-[#1DA851] hover:from-[#1DA851] hover:to-[#128C7E] text-white transition-[border-color,box-shadow,transform] shadow-xl shadow-green-950/40"
+            className="w-full inline-flex items-center justify-center gap-2 rounded-xl px-6 py-4 text-xs font-bold uppercase tracking-wider bg-[#046A38] hover:bg-[#03522B] text-white transition-[border-color,box-shadow,transform] shadow-xl shadow-green-950/40"
           >
             <MessageSquare className="h-4 w-4 fill-white" />
             <span>Get Official Fee Breakdown on WhatsApp</span>

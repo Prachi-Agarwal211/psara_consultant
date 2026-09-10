@@ -67,12 +67,12 @@ export default function CalculatorClient() {
         crumbs={[{ label: "Fee Calculator" }]}
       />
 
-      <PageMain className="bg-[#080714] text-white">
+      <PageMain className="bg-[#0B1E3B] text-white">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-10">
           {/* Controls */}
-          <div className="lg:col-span-7 rounded-3xl border border-[rgba(212,175,55,0.25)] bg-gradient-to-b from-[#14102A] to-[#0F0C1F] p-6 md:p-8 space-y-6 shadow-2xl">
+          <div className="lg:col-span-7 rounded-3xl border border-[rgba(231,111,0,0.25)] bg-[#0B1E3B] p-6 md:p-8 space-y-6 shadow-2xl">
             <h2 className="text-xl font-bold text-white flex items-center gap-2" style={{ fontFamily: "var(--font-display)" }}>
-              <Calculator className="h-5 w-5 text-[#D4AF37]" /> Configure License Parameters
+              <Calculator className="h-5 w-5 text-[#FF7A00]" /> Configure License Parameters
             </h2>
 
             {/* State Selection */}
@@ -83,7 +83,7 @@ export default function CalculatorClient() {
               <select
                 value={selectedState}
                 onChange={(e) => setSelectedState(e.target.value)}
-                className="w-full rounded-xl border border-white/20 bg-[#120C27] p-3.5 text-sm font-bold text-white focus:border-[#D4AF37] outline-none shadow-inner"
+                className="w-full rounded-xl border border-white/20 bg-[#132E57] p-3.5 text-sm font-bold text-white focus:border-[#FF7A00] outline-none shadow-inner"
               >
                 <option value="rajasthan">Rajasthan</option>
                 <option value="delhi">Delhi NCR</option>
@@ -106,12 +106,12 @@ export default function CalculatorClient() {
                   onClick={() => setScale("d1")}
                   className={`p-4 rounded-xl border text-xs font-bold transition-all text-left ${
                     scale === "d1"
-                      ? "border-[#D4AF37] bg-gradient-to-br from-[#332066] to-[#180D36] text-white shadow-lg"
-                      : "border-white/12 bg-[#120C27] text-[#CBD5E1] hover:border-white/30"
+                      ? "border-[#FF7A00] bg-gradient-to-br from-[#1A3A6B] to-[#132E57] text-white shadow-lg"
+                      : "border-white/12 bg-[#132E57] text-[#CBD5E1] hover:border-white/30"
                   }`}
                 >
                   <span className="block font-bold">Single-District</span>
-                  <span className="block font-mono text-sm mt-1 text-[#F5D061]">{parseIndicativeFee(selectedStateInfo?.feeOneDistrict) ? formatINR(parseIndicativeFee(selectedStateInfo?.feeOneDistrict)!) : "Verify"}</span>
+                  <span className="block font-mono text-sm mt-1 text-[#FFB25E]">{parseIndicativeFee(selectedStateInfo?.feeOneDistrict) ? formatINR(parseIndicativeFee(selectedStateInfo?.feeOneDistrict)!) : "Verify"}</span>
                 </button>
 
                 <button
@@ -119,12 +119,12 @@ export default function CalculatorClient() {
                   onClick={() => setScale("d5")}
                   className={`p-4 rounded-xl border text-xs font-bold transition-all text-left ${
                     scale === "d5"
-                      ? "border-[#D4AF37] bg-gradient-to-br from-[#332066] to-[#180D36] text-white shadow-lg"
-                      : "border-white/12 bg-[#120C27] text-[#CBD5E1] hover:border-white/30"
+                      ? "border-[#FF7A00] bg-gradient-to-br from-[#1A3A6B] to-[#132E57] text-white shadow-lg"
+                      : "border-white/12 bg-[#132E57] text-[#CBD5E1] hover:border-white/30"
                   }`}
                 >
                   <span className="block font-bold">Up to 5 Districts</span>
-                  <span className="block font-mono text-sm mt-1 text-[#F5D061]">{parseIndicativeFee(selectedStateInfo?.feeMultiDistrict) ? formatINR(parseIndicativeFee(selectedStateInfo?.feeMultiDistrict)!) : "Verify"}</span>
+                  <span className="block font-mono text-sm mt-1 text-[#FFB25E]">{parseIndicativeFee(selectedStateInfo?.feeMultiDistrict) ? formatINR(parseIndicativeFee(selectedStateInfo?.feeMultiDistrict)!) : "Verify"}</span>
                 </button>
 
                 <button
@@ -132,24 +132,24 @@ export default function CalculatorClient() {
                   onClick={() => setScale("state")}
                   className={`p-4 rounded-xl border text-xs font-bold transition-all text-left ${
                     scale === "state"
-                      ? "border-[#D4AF37] bg-gradient-to-br from-[#332066] to-[#180D36] text-white shadow-lg"
-                      : "border-white/12 bg-[#120C27] text-[#CBD5E1] hover:border-white/30"
+                      ? "border-[#FF7A00] bg-gradient-to-br from-[#1A3A6B] to-[#132E57] text-white shadow-lg"
+                      : "border-white/12 bg-[#132E57] text-[#CBD5E1] hover:border-white/30"
                   }`}
                 >
                   <span className="block font-bold">All-State PSARA</span>
-                  <span className="block font-mono text-sm mt-1 text-[#F5D061]">{parseIndicativeFee(selectedStateInfo?.feeEntireState) ? formatINR(parseIndicativeFee(selectedStateInfo?.feeEntireState)!) : "Verify"}</span>
+                  <span className="block font-mono text-sm mt-1 text-[#FFB25E]">{parseIndicativeFee(selectedStateInfo?.feeEntireState) ? formatINR(parseIndicativeFee(selectedStateInfo?.feeEntireState)!) : "Verify"}</span>
                 </button>
               </div>
             </div>
 
             {/* Armed Guard Option */}
-            <div className="rounded-xl border border-white/12 bg-[#120C27] p-4">
+            <div className="rounded-xl border border-white/12 bg-[#132E57] p-4">
               <label className="flex items-center gap-3 cursor-pointer text-sm font-bold text-white">
                 <input
                   type="checkbox"
                   checked={needArmed}
                   onChange={(e) => setNeedArmed(e.target.checked)}
-                  className="h-4 w-4 accent-[#D4AF37] rounded"
+                  className="h-4 w-4 accent-[#FF7A00] rounded"
                 />
                 <span>Include Armed Guard Endorsement Preparation (+₹15,000)</span>
               </label>
@@ -159,8 +159,8 @@ export default function CalculatorClient() {
             </div>
 
             {/* Other Costs List */}
-            <div className="rounded-2xl border border-white/12 bg-[#120C27] p-5 space-y-3 shadow-inner">
-              <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#D4AF37]">
+            <div className="rounded-2xl border border-white/12 bg-[#132E57] p-5 space-y-3 shadow-inner">
+              <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#FF7A00]">
                 <Info className="h-4 w-4" /> Other Statutory &amp; Third-Party Costs
               </div>
               <div className="space-y-2 pt-1">
@@ -168,7 +168,7 @@ export default function CalculatorClient() {
                   <div key={oc.title} className="text-xs border-b border-white/5 pb-2.5 last:border-0 last:pb-0">
                     <div className="flex items-center justify-between">
                       <span className="text-white font-bold">{oc.title}</span>
-                      <span className="font-mono font-bold text-[#F5D061]">{oc.range}</span>
+                      <span className="font-mono font-bold text-[#FFB25E]">{oc.range}</span>
                     </div>
                     <p className="text-[11px] text-[#94A3B8] mt-0.5">{oc.desc}</p>
                   </div>
@@ -178,9 +178,9 @@ export default function CalculatorClient() {
           </div>
 
           {/* Breakdown Table Card */}
-          <div className="lg:col-span-5 rounded-3xl border border-[rgba(212,175,55,0.35)] bg-gradient-to-b from-[#332066] to-[#120C27] text-white p-6 md:p-8 flex flex-col justify-between shadow-2xl space-y-6">
+          <div className="lg:col-span-5 rounded-3xl border border-[rgba(231,111,0,0.35)] bg-gradient-to-b from-[#1A3A6B] to-[#132E57] text-white p-6 md:p-8 flex flex-col justify-between shadow-2xl space-y-6">
             <div>
-              <span className="text-xs font-bold uppercase tracking-widest text-[#D4AF37] block">
+              <span className="text-xs font-bold uppercase tracking-widest text-[#FF7A00] block">
                 Structured Fee Schedule
               </span>
               <h3 className="text-xl font-bold text-white mt-1">
@@ -191,7 +191,7 @@ export default function CalculatorClient() {
               <div className="mt-6 overflow-x-auto">
                 <table className="w-full text-left text-xs border-collapse">
                   <thead>
-                    <tr className="border-b border-white/15 text-[#D4AF37] uppercase tracking-wider text-[10px]">
+                    <tr className="border-b border-white/15 text-[#FF7A00] uppercase tracking-wider text-[10px]">
                       <th className="pb-2.5 font-bold">Fee Type</th>
                       <th className="pb-2.5 font-bold text-right">Amount (₹)</th>
                       <th className="pb-2.5 font-bold pl-4">Notes</th>
@@ -230,18 +230,18 @@ export default function CalculatorClient() {
               </div>
 
               {/* Total */}
-              <div className="border-t-2 border-[#D4AF37]/50 mt-6 pt-4 flex justify-between items-center">
+              <div className="border-t-2 border-[#FF7A00]/50 mt-6 pt-4 flex justify-between items-center">
                 <span className="text-sm font-bold text-white">Total Estimated Cost:</span>
-                <span className="text-right text-2xl font-bold gold-metallic-text font-mono">{totalEst === null ? "Verify with desk" : formatINR(totalEst)}</span>
+                <span className="text-right text-2xl font-bold gold-text-gradient font-mono">{totalEst === null ? "Verify with desk" : formatINR(totalEst)}</span>
               </div>
 
-              <div className="mt-6 p-4 bg-[#120C27] border border-white/10 rounded-2xl text-xs text-[#CBD5E1] space-y-1.5 shadow-inner">
+              <div className="mt-6 p-4 bg-[#132E57] border border-white/10 rounded-2xl text-xs text-[#CBD5E1] space-y-1.5 shadow-inner">
                 <div className="flex items-center gap-2">
-                  <ShieldCheck className="h-4 w-4 text-[#D4AF37] shrink-0" />
+                  <ShieldCheck className="h-4 w-4 text-[#FF7A00] shrink-0" />
                   <span><strong>Timeline:</strong> {selectedStateInfo?.timeline || "Confirm with desk"}</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <ShieldCheck className="h-4 w-4 text-[#D4AF37] shrink-0" />
+                  <ShieldCheck className="h-4 w-4 text-[#FF7A00] shrink-0" />
                   <span><strong>Validity:</strong> {selectedStateInfo?.validityYears ? `${selectedStateInfo.validityYears} year${selectedStateInfo.validityYears === 1 ? "" : "s"}` : "Confirm with desk"}</span>
                 </div>
                 <p className="pt-1 text-[11px] leading-relaxed text-[#94A3B8]">{selectedStateInfo?.feeNote || "State notification and district scope determine the payable government fee."}</p>
@@ -262,7 +262,7 @@ export default function CalculatorClient() {
                 }))}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full flex items-center justify-center gap-2 rounded-xl py-4 text-xs font-bold uppercase tracking-wider bg-gradient-to-r from-[#25D366] to-[#1DA851] hover:from-[#1DA851] hover:to-[#128C7E] text-white transition-all shadow-xl shadow-green-950/40"
+                className="w-full flex items-center justify-center gap-2 rounded-xl py-4 text-xs font-bold uppercase tracking-wider bg-[#046A38] hover:bg-[#03522B] text-white transition-all shadow-xl shadow-green-950/40"
               >
                 <MessageSquare className="h-4 w-4 fill-white" />
                 <span>Get Detailed Quote on WhatsApp</span>

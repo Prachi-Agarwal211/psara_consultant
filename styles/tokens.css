@@ -1,66 +1,66 @@
 /* ═══════════════════════════════════════════════════════════════
-   PSARA Consultant India · Standard Theme Tokens
-   Philosophy: 2 surfaces + 1 accent + 1 signal. No gradients as atmosphere.
-   Flat backgrounds, paper grain only. Everything else derives from these.
+   PSARA Consultant India · Tricolor Authority Theme (v2)
+   Light-dark mix + bold saffron. Violet + metallic gold removed.
+   Variable NAMES kept so old components don't break — values remapped.
    ═══════════════════════════════════════════════════════════════ */
 
 :root {
-  /* ── 1. Surfaces — ONLY 2 + 1 lifted ── */
-  --canvas-void:       #080611;   /* Primary dark - all dark sections */
-  --canvas-void-2:     #120C27;   /* Elevated dark - cards on dark */
-  --canvas-paper:      #F7F3FF;   /* Primary light - light sections */
+  /* ── 1. Surfaces — paper light + navy dark ── */
+  --canvas-void:       #0B1E3B;   /* Deep navy - all dark sections (was #080611) */
+  --canvas-void-2:     #132E57;   /* Elevated navy - cards on dark */
+  --canvas-paper:      #FFFDF5;   /* Warm paper - all light sections */
   --canvas-paper-2:    #FFFFFF;   /* Elevated light - cards on light */
-  --surface-card-dark: #1A1236;   /* Card on dark */
-  --surface-card-light:#F2EDFB;   /* Card on light */
+  --surface-card-dark: #132E57;   /* Card on dark */
+  --surface-card-light:#FFFFFF;   /* Card on light */
 
-  /* ── 2. Text — 4 steps only ── */
+  /* ── 2. Text ── */
   --text-primary:      #FFFFFF;   /* On dark */
-  --text-secondary:    #E2E8F0;   /* On dark - body */
-  --text-muted:        #94A3B8;   /* On dark - meta */
-  --paper-ink:         #151126;   /* On light - headings */
-  --ink-soft:          #443A61;   /* On light - body */
-  --ink-muted:         #766D90;   /* On light - meta */
+  --text-secondary:    #DCE6F5;   /* On dark - body */
+  --text-muted:        #9FB0C9;   /* On dark - meta */
+  --paper-ink:         #0B1E3B;   /* On light - headings (navy) */
+  --ink-soft:          #33465F;   /* On light - body */
+  --ink-muted:         #475569;   /* On light - meta (AA on paper) */
 
-  /* ── 3. Accent — Gold only (single family) ── */
-  --gold:              #C89B3C;   /* Primary gold */
-  --gold-bright:       #D4AF37;   /* Hover / highlight */
-  --gold-light:        #F5E6BA;   /* Pale - chips */
-  --gold-deep:         #8F681B;   /* Deep - on-light text */
-  --gold-soft:         rgba(200,155,60,0.12);
-  --gold-line:         rgba(212,175,55,0.22);
-  --line-gold:         rgba(212,175,55,0.28);
+  /* ── 3. Accent — Saffron bold (gold names kept for compat) ── */
+  --gold:              #E76F00;   /* Primary saffron */
+  --gold-bright:       #FF7A00;   /* Hover */
+  --gold-light:        #FFE8D1;   /* Pale chips */
+  --gold-deep:         #B35400;   /* Deep - on-light text */
+  --gold-soft:         rgba(231,111,0,0.12);
+  --gold-line:         rgba(231,111,0,0.35);
+  --line-gold:         rgba(231,111,0,0.40);
 
-  /* ── 4. Signal — 2 only ── */
-  --signal-green:      #25D366;   /* WhatsApp / success */
-  --signal-green-deep: #128C7E;
-  --signal-teal:       #4E8F82;   /* Calm alternative */
-  --signal-orange:     #FB5607;   /* Alert only */
+  /* ── 4. Signal ── */
+  --signal-green:      #046A38;   /* India green - success */
+  --signal-green-deep: #03522B;
+  --signal-teal:       #046A38;
+  --signal-orange:     #E76F00;
 
-  /* ── 5. Violet — single ramp (not 6 aliases) ── */
-  --violet-deep:       #100728;
-  --violet-base:       #6D28D9;
-  --violet-electric:   #8B5CF6;
-  --violet-light:      #C4B5FD;
+  /* ── 5. Navy ramp (violet names kept for compat — all navy now) ── */
+  --violet-deep:       #0B1E3B;
+  --violet-base:       #14305E;
+  --violet-electric:   #E76F00;
+  --violet-light:      #FFD9B3;
 
   /* ── 6. Lines & borders ── */
-  --line:              rgba(255,255,255,0.10);
-  --line-strong:       rgba(255,255,255,0.14);
-  --line-light:        #E2D7F1;   /* For light sections */
+  --line:              rgba(255,255,255,0.14);
+  --line-strong:       rgba(255,255,255,0.20);
+  --line-light:        #E8DFC8;   /* For light sections */
   --white-10:          rgba(255,255,255,0.10);
   --white-15:          rgba(255,255,255,0.15);
 
-  /* ── 7. Shadows — 2 only ── */
-  --shadow-card:       0 18px 50px -28px rgba(8,6,17,0.70);
-  --shadow-gold:       0 12px 32px -10px rgba(200,155,60,0.45);
+  /* ── 7. Shadows — flat ── */
+  --shadow-card:       0 12px 32px -18px rgba(11,30,59,0.35);
+  --shadow-gold:       0 10px 24px -12px rgba(231,111,0,0.50);
 
-  /* ── 8. Gradients — ONLY for buttons/metallic text (not backgrounds) ── */
-  --grad-gold-metallic: linear-gradient(100deg, #FFF2BA 0%, #E2C46F 10%, #C89B3C 22%, #A87524 37%, #8F681B 47%, #C89B3C 57%, #F5D061 69%, #FFF2BA 79%, #D4AF37 89%, #A87524 100%);
-  --grad-gold-deep: linear-gradient(105deg, #3C2A0D 0%, #6C4A16 26%, #8F681B 50%, #5A3D13 74%, #322309 100%);
-  --grad-wa: linear-gradient(160deg, #1FAF5E 0%, #128C7E 100%);
+  /* ── 8. Solids only — no metallic gradients ── */
+  --grad-gold-metallic: #E76F00;
+  --grad-gold-deep: #B35400;
+  --grad-wa: #046A38;
 
-  /* ── 9. Typography ── */
-  --font-display: "EB Garamond", Georgia, serif;
-  --font-body:    "Maison Neue Ext", system-ui, sans-serif;
+  /* ── 9. Typography — bold sans, no luxury serif ── */
+  --font-display: "Archivo", "Arial Narrow", Inter, system-ui, sans-serif;
+  --font-body:    Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
   --h1-size: clamp(2.75rem, 6vw, 5.5rem);
   --h2-size: clamp(1.9rem, 3.6vw, 2.9rem);
   --h3-size: clamp(1.25rem, 2.2vw, 1.65rem);
@@ -106,40 +106,40 @@
   --obsidian: var(--canvas-void);
   --obsidian-2: var(--canvas-void-2);
   --space: var(--surface-card-dark);
-  --space-lift:#2A1853;
-  --plum-deep:#0E0821;
-  --plum-mid:#180D36;
-  --plum-lift:#2B1756;
-  --navy-deep:#0E0821;
-  --navy-dark:#120C27;
-  --navy-surface:#1A1236;
+  --space-lift:#1A3A6B;
+  --plum-deep:#0B1E3B;
+  --plum-mid:#132E57;
+  --plum-lift:#1A3A6B;
+  --navy-deep:#0B1E3B;
+  --navy-dark:#0B1E3B;
+  --navy-surface:#132E57;
   --cloud:#E9ECEF;
-  --sage:#4E8F82;
+  --sage:#046A38;
   --emerald: var(--signal-green);
   --emerald-deep: var(--signal-green-deep);
   --whatsapp: var(--signal-green);
   --whatsapp-hover: var(--signal-green-deep);
-  --purple-cta: var(--violet-base);
-  --purple-electric: var(--violet-electric);
-  --purple-light: var(--violet-light);
+  --purple-cta: var(--gold);
+  --purple-electric: var(--gold-bright);
+  --purple-light: var(--gold-light);
   --violet-primary: var(--violet-base);
-  --violet-shimmer:#F0E9FF;
-  --electric: var(--violet-base);
-  --electric-2: var(--violet-electric);
+  --violet-shimmer:#FFE8D1;
+  --electric: var(--gold);
+  --electric-2: var(--gold-bright);
   --electric-3: var(--violet-deep);
-  --cherry: var(--violet-base);
-  --cherry-bright: var(--violet-electric);
-  --cherry-deep: var(--violet-deep);
-  --saffron:#F5D061;
+  --cherry: var(--gold);
+  --cherry-bright: var(--gold-bright);
+  --cherry-deep: var(--gold-deep);
+  --saffron:#E76F00;
   --gold-root: var(--gold);
   --gold-primary: var(--gold);
-  --gold-cream:#FFF6D9;
-  --gold-dim: rgba(200,155,60,0.75);
+  --gold-cream:#FFF3E2;
+  --gold-dim: rgba(231,111,0,0.75);
   --signal-red:#DC2626;
   --graphite:#212529;
-  --cream-dim:#EDE6F8;
+  --cream-dim:#EDE3D0;
   --ink: var(--paper-ink);
-  --ink-warm:#2A2144;
+  --ink-warm:#0B1E3B;
   --text: var(--text-primary);
   --text-dim: var(--text-muted);
   --text-hero:#FFFFFF;
@@ -148,20 +148,20 @@
   --acc-soft: var(--gold-soft);
   --acc-line: var(--line-gold);
   --sapphire: var(--violet-electric);
-  --line-amber: rgba(245,208,97,0.38);
+  --line-amber: rgba(231,111,0,0.38);
   --context: var(--ink-soft);
-  --shadow-gold-inset: inset 0 1px 0 rgba(255,250,230,0.85);
+  --shadow-gold-inset: none;
   --shadow-gold-dim: var(--shadow-gold);
-  --shadow-gold-inner: 0 2px 6px rgba(0,0,0,0.45);
+  --shadow-gold-inner: none;
   --grad-violet-canvas: var(--canvas-void);
   --grad-aurora-plum: var(--canvas-void);
   --grad-violet-card: var(--surface-card-dark);
   --grad-light-section: var(--canvas-paper);
   --grad-navy-header: var(--canvas-void);
   --grad-cream-card: var(--canvas-paper-2);
-  --grad-border-shimmer: linear-gradient(90deg, transparent, rgba(212,175,55,.55), transparent);
+  --grad-border-shimmer: var(--line-gold);
   --grad-gold-surface: var(--gold-soft);
   --grad-gold-border: var(--line-gold);
-  --grad-metal: var(--grad-gold-metallic);
-  --grad-gold-cta: var(--grad-gold-metallic);
+  --grad-metal: var(--gold);
+  --grad-gold-cta: var(--gold);
 }

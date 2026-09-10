@@ -1,15 +1,21 @@
-/* Standard Section Themes — flat, no per-section aura */
+/* Tricolor Authority section rhythm — modern light-dark mix */
 
-.section-void     { background: var(--canvas-paper); color: var(--paper-ink); }
-.section-electric { background: var(--canvas-void); color: #FFFFFF; }
-.section-metal    { background: var(--canvas-void); color: #FFFFFF; }
-.section-warm     { background: var(--canvas-paper); color: var(--paper-ink); }
-.section-night    { background: var(--canvas-void); color: #FFFFFF; }
-.section-surface  { background: var(--canvas-void); color: #FFFFFF; }
+.section-void     { background: #FFFDF5; color: #0B1E3B; }
+.section-electric { background: #0B1E3B; color: #FFFFFF; }
+.section-metal    { background: #0B1E3B; color: #FFFFFF; }
+.section-warm     { background: #FFFDF5; color: #0B1E3B; }
+.section-night    { background: #0B1E3B; color: #FFFFFF; }
+.section-surface  { background: #0B1E3B; color: #FFFFFF; }
 
-/* Homepage sections — flat base, subtle top hairline only */
-.mood-proof, .mood-services, .mood-process, .mood-states, .mood-faq, .mood-contact, .mood-estimator, .mood-presence, .mood-start {
-  background: var(--canvas-void);
+/* Homepage sections — modern rhythm */
+.mood-proof, .mood-process, .mood-contact, .mood-presence, .mood-start {
+  background: #0B1E3B;
+  color: #fff;
+  position: relative;
+}
+.mood-services, .mood-states, .mood-faq, .mood-estimator {
+  background: #FFFDF5;
+  color: #0B1E3B;
   position: relative;
 }
 

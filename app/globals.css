@@ -17,9 +17,9 @@
     font-optical-sizing: auto;
     font-synthesis: none;
     text-rendering: optimizeLegibility;
-    background-color: var(--canvas-void);
-    /* ponytail: flat base, no aurora gradient - paper grain only via .grain-overlay */
-    color: var(--white, #ffffff);
+    background-color: var(--canvas-paper, #FFFDF5);
+    /* ponytail: paper base for light-dark mix, dark sections override */
+    color: var(--paper-ink, #0B1E3B);
     min-height: 100%;
     overflow-x: hidden;
     font-size: 1.0625rem;
@@ -32,8 +32,8 @@
   }
 
   ::selection {
-    background-color: var(--gold-bright, #F5D061);
-    color: #080611;
+    background-color: var(--gold-bright, #FF7A00);
+    color: #FFFFFF;
   }
 
   a {
@@ -145,6 +145,103 @@
 .animate-marquee {
   animation: marquee 32s linear infinite;
 }
+/* edge fade so marquee melts into section */
+.marquee-mask {
+  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   2026 MOTION + GRADIENT UI SYSTEM (Tricolor Authority)
+   CSS-only reveals (IO adds .is-visible), floats, shines, orbs.
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ── Scroll reveal (JS adds .is-visible via IntersectionObserver) ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(26px);
+  transition: opacity 0.7s var(--ease-snappy), transform 0.7s var(--ease-snappy);
+  transition-delay: var(--reveal-delay, 0ms);
+  will-change: opacity, transform;
+}
+.reveal.is-visible { opacity: 1; transform: none; }
+.reveal-scale { transform: translateY(18px) scale(0.97); }
+.reveal-scale.is-visible { transform: none; }
+.reveal-left { transform: translateX(-30px); }
+.reveal-left.is-visible { transform: none; }
+.reveal-right { transform: translateX(30px); }
+.reveal-right.is-visible { transform: none; }
+
+/* ── Hero load entrance ── */
+@keyframes hero-rise {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: none; }
+}
+.hero-enter { opacity: 0; animation: hero-rise 0.8s var(--ease-snappy) forwards; animation-delay: var(--enter-delay, 0ms); }
+
+/* ── Floats / drifts ── */
+@keyframes drift {
+  0%, 100% { transform: translateY(-7px); }
+  50%      { transform: translateY(7px); }
+}
+.animate-drift { animation: drift 5s ease-in-out infinite; animation-delay: var(--drift-delay, 0ms); }
+@keyframes drift-soft {
+  0%, 100% { transform: translateY(-4px) rotate(-1deg); }
+  50%      { transform: translateY(5px) rotate(1deg); }
+}
+.animate-drift-soft { animation: drift-soft 6.5s ease-in-out infinite; }
+
+/* ── Slow image zoom (bento life) ── */
+@keyframes zoom-slow {
+  from { transform: scale(1); }
+  to   { transform: scale(1.08); }
+}
+.group:hover .zoom-slow { animation: zoom-slow 6s ease-out forwards; }
+
+/* ── Button shine sweep ── */
+.btn-shine { position: relative; overflow: hidden; }
+.btn-shine::after {
+  content: ""; position: absolute; top: 0; left: -80%; width: 55%; height: 100%;
+  background: linear-gradient(105deg, transparent, rgba(255,255,255,0.45), transparent);
+  transform: skewX(-20deg); transition: left 0.6s ease;
+}
+.btn-shine:hover::after { left: 130%; }
+
+/* ── Gradient utilities ── */
+.grad-navy { background: linear-gradient(150deg, #132E57 0%, #0B1E3B 60%, #081426 100%); }
+.grad-navy-soft { background: linear-gradient(150deg, #1A3A6B 0%, #132E57 55%, #0B1E3B 100%); }
+.grad-saffron { background: linear-gradient(120deg, #FF7A00 0%, #F26A00 55%, #E76F00 100%); }
+.grad-saffron-soft { background: linear-gradient(120deg, #FFB25E 0%, #FF7A00 55%, #E76F00 100%); }
+.grad-paper { background: linear-gradient(180deg, #FFFFFF 0%, #FFFDF5 100%); }
+.text-grad-saffron {
+  background: linear-gradient(100deg, #FFB25E 0%, #FF7A00 45%, #E76F00 100%);
+  -webkit-background-clip: text; background-clip: text;
+  color: transparent; -webkit-text-fill-color: transparent;
+}
+.on-light .text-grad-saffron {
+  background: linear-gradient(100deg, #E76F00 0%, #B35400 100%);
+  -webkit-background-clip: text; background-clip: text;
+  color: transparent; -webkit-text-fill-color: transparent;
+}
+/* glow orbs */
+.orb { position: absolute; border-radius: 9999px; pointer-events: none; filter: blur(90px); }
+.orb-saffron { background: radial-gradient(circle, rgba(231,111,0,0.35), transparent 70%); }
+.orb-navy { background: radial-gradient(circle, rgba(26,58,107,0.5), transparent 70%); }
+.orb-green { background: radial-gradient(circle, rgba(4,106,56,0.28), transparent 70%); }
+
+/* ── Card lift + glow hover ── */
+.card-lift { transition: transform 0.3s var(--ease-snappy), box-shadow 0.3s, border-color 0.3s; }
+.card-lift:hover { transform: translateY(-5px); box-shadow: 0 22px 44px -20px rgba(11,30,59,0.4); }
+.card-glow:hover { box-shadow: 0 18px 44px -16px rgba(231,111,0,0.45); border-color: #E76F00 !important; }
+
+/* ── Smooth FAQ accordion (grid-rows trick) ── */
+.faq-answer { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.35s var(--ease-snappy); }
+.faq-answer.open { grid-template-rows: 1fr; }
+.faq-answer > div { overflow: hidden; }
+
+/* ── Roadmap progress dots ── */
+.road-dot { transition: all 0.3s var(--ease-snappy); }
+.road-dot.active { transform: scale(1.25); }
 
 /* ── Paper grain — single subtle overlay (3.8% max) ── */
 .grain-overlay {
@@ -181,6 +278,8 @@
     transition-duration: 0.01ms !important;
   }
   .animate-marquee { animation: none; }
+  .animate-drift, .animate-drift-soft, .hero-enter { animation: none; opacity: 1; }
+  .reveal { opacity: 1; transform: none; transition: none; }
   .section-atmosphere::before,
   .section-atmosphere::after { animation: none; }
   ::view-transition-old(root),
@@ -193,54 +292,37 @@
    HIGH CONTRAST & ACCESSIBILITY GUARDRAILS
    ═══════════════════════════════════════════════════════════════ */
 
-/* Metallic gold text — banded oklch metal, not mustard. Sheen drifts slowly.
-   Inside `.on-light` sections the gradient auto-swaps to the deep-bronze
-   variant so gold never washes out on white. */
-.gold-text-gradient {
-  --gold-text-grad: var(--grad-gold-metallic);
-  background: var(--gold-text-grad);
-  background-size: 220% 100%;
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  -webkit-text-fill-color: transparent;
-  animation: metal-sheen 9s ease-in-out infinite alternate;
+/* Metallic gold text — REMOVED. Solid saffron for 2026 bold + contrast.
+   Old .gold-text-gradient / .metal-text classes kept as aliases. */
+.gold-text-gradient,
+.metal-text {
+  background: none !important;
+  color: #E76F00 !important;
+  -webkit-text-fill-color: #E76F00 !important;
+  animation: none !important;
+  filter: none !important;
 }
 
 .on-light {
-  --gold-text-grad: var(--grad-gold-deep);
-  background: var(--grad-light-section);
+  background: var(--canvas-paper);
 }
 
-/* No sheen drift on light surfaces — a moving light band is what made words
-   land on pale stops and vanish. Static deep bronze, always readable. */
+/* No sheen — solid saffron always (deep on light for AA contrast) */
 .on-light .gold-text-gradient,
 .on-light .metal-text {
-  animation: none;
-  background-position: 35% 50%;
-}
-
-/* Premium variant for display headlines: adds lift shadow so gold stays
-   readable over video/imagery. */
-.metal-text {
-  background: var(--grad-gold-metallic);
-  background-size: 220% 100%;
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  -webkit-text-fill-color: transparent;
-  filter: drop-shadow(0 1px 0.5px rgba(0, 0, 0, 0.45)) drop-shadow(0 4px 14px rgba(0, 0, 0, 0.3));
-  animation: metal-sheen 9s ease-in-out infinite alternate;
+  animation: none !important;
+  background: none !important;
+  color: #B35400 !important;
+  -webkit-text-fill-color: #B35400 !important;
 }
 
 @keyframes metal-sheen {
-  from { background-position: 0% 50%; }
-  to   { background-position: 100% 50%; }
+  from { opacity: 1; }
+  to { opacity: 1; }
 }
 
-/* ── Button system: metallic gold / ghost gold / WhatsApp green ── */
+/* ── Button system: solid saffron / navy ghost / india green ── */
 .btn-gold {
-  position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -248,26 +330,16 @@
   padding: 0.95rem 1.9rem;
   border-radius: 12px;
   font-family: var(--font-body);
-  font-weight: 700;
+  font-weight: 800;
   font-size: 0.7rem;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: #241703;
-  background: var(--grad-gold-metallic);
-  background-size: 220% 100%;
-  box-shadow:
-    var(--shadow-gold-inset),
-    var(--shadow-gold-dim),
-    var(--shadow-gold-inner);
-  transition: transform 0.2s var(--ease-snappy), filter 0.2s, box-shadow 0.2s;
+  color: #fff;
+  background: #E76F00;
+  box-shadow: 0 12px 28px -12px rgba(231,111,0,0.6);
+  transition: background 0.2s, transform 0.2s;
 }
-.btn-gold:hover {
-  transform: translateY(-1px);
-  filter: brightness(1.07);
-  box-shadow:
-    var(--shadow-gold-hover),
-    var(--shadow-gold-inner);
-}
+.btn-gold:hover { background: #B35400; transform: translateY(-1px); }
 .btn-gold:active { transform: translateY(0); }
 
 .btn-ghost-gold {
@@ -277,25 +349,19 @@
   gap: 0.5rem;
   padding: 0.95rem 1.9rem;
   border-radius: 12px;
-  border: 1px solid rgba(212, 175, 55, 0.38);
+  border: 2px solid #0B1E3B;
   font-family: var(--font-body);
-  font-weight: 700;
+  font-weight: 800;
   font-size: 0.7rem;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: #F5E6BA;
-  background: rgba(15, 12, 31, 0.55);
-  backdrop-filter: blur(10px);
-  box-shadow: inset 0 1px 0 rgba(255, 246, 217, 0.10);
-  transition: border-color 0.2s, background-color 0.2s, transform 0.2s var(--ease-snappy);
+  color: #0B1E3B;
+  background: #fff;
+  transition: all 0.2s;
 }
-.btn-ghost-gold:hover {
-  border-color: rgba(212, 175, 55, 0.72);
-  background: rgba(212, 175, 55, 0.10);
-  transform: translateY(-1px);
-}
+.btn-ghost-gold:hover { background: #0B1E3B; color: #fff; transform: translateY(-1px); }
 
-.btn-wa {
+.btn-wa, .btn-whatsapp {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -303,48 +369,75 @@
   padding: 0.95rem 1.9rem;
   border-radius: 12px;
   font-family: var(--font-body);
-  font-weight: 700;
+  font-weight: 800;
   font-size: 0.7rem;
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: #ffffff;
-  background: var(--grad-wa);
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.28),
-    inset 0 -1px 0 rgba(0, 60, 50, 0.4),
-    0 12px 30px -10px rgba(18, 140, 126, 0.55);
-  transition: transform 0.2s var(--ease-snappy), filter 0.2s;
+  background: #046A38;
+  transition: background 0.2s, transform 0.2s;
 }
-.btn-wa:hover { transform: translateY(-1px); filter: brightness(1.08); }
-.btn-wa:active { transform: translateY(0); }
+.btn-wa:hover, .btn-whatsapp:hover { background: #03522B; transform: translateY(-1px); }
 
-.gold-arch {
-  border: 1.5px solid rgba(212,175,55,0.58);
-  box-shadow: inset 0 0 0 1px rgba(255,246,217,0.14), 0 18px 60px rgba(109,40,217,0.22);
+.gold-arch { border: 2px solid #E76F00; }
+
+/* ── Badges — were referenced in ~15 places but never defined ── */
+.badge-metallic-gold {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.375rem 0.75rem;
+  border-radius: 0.6rem;
+  background: #E76F00;
+  color: #0B1E3B;
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  white-space: nowrap;
 }
+.badge-navy {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.375rem 0.75rem;
+  border-radius: 0.6rem;
+  background: #0B1E3B;
+  color: #fff;
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+/* Contrast guardrail — badge icons inherit readable colors (saffron-on-saffron was 1.2:1) */
+.badge-metallic-gold svg { color: #0B1E3B !important; }
+.badge-navy svg { color: #FFB25E !important; }
 
 .purple-text-gradient {
-  background: linear-gradient(115deg, #F5D061 0%, #C4B5FD 42%, #8B5CF6 72%, #6D28D9 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  -webkit-text-fill-color: transparent;
+  background: none !important;
+  color: #E76F00 !important;
+  -webkit-text-fill-color: #E76F00 !important;
 }
 
-/* Standard section backgrounds — flat only, texture via .grain-overlay */
-#proof, #services, #process, #states, #faq, #contact, #presence, #start, #estimator {
-  background-color: var(--canvas-void);
+/* Modern light-dark rhythm — 2026 bento */
+#proof, #process, #contact, #presence, #start, #estimator {
+  background-color: #0B1E3B;
+  color: #fff;
 }
-/* Light sections override where needed */
+#services, #states, #faq {
+  background-color: #FFFDF5;
+  color: #0B1E3B;
+}
 #why, #reviews, .on-light {
-  background-color: var(--canvas-paper);
-  color: var(--paper-ink);
+  background-color: #FFFDF5;
+  color: #0B1E3B;
 }
 
-/* Shared page surfaces — flat */
-.psara-page-main { background-color: var(--canvas-void) !important; }
-.psara-page-hero { background-color: var(--canvas-void); }
-.psara-site-footer { background-color: #0A0A12; }
+/* Shared page surfaces — dark dossier default (all inner views render white text) */
+.psara-page-main { background-color: #0B1E3B; color: #fff; }
+.psara-page-hero { background-color: #0B1E3B; color: #fff; }
+.psara-site-footer { background-color: #0B1E3B !important; }
 
 /* Mobile tap target & accessibility — scrollbar restored above */
 @media (max-width: 768px) {
@@ -357,57 +450,38 @@
   }
 }
 
-/* Theme contrast — dark sections white text, light sections ink */
-#hero, #proof, #services, #states, #faq, #presence, #contact, #start, footer, .psara-site-footer {
+/* Theme contrast — modern rhythm */
+#hero { color: #0B1E3B; background: #FFFDF5; }
+#proof, #process, #contact, #start, footer, .psara-site-footer {
   color: #FFFFFF;
 }
-#why, #reviews, .on-light { color: var(--paper-ink); }
-#why p, #reviews p, .on-light p { color: var(--ink-soft); }
+#services, #states, #faq, #why, #reviews, .on-light { color: #0B1E3B; }
+#services p, #states p, #faq p, #why p, #reviews p, .on-light p { color: #33465F; }
 
-/* ── Magnetic button — metallic gold, statutory palette ── */
+/* ── Modern: grain off, magnetic solid, cursor hidden ── */
+.grain-overlay, .noise-overlay { display: none !important; }
 .magnetic {
   position: relative;
   border: none;
   cursor: pointer;
-  isolation: isolate;
   padding: 1.05rem 2.2rem;
   border-radius: 12px;
   font-family: var(--font-body), sans-serif;
-  font-weight: 700;
+  font-weight: 800;
   font-size: 0.72rem;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: #241703;
-  background: var(--grad-gold-metallic);
-  background-size: 220% 100%;
-  box-shadow:
-    var(--shadow-gold-inset),
-    var(--shadow-gold-dim),
-    0 14px 40px -10px rgba(200, 155, 60, 0.55);
+  color: #fff;
+  background: #E76F00;
   min-height: 48px;
 }
-.magnetic-glow {
-  position: absolute;
-  inset: -2px;
-  border-radius: inherit;
-  filter: blur(18px);
-  background: rgba(212, 175, 55, 0.4);
-  opacity: 0;
-  transition: opacity 0.3s var(--ease-snappy, cubic-bezier(0.16,1,0.3,1));
-  z-index: -1;
-}
-.magnetic-glow[data-on] { opacity: 0.75; }
+.magnetic-glow { display: none !important; }
 
-/* ── Cursor dot — refined ── */
-.cursor-dot {
-  position: fixed; top:0; left:0; z-index:9999; width:14px; height:14px; border-radius:50%; pointer-events:none;
-  background: rgba(212,175,55,0.14); border:1px solid var(--gold, #c89b3c);
-  transition: width 0.25s var(--ease-snappy), height 0.25s var(--ease-snappy), background-color 0.25s;
-}
-.cursor-dot.cursor-active { width:74px; height:74px; background: rgba(8,7,20,0.82); }
+/* ── Cursor dot — disabled for modern clean (was refined) ── */
+.cursor-dot, .custom-cursor-dot, .custom-cursor-ring { display: none !important; }
 .cursor-label {
   position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
-  font-size:0.62rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:#F5E6BA; opacity:0; white-space:nowrap; transition:opacity 0.25s;
+  font-size:0.62rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:#FFE8D1; opacity:0; white-space:nowrap; transition:opacity 0.25s;
 }
 
 /* ── Focus-Visible Enhancements — gold accent on interactive elements ── */

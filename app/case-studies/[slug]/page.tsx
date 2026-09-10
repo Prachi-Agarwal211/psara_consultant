@@ -32,41 +32,41 @@ export default async function CaseStudyDetailPage({ params }: { params: Promise<
         crumbs={[{ label: "Case Studies", href: "/case-studies" }, { label: cs.clientType }]}
       />
 
-      <PageMain className="bg-[#080714] text-white">
+      <PageMain className="bg-[#0B1E3B] text-white">
         <div className="max-w-4xl mx-auto space-y-10">
           {/* Key Metrics Banner */}
-          <div className="flex flex-col items-center justify-between gap-6 rounded-3xl border border-[rgba(212,175,55,0.35)] bg-gradient-to-r from-[#332066] via-[#180D36] to-[#24104B] p-6 shadow-2xl sm:flex-row sm:p-8">
+          <div className="flex flex-col items-center justify-between gap-6 rounded-3xl border border-[rgba(231,111,0,0.35)] bg-gradient-to-r from-[#1A3A6B] via-[#132E57] to-[#14305E] p-6 shadow-2xl sm:flex-row sm:p-8">
             <div className="space-y-1">
-              <span className="text-xs font-bold uppercase tracking-widest text-[#D4AF37] block">Territory &amp; Sector</span>
+              <span className="text-xs font-bold uppercase tracking-widest text-[#FF7A00] block">Territory &amp; Sector</span>
               <p className="text-base font-bold text-white flex items-center gap-2">
-                <MapPin className="h-4 w-4 text-[#D4AF37]" /> {cs.state} • {cs.clientType}
+                <MapPin className="h-4 w-4 text-[#FF7A00]" /> {cs.state} • {cs.clientType}
               </p>
             </div>
             <div className="text-right">
-              <span className="text-xs font-bold uppercase tracking-widest text-[#D4AF37] block">Result Metric</span>
-              <p className="text-2xl font-bold gold-metallic-text font-mono mt-0.5">{cs.metric}</p>
+              <span className="text-xs font-bold uppercase tracking-widest text-[#FF7A00] block">Result Metric</span>
+              <p className="text-2xl font-bold gold-text-gradient font-mono mt-0.5">{cs.metric}</p>
             </div>
           </div>
 
           {/* Breakdown Sections */}
           <div className="space-y-6 text-sm text-[#E2E8F0] leading-relaxed">
-            <div className="rounded-2xl border border-white/10 bg-gradient-to-b from-[#14102A] to-[#0F0C1F] p-6 sm:p-8 shadow-md space-y-3">
-              <h2 className="text-xl font-bold text-[#D4AF37] flex items-center gap-2" style={{ fontFamily: "var(--font-display)" }}>
-                <ShieldCheck className="h-5 w-5 text-[#D4AF37]" /> 1. The Regulatory Challenge
+            <div className="rounded-2xl border border-white/10 bg-[#0B1E3B] p-6 sm:p-8 shadow-md space-y-3">
+              <h2 className="text-xl font-bold text-[#FF7A00] flex items-center gap-2" style={{ fontFamily: "var(--font-display)" }}>
+                <ShieldCheck className="h-5 w-5 text-[#FF7A00]" /> 1. The Regulatory Challenge
               </h2>
               <p className="font-normal text-base text-[#E2E8F0] leading-relaxed">{cs.challenge}</p>
             </div>
 
-            <div className="rounded-2xl border border-white/10 bg-gradient-to-b from-[#14102A] to-[#0F0C1F] p-6 sm:p-8 shadow-md space-y-3">
-              <h2 className="text-xl font-bold text-[#D4AF37] flex items-center gap-2" style={{ fontFamily: "var(--font-display)" }}>
-                <Sparkles className="h-5 w-5 text-[#D4AF37]" /> 2. PSARA Advisory Solution &amp; Filing
+            <div className="rounded-2xl border border-white/10 bg-[#0B1E3B] p-6 sm:p-8 shadow-md space-y-3">
+              <h2 className="text-xl font-bold text-[#FF7A00] flex items-center gap-2" style={{ fontFamily: "var(--font-display)" }}>
+                <Sparkles className="h-5 w-5 text-[#FF7A00]" /> 2. PSARA Advisory Solution &amp; Filing
               </h2>
               <p className="font-normal text-base text-[#E2E8F0] leading-relaxed">{cs.solution}</p>
             </div>
 
-            <div className="rounded-2xl border border-white/10 bg-gradient-to-b from-[#14102A] to-[#0F0C1F] p-6 sm:p-8 shadow-md space-y-3">
-              <h2 className="text-xl font-bold text-[#D4AF37] flex items-center gap-2" style={{ fontFamily: "var(--font-display)" }}>
-                <Building2 className="h-5 w-5 text-[#D4AF37]" /> 3. Final Statutory Outcome
+            <div className="rounded-2xl border border-white/10 bg-[#0B1E3B] p-6 sm:p-8 shadow-md space-y-3">
+              <h2 className="text-xl font-bold text-[#FF7A00] flex items-center gap-2" style={{ fontFamily: "var(--font-display)" }}>
+                <Building2 className="h-5 w-5 text-[#FF7A00]" /> 3. Final Statutory Outcome
               </h2>
               <p className="font-normal text-base text-[#E2E8F0] leading-relaxed">{cs.outcome}</p>
             </div>

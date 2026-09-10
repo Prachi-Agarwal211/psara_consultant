@@ -31,7 +31,7 @@ export const LOCATION_ACCENTS: Record<AccentId, LocationAccent> = {
   gold: {
     id: "gold",
     base: "#D4B872",
-    bright: "#E8D5A3",
+    bright: "#FFB25E",
     deep: "#8C6E2F",
     line: "rgba(212,184,114,0.35)",
     soft: "rgba(212,184,114,0.08)",
@@ -125,10 +125,10 @@ const CINEMATIC_HEROES = [
 ];
 
 const HUB_HERO_OVERRIDES: Record<string, string> = {
-  "services-hub": "/assets/images/generated/inner-hero-dossier.png",
-  "blog-hub": "/assets/images/generated/inner-hero-dossier.png",
-  "about-hub": "/assets/images/generated/inner-hero-parchment.png",
-  "contact-hub": "/assets/images/generated/inner-hero-parchment.png",
+  "services-hub": "/assets/images/generated/inner-hero-dossier.jpg",
+  "blog-hub": "/assets/images/generated/inner-hero-dossier.jpg",
+  "about-hub": "/assets/images/generated/inner-hero-parchment.jpg",
+  "contact-hub": "/assets/images/generated/inner-hero-parchment.jpg",
 };
 
 export function stateHeroImage(slug: string): string {

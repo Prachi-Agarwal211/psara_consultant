@@ -295,18 +295,18 @@ export const OFFICES: OfficeLocation[] = [
     region: "Uttar Pradesh",
     placeName: "PSARA Consultant India — Lucknow",
     address:
-      "303, 3rd Floor, Mehra Business Complex, Main Vidhan Sabha Marg, Opposite Ratan Square, Hazratganj, Lucknow",
-    pin: "226001",
+      "Office No. 1640, Lekhraj Dollar Complex, Near Bhootnath Metro Station, Faizabad Road, Lucknow, Uttar Pradesh",
+    pin: "226016",
     phone: CONTACT.phoneDisplay,
     phoneRaw: CONTACT.phoneRaw,
     hours: CONTACT.hours,
     isHQ: false,
-    lat: 26.855,
-    lng: 80.945,
+    lat: 26.878,
+    lng: 81.025,
     mapUrl:
-      "https://www.google.com/maps/search/?api=1&query=Mehra+Business+Complex+Hazratganj+Lucknow",
+      "https://www.google.com/maps/search/?api=1&query=Lekhraj+Dollar+Complex+Bhootnath+Faizabad+Road+Lucknow+226016",
     mapEmbed:
-      "https://www.google.com/maps?q=Hazratganj+Lucknow+Mehra+Business+Complex&output=embed&hl=en",
+      "https://www.google.com/maps?q=Lekhraj+Dollar+Complex+Bhootnath+Faizabad+Road+Lucknow+226016&output=embed&hl=en",
     stateSlug: "uttar-pradesh",
   },
   {
