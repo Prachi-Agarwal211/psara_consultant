@@ -46,9 +46,8 @@ _design-references/
 # vercel
 .vercel
 
-# generated build assets (can be regenerated via scripts/generators/)
-public/assets/images/blog/*.svg
-public/assets/images/og/*.svg
+# ponytail: blog/og SVGs are referenced live — do not ignore or /blog covers 404 on Vercel
+# (regenerate via scripts/generators/, then commit)
 
 # accidental nested copy of this repo
 /psara-consultant/

@@ -275,7 +275,7 @@ export default async function BlogPostPage({
                   Get PSARA License Help
                 </h3>
                 <p className="mt-2 text-xs text-[var(--white-55)]">
-                  500+ agencies across 36 States &amp; UTs trust us. Call or WhatsApp for a free consultation.
+                  300+ agencies across 36 States &amp; UTs trust us. Call or WhatsApp for a free consultation.
                 </p>
                 <div className="mt-4 space-y-2">
                   <a

@@ -45,7 +45,7 @@ export default function CertificationPage() {
     <StageShell>
       <PageHero
         title="ISO &amp; Statutory Certifications"
-        lead="Our advisory practice is anchored in quality management, data confidentiality, and strict statutory compliance standards."
+        lead="Our advisory practice is anchored in quality management, data confidentiality, and strict statutory compliance standards. Certificate numbers available on request — contact the desk for verification."
         crumbs={[{ label: "Certifications" }]}
       />
 

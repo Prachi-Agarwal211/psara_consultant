@@ -10,14 +10,14 @@ import { pageMeta } from "../../lib/metadata";
 
 export const metadata: Metadata = pageMeta(
   "About PSARA Consultant — Leadership, Mission & Statutory Excellence",
-  `About ${SITE.name} — PSARA licensing advisory led by Mr. Sonu Singh & Mr. Nakul Singh Jadaun. 500+ PSARA approvals across 36 States & UTs.`,
+  `About ${SITE.name} — PSARA licensing advisory led by Mr. Sonu Singh & Mr. Nakul Singh Jadaun. 300+ PSARA approvals across 36 States & UTs.`,
   "/about",
   ["PSARA consultant about", "security agency licensing experts", "Sonu Singh PSARA", "Nakul Singh Jadaun"]
 );
 
 const STATS = [
   { number: "10+", label: "Years Regulatory Practice" },
-  { number: "500+", label: "PSARA Licenses Granted" },
+  { number: "300+", label: "PSARA Licenses Granted" },
   { number: "36", label: "States & UTs Covered" },
   { number: "100%", label: "Controlling Authority Compliance" },
 ];
@@ -48,7 +48,7 @@ const TIMELINE = [
   {
     year: "Today",
     title: "National Statutory Authority",
-    desc: "Over 500+ successful PSARA license grants, with filings audited against each State's published Controlling Authority rules across all 36 Indian States and UTs.",
+    desc: "Over 300+ successful PSARA license grants, with filings audited against each State's published Controlling Authority rules across all 36 Indian States and UTs.",
   },
 ];
 

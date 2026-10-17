@@ -96,26 +96,27 @@ export default function ContactForm({
     if (Object.keys(next).length > 0) return;
 
     setIsSubmitting(true);
+    // ponytail: WhatsApp handoff is primary, /api/contact is best-effort backup — always open WA
     try {
-      const response = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name,
-          phone,
-          email,
-          state,
-          city,
-          districts,
-          message,
-          formType,
-          sourcePage: window.location.pathname,
-          startedAt: startedAtRef.current || 0,
-        }),
-      });
-      if (!response.ok) {
-        const payload = (await response.json().catch(() => null)) as { error?: string } | null;
-        throw new Error(payload?.error || "We could not submit the enquiry.");
+      try {
+        await fetch("/api/contact", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            name,
+            phone,
+            email,
+            state,
+            city,
+            districts,
+            message,
+            formType,
+            sourcePage: window.location.pathname,
+            startedAt: startedAtRef.current || 0,
+          }),
+        });
+      } catch {
+        // server backup failed — WhatsApp below still delivers the lead
       }
       openWa();
       setIsSuccess(true);

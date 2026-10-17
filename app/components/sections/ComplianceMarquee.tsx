@@ -5,7 +5,7 @@ import { CONTACT } from "../../../lib/config";
 
 const ITEMS = [
   { icon: Calculator, text: "GOVT FEE ₹5,000 / ₹10,000 / ₹25,000" },
-  { icon: ShieldCheck, text: "500+ LICENSES GRANTED" },
+  { icon: ShieldCheck, text: "300+ LICENSES GRANTED" },
   { icon: MapPin, text: "36 STATES & UTS" },
   { icon: BadgeCheck, text: "TRAINING MOU INCLUDED" },
   { icon: Clock, text: "30–45 DAY FAST-TRACK" },

@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import SmoothScroll from "./components/providers/SmoothScroll";
 import SiteChrome from "../components/SiteChrome";
-import { SITE, CONTACT, AGGREGATE_RATING, OFFICES } from "../lib/config";
+import { SITE, CONTACT, OFFICES } from "../lib/config";
 import DynamicBreadcrumbSchema from "../components/DynamicBreadcrumbSchema";
 import Analytics from "./components/Analytics";
 import "./globals.css";
@@ -148,13 +148,7 @@ const organizationSchema = JSON.stringify({
         "Multi-State PSARA License",
       ],
       areaServed: { "@type": "Country", name: "India" },
-      aggregateRating: {
-        "@type": "AggregateRating",
-        ratingValue: AGGREGATE_RATING.ratingValue,
-        reviewCount: AGGREGATE_RATING.reviewCount,
-        bestRating: AGGREGATE_RATING.bestRating,
-        worstRating: AGGREGATE_RATING.worstRating,
-      },
+      // ponytail: self-awarded AggregateRating removed — Google flags it as spam; restore only with verifiable third-party reviews
     },
     {
       "@type": "WebSite",

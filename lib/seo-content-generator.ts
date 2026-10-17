@@ -1,6 +1,6 @@
 import type { StateInfo } from "../data/states";
 import type { CityInfo } from "../data/cities";
-import { CONTACT, SITE, AGGREGATE_RATING } from "./config";
+import { CONTACT, SITE } from "./config";
 import { getCaContact } from "../data/ca-contacts";
 
 function stringToHash(str: string): number {
@@ -503,17 +503,7 @@ export function localBusinessJsonLd(opts: {
           },
         }
       : {}),
-    ...(opts.localOffice === false
-      ? {}
-      : {
-          aggregateRating: {
-            '@type': 'AggregateRating',
-            ratingValue: AGGREGATE_RATING.ratingValue,
-            reviewCount: AGGREGATE_RATING.reviewCount,
-            bestRating: AGGREGATE_RATING.bestRating,
-            worstRating: AGGREGATE_RATING.worstRating,
-          },
-        }),
+    // ponytail: self-awarded AggregateRating removed — restore only with verifiable third-party reviews
     openingHoursSpecification: {
       '@type': 'OpeningHoursSpecification',
       dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
@@ -556,13 +546,7 @@ export function stateOrganizationJsonLd(opts: {
     description: opts.description,
     image: `${SITE.url}/logo.png`,
     areaServed: { '@type': 'State', name: opts.state },
-    aggregateRating: {
-      '@type': 'AggregateRating',
-      ratingValue: AGGREGATE_RATING.ratingValue,
-      reviewCount: AGGREGATE_RATING.reviewCount,
-      bestRating: AGGREGATE_RATING.bestRating,
-      worstRating: AGGREGATE_RATING.worstRating,
-    },
+    // ponytail: self-awarded AggregateRating removed — restore only with verifiable third-party reviews
   }
 }
 

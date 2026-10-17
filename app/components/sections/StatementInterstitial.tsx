@@ -128,7 +128,7 @@ export default function StatementInterstitial() {
           className="mt-10 flex flex-wrap items-center justify-center gap-x-3 gap-y-2 text-xs font-bold uppercase tracking-[0.16em] text-[#FFB25E]"
           style={{ fontFamily: "var(--font-body)" }}
         >
-          <span>500+ LICENSES GRANTED</span>
+          <span>300+ LICENSES GRANTED</span>
           <span className="h-1.5 w-1.5 rounded-full bg-[#E76F00]" />
           <span>36 STATES &amp; UTs COVERED</span>
           <span className="h-1.5 w-1.5 rounded-full bg-[#E76F00]" />

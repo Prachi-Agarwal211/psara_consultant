@@ -79,7 +79,7 @@ export default function HeroStage() {
               <ShieldCheck className="h-3.5 w-3.5 text-[#FF7A00]" /> PSARA Act 2005 Specialist
             </span>
             <span className="inline-flex items-center gap-1.5 rounded-full border border-[#046A38]/30 bg-green-50 px-3 py-1.5 text-[10px] font-extrabold uppercase tracking-[0.16em] text-[#046A38]">
-              <BadgeCheck className="h-3.5 w-3.5" /> 500+ Licenses Cleared
+              <BadgeCheck className="h-3.5 w-3.5" /> 300+ Licenses Cleared
             </span>
           </div>
 
@@ -141,7 +141,7 @@ export default function HeroStage() {
               <div className="card-glow relative flex items-center gap-3 overflow-hidden rounded-2xl grad-navy p-4 text-white">
                 <div className="orb orb-saffron right-[-40px] top-[-40px] h-[120px] w-[120px] opacity-60" aria-hidden />
                 <Image src="/assets/images/float/shield-gold.svg" alt="Security shield icon" width={36} height={36} className="animate-drift-soft h-9 w-9 shrink-0" />
-                <div><div className="text-xl font-black leading-none">500+</div><div className="mt-1 text-[10px] font-bold uppercase tracking-[0.14em] text-white/70">Licenses Granted</div></div>
+                <div><div className="text-xl font-black leading-none">300+</div><div className="mt-1 text-[10px] font-bold uppercase tracking-[0.14em] text-white/70">Licenses Granted</div></div>
               </div>
               <div className="flex items-center gap-3 rounded-2xl border border-[#E8DFC8] bg-white p-4">
                 {/* ponytail: navy tile — transparent gold washes out on bare white */}

@@ -20,7 +20,7 @@ export default function WhyChooseUs() {
         <Reveal>
         <div className="flex flex-col justify-between gap-4 md:flex-row md:items-end">
           <div>
-            <p className="text-xs font-black uppercase tracking-[0.2em] text-[#FF7A00]">Why 500+ Agencies Chose Us</p>
+            <p className="text-xs font-black uppercase tracking-[0.2em] text-[#FF7A00]">Why 300+ Agencies Chose Us</p>
             <h2 className="mt-2 font-black leading-[1.02]" style={{ fontSize: "clamp(1.9rem,4vw,3rem)", fontFamily: "var(--font-display)" }}>Dalal nahi, <span className="text-[#FF7A00]">direct desk.</span></h2>
           </div>
           <a href={DEFAULT_WA} target="_blank" rel="noopener noreferrer" className="btn-shine inline-flex w-fit items-center gap-2 rounded-xl grad-saffron px-6 py-3 text-xs font-black uppercase tracking-[0.12em] text-[#0B1E3B] hover:brightness-105">Chat Desk <ArrowRight className="h-4 w-4" /></a>

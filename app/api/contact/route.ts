@@ -33,7 +33,8 @@ type StoredLead = {
   createdAt: string;
 };
 
-const DATA_FILE = path.join(process.cwd(), ".data", "contact-leads.json");
+// ponytail: Vercel fs is read-only except /tmp — file is best-effort cache, email is delivery path
+const DATA_FILE = path.join(process.env.VERCEL ? "/tmp" : process.cwd(), process.env.VERCEL ? "contact-leads.json" : ".data/contact-leads.json");
 const requestLog = new Map<string, number[]>();
 const MAX_REQUESTS = 5;
 const WINDOW_MS = 10 * 60 * 1000;
@@ -162,11 +163,12 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: "Please provide a valid name, phone number, state, and email if supplied." }, { status: 422 });
   }
 
+  let saved = false;
   try {
     saveLead(lead);
+    saved = true;
   } catch {
-    // A production deployment should use a managed database or queue. The
-    // email notification below still provides a delivery path when configured.
+    saved = false;
   }
 
   let notified = false;
@@ -176,5 +178,9 @@ export async function POST(request: NextRequest) {
     notified = false;
   }
 
-  return NextResponse.json({ success: true, notified, site: SITE.name }, { status: 202 });
+  // ponytail: honest status — frontend opens WhatsApp anyway, but ops can alert when both paths fail
+  if (!saved && !notified) {
+    return NextResponse.json({ success: false, saved, notified, error: "Enquiry received in browser only — please tap Send on WhatsApp or call us directly." }, { status: 500 });
+  }
+  return NextResponse.json({ success: true, saved, notified, site: SITE.name }, { status: 202 });
 }

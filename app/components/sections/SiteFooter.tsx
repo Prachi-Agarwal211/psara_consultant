@@ -29,7 +29,7 @@ function LiveClock() {
 const TRUST_BADGES = [
   { label: "PSARA Specialist Practice", sub: "Dedicated Regulatory Filing" },
   { label: "36 States & UTs", sub: "Controlling Authority Network" },
-  { label: "500+ Licenses Cleared", sub: "Pan-India Track Record" },
+  { label: "300+ Licenses Cleared", sub: "Pan-India Track Record" },
   { label: "Statutory Advisory", sub: "PSARA Act 2005 Compliant" },
 ];
 
@@ -126,10 +126,10 @@ export default function SiteFooter() {
               <ul className="space-y-2 text-sm text-[#DCE4E4]">
                 <li><Link href="/services/psara-license" className="footer-link transition-colors hover:text-white">Fresh PSARA License</Link></li>
                 <li><Link href="/services/psara-license-renewal" className="footer-link transition-colors hover:text-white">PSARA Renewal</Link></li>
-                <li><Link href="/services/multi-state-psara-license" className="footer-link transition-colors hover:text-white">Multi-State Licensing</Link></li>
-                <li><Link href="/services/psara-training-mou" className="footer-link transition-colors hover:text-white">Training Institute MOUs</Link></li>
-                <li><Link href="/services/police-verification-clearance" className="footer-link transition-colors hover:text-white">Police Verification Clearance</Link></li>
-                <li><Link href="/services/security-agency-incorporation" className="footer-link transition-colors hover:text-white">Agency Incorporation</Link></li>
+                <li><Link href="/services/multi-state-psara" className="footer-link transition-colors hover:text-white">Multi-State Licensing</Link></li>
+                <li><Link href="/services/training-mou" className="footer-link transition-colors hover:text-white">Training Institute MOUs</Link></li>
+                <li><Link href="/services/police-verification" className="footer-link transition-colors hover:text-white">Police Verification Clearance</Link></li>
+                <li><Link href="/services/company-registration" className="footer-link transition-colors hover:text-white">Agency Incorporation</Link></li>
                 <li><Link href="/emergency" className="font-bold text-[#FFD9B3] transition-colors hover:text-[#FF7A00]">Emergency Filing Desk</Link></li>
               </ul>
             </div>
