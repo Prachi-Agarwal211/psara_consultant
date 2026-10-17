@@ -8,7 +8,7 @@ import Reveal from "../ui/Reveal";
 const faqs = [
   { q: "PSARA License kya hai, compulsory kyun hai?", a: "State Controlling Authority se milne wala registration — PSARA Act 2005 ke under. Bina license agency chalana punishable offence hai (fine + jail)." },
   { q: "Training MOU pehle compulsory hai?", a: "Haan. Har state me recognized institute se MOU mandatory hai — unarmed, supervisor aur armed syllabus ke liye." },
-  { q: "Total kharcha kitna — govt + consultancy?", a: "Consultancy ₹30,000 + MOU ₹35,000. Govt fee: ₹5,000 (1 district), ₹10,000 (5 tak), ₹25,000 (entire state)." },
+  { q: "Total kharcha kitna — govt + consultancy?", a: "Standard whole-state package ₹3,65,000 — consultancy, MOU + training, govt fee, office & rent agreement, documents, police verification aur processing sab isme included. Govt fee state-wise alag hoti hai (jaise Karnataka whole state ₹50,000), exact quote Fee Calculator se confirm karo." },
   { q: "Time kitna lagta hai?", a: "30–45 working days standard — documents, police verification aur inspection par depend karta hai." },
   { q: "Validity aur renewal?", a: "5 years most states. Renewal 45–90 days pehle file karo, warna fresh apply karna padega." },
 ];

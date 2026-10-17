@@ -3,60 +3,49 @@
 import { useState } from "react";
 import { CheckCircle2, Shield, MessageSquare, Info, Sparkles } from "lucide-react";
 import { formatEnquiryWhatsAppMessage, openWhatsApp } from "../../../lib/whatsapp";
-import { FEES, formatINR } from "../../../lib/config";
+import { formatINR } from "../../../lib/config";
+import { STATES } from "../../../data/states";
+import {
+  ARMED_GUARD_ADDON,
+  FEE_HEAD_NOTES,
+  GOVT_ITEM_INDEX,
+  QUOTE_ITEMS,
+  buildDefaultAmounts,
+  computeQuote,
+  getStateGovFee,
+  type CoverageScale,
+} from "../../../lib/quote-engine";
 
-const COVERAGE_OPTIONS = [
-  { id: "district", label: "Single-District Setup", govtFee: FEES.govt.singleDistrict, desc: "Single District operations within State" },
-  { id: "multi-district", label: "Up to 5 Districts", govtFee: FEES.govt.upToFiveDistricts, desc: "Multi-district regional coverage" },
-  { id: "statewide", label: "All-State PSARA Setup", govtFee: FEES.govt.entireState, desc: "Full State-wide licensing & deployment" },
-];
-
-const OTHER_COSTS = [
-  {
-    title: "Police Verification & Antecedent Clearance",
-    range: "₹3,000 – ₹8,000",
-    desc: "SP/CP office antecedent verification and CCTNS database clearance per director/promoter.",
-  },
-  {
-    title: "Notarization, Stamp Duty & Affidavits",
-    range: "₹2,000 – ₹5,000",
-    desc: "State non-judicial e-stamp paper, notarized director declarations, and lease deed attestation.",
-  },
-  {
-    title: "ROC Object Clause Amendment / Setup",
-    range: "₹5,000 – ₹12,000",
-    desc: "Company/LLP incorporation or MOA main object clause amendment for security operations (if applicable).",
-  },
-  {
-    title: "Armed Guard Endorsement Preparation",
-    range: "₹15,000",
-    desc: "Armed license vetting, weapon custodian protocols, and specialized armor/training documentation.",
-  },
+const COVERAGE_OPTIONS: Array<{ id: CoverageScale; label: string; desc: string }> = [
+  { id: "single-district", label: "Single-District Setup", desc: "Single District operations within State" },
+  { id: "up-to-five-districts", label: "Up to 5 Districts", desc: "Multi-district regional coverage" },
+  { id: "entire-state", label: "All-State PSARA Setup", desc: "Full State-wide licensing & deployment" },
 ];
 
 export default function PsaraEstimator() {
-  const [selectedState, setSelectedState] = useState("Rajasthan");
-  const [coverageId, setCoverageId] = useState("statewide");
+  const [stateSlug, setStateSlug] = useState("rajasthan");
+  const [coverageId, setCoverageId] = useState<CoverageScale>("entire-state");
   const [needArmed, setNeedArmed] = useState(false);
 
-  const selectedCoverage = COVERAGE_OPTIONS.find((c) => c.id === coverageId) || COVERAGE_OPTIONS[2];
-  const govtFee = selectedCoverage.govtFee;
-  const totalEst = govtFee + FEES.consultancy + FEES.mouTraining + FEES.documents + (needArmed ? FEES.armedGuard : 0);
+  const selectedStateInfo = STATES.find((s) => s.slug === stateSlug);
+  const selectedCoverage = COVERAGE_OPTIONS.find((c) => c.id === coverageId) || COVERAGE_OPTIONS[2]!;
+  const amounts = buildDefaultAmounts(stateSlug, coverageId);
+  const result = computeQuote(amounts);
+  const govtFee = amounts[GOVT_ITEM_INDEX] ?? 0;
+  const totalEst = result.grandTotal + (needArmed ? ARMED_GUARD_ADDON : 0);
 
   const handleWhatsAppConsultation = () => {
     const text = formatEnquiryWhatsAppMessage({
       name: "Calculator User",
       phone: "Required",
-      state: selectedState,
+      state: selectedStateInfo?.name || stateSlug,
       service: "PSARA License Registration",
       formType: "PSARA Fee Estimator",
       extra: {
         "Coverage Scope": selectedCoverage.label,
-        "Consultancy & Professional": formatINR(FEES.consultancy),
-        "Training MOU Fee": formatINR(FEES.mouTraining),
-        "Statutory Govt Fee": formatINR(govtFee),
-        "Documentation & Affidavits": formatINR(FEES.documents),
-        "Armed Endorsement": needArmed ? formatINR(FEES.armedGuard) : "Not Selected",
+        "Statutory Government Fee": formatINR(govtFee),
+        "Professional & Processing (standard)": formatINR(result.grandTotal - govtFee),
+        "Armed Endorsement": needArmed ? formatINR(ARMED_GUARD_ADDON) : "Not Selected",
         "Total Estimate": formatINR(totalEst),
       },
     });
@@ -75,7 +64,9 @@ export default function PsaraEstimator() {
             Complete Cost of <span className="gold-text-gradient">PSARA License</span>
           </h3>
           <p className="mt-2 text-sm text-[#E2E8F0] font-normal max-w-2xl">
-            Transparent fee structure — professional consultancy, training MOU, statutory government fee, and document costs under the PSARA Act, 2005.
+            Transparent standard structure for a full-service PSARA filing — consultancy, MOU &amp; training
+            certification, statutory government fee, office &amp; rent agreement support, documentation, police
+            verification liaison and processing charges.
           </p>
         </div>
         <div className="shrink-0">
@@ -91,28 +82,18 @@ export default function PsaraEstimator() {
         <div className="lg:col-span-7 space-y-6">
           {/* Target State */}
           <div>
-            <label className="block text-xs font-bold uppercase tracking-wider text-[#CBD5E1] mb-2">
-              1. Select Target Operating State
+            <label htmlFor="estimator-state" className="block text-xs font-bold uppercase tracking-wider text-[#CBD5E1] mb-2">
+              1. Select Target Operating State / UT
             </label>
             <select
-              value={selectedState}
-              onChange={(e) => setSelectedState(e.target.value)}
+              id="estimator-state"
+              value={stateSlug}
+              onChange={(e) => setStateSlug(e.target.value)}
               className="w-full rounded-xl border border-orange-200/25 bg-[#132E57] p-3.5 text-sm font-bold text-white focus:border-[#FF7A00] outline-none shadow-inner"
             >
-              <option>Rajasthan</option>
-              <option>Delhi NCR</option>
-              <option>Maharashtra</option>
-              <option>Karnataka</option>
-              <option>Haryana</option>
-              <option>Uttar Pradesh</option>
-              <option>Gujarat</option>
-              <option>Madhya Pradesh</option>
-              <option>Punjab</option>
-              <option>Bihar</option>
-              <option>Tamil Nadu</option>
-              <option>Telangana</option>
-              <option>West Bengal</option>
-              <option>Other State / UT</option>
+              {STATES.map((s) => (
+                <option key={s.slug} value={s.slug}>{s.name}</option>
+              ))}
             </select>
           </div>
 
@@ -138,7 +119,7 @@ export default function PsaraEstimator() {
                   >
                     <span className="font-bold text-xs block leading-snug text-white">{c.label}</span>
                     <span className={`text-base font-bold font-mono mt-1 block ${active ? "text-[#FFB25E]" : "text-[#FF7A00]"}`}>
-                      {formatINR(c.govtFee)}
+                      {formatINR(getStateGovFee(stateSlug, c.id).amount)}
                     </span>
                     <p className="mt-1 text-[11px] text-[#94A3B8] line-clamp-1">{c.desc}</p>
                   </button>
@@ -156,32 +137,24 @@ export default function PsaraEstimator() {
                 onChange={(e) => setNeedArmed(e.target.checked)}
                 className="h-4 w-4 accent-[#FF7A00] rounded"
               />
-              <span>Include Armed Guard Endorsement Preparation (+₹15,000)</span>
+              <span>Include Armed Guard Endorsement Preparation (+{formatINR(ARMED_GUARD_ADDON)})</span>
             </label>
             <p className="mt-1 text-xs text-[#94A3B8] pl-7">
               Required if your agency deploys armed security personnel or cash-in-transit escorts.
             </p>
           </div>
 
-          {/* Additional / Other Costs Section — flat */}
+          {/* How the estimate works */}
           <div className="rounded-xl border border-white/10 bg-[var(--canvas-void-2)] p-5 space-y-3">
             <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#FF7A00]">
-              <Info className="h-4 w-4" /> Other Third-Party / Statutory Expenses
+              <Info className="h-4 w-4" /> How this estimate works
             </div>
-            <p className="text-xs text-[#CBD5E1]">
-              Additional expenses required during processing, billed on actuals or handled directly with authorities:
+            <p className="text-xs text-[#CBD5E1] leading-relaxed">
+              Every head shown is part of the standard full-service quotation — nothing extra is billed inside
+              this scope. Government fees follow the {selectedStateInfo?.name ?? "selected state"} notification
+              for the chosen coverage; where a state differs from the standard slab, the desk confirms it before
+              filing. GST, where applicable, is charged additionally as per law.
             </p>
-            <div className="space-y-2.5 pt-1">
-              {OTHER_COSTS.map((oc) => (
-                <div key={oc.title} className="text-xs border-b border-white/5 pb-2.5 last:border-0 last:pb-0">
-                  <div className="flex items-center justify-between">
-                    <strong className="text-white font-bold">{oc.title}</strong>
-                    <span className="font-mono font-bold text-[#FFB25E]">{oc.range}</span>
-                  </div>
-                  <p className="text-[11px] text-[#94A3B8] mt-0.5">{oc.desc}</p>
-                </div>
-              ))}
-            </div>
           </div>
         </div>
 
@@ -192,7 +165,7 @@ export default function PsaraEstimator() {
               Structured Cost Breakdown
             </span>
             <h4 className="text-lg font-bold text-white mt-1">
-              {selectedState} • {selectedCoverage.label}
+              {selectedStateInfo?.name ?? stateSlug} • {selectedCoverage.label}
             </h4>
           </div>
 
@@ -207,30 +180,19 @@ export default function PsaraEstimator() {
                 </tr>
               </thead>
               <tbody className="divide-y divide-white/10 text-[#E2E8F0]">
-                <tr className="hover:bg-white/5 transition-colors">
-                  <td className="py-2.5 font-medium">Consultancy &amp; Professional</td>
-                  <td className="py-2.5 font-mono font-bold text-white text-right">{formatINR(FEES.consultancy)}</td>
-                  <td className="py-2.5 pl-4 text-[11px] text-[#94A3B8]">Dossier &amp; follow-up</td>
-                </tr>
-                <tr className="hover:bg-white/5 transition-colors">
-                  <td className="py-2.5 font-medium">Training MOU Fee</td>
-                  <td className="py-2.5 font-mono font-bold text-white text-right">{formatINR(FEES.mouTraining)}</td>
-                  <td className="py-2.5 pl-4 text-[11px] text-[#94A3B8]">Institute affiliation</td>
-                </tr>
-                <tr className="hover:bg-white/5 transition-colors">
-                  <td className="py-2.5 font-medium">Statutory Govt Fee</td>
-                  <td className="py-2.5 font-mono font-bold text-white text-right">{formatINR(govtFee)}</td>
-                  <td className="py-2.5 pl-4 text-[11px] text-[#94A3B8]">{selectedCoverage.label}</td>
-                </tr>
-                <tr className="hover:bg-white/5 transition-colors">
-                  <td className="py-2.5 font-medium">Documentation &amp; Affidavits</td>
-                  <td className="py-2.5 font-mono font-bold text-white text-right">{formatINR(FEES.documents)}</td>
-                  <td className="py-2.5 pl-4 text-[11px] text-[#94A3B8]">Legal drafting</td>
-                </tr>
+                {QUOTE_ITEMS.map((item, i) => (
+                  <tr key={item.key} className="hover:bg-white/5 transition-colors">
+                    <td className="py-2.5 font-medium">{item.label}</td>
+                    <td className="py-2.5 font-mono font-bold text-white text-right">{formatINR(amounts[i] ?? 0)}</td>
+                    <td className="py-2.5 pl-4 text-[11px] text-[#94A3B8]">
+                      {i === GOVT_ITEM_INDEX ? selectedCoverage.label : FEE_HEAD_NOTES[item.key]}
+                    </td>
+                  </tr>
+                ))}
                 {needArmed && (
                   <tr className="hover:bg-white/5 transition-colors">
-                    <td className="py-2.5 font-medium">Armed Guard Endorsement</td>
-                    <td className="py-2.5 font-mono font-bold text-white text-right">{formatINR(FEES.armedGuard)}</td>
+                    <td className="py-2.5 font-medium">Armed Guard Endorsement (Optional)</td>
+                    <td className="py-2.5 font-mono font-bold text-white text-right">{formatINR(ARMED_GUARD_ADDON)}</td>
                     <td className="py-2.5 pl-4 text-[11px] text-[#94A3B8]">Weapons vetting</td>
                   </tr>
                 )}
@@ -275,7 +237,7 @@ export default function PsaraEstimator() {
 
           {/* Disclaimer */}
           <p className="text-[11px] text-[#94A3B8] font-normal leading-relaxed border-t border-white/10 pt-3">
-            * Disclaimer: Government charges and third-party costs may vary by state and district.
+            * Disclaimer: Government charges and third-party costs may vary by state and district. GST extra as applicable.
           </p>
         </div>
       </div>

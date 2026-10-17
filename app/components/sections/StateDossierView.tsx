@@ -24,8 +24,13 @@ import { getCaContact } from "../../../data/ca-contacts";
 import type { StateInfo } from "../../../data/states";
 import type { generateStateContent } from "../../../lib/seo-content";
 import { getLocationAccent, accentStyleVars, type LocationAccent } from "../../lib/location-accent";
-import { FEES } from "../../../lib/config";
 import { DEFAULT_WA } from "../../../lib/whatsapp";
+import {
+  GOVT_ITEM_INDEX,
+  buildDefaultAmounts,
+  computeQuote,
+  type CoverageScale,
+} from "../../../lib/quote-engine";
 
 type StateContent = ReturnType<typeof generateStateContent>;
 
@@ -84,12 +89,14 @@ export default function StateDossierView({
     setTimeout(() => setCopiedField(null), 2000);
   };
 
-  // Fee calculation numbers (single source of truth: lib/config.ts FEES)
-  const govFee = calcScale === "d1" ? FEES.govt.singleDistrict : calcScale === "d5" ? FEES.govt.upToFiveDistricts : FEES.govt.entireState;
-  const consultancyFee = FEES.consultancy;
-  const mouFee = FEES.mouTraining;
-  const docFee = FEES.documents;
-  const totalStateEst = govFee + consultancyFee + mouFee + docFee;
+  // Standard fee structure (single source of truth: lib/quote-engine.ts)
+  const coverage: CoverageScale = calcScale === "d1" ? "single-district" : calcScale === "d5" ? "up-to-five-districts" : "entire-state";
+  const feeAmounts = buildDefaultAmounts(state.slug, coverage);
+  const govFee = feeAmounts[GOVT_ITEM_INDEX] ?? 0;
+  const consultancyBundle = (feeAmounts[0] ?? 0) + (feeAmounts[1] ?? 0) + (feeAmounts[2] ?? 0);
+  const officeDocBundle = (feeAmounts[4] ?? 0) + (feeAmounts[5] ?? 0) + (feeAmounts[6] ?? 0);
+  const policeProcessingBundle = (feeAmounts[7] ?? 0) + (feeAmounts[8] ?? 0);
+  const totalStateEst = computeQuote(feeAmounts).grandTotal;
 
   return (
     <div
@@ -388,16 +395,16 @@ export default function StateDossierView({
                 <span className="text-lg font-bold text-white font-mono mt-1 block">₹{govFee.toLocaleString("en-IN")}</span>
               </div>
               <div className="p-4 rounded-xl bg-[#0B1E3B] border border-white/10">
-                <span className="text-[#94A3B8] block">Training MOU Fee</span>
-                <span className="text-lg font-bold text-white font-mono mt-1 block">₹{mouFee.toLocaleString("en-IN")}</span>
+                <span className="text-[#94A3B8] block">Consultancy + MOU &amp; Training</span>
+                <span className="text-lg font-bold text-white font-mono mt-1 block">₹{consultancyBundle.toLocaleString("en-IN")}</span>
               </div>
               <div className="p-4 rounded-xl bg-[#0B1E3B] border border-white/10">
-                <span className="text-[#94A3B8] block">Consultancy Fee</span>
-                <span className="text-lg font-bold text-white font-mono mt-1 block">₹{consultancyFee.toLocaleString("en-IN")}</span>
+                <span className="text-[#94A3B8] block">Office, Rent Agreement &amp; Documentation</span>
+                <span className="text-lg font-bold text-white font-mono mt-1 block">₹{officeDocBundle.toLocaleString("en-IN")}</span>
               </div>
               <div className="p-4 rounded-xl bg-[#0B1E3B] border border-white/10">
-                <span className="text-[#94A3B8] block">Documentation &amp; Affidavits</span>
-                <span className="text-lg font-bold text-white font-mono mt-1 block">₹{docFee.toLocaleString("en-IN")}</span>
+                <span className="text-[#94A3B8] block">Police Verification &amp; Processing</span>
+                <span className="text-lg font-bold text-white font-mono mt-1 block">₹{policeProcessingBundle.toLocaleString("en-IN")}</span>
               </div>
             </div>
 

@@ -6,6 +6,11 @@ import StageShell from "../components/ui/StageShell";
 import { pageMeta } from "../../lib/metadata";
 import { SERVICES } from "../../data/services";
 import { DEFAULT_WA, TEL_HREF } from "../../lib/whatsapp";
+import { formatINR } from "../../lib/config";
+import { buildDefaultAmounts, computeQuote } from "../../lib/quote-engine";
+
+/** Standard whole-state package total — single source of truth: lib/quote-engine.ts */
+const STANDARD_WHOLE_STATE_TOTAL = computeQuote(buildDefaultAmounts("rajasthan", "entire-state")).grandTotal;
 
 export const metadata: Metadata = pageMeta(
   "PSARA Licensing Services & Regulatory Advisory",
@@ -107,7 +112,10 @@ export default function ServicesHubPage() {
                 Calculate Official State License Fees
               </h2>
               <p className="mt-2 text-xs md:text-sm text-[#E2E8F0] font-normal max-w-xl leading-relaxed">
-                Consultancy &amp; Professional Fees: ₹30,000 | Training MOU Fee: ₹35,000 | Statutory Government fees: 1 District (₹5,000), 5 Districts (₹10,000), Entire State (₹25,000).
+                Standard whole-state package {formatINR(STANDARD_WHOLE_STATE_TOTAL)} — consultancy, MOU &amp;
+                training, government fee, office &amp; rent agreement, documentation, police verification and
+                processing. Government fees vary by state and coverage (standard slab ₹5,000 / ₹10,000 /
+                ₹25,000, with state exceptions).
               </p>
             </div>
             <Link

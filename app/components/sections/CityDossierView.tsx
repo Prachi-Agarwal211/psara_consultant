@@ -23,7 +23,13 @@ import type { CityInfo } from "../../../data/cities";
 import type { StateInfo } from "../../../data/states";
 import type { generateCityContent } from "../../../lib/seo-content";
 import { getLocationAccent, accentStyleVars, hashSlug, type LocationAccent } from "../../lib/location-accent";
-import { FEES, formatINR } from "../../../lib/config";
+import { formatINR } from "../../../lib/config";
+import {
+  GOVT_ITEM_INDEX,
+  QUOTE_ITEMS,
+  buildDefaultAmounts,
+  computeQuote,
+} from "../../../lib/quote-engine";
 import { getCaContact } from "../../../data/ca-contacts";
 
 type CityContent = ReturnType<typeof generateCityContent>;
@@ -524,6 +530,9 @@ function FeeSnapshot({ city, state, index }: { city: CityInfo; state?: StateInfo
     { label: "Multiple Districts", value: state.feeMultiDistrict },
     { label: "Entire State", value: state.feeEntireState },
   ];
+  // Standard full-service package (single source of truth: lib/quote-engine.ts)
+  const packageAmounts = buildDefaultAmounts(state.slug, "entire-state");
+  const packageTotal = computeQuote(packageAmounts).grandTotal;
   return (
     <section data-section-transition data-transition="clip-left" className="space-y-8">
       <DossierTitle index={index}>{`PSARA fee structure — ${state.name}`}</DossierTitle>
@@ -547,13 +556,13 @@ function FeeSnapshot({ city, state, index }: { city: CityInfo; state?: StateInfo
         indicative and is confirmed against the current Controlling Authority schedule at filing time.
       </p>
 
-      {/* Complete cost breakdown — consultancy + MOU + govt fee + documents */}
+      {/* Complete cost breakdown — standard full-service structure */}
       <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {[
-          { label: "Consultancy / Professional Fees", value: formatINR(FEES.consultancy) },
-          { label: "Training Institute MOU Tie-up", value: formatINR(FEES.mouTraining) },
-          { label: "Documents, Affidavits & Notarization", value: formatINR(FEES.documents) },
-          { label: "Armed Guard Endorsement (Optional)", value: formatINR(FEES.armedGuard) },
+          { label: "Professional Consultancy Fees", value: formatINR(QUOTE_ITEMS[0]!.default) },
+          { label: "MOU & Training Certification", value: formatINR(QUOTE_ITEMS[1]!.default + QUOTE_ITEMS[2]!.default) },
+          { label: "Government Fee — Whole State", value: formatINR(packageAmounts[GOVT_ITEM_INDEX] ?? 0) },
+          { label: "Standard Package Total (Whole State)", value: formatINR(packageTotal) },
         ].map((c) => (
           <div key={c.label} className="relative overflow-hidden border border-acc bg-acc-soft p-5">
             <span aria-hidden className="pointer-events-none absolute -right-2 -top-4 font-mono text-5xl font-bold text-acc opacity-[0.12]">₹</span>
@@ -563,10 +572,10 @@ function FeeSnapshot({ city, state, index }: { city: CityInfo; state?: StateInfo
         ))}
       </div>
       <p className="max-w-3xl text-xs font-normal leading-relaxed text-[var(--white-55)]">
-        These are the complete one-time costs for a full-service PSARA license filing: end-to-end consultancy,
-        recognized training institute MOU execution, statutory government fees, and document/affidavit
-        preparation. Government fees vary by coverage scale — see the table above. Multi-state expansion is
-        custom quoted.
+        The standard whole-state filing package covers all nine fee heads — consultancy, MOU and training
+        certification, the {state.name} government fee, office and rent-agreement support, documentation,
+        police verification coordination and processing charges. Government fees vary by coverage scale — see
+        the table above. Multi-state expansion is custom quoted.
       </p>
     </section>
   );

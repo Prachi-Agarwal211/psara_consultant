@@ -35,20 +35,25 @@ const AI_CRAWLERS = [
   "Amazonbot",
 ];
 
+// ponytail: never disallow /_next/ — Google needs JS/CSS to render.
+// /quote/ is the internal quotation desk — keep it out of every index,
+// including AI crawlers (it exposes the cost breakdown used for clients).
+const PRIVATE_PATHS = ["/api/", "/admin/", "/metrics/", "/quote/"];
+
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: [
       {
         userAgent: "*",
         allow: "/",
-        disallow: ["/api/", "/_next/", "/admin/", "/metrics/"],
+        disallow: PRIVATE_PATHS,
       },
       // Explicit AI rules repeat the private-path exclusions. A specific
       // user-agent rule can otherwise override the wildcard rule above.
       ...AI_CRAWLERS.map((ua) => ({
         userAgent: ua,
         allow: "/",
-        disallow: ["/api/", "/_next/", "/admin/", "/metrics/"],
+        disallow: PRIVATE_PATHS,
       })),
     ],
     sitemap: `${SITE.url}/sitemap.xml`,
