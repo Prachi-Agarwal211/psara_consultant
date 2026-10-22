@@ -17,6 +17,7 @@ const eslintConfig = defineConfig([
     ".grok/**",
     "ai research prompts/**",
     "research/**",
+    "_design_v3/**",
     "scripts/**",
     "cypress/**",
     // Minified third-party vendor libs:

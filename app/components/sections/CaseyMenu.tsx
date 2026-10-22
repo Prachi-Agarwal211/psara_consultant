@@ -116,8 +116,8 @@ export default function CaseyMenu({
       tlRef.current = tl;
     };
 
-    if (typeof document !== "undefined" && (document as any).fonts?.ready) {
-      (document as any).fonts.ready.then(build).catch(build);
+    if (typeof document !== "undefined" && document.fonts?.ready) {
+      document.fonts.ready.then(build).catch(build);
     } else {
       build();
     }

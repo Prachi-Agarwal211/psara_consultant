@@ -14,7 +14,8 @@ export default function PageTransition({ children }: { children: React.ReactNode
   const rootRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    if (!rootRef.current || prefersReducedMotion()) return;
+    // The homepage owns its intro and pinning; transformed ancestors interfere.
+    if (pathname === "/" || !rootRef.current || prefersReducedMotion()) return;
     const { gsap } = ensureGsap();
     const root = rootRef.current;
     const ctx = gsap.context(() => {

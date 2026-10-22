@@ -13,6 +13,12 @@
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://www.psaraconsultantindia.com";
 const sitemapUrl = `${SITE_URL}/sitemap.xml`;
 
+// A local production build still publishes canonical production sitemap URLs.
+// Keep their paths, but validate against the explicitly selected test server.
+const validationUrl = (url) => process.env.NEXT_PUBLIC_SITE_URL
+  ? new URL(new URL(url, SITE_URL).pathname, SITE_URL).href
+  : url;
+
 async function getSitemapUrls() {
   const res = await fetch(sitemapUrl);
   if (!res.ok) throw new Error(`sitemap HTTP ${res.status}`);
@@ -21,7 +27,7 @@ async function getSitemapUrls() {
     const childLocs = [...xml.matchAll(/<loc>\s*(.*?)\s*<\/loc>/gi)].map((m) => m[1].trim());
     const urls = [];
     for (const loc of childLocs) {
-      const r = await fetch(loc);
+      const r = await fetch(validationUrl(loc));
       if (r.ok) {
         const child = await r.text();
         urls.push(...[...child.matchAll(/<loc>\s*(.*?)\s*<\/loc>/gi)].map((m) => m[1].trim()));
@@ -56,7 +62,7 @@ async function main() {
   let next = 0;
   async function worker() {
     while (next < urls.length) {
-      const url = urls[next++];
+      const url = validationUrl(urls[next++]);
       try {
         const res = await fetch(url, { headers: { "User-Agent": "JSON-LD-Validator/1.0" } });
         if (!res.ok) continue;

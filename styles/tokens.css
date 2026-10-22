@@ -59,8 +59,8 @@
   --grad-wa: #046A38;
 
   /* ── 9. Typography — bold sans, no luxury serif ── */
-  --font-display: "Archivo", "Arial Narrow", Inter, system-ui, sans-serif;
-  --font-body:    Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-display: var(--font-newsreader), Georgia, serif;
+  --font-body:    var(--font-hanken), system-ui, sans-serif;
   --h1-size: clamp(2.75rem, 6vw, 5.5rem);
   --h2-size: clamp(1.9rem, 3.6vw, 2.9rem);
   --h3-size: clamp(1.25rem, 2.2vw, 1.65rem);

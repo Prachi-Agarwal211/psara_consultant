@@ -39,6 +39,8 @@ dev-server*.log
 h.txt
 .grok/
 _design-references/
+/_design_v3/
+/artifacts/v3/
 
 # env files (can opt-in for committing if needed)
 .env*
@@ -55,3 +57,7 @@ _design-references/
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+_design_v3/
+.playwright-mcp/
+.impeccable/

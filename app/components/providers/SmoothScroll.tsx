@@ -1,55 +1,84 @@
-"use client";
+﻿"use client";
 
 import { useEffect } from "react";
 import Lenis from "lenis";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { prefersReducedMotion } from "../../lib/gsap";
+import { ensureGsap, prefersReducedMotion } from "../../lib/motion";
+
+let activeLenis: Lenis | null = null;
+let paused = false;
+const scrollSubscribers = new Set<() => void>();
+
+/** The intro may lock scrolling before the provider effect mounts. */
+export function setSmoothScrollPaused(value: boolean) {
+  paused = value;
+  if (value) activeLenis?.stop();
+  else activeLenis?.start();
+}
+
+export function subscribeSmoothScroll(callback: () => void) {
+  scrollSubscribers.add(callback);
+  return () => { scrollSubscribers.delete(callback); };
+}
 
 export default function SmoothScroll({ children }: { children: React.ReactNode }) {
   useEffect(() => {
-    if (typeof window === "undefined" || prefersReducedMotion()) return;
-    // ponytail: Lenis + ScrollTrigger double refresh fixed — single rAF, ignore vertical threshold
-    const lenis = new Lenis({
-      duration: 1.1,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      smoothWheel: true,
-      touchMultiplier: 1.2,
-      gestureOrientation: "vertical",
-    });
+    const { gsap, ScrollTrigger } = ensureGsap();
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
+    let disposeLenis: (() => void) | undefined;
+    let disposed = false;
 
-    lenis.on("scroll", ScrollTrigger.update);
+    const configure = () => {
+      disposeLenis?.();
+      disposeLenis = undefined;
+      if (prefersReducedMotion()) return;
+      const lenis = new Lenis({
+        duration: 1.1,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        smoothWheel: true,
+        touchMultiplier: 1.2,
+        gestureOrientation: "vertical",
+      });
+      activeLenis = lenis;
+      if (paused) lenis.stop();
+      const onScroll = () => {
+        ScrollTrigger.update();
+        scrollSubscribers.forEach((callback) => callback());
+      };
+      lenis.on("scroll", onScroll);
+      const updateLenis = (time: number) => lenis.raf(time * 1000);
+      gsap.ticker.add(updateLenis);
+      gsap.ticker.lagSmoothing(0);
 
-    const updateLenis = (time: number) => {
-      lenis.raf(time * 1000);
+      const onClick = (event: MouseEvent) => {
+        if (!(event.target instanceof Element)) return;
+        const anchor = event.target.closest<HTMLAnchorElement>('a[href^="#"]');
+        if (!anchor || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
+        const id = anchor.getAttribute("href")?.slice(1);
+        const target = id ? document.getElementById(id) : null;
+        if (!target) return;
+        event.preventDefault();
+        lenis.scrollTo(target, { offset: -80, duration: 1.4 });
+      };
+      document.addEventListener("click", onClick);
+      disposeLenis = () => {
+        gsap.ticker.remove(updateLenis);
+        document.removeEventListener("click", onClick);
+        lenis.off("scroll", onScroll);
+        lenis.destroy();
+        if (activeLenis === lenis) activeLenis = null;
+      };
     };
 
-    gsap.ticker.add(updateLenis);
-    gsap.ticker.lagSmoothing(0);
-
-    // route in-page anchors through Lenis so nav/footer links glide
-    const onClick = (e: MouseEvent) => {
-      const a = (e.target as HTMLElement).closest('a[href^="#"]') as HTMLAnchorElement | null;
-      if (!a) return;
-      const id = a.getAttribute("href")!.slice(1);
-      if (!id) return;
-      const el = document.getElementById(id);
-      if (!el) return;
-      e.preventDefault();
-      lenis.scrollTo(el, { offset: -80, duration: 1.4 });
-    };
-    document.addEventListener("click", onClick);
-
-    // refresh after fonts/images settle — fixes timing bleed
-    const onFonts = () => ScrollTrigger.refresh();
-    if (document.fonts?.ready) document.fonts.ready.then(onFonts);
-    window.addEventListener("load", onFonts);
-
+    configure();
+    reduced.addEventListener("change", configure);
+    const refresh = () => { if (!disposed) ScrollTrigger.refresh(); };
+    document.fonts?.ready.then(refresh);
+    window.addEventListener("load", refresh);
     return () => {
-      gsap.ticker.remove(updateLenis);
-      document.removeEventListener("click", onClick);
-      window.removeEventListener("load", onFonts);
-      lenis.destroy();
+      disposed = true;
+      reduced.removeEventListener("change", configure);
+      window.removeEventListener("load", refresh);
+      disposeLenis?.();
     };
   }, []);
 

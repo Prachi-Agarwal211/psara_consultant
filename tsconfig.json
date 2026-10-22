@@ -30,5 +30,5 @@
     ".next/dev/types/**/*.ts",
     "**/*.mts"
   ],
-  "exclude": ["node_modules", "cypress", "ai research prompts"]
+  "exclude": ["node_modules", "cypress", "ai research prompts", "_design_v3"]
 }

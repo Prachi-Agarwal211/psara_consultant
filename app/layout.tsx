@@ -1,10 +1,15 @@
 import type { Metadata, Viewport } from "next";
+import { Newsreader, Hanken_Grotesk } from "next/font/google";
 import SmoothScroll from "./components/providers/SmoothScroll";
 import SiteChrome from "../components/SiteChrome";
 import { SITE, CONTACT, OFFICES } from "../lib/config";
 import DynamicBreadcrumbSchema from "../components/DynamicBreadcrumbSchema";
 import Analytics from "./components/Analytics";
 import "./globals.css";
+
+const newsreader = Newsreader({ subsets: ["latin"], weight: "400", style: ["normal", "italic"], display: "swap", variable: "--font-newsreader" });
+const hanken = Hanken_Grotesk({ subsets: ["latin"], display: "swap", variable: "--font-hanken" });
+
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -219,13 +224,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="h-full antialiased">
+    <html lang="en" className={`h-full antialiased ${newsreader.variable} ${hanken.variable}`}>
       <head>
         <Analytics />
       </head>
       <body
         suppressHydrationWarning
-        className="min-h-full overflow-x-hidden font-normal bg-[#08060D] text-white selection:bg-[#D8B4FE] selection:text-black"
+        className="min-h-full font-normal bg-[#FFFDF5] text-[#0B1E3B] selection:bg-[#E76F00] selection:text-white"
       >
         {/* JSON-LD Organization / LocalBusiness / FAQ graph — body render avoids React 19 head hydration mismatch */}
         <script

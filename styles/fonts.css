@@ -1,8 +1,7 @@
-/* Tricolor Authority: bold sans system stack — no luxury serif, no woff2 dependency */
-/* ponytail: system fonts only, zero download, max Hindi/English readability */
+/* Fonts are self-hosted by next/font; variables are assigned in app/layout.tsx. */
 
 :root {
-  --font-display: "Archivo", "Arial Narrow", Inter, system-ui, sans-serif;
-  --font-body: Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
-  --font-accent: Inter, system-ui, sans-serif;
+  --font-display: var(--font-newsreader), Georgia, serif;
+  --font-body: var(--font-hanken), system-ui, sans-serif;
+  --font-accent: var(--font-hanken), system-ui, sans-serif;
 }

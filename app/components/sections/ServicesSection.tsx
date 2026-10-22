@@ -45,7 +45,7 @@ export default function ServicesSection() {
               </h2>
               <p className="mt-3 max-w-md text-sm leading-relaxed text-white/75">Company setup, MOU, verification, filing — sab ek desk par. Card kholo, requirements dekho, WhatsApp par bhejo.</p>
               <div className="mt-5 flex flex-wrap gap-2">
-                <a href="/calculator" className="btn-shine rounded-full grad-saffron px-5 py-2.5 text-[11px] font-black uppercase tracking-[0.12em] text-[#0B1E3B] hover:brightness-105">Fee Calculator</a>
+                <Link href="/calculator" className="btn-shine rounded-full grad-saffron px-5 py-2.5 text-[11px] font-black uppercase tracking-[0.12em] text-[#0B1E3B] hover:brightness-105">Fee Calculator</Link>
                 <a href={DEFAULT_WA} target="_blank" rel="noopener noreferrer" className="rounded-full border border-white/25 px-5 py-2.5 text-[11px] font-black uppercase tracking-[0.12em] text-white hover:bg-white hover:text-[#0B1E3B]">WhatsApp Desk</a>
               </div>
             </div>

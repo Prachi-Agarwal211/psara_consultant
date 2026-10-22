@@ -51,8 +51,11 @@ export default function QuoteTool() {
   const [downloading, setDownloading] = useState(false);
 
   useEffect(() => {
-    setQuoteNumber(buildQuoteNumber());
-    setIssuedDate(todayISO());
+    const frame = requestAnimationFrame(() => {
+      setQuoteNumber(buildQuoteNumber());
+      setIssuedDate(todayISO());
+    });
+    return () => cancelAnimationFrame(frame);
   }, []);
 
   const state = STATES.find((s) => s.slug === stateSlug);

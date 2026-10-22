@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Phone, MessageSquare, Mail, MapPin, Clock, ArrowUpRight, ShieldCheck, Sparkles } from "lucide-react";
+import { Phone, MessageSquare, Mail, MapPin, Clock, ArrowUpRight, ShieldCheck } from "lucide-react";
 import ContactForm from "../../../components/ContactForm";
 import { CONTACT, OFFICES } from "../../../lib/config";
 import { DEFAULT_WA, TEL_HREF } from "../../../lib/whatsapp";

@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useState } from "react";
 import { Phone, MessageSquare, ShieldCheck, MapPin, ArrowRight, BadgeCheck } from "lucide-react";
 import CaseyMenu from "./CaseyMenu";
@@ -34,7 +35,7 @@ export default function HeroStage() {
       <header className="relative z-10 border-b border-[#0B1E3B]/10 bg-[#FFFDF5]">
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-5 py-3.5 lg:px-8">
         {/* LEFT — logo + company name */}
-        <a href="/" className="flex shrink-0 items-center gap-2.5" aria-label="PSARA Consultant India home">
+        <Link href="/" className="flex shrink-0 items-center gap-2.5" aria-label="PSARA Consultant India home">
           {/* ponytail: navy disc restores the logo's dark base — gold mark washes out on bare cream */}
           <span className="flex h-11 w-11 items-center justify-center overflow-hidden rounded-full bg-[#0B1E3B] p-1 shadow-md">
             <Image src="/assets/images/brand/psara-consultant-india-mark-transparent.png" alt="PSARA Consultant India logo" width={48} height={48} className="h-full w-full object-contain" />
@@ -43,19 +44,19 @@ export default function HeroStage() {
             <span className="text-[0.95rem] font-black uppercase tracking-[0.16em] text-[#0B1E3B]">PSARA</span>
             <span className="mt-1 hidden text-[0.52rem] font-black uppercase tracking-[0.2em] text-[#B35400] sm:block">Consultant India</span>
           </span>
-        </a>
+        </Link>
         <nav className="hidden items-center gap-7 text-[13px] font-black uppercase tracking-[0.14em] text-[#0B1E3B] lg:flex">
-          <a href="/" className="text-[#B35400]">Home</a>
-          <a href="/about" className="hover:text-[#B35400]">About</a>
-          <a href="/services" className="hover:text-[#B35400]">Services</a>
-          <a href="/states" className="hover:text-[#B35400]">States</a>
-          <a href="/calculator" className="rounded-full bg-[#0B1E3B] px-5 py-2.5 text-[12px] text-white shadow-md hover:bg-[#B35400]">Fee Calculator</a>
+          <Link href="/" className="text-[#B35400]">Home</Link>
+          <Link href="/about" className="hover:text-[#B35400]">About</Link>
+          <Link href="/services" className="hover:text-[#B35400]">Services</Link>
+          <Link href="/states" className="hover:text-[#B35400]">States</Link>
+          <Link href="/calculator" className="rounded-full bg-[#0B1E3B] px-5 py-2.5 text-[12px] text-white shadow-md hover:bg-[#B35400]">Fee Calculator</Link>
         </nav>
         {/* RIGHT — CTA + menu */}
         <div className="flex shrink-0 items-center gap-3">
-          <a href="/contact" className="inline-flex items-center gap-2 rounded-full bg-[#E76F00] px-6 py-3 text-[12px] font-black uppercase tracking-[0.14em] text-[#0B1E3B] shadow-lg shadow-orange-600/30 hover:bg-[#B35400] hover:text-white">
+          <Link href="/contact" className="inline-flex items-center gap-2 rounded-full bg-[#E76F00] px-6 py-3 text-[12px] font-black uppercase tracking-[0.14em] text-[#0B1E3B] shadow-lg shadow-orange-600/30 hover:bg-[#B35400] hover:text-white">
             Get License <ArrowRight className="h-4 w-4" strokeWidth={3} />
-          </a>
+          </Link>
           <button aria-label={menuOpen ? "Close menu" : "Open menu"} onClick={() => setMenuOpen((v) => !v)} className="group flex items-center gap-3">
             <span className="hidden text-[12px] font-black uppercase tracking-[0.2em] text-[#0B1E3B] sm:block">{menuOpen ? "Close" : "Menu"}</span>
             <span className="flex h-11 w-11 items-center justify-center rounded-full bg-[#0B1E3B] text-white shadow-md">
@@ -107,10 +108,10 @@ export default function HeroStage() {
               { fee: "₹10,000", scope: "2–5 Districts" },
               { fee: "₹25,000", scope: "Entire State" },
             ].map((f) => (
-              <a key={f.scope} href="/calculator" className="card-lift group rounded-xl border border-[#E8DFC8] bg-white p-3 text-center shadow-sm hover:border-[#E76F00] sm:p-4">
+              <Link key={f.scope} href="/calculator" className="card-lift group rounded-xl border border-[#E8DFC8] bg-white p-3 text-center shadow-sm hover:border-[#E76F00] sm:p-4">
                 <div className="font-black text-[#0B1E3B] group-hover:text-[#E76F00]" style={{ fontSize: "clamp(1rem,2.4vw,1.4rem)" }}>{f.fee}</div>
                 <div className="mt-1 text-[10px] font-extrabold uppercase tracking-[0.12em] text-[#475569]">{f.scope}</div>
-              </a>
+              </Link>
             ))}
           </div>
         </div>
