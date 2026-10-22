@@ -18,6 +18,7 @@ import {
   BadgeCheck,
   TrendingUp,
 } from "lucide-react";
+import { FAQ, GlassCard, Section } from "../../../components/v3/PagePrimitives";
 import FormattedText from "../../../components/FormattedText";
 import type { CityInfo } from "../../../data/cities";
 import type { StateInfo } from "../../../data/states";
@@ -42,18 +43,8 @@ interface CityDossierViewProps {
   accent?: LocationAccent;
 }
 
-function DossierTitle({ index, children }: { index: string; children: React.ReactNode }) {
-  return (
-    <div className="flex items-center gap-4">
-      <span aria-hidden className="font-mono text-xs font-bold tracking-widest text-acc" style={{ opacity: 0.75 }}>
-        {index}
-      </span>
-      <div className="hairline-acc h-px w-10" aria-hidden />
-      <h2 className="font-[family-name:var(--font-display)] text-2xl font-bold tracking-tight text-white">
-        {children}
-      </h2>
-    </div>
-  );
+function DossierTitle({ children }: { index?: string; children: React.ReactNode }) {
+  return <h2 className="min-w-0 font-[family-name:var(--font-display)] text-3xl font-normal leading-[1.12] tracking-[-0.025em] text-white sm:text-4xl">{children}</h2>;
 }
 
 /** Tier-based positioning — makes each city's identity copy genuinely different */
@@ -91,12 +82,11 @@ export default function CityDossierView({
   const processIdx = extraIdx + 1;
   const marketIdx = processIdx + 1;
   const whyIdx = marketIdx + 1;
-  const faqIdx = marketIdx + 2;
   const pad = (n: number) => String(n).padStart(2, "0");
 
   return (
     <div
-      className="space-y-20 py-6"
+      className="v3-dossier min-w-0 space-y-16 py-4"
       itemScope
       itemType="https://schema.org/HowTo"
       style={accVars}
@@ -105,18 +95,14 @@ export default function CityDossierView({
       <meta itemProp="description" content={content.metaDescription} />
 
       {/* 1. CITY DOSSIER HERO SUMMARY */}
-      <section
-        data-section-transition
-        data-transition="clip-up"
-        className="relative overflow-hidden border border-white/10 bg-white/[0.02] p-6 md:p-10"
-      >
+      <GlassCard className="relative overflow-hidden p-6 sm:p-8">
         <div
           className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full"
           style={{ background: `radial-gradient(circle, ${acc.base}22 0%, transparent 70%)` }}
           aria-hidden
         />
         <div className="flex flex-wrap items-center justify-between gap-4 border-b border-white/10 pb-6">
-          <div className="flex items-center gap-3">
+          <div className="flex min-w-0 flex-wrap items-center gap-3">
             <span className="inline-flex items-center gap-1.5 border border-acc bg-acc-soft px-3 py-1 text-xs font-bold uppercase tracking-wider text-acc-bright">
               <MapPin className="h-3.5 w-3.5" />
               City Security Desk
@@ -125,7 +111,7 @@ export default function CityDossierView({
               Ref: CITY-{city.slug.toUpperCase()}
             </span>
           </div>
-          <div className="flex items-center gap-3 text-xs font-bold uppercase tracking-wider text-[var(--white-55)]">
+          <div className="flex flex-wrap items-center gap-3 text-xs font-bold uppercase tracking-wider text-[var(--white-55)]">
             <span className="border border-acc bg-acc-soft px-2.5 py-1 text-acc-bright">{tierLabel(city.tier)}</span>
             {state && (
               <>
@@ -148,19 +134,19 @@ export default function CityDossierView({
             />
           ))}
         </div>
-      </section>
+      </GlassCard>
 
       {/* 2. LOCAL DEMAND DRIVERS — unique per city via economyTags */}
       {city.economyTags.length > 0 && (
-        <section data-section-transition data-transition="blur" className="space-y-8">
+        <Section className="space-y-8">
           <DossierTitle index="01">{`Security demand profile of ${city.name}`}</DossierTitle>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4">
             {city.economyTags.map((tag, idx) => (
               <div
                 key={tag}
                 className="group relative overflow-hidden border border-white/10 bg-white/[0.02] p-5 transition-[color,border-color,background-color,transform] duration-[250ms] ease-out hover:-translate-y-0.5 hover:border-acc"
               >
-                <span aria-hidden className="pointer-events-none absolute -right-2 -top-4 font-mono text-5xl font-bold text-acc opacity-[0.08] transition-opacity duration-300 group-hover:opacity-[0.16]">
+                <span aria-hidden className="pointer-events-none absolute -right-2 -top-4 tabular-nums text-5xl font-bold text-acc opacity-[0.08] transition-opacity duration-300 group-hover:opacity-[0.16]">
                   {String(idx + 1).padStart(2, "0")}
                 </span>
                 <TrendingUp className="h-4 w-4 text-acc-bright mb-3" />
@@ -181,11 +167,11 @@ export default function CityDossierView({
             vendors with verified training records and labour hygiene — unlicensed manpower is
             excluded from serious tenders.
           </p>
-        </section>
+        </Section>
       )}
 
       {/* 3. STATE JURISDICTION & AUTHORITY FRAMEWORK */}
-      <section data-section-transition data-transition="clip-left" className="space-y-8">
+      <Section className="space-y-8">
         <DossierTitle index={hasDemand ? "02" : "01"}>{`State Licensing Framework for ${city.name}`}</DossierTitle>
 
         <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
@@ -222,35 +208,35 @@ export default function CityDossierView({
             </a>
           </div>
         </div>
-      </section>
+      </Section>
 
       {/* 4. CA CONTACT CARD (when CA data available) */}
       {hasCa && (
-        <section data-section-transition data-transition="fade" className="space-y-8">
+        <Section className="space-y-8">
           <DossierTitle index={hasDemand ? "03" : "02"}>{`Controlling Authority Contact — ${state?.name ?? city.stateName}`}</DossierTitle>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-            <div className="relative overflow-hidden border border-white/10 bg-white/[0.02] p-5 transition-[color,border-color,background-color] duration-[250ms] ease-out hover:border-acc hover:bg-acc-soft">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4">
+            <div className="min-w-0 border-b border-white/15 py-4">
               <BadgeCheck className="h-4 w-4 text-acc-bright mb-2" />
               <span className="block text-[0.6rem] font-bold uppercase tracking-widest text-acc-bright">Officer</span>
               <span className="mt-1 block text-sm font-bold text-white leading-snug">{ca.name}</span>
             </div>
             {ca.phone && ca.phone !== "—" && (
-              <div className="relative overflow-hidden border border-white/10 bg-white/[0.02] p-5 transition-[color,border-color,background-color] duration-[250ms] ease-out hover:border-acc hover:bg-acc-soft">
+              <div className="min-w-0 border-b border-white/15 py-4">
                 <Phone className="h-4 w-4 text-acc-bright mb-2" />
                 <span className="block text-[0.6rem] font-bold uppercase tracking-widest text-acc-bright">Phone</span>
                 <a href={`tel:${ca.phone}`} className="mt-1 block text-sm font-bold text-white hover:text-acc-bright break-all">{ca.phone}</a>
               </div>
             )}
             {ca.email && ca.email !== "—" && (
-              <div className="relative overflow-hidden border border-white/10 bg-white/[0.02] p-5 transition-[color,border-color,background-color] duration-[250ms] ease-out hover:border-acc hover:bg-acc-soft">
+              <div className="min-w-0 border-b border-white/15 py-4">
                 <Mail className="h-4 w-4 text-acc-bright mb-2" />
                 <span className="block text-[0.6rem] font-bold uppercase tracking-widest text-acc-bright">Email</span>
                 <a href={`mailto:${ca.email}`} className="mt-1 block text-sm font-bold text-white hover:text-acc-bright break-all">{ca.email}</a>
               </div>
             )}
             {ca.portal && (
-              <div className="relative overflow-hidden border border-white/10 bg-white/[0.02] p-5 transition-[color,border-color,background-color] duration-[250ms] ease-out hover:border-acc hover:bg-acc-soft">
+              <div className="min-w-0 border-b border-white/15 py-4">
                 <Globe className="h-4 w-4 text-acc-bright mb-2" />
                 <span className="block text-[0.6rem] font-bold uppercase tracking-widest text-acc-bright">Portal</span>
                 <span className="mt-1 block text-sm font-bold text-white break-all">{ca.portal}</span>
@@ -263,7 +249,7 @@ export default function CityDossierView({
               {ca.licensesIssued && ca.licensesIssued !== "—" && (
                 <div className="border border-white/10 bg-white/[0.02] p-4">
                   <span className="block text-[0.6rem] font-bold uppercase tracking-widest text-acc-bright">Licences Issued</span>
-                  <span className="mt-1 block text-2xl font-bold text-white font-mono">{ca.licensesIssued}</span>
+                  <span className="mt-1 block text-2xl font-bold text-white tabular-nums">{ca.licensesIssued}</span>
                   {ca.licensesActive && <span className="text-xs text-[var(--white-55)]">{ca.licensesActive} currently active</span>}
                 </div>
               )}
@@ -281,7 +267,7 @@ export default function CityDossierView({
               )}
             </div>
           )}
-        </section>
+        </Section>
       )}
 
       {/* 5. VARIANT-SPECIFIC SECTION — different type + data per layout variant */}
@@ -291,11 +277,11 @@ export default function CityDossierView({
       {variant === 3 && <FormsChecklist city={city} state={state} index={pad(extraIdx)} />}
 
       {/* 6. INTERACTIVE PROCESS & DOCUMENTS — style varies per variant */}
-      <section data-section-transition data-transition="clip-right" className="space-y-8">
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-white/10 pb-4">
+      <Section className="space-y-8">
+        <div className="flex flex-col items-start justify-between gap-5 border-b border-white/10 pb-4">
           <DossierTitle index={pad(processIdx)}>{content.processHeading}</DossierTitle>
 
-          <div className="flex gap-2 border border-white/10 bg-white/[0.03] p-1">
+          <div className="flex w-full flex-wrap gap-2 rounded-xl border border-white/10 bg-white/[0.03] p-1 sm:w-auto">
             {(["process", "documents"] as const).map((tab) => (
               <button
                 key={tab}
@@ -314,7 +300,7 @@ export default function CityDossierView({
         </div>
 
         {activeTab === "process" && !processAsTimeline && (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
             {content.process.map((stepText, idx) => {
               const parts = stepText.split(":");
               const title = parts.length > 1 ? parts[0] : `Phase ${idx + 1}`;
@@ -324,7 +310,7 @@ export default function CityDossierView({
                   key={idx}
                   className="group relative overflow-hidden border border-white/10 bg-white/[0.02] p-6 transition-[color,border-color,background-color,transform] duration-[250ms] ease-out hover:-translate-y-1 hover:border-acc"
                 >
-                  <span aria-hidden className="pointer-events-none absolute -right-1 -top-3 font-mono text-6xl font-bold text-acc opacity-[0.08] transition-opacity duration-300 group-hover:opacity-[0.18]">
+                  <span aria-hidden className="pointer-events-none absolute -right-1 -top-3 tabular-nums text-6xl font-bold text-acc opacity-[0.08] transition-opacity duration-300 group-hover:opacity-[0.18]">
                     {String(idx + 1).padStart(2, "0")}
                   </span>
                   <div className="flex items-center justify-between">
@@ -364,7 +350,7 @@ export default function CityDossierView({
                     <span className="h-1.5 w-1.5 rounded-full bg-acc-bright" />
                   </span>
                   <div className="border border-white/10 bg-white/[0.02] p-5 transition-[color,border-color,background-color] duration-[250ms] ease-out hover:border-acc">
-                    <span className="font-mono text-[0.6rem] font-bold uppercase tracking-widest text-acc-bright">
+                    <span className="tabular-nums text-[0.6rem] font-bold uppercase tracking-widest text-acc-bright">
                       Stage {String(idx + 1).padStart(2, "0")}
                     </span>
                     <h3 className="mt-1.5 font-[family-name:var(--font-display)] text-lg font-bold text-white">{title}</h3>
@@ -396,7 +382,7 @@ export default function CityDossierView({
             </div>
           </div>
         )}
-      </section>
+      </Section>
 
       {/* 6+7. MARKET / TRAINING & REJECTION — order varies per variant */}
       {marketFirst ? (
@@ -412,7 +398,7 @@ export default function CityDossierView({
       )}
 
       {/* 8. WHY CHOOSE US */}
-      <section data-section-transition data-transition="fade" className="space-y-8">
+      <Section className="space-y-8">
         <DossierTitle index={pad(whyIdx)}>{content.whyHeading}</DossierTitle>
         <div data-stagger className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {content.whyPoints.map((pt, idx) => (
@@ -422,28 +408,9 @@ export default function CityDossierView({
             </div>
           ))}
         </div>
-      </section>
+      </Section>
 
-      {/* 9. CITY FAQs */}
-      <section data-section-transition data-transition="clip-up" className="space-y-8">
-        <DossierTitle index={pad(faqIdx)}>{`Frequently Asked Questions — ${city.name}`}</DossierTitle>
-        <div className="divide-y divide-white/10 border-y border-white/10">
-          {content.faqs.map((faq, idx) => (
-            <details key={idx} className="group py-5 transition-colors">
-              <summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-2 font-[family-name:var(--font-display)] text-base font-bold text-white">
-                <span className="flex items-center gap-2">
-                  <span aria-hidden className="font-mono text-[0.6rem] text-acc opacity-60">{String(idx + 1).padStart(2, "0")}</span>
-                  {faq.q}
-                </span>
-                <span className="text-acc-bright text-sm transition-transform group-open:rotate-180">↓</span>
-              </summary>
-              <p className="mt-3 max-w-3xl px-2 text-sm font-normal leading-relaxed text-[var(--white-70)]">
-                {faq.a}
-              </p>
-            </details>
-          ))}
-        </div>
-      </section>
+      <FAQ title={`Frequently Asked Questions — ${city.name}`} items={content.faqs} />
     </div>
   );
 }
@@ -451,7 +418,7 @@ export default function CityDossierView({
 /** MARKET OPPORTUNITY — shared by both orderings */
 function MarketSection({ city, content, acc, index }: { city: CityInfo; content: CityContent; acc: LocationAccent; index: string }) {
   return (
-    <section data-section-transition data-transition="blur" className="space-y-8">
+    <Section className="space-y-8">
       <DossierTitle index={index}>{content.marketHeading}</DossierTitle>
       <div className="relative overflow-hidden border border-white/10 bg-white/[0.02] p-6 space-y-4">
         <div
@@ -482,7 +449,7 @@ function MarketSection({ city, content, acc, index }: { city: CityInfo; content:
           </div>
         )}
       </div>
-    </section>
+    </Section>
   );
 }
 
@@ -491,7 +458,7 @@ function SectorSpotlight({ city, index }: { city: CityInfo; index: string }) {
   const top = city.economyTags.slice(0, 5);
   if (top.length === 0) return null;
   return (
-    <section data-section-transition data-transition="blur" className="space-y-8">
+    <Section className="space-y-8">
       <DossierTitle index={index}>{`Where security demand comes from in ${city.name}`}</DossierTitle>
       <ol className="space-y-3">
         {top.map((tag, idx) => (
@@ -500,7 +467,7 @@ function SectorSpotlight({ city, index }: { city: CityInfo; index: string }) {
             className="group relative overflow-hidden border border-white/10 bg-white/[0.02] p-4 transition-[color,border-color,background-color,transform] duration-[250ms] ease-out hover:-translate-x-0.5 hover:border-acc"
           >
             <div className="flex items-center gap-4">
-              <span aria-hidden className="font-mono text-2xl font-bold text-acc opacity-40 group-hover:opacity-70 transition-opacity">
+              <span aria-hidden className="tabular-nums text-2xl font-bold text-acc opacity-40 group-hover:opacity-70 transition-opacity">
                 {String(idx + 1).padStart(2, "0")}
               </span>
               <span className="flex-1 text-sm font-bold uppercase tracking-wide text-white">{tag}</span>
@@ -518,7 +485,7 @@ function SectorSpotlight({ city, index }: { city: CityInfo; index: string }) {
           </li>
         ))}
       </ol>
-    </section>
+    </Section>
   );
 }
 
@@ -534,14 +501,14 @@ function FeeSnapshot({ city, state, index }: { city: CityInfo; state?: StateInfo
   const packageAmounts = buildDefaultAmounts(state.slug, "entire-state");
   const packageTotal = computeQuote(packageAmounts).grandTotal;
   return (
-    <section data-section-transition data-transition="clip-left" className="space-y-8">
+    <Section className="space-y-8">
       <DossierTitle index={index}>{`PSARA fee structure — ${state.name}`}</DossierTitle>
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         {rows.map((r) => (
           <div key={r.label} className="relative overflow-hidden border border-acc bg-acc-soft p-5">
-            <span aria-hidden className="pointer-events-none absolute -right-2 -top-4 font-mono text-5xl font-bold text-acc opacity-[0.12]">₹</span>
+            <span aria-hidden className="pointer-events-none absolute -right-2 -top-4 tabular-nums text-5xl font-bold text-acc opacity-[0.12]">₹</span>
             <span className="block text-[0.65rem] font-bold uppercase tracking-widest text-acc-bright">{r.label}</span>
-            <span className="mt-2 block font-mono text-lg font-bold text-white leading-snug">{r.value}</span>
+            <span className="mt-2 block tabular-nums text-lg font-bold text-white leading-snug">{r.value}</span>
           </div>
         ))}
       </div>
@@ -557,7 +524,7 @@ function FeeSnapshot({ city, state, index }: { city: CityInfo; state?: StateInfo
       </p>
 
       {/* Complete cost breakdown — standard full-service structure */}
-      <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4">
         {[
           { label: "Professional Consultancy Fees", value: formatINR(QUOTE_ITEMS[0]!.default) },
           { label: "MOU & Training Certification", value: formatINR(QUOTE_ITEMS[1]!.default + QUOTE_ITEMS[2]!.default) },
@@ -565,9 +532,9 @@ function FeeSnapshot({ city, state, index }: { city: CityInfo; state?: StateInfo
           { label: "Standard Package Total (Whole State)", value: formatINR(packageTotal) },
         ].map((c) => (
           <div key={c.label} className="relative overflow-hidden border border-acc bg-acc-soft p-5">
-            <span aria-hidden className="pointer-events-none absolute -right-2 -top-4 font-mono text-5xl font-bold text-acc opacity-[0.12]">₹</span>
+            <span aria-hidden className="pointer-events-none absolute -right-2 -top-4 tabular-nums text-5xl font-bold text-acc opacity-[0.12]">₹</span>
             <span className="block text-[0.65rem] font-bold uppercase tracking-widest text-acc-bright">{c.label}</span>
-            <span className="mt-2 block font-mono text-lg font-bold text-white leading-snug">{c.value}</span>
+            <span className="mt-2 block tabular-nums text-lg font-bold text-white leading-snug">{c.value}</span>
           </div>
         ))}
       </div>
@@ -577,7 +544,7 @@ function FeeSnapshot({ city, state, index }: { city: CityInfo; state?: StateInfo
         police verification coordination and processing charges. Government fees vary by coverage scale — see
         the table above. Multi-state expansion is custom quoted.
       </p>
-    </section>
+    </Section>
   );
 }
 
@@ -585,7 +552,7 @@ function FeeSnapshot({ city, state, index }: { city: CityInfo; state?: StateInfo
 function ComplianceNotes({ city, state, index }: { city: CityInfo; state?: StateInfo; index: string }) {
   const rules = state?.specialRules ?? [];
   return (
-    <section data-section-transition data-transition="fade" className="space-y-8">
+    <Section className="space-y-8">
       <DossierTitle index={index}>{`Compliance notes that trip up ${city.name} applicants`}</DossierTitle>
       <div className="space-y-3">
         {rules.length > 0 ? (
@@ -614,7 +581,7 @@ function ComplianceNotes({ city, state, index }: { city: CityInfo; state?: State
       <p className="max-w-3xl text-xs font-normal leading-relaxed text-[var(--white-55)]">
         {state?.rulesNote ?? "State-specific rules are verified against the current Rules before filing."}
       </p>
-    </section>
+    </Section>
   );
 }
 
@@ -624,7 +591,7 @@ function FormsChecklist({ city, state, index }: { city: CityInfo; state?: StateI
   const extra = state?.documentsExtra ?? [];
   const stateLabel = state?.name ?? city.stateName;
   return (
-    <section data-section-transition data-transition="clip-right" className="space-y-8">
+    <Section className="space-y-8">
       <DossierTitle index={index}>{`Forms & extra documents — ${stateLabel}`}</DossierTitle>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div className="border border-white/10 bg-white/[0.02] p-6 space-y-4">
@@ -667,14 +634,14 @@ function FormsChecklist({ city, state, index }: { city: CityInfo; state?: StateI
       <p className="max-w-3xl text-xs font-normal leading-relaxed text-[var(--white-55)]">
         {state?.trainingNote ?? `A training MOU with a recognised institute is confirmed for ${city.name} filings.`}
       </p>
-    </section>
+    </Section>
   );
 }
 
 /** TRAINING & REJECTION — shared by both orderings */
 function TrainingRejectionSection({ content }: { content: CityContent }) {
   return (
-    <section data-section-transition data-transition="clip-right" className="grid grid-cols-1 md:grid-cols-2 gap-8">
+    <Section className="grid grid-cols-1 md:grid-cols-2 gap-8">
       <div className="relative overflow-hidden border border-white/10 bg-white/[0.02] p-6 md:p-8 space-y-4">
         <div
           className="pointer-events-none absolute -right-20 top-0 h-56 w-56 rounded-full"
@@ -706,6 +673,6 @@ function TrainingRejectionSection({ content }: { content: CityContent }) {
           ))}
         </ul>
       </div>
-    </section>
+    </Section>
   );
 }

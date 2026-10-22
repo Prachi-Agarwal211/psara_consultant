@@ -4,6 +4,7 @@ import { useState, useMemo } from "react";
 import Link from "next/link";
 import type { CSSProperties } from "react";
 import { Search, ArrowUpRight } from "lucide-react";
+import { GlassCard } from "../../../components/v3/PagePrimitives";
 import { CITIES } from "../../../data/cities";
 import { getLocationAccent, accentStyleVars } from "../../lib/location-accent";
 
@@ -43,7 +44,7 @@ export default function CityExplorerView() {
   return (
     <div className="space-y-8">
       {/* Search & State Selector */}
-      <div data-section-transition data-transition="fade" className="grid grid-cols-1 md:grid-cols-12 gap-4 border border-white/10 bg-white/[0.02] p-4">
+      <GlassCard className="grid min-w-0 grid-cols-1 gap-4 p-4 sm:p-6 md:grid-cols-12">
         {/* Search */}
         <div className="relative md:col-span-8">
           <Search className="absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-[var(--gold-bright)]" />
@@ -71,7 +72,7 @@ export default function CityExplorerView() {
             ))}
           </select>
         </div>
-      </div>
+      </GlassCard>
 
       {/* Results Count Bar */}
       <div className="flex items-center justify-between text-xs text-[var(--white-55)]">
@@ -84,7 +85,7 @@ export default function CityExplorerView() {
       </div>
 
       {/* City Grid — each tile carries its own deterministic accent */}
-      <div data-stagger className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+      <div data-stagger className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-7 gap-y-0">
         {shown.map((c) => {
           const acc = getLocationAccent(c.slug);
           const accVars = accentStyleVars(acc) as CSSProperties;
@@ -93,17 +94,17 @@ export default function CityExplorerView() {
               key={c.slug}
               href={`/city/${c.slug}`}
               style={accVars}
-              className="group relative flex items-center justify-between overflow-hidden rounded border border-white/10 bg-white/[0.02] p-3.5 transition-[color,border-color,background-color] duration-300 hover:-translate-y-0.5 hover:border-acc hover:bg-acc-soft"
+              className="v3-directory-link group relative flex min-w-0 items-center justify-between gap-3 border-b border-white/20 py-5 transition-colors duration-300 hover:border-[#FFB25E]"
             >
               <span
                 className="pointer-events-none absolute bottom-0 left-0 h-px w-0 bg-acc transition-[color,border-color,background-color] duration-500 group-hover:w-full"
                 aria-hidden
               />
               <div>
-                <p className="text-sm font-bold text-white transition-colors group-hover:text-acc-bright">
+                <p className="text-lg font-medium text-white transition-colors group-hover:text-[#FFB25E]">
                   {c.name}
                 </p>
-                <p className="mt-0.5 text-[10px] uppercase tracking-wider text-[var(--white-40)]">
+                <p className="mt-1 text-xs text-[var(--white-70)]">
                   {c.stateName}
                 </p>
               </div>
@@ -119,7 +120,7 @@ export default function CityExplorerView() {
           <button
             type="button"
             onClick={() => setVisible((v) => v + PAGE_SIZE)}
-            className="btn-magnetic"
+            className="btn-magnetic mag"
             style={{ fontFamily: "var(--font-body)" }}
           >
             <span>Load {Math.min(PAGE_SIZE, filteredCities.length - visible)} more cities</span>

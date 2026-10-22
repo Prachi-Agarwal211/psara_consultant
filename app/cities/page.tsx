@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { CITIES } from "../../data/cities";
 import { PageHero, PageMain } from "../../components/PageShell";
+import { Section } from "../../components/v3/PagePrimitives";
 import StageShell from "../components/ui/StageShell";
 import { pageMeta } from "../../lib/metadata";
 
@@ -21,7 +22,9 @@ export default function CitiesHubPage() {
         crumbs={[{ label: "Cities" }]}
       />
       <PageMain>
-        <CityExplorerView />
+        <Section>
+          <CityExplorerView />
+        </Section>
       </PageMain>
     </StageShell>
   );

@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { ArrowLeft, CheckCircle2, MessageSquare, Sparkles } from "lucide-react";
+import { ArrowLeft, CheckCircle2, MessageSquare } from "lucide-react";
 import { PageHero, PageMain } from "../../../components/PageShell";
+import { Section } from "../../../components/v3/PagePrimitives";
 import StageShell from "../../components/ui/StageShell";
 import { pageMeta } from "../../../lib/metadata";
 import { INDUSTRIES } from "../../../data/industries";
-import { DEFAULT_WA } from "../../../lib/whatsapp";
+import { buildWhatsAppUrl } from "../../../lib/whatsapp";
 
 export function generateStaticParams() {
   return INDUSTRIES.map((ind) => ({ slug: ind.slug }));
@@ -30,39 +31,38 @@ export default async function IndustryDetailPage({ params }: { params: Promise<{
         title={`PSARA License Rules: ${ind.title}`}
         lead={ind.desc}
         crumbs={[{ label: "Industries", href: "/industries" }, { label: ind.title }]}
+        image="/assets/images/graded/corridor.webp"
       />
 
-      <PageMain className="bg-[#0B1E3B] text-white">
+      <PageMain>
         <div className="max-w-4xl mx-auto space-y-10">
           {/* Key Compliance Checklist */}
-          <div className="space-y-6 rounded-3xl border border-[rgba(231,111,0,0.35)] bg-gradient-to-br from-[#1A3A6B] via-[#132E57] to-[#0B1E3B] p-6 shadow-2xl sm:p-8">
+          <Section className="space-y-7">
             <div>
-              <span className="badge-metallic-gold mb-2">
-                <Sparkles className="h-3.5 w-3.5 text-[#FF7A00]" /> Statutory Blueprint
-              </span>
               <h2 className="text-2xl sm:text-3xl font-bold text-white mt-1" style={{ fontFamily: "var(--font-display)" }}>
                 Key Statutory Compliance Checkpoints
               </h2>
+              <p className="mt-4 text-sm text-[#B9C2D3]">Statutory Blueprint</p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
+            <ul className="divide-y divide-white/15 border-y border-white/15">
               {ind.keyCompliance.map((item) => (
-                <div key={item} className="flex items-start gap-3 rounded-2xl border border-white/10 bg-[#132E57] p-4 text-xs font-medium text-[#E2E8F0] shadow-inner sm:text-sm">
+                <li key={item} className="flex items-start gap-5 py-6 text-base leading-relaxed">
                   <CheckCircle2 className="h-4 w-4 text-[#FF7A00] shrink-0 mt-0.5" />
                   <span>{item}</span>
-                </div>
+                </li>
               ))}
-            </div>
-          </div>
+            </ul>
+          </Section>
 
           {/* Navigation & Action */}
-          <div className="pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div className="flex flex-col items-start justify-between gap-6 border-t border-white/15 pt-8 md:flex-row md:items-center">
             <Link href="/industries" className="inline-flex items-center gap-2 text-xs font-bold text-[#CBD5E1] hover:text-white uppercase tracking-wider">
               <ArrowLeft className="h-4 w-4" /> Back to Industries
             </Link>
 
             <a
-              href={`${DEFAULT_WA}&text=Hi,%20I%20am%20enquiring%20about%20PSARA%20compliance%20for%20${encodeURIComponent(ind.title)}.%20Please%20guide%20me%20with%20the%20requirements.`}
+              href={buildWhatsAppUrl(`Hi, I am enquiring about PSARA compliance for ${ind.title}. Please guide me with the requirements.`)}
               target="_blank"
               rel="noopener noreferrer"
               className="btn-whatsapp"

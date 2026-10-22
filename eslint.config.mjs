@@ -18,6 +18,7 @@ const eslintConfig = defineConfig([
     "ai research prompts/**",
     "research/**",
     "_design_v3/**",
+    "artifacts/**",
     "scripts/**",
     "cypress/**",
     // Minified third-party vendor libs:

@@ -11,9 +11,8 @@ export default function CtaBar({
 }) {
   return (
     <div
-      className="relative mt-14 border border-white/10 p-6 md:p-8"
-      style={{ background: "linear-gradient(115deg, rgba(11,30,59,0.22), rgba(24,13,54,0.72) 58%, rgba(231,111,0,0.12))" }}
-      data-clip
+      className="v3-inline-cta relative mt-14 p-6 md:p-8"
+      data-v3-reveal
     >
       <div className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-center">
         <div>
@@ -30,7 +29,8 @@ export default function CtaBar({
         <div className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
           <a
             href={TEL_HREF}
-            className="inline-flex items-center justify-center gap-2 rounded-full border border-white/20 px-6 py-3 text-[0.65rem] font-bold uppercase tracking-[0.16em] text-white transition-colors hover:border-[var(--gold)]"
+            className="v3-button v3-button--ghost"
+            data-v3-magnetic
             style={{ fontFamily: "var(--font-body)" }}
           >
             <Phone className="h-3.5 w-3.5" style={{ color: "var(--gold-bright)" }} />
@@ -40,8 +40,8 @@ export default function CtaBar({
             href={DEFAULT_WA}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-[0.65rem] font-bold uppercase tracking-[0.16em]"
-            style={{ background: "var(--grad-metal)", color: "var(--void)", fontFamily: "var(--font-body)" }}
+            className="v3-button v3-button--wa"
+            data-v3-magnetic
           >
             <MessageSquare className="h-3.5 w-3.5" />
             WhatsApp

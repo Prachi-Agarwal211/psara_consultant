@@ -3,10 +3,11 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { CheckCircle2, ShieldCheck } from "lucide-react";
 import { PageHero, PageMain } from "../../../components/PageShell";
+import { GlassCard, Section } from "../../../components/v3/PagePrimitives";
 import StageShell from "../../components/ui/StageShell";
 import { pageMeta } from "../../../lib/metadata";
 import { STATES } from "../../../data/states";
-import { DEFAULT_WA } from "../../../lib/whatsapp";
+import { buildWhatsAppUrl } from "../../../lib/whatsapp";
 
 export function generateStaticParams() {
   return STATES.map((st) => ({ state: st.slug }));
@@ -39,57 +40,57 @@ export default async function SecurityServiceStatePage({ params }: { params: Pro
       />
 
       <PageMain>
-        <div className="max-w-4xl mx-auto space-y-12">
+        <Section className="mx-auto max-w-5xl space-y-12">
           {/* Key Facts Card */}
-          <div className="border border-[var(--gold)]/40 bg-[var(--void-2)] p-8 space-y-4">
-            <h2 className="font-[family-name:var(--font-display)] text-xl font-bold text-white flex items-center gap-2">
+          <GlassCard className="space-y-5 p-6 sm:p-8">
+            <h2 className="font-[family-name:var(--font-display)] text-3xl font-normal leading-tight text-white flex items-center gap-2">
               <ShieldCheck className="h-5 w-5 text-[var(--gold-bright)]" /> {st.name} Controlling Authority Profile
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs text-[var(--white-70)] pt-2">
-              <div className="border border-white/10 bg-white/[0.02] p-3">
+              <div className="min-w-0 border-t border-white/15 pt-4">
                 <strong className="block text-white mb-1">Controlling Body</strong>
                 <span>{st.authority}</span>
               </div>
-              <div className="border border-white/10 bg-white/[0.02] p-3">
+              <div className="min-w-0 border-t border-white/15 pt-4">
                 <strong className="block text-white mb-1">Expected Timeline</strong>
                 <span>{st.timeline}</span>
               </div>
-              <div className="border border-white/10 bg-white/[0.02] p-3">
+              <div className="min-w-0 border-t border-white/15 pt-4">
                 <strong className="block text-white mb-1">Application Mode</strong>
                 <span>{st.applicationMode}</span>
               </div>
-              <div className="border border-white/10 bg-white/[0.02] p-3">
+              <div className="min-w-0 border-t border-white/15 pt-4">
                 <strong className="block text-white mb-1">License Validity</strong>
                 <span>{st.validityYears} Years</span>
               </div>
             </div>
-          </div>
+          </GlassCard>
 
           {/* Fee Schedule */}
-          <div className="border border-white/10 bg-[var(--void-2)] p-8">
-            <h2 className="font-[family-name:var(--font-display)] text-xl font-bold text-white mb-4">
+          <GlassCard className="space-y-5 p-6 sm:p-8">
+            <h2 className="font-[family-name:var(--font-display)] text-3xl font-normal leading-tight text-white mb-4">
               Statutory Government Fees in {st.name}
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs text-center">
-              <div className="border border-white/10 bg-white/[0.02] p-4">
+              <div className="min-w-0 border-t border-white/15 pt-4">
                 <span className="block text-[var(--white-55)] mb-1">1 District</span>
                 <span className="font-bold text-white text-base">{st.feeOneDistrict}</span>
               </div>
-              <div className="border border-white/10 bg-white/[0.02] p-4">
+              <div className="min-w-0 border-t border-white/15 pt-4">
                 <span className="block text-[var(--white-55)] mb-1">Up to 5 Districts</span>
                 <span className="font-bold text-white text-base">{st.feeMultiDistrict}</span>
               </div>
-              <div className="border border-white/10 bg-white/[0.02] p-4">
+              <div className="min-w-0 border-t border-white/15 pt-4">
                 <span className="block text-[var(--white-55)] mb-1">Entire State</span>
                 <span className="font-bold text-white text-base">{st.feeEntireState}</span>
               </div>
             </div>
             <p className="mt-3 text-[11px] text-[var(--white-55)]">{st.feeNote}</p>
-          </div>
+          </GlassCard>
 
           {/* Special Rules */}
-          <div className="border border-white/10 bg-[var(--void-2)] p-8">
-            <h2 className="font-[family-name:var(--font-display)] text-xl font-bold text-white mb-4">
+          <GlassCard className="space-y-5 p-6 sm:p-8">
+            <h2 className="font-[family-name:var(--font-display)] text-3xl font-normal leading-tight text-white mb-4">
               Special State Rules &amp; Local Verification
             </h2>
             <div className="space-y-3">
@@ -100,7 +101,7 @@ export default async function SecurityServiceStatePage({ params }: { params: Pro
                 </div>
               ))}
             </div>
-          </div>
+          </GlassCard>
 
           {/* Actions */}
           <div className="pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
@@ -108,11 +109,11 @@ export default async function SecurityServiceStatePage({ params }: { params: Pro
               View Detailed State Dossier &rarr;
             </Link>
 
-            <a href={`${DEFAULT_WA}&text=Hi,%20I%20need%20PSARA%20license%20help%20for%20${st.name}`} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-full px-6 py-3 text-xs font-bold uppercase tracking-wider" style={{ background: "var(--grad-metal)", color: "var(--void)" }}>
+            <a data-v3-magnetic href={buildWhatsAppUrl(`Hi, I need PSARA license help for ${st.name}`)} target="_blank" rel="noopener noreferrer" className="btn-magnetic mag inline-flex max-w-full items-center justify-center gap-2 rounded-full px-6 py-3 text-center text-sm font-bold" style={{ background: "var(--grad-metal)", color: "var(--void)" }}>
               Apply for {st.name} License
             </a>
           </div>
-        </div>
+        </Section>
       </PageMain>
     </StageShell>
   );

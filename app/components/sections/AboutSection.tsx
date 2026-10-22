@@ -14,8 +14,6 @@ import {
 } from "lucide-react";
 import BrandMark from "../ui/BrandMark";
 import { DEFAULT_WA } from "../../../lib/whatsapp";
-import { MaskReveal } from "../ui/MaskReveal";
-import { Parallax } from "../ui/Parallax";
 
 interface AboutSectionProps {
   showHeaderBar?: boolean;
@@ -83,7 +81,7 @@ export default function AboutSection({
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
           {/* Left Column: Text & 2x2 Feature Grid */}
           <div className="z-10 space-y-6 text-center lg:col-span-6 lg:text-left">
-            <MaskReveal direction="left">
+            <div data-v3-reveal>
               <div>
                 <span className="mb-3 block text-xs font-bold uppercase tracking-[0.16em] text-[#B35400]">
                   About Our Practice
@@ -99,7 +97,7 @@ export default function AboutSection({
                   PSARA Consultant India empowers private security agencies with seamless licensing, recognized training institute MOUs, police verification tracking, and statutory compliance across 36 States &amp; UTs.
                 </p>
               </div>
-            </MaskReveal>
+            </div>
 
             {/* 2x2 Feature Cards Grid with Warm Gradient Mixture */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
@@ -151,7 +149,7 @@ export default function AboutSection({
           </div>
 
           {/* Right Column: one controlled PSARA dossier artifact */}
-          <Parallax amount={10} className="lg:col-span-6 flex items-center justify-center relative">
+          <div data-v3-reveal className="lg:col-span-6 flex items-center justify-center relative">
             <div className="relative mx-auto aspect-square w-full max-w-[570px]" data-cursor="Pan-India file">
               <div className="pointer-events-none absolute inset-[22%] rounded-full bg-[#FF7A00]/15 blur-[80px]" aria-hidden="true" />
               <Image
@@ -163,7 +161,7 @@ export default function AboutSection({
                 className="absolute left-[8%] top-[8%] z-10 h-auto w-[84%] object-contain drop-shadow-[0_28px_30px_rgba(10,18,38,0.32)] transition-transform duration-500 hover:-translate-y-2"
               />
             </div>
-          </Parallax>
+          </div>
         </div>
       </div>
     </section>

@@ -1,101 +1,91 @@
 #!/usr/bin/env node
 /**
- * JSON-LD validation check.
- *
- * Fetches the live sitemap, then every page, extracts each
- * <script type="application/ld+json"> block and verifies it parses as valid
- * JSON. Exits non-zero if any page ships a broken schema block.
- *
- * Usage:  npm run validate:jsonld
- * Env:    NEXT_PUBLIC_SITE_URL (default: site's production URL)
+ * Fetch every sitemap page and check that its JSON-LD parses into non-empty objects.
+ * Inaccessible pages, empty sitemaps, missing blocks and invalid JSON fail the run.
+ * Usage: npm run validate:jsonld
+ * Env: NEXT_PUBLIC_SITE_URL (defaults to production; supports a local server)
  */
-
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://www.psaraconsultantindia.com";
+const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || "https://www.psaraconsultantindia.com").replace(/\/$/, "");
 const sitemapUrl = `${SITE_URL}/sitemap.xml`;
 
-// A local production build still publishes canonical production sitemap URLs.
-// Keep their paths, but validate against the explicitly selected test server.
+// A local build still publishes production sitemap URLs. Validate their paths on
+// the explicitly selected test server while leaving canonical URLs unchanged.
 const validationUrl = (url) => process.env.NEXT_PUBLIC_SITE_URL
   ? new URL(new URL(url, SITE_URL).pathname, SITE_URL).href
   : url;
+const sitemapLocations = (xml) => [...xml.matchAll(/<loc>\s*(.*?)\s*<\/loc>/gi)].map((m) => m[1].trim());
+
+async function fetchSitemap(url) {
+  const res = await fetch(url, { signal: AbortSignal.timeout(30000) });
+  if (!res.ok) throw new Error(`${url}: sitemap HTTP ${res.status}`);
+  const xml = await res.text();
+  const locations = sitemapLocations(xml);
+  if (locations.length === 0) throw new Error(`${url}: no URLs in sitemap`);
+  return { xml, locations };
+}
 
 async function getSitemapUrls() {
-  const res = await fetch(sitemapUrl);
-  if (!res.ok) throw new Error(`sitemap HTTP ${res.status}`);
-  const xml = await res.text();
-  if (xml.includes("<sitemapindex")) {
-    const childLocs = [...xml.matchAll(/<loc>\s*(.*?)\s*<\/loc>/gi)].map((m) => m[1].trim());
-    const urls = [];
-    for (const loc of childLocs) {
-      const r = await fetch(validationUrl(loc));
-      if (r.ok) {
-        const child = await r.text();
-        urls.push(...[...child.matchAll(/<loc>\s*(.*?)\s*<\/loc>/gi)].map((m) => m[1].trim()));
-      }
-    }
-    return urls;
+  const { xml, locations } = await fetchSitemap(sitemapUrl);
+  if (!xml.includes("<sitemapindex")) return locations;
+  const urls = [];
+  for (const loc of locations) {
+    const child = await fetchSitemap(validationUrl(loc));
+    urls.push(...child.locations);
   }
-  return [...xml.matchAll(/<loc>\s*(.*?)\s*<\/loc>/gi)].map((m) => m[1].trim());
+  return urls;
 }
 
 function extractJsonLd(html) {
-  const blocks = [];
-  const re = /<script[^>]*type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi;
-  let m;
-  while ((m = re.exec(html)) !== null) blocks.push(m[1]);
-  return blocks;
+  return [...html.matchAll(/<script[^>]*type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi)].map((m) => m[1]);
 }
 
 async function main() {
   const urls = await getSitemapUrls();
   console.log(`[validate:jsonld] ${urls.length} URLs from ${sitemapUrl}`);
-  if (urls.length === 0) {
-    console.log("[validate:jsonld] No URLs found â€” skipping.");
-    process.exit(0);
-  }
-
-  let checked = 0;
-  let failed = 0;
+  let blocksChecked = 0;
+  let pagesChecked = 0;
   const failures = [];
-
   const CONCURRENCY = 8;
   let next = 0;
   async function worker() {
     while (next < urls.length) {
       const url = validationUrl(urls[next++]);
       try {
-        const res = await fetch(url, { headers: { "User-Agent": "JSON-LD-Validator/1.0" } });
-        if (!res.ok) continue;
-        const html = await res.text();
-        const blocks = extractJsonLd(html);
-        if (blocks.length === 0) continue;
-        checked += blocks.length;
+        const res = await fetch(url, {
+          headers: { "User-Agent": "JSON-LD-Validator/1.0" },
+          signal: AbortSignal.timeout(30000),
+        });
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const blocks = extractJsonLd(await res.text());
+        if (blocks.length === 0) throw new Error("no JSON-LD blocks found");
+        pagesChecked++;
+        blocksChecked += blocks.length;
         for (const [i, block] of blocks.entries()) {
           try {
             const parsed = JSON.parse(block.trim());
-            if (!parsed || typeof parsed !== "object") throw new Error("not an object");
+            if (!parsed || typeof parsed !== "object" || Object.keys(parsed).length === 0) {
+              throw new Error("not a non-empty object or array");
+            }
           } catch (err) {
-            failed++;
             failures.push(`${url} block#${i + 1}: ${err instanceof Error ? err.message : err}`);
           }
         }
-      } catch {
-        /* network blip â€” skip page */
+      } catch (err) {
+        failures.push(`${url}: ${err instanceof Error ? err.message : err}`);
       }
     }
   }
   await Promise.all(Array.from({ length: Math.min(CONCURRENCY, urls.length) }, worker));
-
-  if (failed > 0) {
-    console.error(`[validate:jsonld] FAILED â€” ${failed}/${checked} JSON-LD blocks invalid:`);
-    failures.forEach((f) => console.error("  - " + f));
-    process.exit(1);
+  if (failures.length > 0) {
+    console.error(`[validate:jsonld] FAILED - ${failures.length} errors; ${blocksChecked} blocks inspected on ${pagesChecked}/${urls.length} pages:`);
+    failures.forEach((failure) => console.error("  - " + failure));
+    process.exitCode = 1;
+    return;
   }
-  console.log(`[validate:jsonld] OK â€” ${checked} JSON-LD blocks valid.`);
-  process.exit(0);
+  console.log(`[validate:jsonld] OK - ${blocksChecked} JSON-LD blocks valid on all ${pagesChecked} pages.`);
 }
 
 main().catch((err) => {
   console.error("[validate:jsonld] error:", err);
-  process.exit(1);
+  process.exitCode = 1;
 });

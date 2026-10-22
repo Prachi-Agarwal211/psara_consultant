@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { GlassCard, Section } from "../../components/v3/PagePrimitives";
 import { PageHero, PageMain } from "../../components/PageShell";
 import StageShell from "../components/ui/StageShell";
 import WhatsAppForm from "../../components/WhatsAppForm";
@@ -56,7 +57,7 @@ export default function FranchisePage() {
 
       <PageMain>
         {/* Hero Banner Section */}
-        <section className="relative border border-[var(--gold)]/30 p-8 md:p-12 mb-16 overflow-hidden bg-[var(--void-2)]">
+        <Section className="relative p-8 md:p-12 mb-16 overflow-hidden">
           <div className="max-w-4xl">
             <span className="text-xs font-bold uppercase tracking-wider text-[var(--gold-bright)]">Partner Network</span>
             <h2 className="mt-3 font-[family-name:var(--font-display)] text-3xl md:text-4xl font-bold tracking-tight text-white">
@@ -77,7 +78,7 @@ export default function FranchisePage() {
               </a>
             </div>
           </div>
-        </section>
+        </Section>
 
         {/* About PSARA Advisory */}
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 mb-16">
@@ -94,7 +95,7 @@ export default function FranchisePage() {
             </p>
           </div>
           <div className="lg:col-span-5">
-            <div className="border border-white/10 p-6 space-y-3 bg-white/[0.02]">
+            <GlassCard className="p-6 space-y-3">
               <div className="flex items-center gap-3">
                 <Shield className="h-5 w-5 text-[var(--gold-bright)] shrink-0" />
                 <span className="text-sm font-bold text-white">Exclusive State Territory Rights</span>
@@ -111,7 +112,7 @@ export default function FranchisePage() {
                 <CheckCircle className="h-5 w-5 text-[var(--gold-bright)] shrink-0" />
                 <span className="text-sm font-bold text-white">Centralized Client Lead Routing</span>
               </div>
-            </div>
+            </GlassCard>
           </div>
         </div>
 
@@ -123,11 +124,11 @@ export default function FranchisePage() {
           </h2>
           <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4">
             {BENEFITS.map((b) => (
-              <div key={b.title} className="border border-white/10 bg-white/[0.02] p-6 transition-[color,border-color,background-color] duration-300 hover:border-[var(--gold)]/40">
+              <GlassCard key={b.title} className="p-6 transition-[color,border-color,background-color] duration-300">
                 <b.icon className="h-6 w-6 text-[var(--gold-bright)]" />
                 <h3 className="mt-3 font-[family-name:var(--font-display)] text-base font-bold text-white">{b.title}</h3>
                 <p className="mt-2 text-sm font-normal text-[var(--white-70)]">{b.desc}</p>
-              </div>
+              </GlassCard>
             ))}
           </div>
         </section>
@@ -140,7 +141,7 @@ export default function FranchisePage() {
           </h2>
           <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4">
             {SUPPORT_TYPES.map((s) => (
-              <div key={s.title} className="border border-white/10 bg-white/[0.02] p-6">
+              <GlassCard key={s.title} className="p-6">
                 <h3 className="font-[family-name:var(--font-display)] text-base font-bold text-white">{s.title}</h3>
                 <ul className="mt-3 space-y-2">
                   {s.items.map((item) => (
@@ -150,7 +151,7 @@ export default function FranchisePage() {
                     </li>
                   ))}
                 </ul>
-              </div>
+              </GlassCard>
             ))}
           </div>
         </section>
@@ -182,7 +183,7 @@ export default function FranchisePage() {
               </div>
             </div>
             <div className="lg:col-span-5">
-              <div className="relative border border-[var(--gold)]/30 p-6 md:p-8 bg-[var(--void-2)]">
+              <GlassCard className="relative p-6 md:p-8">
                 <h3 className="font-[family-name:var(--font-display)] text-xl font-bold tracking-tight text-white">
                   Partner Desk Enquiry
                 </h3>
@@ -192,7 +193,7 @@ export default function FranchisePage() {
                 <div className="mt-6">
                   <WhatsAppForm formType="Franchise Enquiry" service="PSARA Master Partner Desk" />
                 </div>
-              </div>
+              </GlassCard>
             </div>
           </div>
         </section>

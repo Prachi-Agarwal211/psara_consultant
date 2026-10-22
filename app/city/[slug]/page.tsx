@@ -6,6 +6,7 @@ import { CITIES, getCity, citiesInState } from "../../../data/cities";
 import { getState } from "../../../data/states";
 import { SERVICES } from "../../../data/services";
 import { PageHero, PageMain } from "../../../components/PageShell";
+import { GlassCard, Section } from "../../../components/v3/PagePrimitives";
 import StageShell from "../../components/ui/StageShell";
 import CtaBar from "../../../components/CtaBar";
 import WhatsAppForm from "../../../components/WhatsAppForm";
@@ -108,23 +109,23 @@ export default async function CityPage({
         meta={`( PSARA CONSULTANCY ) ( ${c.stateName.toUpperCase()} )`}
       />
       {/* Stats strip — accent-tinted */}
-      <section className="border-b border-white/10" style={accentStyle}>
-        <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-center gap-6 px-[var(--gutter)] py-4 text-center text-xs font-bold uppercase tracking-wider md:gap-10">
+      <section className="v3-location-strip border-b border-white/15 bg-[#0B1E3B]" style={accentStyle}>
+        <div className="mx-auto grid max-w-6xl grid-cols-2 gap-4 sm:flex sm:flex-wrap sm:items-center sm:justify-center sm:gap-6 px-[var(--gutter)] py-4 text-center text-xs font-bold uppercase tracking-wider md:gap-10">
           <div>
             <span className="block text-sm text-acc-bright">{c.name}</span>
             <span className="block text-[var(--white-55)]">City</span>
           </div>
-          <div className="h-8 w-px bg-white/10" aria-hidden />
+          <div className="hidden h-8 w-px bg-white/10 sm:block" aria-hidden />
           <div>
             <span className="block text-sm text-acc-bright">{c.stateName}</span>
             <span className="block text-[var(--white-55)]">State</span>
           </div>
-          <div className="h-8 w-px bg-white/10" aria-hidden />
+          <div className="hidden h-8 w-px bg-white/10 sm:block" aria-hidden />
           <div>
             <span className="block text-sm text-acc-bright">Tier {c.tier}</span>
             <span className="block text-[var(--white-55)]">Market tier</span>
           </div>
-          <div className="h-8 w-px bg-white/10" aria-hidden />
+          <div className="hidden h-8 w-px bg-white/10 sm:block" aria-hidden />
           <div>
             <span className="block text-sm text-acc-bright">{c.economyTags.length}</span>
             <span className="block text-[var(--white-55)]">Key sectors</span>
@@ -133,8 +134,8 @@ export default async function CityPage({
       </section>
 
       <PageMain>
-        <div style={accentStyle} className="grid grid-cols-1 gap-12 lg:grid-cols-12">
-          <div className="lg:col-span-7 space-y-12">
+        <div style={accentStyle} className="grid min-w-0 grid-cols-1 items-start gap-10 lg:grid-cols-12">
+          <div className="min-w-0 lg:col-span-8 space-y-12">
             <CityDossierView
               city={c}
               state={state}
@@ -143,8 +144,8 @@ export default async function CityPage({
             />
 
             {siblings.length > 0 && (
-              <div data-section-transition data-transition="fade" className="mt-12">
-                <h2 className="font-[family-name:var(--font-display)] text-2xl font-bold text-white">
+              <Section className="space-y-5">
+                <h2 className="font-[family-name:var(--font-display)] text-3xl font-normal leading-tight text-white">
                   Nearby cities in {c.stateName}
                 </h2>
                 <div data-stagger className="mt-4 flex flex-wrap gap-2">
@@ -152,18 +153,18 @@ export default async function CityPage({
                     <Link
                       key={x.slug}
                       href={`/city/${x.slug}`}
-                      className="border border-white/10 px-3 py-1.5 text-xs font-bold uppercase tracking-wider text-[var(--white-55)] transition-colors hover:border-acc hover:text-acc-bright hover:bg-acc-soft"
+                      className="v3-directory-link inline-flex max-w-full items-center rounded-full border border-white/20 px-4 py-2.5 text-sm text-white transition-colors hover:border-[#FFB25E] hover:text-[#FFB25E]"
                     >
                       {x.name}
                     </Link>
                   ))}
                 </div>
-              </div>
+              </Section>
             )}
 
             {/* Service cross-links for internal linking */}
-            <div data-section-transition data-transition="clip-right" className="mt-12">
-              <h2 className="font-[family-name:var(--font-display)] text-2xl font-bold text-white">
+            <Section className="space-y-5">
+              <h2 className="font-[family-name:var(--font-display)] text-3xl font-normal leading-tight text-white">
                 PSARA Services in {c.name}
               </h2>
               <p className="mt-2 text-sm font-medium text-[var(--white-55)]">
@@ -174,7 +175,7 @@ export default async function CityPage({
                   <Link
                     key={s.slug}
                     href={`/services/${s.slug}`}
-                    className="border border-white/10 px-3 py-1.5 text-xs font-bold uppercase tracking-wider text-[var(--white-55)] transition-colors hover:border-acc hover:text-acc-bright hover:bg-acc-soft"
+                    className="v3-directory-link inline-flex max-w-full items-center rounded-full border border-white/20 px-4 py-2.5 text-sm text-white transition-colors hover:border-[#FFB25E] hover:text-[#FFB25E]"
                   >
                     {s.title}
                   </Link>
@@ -187,17 +188,12 @@ export default async function CityPage({
                 </Link>
                 .
               </p>
-            </div>
+            </Section>
 
             <CtaBar title={`Consult for ${c.name}`} />
           </div>
-          <div id="city-contact" data-clip className="relative overflow-hidden space-y-6 border border-acc bg-acc-soft p-6 lg:col-span-5">
-            <div
-              className="pointer-events-none absolute -right-16 -top-16 h-48 w-48 rounded-full"
-              style={{ background: `radial-gradient(circle, ${accent.base}1f 0%, transparent 70%)` }}
-              aria-hidden
-            />
-            <div>
+          <aside id="city-contact" className="min-w-0 scroll-mt-28 space-y-8 lg:col-span-4">
+            <GlassCard className="relative p-6 sm:p-8">
               <span className="text-[0.6rem] font-bold uppercase tracking-[0.24em] text-acc-bright">City Desk</span>
               <h3 className="mt-2 font-[family-name:var(--font-display)] text-xl font-bold text-white">
                 {c.name} enquiry
@@ -209,14 +205,14 @@ export default async function CityPage({
                   state={c.stateName}
                 />
               </div>
-            </div>
+            </GlassCard>
 
             <GbpOfficeSection
               placeLabel={c.name}
               offices={getOfficesForCityPage(c.slug, c.stateSlug)}
               isLocalOffice={Boolean(localOffice)}
             />
-          </div>
+          </aside>
         </div>
       </PageMain>
     </StageShell>

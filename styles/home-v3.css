@@ -180,7 +180,7 @@
 .v3-home .hdr button svg { width: 18px; height: 18px; }
 .v3-home .brand { flex-shrink: 0; }
 .v3-home .brand img { width: 40px; height: 45px; object-fit: contain; }
-.v3-home :is(a, button, summary):focus-visible, .v3-whatsapp:focus-visible { outline: 2px solid #FFB547; outline-offset: 6px; }
+.v3-home :is(a, button, summary):focus-visible { outline: 2px solid #FFB547; outline-offset: 6px; }
 .v3-home .skip-link { position: fixed; z-index: 150; left: 24px; top: 12px; padding: 12px 20px; background: var(--paper); color: var(--ink); transform: translateY(-160%); border-radius: 12px; }
 .v3-home .skip-link:focus { transform: translateY(0); }
 .v3-home #hero .kb { pointer-events: none; }
@@ -262,9 +262,6 @@
 .v3-home .v3-menu nav { display: grid; gap: 12px; padding: 40px 0; max-width: 650px; }
 .v3-home .v3-menu nav a { display: flex; justify-content: space-between; font-family: var(--font-newsreader), Georgia, serif; font-size: clamp(26px, 5vh, 48px); border-bottom: 1px solid #fffdf526; }
 .v3-home .v3-menu .acts { flex-wrap: wrap; }
-.v3-whatsapp { position: fixed; right: 28px; bottom: max(28px, env(safe-area-inset-bottom)); z-index: 90; width: 60px; height: 60px; border-radius: 50%; display: grid; place-items: center; background: linear-gradient(135deg, #25D366, #046A38); color: white; box-shadow: 0 14px 34px -8px #25d36699; }
-.v3-whatsapp svg { width: 28px; height: 28px; }
-.v3-whatsapp::before { content: ""; position: absolute; inset: 0; border-radius: 50%; border: 2px solid #25D366; animation: v3-ping 2.4s ease-out infinite; }
 
 @media (min-width: 1024px) and (max-width: 1279px) {
   .v3-home .wrap { padding-inline: 56px; }
@@ -312,10 +309,9 @@
   .v3-home footer .brand { display: flex; }
   .v3-home footer > p { margin-top: 20px; }
   .v3-home footer .legal { margin-top: 20px; }
-  .v3-whatsapp { right: 18px; bottom: max(18px, env(safe-area-inset-bottom)); width: 54px; height: 54px; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .v3-home *, .v3-whatsapp, .v3-whatsapp::before { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+  .v3-home * { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
   .v3-home #pre, .v3-home #hero .cap { display: none !important; }
   .v3-home #hero .media { clip-path: none !important; }
   .v3-home #credshot { clip-path: none; }

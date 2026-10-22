@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { GlassCard } from "../../components/v3/PagePrimitives";
 import { PageHero, PageMain } from "../../components/PageShell";
 import StageShell from "../components/ui/StageShell";
 import ContactForm from "../../components/ContactForm";
@@ -39,14 +40,14 @@ export default function ContactPage() {
         crumbs={[{ label: "Contact Us" }]}
       />
 
-      <PageMain className="bg-[#0B1E3B] text-white">
+      <PageMain className="v3-contact">
         {/* Contact Info Header Grid */}
         <div className="mb-16 grid grid-cols-1 md:grid-cols-3 gap-6">
           <a
             href={TEL_HREF}
-            className="flex items-center gap-4 rounded-2xl border border-white/12 bg-gradient-to-br from-[#1A3A6B] to-[#132E57] p-6 shadow-md transition-all duration-200 hover:border-[#FF7A00]"
+            className="v3-glass v3-contact-card flex items-center gap-4 p-6 hover:border-[#FF7A00]"
           >
-            <div className="p-3.5 rounded-xl text-[#FFFFFF]" style={{ background: "var(--grad-gold-metallic)", boxShadow: "inset 0 1px 0 rgba(255,250,230,0.8)" }}>
+            <div className="shrink-0 p-3.5 rounded-xl text-[#FFFFFF]" style={{ background: "var(--grad-gold-metallic)", boxShadow: "inset 0 1px 0 rgba(255,250,230,0.8)" }}>
               <Phone className="h-6 w-6" />
             </div>
             <div>
@@ -62,13 +63,13 @@ export default function ContactPage() {
             href={DEFAULT_WA}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-4 rounded-2xl border border-white/12 bg-gradient-to-br from-[#1A3A6B] to-[#132E57] p-6 shadow-md transition-all duration-200 hover:border-[#046A38]"
+            className="v3-glass v3-contact-card flex items-center gap-4 p-6 hover:border-[#046A38]"
           >
-            <div className="p-3.5 rounded-xl bg-[#046A38] text-white">
+            <div className="shrink-0 p-3.5 rounded-xl bg-[#046A38] text-white">
               <MessageSquare className="h-6 w-6 fill-white" />
             </div>
             <div>
-              <span className="block text-[10px] font-bold uppercase tracking-widest text-[#046A38]">
+              <span className="block text-[10px] font-bold uppercase tracking-widest text-[#FFB547]">
                 WhatsApp Desk
               </span>
               <span className="text-base font-bold text-white">Instant Consultation</span>
@@ -78,16 +79,16 @@ export default function ContactPage() {
 
           <a
             href={`mailto:${CONTACT.email}`}
-            className="flex items-center gap-4 rounded-2xl border border-white/12 bg-gradient-to-br from-[#1A3A6B] to-[#132E57] p-6 shadow-md transition-all duration-200 hover:border-[#FF7A00]"
+            className="v3-glass v3-contact-card flex items-center gap-4 p-6 hover:border-[#FF7A00]"
           >
-            <div className="p-3.5 rounded-xl text-[#FFFFFF]" style={{ background: "var(--grad-gold-metallic)", boxShadow: "inset 0 1px 0 rgba(255,250,230,0.8)" }}>
+            <div className="shrink-0 p-3.5 rounded-xl text-[#FFFFFF]" style={{ background: "var(--grad-gold-metallic)", boxShadow: "inset 0 1px 0 rgba(255,250,230,0.8)" }}>
               <Mail className="h-6 w-6" />
             </div>
             <div>
               <span className="block text-[10px] font-bold uppercase tracking-widest text-[#FFB25E]">
                 Official Email
               </span>
-              <span className="text-sm font-bold text-white">{CONTACT.email}</span>
+              <span className="break-all text-sm font-bold text-white">{CONTACT.email}</span>
               <span className="block text-[10px] text-[#94A3B8] font-medium">Statutory document reviews</span>
             </div>
           </a>
@@ -97,8 +98,8 @@ export default function ContactPage() {
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 mb-20 items-start">
           {/* Highlighted Light Card Form */}
           <div
-            className="lg:col-span-7 rounded-3xl border-2 border-[#E8DFC8] p-7 md:p-10 shadow-2xl text-[#0F172A]"
-            style={{ background: "linear-gradient(165deg, #FDFCFF 0%, #F3EEFB 100%)" }}
+            className="v3-contact-form rounded-2xl lg:col-span-7 p-7 md:p-10 text-[#0F172A]"
+            style={{ background: "linear-gradient(145deg, #FFFDF5 0%, #F5F0E3 100%)" }}
           >
             <div className="flex items-center justify-between pb-5 border-b border-slate-200 mb-6">
               <div>
@@ -131,7 +132,7 @@ export default function ContactPage() {
             </div>
 
             {OFFICES.map((o) => (
-              <div key={o.city} className="rounded-2xl border border-white/12 bg-gradient-to-br from-[#1A3A6B] to-[#132E57] p-5 shadow-md">
+              <GlassCard key={o.city} className="p-5">
                 <div className="flex items-center justify-between">
                   <h3 className="text-base font-bold text-white flex items-center gap-2" style={{ fontFamily: "var(--font-display)" }}>
                     <MapPin className="h-4 w-4 text-[#FF7A00]" />
@@ -143,12 +144,12 @@ export default function ContactPage() {
                     </span>
                   )}
                 </div>
-                <p className="mt-2 text-xs text-[#E2E8F0] font-normal leading-relaxed">{o.address}</p>
+                <p className="mt-2 text-base text-[#E2E8F0] font-normal leading-relaxed">{o.address}</p>
                 <div className="mt-3 pt-3 border-t border-white/10 flex items-center justify-between text-[11px] text-[#94A3B8] font-bold">
                   <span>Phone: {o.phone}</span>
                   <a href={TEL_HREF} className="text-[#FFB25E] font-bold hover:underline">Call Desk &rarr;</a>
                 </div>
-              </div>
+              </GlassCard>
             ))}
           </div>
         </div>
@@ -160,7 +161,7 @@ export default function ContactPage() {
             <h2 className="text-2xl font-bold text-white" style={{ fontFamily: "var(--font-display)" }}>
               Visit Jaipur Headquarters &amp; Regional Locations
             </h2>
-            <p className="text-xs text-[#CBD5E1]">
+            <p className="text-base text-[#CBD5E1]">
               Verified business profile across Google Maps with real client ratings and directions.
             </p>
           </div>

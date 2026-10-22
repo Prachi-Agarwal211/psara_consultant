@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { PageHero, PageMain, Prose } from "../../components/PageShell";
 import StageShell from "../components/ui/StageShell";
+import { GlassCard } from "../../components/v3/PagePrimitives";
 import CtaBar from "../../components/CtaBar";
 import { pageMeta } from "../../lib/metadata";
 import { OFFICES, CONTACT, SITE } from "../../lib/config";
@@ -48,7 +49,7 @@ export default function GooglePage() {
   };
 
   return (
-    <StageShell>
+    <StageShell showCta={false}>
       <JsonLd data={graph} />
       <PageHero
         title="Our offices on Google Maps"
@@ -65,14 +66,14 @@ export default function GooglePage() {
         </Prose>
         <div className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-2">
           {OFFICES.map((o) => (
-            <article key={o.city} className="border border-[var(--line)] p-6">
+            <GlassCard key={o.city} className="p-6 md:p-8">
               <p className="label-meta font-bold text-[var(--gold)]">{o.badge}</p>
               <h2 className="mt-2 font-[family-name:var(--font-display)] text-xl font-bold text-[var(--cream)]">
                 {o.placeName}
               </h2>
               <p className="mt-2 text-sm font-semibold text-[var(--cream-dim)]">{o.address}</p>
               <p className="mt-1 text-sm font-bold text-[var(--cream)]">{o.phone}</p>
-              <p className="mt-1 text-xs font-medium text-[var(--cream-dim)]">{o.hours}</p>
+              <p className="mt-1 text-base font-medium text-[var(--cream-dim)]">{o.hours}</p>
               <div className="mt-4 aspect-video w-full overflow-hidden border border-[var(--line)]">
                 <iframe
                   title={o.placeName}
@@ -90,7 +91,7 @@ export default function GooglePage() {
               >
                 Open in Google Maps
               </a>
-            </article>
+            </GlassCard>
           ))}
         </div>
         <CtaBar title="Book a visit or video consult" />

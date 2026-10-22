@@ -8,10 +8,11 @@ import JsonLd from "../../../components/JsonLd";
 import { pageMeta } from "../../../lib/metadata";
 import { faqJsonLd } from "../../../lib/seo-content";
 import { SITE } from "../../../lib/config";
-import { DEFAULT_WA } from "../../../lib/whatsapp";
+import { buildWhatsAppUrl } from "../../../lib/whatsapp";
 import { hubHeroImage } from "../../lib/location-accent";
 import Link from "next/link";
-import { CheckCircle2, ShieldCheck, ArrowRight, MessageSquare, Sparkles, Clock, Calculator } from "lucide-react";
+import { CheckCircle2, ArrowRight, MessageSquare, Calculator } from "lucide-react";
+import { Section, GlassCard, FAQ } from "../../../components/v3/PagePrimitives";
 
 export function generateStaticParams() {
   return SERVICES.map((s) => ({ slug: s.slug }));
@@ -74,138 +75,80 @@ export default async function ServiceDetailPage({
         image={heroImage}
         meta={`( STATUTORY ADVISORY ) ( ${s.slug.toUpperCase()} )`}
       />
-      <PageMain className="bg-[#0B1E3B] text-white">
-        <div className="grid grid-cols-1 gap-12 lg:grid-cols-12">
-          {/* Main Content Column */}
-          <div className="space-y-12 lg:col-span-7">
-            {/* Overview Card */}
-            <div className="rounded-3xl border border-[rgba(231,111,0,0.3)] bg-gradient-to-br from-[#1A3A6B] via-[#132E57] to-[#0B1E3B] p-6 shadow-2xl sm:p-8">
-              <span className="badge-metallic-gold mb-4">
-                <Sparkles className="h-3.5 w-3.5 text-[#FF7A00]" /> Service Overview
-              </span>
-              <p className="text-base sm:text-lg font-normal leading-relaxed text-[#E2E8F0] mt-2">
-                {s.description}
-              </p>
-            </div>
+      <PageMain>
+        <div className="grid min-w-0 grid-cols-1 gap-16 lg:grid-cols-12 lg:gap-14">
+          <div className="min-w-0 space-y-16 lg:col-span-7">
+            <Section className="v3-reading-section">
+              <h2 className="mb-5">Service Overview</h2>
+              <p className="max-w-[68ch] text-lg leading-relaxed">{s.description}</p>
+            </Section>
 
-            {/* Key Deliverables */}
-            <div className="space-y-4">
-              <h2 className="text-xs font-bold uppercase tracking-[0.2em] text-[#FF7A00] flex items-center gap-2">
-                <ShieldCheck className="h-4 w-4 text-[#FF7A00]" /> Core Deliverables &amp; Outcomes
-              </h2>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <Section>
+              <h2 className="mb-6">Core Deliverables &amp; Outcomes</h2>
+              <ul className="divide-y divide-white/15 border-y border-white/15">
                 {s.bullets.map((b) => (
-                  <div key={b} className="flex items-start gap-3 rounded-2xl border border-white/10 bg-[#0B1E3B] p-4 shadow-md transition-all hover:border-[#FF7A00]">
-                    <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-[#FF7A00]" />
-                    <span className="text-xs sm:text-sm font-bold text-white leading-relaxed">{b}</span>
-                  </div>
+                  <li key={b} className="flex items-start gap-4 py-5">
+                    <CheckCircle2 aria-hidden="true" className="mt-1 h-5 w-5 shrink-0 text-[#FFB547]" />
+                    <span className="text-base leading-relaxed">{b}</span>
+                  </li>
                 ))}
-              </div>
-            </div>
+              </ul>
+            </Section>
 
-            {/* Detailed Sections */}
             {s.sections.map((sec) => (
-              <div key={sec.h} className="rounded-2xl border border-white/10 bg-[#0B1E3B] p-6 shadow-md space-y-3">
-                <h3 className="text-xl font-bold text-white" style={{ fontFamily: "var(--font-display)" }}>{sec.h}</h3>
-                <p className="text-sm font-normal leading-relaxed text-[#E2E8F0]">{sec.p}</p>
-              </div>
+              <Section key={sec.h} className="v3-reading-section border-t border-white/15 pt-10">
+                <h2 className="mb-5">{sec.h}</h2>
+                <p className="max-w-[68ch] text-base leading-relaxed">{sec.p}</p>
+              </Section>
             ))}
 
-            {/* Engagement Roadmap */}
-            <div className="space-y-4">
-              <h2 className="text-xl font-bold text-white flex items-center gap-2" style={{ fontFamily: "var(--font-display)" }}>
-                <Clock className="h-5 w-5 text-[#FF7A00]" /> Engagement Roadmap
-              </h2>
-              <div className="space-y-3">
+            <Section>
+              <h2 className="mb-6">Engagement Roadmap</h2>
+              <ol className="v3-steps divide-y divide-white/15 border-y border-white/15">
                 {s.process.map((step, idx) => (
-                  <div key={step} className="flex items-start gap-4 rounded-2xl border border-white/10 bg-[#0B1E3B] p-4 shadow-md transition-all hover:border-[#FF7A00]">
-                    <span className="badge-metallic-gold shrink-0 text-[10px]">
-                      Phase {idx + 1}
-                    </span>
-                    <p className="pt-0.5 text-sm font-normal text-[#E2E8F0]">{step}</p>
-                  </div>
+                  <li key={step} className="grid grid-cols-[4.5rem_1fr] gap-3 py-6 sm:gap-6">
+                    <span className="text-sm text-[#FFB547]">Phase {idx + 1}</span>
+                    <p className="text-base leading-relaxed">{step}</p>
+                  </li>
                 ))}
-              </div>
-            </div>
+              </ol>
+            </Section>
 
-            {/* FAQs */}
-            {s.faqs.length > 0 && (
-              <div className="space-y-4 border-t border-white/10 pt-8">
-                <h2 className="text-xl font-bold text-white mb-6" style={{ fontFamily: "var(--font-display)" }}>Frequently Asked Questions</h2>
-                <div className="divide-y divide-white/10 border-y border-white/10">
-                  {s.faqs.map((f, idx) => (
-                    <details key={idx} className="group py-4">
-                      <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-bold text-white hover:text-[#FFB25E] text-sm sm:text-base">
-                        <span>{f.q}</span>
-                        <span className="text-[#FF7A00] text-sm transition-transform group-open:rotate-180">↓</span>
-                      </summary>
-                      <p className="mt-2.5 text-xs sm:text-sm font-normal leading-relaxed text-[#E2E8F0]">
-                        {f.a}
-                      </p>
-                    </details>
-                  ))}
-                </div>
-              </div>
-            )}
+            {s.faqs.length > 0 && <FAQ items={s.faqs} title="Frequently Asked Questions" />}
 
-            {/* Cross-Link Shortcuts */}
-            <div className="space-y-4 border-t border-white/10 pt-8">
-              <h3 className="text-lg font-bold text-white">Related Statutory Desks</h3>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                <Link href="/calculator" className="p-4 rounded-xl border border-white/10 bg-[#0B1E3B] hover:border-[#FF7A00] transition-all flex items-center justify-between">
-                  <div>
-                    <span className="text-xs font-bold text-white block">Statutory Fee Calculator</span>
-                    <span className="text-[11px] text-[#94A3B8]">Calculate state and district fees</span>
-                  </div>
-                  <Calculator className="h-4 w-4 text-[#FF7A00]" />
+            <Section className="border-t border-white/15 pt-10">
+              <h2 className="mb-6">Related Statutory Desks</h2>
+              <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+                <Link href="/calculator" className="group flex items-center justify-between gap-4 border-b border-white/15 py-4">
+                  <div><span className="block font-medium">Statutory Fee Calculator</span><span className="mt-1 block text-sm text-[#B9C2D3]">Calculate state and district fees</span></div>
+                  <Calculator aria-hidden="true" className="h-5 w-5 shrink-0 text-[#FFB547]" />
                 </Link>
-                <Link href="/states" className="p-4 rounded-xl border border-white/10 bg-[#0B1E3B] hover:border-[#FF7A00] transition-all flex items-center justify-between">
-                  <div>
-                    <span className="text-xs font-bold text-white block">All 36 State &amp; UT Dossiers</span>
-                    <span className="text-[11px] text-[#94A3B8]">Controlling Authority portals &amp; rules</span>
-                  </div>
-                  <ArrowRight className="h-4 w-4 text-[#FF7A00]" />
+                <Link href="/states" className="group flex items-center justify-between gap-4 border-b border-white/15 py-4">
+                  <div><span className="block font-medium">All 36 State &amp; UT Dossiers</span><span className="mt-1 block text-sm text-[#B9C2D3]">Controlling Authority portals &amp; rules</span></div>
+                  <ArrowRight aria-hidden="true" className="h-5 w-5 shrink-0 text-[#FFB547]" />
                 </Link>
               </div>
-            </div>
+            </Section>
           </div>
 
-          {/* Sticky Sidebar Lead Capture Card */}
-          <div className="lg:col-span-5 space-y-6">
-            <div className="sticky top-24 space-y-6 rounded-3xl border border-[rgba(231,111,0,0.35)] bg-gradient-to-br from-[#1A3A6B] to-[#132E57] p-6 text-white shadow-2xl sm:p-8">
+          <aside className="min-w-0 lg:col-span-5">
+            <GlassCard className="space-y-7 p-6 sm:p-8 lg:sticky lg:top-28">
               <div>
-                <span className="badge-metallic-gold mb-2">
-                  Direct Statutory Desk
-                </span>
-                <h3 className="text-xl font-bold text-white mt-1" style={{ fontFamily: "var(--font-display)" }}>
-                  Enquire for {s.title}
-                </h3>
-                <p className="mt-2 text-xs text-[#E2E8F0] font-normal leading-relaxed">
-                  Connect directly with our legal licensing officers for document auditing, training MOU alignment, and official filing.
-                </p>
+                <h2>Enquire for {s.title}</h2>
+                <p className="mt-4 text-sm text-[#FFB547]">Direct Statutory Desk</p>
+                <p className="mt-4 text-base leading-relaxed text-[#B9C2D3]">Connect directly with our legal licensing officers for document auditing, training MOU alignment, and official filing.</p>
               </div>
-
-              {/* Sidebar Lead Form */}
-              <div className="rounded-2xl border border-white/10 bg-[#132E57] p-4 shadow-inner">
-                <WhatsAppForm formType={`Service: ${s.title}`} service={s.title} />
-              </div>
-
-              {/* Direct WhatsApp Action */}
+              <WhatsAppForm formType={`Service: ${s.title}`} service={s.title} />
               <a
-                href={`${DEFAULT_WA}&text=Hi,%20I%20am%20enquiring%20about%20${encodeURIComponent(s.title)}.%20Please%20guide%20me%20with%20the%20process.`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-whatsapp w-full"
+                href={buildWhatsAppUrl(`Hi, I am enquiring about ${s.title}. Please guide me with the process.`)}
+                target="_blank" rel="noopener noreferrer" className="btn-whatsapp w-full"
               >
-                <MessageSquare className="h-4 w-4 fill-white" />
+                <MessageSquare aria-hidden="true" className="h-4 w-4 shrink-0" />
                 <span>Instant WhatsApp Consultation</span>
               </a>
-
-              <p className="text-[11px] text-center text-[#94A3B8]">
-                Confidential • Controlling Authority Compliant • Pan-India Desks
-              </p>
-            </div>
-          </div>
+              <p className="text-center text-xs leading-relaxed text-[#B9C2D3]">Confidential • Controlling Authority Compliant • Pan-India Desks</p>
+            </GlassCard>
+          </aside>
         </div>
       </PageMain>
     </StageShell>

@@ -1,5 +1,7 @@
 "use client";
 
+import { GlassCard } from "../../components/v3/PagePrimitives";
+
 import { useEffect, useMemo, useState } from "react";
 import {
   Calculator,
@@ -114,12 +116,12 @@ export default function QuoteTool() {
         crumbs={[{ label: "Quote Tool" }]}
       />
 
-      <PageMain className="bg-[#0B1E3B] text-white">
+      <PageMain className="v3-tool">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-10">
           {/* ── Left: inputs ── */}
           <div className="lg:col-span-7 space-y-6">
             {/* Applicant & coverage */}
-            <div className="rounded-3xl border border-[rgba(231,111,0,0.25)] bg-[#0B1E3B] p-6 md:p-7 space-y-5 shadow-2xl">
+            <GlassCard className="p-6 md:p-7 space-y-5">
               <h2 className="text-lg font-bold text-white flex items-center gap-2" style={{ fontFamily: "var(--font-display)" }}>
                 <ShieldCheck className="h-5 w-5 text-[#FF7A00]" /> Applicant & License Coverage
               </h2>
@@ -153,10 +155,10 @@ export default function QuoteTool() {
                   <input id="client-city" type="text" value={city} onChange={(e) => setCity(e.target.value)} placeholder="e.g. Jaipur" className={inputCls} />
                 </div>
               </div>
-            </div>
+            </GlassCard>
 
             {/* Fee particulars */}
-            <div className="rounded-3xl border border-[rgba(231,111,0,0.25)] bg-[#0B1E3B] p-6 md:p-7 space-y-4 shadow-2xl">
+            <GlassCard className="p-6 md:p-7 space-y-4">
               <div className="flex items-start justify-between gap-4 flex-wrap">
                 <h2 className="text-lg font-bold text-white flex items-center gap-2" style={{ fontFamily: "var(--font-display)" }}>
                   <Calculator className="h-5 w-5 text-[#FF7A00]" /> Fee Particulars
@@ -174,7 +176,7 @@ export default function QuoteTool() {
               <div className="divide-y divide-white/8">
                 {QUOTE_ITEMS.map((item, i) => (
                   <div key={item.key} className="py-3 first:pt-1 last:pb-0">
-                    <div className="flex items-start justify-between gap-4">
+                    <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3 sm:gap-4">
                       <div className="min-w-0">
                         <label htmlFor={`amount-${i}`} className="text-sm font-medium text-[#E2E8F0]">
                           <span className="font-mono text-xs text-[#FFB25E] mr-2">{i + 1}.</span>
@@ -214,7 +216,7 @@ export default function QuoteTool() {
                 ))}
               </div>
 
-              <label className="flex items-center gap-3 cursor-pointer rounded-xl border border-white/12 bg-[#132E57] p-4">
+              <label className="flex flex-wrap items-center gap-3 cursor-pointer rounded-xl border border-white/12 bg-[#132E57] p-4">
                 <input type="checkbox" data-testid="gst-toggle" checked={gstEnabled} onChange={(e) => setGstEnabled(e.target.checked)} className="h-4 w-4 accent-[#FF7A00] rounded" />
                 <span className="text-sm font-bold text-white">Add GST @18% (optional)</span>
                 <span className="text-xs text-[#94A3B8]">— shows a GST line and a Total Payable above</span>
@@ -227,12 +229,12 @@ export default function QuoteTool() {
                   defaults, not saved overrides. Government fee follows the selected state and coverage.
                 </p>
               </div>
-            </div>
+            </GlassCard>
           </div>
 
           {/* ── Right: live preview ── */}
           <div className="lg:col-span-5">
-            <div className="lg:sticky lg:top-24 rounded-3xl border border-[rgba(231,111,0,0.35)] bg-gradient-to-b from-[#1A3A6B] to-[#132E57] text-white p-6 md:p-7 shadow-2xl space-y-5">
+            <GlassCard className="lg:sticky lg:top-24 text-white p-6 md:p-7 space-y-5">
               <div className="flex items-center justify-between gap-3">
                 <div>
                   <span className="text-xs font-bold uppercase tracking-widest text-[#FF7A00] block">Quotation Preview</span>
@@ -254,7 +256,7 @@ export default function QuoteTool() {
                 {result.lines.map((line, i) => (
                   <div key={QUOTE_ITEMS[i]!.key} className="flex items-baseline justify-between gap-3 text-xs">
                     <span className="text-[#CBD5E1] leading-snug" title={line.label}>
-                      {i + 1}. {line.label.length > 58 ? `${line.label.slice(0, 58)}…` : line.label}
+                      {i + 1}. {line.label}
                     </span>
                     <span className="font-mono font-bold text-white shrink-0">{formatINR(line.amount)}</span>
                   </div>
@@ -304,7 +306,7 @@ export default function QuoteTool() {
                   A4 PDF in the standard ops format — 9 fee heads, grand total, amount in words, notes & signature block.
                 </p>
               </div>
-            </div>
+            </GlassCard>
           </div>
         </div>
       </PageMain>

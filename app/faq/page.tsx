@@ -6,7 +6,8 @@ import { FAQS } from "../../data/faq";
 import { DEFAULT_WA } from "../../lib/whatsapp";
 import { faqJsonLd } from "../../lib/seo-content-generator";
 import JsonLd from "../../components/JsonLd";
-import { MessageSquare, HelpCircle, ChevronDown } from "lucide-react";
+import { MessageSquare } from "lucide-react";
+import { FAQ, GlassCard } from "../../components/v3/PagePrimitives";
 
 export const metadata: Metadata = pageMeta(
   "FAQ — PSARA License Legal & Compliance Questions",
@@ -24,45 +25,18 @@ export default function FaqPage() {
         title="Frequently Asked Questions on PSARA Licensing"
         lead="Eligibility criteria, director qualifications, training institute MOUs, police verification, and state fee slabs — clear answers for private security agency promoters."
         crumbs={[{ label: "FAQ" }]}
+        image="/assets/images/graded/desk.webp"
       />
-      <PageMain className="bg-[#0B1E3B] text-white">
+      <PageMain>
         <div className="mx-auto max-w-4xl space-y-4">
-          <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#FFB25E] mb-6">
-            <HelpCircle className="h-4 w-4 text-[#FF7A00]" />
-            <span>Comprehensive Statutory Answers</span>
-          </div>
-
-          <div className="divide-y divide-white/10 border-t border-b border-white/10">
-            {items.map((item, i) => (
-              <details
-                key={i}
-                className="group py-6 transition-colors"
-              >
-                <summary
-                  className="cursor-pointer list-none text-lg font-bold text-white leading-snug marker:content-none flex items-center justify-between gap-4 group-hover:text-[#FFB25E]"
-                  style={{ fontFamily: "var(--font-display)" }}
-                >
-                  <span>{item.q}</span>
-                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl border border-white/20 bg-[#132E57] text-[#FFB25E] transition-all group-open:rotate-180 group-open:bg-[#E76F00] group-open:text-[#FFFFFF]">
-                    <ChevronDown className="h-4 w-4" />
-                  </span>
-                </summary>
-                <p
-                  className="mt-4 text-base font-normal leading-[1.65] text-[#E2E8F0] pr-6"
-                  style={{ fontFamily: "var(--font-body)" }}
-                >
-                  {item.a}
-                </p>
-              </details>
-            ))}
-          </div>
+          <FAQ items={items} title="Comprehensive Statutory Answers" />
 
           {/* Bottom WhatsApp CTA */}
-          <div className="mt-12 space-y-4 rounded-2xl border border-white/15 bg-gradient-to-br from-[#1A3A6B] to-[#132E57] p-8 text-center">
+          <GlassCard className="mt-16 space-y-5 p-6 sm:p-8 md:p-10">
             <h3 className="text-xl font-bold text-white" style={{ fontFamily: "var(--font-display)" }}>
               Have a Specific State or Director Query?
             </h3>
-            <p className="text-sm text-[#CBD5E1] max-w-lg mx-auto">
+            <p className="text-sm text-[#CBD5E1] max-w-[65ch]">
               Our statutory licensing officers are available to review your director qualifications, registered office lease, and training MOU requirements directly.
             </p>
             <div className="pt-2">
@@ -76,7 +50,7 @@ export default function FaqPage() {
                 <span>Ask a PSARA Specialist on WhatsApp</span>
               </a>
             </div>
-          </div>
+          </GlassCard>
         </div>
       </PageMain>
     </StageShell>

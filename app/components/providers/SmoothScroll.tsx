@@ -57,7 +57,13 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
         const target = id ? document.getElementById(id) : null;
         if (!target) return;
         event.preventDefault();
-        lenis.scrollTo(target, { offset: -80, duration: 1.4 });
+        lenis.scrollTo(target, {
+          offset: -80,
+          duration: 1.4,
+          onComplete: () => {
+            if (anchor.classList.contains("v3-skip-link")) target.focus({ preventScroll: true });
+          },
+        });
       };
       document.addEventListener("click", onClick);
       disposeLenis = () => {

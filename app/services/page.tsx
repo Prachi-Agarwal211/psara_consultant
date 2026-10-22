@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Calculator, ArrowRight, ArrowUpRight, Phone, MessageSquare, Sparkles } from "lucide-react";
+import { Calculator, ArrowRight, ArrowUpRight, Phone, MessageSquare } from "lucide-react";
 import { PageHero, PageMain } from "../../components/PageShell";
+import { Section, GlassCard } from "../../components/v3/PagePrimitives";
 import StageShell from "../components/ui/StageShell";
 import { pageMeta } from "../../lib/metadata";
 import { SERVICES } from "../../data/services";
@@ -36,82 +37,54 @@ export default function ServicesHubPage() {
         crumbs={[{ label: "Services" }]}
       />
 
-      <PageMain className="bg-[#0B1E3B] text-white">
-        {/* Service Pillars Grid */}
-        <div className="mb-16">
-          <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#FFB25E] mb-2">
-            <Sparkles className="h-4 w-4" /> Comprehensive Portfolio
-          </div>
-          <h2 className="text-3xl font-bold tracking-tight text-white mb-8" style={{ fontFamily: "var(--font-display)" }}>
-            Complete PSARA Regulatory Portfolio
-          </h2>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+      <PageMain>
+        <Section className="mb-20">
+          <h2 className="mb-5">Complete PSARA Regulatory Portfolio</h2>
+          <p className="mb-10 text-sm text-[#B9C2D3]">Comprehensive Portfolio</p>
+          <div className="v3-directory-list divide-y divide-white/15 border-y border-white/15">
             {SERVICES.map((s) => (
-              <Link
-                key={s.slug}
-                href={`/services/${s.slug}`}
-                className="group relative flex flex-col justify-between overflow-hidden rounded-xl border border-white/10 bg-[var(--surface-card-dark)] p-6 shadow-[var(--shadow-card)] transition-[border-color,transform] duration-200 hover:-translate-y-1 hover:border-[var(--line-gold)] sm:p-8"
-              >
-                <div>
-                  <div className="flex items-center justify-between mb-4">
-                    <span className="text-[10px] font-bold uppercase tracking-widest text-[#FFB25E]">
-                      Statutory Service
-                    </span>
-                    <ArrowUpRight className="h-4 w-4 text-white/50 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-[#FFB25E]" />
-                  </div>
-                  <h3
-                    className="text-xl font-bold text-white group-hover:text-[#FFB25E] transition-colors leading-snug"
-                    style={{ fontFamily: "var(--font-display)" }}
-                  >
-                    {s.title}
-                  </h3>
-                  <p className="mt-3 text-xs sm:text-sm font-normal leading-relaxed text-[#E2E8F0] line-clamp-3">
-                    {s.short}
-                  </p>
+              <Link data-v3-reveal key={s.slug} href={`/services/${s.slug}`} className="v3-directory-row group grid grid-cols-[1fr_auto] gap-x-6 gap-y-4 py-8 md:grid-cols-[1.1fr_1fr_auto] md:items-center md:gap-10 md:py-10">
+                <div className="min-w-0">
+                  <h3 className="text-2xl leading-tight transition-colors group-hover:text-[#FFB547] sm:text-3xl" style={{ fontFamily: "var(--font-display)" }}>{s.title}</h3>
+                  <p className="mt-3 text-xs text-[#B9C2D3]">Statutory Service · Pan-India Support</p>
                 </div>
-
-                <div className="mt-6 flex items-center justify-between border-t border-white/10 pt-4 text-xs">
-                  <span className="text-[#94A3B8] font-bold">Pan-India Support</span>
-                  <span className="font-bold text-[#FFB25E] group-hover:underline">View Details &rarr;</span>
-                </div>
+                <p className="col-start-1 max-w-[60ch] text-base leading-relaxed text-[#B9C2D3] md:col-start-auto">{s.short}</p>
+                <span className="col-start-2 row-start-1 flex items-center gap-3 text-sm text-[#FFB547] md:col-start-auto md:row-start-auto"><span className="hidden xl:inline">View Details</span><ArrowUpRight aria-hidden="true" className="h-5 w-5 transition-transform group-hover:-translate-y-1 group-hover:translate-x-1" /></span>
               </Link>
             ))}
           </div>
-        </div>
+        </Section>
 
         {/* Process Roadmap */}
-        <section className="mb-20 border-t border-white/10 pt-16">
-          <span className="text-xs font-bold uppercase tracking-wider text-[#FFB25E]">Statutory Workflow</span>
+        <Section className="mb-20 border-t border-white/15 pt-12">
           <h2 className="mt-2 text-3xl font-bold tracking-tight text-white" style={{ fontFamily: "var(--font-display)" }}>
             5-Stage PSARA License Acquisition Process
           </h2>
+          <p className="mt-4 text-sm text-[#FFB547]">Statutory Workflow</p>
           <p className="mt-2 text-sm text-[#E2E8F0] font-normal max-w-2xl">
             Our systematic approach eliminates common rejection triggers like flawed MOA objects, unverified training MOUs, or incomplete police clearance forms.
           </p>
 
-          <div className="mt-10 grid grid-cols-1 md:grid-cols-5 gap-4">
+          <ol className="v3-steps mt-10 divide-y divide-white/15 border-y border-white/15">
             {PROCESS_STEPS.map((ps) => (
-              <div key={ps.step} className="rounded-xl border border-white/10 bg-[var(--surface-card-dark)] p-5 shadow-[var(--shadow-card)]">
-                <span className="mb-2 block font-mono text-2xl font-bold text-[#FFB25E]">{ps.step}</span>
-                <h3 className="mb-2 text-sm font-bold text-white" style={{ fontFamily: "var(--font-display)" }}>{ps.title}</h3>
-                <p className="text-xs text-[#CBD5E1] font-normal leading-relaxed">{ps.desc}</p>
-              </div>
+              <li key={ps.step} className="grid grid-cols-[2.5rem_1fr] gap-4 py-7 md:grid-cols-[3rem_1fr_1.2fr] md:gap-8">
+                <span className="text-lg text-[#FFB547]">{ps.step}</span>
+                <h3 className="text-xl font-normal leading-snug text-white" style={{ fontFamily: "var(--font-display)" }}>{ps.title}</h3>
+                <p className="col-start-2 text-base leading-relaxed text-[#B9C2D3] md:col-start-auto">{ps.desc}</p>
+              </li>
             ))}
-          </div>
-        </section>
+          </ol>
+        </Section>
 
         {/* Fee Calculator CTA Banner — flat */}
-        <section className="mb-20 rounded-xl border border-white/10 bg-[var(--surface-card-dark)] p-8 text-white shadow-[var(--shadow-card)] md:p-12">
-          <div className="flex flex-col lg:flex-row items-center justify-between gap-8">
+        <GlassCard className="mb-20 p-6 sm:p-8 md:p-12">
+          <div className="flex flex-col items-start justify-between gap-8 lg:flex-row lg:items-center">
             <div>
-              <div className="flex items-center gap-2 text-[#FFB25E] text-xs font-bold uppercase tracking-widest">
-                <Calculator className="h-4 w-4" /> PSARA Cost Estimator
-              </div>
               <h2 className="mt-2 text-2xl md:text-3xl font-bold text-white" style={{ fontFamily: "var(--font-display)" }}>
                 Calculate Official State License Fees
               </h2>
-              <p className="mt-2 text-xs md:text-sm text-[#E2E8F0] font-normal max-w-xl leading-relaxed">
+              <p className="mt-4 flex items-center gap-2 text-sm text-[#FFB547]"><Calculator aria-hidden="true" className="h-4 w-4" /> PSARA Cost Estimator</p>
+              <p className="mt-5 max-w-[68ch] text-base leading-relaxed text-[#B9C2D3]">
                 Standard whole-state package {formatINR(STANDARD_WHOLE_STATE_TOTAL)} — consultancy, MOU &amp;
                 training, government fee, office &amp; rent agreement, documentation, police verification and
                 processing. Government fees vary by state and coverage (standard slab ₹5,000 / ₹10,000 /
@@ -120,49 +93,44 @@ export default function ServicesHubPage() {
             </div>
             <Link
               href="/calculator"
-              className="shrink-0 inline-flex items-center gap-2 rounded-xl px-7 py-4 text-xs font-bold uppercase tracking-wider text-[#0B1E3B] transition-all hover:brightness-105"
-              style={{
-                background: "var(--grad-gold-metallic)",
-                boxShadow: "inset 0 1px 0 rgba(255,250,230,0.85), inset 0 -1px 0 rgba(88,58,8,0.5), 0 12px 30px -10px rgba(231,111,0,0.5)",
-              }}
+              className="v3-button v3-button--saffron shrink-0" data-v3-magnetic
             >
               Launch Cost Calculator <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
-        </section>
+        </GlassCard>
 
         {/* Direct Advisory CTA — flat */}
-        <section className="rounded-xl border border-[var(--line-gold)] bg-[var(--surface-card-dark)] p-8 text-white shadow-[var(--shadow-card)] md:p-12">
+        <GlassCard className="p-6 sm:p-8 md:p-12">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
             <div>
-              <span className="text-xs font-bold uppercase tracking-widest text-[#FFB25E]">Direct Advisory</span>
               <h2 className="mt-1 text-2xl md:text-3xl font-bold text-white" style={{ fontFamily: "var(--font-display)" }}>
                 Need Help Selecting the Right PSARA Category?
               </h2>
-              <p className="mt-2 text-xs md:text-sm text-[#E2E8F0] max-w-2xl font-normal leading-relaxed">
+              <p className="mt-4 text-sm text-[#FFB547]">Direct Advisory</p>
+              <p className="mt-5 max-w-[68ch] text-base leading-relaxed text-[#B9C2D3]">
                 Our senior compliance officers assess your business model (guarding, cash-in-transit, bouncer deployment, armed escort) and craft your complete filing strategy.
               </p>
             </div>
-            <div className="flex flex-wrap gap-3 shrink-0">
+            <div className="flex min-w-0 flex-wrap gap-3">
               <a
                 href={DEFAULT_WA}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 rounded-xl px-6 py-3.5 text-xs font-bold uppercase tracking-wider text-white transition-all hover:brightness-110"
-                style={{ background: "var(--grad-wa)", boxShadow: "inset 0 1px 0 rgba(255,255,255,0.25), 0 10px 24px -10px rgba(4,106,56,0.55)" }}
+                className="v3-button v3-button--wa" data-v3-magnetic
               >
                 <MessageSquare className="h-4 w-4 fill-white" />
                 <span>WhatsApp Desk</span>
               </a>
               <a
                 href={TEL_HREF}
-                className="inline-flex items-center gap-2 rounded-xl border border-white/20 bg-white/5 hover:bg-white/10 px-6 py-3.5 text-xs font-bold uppercase tracking-wider text-white transition-all"
+                className="v3-button v3-button--ghost" data-v3-magnetic
               >
                 <Phone className="h-4 w-4" /> Call Advisor
               </a>
             </div>
           </div>
-        </section>
+        </GlassCard>
       </PageMain>
     </StageShell>
   );

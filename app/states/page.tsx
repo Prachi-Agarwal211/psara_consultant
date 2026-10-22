@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { STATES } from "../../data/states";
 import { PageHero, PageMain } from "../../components/PageShell";
+import { Section } from "../../components/v3/PagePrimitives";
 import StageShell from "../components/ui/StageShell";
 import { pageMeta } from "../../lib/metadata";
 import StatePortalView from "../components/sections/StatePortalView";
@@ -22,7 +23,9 @@ export default function StatesHubPage() {
         meta="36 STATES & UTs · ONE COMPLIANCE DESK"
       />
       <PageMain>
-        <StatePortalView />
+        <Section>
+          <StatePortalView />
+        </Section>
       </PageMain>
     </StageShell>
   );

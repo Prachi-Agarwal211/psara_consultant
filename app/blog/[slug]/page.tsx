@@ -8,7 +8,7 @@ import { CalendarDays, Clock, User, ArrowLeft } from "lucide-react";
 import { BLOG_POSTS } from "../../../data/blog";
 import { PageHero, PageMain, Prose } from "../../../components/PageShell";
 import StageShell from "../../components/ui/StageShell";
-import CtaBar from "../../../components/CtaBar";
+import { GlassCard, CTABand } from "../../../components/v3/PagePrimitives";
 import JsonLd from "../../../components/JsonLd";
 import { pageMeta } from "../../../lib/metadata";
 import { hubHeroImage } from "../../lib/location-accent";
@@ -101,7 +101,7 @@ export default async function BlogPostPage({
   }
 
   return (
-    <StageShell>
+    <StageShell showCta={false}>
       <JsonLd data={blogPostingSchema} />
       <JsonLd data={breadcrumbSchema} />
 
@@ -117,29 +117,29 @@ export default async function BlogPostPage({
         meta={`( ${post.category.toUpperCase()} ) ( ${post.readTime} )`}
       />
 
-      <PageMain className="psara-article-main">
+      <PageMain>
         {/* Featured cover image */}
-        <div className="psara-article-cover relative mb-10 aspect-[21/9] overflow-hidden rounded-[var(--radius)] border border-[var(--line)] bg-[var(--obsidian)]">
+        <div className={`relative mb-12 overflow-hidden rounded-2xl bg-[#1a1510] ${coverImage.endsWith(".svg") ? "aspect-[1200/630]" : "aspect-[4/3] sm:aspect-[21/9]"}`}>
           <Image
             src={coverImage}
             alt={`${post.title} — PSARA Consultant India blog cover`}
             fill
             priority
             sizes="100vw"
-            className="object-cover"
+            className={coverImage.endsWith(".svg") ? "object-contain" : "object-cover"}
           />
           <div className="absolute inset-0 bg-gradient-to-t from-[var(--obsidian)]/40 via-transparent to-transparent" />
-          <div className="absolute left-5 top-5 flex items-center gap-3 rounded-full border border-white/20 bg-black/45 px-3 py-2 backdrop-blur-md">
+          <div className="absolute bottom-5 left-5 right-5 flex w-fit max-w-[calc(100%-2.5rem)] items-center gap-3 rounded-full border border-white/20 bg-[#081426]/75 px-3 py-2 backdrop-blur-md">
             <Image src="/assets/images/brand/psara-consultant-india-mark-transparent.png" alt="PSARA Consultant India" width={34} height={34} className="h-8 w-8 object-contain" />
-            <span className="text-[10px] font-bold uppercase tracking-[0.18em] text-white">PSARA Consultant India</span>
+            <span className="text-xs font-medium text-white">PSARA Consultant India</span>
           </div>
         </div>
 
-        <div className="grid grid-cols-1 gap-12 lg:grid-cols-12">
-          <article className="psara-article-body lg:col-span-8">
+        <div className="grid min-w-0 grid-cols-1 gap-14 lg:grid-cols-12">
+          <article className="min-w-0 lg:col-span-8">
             {/* Meta info bar */}
-            <div className="mb-8 flex flex-wrap items-center gap-4 text-sm font-medium text-[var(--white-55)]">
-              <span className="flex items-center gap-1.5">
+            <div className="mb-10 flex flex-wrap items-center gap-x-5 gap-y-4 border-b border-white/15 pb-7 text-sm text-[#B9C2D3]">
+              <span className="flex min-w-0 flex-wrap items-center gap-1.5">
                 <CalendarDays className="h-4 w-4 text-[var(--gold-bright)]" aria-hidden />
                 {new Date(post.publishedAt).toLocaleDateString("en-IN", {
                   day: "numeric",
@@ -147,15 +147,15 @@ export default async function BlogPostPage({
                   year: "numeric",
                 })}
               </span>
-              <span className="flex items-center gap-1.5">
+              <span className="flex min-w-0 flex-wrap items-center gap-1.5">
                 <Clock className="h-4 w-4 text-[var(--gold-bright)]" aria-hidden />
                 {post.readTime}
               </span>
-              <span className="flex items-center gap-1.5">
-                <User className="h-4 w-4 text-[var(--gold-bright)]" aria-hidden />
+              <span className="flex min-w-0 flex-wrap items-center gap-1.5">
+                <User className="h-4 w-4 shrink-0 text-[var(--gold-bright)]" aria-hidden />
                 {post.author}
                 {post.role && (
-                  <span className="text-[var(--white-40)]">· {post.role}</span>
+                  <span className="text-[#B9C2D3]">· {post.role}</span>
                 )}
               </span>
               <span className="rounded border border-white/10 px-2 py-0.5 text-[11px] font-bold uppercase tracking-wider text-[var(--gold-bright)]">
@@ -173,7 +173,7 @@ export default async function BlogPostPage({
                   {post.tags.map((tag) => (
                     <span
                       key={tag}
-                      className="mr-2 inline-block rounded border border-white/10 px-2 py-0.5 text-[11px] font-medium text-[var(--white-55)]"
+                      className="mr-2 inline-block rounded border border-white/10 px-2 py-0.5 text-[11px] font-medium text-[#B9C2D3]"
                     >
                       {tag}
                     </span>
@@ -181,11 +181,11 @@ export default async function BlogPostPage({
                 </p>
               </div>
 
-              <div className="mt-8 rounded border border-white/10 bg-white/[0.02] p-6">
-                <h3 className="font-[family-name:var(--font-display)] text-lg font-bold text-white">
+              <GlassCard className="mt-10 p-6 sm:p-8">
+                <h3 className="font-[family-name:var(--font-display)] text-2xl font-normal text-white">
                   Need Help With Your PSARA License?
                 </h3>
-                <p className="mt-2 text-sm text-[var(--white-55)]">
+                <p className="mt-2 text-sm text-[#B9C2D3]">
                   Contact PSARA Consultant India at <strong>{CONTACT.phoneDisplay}</strong> or send us a
                   WhatsApp message. Our team of experienced licensing advisors is ready to assist with
                   your application.
@@ -207,7 +207,7 @@ export default async function BlogPostPage({
                     WhatsApp Us
                   </a>
                 </div>
-              </div>
+              </GlassCard>
             </Prose>
 
             <div className="mt-8">
@@ -222,31 +222,31 @@ export default async function BlogPostPage({
           </article>
 
           {/* Sidebar */}
-          <aside className="psara-article-aside lg:col-span-4">
-            <div className="sticky top-24 space-y-6">
+          <aside className="min-w-0 lg:col-span-4">
+            <div className="space-y-6 lg:sticky lg:top-28">
               {/* Category */}
-              <div className="rounded border border-white/10 bg-white/[0.02] p-5">
-                <h3 className="font-[family-name:var(--font-display)] text-sm font-bold uppercase tracking-wider text-[var(--gold-bright)]">
+              <GlassCard className="p-6">
+                <h3 className="font-[family-name:var(--font-display)] text-2xl font-normal text-[#FFFDF5]">
                   Category
                 </h3>
                 <p className="mt-2 text-sm text-white">{post.category}</p>
-              </div>
+              </GlassCard>
 
               {/* Author */}
-              <div className="rounded border border-white/10 bg-white/[0.02] p-5">
-                <h3 className="font-[family-name:var(--font-display)] text-sm font-bold uppercase tracking-wider text-[var(--gold-bright)]">
+              <GlassCard className="p-6">
+                <h3 className="font-[family-name:var(--font-display)] text-2xl font-normal text-[#FFFDF5]">
                   Author
                 </h3>
                 <p className="mt-2 text-sm font-bold text-white">{post.author}</p>
                 {post.role && (
-                  <p className="mt-0.5 text-xs text-[var(--white-55)]">{post.role}</p>
+                  <p className="mt-0.5 text-xs text-[#B9C2D3]">{post.role}</p>
                 )}
-              </div>
+              </GlassCard>
 
               {/* Related posts */}
               {related.length > 0 && (
-                <div className="rounded border border-white/10 bg-white/[0.02] p-5">
-                  <h3 className="font-[family-name:var(--font-display)] text-sm font-bold uppercase tracking-wider text-[var(--gold-bright)]">
+                <GlassCard className="p-6">
+                  <h3 className="font-[family-name:var(--font-display)] text-2xl font-normal text-[#FFFDF5]">
                     Related Articles
                   </h3>
                   <ul className="mt-3 space-y-3">
@@ -259,22 +259,22 @@ export default async function BlogPostPage({
                           <p className="text-sm font-bold text-white transition-colors group-hover:text-[var(--gold-bright)]">
                             {r.title}
                           </p>
-                          <p className="mt-0.5 text-xs text-[var(--white-55)]">
+                          <p className="mt-0.5 text-xs text-[#B9C2D3]">
                             {r.category} · {r.readTime}
                           </p>
                         </Link>
                       </li>
                     ))}
                   </ul>
-                </div>
+                </GlassCard>
               )}
 
               {/* CTA */}
-              <div className="rounded border border-[var(--gold)]/30 bg-white/[0.02] p-5">
-                <h3 className="font-[family-name:var(--font-display)] text-base font-bold text-white">
+              <GlassCard className="p-6">
+                <h3 className="font-[family-name:var(--font-display)] text-2xl font-normal text-white">
                   Get PSARA License Help
                 </h3>
-                <p className="mt-2 text-xs text-[var(--white-55)]">
+                <p className="mt-2 text-xs text-[#B9C2D3]">
                   300+ agencies across 36 States &amp; UTs trust us. Call or WhatsApp for a free consultation.
                 </p>
                 <div className="mt-4 space-y-2">
@@ -286,12 +286,12 @@ export default async function BlogPostPage({
                     Call {CONTACT.phoneDisplay}
                   </a>
                 </div>
-              </div>
+              </GlassCard>
             </div>
           </aside>
         </div>
 
-        <CtaBar title="Ready to Start Your PSARA Application?" />
+        <CTABand title="Ready to Start Your PSARA Application?" lead="Call or WhatsApp — Jaipur · Delhi · Gurugram · Noida · Ahmedabad" />
       </PageMain>
     </StageShell>
   );

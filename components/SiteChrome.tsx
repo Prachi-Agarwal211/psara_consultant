@@ -2,11 +2,13 @@
 
 import { usePathname } from "next/navigation";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import Image from "next/image";
+import { useEffect, useRef, useState } from "react";
 import { Menu, X, Phone, MessageSquare, ShieldCheck, ArrowRight } from "lucide-react";
 import BrandMark from "../app/components/ui/BrandMark";
-import { CONTACT } from "../lib/config";
+import { CONTACT, SITE } from "../lib/config";
 import { DEFAULT_WA, TEL_HREF } from "../lib/whatsapp";
+import { setSmoothScrollPaused } from "../app/components/providers/SmoothScroll";
 
 const NAV_LINKS = [
   { label: "About", href: "/about" },
@@ -27,6 +29,8 @@ export function SiteHeader({ pathname, homePlacement = false }: { pathname: stri
   const [scrolled, setScrolled] = useState(false);
   const [visible, setVisible] = useState(!homePlacement);
   const [menuOpen, setMenuOpen] = useState(false);
+  const drawerRef = useRef<HTMLDivElement>(null);
+  const menuRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     let lastScrollY = window.scrollY;
@@ -70,19 +74,45 @@ export function SiteHeader({ pathname, homePlacement = false }: { pathname: stri
   }, [homePlacement]);
 
   useEffect(() => {
-    document.body.style.overflow = menuOpen ? "hidden" : "";
-    return () => { document.body.style.overflow = ""; };
+    if (!menuOpen) return;
+    const overflow = document.body.style.overflow;
+    const main = document.getElementById("main");
+    const wasInert = main?.inert ?? false;
+    if (main) main.inert = true;
+    document.body.style.overflow = "hidden";
+    setSmoothScrollPaused(true);
+    const drawer = drawerRef.current;
+    const menuButton = menuRef.current;
+    drawer?.querySelector<HTMLButtonElement>("button")?.focus();
+    const handleKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setMenuOpen(false);
+      if (event.key !== "Tab") return;
+      const focusable = Array.from(drawer?.querySelectorAll<HTMLElement>('a[href], button:not([disabled])') ?? []);
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last?.focus(); }
+      else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first?.focus(); }
+    };
+    document.addEventListener("keydown", handleKey);
+    return () => {
+      document.removeEventListener("keydown", handleKey);
+      document.body.style.overflow = overflow;
+      if (main) main.inert = wasInert;
+      setSmoothScrollPaused(false);
+      menuButton?.focus();
+    };
   }, [menuOpen]);
 
-  const isHeaderShown = visible && (!homePlacement || scrolled);
+  const isHeaderShown = !homePlacement || (visible && scrolled);
 
   return (
     <>
       <header
-        className={`fixed inset-x-0 top-0 z-[100] transition-all duration-300 ease-out ${
+        className={`v3-site-header fixed inset-x-0 top-0 z-[100] transition-all duration-300 ease-out ${
           isHeaderShown ? "translate-y-0 opacity-100 pointer-events-auto" : "-translate-y-full opacity-0 pointer-events-none"
         }`}
         aria-hidden={!isHeaderShown}
+        inert={!isHeaderShown || menuOpen}
         style={{
           paddingTop: "env(safe-area-inset-top, 0px)",
           viewTransitionName: "navbar",
@@ -100,7 +130,8 @@ export function SiteHeader({ pathname, homePlacement = false }: { pathname: stri
         >
           {/* Brand Logo — ponytail: lockup PNG carries the name, no duplicate text (was invisible white-on-cream on home header) */}
           <Link href="/" className="shrink-0 flex items-center gap-2.5" aria-label="PSARA Consultant India home">
-            <BrandMark variant="light" compact />
+            <Image src="/assets/images/graded/eagle-mark.webp" alt="" width={40} height={45} priority />
+            <span className="v3-header-brand">{SITE.name}</span>
           </Link>
 
           {/* Center: Main Primary Desktop Nav */}
@@ -139,6 +170,7 @@ export function SiteHeader({ pathname, homePlacement = false }: { pathname: stri
 
             {/* Universal Menu Button */}
             <button
+              ref={menuRef}
               type="button"
               className="flex h-11 w-11 items-center justify-center rounded-full border border-[#E76F00]/70 bg-[#0B1E3B]/70 p-0 text-xs font-bold uppercase tracking-[.08em] text-white shadow-md transition-all duration-200 hover:border-[#FFB25E] hover:text-[#FFB25E] active:scale-95"
               onClick={() => setMenuOpen(true)}
@@ -154,7 +186,12 @@ export function SiteHeader({ pathname, homePlacement = false }: { pathname: stri
       </header>
 
       <div
+        ref={drawerRef}
         id="site-navigation-drawer"
+        role="dialog"
+        aria-modal={menuOpen || undefined}
+        aria-label="Site navigation"
+        inert={!menuOpen}
         aria-hidden={!menuOpen}
         className={`fixed inset-0 z-[120] transition-opacity duration-300 flex flex-col justify-between ${
           menuOpen ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"
@@ -240,6 +277,7 @@ export default function SiteChrome({ children }: { children: React.ReactNode }) 
 
   return (
     <>
+      {!isHome && <a className="v3-skip-link" href="#page-content">Skip to content</a>}
       {!isHome && <SiteHeader pathname={pathname ?? ""} />}
       <div id="main">{children}</div>
     </>

@@ -4,13 +4,14 @@ import Image from "next/image";
 import { ShieldCheck, CheckCircle2 } from "lucide-react";
 import { LEADERS } from "../../../data/team";
 import { SITE } from "../../../lib/config";
+import { GlassCard, Section } from "../../../components/v3/PagePrimitives";
 
 export default function Leadership() {
   return (
-    <section className="relative my-12 overflow-hidden border-t border-white/10 bg-gradient-to-br from-[#0B1E3B] via-[#132E57] to-[#1A3A6B] px-4 py-20 text-white md:px-8">
+    <Section className="relative my-12 border-t border-white/15 py-16 text-white">
       <div className="relative mx-auto max-w-7xl">
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <span className="inline-flex items-center gap-2 rounded-xl border border-[#BF953F]/40 bg-[#8C1F32]/30 px-4 py-1.5 text-xs font-black uppercase tracking-widest text-[#FF7A00] shadow-md">
+          <span className="inline-flex items-center gap-2 text-xs font-semibold tracking-wide text-[#FFB547]">
             <ShieldCheck className="h-4 w-4 text-[#FF7A00]" /> Board of Leadership
           </span>
           <h2 className="mt-4 text-3xl md:text-5xl font-black tracking-tight text-white leading-[0.95]" style={{ fontFamily: "var(--font-display)" }}>
@@ -23,12 +24,12 @@ export default function Leadership() {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
           {LEADERS.map((leader) => (
-            <div
+            <GlassCard
               key={leader.id}
-              className="relative flex flex-col md:flex-row gap-6 rounded-3xl border-2 border-[#E76F00]/40 bg-gradient-to-br from-[#1A3A6B] via-[#132E57] to-[#0B1E3B] text-white p-6 md:p-8 shadow-2xl transition-[border-color,box-shadow,transform] duration-200 hover:border-[#E76F00]"
+              className="relative flex flex-col gap-6 text-white p-6 md:p-8 xl:flex-row"
             >
               {/* Leader Photo */}
-              <div className="relative w-36 h-36 md:w-44 md:h-44 shrink-0 overflow-hidden rounded-2xl border-2 border-[#E76F00] self-center md:self-start shadow-xl">
+              <div className="relative w-36 h-36 shrink-0 overflow-hidden rounded-xl self-start">
                 <Image
                   src={leader.photo}
                   alt={`${leader.name} — ${leader.role}`}
@@ -41,16 +42,16 @@ export default function Leadership() {
               {/* Bio & Credentials */}
               <div className="flex flex-col justify-between flex-1">
                 <div>
-                  <div className="flex items-center justify-between gap-2">
+                  <div className="flex flex-wrap items-start justify-between gap-3">
                     <h3 className="text-2xl font-black text-white" style={{ fontFamily: "var(--font-display)" }}>
                       {leader.name}
                     </h3>
-                    <span className="bg-[#FFE8D1] px-3 py-1 text-[10px] font-black uppercase tracking-wider text-[#0F3C65] rounded-lg shadow-sm">
+                    <span className="border border-[#FFB547]/30 px-3 py-1 text-xs font-semibold text-[#FFCC8C] rounded-full">
                       {leader.role}
                     </span>
                   </div>
 
-                  <p className="mt-3 text-xs md:text-sm font-medium leading-relaxed text-slate-300">
+                  <p className="mt-3 text-base font-normal leading-relaxed text-[#C7D2E4]">
                     {leader.bio}
                   </p>
                 </div>
@@ -92,10 +93,10 @@ export default function Leadership() {
                   }),
                 }}
               />
-            </div>
+            </GlassCard>
           ))}
         </div>
       </div>
-    </section>
+    </Section>
   );
 }

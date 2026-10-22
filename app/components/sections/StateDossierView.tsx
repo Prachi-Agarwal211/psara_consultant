@@ -19,12 +19,13 @@ import {
   Check,
   MessageSquare,
 } from "lucide-react";
+import { FAQ, GlassCard, Section } from "../../../components/v3/PagePrimitives";
 import FormattedText from "../../../components/FormattedText";
 import { getCaContact } from "../../../data/ca-contacts";
 import type { StateInfo } from "../../../data/states";
 import type { generateStateContent } from "../../../lib/seo-content";
 import { getLocationAccent, accentStyleVars, type LocationAccent } from "../../lib/location-accent";
-import { DEFAULT_WA } from "../../../lib/whatsapp";
+import { buildWhatsAppUrl } from "../../../lib/whatsapp";
 import {
   GOVT_ITEM_INDEX,
   buildDefaultAmounts,
@@ -40,21 +41,8 @@ interface StateDossierViewProps {
   accent?: LocationAccent;
 }
 
-function DossierTitle({ index, children }: { index: string; children: React.ReactNode }) {
-  return (
-    <div className="flex min-w-0 items-start gap-3 sm:items-center sm:gap-4">
-      <span
-        aria-hidden
-        className="shrink-0 pt-1 font-mono text-xs font-bold tracking-widest text-[#FF7A00] sm:pt-0"
-      >
-        {index}
-      </span>
-      <div className="mt-3 h-px w-5 shrink-0 bg-[#FF7A00] sm:mt-0 sm:w-10" aria-hidden />
-      <h2 className="min-w-0 text-xl font-bold leading-tight tracking-tight text-white sm:text-2xl" style={{ fontFamily: "var(--font-display)" }}>
-        {children}
-      </h2>
-    </div>
-  );
+function DossierTitle({ children }: { index?: string; children: React.ReactNode }) {
+  return <h2 className="min-w-0 font-[family-name:var(--font-display)] text-3xl font-normal leading-[1.12] tracking-[-0.025em] text-white sm:text-4xl">{children}</h2>;
 }
 
 export default function StateDossierView({
@@ -72,12 +60,6 @@ export default function StateDossierView({
   const ca = getCaContact(state.slug);
 
   const hasCa = !!(ca && ca.name && ca.name !== "—");
-  const variantIdx = hasCa ? 4 : 3;
-  const processIdx = variantIdx + 1;
-  const feesIdx = processIdx + 1;
-  const marketIdx = feesIdx + 1;
-  const faqIdx = marketIdx + 2;
-  const pad = (n: number) => String(n).padStart(2, "0");
 
   const toggleDoc = (idx: number) => {
     setCheckedDocs((prev) => ({ ...prev, [idx]: !prev[idx] }));
@@ -100,7 +82,7 @@ export default function StateDossierView({
 
   return (
     <div
-      className="min-w-0 space-y-16 py-4 text-white"
+      className="v3-dossier min-w-0 space-y-16 py-4 text-white"
       itemScope
       itemType="https://schema.org/HowTo"
       style={accVars}
@@ -109,14 +91,14 @@ export default function StateDossierView({
       <meta itemProp="description" content={content.metaDescription} />
 
       {/* 1. EXECUTIVE DOSSIER HERO SUMMARY — flat */}
-      <section className="relative overflow-hidden rounded-xl border border-white/10 bg-[var(--surface-card-dark)] p-6 shadow-[var(--shadow-card)] sm:p-8 md:p-10">
+      <GlassCard className="space-y-6 p-6 sm:p-8">
         <div className="flex flex-col items-start justify-between gap-4 border-b border-white/10 pb-6 sm:flex-row sm:items-center">
           <div className="flex min-w-0 flex-wrap items-center gap-3">
             <span className="badge-metallic-gold">
               <Shield className="h-3.5 w-3.5 text-[#FF7A00]" />
               State Statutory Framework
             </span>
-            <span className="text-xs font-mono font-bold tracking-widest uppercase text-[#FF7A00]">
+            <span className="text-xs tabular-nums font-bold tracking-widest uppercase text-[#FF7A00]">
               Ref: PSARA-{state.slug.toUpperCase()}
             </span>
           </div>
@@ -145,65 +127,65 @@ export default function StateDossierView({
 
         {/* Key Framework Parameters */}
           <div className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-4 pt-6 border-t border-white/10">
-          <div className="rounded-xl border border-white/10 bg-[var(--canvas-void-2)] p-4">
+          <div className="border-t border-white/15 pt-4">
             <span className="block text-[0.65rem] font-bold uppercase tracking-widest text-[#FF7A00]">Application Mode</span>
             <span className="mt-1 block text-sm font-bold text-white">{state.applicationMode}</span>
           </div>
-          <div className="rounded-xl border border-white/10 bg-[var(--canvas-void-2)] p-4">
+          <div className="border-t border-white/15 pt-4">
             <span className="block text-[0.65rem] font-bold uppercase tracking-widest text-[#FF7A00]">Rules Framework</span>
             <span className="mt-1 block text-sm font-bold text-white">{state.rulesNote}</span>
           </div>
-          <div className="rounded-xl border border-white/10 bg-[var(--canvas-void-2)] p-4">
+          <div className="border-t border-white/15 pt-4">
             <span className="block text-[0.65rem] font-bold uppercase tracking-widest text-[#FF7A00]">Coverage Scale</span>
             <span className="mt-1 block text-sm font-bold text-white">{state.cities.length}+ Major Districts</span>
           </div>
         </div>
-      </section>
+      </GlassCard>
 
       {/* 2. STATE AT A GLANCE */}
-      <section className="space-y-6">
-        <DossierTitle index="01">State at a Glance</DossierTitle>
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          <div className="rounded-2xl border border-[rgba(231,111,0,0.28)] bg-[#0B1E3B] p-5 shadow-md">
+      <Section className="space-y-6">
+        <DossierTitle>State at a Glance</DossierTitle>
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-2">
+          <div className="border-b border-white/15 py-4">
             <span className="block text-[0.65rem] font-bold uppercase tracking-widest text-[#FF7A00]">Controlling Authority</span>
             <span className="mt-1.5 block text-xs font-bold text-white leading-snug">{state.authority}</span>
           </div>
-          <div className="rounded-2xl border border-white/10 bg-[#0B1E3B] p-5 shadow-md">
+          <div className="border-b border-white/15 py-4">
             <span className="block text-[0.65rem] font-bold uppercase tracking-widest text-[#FF7A00]">Indicative Timeline</span>
-            <span className="mt-1.5 block text-lg font-bold text-white font-mono">{state.timeline}</span>
+            <span className="mt-1.5 block text-lg font-bold text-white tabular-nums">{state.timeline}</span>
           </div>
-          <div className="rounded-2xl border border-white/10 bg-[#0B1E3B] p-5 shadow-md">
+          <div className="border-b border-white/15 py-4">
             <span className="block text-[0.65rem] font-bold uppercase tracking-widest text-[#FF7A00]">Application Mode</span>
             <span className="mt-1.5 block text-xs font-bold text-white leading-snug">{state.applicationMode}</span>
           </div>
-          <div className="rounded-2xl border border-white/10 bg-[#0B1E3B] p-5 shadow-md">
+          <div className="border-b border-white/15 py-4">
             <span className="block text-[0.65rem] font-bold uppercase tracking-widest text-[#FF7A00]">Licence Validity</span>
-            <span className="mt-1.5 block text-lg font-bold text-white font-mono">{state.validityYears} year{state.validityYears > 1 ? "s" : ""}</span>
+            <span className="mt-1.5 block text-lg font-bold text-white tabular-nums">{state.validityYears} year{state.validityYears > 1 ? "s" : ""}</span>
           </div>
-          <div className="rounded-2xl border border-white/10 bg-[#0B1E3B] p-5 shadow-md">
+          <div className="border-b border-white/15 py-4">
             <span className="block text-[0.65rem] font-bold uppercase tracking-widest text-[#FF7A00]">State Capital</span>
             <span className="mt-1.5 block text-sm font-bold text-white">{state.capital}</span>
           </div>
-          <div className="rounded-2xl border border-white/10 bg-[#0B1E3B] p-5 shadow-md">
+          <div className="border-b border-white/15 py-4">
             <span className="block text-[0.65rem] font-bold uppercase tracking-widest text-[#FF7A00]">Fee Slabs (Govt)</span>
             <span className="mt-1.5 block text-xs font-bold text-white leading-snug">₹5,000 / ₹10,000 / ₹25,000</span>
           </div>
         </div>
-      </section>
+      </Section>
 
       {/* 3. CA CONTACT CARD WITH ONE-CLICK COPY */}
       {hasCa && (
-        <section className="space-y-6">
-          <DossierTitle index="02">{`Controlling Authority — Officer & Contact Details`}</DossierTitle>
+        <Section className="space-y-6">
+          <DossierTitle>{`Controlling Authority — Officer & Contact Details`}</DossierTitle>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-            <div className="rounded-2xl border border-white/10 bg-[#0B1E3B] p-5 shadow-md">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4">
+            <div className="border-b border-white/15 py-4">
               <BadgeCheck className="h-4 w-4 text-[#FF7A00] mb-2" />
               <span className="block text-[0.6rem] font-bold uppercase tracking-widest text-[#FF7A00]">Officer on Record</span>
               <span className="mt-1 block text-sm font-bold text-white leading-snug">{ca.name}</span>
             </div>
             {ca.phone && ca.phone !== "—" && (
-              <div className="rounded-2xl border border-white/10 bg-[#0B1E3B] p-5 shadow-md">
+              <div className="border-b border-white/15 py-4">
                 <div className="flex items-center justify-between">
                   <Phone className="h-4 w-4 text-[#FF7A00] mb-2" />
                   <button
@@ -219,7 +201,7 @@ export default function StateDossierView({
               </div>
             )}
             {ca.email && ca.email !== "—" && (
-              <div className="rounded-2xl border border-white/10 bg-[#0B1E3B] p-5 shadow-md">
+              <div className="border-b border-white/15 py-4">
                 <div className="flex items-center justify-between">
                   <Mail className="h-4 w-4 text-[#FF7A00] mb-2" />
                   <button
@@ -235,20 +217,20 @@ export default function StateDossierView({
               </div>
             )}
             {ca.portal && (
-              <div className="rounded-2xl border border-white/10 bg-[#0B1E3B] p-5 shadow-md">
+              <div className="border-b border-white/15 py-4">
                 <Globe className="h-4 w-4 text-[#FF7A00] mb-2" />
                 <span className="block text-[0.6rem] font-bold uppercase tracking-widest text-[#FF7A00]">Portal</span>
                 <span className="mt-1 block text-xs font-bold text-white break-all">{ca.portal}</span>
               </div>
             )}
           </div>
-        </section>
+        </Section>
       )}
 
       {/* 4. INTERACTIVE TABS: PROCESS / CHECKLIST / LIVE FEE CALCULATOR */}
-      <section className="space-y-8">
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-white/10 pb-4">
-          <DossierTitle index={pad(processIdx)}>{`Compliance Toolkit for ${state.name}`}</DossierTitle>
+      <Section className="space-y-8">
+        <div className="flex flex-col items-start justify-between gap-5 border-b border-white/10 pb-4">
+          <DossierTitle>{`Compliance Toolkit for ${state.name}`}</DossierTitle>
 
           <div className="flex w-full flex-wrap gap-2 rounded-xl border border-white/10 bg-[#132E57] p-1.5 sm:w-auto sm:flex-nowrap">
             {(["process", "documents", "calculator"] as const).map((tab) => (
@@ -270,7 +252,7 @@ export default function StateDossierView({
 
         {/* Tab 1: Step-by-Step Approval Process */}
         {activeTab === "process" && (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
             {content.process.map((stepText, idx) => {
               const parts = stepText.split(":");
               const title = parts.length > 1 ? parts[0] : `Phase ${idx + 1}`;
@@ -287,7 +269,7 @@ export default function StateDossierView({
                     </span>
                   </div>
 
-                  <h3 className="mt-4 text-lg font-bold text-white" style={{ fontFamily: "var(--font-display)" }}>
+                  <h3 className="mt-4 text-2xl font-normal text-white" style={{ fontFamily: "var(--font-display)" }}>
                     {title}
                   </h3>
 
@@ -314,7 +296,7 @@ export default function StateDossierView({
               <h3 className="flex min-w-0 items-start gap-2 text-lg font-bold leading-tight text-white">
                 <FileCheck className="h-5 w-5 text-[#FF7A00]" /> Mandatory Document Checklist ({state.name})
               </h3>
-              <span className="text-xs text-[#FFB25E] font-mono font-bold">
+              <span className="text-xs text-[#FFB25E] tabular-nums font-bold">
                 {Object.values(checkedDocs).filter(Boolean).length} of {content.documents.length} Checked
               </span>
             </div>
@@ -389,35 +371,36 @@ export default function StateDossierView({
               </div>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-xs">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4 text-xs">
               <div className="p-4 rounded-xl bg-[#0B1E3B] border border-white/10">
                 <span className="text-[#94A3B8] block">Statutory Govt Fee</span>
-                <span className="text-lg font-bold text-white font-mono mt-1 block">₹{govFee.toLocaleString("en-IN")}</span>
+                <span className="text-lg font-bold text-white tabular-nums mt-1 block">₹{govFee.toLocaleString("en-IN")}</span>
               </div>
               <div className="p-4 rounded-xl bg-[#0B1E3B] border border-white/10">
                 <span className="text-[#94A3B8] block">Consultancy + MOU &amp; Training</span>
-                <span className="text-lg font-bold text-white font-mono mt-1 block">₹{consultancyBundle.toLocaleString("en-IN")}</span>
+                <span className="text-lg font-bold text-white tabular-nums mt-1 block">₹{consultancyBundle.toLocaleString("en-IN")}</span>
               </div>
               <div className="p-4 rounded-xl bg-[#0B1E3B] border border-white/10">
                 <span className="text-[#94A3B8] block">Office, Rent Agreement &amp; Documentation</span>
-                <span className="text-lg font-bold text-white font-mono mt-1 block">₹{officeDocBundle.toLocaleString("en-IN")}</span>
+                <span className="text-lg font-bold text-white tabular-nums mt-1 block">₹{officeDocBundle.toLocaleString("en-IN")}</span>
               </div>
               <div className="p-4 rounded-xl bg-[#0B1E3B] border border-white/10">
                 <span className="text-[#94A3B8] block">Police Verification &amp; Processing</span>
-                <span className="text-lg font-bold text-white font-mono mt-1 block">₹{policeProcessingBundle.toLocaleString("en-IN")}</span>
+                <span className="text-lg font-bold text-white tabular-nums mt-1 block">₹{policeProcessingBundle.toLocaleString("en-IN")}</span>
               </div>
             </div>
 
             <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-[#FF7A00]/40">
               <div>
                 <span className="text-xs text-[#CBD5E1] font-bold">Total Estimated Budget:</span>
-                <span className="text-2xl font-bold gold-text-gradient font-mono block">₹{totalStateEst.toLocaleString("en-IN")}</span>
+                <span className="text-2xl font-bold text-[#FFB25E] tabular-nums block">₹{totalStateEst.toLocaleString("en-IN")}</span>
               </div>
 
               <a
-                href={`${DEFAULT_WA}&text=Hi,%20I%20am%20enquiring%20for%20PSARA%20License%20in%20${state.name}.%20Estimated%20Total:%20₹${totalStateEst.toLocaleString("en-IN")}.%20Please%20guide%20with%20filing.`}
+                href={buildWhatsAppUrl(`Hi, I am enquiring for PSARA License in ${state.name}. Estimated Total: ₹${totalStateEst.toLocaleString("en-IN")}. Please guide with filing.`)}
                 target="_blank"
                 rel="noopener noreferrer"
+                data-v3-magnetic
                 className="btn-whatsapp"
               >
                 <MessageSquare className="h-4 w-4 fill-white" />
@@ -426,29 +409,9 @@ export default function StateDossierView({
             </div>
           </div>
         )}
-      </section>
+      </Section>
 
-      {/* 5. INTERACTIVE STATE FAQS */}
-      <section className="space-y-8">
-        <DossierTitle index={pad(faqIdx)}>{`Frequently Asked Questions — ${state.name}`}</DossierTitle>
-
-        <div className="divide-y divide-white/10 border-y border-white/10">
-          {content.faqs.map((faq, idx) => (
-            <details key={idx} className="group py-5 transition-colors">
-              <summary className="flex cursor-pointer list-none items-start justify-between gap-4 px-2 font-[family-name:var(--font-display)] text-base font-bold text-white hover:text-[#FFB25E]">
-                <span className="flex min-w-0 items-start gap-2">
-                  <span aria-hidden className="shrink-0 pt-0.5 font-mono text-xs text-[#FF7A00]">{String(idx + 1).padStart(2, "0")}</span>
-                  {faq.q}
-                </span>
-                <span className="shrink-0 pt-0.5 text-sm text-[#FF7A00] transition-transform group-open:rotate-180">↓</span>
-              </summary>
-              <p className="mt-3 max-w-3xl px-2 text-sm font-normal leading-relaxed text-[#E2E8F0]">
-                {faq.a}
-              </p>
-            </details>
-          ))}
-        </div>
-      </section>
+      <FAQ title={`Frequently Asked Questions — ${state.name}`} items={content.faqs} />
     </div>
   );
 }

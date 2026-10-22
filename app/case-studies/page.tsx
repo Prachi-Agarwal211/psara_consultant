@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowUpRight, Award, Building2, MapPin, MessageSquare } from "lucide-react";
 import { PageHero, PageMain } from "../../components/PageShell";
+import { Section, GlassCard } from "../../components/v3/PagePrimitives";
 import StageShell from "../components/ui/StageShell";
 import { pageMeta } from "../../lib/metadata";
 import { CASE_STUDIES } from "../../data/case-studies";
@@ -21,53 +22,51 @@ export default function CaseStudiesPage() {
         title="Proven PSARA Licensing Approval Track Record"
         lead="Explore real case studies of how we helped security agencies, facility managers, and corporate groups secure PSARA Licenses across Rajasthan, Delhi NCR, Maharashtra, Karnataka, and 24 other states."
         crumbs={[{ label: "Case Studies" }]}
+        image="/assets/images/graded/desk.webp"
       />
 
-      <PageMain className="bg-[#0B1E3B] text-white">
-        <div className="grid grid-cols-1 gap-8">
+      <PageMain>
+        <div className="space-y-20">
           {CASE_STUDIES.map((cs) => (
-            <div
-              key={cs.slug}
-              className="space-y-6 rounded-3xl border border-[rgba(231,111,0,0.3)] bg-gradient-to-br from-[#1A3A6B] via-[#132E57] to-[#132E57] p-6 shadow-2xl transition-all duration-200 hover:border-[#FF7A00] md:p-8"
-            >
+            <Section key={cs.slug} className="space-y-7 border-t border-white/15 pt-8">
               {/* Header */}
               <div className="flex flex-wrap items-center justify-between gap-4 pb-4 border-b border-white/10">
                 <div className="flex items-center gap-2 text-xs font-bold text-[#FF7A00] uppercase tracking-wider">
                   <Building2 className="h-4 w-4 text-[#FF7A00]" /> {cs.clientType}
                 </div>
-                <span className="badge-metallic-gold font-mono text-xs">
+                <span className="text-base text-[#FFB547]">
                   {cs.metric}
                 </span>
               </div>
 
               {/* Title & Summary */}
               <div>
-                <h2 className="text-2xl md:text-3xl font-bold text-white mb-3" style={{ fontFamily: "var(--font-display)" }}>
+                <h2 className="mb-5 max-w-[28ch] text-3xl font-normal leading-tight text-white md:text-5xl" style={{ fontFamily: "var(--font-display)" }}>
                   {cs.title}
                 </h2>
-                <p className="text-sm md:text-base text-[#E2E8F0] leading-relaxed font-normal">
+                <p className="max-w-[72ch] text-base leading-relaxed text-[#B9C2D3] md:text-lg">
                   {cs.summary}
                 </p>
               </div>
 
               {/* 3-Column Challenge / Solution / Outcome */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 border-t border-white/10 pt-6">
-                <div className="space-y-1 rounded-2xl border border-white/10 bg-[#132E57] p-4">
+              <div className="grid grid-cols-1 gap-8 pt-4 md:grid-cols-3 md:gap-10">
+                <div className="space-y-3">
                   <strong className="block text-[#FF7A00] uppercase tracking-wider text-[11px] font-bold">1. Challenge</strong>
-                  <p className="text-xs text-[#CBD5E1] leading-relaxed font-normal">{cs.challenge}</p>
+                  <p className="text-base leading-relaxed text-[#B9C2D3]">{cs.challenge}</p>
                 </div>
-                <div className="space-y-1 rounded-2xl border border-white/10 bg-[#132E57] p-4">
+                <div className="space-y-3">
                   <strong className="block text-[#FF7A00] uppercase tracking-wider text-[11px] font-bold">2. Statutory Strategy</strong>
-                  <p className="text-xs text-[#CBD5E1] leading-relaxed font-normal">{cs.solution}</p>
+                  <p className="text-base leading-relaxed text-[#B9C2D3]">{cs.solution}</p>
                 </div>
-                <div className="space-y-1 rounded-2xl border border-white/10 bg-[#132E57] p-4">
+                <div className="space-y-3">
                   <strong className="block text-[#FF7A00] uppercase tracking-wider text-[11px] font-bold">3. Official Outcome</strong>
-                  <p className="text-xs text-[#CBD5E1] leading-relaxed font-normal">{cs.outcome}</p>
+                  <p className="text-base leading-relaxed text-[#B9C2D3]">{cs.outcome}</p>
                 </div>
               </div>
 
               {/* Footer */}
-              <div className="pt-4 border-t border-white/10 flex items-center justify-between text-xs">
+              <div className="flex flex-wrap items-center justify-between gap-5 border-t border-white/15 pt-6 text-sm">
                 <span className="text-[#94A3B8] flex items-center gap-1.5 font-bold uppercase tracking-wider">
                   <MapPin className="h-4 w-4 text-[#FF7A00]" /> {cs.state}
                 </span>
@@ -79,19 +78,19 @@ export default function CaseStudiesPage() {
                   <ArrowUpRight className="h-4 w-4" />
                 </Link>
               </div>
-            </div>
+            </Section>
           ))}
         </div>
 
         {/* Bottom CTA Box */}
-        <section className="mt-16 space-y-4 rounded-3xl border border-[rgba(231,111,0,0.35)] bg-gradient-to-r from-[#1A3A6B] via-[#132E57] to-[#14305E] p-8 text-center shadow-2xl md:p-12">
-          <div className="mb-2 inline-flex rounded-2xl border border-[#FF7A00]/40 bg-[#132E57] p-3 text-[#FF7A00]">
+        <GlassCard className="mt-20 space-y-5 p-6 sm:p-8 md:p-12">
+          <div className="mb-2 inline-flex text-[#FFB547]">
             <Award className="h-8 w-8" />
           </div>
           <h2 className="text-2xl md:text-4xl font-bold text-white" style={{ fontFamily: "var(--font-display)" }}>
             Have a Complex License Requirement?
           </h2>
-          <p className="text-sm text-[#E2E8F0] max-w-xl mx-auto font-normal leading-relaxed">
+          <p className="text-sm text-[#E2E8F0] max-w-[68ch] font-normal leading-relaxed">
             Discuss your state parameters, director eligibility, and training MOUs directly with our senior legal desk.
           </p>
           <div className="pt-4">
@@ -105,7 +104,7 @@ export default function CaseStudiesPage() {
               <span>Discuss Your File on WhatsApp</span>
             </a>
           </div>
-        </section>
+        </GlassCard>
       </PageMain>
     </StageShell>
   );

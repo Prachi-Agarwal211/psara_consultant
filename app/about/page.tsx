@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
+import { GlassCard } from "../../components/v3/PagePrimitives";
 import { Award, Target, Eye, CheckCircle2, MapPin, Sparkles } from "lucide-react";
-import { PageMain } from "../../components/PageShell";
+import { PageHero, PageMain } from "../../components/PageShell";
 import StageShell from "../components/ui/StageShell";
 import AboutSection from "../components/sections/AboutSection";
 import WhatsAppForm from "../../components/WhatsAppForm";
@@ -62,15 +63,16 @@ const CERTIFICATIONS = [
 export default function AboutPage() {
   return (
     <StageShell>
+      <PageHero title="About PSARA Consultant" lead="PSARA Consultant India empowers private security agencies with seamless licensing, recognized training institute MOUs, police verification tracking, and statutory compliance across 36 States & UTs." image="/assets/images/graded/hq.webp" crumbs={[{ label: "About Us" }]} />
       {/* Featured Hero About Section */}
-      <AboutSection showHeaderBar={false} headingLevel="h1" className="pt-28 pb-16 border-b border-white/10" />
+      <AboutSection showHeaderBar={false} headingLevel="h2" className="v3-about-story" />
 
-      <PageMain className="bg-[#0B1E3B] text-white">
+      <PageMain className="v3-about">
         {/* Stats Grid — flat standard */}
         <section className="mb-16 grid grid-cols-2 md:grid-cols-4 gap-4 border border-white/10 bg-[var(--surface-card-dark)] p-6 text-center rounded-xl shadow-[var(--shadow-card)]">
           {STATS.map((s) => (
             <div key={s.label} className="p-3 relative">
-              <span className="block font-bold text-3xl md:text-5xl gold-text-gradient font-mono" style={{ fontFamily: "var(--font-display)" }}>
+              <span className="block font-bold text-3xl md:text-5xl text-[#FFB547] font-mono" style={{ fontFamily: "var(--font-display)" }}>
                 {s.number}
               </span>
               <span className="mt-2 block text-xs font-bold uppercase tracking-wider text-[#CBD5E1]">{s.label}</span>
@@ -85,7 +87,7 @@ export default function AboutPage() {
               <Sparkles className="h-3.5 w-3.5 text-[#FF7A00]" /> Our Practice
             </span>
             <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-white leading-tight" style={{ fontFamily: "var(--font-display)" }}>
-              A Practice Built on <span className="gold-text-gradient">Statutory Discipline</span>
+              A Practice Built on <span className="text-[#FFB547]">Statutory Discipline</span>
             </h2>
             <p className="text-base text-[#E2E8F0] leading-relaxed font-normal">
               Founded in Jaipur, Rajasthan, PSARA Consultant was built on a singular premise: private security licensing requires legal precision, transparent statutory execution, and zero procedural shortcuts.
@@ -95,32 +97,32 @@ export default function AboutPage() {
             </p>
             <div className="pt-4 grid grid-cols-1 sm:grid-cols-2 gap-4">
               {OFFICES.slice(0, 6).map((o) => (
-                <div key={o.city} className="flex items-start gap-2.5 border border-white/10 bg-[#0B1E3B] p-3.5 rounded-xl text-xs">
+                <GlassCard key={o.city} className="flex items-start gap-2.5 p-3.5 text-xs">
                   <MapPin className="h-4 w-4 text-[#FF7A00] shrink-0 mt-0.5" />
                   <div>
                     <strong className="block text-white font-bold">{o.city} Desk ({o.badge})</strong>
                     <span className="text-[#94A3B8] font-normal">{o.address}</span>
                   </div>
-                </div>
+                </GlassCard>
               ))}
             </div>
           </div>
 
             <div className="lg:col-span-5">
-            <div className="space-y-4 rounded-xl border border-white/10 bg-[var(--surface-card-dark)] p-6 text-white shadow-[var(--shadow-card)] md:p-8">
+            <GlassCard className="space-y-4 p-6 text-white md:p-8">
               <span className="badge-metallic-gold">
                 Immediate Consultation
               </span>
               <h3 className="text-xl font-bold text-white mt-1" style={{ fontFamily: "var(--font-display)" }}>
                 Speak with a PSARA Specialist
               </h3>
-              <p className="text-xs text-[#E2E8F0] font-normal leading-relaxed">
+              <p className="text-base text-[#E2E8F0] font-normal leading-relaxed">
                 Submit your query to receive a customized state regulatory roadmap and statutory fee structure.
               </p>
               <div className="mt-4">
                 <WhatsAppForm formType="About Page Advisory" />
               </div>
-            </div>
+            </GlassCard>
           </div>
         </section>
 
@@ -132,32 +134,32 @@ export default function AboutPage() {
           </h2>
           <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {TIMELINE.map((t) => (
-              <div key={t.year} className="relative rounded-xl border border-white/10 bg-[var(--surface-card-dark)] p-6 shadow-[var(--shadow-card)] transition-[border-color,transform] hover:border-[var(--line-gold)] hover:-translate-y-0.5">
+              <GlassCard key={t.year} className="relative p-6 transition-[border-color,transform] hover:-translate-y-0.5">
                 <span className="text-xs font-mono font-bold uppercase text-[#FF7A00] block">{t.year}</span>
                 <h3 className="mt-2 text-base font-bold text-white" style={{ fontFamily: "var(--font-display)" }}>{t.title}</h3>
-                <p className="mt-2 text-xs text-[#E2E8F0] leading-relaxed font-normal">{t.desc}</p>
-              </div>
+                <p className="mt-2 text-base text-[#E2E8F0] leading-relaxed font-normal">{t.desc}</p>
+              </GlassCard>
             ))}
           </div>
         </section>
 
         {/* Mission & Vision — flat */}
         <section className="mb-20 grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div className="rounded-xl border border-white/10 bg-[var(--surface-card-dark)] p-8 shadow-[var(--shadow-card)] space-y-3">
+          <GlassCard className="p-8 space-y-3">
             <Target className="h-6 w-6 text-[#FF7A00]" />
             <h3 className="text-2xl font-bold text-white" style={{ fontFamily: "var(--font-display)" }}>Our Mission</h3>
             <p className="text-sm text-[#E2E8F0] leading-relaxed font-normal">
               To provide fast, reliable, statute-aligned PSARA licensing advisory for security agency promoters across India through clause-by-clause documentation, recognized training institute affiliations, and disciplined police clearance liaisoning.
             </p>
-          </div>
+          </GlassCard>
 
-          <div className="rounded-xl border border-white/10 bg-[var(--surface-card-dark)] p-8 shadow-[var(--shadow-card)] space-y-3">
+          <GlassCard className="p-8 space-y-3">
             <Eye className="h-6 w-6 text-[#FF7A00]" />
             <h3 className="text-2xl font-bold text-white" style={{ fontFamily: "var(--font-display)" }}>Our Vision</h3>
             <p className="text-sm text-[#E2E8F0] leading-relaxed font-normal">
               To remain India&apos;s most trusted regulatory authority in private security compliance, setting new national benchmarks for speed, accuracy, promoter protection, and post-grant statutory discipline.
             </p>
-          </div>
+          </GlassCard>
         </section>
 
         {/* Core Values */}
@@ -168,13 +170,13 @@ export default function AboutPage() {
           </h2>
           <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-6">
             {VALUES.map((v) => (
-              <div key={v.title} className="rounded-xl border border-white/10 bg-[var(--surface-card-dark)] p-6 flex items-start gap-4 shadow-[var(--shadow-card)]">
+              <GlassCard key={v.title} className="p-6 flex items-start gap-4">
                 <CheckCircle2 className="h-5 w-5 text-[#FF7A00] shrink-0 mt-1" />
                 <div>
                   <h3 className="text-base font-bold text-white" style={{ fontFamily: "var(--font-display)" }}>{v.title}</h3>
-                  <p className="mt-1 text-xs text-[#E2E8F0] leading-relaxed font-normal">{v.desc}</p>
+                  <p className="mt-1 text-base text-[#E2E8F0] leading-relaxed font-normal">{v.desc}</p>
                 </div>
-              </div>
+              </GlassCard>
             ))}
           </div>
         </section>
@@ -188,17 +190,17 @@ export default function AboutPage() {
             <h2 className="text-2xl font-bold text-white" style={{ fontFamily: "var(--font-display)" }}>
               Recognized Regulatory Credentials
             </h2>
-            <p className="mt-2 text-xs text-[#CBD5E1] font-normal">
+            <p className="mt-2 text-base text-[#CBD5E1] font-normal">
               Certified and recognized across statutory and quality management frameworks.
             </p>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {CERTIFICATIONS.map((c) => (
-              <div key={c.name} className="rounded-xl border border-white/10 bg-[var(--surface-card-dark)] p-4 text-center shadow-[var(--shadow-card)]">
+              <GlassCard key={c.name} className="p-4 text-center">
                 <Award className="h-6 w-6 text-[#FF7A00] mx-auto mb-2" />
                 <span className="block text-xs font-bold text-white">{c.name}</span>
                 <span className="block text-[10px] text-[#94A3B8] mt-0.5">{c.desc}</span>
-              </div>
+              </GlassCard>
             ))}
           </div>
         </section>

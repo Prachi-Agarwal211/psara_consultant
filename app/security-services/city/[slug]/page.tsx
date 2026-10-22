@@ -3,11 +3,12 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { MapPin, CheckCircle2 } from "lucide-react";
 import { PageHero, PageMain } from "../../../../components/PageShell";
+import { GlassCard, Section } from "../../../../components/v3/PagePrimitives";
 import StageShell from "../../../components/ui/StageShell";
 import { pageMeta } from "../../../../lib/metadata";
 import { CITIES } from "../../../../data/cities";
 import { STATES } from "../../../../data/states";
-import { DEFAULT_WA } from "../../../../lib/whatsapp";
+import { buildWhatsAppUrl } from "../../../../lib/whatsapp";
 import { generateCityContent } from "../../../../lib/seo-content-generator";
 
 export function generateStaticParams() {
@@ -44,19 +45,19 @@ export default async function SecurityServiceCityPage({ params }: { params: Prom
       />
 
       <PageMain>
-        <div className="max-w-4xl mx-auto space-y-10">
-          <div className="border border-[var(--gold)]/40 bg-[var(--void-2)] p-8 space-y-4">
-            <h2 className="font-[family-name:var(--font-display)] text-xl font-bold text-white flex items-center gap-2">
+        <Section className="mx-auto max-w-5xl space-y-12">
+          <GlassCard className="space-y-5 p-6 sm:p-8">
+            <h2 className="font-[family-name:var(--font-display)] text-3xl font-normal leading-tight text-white flex items-center gap-2">
               <MapPin className="h-5 w-5 text-[var(--gold-bright)]" /> {c.name} Local Desk Guidelines
             </h2>
-            <p className="text-xs text-[var(--white-70)] leading-relaxed">
+            <p className="text-base text-[var(--white-70)] leading-relaxed">
               Security agency promoters operating in {c.name} must file Form-I with the {c.stateName} Controlling Authority, obtain police antecedent verification from local SP/CP offices, and execute an MOU with a state-recognized security training institute.
             </p>
-          </div>
+          </GlassCard>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <section className="border border-white/10 bg-[var(--void-2)] p-8">
-              <h2 className="font-[family-name:var(--font-display)] text-xl font-bold text-white mb-4">
+            <Section className="space-y-5 border-t border-white/15 pt-8">
+              <h2 className="font-[family-name:var(--font-display)] text-3xl font-normal leading-tight text-white mb-4">
                 What the {c.name} filing needs
               </h2>
               <div className="space-y-3 text-xs text-[var(--white-70)]">
@@ -67,18 +68,18 @@ export default async function SecurityServiceCityPage({ params }: { params: Prom
                   </div>
                 ))}
               </div>
-            </section>
-            <section className="border border-white/10 bg-[var(--void-2)] p-8">
-              <h2 className="font-[family-name:var(--font-display)] text-xl font-bold text-white mb-4">
+            </Section>
+            <Section className="space-y-5 border-t border-white/15 pt-8">
+              <h2 className="font-[family-name:var(--font-display)] text-3xl font-normal leading-tight text-white mb-4">
                 Local filing sequence
               </h2>
               <ol className="space-y-3 text-xs text-[var(--white-70)] list-decimal list-inside">
                 {content.process.slice(0, 6).map((step) => <li key={step}>{step}</li>)}
               </ol>
-            </section>
+            </Section>
           </div>
 
-          <div className="border border-white/10 bg-[var(--void-2)] p-8">
+          <GlassCard className="space-y-5 p-6 sm:p-8">
             <h3 className="font-[family-name:var(--font-display)] text-lg font-bold text-white mb-4">
               Local Verification Checklist for {c.name}
             </h3>
@@ -96,18 +97,18 @@ export default async function SecurityServiceCityPage({ params }: { params: Prom
                 <span>State-recognized training institute MOU covering guard syllabus</span>
               </div>
             </div>
-          </div>
+          </GlassCard>
 
           <div className="pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
             <Link href={`/city/${c.slug}`} className="inline-flex items-center gap-2 text-xs font-bold text-[var(--gold-bright)] hover:underline">
               View Detailed {c.name} City Page &rarr;
             </Link>
 
-            <a href={`${DEFAULT_WA}&text=Hi,%20I%20need%20PSARA%20license%20help%20in%20${c.name}`} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-full px-6 py-3 text-xs font-bold uppercase tracking-wider" style={{ background: "var(--grad-metal)", color: "var(--void)" }}>
+            <a data-v3-magnetic href={buildWhatsAppUrl(`Hi, I need PSARA license help in ${c.name}`)} target="_blank" rel="noopener noreferrer" className="btn-magnetic mag inline-flex max-w-full items-center justify-center gap-2 rounded-full px-6 py-3 text-center text-sm font-bold" style={{ background: "var(--grad-metal)", color: "var(--void)" }}>
               Apply for {c.name} PSARA
             </a>
           </div>
-        </div>
+        </Section>
       </PageMain>
     </StageShell>
   );

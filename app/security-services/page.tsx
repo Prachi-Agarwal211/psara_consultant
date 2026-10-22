@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { MapPin, ArrowUpRight } from "lucide-react";
 import { PageHero, PageMain } from "../../components/PageShell";
+import { Section } from "../../components/v3/PagePrimitives";
 import StageShell from "../components/ui/StageShell";
 import { pageMeta } from "../../lib/metadata";
 import { STATES } from "../../data/states";
@@ -23,12 +24,12 @@ export default function SecurityServicesDirectoryPage() {
       />
 
       <PageMain>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <Section className="grid grid-cols-1 gap-x-9 sm:grid-cols-2 lg:grid-cols-3">
           {STATES.map((st) => (
             <Link
               key={st.slug}
               href={`/states/${st.slug}`}
-              className="group border border-white/10 bg-[var(--void-2)] p-6 transition-colors duration-200 hover:border-[var(--gold)] flex flex-col justify-between"
+              className="v3-directory-link group flex min-w-0 flex-col justify-between gap-6 border-b border-white/20 py-7 transition-colors duration-200 hover:border-[#FFB25E]"
             >
               <div>
                 <div className="flex items-center justify-between mb-3">
@@ -38,11 +39,11 @@ export default function SecurityServicesDirectoryPage() {
                   <ArrowUpRight className="h-4 w-4 text-[var(--white-40)] transition-transform group-hover:text-[var(--gold-bright)] group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                 </div>
 
-                <h2 className="font-[family-name:var(--font-display)] text-xl font-bold text-white group-hover:text-[var(--gold-bright)] transition-colors">
+                <h2 className="font-[family-name:var(--font-display)] text-3xl font-normal text-white group-hover:text-[var(--gold-bright)] transition-colors">
                   {st.name}
                 </h2>
 
-                <p className="mt-2 text-xs text-[var(--white-70)] line-clamp-2">
+                <p className="mt-2 text-xs text-[var(--white-70)] leading-relaxed">
                   Authority: {st.authority}
                 </p>
               </div>
@@ -53,7 +54,7 @@ export default function SecurityServicesDirectoryPage() {
               </div>
             </Link>
           ))}
-        </div>
+        </Section>
       </PageMain>
     </StageShell>
   );

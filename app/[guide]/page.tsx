@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { GUIDES, getGuide } from "../../data/guides";
 import { PageHero, PageMain } from "../../components/PageShell";
+import { GlassCard } from "../../components/v3/PagePrimitives";
 import StageShell from "../components/ui/StageShell";
 import CtaBar from "../../components/CtaBar";
 import WhatsAppForm from "../../components/WhatsAppForm";
@@ -73,8 +74,8 @@ export default async function GuidePage({
         crumbs={[{ label: "Guides", href: "/psara-license" }, { label: g.title }]}
       />
       <PageMain>
-        <div className="grid grid-cols-1 gap-12 lg:grid-cols-12">
-          <div className="lg:col-span-7 space-y-8">
+        <div className="grid min-w-0 grid-cols-1 items-start gap-10 lg:grid-cols-12">
+          <div className="min-w-0 lg:col-span-8 space-y-8">
             <GuideDossierView guide={g} />
 
             {/* More guides sidebar */}
@@ -99,10 +100,8 @@ export default async function GuidePage({
           </div>
 
           {/* Sidebar enquiry form */}
-          <div className="lg:col-span-5">
-            <div className="relative border border-white/10 p-6 md:p-8"
-              style={{ backgroundColor: "rgba(2,8,20,0.4)" }}
-            >
+          <div className="min-w-0 lg:col-span-4">
+            <GlassCard className="p-6 sm:p-8">
               <h3 className="font-[family-name:var(--font-display)] text-xl font-bold tracking-tight text-white">
                 Ask about this topic
               </h3>
@@ -112,7 +111,7 @@ export default async function GuidePage({
               <div className="mt-6">
                 <WhatsAppForm formType="Guide Enquiry" service={g.title} />
               </div>
-            </div>
+            </GlassCard>
           </div>
         </div>
       </PageMain>

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { GlassCard, Section } from "../../components/v3/PagePrimitives";
 import { Award, ShieldCheck } from "lucide-react";
 import { PageHero, PageMain } from "../../components/PageShell";
 import StageShell from "../components/ui/StageShell";
@@ -42,9 +43,9 @@ const CERTS = [
 
 export default function CertificationPage() {
   return (
-    <StageShell>
+    <StageShell showCta={false}>
       <PageHero
-        title="ISO &amp; Statutory Certifications"
+        title="ISO & Statutory Certifications"
         lead="Our advisory practice is anchored in quality management, data confidentiality, and strict statutory compliance standards. Certificate numbers available on request — contact the desk for verification."
         crumbs={[{ label: "Certifications" }]}
       />
@@ -52,7 +53,7 @@ export default function CertificationPage() {
       <PageMain>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {CERTS.map((c) => (
-            <div key={c.name} className="border border-white/10 bg-[var(--void-2)] p-8 flex items-start gap-4">
+            <GlassCard key={c.name} className="p-8 flex items-start gap-4">
               <Award className="h-8 w-8 text-[var(--gold-bright)] shrink-0" />
               <div>
                 <span className="text-[10px] font-bold uppercase tracking-widest text-[var(--gold-bright)] block mb-1">
@@ -61,24 +62,24 @@ export default function CertificationPage() {
                 <h2 className="font-[family-name:var(--font-display)] text-xl font-bold text-white mb-2">
                   {c.name}
                 </h2>
-                <p className="text-xs text-[var(--white-70)] leading-relaxed">{c.desc}</p>
+                <p className="text-base text-[var(--white-70)] leading-relaxed">{c.desc}</p>
               </div>
-            </div>
+            </GlassCard>
           ))}
         </div>
 
-        <section className="mt-16 border border-[var(--gold)]/30 bg-[var(--void-2)] p-8 text-center">
+        <Section className="mt-16 p-8 text-center">
           <ShieldCheck className="h-8 w-8 text-[var(--gold-bright)] mx-auto mb-3" />
           <h2 className="font-[family-name:var(--font-display)] text-2xl font-bold text-white">Require ISO Certification for Your Security Agency?</h2>
-          <p className="mt-2 text-xs text-[var(--white-70)] max-w-xl mx-auto">
+          <p className="mt-2 text-base text-[var(--white-70)] max-w-xl mx-auto">
             We assist security agencies in acquiring IAF-accredited ISO 9001, ISO 14001, ISO 45001, and ISO 27001 certifications required for corporate tenders.
           </p>
           <div className="mt-6">
-            <a href={DEFAULT_WA} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-full px-8 py-3.5 text-xs font-bold uppercase tracking-wider" style={{ background: "var(--grad-metal)", color: "var(--void)" }}>
+            <a data-v3-magnetic href={DEFAULT_WA} target="_blank" rel="noopener noreferrer" className="v3-button v3-button--saffron">
               Get ISO Certification Quote
             </a>
           </div>
-        </section>
+        </Section>
       </PageMain>
     </StageShell>
   );

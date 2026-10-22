@@ -196,6 +196,8 @@ export default function ContactForm({
             <input
               id="cf-name"
               required
+              aria-invalid={errors.name ? true : undefined}
+              aria-describedby={errors.name ? "cf-name-error" : undefined}
               className={`${inputBase} ${errors.name ? "border-rose-500 focus:border-rose-500 focus:ring-rose-500/20" : ""}`}
               placeholder="e.g. Rahul Sharma"
               value={name}
@@ -209,7 +211,7 @@ export default function ContactForm({
             />
           </div>
           {errors.name && (
-            <p role="alert" className={errCls}>
+            <p id="cf-name-error" role="alert" className={errCls}>
               <AlertCircle className="h-3.5 w-3.5" /> {errors.name}
             </p>
           )}
@@ -223,6 +225,8 @@ export default function ContactForm({
             <input
               id="cf-phone"
               required
+              aria-invalid={errors.phone ? true : undefined}
+              aria-describedby={errors.phone ? "cf-phone-error" : undefined}
               className={`${inputBase} ${errors.phone ? "border-rose-500 focus:border-rose-500 focus:ring-rose-500/20" : ""}`}
               placeholder="+91 99831 69555"
               value={phone}
@@ -237,7 +241,7 @@ export default function ContactForm({
             />
           </div>
           {errors.phone && (
-            <p role="alert" className={errCls}>
+            <p id="cf-phone-error" role="alert" className={errCls}>
               <AlertCircle className="h-3.5 w-3.5" /> {errors.phone}
             </p>
           )}
@@ -253,6 +257,8 @@ export default function ContactForm({
           <input
             id="cf-email"
             type="email"
+            aria-invalid={errors.email ? true : undefined}
+            aria-describedby={errors.email ? "cf-email-error" : undefined}
             className={`${inputBase} ${errors.email ? "border-rose-500 focus:border-rose-500 focus:ring-rose-500/20" : ""}`}
             placeholder="you@agency.com"
             value={email}
@@ -263,7 +269,7 @@ export default function ContactForm({
             autoComplete="email"
           />
           {errors.email && (
-            <p role="alert" className={errCls}>
+            <p id="cf-email-error" role="alert" className={errCls}>
               <AlertCircle className="h-3.5 w-3.5" /> {errors.email}
             </p>
           )}
@@ -276,6 +282,8 @@ export default function ContactForm({
           <select
             id="cf-state"
             required
+            aria-invalid={errors.state ? true : undefined}
+            aria-describedby={errors.state ? "cf-state-error" : undefined}
             className={`${inputBase} ${errors.state ? "border-rose-500 focus:border-rose-500 focus:ring-rose-500/20" : ""}`}
             value={state}
             onChange={(e) => {
@@ -293,7 +301,7 @@ export default function ContactForm({
             ))}
           </select>
           {errors.state && (
-            <p role="alert" className={errCls}>
+            <p id="cf-state-error" role="alert" className={errCls}>
               <AlertCircle className="h-3.5 w-3.5" /> {errors.state}
             </p>
           )}

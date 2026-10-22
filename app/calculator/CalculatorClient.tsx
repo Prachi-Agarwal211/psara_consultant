@@ -1,5 +1,7 @@
 "use client";
 
+import { GlassCard } from "../../components/v3/PagePrimitives";
+
 import { useState } from "react";
 import { Calculator, ShieldCheck, Info, MessageSquare } from "lucide-react";
 import { PageHero, PageMain } from "../../components/PageShell";
@@ -40,15 +42,15 @@ export default function CalculatorClient() {
   return (
     <StageShell>
       <PageHero
-        title="PSARA License Fee &amp; Timeline Estimator"
+        title="PSARA License Fee & Timeline Estimator"
         lead="Transparent cost breakdown for PSARA license registration — professional consultancy, MOU &amp; training certification, statutory government fees, office &amp; documentation support, and processing."
         crumbs={[{ label: "Fee Calculator" }]}
       />
 
-      <PageMain className="bg-[#0B1E3B] text-white">
+      <PageMain className="v3-tool">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-10">
           {/* Controls */}
-          <div className="lg:col-span-7 rounded-3xl border border-[rgba(231,111,0,0.25)] bg-[#0B1E3B] p-6 md:p-8 space-y-6 shadow-2xl">
+          <GlassCard className="lg:col-span-7 p-6 md:p-8 space-y-6">
             <h2 className="text-xl font-bold text-white flex items-center gap-2" style={{ fontFamily: "var(--font-display)" }}>
               <Calculator className="h-5 w-5 text-[#FF7A00]" /> Configure License Parameters
             </h2>
@@ -83,6 +85,7 @@ export default function CalculatorClient() {
                       key={s.id}
                       type="button"
                       onClick={() => setCoverage(s.id)}
+                      aria-pressed={active}
                       className={`p-4 rounded-xl border text-xs font-bold transition-all text-left ${
                         active
                           ? "border-[#FF7A00] bg-gradient-to-br from-[#1A3A6B] to-[#132E57] text-white shadow-lg"
@@ -124,10 +127,10 @@ export default function CalculatorClient() {
                 additionally as per law.
               </p>
             </div>
-          </div>
+          </GlassCard>
 
           {/* Breakdown Table Card */}
-          <div className="lg:col-span-5 rounded-3xl border border-[rgba(231,111,0,0.35)] bg-gradient-to-b from-[#1A3A6B] to-[#132E57] text-white p-6 md:p-8 flex flex-col justify-between shadow-2xl space-y-6">
+          <GlassCard className="lg:col-span-5 text-white p-6 md:p-8 flex flex-col justify-between space-y-6">
             <div>
               <span className="text-xs font-bold uppercase tracking-widest text-[#FF7A00] block">
                 Structured Fee Schedule
@@ -170,7 +173,7 @@ export default function CalculatorClient() {
               {/* Total */}
               <div className="border-t-2 border-[#FF7A00]/50 mt-6 pt-4 flex justify-between items-center">
                 <span className="text-sm font-bold text-white">Total Estimated Cost:</span>
-                <span className="text-right text-2xl font-bold gold-text-gradient font-mono">{formatINR(totalEst)}</span>
+                <span className="text-right text-2xl font-bold text-[#FFB547] font-mono">{formatINR(totalEst)}</span>
               </div>
 
               <div className="mt-6 p-4 bg-[#132E57] border border-white/10 rounded-2xl text-xs text-[#CBD5E1] space-y-1.5 shadow-inner">
@@ -209,7 +212,7 @@ export default function CalculatorClient() {
                 * Government charges and third-party costs may vary by state and district. GST extra as applicable.
               </span>
             </div>
-          </div>
+          </GlassCard>
         </div>
       </PageMain>
     </StageShell>

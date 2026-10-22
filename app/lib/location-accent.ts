@@ -60,13 +60,13 @@ export const LOCATION_ACCENTS: Record<AccentId, LocationAccent> = {
   },
   electric: {
     id: "electric",
-    base: "#6557E8",
-    bright: "#B8B2FF",
-    deep: "#30266F",
-    line: "rgba(101,87,232,0.38)",
-    soft: "rgba(101,87,232,0.08)",
-    strong: "rgba(101,87,232,0.16)",
-    glow: "rgba(101,87,232,0.12)",
+    base: "#E76F00",
+    bright: "#FFD9B3",
+    deep: "#9A4B0A",
+    line: "rgba(231,111,0,0.38)",
+    soft: "rgba(231,111,0,0.08)",
+    strong: "rgba(231,111,0,0.16)",
+    glow: "rgba(231,111,0,0.12)",
   },
 };
 

@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { Search, MapPin, ArrowUpRight, Sparkles } from "lucide-react";
+import { GlassCard } from "../../../components/v3/PagePrimitives";
 import { STATES } from "../../../data/states";
 
 export default function StatePortalView() {
@@ -23,7 +24,7 @@ export default function StatePortalView() {
             <Sparkles className="h-3.5 w-3.5" />
             Jurisdiction Directory
           </div>
-          <h2 className="text-2xl sm:text-3xl font-bold text-white leading-tight" style={{ fontFamily: "var(--font-display)" }}>
+          <h2 className="text-3xl sm:text-5xl font-normal text-white leading-[1.1]" style={{ fontFamily: "var(--font-display)" }}>
             Find Your State &amp; Union Territory Desk
           </h2>
           <p className="mt-2 max-w-xl text-sm leading-relaxed text-[#E2E8F0]">
@@ -31,32 +32,33 @@ export default function StatePortalView() {
           </p>
         </div>
         <div className="flex shrink-0 items-center gap-3 text-xs font-bold uppercase tracking-[.08em] text-[#CBD5E1]">
-          <span className="grid h-10 w-10 place-items-center rounded-xl text-[#FFFFFF] font-mono font-bold" style={{ background: "var(--grad-gold-metallic)" }}>{STATES.length}</span>
+          <span className="grid h-10 w-10 place-items-center rounded-xl text-[#FFFFFF] tabular-nums font-bold" style={{ background: "var(--grad-gold-metallic)" }}>{STATES.length}</span>
           <span>State Desks<br />Indexed</span>
         </div>
       </div>
 
       {/* Search Bar */}
-      <div className="rounded-2xl border border-white/15 bg-gradient-to-br from-[#1A3A6B] to-[#132E57] p-3 shadow-lg">
+      <GlassCard className="p-3 sm:p-4">
         <div className="relative">
           <Search className="absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-[#FFB25E]" />
           <input
-            type="text"
+            type="search"
+            aria-label="Search by State, Union Territory, or Capital city"
             placeholder="Search by State, Union Territory, or Capital city…"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             className="w-full rounded-xl border border-white/15 bg-[#0B1E3B] pl-12 pr-4 py-3.5 text-sm font-medium text-white outline-none placeholder:text-white/40 transition-[border-color,box-shadow,transform] focus:border-[#FF7A00] focus:ring-2 focus:ring-[#FF7A00]/20"
           />
         </div>
-      </div>
+      </GlassCard>
 
       {/* State Cards Grid */}
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="grid grid-cols-1 gap-x-9 sm:grid-cols-2 lg:grid-cols-3">
         {filteredStates.map((s) => (
           <Link
             key={s.slug}
             href={`/states/${s.slug}`}
-            className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-white/12 bg-gradient-to-br from-[#1A3A6B] to-[#132E57] p-6 shadow-md transition-[border-color,box-shadow,transform,filter] duration-200 hover:-translate-y-1 hover:border-[#FF7A00] hover:from-[#1A3A6B] hover:to-[#132E57]"
+            className="v3-directory-link group relative flex min-w-0 flex-col justify-between gap-6 border-b border-white/20 py-7 transition-colors duration-200 hover:border-[#FFB25E]"
           >
             <div>
               <div className="flex items-center justify-between mb-3">
@@ -66,11 +68,11 @@ export default function StatePortalView() {
                 <ArrowUpRight className="h-4 w-4 text-white/50 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-[#FFB25E]" />
               </div>
 
-              <h3 className="text-xl font-bold text-white group-hover:text-[#FFB25E] transition-colors" style={{ fontFamily: "var(--font-display)" }}>
+              <h3 className="text-3xl font-normal text-white group-hover:text-[#FFB25E] transition-colors" style={{ fontFamily: "var(--font-display)" }}>
                 {s.name}
               </h3>
 
-              <p className="mt-2 line-clamp-2 text-xs font-normal leading-relaxed text-[#CBD5E1]">
+              <p className="mt-2 text-xs font-normal leading-relaxed text-[#CBD5E1]">
                 {s.authority}
               </p>
             </div>
@@ -84,7 +86,7 @@ export default function StatePortalView() {
       </div>
 
       {filteredStates.length === 0 && (
-        <div className="rounded-2xl border border-white/15 bg-gradient-to-br from-[#1A3A6B] to-[#132E57] py-12 text-center">
+        <div className="rounded-xl border border-white/15 py-12 text-center">
           <p className="text-sm text-[#CBD5E1]">No States found matching &quot;{search}&quot;.</p>
         </div>
       )}
